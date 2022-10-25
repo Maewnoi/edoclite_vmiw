@@ -993,7 +993,7 @@ class functionController extends Controller
     //ฟังชันเรียกstatus sub_doc ด้วย sub_id
     public static function funtion_sub_status_detail($status) {
         if($status == '0'){
-            $txt_status = '<span class="badge bg-danger">รอสารบรรกลางลงรับ</span>';
+            $txt_status = '<span class="badge bg-danger">รอสารบรรกองลงรับ</span>';
         }elseif($status == '1'){
             $txt_status = '<span class="badge bg-warning">รอหัวหน้าฝ่ายพิจารณา</span>';
         }elseif($status == '2'){
