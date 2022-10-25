@@ -95,7 +95,7 @@
 </head>
 
 <body>
-    <div class="font-sans text-gray-900 antialiased">
+    <div class="font-sans antialiased text-gray-900">
         {{ $slot }}
     </div>
 </body>
@@ -106,11 +106,11 @@
     <i class="fa fa-solid fa-comment contact-problem-comment"></i>
     <i class="fa fa-solid fa-comment contact-problem-close"></i>
 </label>
-<div class="hide shadow contact-problem-wrapper">
+<div class="shadow hide contact-problem-wrapper">
     <div class="contact-problem-header">
         <h6>ติดต่อปัญหาและคู่มือการใช้งาน</h6>
     </div>
-    <div class="text-center p-2">
+    <div class="p-2 text-center">
         <span>043245265 , 043245261</span>
     </div>
 </div>
