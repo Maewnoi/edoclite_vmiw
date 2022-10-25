@@ -56,7 +56,10 @@ class functionController extends Controller
         $pdf->SetFont('THSarabunNew','',16);
 
         if($groupmems->group_seal == ''){
-            $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',$seal_point,10,40,23);
+            $tokens = tokens::where('tokens'.'token_site_id', Auth::user()->site_id)
+            ->first();
+
+            $pdf->Image($tokens->tokens_seal,$seal_point,10,40,23);
         }else{
             $pdf->Image($groupmems->group_seal,$seal_point,10,40,23);
         }
@@ -1083,7 +1086,7 @@ class functionController extends Controller
         $n = 6;
         $pdf->MultiCell(110,$n, iconv('UTF-8', 'cp874', $sub_recid_name." \n ".$seal_deteil),'0','L',false);
 
-         $y = 85 + $n;
+         $y = 85 + $n + 10;
 
         //ลายเซ็น
         if(Auth::user()->sign == ''){
