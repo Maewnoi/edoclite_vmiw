@@ -1183,6 +1183,7 @@ class functionController extends Controller
         return $txt_status;
     }
 
+
     //ฟังชันเรียกชื่อสิทธิ์ด้วย id
     public static function funtion_reserve_status($status) {
         if($status == '0'){

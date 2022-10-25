@@ -3,7 +3,7 @@ use App\Http\Controllers\functionController;
 @endphp
 <x-app-layout>
     <!-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             สวัสดี , {{Auth::user()->name}}
         </h2>
     </x-slot> -->
@@ -12,14 +12,14 @@ use App\Http\Controllers\functionController;
             <div class="row">
                 <div class="col-md-12">
                     @if(session("success"))
-                    <div class="alert shadow alert-success">{{session('success')}}</div>
+                    <div class="shadow alert alert-success">{{session('success')}}</div>
                     @endif
                     @if ($errors->any())
                     @foreach ($errors->all() as $error)
-                    <div class="alert shadow alert-danger">{{ $error }}</div>
+                    <div class="shadow alert alert-danger">{{ $error }}</div>
                     @endforeach
                     @endif
-                    <div class="card shadow">
+                    <div class="shadow card">
                         <div class="card-header bg-primary">เอกสารรับเข้าภายนอก (หัวหน้ากอง)</div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table">
@@ -46,18 +46,18 @@ use App\Http\Controllers\functionController;
                                         <td>
                                             @if($row->doc_date != NULL)
                                             <span class="badge bg-secondary">{{$row->doc_date}}</span>
-                                            <p class="text-sm text-muted">
-                                                <i class="far fa-clock mr-1"></i>
+                                            <!--<p class="text-sm text-muted">
+                                                <i class="mr-1 far fa-clock"></i>
                                                 {{Carbon\Carbon::parse($row->doc_date)->diffForHumans()}}
-                                            </p>
+                                            </p>-->
                                             @endif
                                         </td>
                                         <td>
                                             @if($row->doc_date_2 != NULL)
                                             <span class="badge bg-secondary">{{$row->doc_date_2}}</span>
                                             <p class="text-sm text-muted">
-                                                <i class="far fa-clock mr-1"></i>
-                                                {{Carbon\Carbon::parse($row->doc_date_2)->diffForHumans()}}
+                                                <i class="mr-1 far fa-clock"></i>
+                                                {{Carbon\Carbon::parse($row->doc_date_2." ".$row->doc_time)->diffForHumans()}}
                                             </p>
                                             @endif
                                         </td>
