@@ -13,6 +13,8 @@ use App\Models\cottons;
 use App\Models\reserve_number;
 use App\Models\sub_doc;
 use App\Models\sub2_doc;
+use App\Models\sub3_doc;
+use App\Models\sub3_detail;
 use App\Models\token;
 use Illuminate\Support\Facades\Auth;
 
@@ -1468,7 +1470,24 @@ class functionController extends Controller
         }
         return $txt_doc_speed;
     }
+      //ฟังชันเรียกชื่อกองงานด้วย id
+      public static function display_pdf_sub3_doc($sub_id) {
+        $sub2_doc_Check = sub2_doc::where('sub2_docs.sub2_subid', $sub_id)
+        ->where('sub2_docs.sub2_recid', Auth::user()->id)
+        ->first();
+        if($sub2_doc_Check){
+            $sub3_doc_Check = sub3_doc::where('sub3_docs.sub3_sub_2id', $sub2_doc_Check->sub2_id)
+            ->first();
 
+            if($sub3_doc_Check){
+                $sub3_detail_Check = sub3_detail::where('sub3_details.sub3d_sub_3id', $sub3_doc_Check->sub3_id)
+                ->first();
+                if($sub3_detail_Check->sub3d_file != ''){
+                    return $sub3_detail_Check->sub3d_file;
+                }
+            }
+        }
+    }
     public static function display_pdf($pathToFile)
     {       
         $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
