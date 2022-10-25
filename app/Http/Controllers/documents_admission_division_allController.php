@@ -110,7 +110,7 @@ class documents_admission_division_allController extends Controller
             //นับจำนวนคนทำงาน
             for ($t = 0; $t < count($request->sub2_recid); $t++) {
                 $sub2_recid[$t] = $request->sub2_recid[$t];
-                $insert_sub2_doc = sub2_doc::insert([
+               $insert_sub2_doc = sub2_doc::insert([
                     'sub2_docid'=>$request->doc_id,
                     'sub2_subid'=>$request->sub_id,
                     'sub2_sendid'=>Auth::user()->group,
@@ -164,7 +164,7 @@ class documents_admission_division_allController extends Controller
             $full_path = '';
         }
 
-        $update_sub_docs = sub_doc::where('sub_id', $request->sub_id)->update([
+       $update_sub_docs = sub_doc::where('sub_id', $request->sub_id)->update([
             'seal_detail_1'=>$request->seal_detail_1,
             'seal_pos_1'=>$request->seal_pos_1,
             'seal_date_1'=>date('Y-m-d H:i:s'),
