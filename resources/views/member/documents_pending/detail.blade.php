@@ -27,9 +27,6 @@ use App\Http\Controllers\functionController;
                             เอกสารรับเข้าภายนอกรายละเอียด : {{$document_detail->doc_origin}}
                         </div>
                         <div class="card-body table-responsive">
-                            <div class="card card-body">
-                                <x-jet-label class="text-lg" value="{{ __('ข้อมูลทั่วไป') }}" />
-                            </div>
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">

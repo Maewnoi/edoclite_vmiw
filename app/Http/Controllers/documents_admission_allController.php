@@ -147,8 +147,10 @@ class documents_admission_allController extends Controller
             $doc_attached_file = $request->doc_attached_file;
             unlink($doc_attached_file);
         }
-        $doc_filedirec = $request->doc_filedirec;
-        unlink($doc_filedirec);
+        if($request->doc_filedirec != ''){
+            $doc_filedirec = $request->doc_filedirec;
+            unlink($doc_filedirec);
+        }
 
         $reserve_number_Check_reserve_number_receive = reserve_number::where('reserve_number', $request->doc_recnum)
         ->where('reserve_site',Auth::user()->site_id)
@@ -156,7 +158,7 @@ class documents_admission_allController extends Controller
         ->where('reserve_template', 'A')
         ->first();
         if($reserve_number_Check_reserve_number_receive){
-            $update_reserve_number_receive = reserve_number::where('reserve_id', $reserve_number_Check_reserve_number->reserve_id)->update([
+            $update_reserve_number_receive = reserve_number::where('reserve_id', $reserve_number_Check_reserve_number_receive->reserve_id)->update([
                 'reserve_status'=>'2',
                 'reserve_used'=>NULL,
                 'reserve_updated_at'=>date('Y-m-d H:i:s')
