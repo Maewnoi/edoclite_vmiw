@@ -141,7 +141,7 @@ use App\Http\Controllers\functionController;
                                                 @foreach($sub_docsS as $row_sub_docs)
                                                 <tr>
                                                     <td>{{ functionController::funtion_groupmem_name($row_sub_docs->sub_recid) }}</td>
-                                                    <td><font class="text-danger">{{ functionController::funtion_sub_docs_status($row_sub_docs->sub_id) }}</font></td>
+                                                    <td>{!! functionController::funtion_sub_status_detail($row_sub_docs->sub_status) !!}</td>
                                                 </tr>
                                                 @endforeach
                                             </table>

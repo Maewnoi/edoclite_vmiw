@@ -200,7 +200,7 @@ unset($__errorArgs, $__bag); ?>
                                                 <?php $__currentLoopData = $sub_docsS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_sub_docs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <tr>
                                                     <td><?php echo e(functionController::funtion_groupmem_name($row_sub_docs->sub_recid)); ?></td>
-                                                    <td><font class="text-danger"><?php echo e(functionController::funtion_sub_docs_status($row_sub_docs->sub_id)); ?></font></td>
+                                                    <td><?php echo functionController::funtion_sub_status_detail($row_sub_docs->sub_status); ?></td>
                                                 </tr>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </table>

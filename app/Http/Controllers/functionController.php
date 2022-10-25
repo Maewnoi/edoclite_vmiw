@@ -960,7 +960,7 @@ class functionController extends Controller
         }elseif($status == '6'){
             $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '7'){
-            $txt_status = '<span class="badge bg-success">กำลังดำเนินการ</span>';
+            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '8'){
             $txt_status = '<span class="badge bg-success">สำเร็จ</span>';
         }else{
@@ -968,6 +968,35 @@ class functionController extends Controller
         }
         return $txt_status;
     }
+
+    
+    //ฟังชันเรียกstatus sub_doc ด้วย sub_id
+    public static function funtion_sub_status_detail($status) {
+        if($status == '0'){
+            $txt_status = '<span class="badge bg-danger">รอสารบรรกลางลงรับ</span>';
+        }elseif($status == '1'){
+            $txt_status = '<span class="badge bg-warning">รอหัวหน้าฝ่ายพิจารณา</span>';
+        }elseif($status == '2'){
+            $txt_status = '<span class="badge bg-warning">รอหัวหน้ากองงานพิจารณา</span>';
+        }elseif($status == '3'){
+            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+        }elseif($status == '4'){
+            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+        }elseif($status == '5'){
+            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+        }elseif($status == '6'){
+            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+        }elseif($status == '7'){
+            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+        }elseif($status == '8'){
+            $txt_status = '<span class="badge bg-success">สำเร็จ</span>';
+        }else{
+            return "ไม่ถูกนิยาม";
+        }
+        return $txt_status;
+    }
+    
+    
 
     //function ประทับตรา เซ็น และแทรกหน้าแรก PDF  ของหัวหน้าสำนักปลัด
     public static function funtion_generate_PDF_I(array $sub_recid ,$seal_point ,$doc_recnum ,$doc_date ,$doc_time ,$pos ,$doc_filedirec ,$doc_id ,$seal_deteil ,$doc_docnum ,$doc_title) {
@@ -1395,23 +1424,6 @@ class functionController extends Controller
         }
     }
 
-    //ฟังชันเรียกstatus sub_doc ด้วย sub_id
-    public static function funtion_sub_docs_status($sub_id) {
-        $sub_doc_Check = sub_doc::where('sub_docs.sub_id', $sub_id)->first();
-        if($sub_doc_Check){
-            if($sub_doc_Check->sub_status == 0){return "รอสารบรรณกองลงรับ";}
-            if($sub_doc_Check->sub_status == 1){return "รอหัวหน้าฝ่ายพิจารณา";}
-            
-            if($sub_doc_Check->sub_status == 2){return "รอหัวหน้ากองพิจารณา";}
-            
-            if($sub_doc_Check->sub_status == 8){return "ส่งถึงงานแล้ว";}
-            
-        }else{
-            return "ไม่ถูกนิยาม";
-        }
-    }
-    
-    
 
     //ฟังชันเรียกชื่อสิทธิ์ด้วย id
     public static function funtion_user_level($level) {
