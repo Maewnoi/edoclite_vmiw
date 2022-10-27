@@ -136,7 +136,7 @@ use App\Http\Controllers\functionController;
                                                 <x-jet-label class="text-lg"
                                                     value="{{ __('รอพิจารณา') }}" />
                                             @elseif($document_detail->doc_status == 'success')
-                                            <x-jet-label class="text-lg" value="{{ __('กองงานที่เกี่ยวข้อง') }}" />
+                                            <x-jet-label class="text-lg" value="{{ __('สถานะการลงรับหนังสือ') }}" />
                                             <table>
                                                 @foreach($sub_docsS as $row_sub_docs)
                                                 <tr>

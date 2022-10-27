@@ -95,7 +95,28 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                             </div>
+                            @if($document_detail->doc_status == 'success')
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="callout callout-danger">
+                                            <x-jet-label class="text-lg" value="{{ __('สถานะการลงรับหนังสือ') }}" />
+                                            <table>
+                                                @foreach($sub_docsS as $row_sub_docs)
+                                                <tr>
+                                                    <td>{{ functionController::funtion_groupmem_name($row_sub_docs->sub_recid) }}</td>
+                                                    <td>{!! functionController::funtion_sub_status_detail($row_sub_docs->sub_status) !!}</td>
+                                                </tr>
+                                                @endforeach
+                                            </table>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <hr>
+                            @endif
+
                             @if($document_detail->sub_status == '0')
                             <div class="row">
                                 <div class="col-md-12">

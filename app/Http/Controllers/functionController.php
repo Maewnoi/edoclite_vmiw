@@ -997,21 +997,21 @@ class functionController extends Controller
         if($status == '0'){
             $txt_status = '<span class="badge bg-danger">รอสารบรรกองลงรับ</span>';
         }elseif($status == '1'){
-            $txt_status = '<span class="badge bg-warning">รอหัวหน้าฝ่ายพิจารณา</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">รอหัวหน้าฝ่ายพิจารณา</span>';
         }elseif($status == '2'){
-            $txt_status = '<span class="badge bg-warning">รอหัวหน้ากองงานพิจารณา</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">รอหัวหน้ากองงานพิจารณา</span>';
         }elseif($status == '3'){
-            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '4'){
-            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '5'){
-            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '6'){
-            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '7'){
-            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '8'){
-            $txt_status = '<span class="badge bg-success">สำเร็จ</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-success">สำเร็จ</span>';
         }else{
             return "ไม่ถูกนิยาม";
         }
