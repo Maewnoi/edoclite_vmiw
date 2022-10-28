@@ -108,9 +108,7 @@ use App\Http\Controllers\functionController;
                                                     <td>{!! functionController::funtion_sub_status_detail($row_sub_docs->sub_status) !!}</td>
                                                     <td>
                                                     @if($row_sub_docs->sub_status == 8)
-                                                        @foreach($sub2docsS)
-                                                            {{ $sub2docsS->sub2_id }}
-                                                        @endforeach
+                                                           <p> {{ $row_sub_docs->sub_id }}</p>
                                                     @endif
                                                     </td>
 

@@ -159,7 +159,7 @@ use App\Http\Controllers\functionController;
                                 <?php endif; ?>
                             </div>
                             <hr>
-                       <!--     <?php if($document_detail->sub2_status == '0'): ?> -->
+                           <?php if($document_detail->sub2_status == '0'): ?>
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="<?php echo e(route('documents_admission_work_detail_respond')); ?>" method="post"
@@ -272,7 +272,7 @@ unset($__errorArgs, $__bag); ?>
                                                                 <div class="col-9">
                                                                     <input class="mt-2 form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_government"
-                                                                        name="sub3d_government" type="text" value="">
+                                                                        name="sub3d_government" type="text" value="1">
                                                                 </div>
                                                                 <!-- // -->
                                                                 <div class="col-2">
@@ -281,7 +281,7 @@ unset($__errorArgs, $__bag); ?>
                                                                 <div class="col-4">
                                                                     <input class="form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_draft"
-                                                                        name="sub3d_draft" type="text" value="">
+                                                                        name="sub3d_draft" type="text" value="2">
                                                                 </div>
                                                                 <div class="col-2">
                                                                     <p class="mt-3">วันที่</p>
@@ -289,7 +289,7 @@ unset($__errorArgs, $__bag); ?>
                                                                 <div class="col-4">
                                                                     <input class="form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_date"
-                                                                        name="sub3d_date" type="text" value="">
+                                                                        name="sub3d_date" type="text" value="3">
                                                                 </div>
                                                                 <!-- // -->
                                                                 <div class="col-2">
@@ -298,15 +298,12 @@ unset($__errorArgs, $__bag); ?>
                                                                 <div class="col-10">
                                                                     <input class="form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_topic"
-                                                                        name="sub3d_topic" type="text" value="">
+                                                                        name="sub3d_topic" type="text" value="4">
                                                                 </div>
                                                                 <!-- // -->
                                                                 <div class="col-12">
                                                                     <div class="mt-3 mb-14">
-                                                                        <textarea
-                                                                            id="documents_admission_work_allController_sub3d_podium"
-                                                                            rows="20" name="sub3d_podium"
-                                                                            class="form-control form-control-border">จึงเสนอมาเพื่อทราบ</textarea>
+                                                                        <textarea id="documents_admission_work_allController_sub3d_podium" class="form-control" rows="25" cols="75"name="sub3d_podium"></textarea>
                                                                     </div>
                                                                 </div>
                                                                 <!-- // -->
@@ -349,6 +346,9 @@ unset($__errorArgs, $__bag); ?>
                                                         <input type="hidden" name="doc_docnum" value="<?php echo e($document_detail->doc_docnum); ?>">
                                                         <input type="hidden" name="doc_origin" value="<?php echo e($document_detail->doc_origin); ?>">
                                                         <input type="hidden" name="doc_title" value="<?php echo e($document_detail->doc_title); ?>">
+                                                        <input type="hidden" name="_token" id="_token" value="<?php echo e(csrf_token()); ?>" />
+                                                       
+                                                   
                                                         <div class="flex items-center justify-center mt-20">
                                                             <button type="button"
                                                                 id="documents_admission_work_allController_bt_preview"
@@ -384,8 +384,9 @@ unset($__errorArgs, $__bag); ?>
                                     </form>
                                 </div>
                             </div>
-                          <!--   <?php endif; ?> -->
+                            <?php endif; ?>
                             <hr>
+                           
                         </div>
                     </div>
                 </div>
@@ -417,4 +418,5 @@ unset($__errorArgs, $__bag); ?>
 <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
 <?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
 <?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
-<?php endif; ?><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/member/documents_admission_work_all/detail.blade.php ENDPATH**/ ?>
+<?php endif; ?>
+<?php /**PATH C:\xampp\htdocs\edoclite\resources\views/member/documents_admission_work_all/detail.blade.php ENDPATH**/ ?>

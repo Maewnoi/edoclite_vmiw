@@ -100,22 +100,22 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-menu')->html();
-} elseif ($_instance->childHasBeenRendered('liLqXZE')) {
-    $componentId = $_instance->getRenderedChildComponentId('liLqXZE');
-    $componentTag = $_instance->getRenderedChildComponentTagName('liLqXZE');
+} elseif ($_instance->childHasBeenRendered('QJXRVg9')) {
+    $componentId = $_instance->getRenderedChildComponentId('QJXRVg9');
+    $componentTag = $_instance->getRenderedChildComponentTagName('QJXRVg9');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('liLqXZE');
+    $_instance->preserveRenderedChild('QJXRVg9');
 } else {
     $response = \Livewire\Livewire::mount('navigation-menu');
     $html = $response->html();
-    $_instance->logRenderedChild('liLqXZE', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('QJXRVg9', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
 
         <!-- Page Heading -->
         <!-- <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <?php echo e($header); ?>
 
                 </div>
@@ -146,7 +146,7 @@ echo $html;
     <div class="contact-problem-header">
         <h6>ติดต่อปัญหาและคู่มือการใช้งาน</h6>
     </div>
-    <div class="text-center p-2">
+    <div class="p-2 text-center">
         <span>043245265 , 043245261</span>
     </div>
 </div>
@@ -162,6 +162,7 @@ echo $html;
 
   gtag('config', 'G-FZVNG8FL27');
 </script>
+
 <!-- jQuery -->
 <script src="<?php echo e(asset('/plugins/jquery/jquery.min.js')); ?>"></script>
 <!-- jQuery UI 1.11.4 -->

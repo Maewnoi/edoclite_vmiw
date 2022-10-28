@@ -161,7 +161,7 @@ use App\Http\Controllers\functionController;
                                                     <td><?php echo functionController::funtion_sub_status_detail($row_sub_docs->sub_status); ?></td>
                                                     <td>
                                                     <?php if($row_sub_docs->sub_status == 8): ?>
-                                                        $sub2docsS->sub2_id
+                                                           <p> <?php echo e($row_sub_docs->sub_id); ?><br></p>
                                                     <?php endif; ?>
                                                     </td>
 

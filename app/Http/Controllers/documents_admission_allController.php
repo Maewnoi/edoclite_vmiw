@@ -33,9 +33,12 @@ class documents_admission_allController extends Controller
             $document_detail = document::where('doc_id', $id)->where('doc_site_id',Auth::user()->site_id)->first();
             if($document_detail->doc_status == 'success'){
                 $sub_docsS = sub_doc::where('sub_docid', $id)->get();
+                if($sub_docsS->sub_status == 8){
+                    //ฟังชันเรียกชื่องานที่ได้รับเอกสาร
+                    $sub2docsS = sub2_doc::where('sub2_subid', $sub_docsS->sub_id)->get();
+
+                }
                 
-                //ฟังชันเรียกชื่องานที่ได้รับเอกสาร
-                $sub2docsS = sub2_doc::where('sub2_subid', $id)->get();
 
             }else{
                 $sub_docsS = '';
