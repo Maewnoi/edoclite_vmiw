@@ -33,10 +33,14 @@ class documents_admission_allController extends Controller
             $document_detail = document::where('doc_id', $id)->where('doc_site_id',Auth::user()->site_id)->first();
             if($document_detail->doc_status == 'success'){
                 $sub_docsS = sub_doc::where('sub_docid', $id)->get();
+                
+                //ฟังชันเรียกชื่องานที่ได้รับเอกสาร
+                $sub2docsS = sub2_doc::where('sub2_subid', $id)->get();
+
             }else{
                 $sub_docsS = '';
             }
-            return view('member.documents_admission_all.detail',compact('document_detail','sub_docsS'));
+            return view('member.documents_admission_all.detail',compact('document_detail','sub_docsS'.'sub2docsS'));
         }else{
             return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }

@@ -106,6 +106,14 @@ use App\Http\Controllers\functionController;
                                                 <tr>
                                                     <td>{{ functionController::funtion_groupmem_name($row_sub_docs->sub_recid) }}</td>
                                                     <td>{!! functionController::funtion_sub_status_detail($row_sub_docs->sub_status) !!}</td>
+                                                    <td>
+                                                    @if($row_sub_docs->sub_status == 8)
+                                                        @foreach($sub2docsS)
+                                                            {{ $sub2docsS->sub2_id }}
+                                                        @endforeach
+                                                    @endif
+                                                    </td>
+
                                                 </tr>
                                                 @endforeach
                                             </table>
@@ -214,13 +222,13 @@ use App\Http\Controllers\functionController;
                                                             <optgroup label="หัวหน้าฝ่าย">
                                                                 @foreach($userS_0 as $row_userS_0)
                                                                 <option value="{{$row_userS_0->id}}">
-                                                                    {{$row_userS_0->name}}</option>
+                                                                    {{$row_userS_0->name." ".$row_userS_0->pos}}</option>
                                                                 @endforeach
                                                             </optgroup>
                                                             <optgroup label="หัวหน้ากอง">
                                                                 @foreach($userS_1 as $row_userS_1)
                                                                 <option value="{{$row_userS_1->id}}">
-                                                                    {{$row_userS_1->name}}</option>
+                                                                    {{$row_userS_1->name." ".$row_userS_0->pos}}</option>
                                                                 @endforeach
                                                             </optgroup>
                                                         </select>

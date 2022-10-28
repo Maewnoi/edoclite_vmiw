@@ -75,6 +75,8 @@ class documents_admission_division_allController extends Controller
             ->where('group', Auth::user()->group)
             ->get();
 
+         
+
             //หาชื่อ-นามสกุล นายก
             // $userS_1 = User::where('level', '1')
             // ->where('site_id',Auth::user()->site_id)

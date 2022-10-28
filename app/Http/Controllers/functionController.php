@@ -1012,6 +1012,7 @@ class functionController extends Controller
             $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '8'){
             $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-success">สำเร็จ</span>';
+
         }else{
             return "ไม่ถูกนิยาม";
         }
@@ -1434,7 +1435,8 @@ class functionController extends Controller
             return "ไม่ถูกนิยาม";
         }
     }
-
+    
+    
 
     //ฟังชันเรียกชื่อสิทธิ์ด้วย id
     public static function funtion_user_level($level) {

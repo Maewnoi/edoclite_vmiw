@@ -220,7 +220,7 @@ use App\Http\Controllers\functionController;
                             <div class="col-md-12">
                                 <div class="shadow card">
                                     <div class="card-header bg-primary">
-                                        <h5 class="card-title">เอกสารรับเข้าในนอกทั้งหมด</h5>
+                                        <h5 class="card-title">เอกสารรับเข้าภายในทั้งหมด</h5>
                                         <div class="card-tools">
                                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                                 <i class="fas fa-minus"></i>
