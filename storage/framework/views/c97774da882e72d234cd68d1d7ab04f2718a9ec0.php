@@ -159,6 +159,12 @@ use App\Http\Controllers\functionController;
                                                 <tr>
                                                     <td><?php echo e(functionController::funtion_groupmem_name($row_sub_docs->sub_recid)); ?></td>
                                                     <td><?php echo functionController::funtion_sub_status_detail($row_sub_docs->sub_status); ?></td>
+                                                    <td>
+                                                    <?php if($row_sub_docs->sub_status == 8): ?>
+                                                        $sub2docsS->sub2_id
+                                                    <?php endif; ?>
+                                                    </td>
+
                                                 </tr>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </table>
@@ -372,13 +378,13 @@ unset($__errorArgs, $__bag); ?>"
                                                             <optgroup label="หัวหน้าฝ่าย">
                                                                 <?php $__currentLoopData = $userS_0; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_userS_0): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <option value="<?php echo e($row_userS_0->id); ?>">
-                                                                    <?php echo e($row_userS_0->name); ?></option>
+                                                                    <?php echo e($row_userS_0->name." ".$row_userS_0->pos); ?></option>
                                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                             </optgroup>
                                                             <optgroup label="หัวหน้ากอง">
                                                                 <?php $__currentLoopData = $userS_1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_userS_1): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <option value="<?php echo e($row_userS_1->id); ?>">
-                                                                    <?php echo e($row_userS_1->name); ?></option>
+                                                                    <?php echo e($row_userS_1->name." ".$row_userS_0->pos); ?></option>
                                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                             </optgroup>
                                                         </select>

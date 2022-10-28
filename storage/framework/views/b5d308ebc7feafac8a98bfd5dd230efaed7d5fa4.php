@@ -8,7 +8,7 @@ use App\Http\Controllers\functionController;
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
     <!--  <?php $__env->slot('header', null, []); ?> 
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             สวัสดี , <?php echo e(Auth::user()->name); ?>
 
         </h2>
@@ -16,41 +16,24 @@ use App\Http\Controllers\functionController;
     <div class="py-12">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="shadow card">
-                        <div class="card-body table-responsive">
-                            <ul class="flex-row nav nav-pills">
-                                <li class="nav-item active">
-                                    <a href="#" class="nav-link active">
-                                        <i class="fas fa-inbox"></i> เลขรับภายนอก
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo e(route('reserve_number_receive_inside_all')); ?>" class="nav-link">
-                                        <i class="far fa-envelope"></i> เลขรับภายใน
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-9">
                     <?php if(session("success")): ?>
-                    <div class="shadow alert alert-success"><?php echo e(session('success')); ?></div>
+                    <div class="alert shadow alert-success"><?php echo e(session('success')); ?></div>
                     <?php endif; ?>
                     <?php if($errors->any()): ?>
                     <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="shadow alert alert-danger"><?php echo e($error); ?></div>
+                    <div class="alert shadow alert-danger"><?php echo e($error); ?></div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <?php endif; ?>
-                    <div class="shadow card">
-                        <div class="card-header bg-primary">รายการจองเลขรับภายนอกทั้งหมด</div>
+                    <div class="card shadow">
+                        <div class="card-header bg-primary">รายการจองเลขรับทั้งหมด</div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
                                         <th scope="col">เลขที่ถูกจอง</th>
+                                        <th scope="col">เรื่อง</th>
                                         <th scope="col">ผู้จอง</th>
                                         <th scope="col">วันที่จอง</th>
                                         <th scope="col">สถานะ</th>
@@ -58,16 +41,17 @@ use App\Http\Controllers\functionController;
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $__currentLoopData = $reserve_numberS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $reserve_delivery_inside_numberS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <th><?php echo e($loop->index+1); ?></th>
                                         <td><?php echo e($row->reserve_number); ?></td>
+                                        <td><?php echo e($row->reserve_topic); ?></td>
                                         <td><?php echo e(functionController::funtion_users($row->reserve_owner)); ?></td>
                                         <td>
                                             <?php if($row->reserve_date != NULL): ?>
                                             <span class="badge bg-secondary"><?php echo e($row->reserve_date); ?></span>
                                             <p class="text-sm text-muted">
-                                                <i class="mr-1 far fa-clock"></i>
+                                                <i class="far fa-clock mr-1"></i>
                                                 <?php echo e(Carbon\Carbon::parse($row->reserve_date)->diffForHumans()); ?>
 
                                             </p>
@@ -123,8 +107,7 @@ use App\Http\Controllers\functionController;
                                                     </h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="<?php echo e(route('cancel_reserve_number_receive_all')); ?>"
-                                                        method="post">
+                                                    <form action="<?php echo e(route('cancel_reserve_number_delivery_inside_all')); ?>" method="post">
                                                         <?php echo csrf_field(); ?>
                                                         <input type="hidden" name="reserve_id" class="form-control"
                                                             value="<?php echo e($row->reserve_id); ?>">
@@ -155,13 +138,11 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                 </div>
-               
-                <?php if(Auth::user()->level == 3): ?>
                 <div class="col-md-3">
-                    <div class="shadow card">
+                    <div class="card shadow">
                         <div class="card-header bg-primary">จองเลข</div>
                         <div class="card-body">
-                            <form action="<?php echo e(route('add_reserve_number_receive_all')); ?>" method="post">
+                            <form action="<?php echo e(route('add_reserve_number_delivery_inside_all')); ?>" method="post">
                                 <?php echo csrf_field(); ?>
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -179,8 +160,8 @@ use App\Http\Controllers\functionController;
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                                             <input type="number" name="reserve_number"
-                                                min="<?php echo e(functionController::funtion_documents_doc_recnum_plus(Auth::user()->site_id)); ?>"
-                                                value="<?php echo e(functionController::funtion_documents_doc_recnum_plus(Auth::user()->site_id)); ?>"
+                                                min="<?php echo e(functionController::funtion_documents_doc_recnum_delivery_inside_plus(Auth::user()->site_id)); ?>"
+                                                value="<?php echo e(functionController::funtion_documents_doc_recnum_delivery_inside_plus(Auth::user()->site_id)); ?>"
                                                 class="form-control <?php $__errorArgs = ['reserve_number'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -196,7 +177,7 @@ if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
                                             <div class="my-2">
-                                                <p class="mt-2 text-sm text-red-600"><?php echo e($message); ?></p>
+                                                <p class="text-sm text-red-600 mt-2"><?php echo e($message); ?></p>
                                             </div>
                                             <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
@@ -204,6 +185,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                         </div>
                                     </div>
+                                    
                                 </div>
                                 <hr>
                                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -224,8 +206,6 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
                 </div>
-                <?php endif; ?>
-
             </div>
         </div>
     </div>
@@ -234,4 +214,4 @@ unset($__errorArgs, $__bag); ?>
 <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
 <?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
 <?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
-<?php endif; ?><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/member/reserve_number_receive_all/index.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/member/reserve_number_delivery_inside_all/index.blade.php ENDPATH**/ ?>
