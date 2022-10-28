@@ -136,6 +136,27 @@ use App\Http\Controllers\functionController;
                                         <?php endif; ?>
                                     </div>
                                 </div>
+                                <?php if(functionController::display_pdf_sub3_doc($document_detail->sub_id) != ''): ?>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'doc_filedirec_1','value' => ''.e(__('บันทึกข้อความตอบกลับ')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','for' => 'doc_filedirec_1','value' => ''.e(__('บันทึกข้อความตอบกลับ')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                        <?php echo functionController::display_pdf(functionController::display_pdf_sub3_doc($document_detail->sub_id)); ?>
+
+
+                                    </div>
+                                </div>
+                                <?php endif; ?>
                             </div>
                             <hr>
                            <?php if($document_detail->sub2_status == '0'): ?>
@@ -177,7 +198,7 @@ unset($__errorArgs, $__bag); ?>">
                                                             <option value="0">
                                                                 บันทึกข้อความ
                                                             </option>
-                                                            <option value="1" disabled>
+                                                            <option value="1">
                                                                 ตราครุฑ
                                                             </option>
                                                         </select>
@@ -233,7 +254,51 @@ unset($__errorArgs, $__bag); ?>
                                                 </div>
                                                 <div class="col-md-12 table-responsive">
                                                     <div class="form-group hide"
-                                                        id="documents_admission_work_allController_form-group_tb-sub3_details">
+                                                        id="documents_admission_work_allController_form-group_tb-sub3_details-garuda">
+                                                        <page id="ocuments_admission_work_allController_page"
+                                                            class="items-center block p-24 mx-auto bg-white shadow-2xl">
+                                                            <div class="row">
+                                                                <div class="col-3 pt-14">
+                                                                    <input class="form-control form-control-border"
+                                                                        id="documents_admission_work_allController_sub3d_draft-garuda"
+                                                                        name="sub3d_draft-garuda" type="text" value="ที่ร่าง">
+                                                                </div>
+                                                                <div class="col-5">
+                                                                    <img class="w-24 h-24 ml-20"
+                                                                        src="<?php echo e(asset('/image/Garuda.jpeg')); ?>" alt="">
+                                                                </div>
+                                                                <div class="col-4 pt-14">
+                                                                    <input class="form-control form-control-border"
+                                                                        id="documents_admission_work_allController_sub3d_government-garuda"
+                                                                        name="sub3d_government-garuda" type="text" value="องค์การบริหาร">
+                                                                </div>
+                                                                <div class="col-5">
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <input class="mt-3 form-control form-control-border"
+                                                                        id="documents_admission_work_allController_sub3d_date-garuda"
+                                                                        name="sub3d_date-garuda" type="text" value="21 oct 1988">
+                                                                </div>
+                                                                <div class="col-4">
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <p class="mt-3">เรื่อง</p>
+                                                                </div>
+                                                                <div class="col-10">
+                                                                    <input class="form-control form-control-border"
+                                                                        id="documents_admission_work_allController_sub3d_topic-garuda"
+                                                                        name="sub3d_topic-garuda" type="text" value="">
+                                                                </div>   
+                                                                <div class="col-12">
+                                                                    <div class="mt-3 mb-14">
+                                                                        <textarea id="documents_admission_work_allController_sub3d_podium-garuda" class="form-control" rows="25" cols="75" name="sub3d_podium-garuda">เรียน ...</textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </page>
+                                                    </div>
+                                                    <div class="form-group hide"
+                                                        id="documents_admission_work_allController_form-group_tb-sub3_details-message-memo">
                                                         <page id="ocuments_admission_work_allController_page"
                                                             class="items-center block p-24 mx-auto bg-white shadow-2xl">
                                                             <div class="row">
@@ -251,7 +316,7 @@ unset($__errorArgs, $__bag); ?>
                                                                 <div class="col-9">
                                                                     <input class="mt-2 form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_government"
-                                                                        name="sub3d_government" type="text" value="1">
+                                                                        name="sub3d_government" type="text" value="">
                                                                 </div>
                                                                 <!-- // -->
                                                                 <div class="col-2">
@@ -260,7 +325,7 @@ unset($__errorArgs, $__bag); ?>
                                                                 <div class="col-4">
                                                                     <input class="form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_draft"
-                                                                        name="sub3d_draft" type="text" value="2">
+                                                                        name="sub3d_draft" type="text" value="">
                                                                 </div>
                                                                 <div class="col-2">
                                                                     <p class="mt-3">วันที่</p>
@@ -268,7 +333,7 @@ unset($__errorArgs, $__bag); ?>
                                                                 <div class="col-4">
                                                                     <input class="form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_date"
-                                                                        name="sub3d_date" type="text" value="3">
+                                                                        name="sub3d_date" type="text" value="">
                                                                 </div>
                                                                 <!-- // -->
                                                                 <div class="col-2">
@@ -277,16 +342,16 @@ unset($__errorArgs, $__bag); ?>
                                                                 <div class="col-10">
                                                                     <input class="form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_topic"
-                                                                        name="sub3d_topic" type="text" value="4">
+                                                                        name="sub3d_topic" type="text" value="">
                                                                 </div>
                                                                 <!-- // -->
                                                                 <div class="col-12">
                                                                     <div class="mt-3 mb-14">
-                                                                        <textarea id="documents_admission_work_allController_sub3d_podium" class="form-control" rows="25" cols="75"name="sub3d_podium"></textarea>
+                                                                        <textarea id="documents_admission_work_allController_sub3d_podium" class="form-control" rows="25" cols="75"name="sub3d_podium">เรียน ...</textarea>
                                                                     </div>
                                                                 </div>
                                                                 <!-- // -->
-                                                                <div class="col-12">
+                                                                <!-- <div class="col-12">
                                                                     <div class="col-3">
                                                                         <select
                                                                             class="ml-32 form-control form-control-border"
@@ -316,7 +381,7 @@ unset($__errorArgs, $__bag); ?>
                                                                             </option>
                                                                         </select>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
                                                             </div>
                                                         </page>
                                                         <input type="hidden" name="doc_id" value="<?php echo e($document_detail->doc_id); ?>">
