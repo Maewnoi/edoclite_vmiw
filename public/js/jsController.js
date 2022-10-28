@@ -489,11 +489,14 @@ $("#documents_admission_division_allController_sign_goup_0").change(function(eve
 $("#documents_admission_work_allController_sub3_type").change(function(event) {
     var var_documents_admission_work_allController_sub3_type = $("#documents_admission_work_allController_sub3_type").val();
     if(var_documents_admission_work_allController_sub3_type == '0'){
-        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details').style.display = 'block';
+        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-message-memo').style.display = 'block';
+        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-garuda').style.display = 'none';
     }else if(var_documents_admission_work_allController_sub3_type == '1'){
-        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details').style.display = 'none';
+        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-message-memo').style.display = 'none';
+        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-garuda').style.display = 'block';
     }else{
-        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details').style.display = 'none';
+        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-message-memo').style.display = 'none';
+        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-garuda').style.display = 'none';
     }
 });
 
