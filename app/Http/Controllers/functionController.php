@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use setasign\Fpdi\Fpdi;
 use setasign\Fpdf\Fpdf;
-
 use Illuminate\Http\Request;
 use App\Models\Groupmem;
 use App\Models\sites;
@@ -251,11 +250,13 @@ class functionController extends Controller
         }
         return $data;
     }
+
     //function pdf_preview
-    public static function funtion_PDFRespond($sub3d_government,$sub3d_draft,$sub3d_date,$sub3d_topic,$sub3d_podium,$sub3d_therefore,$sub3d_pos,$action,$sub3d_id) {
+    public static function funtion_PDFRespond(Request $request) {
+        // return response()->json($request->sub3d_government,200);
+
         $pdf = new Fpdi();
         $pdf->AddPage();
-      
         $pdf->Image('image/Garuda.jpeg',25,25,20,20);
         
         $pdf->SetTextColor(0, 0, 0);
@@ -274,7 +275,7 @@ class functionController extends Controller
         $pdf->SetXY(50, 55); //+12
         $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
         $pdf->SetFont('THSarabunNew','',16);
-        $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3d_government));
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_government));
         // ----------- ----------- ----------- ----------- ----------- -----------
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetXY(25, 67); //+12
@@ -286,7 +287,7 @@ class functionController extends Controller
         $pdf->SetXY(40, 67); //+12
         $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
         $pdf->SetFont('THSarabunNew','',16);
-        $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3d_draft));
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_draft));
 
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetXY(125, 67); //+12
@@ -298,7 +299,7 @@ class functionController extends Controller
         $pdf->SetXY(140, 67); //+12
         $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
         $pdf->SetFont('THSarabunNew','',16);
-        $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3d_date));
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_date));
         // ----------- ----------- ----------- ----------- ----------- -----------
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetXY(25, 79); //+12
@@ -310,10 +311,12 @@ class functionController extends Controller
         $pdf->SetXY(40, 79); //+12
         $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
         $pdf->SetFont('THSarabunNew','',16);
-        $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3d_topic));
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_topic));
         // ----------- ----------- ----------- ----------- ----------- -----------
         // นำจำนวน
-        $strlen_podium = strlen($sub3d_podium);
+        $strlen_podium = strlen($request->sub3d_podium);
+        // $strip_tags_podium = strip_tags($request->sub3d_podium,"<b><p>");
+        // console.log($strip_tags_podium);
         if($strlen_podium <='270'){
             $MultiCell_H = 5;
         }else if($strlen_podium >= '271' && $strlen_podium <= '540'){
@@ -335,32 +338,35 @@ class functionController extends Controller
         $pdf->SetXY(25, 91); //+12
         $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
         $pdf->SetFont('THSarabunNew','',16);
-        $pdf->MultiCell(160,$MultiCell_H, iconv('UTF-8', 'cp874', $sub3d_podium),'0','L',false);
+        $pdf->MultiCell(160,$MultiCell_H, iconv('UTF-8', 'cp874', $request->sub3d_podium),'0','L',false); //strip_tags($request->sub3d_podium,"<b><i>&nbsp;")
         // $pdf->Ln();
         // ----------- ----------- ----------- ----------- ----------- -----------
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetXY(75, 250); //+12
         $pdf->AddFont('THSarabunNew','B','THSarabunNew_b.php');
         $pdf->SetFont('THSarabunNew','B',16);
-        $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3d_therefore));
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_therefore));
         // ----------- ----------- ----------- ----------- ----------- -----------
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetXY(95, 260); //+12
         $pdf->AddFont('THSarabunNew','B','THSarabunNew_b.php');
         $pdf->SetFont('THSarabunNew','B',16);
-        $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3d_pos));
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_pos));
 
-        if($action == 'preview'){
+        if($request->action == 'preview'){
             return response($pdf->Output())->header('Content-Type', 'application/pdf');
-        }else if($action == 'respond'){
+        }else if($request->action == 'respond'){
             $date_new = date('Y-m-d');
             $year_new = date('Y');
             $upload_location = 'image/'.$year_new.'/respond/';
-            $name_gen_new = $sub3d_id."_".$date_new;
+            $name_gen_new = $request->sub3d_id."_".$date_new;
+            // $name_gen_new = 'test_by_domji';
             $full_path = $upload_location.$name_gen_new.'.pdf';
             $pdf->Output('F', $full_path);
             // return response($pdf->Output())->header('Content-Type', 'application/pdf');
             return $full_path;
+        }else{
+            return "Error".$request;
         }
         
 

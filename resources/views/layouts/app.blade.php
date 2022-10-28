@@ -89,7 +89,7 @@
 
         <!-- Page Heading -->
         <!-- <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
             </header> -->
@@ -117,7 +117,7 @@
     <div class="contact-problem-header">
         <h6>ติดต่อปัญหาและคู่มือการใช้งาน</h6>
     </div>
-    <div class="text-center p-2">
+    <div class="p-2 text-center">
         <span>043245265 , 043245261</span>
     </div>
 </div>
@@ -133,6 +133,7 @@
 
   gtag('config', 'G-FZVNG8FL27');
 </script>
+
 <!-- jQuery -->
 <script src="{{ asset('/plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
