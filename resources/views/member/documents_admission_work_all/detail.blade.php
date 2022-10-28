@@ -215,7 +215,7 @@ use App\Http\Controllers\functionController;
                                                                     </div>
                                                                 </div>
                                                                 <!-- // -->
-                                                                <div class="col-12">
+                                                                <!-- <div class="col-12">
                                                                     <div class="col-3">
                                                                         <select
                                                                             class="ml-32 form-control form-control-border"
@@ -245,7 +245,7 @@ use App\Http\Controllers\functionController;
                                                                             </option>
                                                                         </select>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
                                                             </div>
                                                         </page>
                                                         <input type="hidden" name="doc_id" value="{{$document_detail->doc_id}}">

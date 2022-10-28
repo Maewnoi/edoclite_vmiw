@@ -136,6 +136,27 @@ use App\Http\Controllers\functionController;
                                         <?php endif; ?>
                                     </div>
                                 </div>
+                                <?php if(functionController::display_pdf_sub3_doc($document_detail->sub_id) != ''): ?>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'doc_filedirec_1','value' => ''.e(__('บันทึกข้อความตอบกลับ')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','for' => 'doc_filedirec_1','value' => ''.e(__('บันทึกข้อความตอบกลับ')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                        <?php echo functionController::display_pdf(functionController::display_pdf_sub3_doc($document_detail->sub_id)); ?>
+
+
+                                    </div>
+                                </div>
+                                <?php endif; ?>
                             </div>
                             <hr>
                            <?php if($document_detail->sub2_status == '0'): ?>
@@ -286,7 +307,7 @@ unset($__errorArgs, $__bag); ?>
                                                                     </div>
                                                                 </div>
                                                                 <!-- // -->
-                                                                <div class="col-12">
+                                                                <!-- <div class="col-12">
                                                                     <div class="col-3">
                                                                         <select
                                                                             class="ml-32 form-control form-control-border"
@@ -316,7 +337,7 @@ unset($__errorArgs, $__bag); ?>
                                                                             </option>
                                                                         </select>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
                                                             </div>
                                                         </page>
                                                         <input type="hidden" name="doc_id" value="<?php echo e($document_detail->doc_id); ?>">

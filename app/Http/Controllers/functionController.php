@@ -340,18 +340,18 @@ class functionController extends Controller
         $pdf->SetFont('THSarabunNew','',16);
         $pdf->MultiCell(160,$MultiCell_H, iconv('UTF-8', 'cp874', $request->sub3d_podium),'0','L',false); //strip_tags($request->sub3d_podium,"<b><i>&nbsp;")
         // $pdf->Ln();
-        // ----------- ----------- ----------- ----------- ----------- -----------
-        $pdf->SetTextColor(0, 0, 0);
-        $pdf->SetXY(75, 250); //+12
-        $pdf->AddFont('THSarabunNew','B','THSarabunNew_b.php');
-        $pdf->SetFont('THSarabunNew','B',16);
-        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_therefore));
-        // ----------- ----------- ----------- ----------- ----------- -----------
-        $pdf->SetTextColor(0, 0, 0);
-        $pdf->SetXY(95, 260); //+12
-        $pdf->AddFont('THSarabunNew','B','THSarabunNew_b.php');
-        $pdf->SetFont('THSarabunNew','B',16);
-        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_pos));
+        // // ----------- ----------- ----------- ----------- ----------- -----------
+        // $pdf->SetTextColor(0, 0, 0);
+        // $pdf->SetXY(75, 250); //+12
+        // $pdf->AddFont('THSarabunNew','B','THSarabunNew_b.php');
+        // $pdf->SetFont('THSarabunNew','B',16);
+        // $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_therefore));
+        // // ----------- ----------- ----------- ----------- ----------- -----------
+        // $pdf->SetTextColor(0, 0, 0);
+        // $pdf->SetXY(95, 260); //+12
+        // $pdf->AddFont('THSarabunNew','B','THSarabunNew_b.php');
+        // $pdf->SetFont('THSarabunNew','B',16);
+        // $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_pos));
 
         if($request->action == 'preview'){
             return response($pdf->Output())->header('Content-Type', 'application/pdf');

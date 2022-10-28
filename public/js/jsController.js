@@ -512,12 +512,12 @@ $("#documents_admission_work_allController_sub3d_topic").keyup(function(event) {
 $("#documents_admission_work_allController_sub3d_podium").keyup(function(event) {
     document.getElementById("documents_admission_work_allController_bt_respond").disabled = true;
 });
-$("#documents_admission_work_allController_sub3d_therefore").change(function(event) {
-    document.getElementById("documents_admission_work_allController_bt_respond").disabled = true;
-});
-$("#documents_admission_work_allController_sub3d_pos").change(function(event) {
-    document.getElementById("documents_admission_work_allController_bt_respond").disabled = true;
-});
+// $("#documents_admission_work_allController_sub3d_therefore").change(function(event) {
+//     document.getElementById("documents_admission_work_allController_bt_respond").disabled = true;
+// });
+// $("#documents_admission_work_allController_sub3d_pos").change(function(event) {
+//     document.getElementById("documents_admission_work_allController_bt_respond").disabled = true;
+// });
 
 $("#documents_admission_work_allController_bt_preview").click(function(event) {
     let _token = $("#_token").val(); //csrf_token
@@ -527,8 +527,8 @@ $("#documents_admission_work_allController_bt_preview").click(function(event) {
     let documents_admission_work_allController_sub3d_date = $("#documents_admission_work_allController_sub3d_date").val(); //วันที่
     let documents_admission_work_allController_sub3d_topic = $("#documents_admission_work_allController_sub3d_topic").val(); //เรื่อง
     let documents_admission_work_allController_sub3d_podium = $("#documents_admission_work_allController_sub3d_podium").val(); //ข้อความตั้งแท่น
-    let documents_admission_work_allController_sub3d_therefore = $("#documents_admission_work_allController_sub3d_therefore").val(); //จึงเรียน
-    let documents_admission_work_allController_sub3d_pos = $("#documents_admission_work_allController_sub3d_pos").val(); //ตำแหน่ง
+    // let documents_admission_work_allController_sub3d_therefore = $("#documents_admission_work_allController_sub3d_therefore").val(); //จึงเรียน
+    // let documents_admission_work_allController_sub3d_pos = $("#documents_admission_work_allController_sub3d_pos").val(); //ตำแหน่ง
 
     if(documents_admission_work_allController_sub3d_government == ''){
         document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
@@ -550,14 +550,14 @@ $("#documents_admission_work_allController_bt_preview").click(function(event) {
         document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
         document.getElementById('documents_admission_work_allController_tag_p_error').innerText  = 'กรุณากรอก รายละเอียด';
         return;
-    }else if(documents_admission_work_allController_sub3d_therefore == ''){
-        document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController_tag_p_error').innerText  = 'กรุณาเลือก ผู้รับ';
-        return;
-    }else if(documents_admission_work_allController_sub3d_pos == ''){
-        document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController_tag_p_error').innerText  = 'กรุณาเลือก ตำแหน่ง';
-        return;
+    // }else if(documents_admission_work_allController_sub3d_therefore == ''){
+    //     document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
+    //     document.getElementById('documents_admission_work_allController_tag_p_error').innerText  = 'กรุณาเลือก ผู้รับ';
+    //     return;
+    // }else if(documents_admission_work_allController_sub3d_pos == ''){
+    //     document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
+    //     document.getElementById('documents_admission_work_allController_tag_p_error').innerText  = 'กรุณาเลือก ตำแหน่ง';
+    //     return;
     }else if(documents_admission_work_allController_sub3d_speed == ''){
         document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
         document.getElementById('documents_admission_work_allController_tag_p_error').innerText  = 'กรุณาเลือก ชั้นความเร็ว';
@@ -571,8 +571,8 @@ $("#documents_admission_work_allController_bt_preview").click(function(event) {
                         sub3d_date: documents_admission_work_allController_sub3d_date,
                         sub3d_topic: documents_admission_work_allController_sub3d_topic,
                         sub3d_podium: documents_admission_work_allController_sub3d_podium,
-                        sub3d_therefore: documents_admission_work_allController_sub3d_therefore,
-                        sub3d_pos: documents_admission_work_allController_sub3d_pos,
+                        // sub3d_therefore: documents_admission_work_allController_sub3d_therefore,
+                        // sub3d_pos: documents_admission_work_allController_sub3d_pos,
                         action: 'preview',
                         sub3d_id: null,
         };

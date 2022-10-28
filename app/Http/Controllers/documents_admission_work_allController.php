@@ -111,8 +111,8 @@ class documents_admission_work_allController extends Controller
                 'sub3d_date'=>$request->sub3d_date,
                 'sub3d_topic'=>$request->sub3d_topic,
                 'sub3d_podium' =>$request->sub3d_podium,
-                'sub3d_therefore'=>$request->sub3d_therefore,
-                'sub3d_pos'=>$request->sub3d_pos,
+                // 'sub3d_therefore'=>$request->sub3d_therefore,
+                // 'sub3d_pos'=>$request->sub3d_pos,
                 'sub3d_speed'=>$request->sub3d_speed
             ]);
            
