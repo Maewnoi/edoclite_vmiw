@@ -676,6 +676,7 @@ use App\Http\Controllers\navigationController;
                         </div>
                     </div>
                     <?php endif; ?>
+                    <?php if(Auth::user()->level != '3'): ?>
                     <!-- Dropdown ทะเบียนหนังสือภายใน -->
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <div class="relative ml-1">
@@ -945,6 +946,8 @@ use App\Http\Controllers\navigationController;
 <?php endif; ?>
                         </div>
                     </div>
+                    
+                    <?php endif; ?>
                     <?php endif; ?>
                 </div>
             </div>

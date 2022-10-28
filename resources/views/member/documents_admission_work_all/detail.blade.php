@@ -94,6 +94,16 @@ use App\Http\Controllers\functionController;
                                         @endif
                                     </div>
                                 </div>
+                                @if(functionController::display_pdf_sub3_doc($document_detail->sub_id) != '')
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <x-jet-label class="text-md" for="doc_filedirec_1"
+                                            value="{{ __('บันทึกข้อความตอบกลับ') }}" />
+                                        {!!functionController::display_pdf(functionController::display_pdf_sub3_doc($document_detail->sub_id))!!}
+
+                                    </div>
+                                </div>
+                                @endif
                             </div>
                             <hr>
                            @if($document_detail->sub2_status == '0')

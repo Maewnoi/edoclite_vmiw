@@ -12,6 +12,8 @@ use App\Models\cottons;
 use App\Models\reserve_number;
 use App\Models\sub_doc;
 use App\Models\sub2_doc;
+use App\Models\sub3_doc;
+use App\Models\sub3_detail;
 use App\Models\token;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,10 +57,10 @@ class functionController extends Controller
         $pdf->SetFont('THSarabunNew','',16);
 
         if($groupmems->group_seal == ''){
-            $tokens = tokens::where('tokens'.'token_site_id', Auth::user()->site_id)
+            $tokens = token::where('tokens'.'token_site_id', Auth::user()->site_id)
             ->first();
 
-            $pdf->Image($tokens->tokens_seal,$seal_point,10,40,23);
+            $pdf->Image($tokens->token_seal,$seal_point,10,40,23);
         }else{
             $pdf->Image($groupmems->group_seal,$seal_point,10,40,23);
         }
@@ -690,43 +692,26 @@ class functionController extends Controller
                 //Font
                 $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
                 $pdf->SetFont('THSarabunNew','',16);
+
                 
+                //กำหนดแกน x ให้กับข้อความ
+                  $x1 = 0; $x2 = 0; $x3 = 0;
+                  
+                //ตราแสตมป์
                 if($groupmems->group_seal == ''){
                     $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',$seal_point,10,40,23);
                 }else{
-                    $pdf->Image($groupmems->group_seal,$seal_point,10,40,23);
+                        if($seal_point == '1'){ $sealpoint = 3; $x1 = 20; $x2 = 14; $x3 = 17; }
+                        if($seal_point == '2'){ $sealpoint = 43; $x1 = 60; $x2 = 54; $x3 = 57; }
+                        if($seal_point == '3'){ $sealpoint = 83; $x1 = 100; $x2 = 94; $x3 = 97; }
+                        if($seal_point == '4'){ $sealpoint = 123; $x1 = 140; $x2 = 135; $x3 = 138; }
+                        if($seal_point == '5'){ $sealpoint = 163;  $x1 = 180; $x2 = 175; $x3 = 178; }
+                        //$pdf->Image($tokens->token_seal,$sealpoint,10,40,23);
+                   
+                    $pdf->Image($groupmems->group_seal,$sealpoint,10,40,23);
                 }
-
-                //กำหนดแกน x ให้กับข้อความ
-                $xx1 = 0;
-                $xx2 = 0;
-                $xx3 = 0;
-                if($seal_point > 85){
-                   //ขวา เพิ่ม
-                    for ($t = 85; $t < $seal_point; $t++) {
-                        $xx1 += 1;
-                        $xx2 += 1;
-                        $xx3 += 1;
-                    }
-                    $x1 = 100 + $xx1;
-                    $x2 = 93 + $xx2;
-                    $x3 = 97 + $xx3;
-                }else if($seal_point < 85){
-                    //ซ้าย ลด
-                    for ($t = 85; $t > $seal_point; $t--) {
-                        $xx1 += 1;
-                        $xx2 += 1;
-                        $xx3 += 1;
-                    }
-                    $x1 = 100 - $xx1;
-                    $x2 = 93 - $xx2;
-                    $x3 = 97 - $xx3;
-                }else if($seal_point == 85){
-                    $x1 = 100;
-                    $x2 = 93;
-                    $x3 = 97;
-                }
-                    
+                
+                $pdf->SetFont('THSarabunNew','',14);
                 //ข้อความประทับตรา 
                 $pdf->SetTextColor(0, 0, 0);
                 $pdf->SetXY($x1, 18);
@@ -738,33 +723,56 @@ class functionController extends Controller
                 $pdf->SetXY($x3, 28.5);
                 $pdf->Write(0, iconv('UTF-8', 'cp874', functionController::funtion_time_format($sub_time)));
 
+                
+                $pdf->SetFont('THSarabunNew','',16);
+
                 if($seal_date_0 != ''){
+
+                    $x = 150;
                     //หมายเหตุ   
                     $pdf->SetTextColor(0, 0, 0);
-                    $pdf->SetXY(85, 180);
+                    $pdf->SetXY(70, $x);
                     $pdf->MultiCell(105,10, iconv('UTF-8', 'cp874', $seal_detail_0),'0','L',false);
 
                     //ลายเซ็นหัวหน้าฝ่าย
                     $user_Check = User::where('id', $seal_id_0)
                     ->first();
+                    $x = $x + 10;
                     if($user_Check->sign == ''){
-                        $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',85,200,20,20);
+                        $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',85,$x,20,20);
+                        
                     }else{
-                        $pdf->Image($user_Check->sign,85,200,20,20);
+                        $pdf->Image($user_Check->sign,85,$x,20,20);
+                       
                     }
-                    
+                                     
                     //ตำแหน่ง 25
+                    $Y = 0;
+                    $Y = strlen($seal_pos_0);
+                    if($Y >= 14){$YY = 93;}
+                    else if($Y == 13){$YY = 90;}
+                    else if($Y == 12){$YY = 91;}
+                    else if($Y == 10){$YY = 92;}                    
+                    else if($Y == 9){$YY = 93;}                    
+                    else if($Y == 8){$YY = 94;}                    
+                    else if($Y == 7){$YY = 95;}
+                    else{$YY = 95;}
+
+
                     $pdf->SetTextColor(0, 0, 0);
-                    $pdf->SetXY(85, 225);
+                    $x = $x + 25;  
+                    $pdf->SetXY($YY,  $x);
                     $pdf->Write(0, iconv('UTF-8', 'cp874', $seal_pos_0));
                     //วันที่เซ็น 6
                     $pdf->SetTextColor(0, 0, 0);
-                    $pdf->SetXY(85, 231);
+                    $x = $x + 6;  
+                    $pdf->SetXY(90, $x);
                     $pdf->Write(0, iconv('UTF-8', 'cp874', functionController::funtion_date_format($seal_date_0)));
-                }else if(Auth::user()->level == '5'){
+                }
+                else if(Auth::user()->level == '5'){
                     //หมายเหตุ   
                     $pdf->SetTextColor(0, 0, 0);
-                    $pdf->SetXY(85, 180);
+                    $pdf->SetXY(70, 180);
                     $pdf->MultiCell(105,10, iconv('UTF-8', 'cp874', $seal_detail_0),'0','L',false);
 
                     //ลายเซ็นหัวหน้าฝ่าย
@@ -780,36 +788,42 @@ class functionController extends Controller
                     $pdf->Write(0, iconv('UTF-8', 'cp874', $seal_pos_0));
                     //วันที่เซ็น 6
                     $pdf->SetTextColor(0, 0, 0);
-                    $pdf->SetXY(85, 231);
+                    $pdf->SetXY(90, 231);
                     $pdf->Write(0, iconv('UTF-8', 'cp874', functionController::funtion_date_format(date('Y-m-d H:i:s'))));
                 }
+               
                 if($seal_date_1 != ''){
+                    $x = 220;
                     //หมายเหตุ   
                     $pdf->SetTextColor(0, 0, 0);
-                    $pdf->SetXY(85, 120);
+                    $pdf->SetXY(70, $x);
                     $pdf->MultiCell(105,10, iconv('UTF-8', 'cp874', $seal_detail_1),'0','L',false);
 
                     //ลายเซ็นหัวหน้ากอง
                     $user_Check = User::where('id', $seal_id_1)
                     ->first();
+                    $x = $x + 10;
                     if($user_Check->sign == ''){
                         $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',85,140,20,20);
                     }else{
-                        $pdf->Image($user_Check->sign,85,140,20,20);
+                        $pdf->Image($user_Check->sign,85,$x,20,20);
                     }
-
+                    
+                    $x = $x + 25;
                     //ตำแหน่ง 25
                     $pdf->SetTextColor(0, 0, 0);
-                    $pdf->SetXY(85, 165);
+                    $pdf->SetXY(85, $x);
                     $pdf->Write(0, iconv('UTF-8', 'cp874', $seal_pos_1));
+                    
                     //วันที่เซ็น 6
+                    $x = $x + 6;
                     $pdf->SetTextColor(0, 0, 0);
-                    $pdf->SetXY(85, 171);
+                    $pdf->SetXY(90, $x);
                     $pdf->Write(0, iconv('UTF-8', 'cp874', functionController::funtion_date_format($seal_date_1)));
                 }else if(Auth::user()->level == '4'){
                     //หมายเหตุ   
                     $pdf->SetTextColor(0, 0, 0);
-                    $pdf->SetXY(85, 120);
+                    $pdf->SetXY(70, 120);
                     $pdf->MultiCell(105,10, iconv('UTF-8', 'cp874', $seal_detail_1),'0','L',false);
 
                     //ลายเซ็นหัวหน้ากอง
@@ -828,6 +842,7 @@ class functionController extends Controller
                     $pdf->SetXY(85, 171);
                     $pdf->Write(0, iconv('UTF-8', 'cp874', functionController::funtion_date_format(date('Y-m-d H:i:s'))));
                 }
+               
             }
         }
         $date_new = date('Y-m-d');
@@ -837,7 +852,7 @@ class functionController extends Controller
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
         return $full_path;
-        // return response($pdf->Output())->header('Content-Type', 'application/pdf');
+       //  return response($pdf->Output())->header('Content-Type', 'application/pdf');
     }
 
     //function เรียก cottons ด้วย id group
@@ -869,7 +884,11 @@ class functionController extends Controller
                 $pdf->SetFont('THSarabunNew','',16);
                 
                 if($groupmems->group_seal == ''){
-                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',$seal_point,10,40,23);
+                    //$pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',$seal_point,10,40,23);
+                    $tokens = token::where('tokens'.'token_site_id', Auth::user()->site_id)
+                    ->first();
+
+                     $pdf->Image($tokens->token_seal,$seal_point,10,40,23);
                 }else{
                     $pdf->Image($groupmems->group_seal,$seal_point,10,40,23);
                 }
@@ -919,12 +938,12 @@ class functionController extends Controller
             }
         }
         $date_new = date('Y-m-d');
-        $year_new = date('Y');
+       $year_new = date('Y');
         $upload_location = 'image/'.$year_new.'/fileseal01/';
-        $name_gen_new = $sub_id."_".$date_new;
+       $name_gen_new = $sub_id."_".$date_new;
         $full_path = $upload_location.$name_gen_new.'.pdf';
-        $pdf->Output('F', $full_path);
-        // return response($pdf->Output())->header('Content-Type', 'application/pdf');
+       $pdf->Output('F', $full_path);
+       //  return response($pdf->Output())->header('Content-Type', 'application/pdf');
         return $full_path;
     }
 
@@ -982,23 +1001,23 @@ class functionController extends Controller
     //ฟังชันเรียกstatus sub_doc ด้วย sub_id
     public static function funtion_sub_status_detail($status) {
         if($status == '0'){
-            $txt_status = '<span class="badge bg-danger">รอสารบรรกลางลงรับ</span>';
+            $txt_status = '<span class="badge bg-danger">รอสารบรรกองลงรับ</span>';
         }elseif($status == '1'){
-            $txt_status = '<span class="badge bg-warning">รอหัวหน้าฝ่ายพิจารณา</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">รอหัวหน้าฝ่ายพิจารณา</span>';
         }elseif($status == '2'){
-            $txt_status = '<span class="badge bg-warning">รอหัวหน้ากองงานพิจารณา</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">รอหัวหน้ากองงานพิจารณา</span>';
         }elseif($status == '3'){
-            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '4'){
-            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '5'){
-            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '6'){
-            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '7'){
-            $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '8'){
-            $txt_status = '<span class="badge bg-success">สำเร็จ</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-success">สำเร็จ</span>';
         }else{
             return "ไม่ถูกนิยาม";
         }
@@ -1035,37 +1054,25 @@ class functionController extends Controller
             $xx2 = 0;
             $xx3 = 0;
 
-            if($seal_point == '1'){
-                $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',5,10,38,20);
-                $x1 = 20; $x2 = 13; $x3 = 17;
+            if($seal_point == '1'){ $sealpoint = 5; $x1 = 20; $x2 = 14; $x3 = 17; }
+            if($seal_point == '2'){ $sealpoint = 45; $x1 = 60; $x2 = 54; $x3 = 57; }
+            if($seal_point == '3'){ $sealpoint = 85; $x1 = 100; $x2 = 94; $x3 = 97; }
+            if($seal_point == '4'){ $sealpoint = 125; $x1 = 140; $x2 = 135; $x3 = 138; }
+            if($seal_point == '5'){ $sealpoint = 165;  $x1 = 180; $x2 = 175; $x3 = 178; }
+            $pdf->Image($tokens->token_seal,$sealpoint,10,40,23);
 
-            }if($seal_point == '2'){                
-                $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',45,10,38,20);
-                $x1 = 60; $x2 = 53; $x3 = 57;
+            //dd($tokens);
 
-            } if($seal_point == '3'){
-                $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',85,10,38,20);
-                $x1 = 100; $x2 = 93; $x3 = 97;
-
-            } if($seal_point == '4'){
-                $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',125,10,38,20);
-                $x1 = 140; $x2 = 135; $x3 = 138;
-
-            } if($seal_point == '5'){
-                $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',165,10,38,20);
-                $x1 = 180; $x2 = 175; $x3 = 178;
-                
-            }
             $pdf->SetFont('THSarabunNew','',14);
             //ข้อความประทับตรา 
             $pdf->SetTextColor(0, 0, 0);
-            $pdf->SetXY($x1, 17);
+            $pdf->SetXY($x1, 18);
             $pdf->Write(0, iconv('UTF-8', 'cp874', $doc_recnum));
             $pdf->SetTextColor(0, 0, 0);
-            $pdf->SetXY($x2, 21);
+            $pdf->SetXY($x2, 23);
             $pdf->Write(0, iconv('UTF-8', 'cp874', functionController::funtion_date_format($doc_date)));
             $pdf->SetTextColor(0, 0, 0);
-            $pdf->SetXY($x3, 26);
+            $pdf->SetXY($x3, 28);
             $pdf->Write(0, iconv('UTF-8', 'cp874', functionController::funtion_time_format($doc_time)));
 
         }
@@ -1092,7 +1099,7 @@ class functionController extends Controller
         $n = 6;
         $pdf->MultiCell(110,$n, iconv('UTF-8', 'cp874', $sub_recid_name." \n ".$seal_deteil),'0','L',false);
 
-         $y = 85 + $n + 10;
+         $y = 85 + $n + 5;
 
         //ลายเซ็น
         if(Auth::user()->sign == ''){
@@ -1181,6 +1188,7 @@ class functionController extends Controller
         }
         return $txt_status;
     }
+
 
     //ฟังชันเรียกชื่อสิทธิ์ด้วย id
     public static function funtion_reserve_status($status) {
@@ -1469,7 +1477,24 @@ class functionController extends Controller
         }
         return $txt_doc_speed;
     }
+      //ฟังชันเรียกชื่อกองงานด้วย id
+      public static function display_pdf_sub3_doc($sub_id) {
+        $sub2_doc_Check = sub2_doc::where('sub2_docs.sub2_subid', $sub_id)
+        ->where('sub2_docs.sub2_recid', Auth::user()->id)
+        ->first();
+        if($sub2_doc_Check){
+            $sub3_doc_Check = sub3_doc::where('sub3_docs.sub3_sub_2id', $sub2_doc_Check->sub2_id)
+            ->first();
 
+            if($sub3_doc_Check){
+                $sub3_detail_Check = sub3_detail::where('sub3_details.sub3d_sub_3id', $sub3_doc_Check->sub3_id)
+                ->first();
+                if($sub3_detail_Check->sub3d_file != ''){
+                    return $sub3_detail_Check->sub3d_file;
+                }
+            }
+        }
+    }
     public static function display_pdf($pathToFile)
     {       
         $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");

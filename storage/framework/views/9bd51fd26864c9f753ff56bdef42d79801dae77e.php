@@ -44,18 +44,19 @@ use App\Http\Controllers\functionController;
 
                         </div>
                         <div class="card-body table-responsive">
-                            <div class="row">
+                            
+                        <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                       เลขที่รับส่วนงาน : <font class="text-primary"><?php echo e($document_detail->doc_recnum); ?></font>
+                                        เลขที่รับส่วนงาน : <font class="text-primary"><?php echo e($document_detail->doc_recnum); ?></font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        เลขที่หนังสือ : <font class="text-primary"><?php echo e($document_detail->doc_docnum); ?></font>
+                                       เลขที่หนังสือ : <font class="text-primary"><?php echo e($document_detail->doc_docnum); ?></font>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                        วันที่ : <font class="text-primary"><?php echo e($document_detail->doc_date); ?></font>
                                     </div>
@@ -85,7 +86,6 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                             </div>
-                            <hr/>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -102,10 +102,10 @@ use App\Http\Controllers\functionController;
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                                         <?php if($document_detail->sub_status == '8'): ?>
-                                        <?php echo functionController::display_pdf($document_detail->seal_file); ?>
+                                            <?php echo functionController::display_pdf($document_detail->seal_file); ?>
 
                                         <?php else: ?>
-                                        <?php echo functionController::display_pdf($document_detail->doc_filedirec_1); ?>
+                                            <?php echo functionController::display_pdf($document_detail->doc_filedirec_1); ?>
 
                                         <?php endif; ?>
                                     </div>
@@ -138,50 +138,15 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
+                            <?php if($document_detail->sub_status == '1'): ?>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="callout callout-danger"> 
-                                            <?php if($document_detail->doc_status == 'success'): ?>
-                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-lg','value' => ''.e(__('ผู้รับ')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-lg','value' => ''.e(__('ผู้รับ')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                            <table>
-                                                <?php $__currentLoopData = $userS_2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_sub_docs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <tr>
-                                                    <td><?php echo e($row_sub_docs->name); ?></td>
-                                                    <td>**</td>
-                                                    
-                                                </tr>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            </table>
-                                            <?php endif; ?>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <?php if($document_detail->sub_status == '2'): ?>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <form action="<?php echo e(route('documents_admission_division_takedown')); ?>" method="post"
+                                    <form action="<?php echo e(route('documents_admission_department_takedown')); ?>" method="post"
                                         enctype="multipart/form-data">
                                         <?php echo csrf_field(); ?>
                                         <div class="card card-body">
                                             <div class="row">
-                                                <?php if($document_detail->seal_id_0 == ''): ?>
+                                                <?php if($document_detail->seal_id_1 == ''): ?>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -196,9 +161,8 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                                        <!-- ผู้พิจารณาคนที่ 1 -->
                                                         <select
-                                                            class="form-control select2bs4 <?php $__errorArgs = ['sign_goup_0'];
+                                                            class="form-control select2bs4 <?php $__errorArgs = ['sign_goup_1'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -206,69 +170,18 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                                            name="sign_goup_0"
-                                                            id="documents_admission_division_allController_sign_goup_0">
+                                                            name="sign_goup_1"
+                                                            id="documents_admission_department_allController_sign_goup_1">
                                                             <option value="">ไม่มีผู้พิจารณา</option>
-                                                            <optgroup label="หัวหน้าฝ่าย">
+                                                            <optgroup label="หัวหน้ากอง">
                                                                 <?php $__currentLoopData = $userS_0; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_userS_0): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                <option value="<?php echo e($row_userS_0->id); ?>">
+                                                                <option
+                                                                    value="<?php echo e($row_userS_0->id); ?>">
                                                                     <?php echo e($row_userS_0->name); ?></option>
                                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                             </optgroup>
-                                                            
                                                         </select>
-
-                                                        <!-- ผู้พิจารณาคนที่ 2 -->
-                                                        <!-- <div class="hide"
-                                                            id="documents_admission_division_allController_form-group_sign_goup_4">
-                                                            <hr><select
-                                                                class="form-control select2bs4 <?php $__errorArgs = ['sign_goup_4'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                                                                name="sign_goup_4"
-                                                                id="documents_admission_division_allController_sign_goup_4">
-                                                            </select>
-                                                        </div> -->
-
-                                                        <!-- ผู้พิจารณาคนที่ 3 -->
-                                                        <!-- <div class="hide"
-                                                            id="documents_admission_division_allController_form-group_sign_goup_5">
-                                                            <hr><select
-                                                                class="form-control select2bs4 <?php $__errorArgs = ['sign_goup_5'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                                                                name="sign_goup_5"
-                                                                id="documents_admission_division_allController_sign_goup_5">
-                                                            </select>
-                                                        </div> -->
-
-                                                        <!-- ผู้พิจารณาคนที่ 4 -->
-                                                        <!-- <div class="hide"
-                                                            id="documents_admission_division_allController_form-group_sign_goup_6">
-                                                            <hr><select
-                                                                class="form-control select2bs4 <?php $__errorArgs = ['sign_goup_6'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                                                                name="sign_goup_6"
-                                                                id="documents_admission_division_allController_sign_goup_6">
-                                                            </select>
-                                                        </div> -->
-                                                        <?php $__errorArgs = ['sign_goup_0'];
+                                                        <?php $__errorArgs = ['sign_goup_1'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -284,11 +197,11 @@ unset($__errorArgs, $__bag); ?>
                                                     </div>
                                                 </div>
                                                 <?php else: ?>
-                                                <input type="hidden" name="sign_goup_0" class="form-control">
+                                                <input type="hidden" name="sign_goup_1" class="form-control">
                                                 <?php endif; ?>
                                                 <div class="col-md-6">
                                                     <div class="form-group"
-                                                        id="documents_admission_division_allController_form-group_selected_multiple_sub2_recid">
+                                                        id="documents_admission_department_allController_form-group_selected_multiple_sub2_recid">
                                                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','value' => ''.e(__('เลือกผู้รับ')).'']]); ?>
 <?php $component->withName('jet-label'); ?>
@@ -302,7 +215,7 @@ unset($__errorArgs, $__bag); ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                                                         <select name="sub2_recid[]"
-                                                            id="documents_admission_division_allController_selected_multiple_sub2_recid"
+                                                            id="documents_admission_department_allController_selected_multiple_sub2_recid"
                                                             multiple="multiple" required
                                                             class=" <?php $__errorArgs = ['sub2_recid'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -335,8 +248,8 @@ unset($__errorArgs, $__bag); ?>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <textarea name="seal_detail_1" rows="4" cols="50"
-                                                            class="form-control <?php $__errorArgs = ['seal_detail_1'];
+                                                        <textarea name="seal_detail_0" rows="4" cols="50"
+                                                            class="form-control <?php $__errorArgs = ['seal_detail_0'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -344,7 +257,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"></textarea>
-                                                        <?php $__errorArgs = ['seal_detail_1'];
+                                                        <?php $__errorArgs = ['seal_detail_0'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -359,9 +272,9 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" name="seal_pos_1"
+                                                        <input type="text" name="seal_pos_0"
                                                             value="<?php echo e(Auth::user()->pos); ?>"
-                                                            class="form-control <?php $__errorArgs = ['seal_pos_1'];
+                                                            class="form-control <?php $__errorArgs = ['seal_pos_0'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -370,7 +283,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
                                                             required>
-                                                        <?php $__errorArgs = ['seal_pos_1'];
+                                                        <?php $__errorArgs = ['seal_pos_0'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -396,7 +309,6 @@ unset($__errorArgs, $__bag); ?>
                                                 value="<?php echo e($document_detail->doc_origin); ?>" class="form-control">
                                             <input type="hidden" name="doc_title"
                                                 value="<?php echo e($document_detail->doc_title); ?>" class="form-control">
-
                                             <input type="hidden" name="doc_recnum"
                                                 value="<?php echo e($document_detail->doc_recnum); ?>" class="form-control">
                                             <input type="hidden" name="doc_date" value="<?php echo e($document_detail->doc_date); ?>"
@@ -406,33 +318,32 @@ unset($__errorArgs, $__bag); ?>
                                             <input type="hidden" name="seal_point"
                                                 value="<?php echo e($document_detail->seal_point); ?>" class="form-control">
 
-                                            <input type="hidden" name="seal_date_0"
-                                                value="<?php echo e($document_detail->seal_date_0); ?>" class="form-control">
                                             <input type="hidden" name="seal_date_1"
                                                 value="<?php echo e($document_detail->seal_date_1); ?>" class="form-control">
+                                            <input type="hidden" name="seal_date_0"
+                                                value="<?php echo e($document_detail->seal_date_0); ?>" class="form-control">
 
-                                            <input type="hidden" name="seal_id_0"
-                                                value="<?php echo e($document_detail->seal_id_0); ?>" class="form-control">
                                             <input type="hidden" name="seal_id_1"
+                                                value="<?php echo e($document_detail->seal_id_1); ?>" class="form-control">
+                                            <input type="hidden" name="seal_id_0"
                                                 value="<?php echo e(Auth::user()->id); ?>" class="form-control">
 
-                                            <input type="hidden" name="seal_detail_0"
-                                                value="<?php echo e($document_detail->seal_detail_0); ?>" class="form-control">
+                                            <input type="hidden" name="seal_detail_1"
+                                                value="<?php echo e($document_detail->seal_detail_1); ?>" class="form-control">
 
-                                            <input type="hidden" name="seal_pos_0"
-                                                value="<?php echo e($document_detail->seal_pos_0); ?>" class="form-control">
-
+                                            <input type="hidden" name="seal_pos_1"
+                                                value="<?php echo e($document_detail->seal_pos_1); ?>" class="form-control">
+                                                
                                             <input type="hidden" name="doc_filedirec_1"
                                                 value="<?php echo e($document_detail->doc_filedirec_1); ?>" class="form-control">
-
+                                                
                                             <input type="hidden" name="sub_recnum"
                                                 value="<?php echo e($document_detail->sub_recnum); ?>" class="form-control">
                                             <input type="hidden" name="sub_date"
                                                 value="<?php echo e($document_detail->sub_date); ?>" class="form-control">
                                             <input type="hidden" name="sub_time"
                                                 value="<?php echo e($document_detail->sub_time); ?>" class="form-control">
-
-                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+                                                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => []]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
@@ -463,4 +374,4 @@ unset($__errorArgs, $__bag); ?>
 <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
 <?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
 <?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
-<?php endif; ?><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/member/documents_admission_division_all/detail.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/member/documents_admission_department_all/detail.blade.php ENDPATH**/ ?>

@@ -3,7 +3,7 @@ use App\Http\Controllers\functionController;
 @endphp
 <x-app-layout>
     <!-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             สวัสดี , {{Auth::user()->name}}
         </h2>
     </x-slot> -->
@@ -12,79 +12,59 @@ use App\Http\Controllers\functionController;
             <div class="row">
                 <div class="col-md-12">
                     @if(session("success"))
-                    <div class="alert shadow alert-success">{{session('success')}}</div>
+                    <div class="shadow alert alert-success">{{session('success')}}</div>
                     @endif
                     @if ($errors->any())
                     @foreach ($errors->all() as $error)
-                    <div class="alert shadow alert-danger">{{ $error }}</div>
+                    <div class="shadow alert alert-danger">{{ $error }}</div>
                     @endforeach
                     @endif
-                    <div class="card shadow">
-                        <div class="card-header text-lg bg-primary">
+                    <div class="shadow card">
+                        <div class="text-lg card-header bg-primary">
                             <x-jet-nav-link href="{{url('/documents_pending/all')}}">
                                 <i class="fa fa-arrow-left"></i>
                             </x-jet-nav-link>
                             เอกสารรับเข้าภายนอกรายละเอียด : {{$document_detail->doc_origin}}
                         </div>
                         <div class="card-body table-responsive">
-                            <div class="card card-body">
-                                <x-jet-label class="text-lg" value="{{ __('ข้อมูลทั่วไป') }}" />
-                            </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_recnum"
-                                            value="{{ __('เลขที่รับส่วนงาน') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_recnum}}</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_docnum"
-                                            value="{{ __('เลขที่หนังสือ') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_docnum}}</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_date" value="{{ __('วันที่') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_date}}</label>
+                                        เลขที่รับส่วนงาน : <font class="text-primary">{{$document_detail->doc_recnum}}</font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_date_2" value="{{ __('ลงวันที่') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_date}}</label>
+                                       เลขที่หนังสือ : <font class="text-primary">{{$document_detail->doc_docnum}}</font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_time" value="{{ __('เวลา') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_time}}</label>
+                                       วันที่ : <font class="text-primary">{{$document_detail->doc_date}}</font>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_title" value="{{ __('เรื่อง') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_title}}</label>
+                                        ลงวันที่ : <font class="text-primary">{{$document_detail->doc_date}}</font>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="" value="{{ __('ชั้นความเร็ว/สถานะ') }}" />
+                                        เวลา : <font class="text-primary">{{$document_detail->doc_time}}</font>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        ชั้นความเร็ว/สถานะ : 
                                         {!! functionController::funtion_doc_speed($document_detail->doc_speed) !!}
                                         {!! functionController::funtion_sub_status($document_detail->sub_status) !!}
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card card-body">
-                                <x-jet-label class="text-lg" value="{{ __('ข้อมูลเอกสาร') }}" />
-                                @error('doc_filedirec')
-                                <div class="my-2">
-                                    <p class="text-sm text-red-600 mt-2">
-                                        {{$message}}</p>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        เรื่อง : <font class="text-primary">{{$document_detail->doc_title}}</font>
+                                    </div>
                                 </div>
-                                @enderror
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -115,7 +95,28 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                             </div>
+                            @if($document_detail->doc_status == 'success')
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="callout callout-danger">
+                                            <x-jet-label class="text-lg" value="{{ __('สถานะการลงรับหนังสือ') }}" />
+                                            <table>
+                                                @foreach($sub_docsS as $row_sub_docs)
+                                                <tr>
+                                                    <td>{{ functionController::funtion_groupmem_name($row_sub_docs->sub_recid) }}</td>
+                                                    <td>{!! functionController::funtion_sub_status_detail($row_sub_docs->sub_status) !!}</td>
+                                                </tr>
+                                                @endforeach
+                                            </table>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <hr>
+                            @endif
+
                             @if($document_detail->sub_status == '0')
                             <div class="row">
                                 <div class="col-md-12">
@@ -125,8 +126,14 @@ use App\Http\Controllers\functionController;
                                         <div class="card card-body">
                                             <x-jet-label class="text-lg" value="{{ __('ตำแหน่งประทับตรา') }}" />
                                             <div class="form-group">
-                                                <input type="range" name="seal_point" class="form-range" min="10" value="20"
-                                                    max="160" step="1">
+                                               <!-- <input type="range" name="seal_point" class="form-range" min="10" value="20"
+                                                    max="160" step="1"> -->
+                                                    <input type="radio" id="seal_point" name="seal_point" value="1"> ตำแหน่งที่ 1 &nbsp;&nbsp;
+                                                    <input type="radio" id="seal_point" name="seal_point" value="2"> ตำแหน่งที่ 2 &nbsp;&nbsp;
+                                                    <input type="radio" id="seal_point" name="seal_point" value="3"> ตำแหน่งที่ 3 &nbsp;&nbsp;
+                                                    <input type="radio" id="seal_point" name="seal_point" value="4" checked > ตำแหน่งที่ 4  &nbsp;&nbsp;
+                                                    <input type="radio" id="seal_point" name="seal_point" value="5"> ตำแหน่งที่ 5 &nbsp;&nbsp;<br/>
+                                                    <img src="{{ asset('/image/seal_point.jpg') }}" alt="Girl in a jacket" width="500" height="auto">
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -160,7 +167,7 @@ use App\Http\Controllers\functionController;
                                                         </select>
                                                         @error('sub_recnum')
                                                         <div class="my-2">
-                                                            <p class="text-sm text-red-600 mt-2">
+                                                            <p class="mt-2 text-sm text-red-600">
                                                                 {{$message}}</p>
                                                         </div>
                                                         @enderror
@@ -175,7 +182,7 @@ use App\Http\Controllers\functionController;
                                                             required>
                                                         @error('sub_date')
                                                         <div class="my-2">
-                                                            <p class="text-sm text-red-600 mt-2">
+                                                            <p class="mt-2 text-sm text-red-600">
                                                                 {{$message}}</p>
                                                         </div>
                                                         @enderror
@@ -189,7 +196,7 @@ use App\Http\Controllers\functionController;
                                                             required>
                                                         @error('sub_time')
                                                         <div class="my-2">
-                                                            <p class="text-sm text-red-600 mt-2">
+                                                            <p class="mt-2 text-sm text-red-600">
                                                                 {{$message}}</p>
                                                         </div>
                                                         @enderror
@@ -220,7 +227,7 @@ use App\Http\Controllers\functionController;
                                                     </div>
                                                     @error('sign_goup_0')
                                                     <div class="my-2">
-                                                        <p class="text-sm text-red-600 mt-2">
+                                                        <p class="mt-2 text-sm text-red-600">
                                                             {{$message}}</p>
                                                     </div>
                                                     @enderror
@@ -240,7 +247,7 @@ use App\Http\Controllers\functionController;
                                                         </select>
                                                         @error('sub2_recid')
                                                         <div class="my-2">
-                                                            <p class="text-sm text-red-600 mt-2">
+                                                            <p class="mt-2 text-sm text-red-600">
                                                                 {{$message}}</p>
                                                         </div>
                                                         @enderror

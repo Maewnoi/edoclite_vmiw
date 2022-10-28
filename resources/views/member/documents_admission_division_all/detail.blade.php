@@ -96,6 +96,30 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="callout callout-danger"> 
+                                            @if($document_detail->doc_status == 'success')
+                                            <x-jet-label class="text-lg" value="{{ __('ผู้รับ') }}" />
+                                            <table>
+                                                @foreach($userS_2 as $row_sub_docs)
+                                                <tr>
+                                                    <td>{{  $row_sub_docs->name }}</td>
+                                                    <td>**</td>
+                                                    
+                                                </tr>
+                                                @endforeach
+                                            </table>
+                                            @endif
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
                             @if($document_detail->sub_status == '2')
                             <div class="row">
                                 <div class="col-md-12">
