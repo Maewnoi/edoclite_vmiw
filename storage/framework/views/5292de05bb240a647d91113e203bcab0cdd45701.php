@@ -1,116 +1,176 @@
-@php
+<?php
 use App\Http\Controllers\functionController;
-@endphp
-<x-app-layout>
-    <!-- <x-slot name="header">
+?>
+<?php if (isset($component)) { $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\AppLayout::class, []); ?>
+<?php $component->withName('app-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes([]); ?>
+    <!--  <?php $__env->slot('header', null, []); ?> 
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            สวัสดี , {{Auth::user()->name}}
+            สวัสดี , <?php echo e(Auth::user()->name); ?>
+
         </h2>
-    </x-slot> -->
+     <?php $__env->endSlot(); ?> -->
     <div class="py-12">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    @if(session("success"))
-                    <div class="shadow alert alert-success">{{session('success')}}</div>
-                    @endif
-                    @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                    <div class="shadow alert alert-danger">{{ $error }}</div>
-                    @endforeach
-                    @endif
+                    <?php if(session("success")): ?>
+                    <div class="shadow alert alert-success"><?php echo e(session('success')); ?></div>
+                    <?php endif; ?>
+                    <?php if($errors->any()): ?>
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="shadow alert alert-danger"><?php echo e($error); ?></div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php endif; ?>
                     <div class="shadow card">
                         <div class="text-lg card-header bg-primary">
-                            <x-jet-nav-link href="{{url('/documents_pending/all')}}">
+                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.nav-link','data' => ['href' => ''.e(url('/documents_pending/all')).'']]); ?>
+<?php $component->withName('jet-nav-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(url('/documents_pending/all')).'']); ?>
                                 <i class="fa fa-arrow-left"></i>
-                            </x-jet-nav-link>
-                            เอกสารรับเข้าภายนอกรายละเอียด : {{$document_detail->doc_origin}}
+                             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                            เอกสารรับเข้าภายนอกรายละเอียด : <?php echo e($document_detail->doc_origin); ?>
+
                         </div>
                         <div class="card-body table-responsive">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        เลขที่รับส่วนงาน : <font class="text-primary">{{$document_detail->doc_recnum}}</font>
+                                        เลขที่รับส่วนงาน : <font class="text-primary"><?php echo e($document_detail->doc_recnum); ?></font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                       เลขที่หนังสือ : <font class="text-primary">{{$document_detail->doc_docnum}}</font>
+                                       เลขที่หนังสือ : <font class="text-primary"><?php echo e($document_detail->doc_docnum); ?></font>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        วันที่ : <font class="text-primary">{{$document_detail->doc_date}}</font>
+                                        วันที่ : <font class="text-primary"><?php echo e($document_detail->doc_date); ?></font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        ลงวันที่ : <font class="text-primary">{{$document_detail->doc_date}}</font>
+                                        ลงวันที่ : <font class="text-primary"><?php echo e($document_detail->doc_date); ?></font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        เวลา : <font class="text-primary">{{$document_detail->doc_time}}</font>
+                                        เวลา : <font class="text-primary"><?php echo e($document_detail->doc_time); ?></font>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         ชั้นความเร็ว/สถานะ : 
-                                        {!! functionController::funtion_doc_speed($document_detail->doc_speed) !!}
-                                        {!! functionController::funtion_sub2_status($document_detail->sub2_status) !!}
+                                        <?php echo functionController::funtion_doc_speed($document_detail->doc_speed); ?>
+
+                                        <?php echo functionController::funtion_sub2_status($document_detail->sub2_status); ?>
+
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        เรื่อง : <font class="text-primary">{{$document_detail->doc_title}}</font>
+                                        เรื่อง : <font class="text-primary"><?php echo e($document_detail->doc_title); ?></font>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_filedirec_1"
-                                            value="{{ __('ไฟล์เอกสาร') }}" />
-                                        @if($document_detail->sub_status == '8')
-                                        {!!functionController::display_pdf($document_detail->seal_file)!!}
-                                        @else
-                                        {!!functionController::display_pdf($document_detail->doc_filedirec_1)!!}
-                                        @endif
+                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'doc_filedirec_1','value' => ''.e(__('ไฟล์เอกสาร')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','for' => 'doc_filedirec_1','value' => ''.e(__('ไฟล์เอกสาร')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                        <?php if($document_detail->sub_status == '8'): ?>
+                                        <?php echo functionController::display_pdf($document_detail->seal_file); ?>
+
+                                        <?php else: ?>
+                                        <?php echo functionController::display_pdf($document_detail->doc_filedirec_1); ?>
+
+                                        <?php endif; ?>
 
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="" value="{{ __('ไฟล์เอกสารแนบ') }}" />
-                                        @if($document_detail->doc_attached_file != '')
+                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => '','value' => ''.e(__('ไฟล์เอกสารแนบ')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','for' => '','value' => ''.e(__('ไฟล์เอกสารแนบ')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                        <?php if($document_detail->doc_attached_file != ''): ?>
                                         <button type="button" id="open_doc_attached_file"
-                                            value="{{asset($document_detail->doc_attached_file)}}"
+                                            value="<?php echo e(asset($document_detail->doc_attached_file)); ?>"
                                             class="btn btn-outline-primary col start">
                                             <i class="fas fa-upload"></i>
                                             <span>open & download</span>
                                         </button>
-                                        @else
-                                        <label class="text-danger">{{ __('--ไม่พบไฟล์เอกสารแนบ--') }}</label>
-                                        @endif
+                                        <?php else: ?>
+                                        <label class="text-danger"><?php echo e(__('--ไม่พบไฟล์เอกสารแนบ--')); ?></label>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
                             <hr>
-                           @if($document_detail->sub2_status == '0')
+                           <?php if($document_detail->sub2_status == '0'): ?>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form action="{{route('documents_admission_work_detail_respond')}}" method="post"
+                                    <form action="<?php echo e(route('documents_admission_work_detail_respond')); ?>" method="post"
                                         enctype="multipart/form-data">
-                                       @csrf
+                                       <?php echo csrf_field(); ?>
                                         <div class="card card-body">
-                                            <x-jet-label class="text-lg" value="{{ __('ตอบกลับ') }}" />
+                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-lg','value' => ''.e(__('ตอบกลับ')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-lg','value' => ''.e(__('ตอบกลับ')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <select name="sub3_type"
                                                             id="documents_admission_work_allController_sub3_type"
                                                             required
-                                                            class="form-control select2bs4 @error('sub3_type') is-invalid @enderror">
+                                                            class="form-control select2bs4 <?php $__errorArgs = ['sub3_type'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
                                                             <option value="">
                                                                 เลือกประเภท
                                                             </option>
@@ -121,18 +181,32 @@ use App\Http\Controllers\functionController;
                                                                 ตราครุฑ
                                                             </option>
                                                         </select>
-                                                        @error('sub3_type')
+                                                        <?php $__errorArgs = ['sub3_type'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                                         <div class="my-2">
                                                             <p class="mt-2 text-sm text-red-600">
-                                                                {{$message}}</p>
+                                                                <?php echo e($message); ?></p>
                                                         </div>
-                                                        @enderror
+                                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <select name="sub3d_speed" required
-                                                            class="form-control select2bs4 @error('sub3d_speed') is-invalid @enderror"
+                                                            class="form-control select2bs4 <?php $__errorArgs = ['sub3d_speed'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
                                                             id="documents_admission_work_allController_sub3d_speed">
                                                             <option value="">
                                                                 เลือกชั้นความเร็ว
@@ -142,12 +216,19 @@ use App\Http\Controllers\functionController;
                                                             <option value="2">ด่วนมาก</option>
                                                             <option value="3">ด่วนที่สุด</option>
                                                         </select>
-                                                        @error('sub3d_speed')
+                                                        <?php $__errorArgs = ['sub3d_speed'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                                         <div class="my-2">
                                                             <p class="mt-2 text-sm text-red-600">
-                                                                {{$message}}</p>
+                                                                <?php echo e($message); ?></p>
                                                         </div>
-                                                        @enderror
+                                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 table-responsive">
@@ -158,7 +239,7 @@ use App\Http\Controllers\functionController;
                                                             <div class="row">
                                                                 <div class="col-5">
                                                                     <img class="w-16 h-16"
-                                                                        src="{{ asset('/image/Garuda.jpeg') }}" alt="">
+                                                                        src="<?php echo e(asset('/image/Garuda.jpeg')); ?>" alt="">
                                                                 </div>
                                                                 <div class="col-7">
                                                                     <label class="mt-6">บันทึกข้อความ</label>
@@ -238,26 +319,36 @@ use App\Http\Controllers\functionController;
                                                                 </div>
                                                             </div>
                                                         </page>
-                                                        <input type="hidden" name="doc_id" value="{{$document_detail->doc_id}}">
-                                                        <input type="hidden" name="sub_id" value="{{$document_detail->sub_id}}">
-                                                        <input type="hidden" name="sub2_id" value="{{$document_detail->sub2_id}}">
-                                                        <input type="hidden" name="doc_docnum" value="{{$document_detail->doc_docnum}}">
-                                                        <input type="hidden" name="doc_origin" value="{{$document_detail->doc_origin}}">
-                                                        <input type="hidden" name="doc_title" value="{{$document_detail->doc_title}}">
-                                                        <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}" />
+                                                        <input type="hidden" name="doc_id" value="<?php echo e($document_detail->doc_id); ?>">
+                                                        <input type="hidden" name="sub_id" value="<?php echo e($document_detail->sub_id); ?>">
+                                                        <input type="hidden" name="sub2_id" value="<?php echo e($document_detail->sub2_id); ?>">
+                                                        <input type="hidden" name="doc_docnum" value="<?php echo e($document_detail->doc_docnum); ?>">
+                                                        <input type="hidden" name="doc_origin" value="<?php echo e($document_detail->doc_origin); ?>">
+                                                        <input type="hidden" name="doc_title" value="<?php echo e($document_detail->doc_title); ?>">
+                                                        <input type="hidden" name="_token" id="_token" value="<?php echo e(csrf_token()); ?>" />
                                                        
                                                    
                                                         <div class="flex items-center justify-center mt-20">
                                                             <button type="button"
                                                                 id="documents_admission_work_allController_bt_preview"
                                                                 class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-900 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:shadow-outline-blue disabled:opacity-25">
-                                                                {{ __('แสดงตัวอย่าง') }}
+                                                                <?php echo e(__('แสดงตัวอย่าง')); ?>
+
                                                             </button>
-                                                            <x-jet-button
-                                                                id="documents_admission_work_allController_bt_respond"
-                                                                disabled>
-                                                                {{ __('ตอบกลับ') }}
-                                                            </x-jet-button>
+                                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['id' => 'documents_admission_work_allController_bt_respond','disabled' => true]]); ?>
+<?php $component->withName('jet-button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['id' => 'documents_admission_work_allController_bt_respond','disabled' => true]); ?>
+                                                                <?php echo e(__('ตอบกลับ')); ?>
+
+                                                             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
                                                         </div>
                                                         <div class="mt-2 shadow alert alert-danger hide"
                                                             id="documents_admission_work_allController_alert_error">
@@ -272,7 +363,7 @@ use App\Http\Controllers\functionController;
                                     </form>
                                 </div>
                             </div>
-                            @endif
+                            <?php endif; ?>
                             <hr>
                            
                         </div>
@@ -301,4 +392,10 @@ use App\Http\Controllers\functionController;
             </div>
         </div>
     </div>
-</x-app-layout>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
+<?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
+<?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
+<?php endif; ?>
+<?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/member/documents_admission_work_all/detail.blade.php ENDPATH**/ ?>

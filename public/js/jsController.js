@@ -518,7 +518,9 @@ $("#documents_admission_work_allController_sub3d_therefore").change(function(eve
 $("#documents_admission_work_allController_sub3d_pos").change(function(event) {
     document.getElementById("documents_admission_work_allController_bt_respond").disabled = true;
 });
+
 $("#documents_admission_work_allController_bt_preview").click(function(event) {
+    let _token = $("#_token").val(); //csrf_token
     let documents_admission_work_allController_sub3d_speed = $("#documents_admission_work_allController_sub3d_speed").val(); //ตำแหน่ง
     let documents_admission_work_allController_sub3d_government = $("#documents_admission_work_allController_sub3d_government").val(); //ส่วนราชการ
     let documents_admission_work_allController_sub3d_draft = $("#documents_admission_work_allController_sub3d_draft").val(); //ที่ร่าง
@@ -562,19 +564,39 @@ $("#documents_admission_work_allController_bt_preview").click(function(event) {
         return;
     }else{
         document.getElementById('documents_admission_work_allController_alert_error').style.display = 'none';
-        let url = "/PDFRespond/"+ documents_admission_work_allController_sub3d_government + "/"+ documents_admission_work_allController_sub3d_draft +"/"+ documents_admission_work_allController_sub3d_date + "/"+ documents_admission_work_allController_sub3d_topic + "/"+ documents_admission_work_allController_sub3d_podium + "/"+ documents_admission_work_allController_sub3d_therefore + "/"+ documents_admission_work_allController_sub3d_pos+"/preview/null";
-        // console.log(documents_admission_work_allController_sub3d_podium);
-        fetch(url)
+
+        const var_data = {
+                        sub3d_government: documents_admission_work_allController_sub3d_government,
+                        sub3d_draft: documents_admission_work_allController_sub3d_draft,
+                        sub3d_date: documents_admission_work_allController_sub3d_date,
+                        sub3d_topic: documents_admission_work_allController_sub3d_topic,
+                        sub3d_podium: documents_admission_work_allController_sub3d_podium,
+                        sub3d_therefore: documents_admission_work_allController_sub3d_therefore,
+                        sub3d_pos: documents_admission_work_allController_sub3d_pos,
+                        action: 'preview',
+                        sub3d_id: null,
+        };
+        console.log(var_data);
+        //post
+        fetch('/PDFRespond', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': _token
+        },
+        body:  JSON.stringify(var_data)
+        })
         .then(response => response.arrayBuffer())
         .then(result => {
-            // console.log(result);
+            // const content = await rawResponse.json();
             $("#modal-preview").modal("show");
             var blob = new Blob([result], { type: 'application/pdf' });
             var fileURL = URL.createObjectURL(blob);
-            
+                            
             const isMobile = navigator.userAgentData.mobile;
             if(isMobile){
-                var newWin = window.open(fileURL);
+            var newWin = window.open(fileURL);
                 newWin.focus();
                 var timer = setInterval(function() {
                     if (newWin.closed) {
@@ -591,6 +613,34 @@ $("#documents_admission_work_allController_bt_preview").click(function(event) {
             }
             document.getElementById("documents_admission_work_allController_bt_respond").disabled = false;
         });
+
+        //get บ่ได้ใช้ละอันนิหะ
+        // fetch(url)
+        // .then(response => response.arrayBuffer())
+        // .then(result => {
+        //     $("#modal-preview").modal("show");
+        //     var blob = new Blob([result], { type: 'application/pdf' });
+        //     var fileURL = URL.createObjectURL(blob);
+            
+        //     const isMobile = navigator.userAgentData.mobile;
+        //     if(isMobile){
+        //         var newWin = window.open(fileURL);
+        //         newWin.focus();
+        //         var timer = setInterval(function() {
+        //             if (newWin.closed) {
+        //                 clearInterval(timer);
+        //                 $("#modal-preview").modal("hide");
+        //             }
+        //         }, 1000);
+        //     }else{
+        //         let input_cotton = document.querySelector("#documents_admission_work_allController_pdf_preview");
+        //         input_cotton.src = fileURL;
+        //         $("#documents_admission_work_allController_close-modal-preview").click(function(event) {
+        //             $("#modal-preview").modal("hide");
+        //         });
+        //     }
+        //     document.getElementById("documents_admission_work_allController_bt_respond").disabled = false;
+        // });
     }
 });
 //------------------------------------------------------------------------------------------
@@ -621,7 +671,22 @@ $('#documents_admission_group_allController_selected_multiple_sub_recid_inside')
 //member_dashboard selected_multiple2
 $('#documents_admission_group_allController_selected_multiple_sub2_recid_inside').multiSelect();
 //------------------------------------------------------------------------------------------
-
+//member_dashboard selected_multiple2
+// $('#documents_admission_work_allController_sub3d_podium').summernote({
+//     placeholder: 'อะ',
+//     tabsize: 2,
+//     height: 500,
+//     toolbar: [
+//         ['style', ['style']],
+//         ['font', ['bold', 'underline', 'clear']],
+//         ['color', ['color']],
+//         ['para', ['ul', 'ol', 'paragraph']],
+//         ['table', ['table']],
+//         ['insert', ['link', 'picture', 'video']],
+//         ['view', ['fullscreen', 'codeview', 'help']]
+//       ]
+// });
+//------------------------------------------------------------------------------------------
 
 
 //Table
