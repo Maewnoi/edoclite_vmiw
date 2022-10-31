@@ -147,6 +147,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/getdoc_recnum/{id}',[member_dashboardController::class,'getdoc_recnum']);
     Route::post('/member_dashboard/document_accepting_new_inside',[member_dashboardController::class,'document_accepting_new_inside'])->name('document_accepting_new_inside');
 
+    Route::get('/member/s_all',[memberController::class,'index'])->name('s_member');
+    Route::post('/member/s_add',[memberController::class,'add'])->name('s_addMember');
+    Route::post('/member/s_delete',[memberController::class,'delete'])->name('s_deleteMember');
+    Route::post('/member/s_update',[memberController::class,'update'])->name('s_updateMember');
+
     //All admission documents เอกสารรับเข้าทั้งหมด ภายนอก
     Route::get('/documents_admission_all/all',[documents_admission_allController::class,'index'])->name('documents_admission_all');
     Route::get('/documents_admission_all/detail/{id}',[documents_admission_allController::class,'detail'])->name('documents_admission_detail');

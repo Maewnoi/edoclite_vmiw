@@ -548,6 +548,11 @@ use App\Http\Controllers\navigationController;
                             <x-jet-dropdown-link href="{{ route('profile.show') }}" class="text-decoration-none">
                                 {{ __('โปรไฟล์') }}
                             </x-jet-dropdown-link>
+                            
+
+                            <x-jet-dropdown-link href="{{ route('s_member') }}" class="text-decoration-none">
+                                {{ __('จัดการสมาชิก') }}
+                            </x-jet-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                             <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
@@ -856,6 +861,11 @@ use App\Http\Controllers\navigationController;
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" class="text-decoration-none"
                     :active="request()->routeIs('profile.show')">
                     {{ __('โปรไฟล์') }}
+                </x-jet-responsive-nav-link>
+                
+                <x-jet-responsive-nav-link href="{{ route('s_member') }}" class="text-decoration-none"
+                    :active="request()->routeIs('s_member')">
+                    {{ __('จัดการสมาชิก') }}
                 </x-jet-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

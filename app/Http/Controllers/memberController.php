@@ -19,10 +19,18 @@ class memberController extends Controller
     use PasswordValidationRules;
     //หน้ากลัก
     public function index(){
-        $memberS=User::where('users.level', '!=' , '0')
-        ->leftJoin('groupmems','groupmems.group_id','users.group')
-        ->orderBy('users.id', 'DESC')
-        ->get();
+        if(Auth::user()->level=='0'){
+            $memberS=User::where('users.level', '!=' , '0')
+            ->leftJoin('groupmems','groupmems.group_id','users.group')
+            ->orderBy('users.id', 'DESC')
+            ->get();
+        }else if(Auth::user()->level=='3'){
+            $memberS=User::where('users.level', '!=' , '0')
+            ->leftJoin('groupmems','groupmems.group_id','users.group')
+            ->orderBy('users.id', 'DESC')
+            ->get();
+        }
+        
 
         $select_groupmemsS=Groupmem::join('sites','sites.site_id','groupmems.group_site_id')->get();
 

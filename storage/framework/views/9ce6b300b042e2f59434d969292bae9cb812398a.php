@@ -97,6 +97,7 @@
 
 <body>
     <div class="font-sans antialiased text-gray-900">
+        <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php echo e($slot); ?>
 
     </div>
