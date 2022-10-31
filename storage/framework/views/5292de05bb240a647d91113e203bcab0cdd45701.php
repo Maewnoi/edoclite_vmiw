@@ -160,11 +160,11 @@ use App\Http\Controllers\functionController;
                                        <?php echo csrf_field(); ?>
                                         <div class="card card-body">
                                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-lg','value' => ''.e(__('ตอบกลับ')).'']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-lg','value' => ''.e(__('ตอบกลับ v45.65')).'']]); ?>
 <?php $component->withName('jet-label'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-lg','value' => ''.e(__('ตอบกลับ')).'']); ?>
+<?php $component->withAttributes(['class' => 'text-lg','value' => ''.e(__('ตอบกลับ v45.65')).'']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
@@ -254,7 +254,7 @@ unset($__errorArgs, $__bag); ?>
                                                                 <div class="col-3 pt-14">
                                                                     <input class="form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_draft-garuda"
-                                                                        name="sub3d_draft-garuda" type="text" value="ที่ร่าง">
+                                                                        name="sub3d_draft_garuda" type="text" value="ที่ร่าง">
                                                                 </div>
                                                                 <div class="col-5">
                                                                     <img class="w-24 h-24 ml-20"
@@ -263,14 +263,14 @@ unset($__errorArgs, $__bag); ?>
                                                                 <div class="col-4 pt-14">
                                                                     <input class="form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_government-garuda"
-                                                                        name="sub3d_government-garuda" type="text" value="องค์การบริหาร">
+                                                                        name="sub3d_government_garuda" type="text" value="องค์การบริหาร">
                                                                 </div>
                                                                 <div class="col-5">
                                                                 </div>
                                                                 <div class="col-3">
                                                                     <input class="mt-3 form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_date-garuda"
-                                                                        name="sub3d_date-garuda" type="text" value="21 oct 1988">
+                                                                        name="sub3d_date_garuda" type="text" value="21 oct 1988">
                                                                 </div>
                                                                 <div class="col-4">
                                                                 </div>
@@ -280,15 +280,22 @@ unset($__errorArgs, $__bag); ?>
                                                                 <div class="col-10">
                                                                     <input class="form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_topic-garuda"
-                                                                        name="sub3d_topic-garuda" type="text" value="">
+                                                                        name="sub3d_topic_garuda" type="text" value="">
                                                                 </div>   
                                                                 <div class="col-12">
                                                                     <div class="mt-3 mb-14">
-                                                                        <textarea id="documents_admission_work_allController_sub3d_podium-garuda" class="form-control" rows="25" cols="75" name="sub3d_podium-garuda">เรียน ...</textarea>
+                                                                        <textarea id="documents_admission_work_allController_sub3d_podium-garuda" class="form-control" rows="25" cols="75" name="sub3d_podium_garuda">เรียน ...</textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </page>
+                                                        <input type="hidden" name="doc_id_garuda" value="<?php echo e($document_detail->doc_id); ?>">
+                                                        <input type="hidden" name="sub_id_garuda" value="<?php echo e($document_detail->sub_id); ?>">
+                                                        <input type="hidden" name="sub2_id_garuda" value="<?php echo e($document_detail->sub2_id); ?>">
+                                                        <input type="hidden" name="doc_docnum_garuda" value="<?php echo e($document_detail->doc_docnum); ?>">
+                                                        <input type="hidden" name="doc_origin_garuda" value="<?php echo e($document_detail->doc_origin); ?>">
+                                                        <input type="hidden" name="doc_title_garuda" value="<?php echo e($document_detail->doc_title); ?>">
+
                                                         <div class="flex items-center justify-center mt-20">
                                                             <button type="button"
                                                                 id="documents_admission_work_allController_bt_preview-garuda"
@@ -297,11 +304,11 @@ unset($__errorArgs, $__bag); ?>
 
                                                             </button>
                                                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['id' => 'documents_admission_work_allController_bt_respond-garudav','disabled' => true]]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['id' => 'documents_admission_work_allController_bt_respond-garudav','name' => 'bt_respond','value' => 'respond_garudav','disabled' => true]]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'documents_admission_work_allController_bt_respond-garudav','disabled' => true]); ?>
+<?php $component->withAttributes(['id' => 'documents_admission_work_allController_bt_respond-garudav','name' => 'bt_respond','value' => 'respond_garudav','disabled' => true]); ?>
                                                                 <?php echo e(__('ตอบกลับ')); ?>
 
                                                              <?php echo $__env->renderComponent(); ?>
@@ -311,11 +318,7 @@ unset($__errorArgs, $__bag); ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                                                         </div>
-                                                        <div class="mt-2 shadow alert alert-danger hide"
-                                                            id="documents_admission_work_allController-garuda_alert_error">
-                                                            <p id="documents_admission_work_allController-garuda_tag_p_error">
-                                                            </p>
-                                                        </div>
+                                                        
                                                         <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
                                                     </div>
                                                     <div class="form-group hide"
@@ -422,11 +425,11 @@ unset($__errorArgs, $__bag); ?>
 
                                                             </button>
                                                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['id' => 'documents_admission_work_allController_bt_respond','disabled' => true]]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['id' => 'documents_admission_work_allController_bt_respond','name' => 'bt_respond','value' => 'respond','disabled' => true]]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'documents_admission_work_allController_bt_respond','disabled' => true]); ?>
+<?php $component->withAttributes(['id' => 'documents_admission_work_allController_bt_respond','name' => 'bt_respond','value' => 'respond','disabled' => true]); ?>
                                                                 <?php echo e(__('ตอบกลับ')); ?>
 
                                                              <?php echo $__env->renderComponent(); ?>
@@ -436,11 +439,7 @@ unset($__errorArgs, $__bag); ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                                                         </div>
-                                                        <div class="mt-2 shadow alert alert-danger hide"
-                                                            id="documents_admission_work_allController_alert_error">
-                                                            <p id="documents_admission_work_allController_tag_p_error">
-                                                            </p>
-                                                        </div>
+                                                        
                                                         <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
                                                     </div>
                                                 </div>

@@ -76,6 +76,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //pdf_preview
     //Route::get('/PDFRespond/{sub3d_government}/{sub3d_draft}/{sub3d_date}/{sub3d_topic}/{sub3d_podium}/{sub3d_therefore}/{sub3d_pos}/{action}/{sub3d_id}', [functionController::class , 'funtion_PDFRespond' ]);
     Route::post('/PDFRespond',[functionController::class , 'funtion_PDFRespond' ]);
+    Route::post('/PDFRespond_garuda',[functionController::class , 'funtion_PDFRespond_garuda' ]);
     //doc_recnum_inside_run
     Route::get('/get_doc_recnum_inside_run/{id}', [functionController::class , 'getdoc_recnum_inside_run' ]);
     //doc_recnum_inside_reserve

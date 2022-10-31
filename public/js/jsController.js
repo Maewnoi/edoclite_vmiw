@@ -1,3 +1,4 @@
+
 // alert(var_memberController_add_level);
 //------------------------------------------------------------------------------------------
 //admin.member.index
@@ -501,6 +502,22 @@ $("#documents_admission_work_allController_sub3_type").change(function(event) {
 });
 //------------------------------------------------------------------------------------------
 //member.documents_admission_work_all.detail
+$("#documents_admission_work_allController_sub3d_government-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_work_allController_bt_respond-garudav").disabled = true;
+});
+$("#documents_admission_work_allController_sub3d_draft-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_work_allController_bt_respond-garudav").disabled = true;
+});
+$("#documents_admission_work_allController_sub3d_date-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_work_allController_bt_respond-garudav").disabled = true;
+});
+$("#documents_admission_work_allController_sub3d_topic-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_work_allController_bt_respond-garudav").disabled = true;
+});
+$("#documents_admission_work_allController_sub3d_podium-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_work_allController_bt_respond-garudav").disabled = true;
+});
+
 $("#documents_admission_work_allController_bt_preview-garuda").click(function(event) {
 
     let _token = $("#_token").val(); //csrf_token
@@ -512,30 +529,95 @@ $("#documents_admission_work_allController_bt_preview-garuda").click(function(ev
     let documents_admission_work_allController_sub3d_podium_garuda = $("#documents_admission_work_allController_sub3d_podium-garuda").val(); //ข้อความตั้งแท่น
 
     if(documents_admission_work_allController_sub3d_government_garuda == ''){
-        document.getElementById('documents_admission_work_allController-garuda_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController-garuda_tag_p_error').innerText  = 'กรุณากรอก ส่วนงานราชการ';
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ส่วนงานราชการ!",
+            icon: "warning",
+        });
         return;
     }else if(documents_admission_work_allController_sub3d_draft_garuda == ''){
-        document.getElementById('documents_admission_work_allController-garuda_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController-garuda_tag_p_error').innerText  = 'กรุณากรอก ที่ร่าง';
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ที่ร่าง!",
+            icon: "warning",
+        });
         return;
     }else if(documents_admission_work_allController_sub3d_date_garuda == ''){
-        document.getElementById('documents_admission_work_allController-garuda_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController-garuda_tag_p_error').innerText  = 'กรุณากรอก วันที่';
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก วันที่!",
+            icon: "warning",
+        });
         return;
     }else if(documents_admission_work_allController_sub3d_topic_garuda == ''){
-        document.getElementById('documents_admission_work_allController-garuda_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController-garuda_tag_p_error').innerText  = 'กรุณากรอก เรื่อง';
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก เรื่อง!",
+            icon: "warning",
+        });
         return;
     }else if(documents_admission_work_allController_sub3d_podium_garuda == ''){
-        document.getElementById('documents_admission_work_allController-garuda_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController-garuda_tag_p_error').innerText  = 'กรุณากรอก รายละเอียด';
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก รายละเอียด!",
+            icon: "warning",
+        });
         return;
     }else if(documents_admission_work_allController_sub3d_speed_garuda == ''){
-        document.getElementById('documents_admission_work_allController-garuda_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController-garuda_tag_p_error').innerText  = 'กรุณาเลือก ชั้นความเร็ว';
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณาเลือก ชั้นความเร็ว!",
+            icon: "warning",
+        });
         return;
     }else{
+        const var_data = {
+            sub3d_government_garuda: documents_admission_work_allController_sub3d_government_garuda,
+            sub3d_draft_garuda: documents_admission_work_allController_sub3d_draft_garuda,
+            sub3d_date_garuda: documents_admission_work_allController_sub3d_date_garuda,
+            sub3d_topic_garuda: documents_admission_work_allController_sub3d_topic_garuda,
+            sub3d_podium_garuda: documents_admission_work_allController_sub3d_podium_garuda,
+            action_garuda: 'preview',
+            sub3d_id_garuda: null,
+        };
+        console.log(var_data);
+
+        fetch('/PDFRespond_garuda', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': _token
+        },
+        body:  JSON.stringify(var_data)
+        })
+        .then(response => response.arrayBuffer())
+        .then(result => {
+            // const content = await rawResponse.json();
+            $("#modal-preview").modal("show");
+            var blob = new Blob([result], { type: 'application/pdf' });
+            var fileURL = URL.createObjectURL(blob);
+                            
+            const isMobile = navigator.userAgentData.mobile;
+            if(isMobile){
+            var newWin = window.open(fileURL);
+                newWin.focus();
+                var timer = setInterval(function() {
+                    if (newWin.closed) {
+                        clearInterval(timer);
+                        $("#modal-preview").modal("hide");
+                    }
+                }, 1000);
+            }else{
+                let input_cotton = document.querySelector("#documents_admission_work_allController_pdf_preview");
+                input_cotton.src = fileURL;
+                $("#documents_admission_work_allController_close-modal-preview").click(function(event) {
+                    $("#modal-preview").modal("hide");
+                });
+            }
+            document.getElementById("documents_admission_work_allController_bt_respond-garudav").disabled = false;
+        });
+
         
     }
 });
@@ -576,24 +658,39 @@ $("#documents_admission_work_allController_bt_preview").click(function(event) {
     // let documents_admission_work_allController_sub3d_pos = $("#documents_admission_work_allController_sub3d_pos").val(); //ตำแหน่ง
 
     if(documents_admission_work_allController_sub3d_government == ''){
-        document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController_tag_p_error').innerText  = 'กรุณากรอก ส่วนงานราชการ';
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ส่วนงานราชการ!",
+            icon: "warning",
+        });
         return;
     }else if(documents_admission_work_allController_sub3d_draft == ''){
-        document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController_tag_p_error').innerText  = 'กรุณากรอก ที่ร่าง';
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ที่ร่าง!",
+            icon: "warning",
+        });
         return;
     }else if(documents_admission_work_allController_sub3d_date == ''){
-        document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController_tag_p_error').innerText  = 'กรุณากรอก วันที่';
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก วันที่!",
+            icon: "warning",
+        });
         return;
     }else if(documents_admission_work_allController_sub3d_topic == ''){
-        document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController_tag_p_error').innerText  = 'กรุณากรอก เรื่อง';
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก เรื่อง!",
+            icon: "warning",
+        });
         return;
     }else if(documents_admission_work_allController_sub3d_podium == ''){
-        document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController_tag_p_error').innerText  = 'กรุณากรอก รายละเอียด';
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก รายละเอียด!",
+            icon: "warning",
+        });
         return;
     // }else if(documents_admission_work_allController_sub3d_therefore == ''){
     //     document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
@@ -604,11 +701,14 @@ $("#documents_admission_work_allController_bt_preview").click(function(event) {
     //     document.getElementById('documents_admission_work_allController_tag_p_error').innerText  = 'กรุณาเลือก ตำแหน่ง';
     //     return;
     }else if(documents_admission_work_allController_sub3d_speed == ''){
-        document.getElementById('documents_admission_work_allController_alert_error').style.display = 'block';
-        document.getElementById('documents_admission_work_allController_tag_p_error').innerText  = 'กรุณาเลือก ชั้นความเร็ว';
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณาเลือก ชั้นความเร็ว!",
+            icon: "warning",
+        });
         return;
     }else{
-        document.getElementById('documents_admission_work_allController_alert_error').style.display = 'none';
+        // document.getElementById('documents_admission_work_allController_alert_error').style.display = 'none';
 
         const var_data = {
                         sub3d_government: documents_admission_work_allController_sub3d_government,
