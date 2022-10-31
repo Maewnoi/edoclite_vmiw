@@ -17,14 +17,7 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <?php if(session("success")): ?>
-                    <div class="shadow alert alert-success"><?php echo e(session('success')); ?></div>
-                    <?php endif; ?>
-                    <?php if($errors->any()): ?>
-                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="shadow alert alert-danger"><?php echo e($error); ?></div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php endif; ?>
+                 
                     <div class="shadow card">
                         <div class="text-lg card-header bg-primary">
                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>

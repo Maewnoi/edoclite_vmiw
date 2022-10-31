@@ -372,6 +372,13 @@ use App\Http\Controllers\navigationController;
                                         {{ __('สร้างเอกสารภายใน') }}
                                     </x-jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
+                                    
+                                    <x-jet-dropdown-link type="button" data-toggle="modal" class="text-decoration-none"
+                                        data-target="#modal-Create-new-document-inside">
+                                        {{ __('เอกสารภายในทั้งหมด') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+
                                     <x-jet-dropdown-link href="{{ route('documents_admission_group_inside_all_0') }}" class="text-decoration-none">
                                         {{ __('มีเอกสารใหม่ (') }}
                                         {{navigationController::funtion_document_admission_all_group_inside_count_0_level_6(Auth::user()->level)}}

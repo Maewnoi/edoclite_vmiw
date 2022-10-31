@@ -8,7 +8,7 @@ use App\Http\Controllers\functionController;
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
     <!--  <?php $__env->slot('header', null, []); ?> 
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             สวัสดี , <?php echo e(Auth::user()->name); ?>
 
         </h2>
@@ -17,15 +17,8 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <?php if(session("success")): ?>
-                    <div class="alert shadow alert-success"><?php echo e(session('success')); ?></div>
-                    <?php endif; ?>
-                    <?php if($errors->any()): ?>
-                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="alert shadow alert-danger"><?php echo e($error); ?></div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php endif; ?>
-                    <div class="card shadow">
+                   
+                    <div class="shadow card">
                         <div class="card-header bg-primary">เอกสารรับเข้าภายนอก (กอง)</div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table">
@@ -53,7 +46,7 @@ use App\Http\Controllers\functionController;
                                             <?php if($row->doc_date != NULL): ?>
                                             <span class="badge bg-secondary"><?php echo e($row->doc_date); ?></span>
                                             <p class="text-sm text-muted">
-                                                <i class="far fa-clock mr-1"></i>
+                                                <i class="mr-1 far fa-clock"></i>
                                                 <?php echo e(Carbon\Carbon::parse($row->doc_date)->diffForHumans()); ?>
 
                                             </p>
@@ -63,7 +56,7 @@ use App\Http\Controllers\functionController;
                                             <?php if($row->doc_date_2 != NULL): ?>
                                             <span class="badge bg-secondary"><?php echo e($row->doc_date_2); ?></span>
                                             <p class="text-sm text-muted">
-                                                <i class="far fa-clock mr-1"></i>
+                                                <i class="mr-1 far fa-clock"></i>
                                                 <?php echo e(Carbon\Carbon::parse($row->doc_date_2)->diffForHumans()); ?>
 
                                             </p>
