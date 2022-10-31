@@ -158,15 +158,18 @@ use App\Http\Controllers\functionController;
                                                 <?php $__currentLoopData = $sub_docsS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_sub_docs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <tr>
                                                     <td><?php echo e(functionController::funtion_groupmem_name($row_sub_docs->sub_recid)); ?></td>
-                                                    <td><?php echo functionController::funtion_sub_status_detail($row_sub_docs->sub_status); ?></td>
-                                                    <td>
-                                                    <?php if($row_sub_docs->sub_status == 8): ?>
-                                                           <p> <?php echo e($row_sub_docs->sub_id); ?><br></p>
-                                                    <?php endif; ?>
+                                                    <td><?php echo functionController::funtion_sub_status_detail($row_sub_docs->sub_status); ?>
+
                                                     </td>
+                                                    <?php if($row_sub_docs->sub_status == 8): ?>
+                                                        <td><?php echo functionController::funtion_sub2_recid_name($row_sub_docs->sub_id); ?><hr></td>
+                                                    <?php endif; ?>
+                                                    
 
                                                 </tr>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                
+                                               
                                             </table>
                                             
                                         </div>

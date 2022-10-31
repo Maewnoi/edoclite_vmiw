@@ -105,15 +105,17 @@ use App\Http\Controllers\functionController;
                                                 @foreach($sub_docsS as $row_sub_docs)
                                                 <tr>
                                                     <td>{{ functionController::funtion_groupmem_name($row_sub_docs->sub_recid) }}</td>
-                                                    <td>{!! functionController::funtion_sub_status_detail($row_sub_docs->sub_status) !!}</td>
-                                                    <td>
-                                                    @if($row_sub_docs->sub_status == 8)
-                                                           <p> {{ $row_sub_docs->sub_id }}</p>
-                                                    @endif
+                                                    <td>{!! functionController::funtion_sub_status_detail($row_sub_docs->sub_status) !!}
                                                     </td>
+                                                    @if($row_sub_docs->sub_status == 8)
+                                                        <td>{!!functionController::funtion_sub2_recid_name($row_sub_docs->sub_id) !!}<hr></td>
+                                                    @endif
+                                                    
 
                                                 </tr>
                                                 @endforeach
+                                                
+                                               
                                             </table>
                                             
                                         </div>

@@ -1017,7 +1017,7 @@ class functionController extends Controller
         }elseif($status == '7'){
             $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '8'){
-            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-success">สำเร็จ</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-success">ส่งถึงผู้รับแล้ว</span>';
 
         }else{
             return "ไม่ถูกนิยาม";
@@ -1025,6 +1025,23 @@ class functionController extends Controller
         return $txt_status;
     }
     
+       //ฟังชันเรียกstatus sub_doc ด้วย sub_id
+       public static function funtion_sub2_recid_name($status) {
+            $sub2docsS = sub2_doc::leftJoin('users','users.id','sub2_docs.sub2_recid')
+                ->where('sub2_subid', $status)
+                ->get();
+
+            foreach($sub2docsS as $sub2doc){
+                if($sub2doc->sub2_status == 1){$text = '<span class="badge bg-success">อ่านแล้ว</span>';}
+                else{$text = '<span class="badge bg-danger">ยังไม่อ่าน</span>';}
+                $txt_status[] = $sub2doc->name.' '.$text;
+                
+            }
+            $sub_recid_name = implode("<br>", $txt_status);
+            return $sub_recid_name;
+
+       
+    }
     
 
     //function ประทับตรา เซ็น และแทรกหน้าแรก PDF  ของหัวหน้าสำนักปลัด

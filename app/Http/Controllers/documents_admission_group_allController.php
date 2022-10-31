@@ -84,9 +84,21 @@ class documents_admission_group_allController extends Controller
             ->first();
             
                if($document_detail->doc_status == 'success'){
-                    $sub_docsS = sub_doc::where('sub_docid', $id)->get();
-                }
+                    $sub_docsS = sub_doc::where('sub_docid', $id) ->get();
 
+                  /*  if($document_detail->sub_status == 8){
+                        $sub2_docsS = sub2_doc::where('sub2_subid', $document_detail->sub_id) ->get();
+                        //dd($sub2_docsS);
+                    }
+                    */    
+                   
+                   // $sub_docsS = sub_doc::leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+                   // ->where('sub_docid', $id)
+                   // ->get();
+
+                
+                   
+                }
             //หาตัวเลขที่จองไว้
             $reserved_numbersS = reserve_number::where('reserve_site',Auth::user()->site_id)
             ->where('reserve_owner',Auth::user()->id)
