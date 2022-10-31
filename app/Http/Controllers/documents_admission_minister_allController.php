@@ -29,7 +29,7 @@ class documents_admission_minister_allController extends Controller
             ->get();
             return view('member.documents_admission_minister_all.index',compact('documents_admission_minister_all'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -46,7 +46,7 @@ class documents_admission_minister_allController extends Controller
             ->get();
             return view('member.documents_admission_minister_all.index',compact('documents_admission_minister_all'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
     public function detail($id){
@@ -58,7 +58,7 @@ class documents_admission_minister_allController extends Controller
             ->first();
             return view('member.documents_admission_minister_all.detail',compact('document_detail'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 }

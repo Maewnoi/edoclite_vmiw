@@ -30,7 +30,7 @@ class documents_admission_group_allController extends Controller
             ->get();
             return view('member.documents_admission_group_all.index',compact('document_admission_all_group'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -51,7 +51,7 @@ class documents_admission_group_allController extends Controller
             ->get();
             return view('member.documents_admission_group_all.index',compact('document_admission_all_group'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -70,7 +70,7 @@ class documents_admission_group_allController extends Controller
             ->get();
             return view('member.documents_admission_group_all.index',compact('document_admission_all_group'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -133,7 +133,7 @@ class documents_admission_group_allController extends Controller
             ->get();
             return view('member.documents_admission_group_all.detail',compact('document_detail','sub_docsS','userS_0','userS_1','userS_2','reserved_numbersS','dropped_numbersS'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
     //สารบรรณกองลงรับ
@@ -193,7 +193,7 @@ class documents_admission_group_allController extends Controller
                 ]);
                 $sub_status = '1';
             }else{
-                return redirect()->back()->withErrors('พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level]!');
+                return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level]!');
             }
             $full_path = '';
         }
@@ -212,7 +212,7 @@ class documents_admission_group_allController extends Controller
         ->first();
         if($sub_doc_Check_sub_recnum){
             if($reserve_number_Check_reserve_number){
-                return redirect()->back()->withErrors('ตรวจพบเลขที่รับส่วนงาน '.$request->sub_recnum.' ซํ้าในระบบ');
+                return redirect()->back()->with('error','ตรวจพบเลขที่รับส่วนงาน '.$request->sub_recnum.' ซํ้าในระบบ');
             }else{
                 $sub_recnum = $request->sub_recnum + 1;
             }
@@ -256,7 +256,7 @@ class documents_admission_group_allController extends Controller
         if($update_sub_docs){
             return redirect()->route('documents_admission_group_all_0')->with('success',"ลงรับเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
     }
 
@@ -266,7 +266,7 @@ class documents_admission_group_allController extends Controller
         if($reserve_number_reserve_date_inside){
             return date('dmY', strtotime($reserve_number_reserve_date_inside->reserve_date));
         }else{
-            return redirect('member_dashboard')->withErrors('พบปัญหาบางอย่างไม่ถูกต้อง [getdoc_recnum_inside] !');
+            return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างไม่ถูกต้อง [getdoc_recnum_inside] !');
         }
     }
 }

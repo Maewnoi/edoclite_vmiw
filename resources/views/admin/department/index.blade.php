@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             สวัสดี , {{Auth::user()->name}}
         </h2>
     </x-slot>
@@ -8,9 +8,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    @if(session("success"))
-                        <div class="alert alert-success">{{session('success')}}</div>
-                    @endif
+                    
                     <div class="card">
                         <div class="card-header">ตารางข้อมูลแผนก</div>
                         <table class="table table-bordered">
@@ -50,7 +48,7 @@
                         {{$departments->links()}}
                     </div>
                     @if (count($trashDepartments)>0)
-                    <div class="card my-2">
+                    <div class="my-2 card">
                     <div class="card-header">ถังขยะ</div>
                         <table class="table table-bordered">
                         <thead>

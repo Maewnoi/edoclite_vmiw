@@ -371,7 +371,7 @@ class member_dashboardController extends Controller
             ->where('doc_site_id', Auth::user()->site_id)
             ->first();
             if($document_Check_doc_docnum){
-                return redirect()->back()->withErrors('ตรวจพบเลขที่หนังสือ '.$request->doc_docnum.' ซํ้าในระบบ');
+                return redirect()->back()->with('error','ตรวจพบเลขที่หนังสือ '.$request->doc_docnum.' ซํ้าในระบบ');
             }
         }
 
@@ -391,7 +391,7 @@ class member_dashboardController extends Controller
         ->first();
         if($document_Check_doc_recnum){
             if($reserve_number_Check_reserve_number){
-                return redirect()->back()->withErrors('ตรวจพบเลขที่รับส่วนงาน '.$request->doc_recnum.' ซํ้าในระบบ');
+                return redirect()->back()->with('error','ตรวจพบเลขที่รับส่วนงาน '.$request->doc_recnum.' ซํ้าในระบบ');
             }else{
                 $doc_recnum = $request->doc_recnum + 1;
             }
@@ -474,9 +474,9 @@ class member_dashboardController extends Controller
         }
 
         if($insert_document){
-            return redirect()->back()->with('success',"สร้างเอกสารใหม่เรียบร้อย");
+            return redirect()->back()->with('success',"สร้างเอกสารใหม่เรียบร้อย  s");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
         
     }
@@ -487,7 +487,7 @@ class member_dashboardController extends Controller
         if($reserve_number_reserve_date){
             return date('dmY', strtotime($reserve_number_reserve_date->reserve_date));
         }else{
-            return redirect('member_dashboard')->withErrors('พบปัญหาบางอย่างไม่ถูกต้อง [getdoc_recnum] !');
+            return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างไม่ถูกต้อง [getdoc_recnum] !');
         }
     }
 
@@ -550,7 +550,7 @@ class member_dashboardController extends Controller
             ->where('doc_group',Auth::user()->group)
             ->first();
             if($document_Check_doc_docnum){
-                return redirect()->back()->withErrors('ตรวจพบเลขที่หนังสือ '.$request->doc_docnum_inside.' ซํ้าในระบบ');
+                return redirect()->back()->with('error','ตรวจพบเลขที่หนังสือ '.$request->doc_docnum_inside.' ซํ้าในระบบ');
             }
         }
 
@@ -573,7 +573,7 @@ class member_dashboardController extends Controller
          ->first();
          if($document_Check_doc_recnum){
              if($reserve_number_Check_reserve_number){
-                 return redirect()->back()->withErrors('ตรวจพบเลขที่รับส่วนงาน '.$request->doc_recnum_inside.' ซํ้าในระบบ');
+                 return redirect()->back()->with('error','ตรวจพบเลขที่รับส่วนงาน '.$request->doc_recnum_inside.' ซํ้าในระบบ');
              }else{
                  $doc_recnum = $request->doc_recnum_inside + 1;
              }
@@ -685,7 +685,7 @@ class member_dashboardController extends Controller
                     ]);
                 }
             }else{
-                return redirect()->back()->withErrors('พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา [send_inside]!');
+                return redirect()->back()->with('error','พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา [send_inside]!');
             }
 
              //linetoken
@@ -699,7 +699,7 @@ class member_dashboardController extends Controller
 
             return redirect()->back()->with('success',"สร้างเอกสารใหม่ภายในเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา [insert_document]!');
+            return redirect()->back()->with('error','พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา [insert_document]!');
         }
 
     }

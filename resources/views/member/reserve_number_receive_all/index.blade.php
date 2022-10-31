@@ -29,14 +29,7 @@ use App\Http\Controllers\functionController;
                     </div>
                 </div>
                 <div class="col-md-9">
-                    @if(session("success"))
-                    <div class="shadow alert alert-success">{{session('success')}}</div>
-                    @endif
-                    @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                    <div class="shadow alert alert-danger">{{ $error }}</div>
-                    @endforeach
-                    @endif
+                 
                     <div class="shadow card">
                         <div class="card-header bg-primary">รายการจองเลขรับภายนอกทั้งหมด</div>
                         <div class="card-body table-responsive">

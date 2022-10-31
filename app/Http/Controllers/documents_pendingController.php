@@ -29,7 +29,7 @@ class documents_pendingController extends Controller
             ->get();
             return view('member.documents_pending.index',compact('documents'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
     public function detail($id){
@@ -44,7 +44,7 @@ class documents_pendingController extends Controller
         $GroupmemS = Groupmem::where('group_site_id',Auth::user()->site_id)->get();
             return view('member.documents_pending.detail',compact('document_detail','GroupmemS'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -68,7 +68,7 @@ class documents_pendingController extends Controller
         //ประทับตาและเซ็น
         $full_path = functionController::funtion_generate_PDF_I($request->sub_recid ,$request->seal_point ,$request->doc_recnum ,$request->doc_date ,$request->doc_time ,$request->pos ,$request->doc_filedirec ,$request->doc_id ,$request->seal_deteil ,$request->doc_docnum ,$request->doc_title);
         if(!$full_path){
-           return redirect()->back()->withErrors('พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา !');
+           return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา !');
         }
         
         //นับจำนวนกองงาน
@@ -105,7 +105,7 @@ class documents_pendingController extends Controller
         if($update_documents){
             return redirect()->route('documents_pending_all')->with('success',"พิจารณาเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
 
     }

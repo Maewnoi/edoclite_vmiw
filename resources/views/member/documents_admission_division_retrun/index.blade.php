@@ -3,7 +3,7 @@ use App\Http\Controllers\functionController;
 @endphp
 <x-app-layout>
     <!-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             สวัสดี , {{Auth::user()->name}}
         </h2>
     </x-slot> -->
@@ -11,15 +11,8 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    @if(session("success"))
-                    <div class="alert shadow alert-success">{{session('success')}}</div>
-                    @endif
-                    @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                    <div class="alert shadow alert-danger">{{ $error }}</div>
-                    @endforeach
-                    @endif
-                    <div class="card shadow">
+                    
+                    <div class="shadow card">
                         <div class="card-header bg-primary">บันทึกข้อความ</div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table">

@@ -499,7 +499,49 @@ $("#documents_admission_work_allController_sub3_type").change(function(event) {
         document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-garuda').style.display = 'none';
     }
 });
+//------------------------------------------------------------------------------------------
+//member.documents_admission_work_all.detail
+$("#documents_admission_work_allController_bt_preview-garuda").click(function(event) {
 
+    let _token = $("#_token").val(); //csrf_token
+    let documents_admission_work_allController_sub3d_speed_garuda = $("#documents_admission_work_allController_sub3d_speed").val(); //ความเร็ว
+    let documents_admission_work_allController_sub3d_government_garuda = $("#documents_admission_work_allController_sub3d_government-garuda").val(); //ส่วนราชการ
+    let documents_admission_work_allController_sub3d_draft_garuda = $("#documents_admission_work_allController_sub3d_draft-garuda").val(); //ที่ร่าง
+    let documents_admission_work_allController_sub3d_date_garuda = $("#documents_admission_work_allController_sub3d_date-garuda").val(); //วันที่
+    let documents_admission_work_allController_sub3d_topic_garuda = $("#documents_admission_work_allController_sub3d_topic-garuda").val(); //เรื่อง
+    let documents_admission_work_allController_sub3d_podium_garuda = $("#documents_admission_work_allController_sub3d_podium-garuda").val(); //ข้อความตั้งแท่น
+
+    if(documents_admission_work_allController_sub3d_government_garuda == ''){
+        document.getElementById('documents_admission_work_allController-garuda_alert_error').style.display = 'block';
+        document.getElementById('documents_admission_work_allController-garuda_tag_p_error').innerText  = 'กรุณากรอก ส่วนงานราชการ';
+        return;
+    }else if(documents_admission_work_allController_sub3d_draft_garuda == ''){
+        document.getElementById('documents_admission_work_allController-garuda_alert_error').style.display = 'block';
+        document.getElementById('documents_admission_work_allController-garuda_tag_p_error').innerText  = 'กรุณากรอก ที่ร่าง';
+        return;
+    }else if(documents_admission_work_allController_sub3d_date_garuda == ''){
+        document.getElementById('documents_admission_work_allController-garuda_alert_error').style.display = 'block';
+        document.getElementById('documents_admission_work_allController-garuda_tag_p_error').innerText  = 'กรุณากรอก วันที่';
+        return;
+    }else if(documents_admission_work_allController_sub3d_topic_garuda == ''){
+        document.getElementById('documents_admission_work_allController-garuda_alert_error').style.display = 'block';
+        document.getElementById('documents_admission_work_allController-garuda_tag_p_error').innerText  = 'กรุณากรอก เรื่อง';
+        return;
+    }else if(documents_admission_work_allController_sub3d_podium_garuda == ''){
+        document.getElementById('documents_admission_work_allController-garuda_alert_error').style.display = 'block';
+        document.getElementById('documents_admission_work_allController-garuda_tag_p_error').innerText  = 'กรุณากรอก รายละเอียด';
+        return;
+    }else if(documents_admission_work_allController_sub3d_speed_garuda == ''){
+        document.getElementById('documents_admission_work_allController-garuda_alert_error').style.display = 'block';
+        document.getElementById('documents_admission_work_allController-garuda_tag_p_error').innerText  = 'กรุณาเลือก ชั้นความเร็ว';
+        return;
+    }else{
+        
+    }
+});
+
+//------------------------------------------------------------------------------------------
+//member.documents_admission_work_all.detail
 $("#documents_admission_work_allController_sub3d_government").keyup(function(event) {
     document.getElementById("documents_admission_work_allController_bt_respond").disabled = true;
 });
@@ -524,7 +566,7 @@ $("#documents_admission_work_allController_sub3d_podium").keyup(function(event) 
 
 $("#documents_admission_work_allController_bt_preview").click(function(event) {
     let _token = $("#_token").val(); //csrf_token
-    let documents_admission_work_allController_sub3d_speed = $("#documents_admission_work_allController_sub3d_speed").val(); //ตำแหน่ง
+    let documents_admission_work_allController_sub3d_speed = $("#documents_admission_work_allController_sub3d_speed").val(); //ความเร็ว
     let documents_admission_work_allController_sub3d_government = $("#documents_admission_work_allController_sub3d_government").val(); //ส่วนราชการ
     let documents_admission_work_allController_sub3d_draft = $("#documents_admission_work_allController_sub3d_draft").val(); //ที่ร่าง
     let documents_admission_work_allController_sub3d_date = $("#documents_admission_work_allController_sub3d_date").val(); //วันที่

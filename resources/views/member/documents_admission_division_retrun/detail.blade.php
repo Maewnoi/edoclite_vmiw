@@ -3,7 +3,7 @@ use App\Http\Controllers\functionController;
 @endphp
 <x-app-layout>
     <!-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             สวัสดี , {{Auth::user()->name}}
         </h2>
     </x-slot> -->
@@ -11,16 +11,9 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    @if(session("success"))
-                    <div class="alert shadow alert-success">{{session('success')}}</div>
-                    @endif
-                    @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                    <div class="alert shadow alert-danger">{{ $error }}</div>
-                    @endforeach
-                    @endif
-                    <div class="card shadow">
-                        <div class="card-header text-lg bg-primary">
+                   
+                    <div class="shadow card">
+                        <div class="text-lg card-header bg-primary">
                             <x-jet-nav-link href="{{url('/documents_pending/all')}}">
                                 <i class="fa fa-arrow-left"></i>
                             </x-jet-nav-link>
@@ -81,7 +74,7 @@ use App\Http\Controllers\functionController;
                                 <x-jet-label class="text-lg" value="{{ __('ข้อมูลเอกสาร') }}" />
                                 @error('doc_filedirec')
                                 <div class="my-2">
-                                    <p class="text-sm text-red-600 mt-2">
+                                    <p class="mt-2 text-sm text-red-600">
                                         {{$message}}</p>
                                 </div>
                                 @enderror

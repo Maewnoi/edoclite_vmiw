@@ -11,14 +11,7 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    @if(session("success"))
-                    <div class="shadow alert alert-success">{{session('success')}}</div>
-                    @endif
-                    @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                    <div class="shadow alert alert-danger">{{ $error }}</div>
-                    @endforeach
-                    @endif
+                  
                     <div class="shadow card">
                         <div class="text-lg card-header bg-primary">
                             <x-jet-nav-link href="{{url('/documents_pending/all')}}">

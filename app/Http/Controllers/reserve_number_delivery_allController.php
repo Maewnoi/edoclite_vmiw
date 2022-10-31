@@ -21,7 +21,7 @@ class reserve_number_delivery_allController extends Controller
             ->get();
             return view('member.reserve_number_delivery_all.index',compact('reserve_delivery_numberS'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -43,7 +43,7 @@ class reserve_number_delivery_allController extends Controller
         ->where('doc_template', 'B')
         ->first();
         if($document_Check_reserve_number){
-            return redirect()->back()->withErrors('ไม่กี่วินาทีตรวจพบเลข '.$request->reserve_number.' มีการใช้งานในระบบแล้ว');
+            return redirect()->back()->with('error','ไม่กี่วินาทีตรวจพบเลข '.$request->reserve_number.' มีการใช้งานในระบบแล้ว');
         }
         //เช็คการค่าซํ้าใน reserve_number
         $reserve_number_Check_reserve_number = reserve_number::where('reserve_number', $request->reserve_number)
@@ -53,7 +53,7 @@ class reserve_number_delivery_allController extends Controller
         ->where('reserve_template', 'B')
         ->first();
         if($reserve_number_Check_reserve_number){
-            return redirect()->back()->withErrors('ไม่กี่วินาทีตรวจพบเลข '.$request->reserve_number.' มีการจองในระบบแล้ว');
+            return redirect()->back()->with('error','ไม่กี่วินาทีตรวจพบเลข '.$request->reserve_number.' มีการจองในระบบแล้ว');
         }
 
         $insert_reserve_number_receive = reserve_number::insert([
@@ -80,7 +80,7 @@ class reserve_number_delivery_allController extends Controller
         if($insert_reserve_number_receive){
             return redirect()->back()->with('success',"จองเลข ".$request->reserve_number." เรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหา กรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหา กรุณาแจ้งผู้พัฒนา !');
         }
 
     }
@@ -106,7 +106,7 @@ class reserve_number_delivery_allController extends Controller
         if($update){
             return redirect()->back()->with('success',"ยกเลิกเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหา กรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหา กรุณาแจ้งผู้พัฒนา !');
         }
     }
 }

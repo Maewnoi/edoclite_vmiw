@@ -35,7 +35,7 @@ class documents_admission_department_retrunController extends Controller
             ->get();
             return view('member.documents_admission_department_retrun.index',compact('document_admission_department_retrun'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -52,7 +52,7 @@ class documents_admission_department_retrunController extends Controller
             ->first();
             return view('member.documents_admission_department_retrun.detail',compact('document_detail'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -82,10 +82,10 @@ class documents_admission_department_retrunController extends Controller
                 }
                 return redirect()->route('documents_admission_department_retrun')->with('success',"รับทราบเรียบร้อย");
             }else{
-                return redirect('member_dashboard')->withErrors('เกิดข้อผิดพลาด [update_sub3_docs] !');
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs] !');
             }
         }else{
-            return redirect('member_dashboard')->withErrors('เกิดข้อผิดพลาด ไม่พบหัวหน้ากองในระบบ [userS_0] !');
+            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด ไม่พบหัวหน้ากองในระบบ [userS_0] !');
         }
         
 

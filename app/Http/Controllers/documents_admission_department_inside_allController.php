@@ -35,7 +35,7 @@ class documents_admission_department_inside_allController extends Controller
             ->get();
             return view('member.documents_admission_department_inside_all.index',compact('document_admission_department_inside_all'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
     //งานพิจารณาแล้ว
@@ -59,7 +59,7 @@ class documents_admission_department_inside_allController extends Controller
             ->get();
             return view('member.documents_admission_department_inside_all.index',compact('document_admission_department_inside_all'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -87,7 +87,7 @@ class documents_admission_department_inside_allController extends Controller
             ->get();
             return view('member.documents_admission_department_inside_all.detail',compact('document_detail','userS_0','userS_2'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -131,7 +131,7 @@ class documents_admission_department_inside_allController extends Controller
                 ]);
                 $sub_status_inside = '2';
             }else{
-                return redirect()->back()->withErrors('พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level]!');
+                return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level]!');
             }
             $full_path_inside = '';
         }
@@ -157,7 +157,7 @@ class documents_admission_department_inside_allController extends Controller
         if($update_sub_docs){
             return redirect()->route('documents_admission_department_inside_all_0')->with('success',"ลงรับเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
     }
 }
