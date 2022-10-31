@@ -30,7 +30,7 @@ class documents_admission_division_allController extends Controller
             ->get();
             return view('member.documents_admission_division_all.index',compact('document_admission_division_all'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
     //งานพิจารณาแล้ว
@@ -49,7 +49,7 @@ class documents_admission_division_allController extends Controller
             ->get();
             return view('member.documents_admission_division_all.index',compact('document_admission_division_all'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -89,7 +89,7 @@ class documents_admission_division_allController extends Controller
 
             return view('member.documents_admission_division_all.detail',compact('document_detail','userS_0','userS_2'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -161,7 +161,7 @@ class documents_admission_division_allController extends Controller
             //         ]);
             //     }
             }else{
-                return redirect()->back()->withErrors('พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level_goup_3]!');
+                return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level_goup_3]!');
             }
             $full_path = '';
         }
@@ -187,7 +187,7 @@ class documents_admission_division_allController extends Controller
         if($update_sub_docs){
             return redirect()->route('documents_admission_division_all_0')->with('success',"ลงรับเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
     }
 }

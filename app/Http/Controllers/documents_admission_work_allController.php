@@ -35,7 +35,7 @@ class documents_admission_work_allController extends Controller
             ->get();
             return view('member.documents_admission_work_all.index',compact('document_admission_all_work'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -56,7 +56,7 @@ class documents_admission_work_allController extends Controller
             ->get();
             return view('member.documents_admission_work_all.index',compact('document_admission_all_work'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -73,16 +73,17 @@ class documents_admission_work_allController extends Controller
 
             if($document_detail->sub2_status == '0'){
                 //document_update_sub2_status อ่าน
-                $document_update_sub2_status = sub2_doc::where('sub2_id', $document_detail->sub2_id)->update([
-                    'sub2_status'=>'1',
-                    'sub2_updated_at'=>date('Y-m-d H:i:s')
-                ]);
-                return view('member.documents_admission_work_all.detail',compact('document_detail'))->withErrors('อ่านเอกสารเรียบร้อย !');
+                // $document_update_sub2_status = sub2_doc::where('sub2_id', $document_detail->sub2_id)->update([
+                //     'sub2_status'=>'1',
+                //     'sub2_updated_at'=>date('Y-m-d H:i:s')
+                // ]);
+                return view('member.documents_admission_work_all.detail',compact('document_detail'))->with('success','อ่านเอกสารเรียบร้อย !');
+                
             }else{
                 return view('member.documents_admission_work_all.detail',compact('document_detail'));
             }
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -119,7 +120,7 @@ class documents_admission_work_allController extends Controller
             $request->request->add(['sub3d_id' => $insert_sub3_docs,'action' => 'respond']);
             event(new functionController($full_path = functionController::funtion_PDFRespond($request)));
             if(!$full_path){
-                return redirect('member_dashboard')->withErrors('พบปัญหาบางอย่างผิดพลาด [funtion_PDFRespond] !');
+                return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [funtion_PDFRespond] !');
             }
             $update_sub3_detail = sub3_detail::where('sub3d_id', $insert_sub3_detail)->update([
                 'sub3d_file'=>$full_path
@@ -135,10 +136,10 @@ class documents_admission_work_allController extends Controller
                 }
                 return redirect()->route('documents_admission_work_all_0')->with('success',"ตอบการเอกสารเรียบร้อย");
             }else{
-                return redirect('member_dashboard')->withErrors('พบปัญหาบางอย่างผิดพลาด [insert] !');
+                return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [insert] !');
             }
         }else{
-            return redirect('member_dashboard')->withErrors('พบปัญหาบางอย่างผิดพลาด [userS_level_5] !');
+            return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [userS_level_5] !');
         }
     }
 }

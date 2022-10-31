@@ -100,19 +100,19 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-menu')->html();
-} elseif ($_instance->childHasBeenRendered('5Q4uFeN')) {
-    $componentId = $_instance->getRenderedChildComponentId('5Q4uFeN');
-    $componentTag = $_instance->getRenderedChildComponentTagName('5Q4uFeN');
+} elseif ($_instance->childHasBeenRendered('Zl50cAE')) {
+    $componentId = $_instance->getRenderedChildComponentId('Zl50cAE');
+    $componentTag = $_instance->getRenderedChildComponentTagName('Zl50cAE');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('5Q4uFeN');
+    $_instance->preserveRenderedChild('Zl50cAE');
 } else {
     $response = \Livewire\Livewire::mount('navigation-menu');
     $html = $response->html();
-    $_instance->logRenderedChild('5Q4uFeN', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('Zl50cAE', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
-
+        <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- Page Heading -->
         <!-- <header class="bg-white shadow">
                 <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">

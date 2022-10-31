@@ -17,14 +17,7 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <?php if(session("success")): ?>
-                    <div class="shadow alert alert-success"><?php echo e(session('success')); ?></div>
-                    <?php endif; ?>
-                    <?php if($errors->any()): ?>
-                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="shadow alert alert-danger"><?php echo e($error); ?></div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php endif; ?>
+                 
                     <div class="shadow card">
                         <div class="text-lg card-header bg-primary">
                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -296,6 +289,34 @@ unset($__errorArgs, $__bag); ?>
                                                                 </div>
                                                             </div>
                                                         </page>
+                                                        <div class="flex items-center justify-center mt-20">
+                                                            <button type="button"
+                                                                id="documents_admission_work_allController_bt_preview-garuda"
+                                                                class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-900 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:shadow-outline-blue disabled:opacity-25">
+                                                                <?php echo e(__('แสดงตัวอย่าง')); ?>
+
+                                                            </button>
+                                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['id' => 'documents_admission_work_allController_bt_respond-garudav','disabled' => true]]); ?>
+<?php $component->withName('jet-button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['id' => 'documents_admission_work_allController_bt_respond-garudav','disabled' => true]); ?>
+                                                                <?php echo e(__('ตอบกลับ')); ?>
+
+                                                             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                        </div>
+                                                        <div class="mt-2 shadow alert alert-danger hide"
+                                                            id="documents_admission_work_allController-garuda_alert_error">
+                                                            <p id="documents_admission_work_allController-garuda_tag_p_error">
+                                                            </p>
+                                                        </div>
+                                                        <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
                                                     </div>
                                                     <div class="form-group hide"
                                                         id="documents_admission_work_allController_form-group_tb-sub3_details-message-memo">

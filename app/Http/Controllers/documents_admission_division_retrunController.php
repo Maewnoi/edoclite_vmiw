@@ -34,7 +34,7 @@ class documents_admission_division_retrunController extends Controller
             ->get();
             return view('member.documents_admission_division_retrun.index',compact('document_admission_division_retrun'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -51,7 +51,7 @@ class documents_admission_division_retrunController extends Controller
             ->first();
             return view('member.documents_admission_division_retrun.detail',compact('document_detail'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 }

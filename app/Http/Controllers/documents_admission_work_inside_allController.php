@@ -40,7 +40,7 @@ class documents_admission_work_inside_allController extends Controller
             ->get();
             return view('member.documents_admission_work_inside_all.index',compact('document_admission_all_work_inside'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -66,7 +66,7 @@ class documents_admission_work_inside_allController extends Controller
             ->get();
             return view('member.documents_admission_work_inside_all.index',compact('document_admission_all_work_inside'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 
@@ -88,12 +88,12 @@ class documents_admission_work_inside_allController extends Controller
                         'sub2_status'=>'1',
                         'sub2_updated_at'=> date('Y-m-d H:i:s')
                     ]);
-                return view('member.documents_admission_work_inside_all.detail',compact('document_detail'))->withErrors('อ่านเอกสารเรียบร้อย !');
+                return view('member.documents_admission_work_inside_all.detail',compact('document_detail'))->with('success','อ่านเอกสารเรียบร้อย !');
             }else{
                 return view('member.documents_admission_work_inside_all.detail',compact('document_detail'));
             }
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
 }

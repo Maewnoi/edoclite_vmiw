@@ -40,7 +40,7 @@ class GroupmemController extends Controller
         ->where('group_site_id', $request->group_site_id)
         ->first();
         if($Groupmem_check){
-            return redirect()->back()->withErrors('ตรวจพบชื่อกองงาน '.$Groupmem_check->group_name.' มีในระบบแล้ว');
+            return redirect()->back()->with('error','ตรวจพบชื่อกองงาน '.$Groupmem_check->group_name.' มีในระบบแล้ว');
         }
 
         //บันทึกข้อมูล
@@ -55,7 +55,7 @@ class GroupmemController extends Controller
         if($insert){
             return redirect()->back()->with('success',"บันทึกข้อมูลกองงานเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
         
     }
@@ -65,7 +65,7 @@ class GroupmemController extends Controller
         if($delete){
             return redirect()->back()->with('success',"ลบข้อมูลเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการลบข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการลบข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
     }
 
@@ -92,7 +92,7 @@ class GroupmemController extends Controller
         ->where('group_id','!=', $request->group_id)
         ->first();
         if($Groupmem_check){
-            return redirect()->back()->withErrors('ตรวจพบชื่อกองงาน '.$Groupmem_check->group_name.' มีในระบบแล้ว');
+            return redirect()->back()->with('error','ตรวจพบชื่อกองงาน '.$Groupmem_check->group_name.' มีในระบบแล้ว');
         }
 
         //query
@@ -106,7 +106,7 @@ class GroupmemController extends Controller
         if($update){
             return redirect()->back()->with('success',"อัพเดตข้อมูลเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
     }
 }

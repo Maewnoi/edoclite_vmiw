@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             สวัสดี , {{Auth::user()->name}}
         </h2>
     </x-slot> -->
@@ -8,16 +8,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-
-                    @if(session("success"))
-                    <div class="alert shadow alert-success">{{session('success')}}</div>
-                    @endif
-                    @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                    <div class="alert shadow alert-danger">{{ $error }}</div>
-                    @endforeach
-                    @endif
-                    <div class="card shadow">
+                    <div class="shadow card">
                         <div class="card-header">ตารางข้อมูลฝ่าย</div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table">
@@ -39,7 +30,7 @@
                                             @if($row->cottons_created_at != NULL)
                                             <span class="badge bg-secondary">{{$row->cottons_created_at}}</span>
                                             <p class="text-sm text-muted">
-                                                <i class="far fa-clock mr-1"></i>
+                                                <i class="mr-1 far fa-clock"></i>
                                                 {{Carbon\Carbon::parse($row->cottons_created_at)->diffForHumans()}}
                                             </p>
                                             @endif
@@ -48,7 +39,7 @@
                                             @if($row->cottons_updated_at != NULL)
                                             <span class="badge bg-secondary">$row->cottons_updated_at</span>
                                             <p class="text-sm text-muted">
-                                                <i class="far fa-clock mr-1"></i>
+                                                <i class="mr-1 far fa-clock"></i>
                                                 {{Carbon\Carbon::parse($row->cottons_updated_at)->diffForHumans()}}
                                             </p>
                                             @endif
@@ -105,7 +96,7 @@
                                                                         class="form-control @error('cottons_name') is-invalid @enderror">
                                                                     @error('cottons_name')
                                                                     <div class="my-2">
-                                                                        <p class="text-sm text-red-600 mt-2">
+                                                                        <p class="mt-2 text-sm text-red-600">
                                                                             {{$message}}</p>
                                                                     </div>
                                                                     @enderror
@@ -130,7 +121,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card shadow">
+                    <div class="shadow card">
                         <div class="card-header">เพิ่มฝ่าย</div>
                         <div class="card-body">
                             <form action="{{route('addcottons')}}" method="post">
@@ -144,7 +135,7 @@
                                                 class="form-control @error('cottons_name') is-invalid @enderror">
                                             @error('cottons_name')
                                             <div class="my-2">
-                                                <p class="text-sm text-red-600 mt-2">{{$message}}</p>
+                                                <p class="mt-2 text-sm text-red-600">{{$message}}</p>
                                             </div>
                                             @enderror
                                         </div>
@@ -165,7 +156,7 @@
                                             </select>
                                             @error('cottons_group')
                                             <div class="my-2">
-                                                <p class="text-sm text-red-600 mt-2">
+                                                <p class="mt-2 text-sm text-red-600">
                                                     {{$message}}</p>
                                             </div>
                                             @enderror

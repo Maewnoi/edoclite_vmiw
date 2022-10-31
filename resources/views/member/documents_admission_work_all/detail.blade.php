@@ -11,14 +11,7 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    @if(session("success"))
-                    <div class="shadow alert alert-success">{{session('success')}}</div>
-                    @endif
-                    @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                    <div class="shadow alert alert-danger">{{ $error }}</div>
-                    @endforeach
-                    @endif
+                 
                     <div class="shadow card">
                         <div class="text-lg card-header bg-primary">
                             <x-jet-nav-link href="{{url('/documents_pending/all')}}">
@@ -204,6 +197,24 @@ use App\Http\Controllers\functionController;
                                                                 </div>
                                                             </div>
                                                         </page>
+                                                        <div class="flex items-center justify-center mt-20">
+                                                            <button type="button"
+                                                                id="documents_admission_work_allController_bt_preview-garuda"
+                                                                class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-900 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:shadow-outline-blue disabled:opacity-25">
+                                                                {{ __('แสดงตัวอย่าง') }}
+                                                            </button>
+                                                            <x-jet-button
+                                                                id="documents_admission_work_allController_bt_respond-garudav"
+                                                                disabled>
+                                                                {{ __('ตอบกลับ') }}
+                                                            </x-jet-button>
+                                                        </div>
+                                                        <div class="mt-2 shadow alert alert-danger hide"
+                                                            id="documents_admission_work_allController-garuda_alert_error">
+                                                            <p id="documents_admission_work_allController-garuda_tag_p_error">
+                                                            </p>
+                                                        </div>
+                                                        <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
                                                     </div>
                                                     <div class="form-group hide"
                                                         id="documents_admission_work_allController_form-group_tb-sub3_details-message-memo">

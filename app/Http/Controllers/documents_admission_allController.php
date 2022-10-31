@@ -23,7 +23,7 @@ class documents_admission_allController extends Controller
             ->get();
             return view('member.documents_admission_all.index',compact('documents'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
     public function detail($id){
@@ -42,7 +42,7 @@ class documents_admission_allController extends Controller
             }
             return view('member.documents_admission_all.detail',compact('document_detail','sub_docsS'.'sub2docsS'));
         }else{
-            return redirect('member_dashboard')->withErrors('คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
     
@@ -78,7 +78,7 @@ class documents_admission_allController extends Controller
             ->where('doc_site_id', Auth::user()->site_id)
             ->first();
             if($document_Check_doc_docnum){
-                return redirect()->back()->withErrors('ตรวจพบเลขที่หนังสือ '.$request->doc_docnum.' ซํ้าในระบบ');
+                return redirect()->back()->with('error','ตรวจพบเลขที่หนังสือ '.$request->doc_docnum.' ซํ้าในระบบ');
             }
         }
 
@@ -94,7 +94,7 @@ class documents_admission_allController extends Controller
         if($update_document){
             return redirect()->back()->with('success',"อัพเดตข้อมูลเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
 
     }
@@ -141,7 +141,7 @@ class documents_admission_allController extends Controller
         if($update_document){
             return redirect()->back()->with('success',"อัพเดตข้อมูลเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
 
     }
@@ -195,7 +195,7 @@ class documents_admission_allController extends Controller
         if($delete_document){
             return redirect()->route('documents_admission_all')->with('success',"ลบข้อมูลเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการลบข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการลบข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
     }
 }

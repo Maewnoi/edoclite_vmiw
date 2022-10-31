@@ -40,7 +40,7 @@ class sitesController extends Controller
         if($insert){
             return redirect()->back()->with('success',"บันทึกข้อมูลกองงานเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
     }
 
@@ -50,7 +50,7 @@ class sitesController extends Controller
         if($delete){
             return redirect()->back()->with('success',"ลบข้อมูลเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการลบข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการลบข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
         
     }
@@ -77,7 +77,7 @@ class sitesController extends Controller
         if($update){
             return redirect()->back()->with('success',"อัพเดตข้อมูลเรียบร้อย");
         }else{
-            return redirect()->back()->withErrors('พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
+            return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }
     }
 }
