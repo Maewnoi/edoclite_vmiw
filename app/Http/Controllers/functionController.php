@@ -252,6 +252,86 @@ class functionController extends Controller
     }
 
     //function pdf_preview
+    public static function funtion_PDFRespond_garuda(Request $request) {
+        $pdf = new Fpdi();
+        $pdf->AddPage();
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(25, 42.5);
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_draft_garuda));
+
+        $pdf->Image('image/Garuda.jpeg',90,25,25,25);
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(135, 40);
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->MultiCell(50,5, iconv('UTF-8', 'cp874', $request->sub3d_government_garuda),'0','L',false); 
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(100, 60);
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_date_garuda));
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(25, 70); //+12
+        $pdf->AddFont('THSarabunNew','B','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','B',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', 'เรื่อง'));
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(40, 70); 
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_topic_garuda));
+
+        $strlen_podium = strlen($request->sub3d_podium_garuda);
+        // $strip_tags_podium = strip_tags($request->sub3d_podium,"<b><p>");
+        // console.log($strip_tags_podium);
+        if($strlen_podium <='270'){
+            $MultiCell_H = 5;
+        }else if($strlen_podium >= '271' && $strlen_podium <= '540'){
+            $MultiCell_H = 10;
+        }else if($strlen_podium >= '541' && $strlen_podium <= '810'){
+            $MultiCell_H = 11;
+        }else if($strlen_podium >= '811' && $strlen_podium <= '1080'){
+            $MultiCell_H = 12;
+        }else if($strlen_podium >= '1081' && $strlen_podium <= '1350'){
+            $MultiCell_H = 13;
+        }else if($strlen_podium >= '1351' && $strlen_podium <= '1620'){
+            $MultiCell_H = 14;
+        }else if($strlen_podium >= '1621' && $strlen_podium <= '1890'){
+            $MultiCell_H = 15;
+        }else if($strlen_podium >= '1891'){
+            $MultiCell_H = 16;
+        }
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(25, 80); //+12
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->MultiCell(160,$MultiCell_H, iconv('UTF-8', 'cp874', $request->sub3d_podium_garuda),'0','L',false);
+
+        if($request->action_garuda == 'preview'){
+            return response($pdf->Output())->header('Content-Type', 'application/pdf');
+        }else if($request->action_garuda == 'respond'){
+            $date_new = date('Y-m-d');
+            $year_new = date('Y');
+            $upload_location = 'image/'.$year_new.'/respond/';
+            $name_gen_new = $request->sub3d_id_garuda."_".$date_new;
+            // $name_gen_new = 'test_by_domji';
+            $full_path = $upload_location.$name_gen_new.'.pdf';
+            $pdf->Output('F', $full_path);
+            // return response($pdf->Output())->header('Content-Type', 'application/pdf');
+            return $full_path;
+        }else{
+            return "Error".$request;
+        }
+    }
+
+    //function pdf_preview
     public static function funtion_PDFRespond(Request $request) {
         // return response()->json($request->sub3d_government,200);
 

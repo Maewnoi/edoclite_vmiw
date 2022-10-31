@@ -106,7 +106,7 @@ use App\Http\Controllers\functionController;
                                         enctype="multipart/form-data">
                                        @csrf
                                         <div class="card card-body">
-                                            <x-jet-label class="text-lg" value="{{ __('ตอบกลับ') }}" />
+                                            <x-jet-label class="text-lg" value="{{ __('ตอบกลับ v45.65') }}" />
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -162,7 +162,7 @@ use App\Http\Controllers\functionController;
                                                                 <div class="col-3 pt-14">
                                                                     <input class="form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_draft-garuda"
-                                                                        name="sub3d_draft-garuda" type="text" value="ที่ร่าง">
+                                                                        name="sub3d_draft_garuda" type="text" value="ที่ร่าง">
                                                                 </div>
                                                                 <div class="col-5">
                                                                     <img class="w-24 h-24 ml-20"
@@ -171,14 +171,14 @@ use App\Http\Controllers\functionController;
                                                                 <div class="col-4 pt-14">
                                                                     <input class="form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_government-garuda"
-                                                                        name="sub3d_government-garuda" type="text" value="องค์การบริหาร">
+                                                                        name="sub3d_government_garuda" type="text" value="องค์การบริหาร">
                                                                 </div>
                                                                 <div class="col-5">
                                                                 </div>
                                                                 <div class="col-3">
                                                                     <input class="mt-3 form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_date-garuda"
-                                                                        name="sub3d_date-garuda" type="text" value="21 oct 1988">
+                                                                        name="sub3d_date_garuda" type="text" value="21 oct 1988">
                                                                 </div>
                                                                 <div class="col-4">
                                                                 </div>
@@ -188,15 +188,22 @@ use App\Http\Controllers\functionController;
                                                                 <div class="col-10">
                                                                     <input class="form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_topic-garuda"
-                                                                        name="sub3d_topic-garuda" type="text" value="">
+                                                                        name="sub3d_topic_garuda" type="text" value="">
                                                                 </div>   
                                                                 <div class="col-12">
                                                                     <div class="mt-3 mb-14">
-                                                                        <textarea id="documents_admission_work_allController_sub3d_podium-garuda" class="form-control" rows="25" cols="75" name="sub3d_podium-garuda">เรียน ...</textarea>
+                                                                        <textarea id="documents_admission_work_allController_sub3d_podium-garuda" class="form-control" rows="25" cols="75" name="sub3d_podium_garuda">เรียน ...</textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </page>
+                                                        <input type="hidden" name="doc_id_garuda" value="{{$document_detail->doc_id}}">
+                                                        <input type="hidden" name="sub_id_garuda" value="{{$document_detail->sub_id}}">
+                                                        <input type="hidden" name="sub2_id_garuda" value="{{$document_detail->sub2_id}}">
+                                                        <input type="hidden" name="doc_docnum_garuda" value="{{$document_detail->doc_docnum}}">
+                                                        <input type="hidden" name="doc_origin_garuda" value="{{$document_detail->doc_origin}}">
+                                                        <input type="hidden" name="doc_title_garuda" value="{{$document_detail->doc_title}}">
+
                                                         <div class="flex items-center justify-center mt-20">
                                                             <button type="button"
                                                                 id="documents_admission_work_allController_bt_preview-garuda"
@@ -204,16 +211,12 @@ use App\Http\Controllers\functionController;
                                                                 {{ __('แสดงตัวอย่าง') }}
                                                             </button>
                                                             <x-jet-button
-                                                                id="documents_admission_work_allController_bt_respond-garudav"
+                                                                id="documents_admission_work_allController_bt_respond-garudav" name="bt_respond" value="respond_garudav"
                                                                 disabled>
                                                                 {{ __('ตอบกลับ') }}
                                                             </x-jet-button>
                                                         </div>
-                                                        <div class="mt-2 shadow alert alert-danger hide"
-                                                            id="documents_admission_work_allController-garuda_alert_error">
-                                                            <p id="documents_admission_work_allController-garuda_tag_p_error">
-                                                            </p>
-                                                        </div>
+                                                        
                                                         <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
                                                     </div>
                                                     <div class="form-group hide"
@@ -319,16 +322,12 @@ use App\Http\Controllers\functionController;
                                                                 {{ __('แสดงตัวอย่าง') }}
                                                             </button>
                                                             <x-jet-button
-                                                                id="documents_admission_work_allController_bt_respond"
+                                                                id="documents_admission_work_allController_bt_respond" name="bt_respond" value="respond"
                                                                 disabled>
                                                                 {{ __('ตอบกลับ') }}
                                                             </x-jet-button>
                                                         </div>
-                                                        <div class="mt-2 shadow alert alert-danger hide"
-                                                            id="documents_admission_work_allController_alert_error">
-                                                            <p id="documents_admission_work_allController_tag_p_error">
-                                                            </p>
-                                                        </div>
+                                                        
                                                         <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
                                                     </div>
                                                 </div>
