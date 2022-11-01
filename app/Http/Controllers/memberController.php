@@ -24,17 +24,25 @@ class memberController extends Controller
             ->leftJoin('groupmems','groupmems.group_id','users.group')
             ->orderBy('users.id', 'DESC')
             ->get();
+
+        $select_groupmemsS=Groupmem::join('sites','sites.site_id','groupmems.group_site_id')->get();
         }else if(Auth::user()->level=='3'){
             $memberS=User::where('users.level', '!=' , '0')
+            ->where('users.site_id',Auth::user()->site_id)
             ->leftJoin('groupmems','groupmems.group_id','users.group')
-            ->orderBy('users.id', 'DESC')
+             
+            ->orderBy('users.level', 'ASC')
             ->get();
+        $select_groupmemsS=Groupmem::join('sites','sites.site_id','groupmems.group_site_id')
+        ->where('groupmems.group_site_id',Auth::user()->site_id)
+        ->get();
         }
         
 
-        $select_groupmemsS=Groupmem::join('sites','sites.site_id','groupmems.group_site_id')->get();
+        
 
         $select_sitesS=sites::get();
+
         return view('admin.member.index',compact('memberS','select_groupmemsS','select_sitesS'));
     }
 

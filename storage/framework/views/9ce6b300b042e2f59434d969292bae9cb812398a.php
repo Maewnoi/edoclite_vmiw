@@ -214,7 +214,8 @@ $.widget.bridge('uibutton', $.ui.button)
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <!-- SweetAlert2 -->
-<script src="<?php echo e(asset('/plugins/sweetalert2/sweetalert2.min.js')); ?>"></script>
+<!-- <script src="<?php echo e(asset('/plugins/sweetalert2/sweetalert2.min.js')); ?>"></script> -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Toastr -->
 <script src="<?php echo e(asset('/plugins/toastr/toastr.min.js')); ?>"></script>
 <!-- search -->

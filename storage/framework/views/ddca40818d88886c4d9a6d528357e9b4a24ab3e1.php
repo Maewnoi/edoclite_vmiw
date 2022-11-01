@@ -100,15 +100,15 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-menu')->html();
-} elseif ($_instance->childHasBeenRendered('eBINaRu')) {
-    $componentId = $_instance->getRenderedChildComponentId('eBINaRu');
-    $componentTag = $_instance->getRenderedChildComponentTagName('eBINaRu');
+} elseif ($_instance->childHasBeenRendered('jJhQ3eD')) {
+    $componentId = $_instance->getRenderedChildComponentId('jJhQ3eD');
+    $componentTag = $_instance->getRenderedChildComponentTagName('jJhQ3eD');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('eBINaRu');
+    $_instance->preserveRenderedChild('jJhQ3eD');
 } else {
     $response = \Livewire\Livewire::mount('navigation-menu');
     $html = $response->html();
-    $_instance->logRenderedChild('eBINaRu', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('jJhQ3eD', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -233,7 +233,8 @@ $.widget.bridge('uibutton', $.ui.button)
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <!-- SweetAlert2 -->
-<script src="<?php echo e(asset('/plugins/sweetalert2/sweetalert2.min.js')); ?>"></script>
+<!-- <script src="<?php echo e(asset('/plugins/sweetalert2/sweetalert2.min.js')); ?>"></script> -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Toastr -->
 <script src="<?php echo e(asset('/plugins/toastr/toastr.min.js')); ?>"></script>
 <!-- search -->
