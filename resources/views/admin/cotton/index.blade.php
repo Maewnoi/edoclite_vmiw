@@ -16,6 +16,8 @@
                                     <tr>
                                         <th scope="col">ลำดับ</th>
                                         <th scope="col">ชื่อ</th>
+                                        <th scope="col">กองาน</th>
+                                        <th scope="col">site</th>
                                         <th scope="col">วันที่สร้าง</th>
                                         <th scope="col">วันที่อัพเดต</th>
                                         <th scope="col">จัดการ</th>
@@ -26,6 +28,8 @@
                                     <tr>
                                         <th>{{$loop->index+1}}</th>
                                         <td>{{$row->cottons_name}}</td>
+                                        <td>{{$row->group_name}}</td>
+                                        <td>{{$row->site_name}}</td>
                                         <td>
                                             @if($row->cottons_created_at != NULL)
                                             <span class="badge bg-secondary">{{$row->cottons_created_at}}</span>

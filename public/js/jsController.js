@@ -2,7 +2,7 @@
 function submitForm(btn) {
      btn.disabled = true;
      btn.className = ('loadingbydomji555+');
-     btn.innerHTML = '<img src="../image/load.gif" alt="" width="100" height="100" />';
+     btn.innerHTML = '<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>';
      btn.form.submit();
 }
 // alert(var_memberController_add_level);

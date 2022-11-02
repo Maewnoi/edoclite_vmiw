@@ -19,7 +19,11 @@ class cottonController extends Controller
      */
     //หน้ากลัก
     public function index(){
-        $cottonS=cottons::orderBy('cottons.cottons_id', 'DESC')->get();
+        $cottonS=cottons::leftJoin('groupmems','groupmems.group_id','cottons.cottons_group')
+        ->leftJoin('sites','sites.site_id','groupmems.group_site_id')
+        ->orderBy('cottons.cottons_id', 'DESC')
+        ->get();
+
         $select_groupmemsS=Groupmem::join('sites','sites.site_id','groupmems.group_site_id')->get();
         return view('admin.cotton.index',compact('cottonS','select_groupmemsS'));
     }
