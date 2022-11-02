@@ -17,9 +17,9 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-                  
+                   
                     <div class="shadow card">
-                        <div class="card-header bg-primary">รายการจองเลขคำสั่งทั้งหมด</div>
+                        <div class="card-header bg-primary">รายการจองเลขหนังสือรับรองทั้งหมด</div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table">
                                 <thead>
@@ -34,7 +34,7 @@ use App\Http\Controllers\functionController;
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $__currentLoopData = $reserve_order_numberS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $reserve_certificate_numberS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <th><?php echo e($loop->index+1); ?></th>
                                         <td><?php echo e($row->reserve_number); ?></td>
@@ -100,7 +100,7 @@ use App\Http\Controllers\functionController;
                                                     </h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="<?php echo e(route('cancel_reserve_number_order_all')); ?>" method="post">
+                                                    <form action="<?php echo e(route('cancel_reserve_number_certificate_all')); ?>" method="post">
                                                         <?php echo csrf_field(); ?>
                                                         <input type="hidden" name="reserve_id" class="form-control"
                                                             value="<?php echo e($row->reserve_id); ?>">
@@ -135,7 +135,7 @@ use App\Http\Controllers\functionController;
                     <div class="shadow card">
                         <div class="card-header bg-primary">จองเลข</div>
                         <div class="card-body">
-                            <form action="<?php echo e(route('add_reserve_number_order_all')); ?>" method="post">
+                            <form action="<?php echo e(route('add_reserve_number_certificate_all')); ?>" method="post">
                                 <?php echo csrf_field(); ?>
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -153,8 +153,8 @@ use App\Http\Controllers\functionController;
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                                             <input type="number" name="reserve_number"
-                                                min="<?php echo e(functionController::funtion_documents_doc_recnum_order_plus(Auth::user()->site_id)); ?>"
-                                                value="<?php echo e(functionController::funtion_documents_doc_recnum_order_plus(Auth::user()->site_id)); ?>"
+                                                min="<?php echo e(functionController::funtion_documents_doc_recnum_certificate_plus(Auth::user()->site_id)); ?>"
+                                                value="<?php echo e(functionController::funtion_documents_doc_recnum_certificate_plus(Auth::user()->site_id)); ?>"
                                                 class="form-control <?php $__errorArgs = ['reserve_number'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -243,4 +243,4 @@ unset($__errorArgs, $__bag); ?>
 <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
 <?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
 <?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
-<?php endif; ?><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/member/reserve_number_order_all/index.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/member/reserve_number_certificate_all/index.blade.php ENDPATH**/ ?>

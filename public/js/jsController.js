@@ -49,33 +49,33 @@ function date_format(reserve_date) {
     const  d = reserve_date.substr(8, 2);
     
     const  yy = (y + 543);
-    const mm = '';
 
-    if (m == '01'){ const mm = "มกราคม";}
-    else if (m == '02'){const  mm = "กุมภาพันธ์";}
-    else if (m == '03'){ const mm = "มีนาคม";}
-    else if (m == '04'){ const mm = "เมษายน";}
-    else if (m == '05'){ const mm = "พฤษภาคม";}
-    else if (m == '06'){ const mm = "มิถุนายน";}
-    else if (m == '07'){ const mm = "กรกฎาคม";}
-    else if (m == '08'){ const mm = "สิงหาคม";}
-    else if (m == '09'){ const mm = "กันยายน";}
-    else if (m == '10'){ const mm = "ตุลาคม";}
-    else if (m == '11'){ const mm = "พฤศจิกายน";}
-    else if (m == '12'){ const mm = "ธันวาคม";}
+    if (m == '01'){  mm = "มกราคม";}
+    else if (m == '02'){  mm = "กุมภาพันธ์";}
+    else if (m == '03'){  mm = "มีนาคม";}
+    else if (m == '04'){  mm = "เมษายน";}
+    else if (m == '05'){  mm = "พฤษภาคม";}
+    else if (m == '06'){  mm = "มิถุนายน";}
+    else if (m == '07'){  mm = "กรกฎาคม";}
+    else if (m == '08'){  mm = "สิงหาคม";}
+    else if (m == '09'){  mm = "กันยายน";}
+    else if (m == '10'){  mm = "ตุลาคม";}
+    else if (m == '11'){  mm = "พฤศจิกายน";}
+    else if (m == '12'){  mm = "ธันวาคม";}
 
-/* 
-    if (d == "01"){ d = "1"; }
-    else if (d == "02"){ d = "2";}
-    else if (d == "03"){ d = "3";}
-    else if (d == "04"){ d = "4";}
-    else if (d == "05"){ d = "5";}
-    else if (d == "06"){ d = "6";}
-    else if (d == "07"){ d = "7";}
-    else if (d == "08"){ d = "8";}
-    else if (d == "09"){ d = "9";} 
-*/
-   const format = d + "/" + mm + "/" + yy;
+ 
+    if (d == "01"){ dd = "1"; }
+    else if (d == "02"){ dd = "2";}
+    else if (d == "03"){ dd = "3";}
+    else if (d == "04"){ dd = "4";}
+    else if (d == "05"){ dd = "5";}
+    else if (d == "06"){ dd = "6";}
+    else if (d == "07"){ dd = "7";}
+    else if (d == "08"){ dd = "8";}
+    else if (d == "09"){ dd = "9";}
+    else{ dd = d ;}
+
+   const format = dd + " " + mm + " " + yy;
     
     return format
 }
@@ -132,7 +132,6 @@ $("#member_dashoardController_doc_template_inside").change(function(event) {
                 for (let item of result) {
                     
                     let option = document.createElement("option");
-                //    option.text = '( ' + item.reserve_number + ' ) ' + date_format(item.reserve_date);
                     option.text ='( ' + item.reserve_number + ' ) ' + date_format(item.reserve_date);
                     
                     option.value = item.reserve_number;
@@ -152,7 +151,8 @@ $("#member_dashoardController_doc_template_inside").change(function(event) {
                 for (let item of result) {
                     
                     let option = document.createElement("option");
-                    option.text = '( ' + item.reserve_number + ' )' + item.reserve_date;
+                    //option.text = '( ' + item.reserve_number + ' )' + item.reserve_date;
+                    option.text ='( ' + item.reserve_number + ' ) ' + date_format(item.reserve_date);
                     option.value = item.reserve_number;
                     option.dataset.id = item.reserve_id;
                     optgroup.appendChild(option);
