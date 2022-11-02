@@ -102,7 +102,7 @@ use App\Http\Controllers\functionController;
                                                             value="{{$row->reserve_id}}">
                                                         <input type="hidden" name="reserve_number" class="form-control"
                                                             value="{{$row->reserve_number}}">
-                                                        <x-jet-button>
+                                                        <x-jet-button onclick="submitForm(this);">
                                                             {{ __('ยืนยัน') }}
                                                         </x-jet-button>
                                                     </form>
@@ -141,7 +141,7 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                                 <hr>
-                                <x-jet-button>
+                                <x-jet-button onclick="submitForm(this);">
                                     {{ __('จอง') }}
                                 </x-jet-button>
                                 @endif

@@ -111,7 +111,7 @@ use App\Http\Controllers\functionController;
                                                     value="{{$document_detail->doc_origin}}">
                                                 <input type="hidden" name="doc_title"
                                                     value="{{$document_detail->doc_title}}">
-                                                <x-jet-button>
+                                                <x-jet-button onclick="submitForm(this);">
                                                     {{ __('รับทราบ') }}
                                                 </x-jet-button>
                                             </div>

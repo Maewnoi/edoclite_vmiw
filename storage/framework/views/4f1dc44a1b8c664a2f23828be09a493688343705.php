@@ -15,14 +15,6 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="container-fluid">
                 <div class="row">
-                    <?php if(session("success")): ?>
-                    <div class="shadow alert alert-success"><?php echo e(session('success')); ?></div>
-                    <?php endif; ?>
-                    <?php if($errors->any()): ?>
-                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="shadow alert alert-danger"><?php echo e($error); ?></div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php endif; ?>
                     <!-- สารบรรณกลาง -->
                     <?php if(Auth::user()->level == '3'): ?>
                     <div class="col-md-5">
@@ -938,11 +930,11 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => []]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes([]); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
                             <?php echo e(__('save')); ?>
 
                          <?php echo $__env->renderComponent(); ?>
@@ -1638,11 +1630,11 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => []]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes([]); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
                             <?php echo e(__('save')); ?>
 
                          <?php echo $__env->renderComponent(); ?>

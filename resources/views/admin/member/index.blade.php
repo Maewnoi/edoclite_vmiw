@@ -95,7 +95,7 @@ use App\Http\Controllers\functionController;
                                                         @csrf
                                                         <input type="hidden" name="id" class="form-control"
                                                             value="{{$row->id}}">
-                                                        <x-jet-button>
+                                                        <x-jet-button onclick="submitForm(this);">
                                                             {{ __('delete') }}
                                                         </x-jet-button>
                                                     </form>
@@ -218,7 +218,7 @@ use App\Http\Controllers\functionController;
                                                         <input type="hidden" name="id" value="{{$row->id}}">
                                                         <input type="hidden" name="old_sign" value="{{$row->sign}}">
 
-                                                        <x-jet-button>
+                                                        <x-jet-button onclick="submitForm(this);">
                                                             {{ __('save') }}
                                                         </x-jet-button>
                                                     </form>
@@ -438,7 +438,7 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                                 <hr>
-                                <x-jet-button>
+                                <x-jet-button onclick="submitForm(this);">
                                     {{ __('save') }}
                                 </x-jet-button>
                             </form>

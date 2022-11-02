@@ -73,10 +73,10 @@ class documents_admission_work_allController extends Controller
 
             if($document_detail->sub2_status == '0'){
                 //document_update_sub2_status อ่าน
-                $document_update_sub2_status = sub2_doc::where('sub2_id', $document_detail->sub2_id)->update([
-                    'sub2_status'=>'1',
-                    'sub2_updated_at'=>date('Y-m-d H:i:s')
-                ]);
+                // $document_update_sub2_status = sub2_doc::where('sub2_id', $document_detail->sub2_id)->update([
+                //     'sub2_status'=>'1',
+                //     'sub2_updated_at'=>date('Y-m-d H:i:s')
+                // ]);
                 return view('member.documents_admission_work_all.detail',compact('document_detail'))->with('success','อ่านเอกสารเรียบร้อย !');
                 
             }else{

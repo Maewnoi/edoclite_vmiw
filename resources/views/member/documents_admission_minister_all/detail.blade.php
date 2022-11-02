@@ -116,7 +116,7 @@ use App\Http\Controllers\functionController;
                                         @csrf
                                         <div class="card card-body">
                                             
-                                            <x-jet-button>
+                                            <x-jet-button onclick="submitForm(this);">
                                                 {{ __('save') }}
                                             </x-jet-button>
                                         </div>

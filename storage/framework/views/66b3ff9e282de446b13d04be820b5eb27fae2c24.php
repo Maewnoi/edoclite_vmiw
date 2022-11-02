@@ -100,19 +100,20 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-menu')->html();
-} elseif ($_instance->childHasBeenRendered('V6wYOgK')) {
-    $componentId = $_instance->getRenderedChildComponentId('V6wYOgK');
-    $componentTag = $_instance->getRenderedChildComponentTagName('V6wYOgK');
+} elseif ($_instance->childHasBeenRendered('HcDPmn3')) {
+    $componentId = $_instance->getRenderedChildComponentId('HcDPmn3');
+    $componentTag = $_instance->getRenderedChildComponentTagName('HcDPmn3');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('V6wYOgK');
+    $_instance->preserveRenderedChild('HcDPmn3');
 } else {
     $response = \Livewire\Livewire::mount('navigation-menu');
     $html = $response->html();
-    $_instance->logRenderedChild('V6wYOgK', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('HcDPmn3', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
         <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        
         <!-- Page Heading -->
         <!-- <header class="bg-white shadow">
                 <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -235,6 +236,16 @@ $.widget.bridge('uibutton', $.ui.button)
 <!-- SweetAlert2 -->
 <!-- <script src="<?php echo e(asset('/plugins/sweetalert2/sweetalert2.min.js')); ?>"></script> -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<?php if($errors->any()): ?>
+<?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <script>
+        swal({
+            title: "<?php echo e($error); ?>",
+            icon: "error",
+        });
+    </script>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php endif; ?>
 <!-- Toastr -->
 <script src="<?php echo e(asset('/plugins/toastr/toastr.min.js')); ?>"></script>
 <!-- search -->

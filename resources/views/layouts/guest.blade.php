@@ -214,6 +214,16 @@ $.widget.bridge('uibutton', $.ui.button)
 <!-- SweetAlert2 -->
 <!-- <script src="{{ asset('/plugins/sweetalert2/sweetalert2.min.js') }}"></script> -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if ($errors->any())
+@foreach ($errors->all() as $error)
+    <script>
+        swal({
+            title: "{{ $error }}",
+            icon: "error",
+        });
+    </script>
+@endforeach
+@endif
 <!-- Toastr -->
 <script src="{{ asset('/plugins/toastr/toastr.min.js') }}"></script>
 <!-- search -->

@@ -356,6 +356,7 @@ class member_dashboardController extends Controller
                 'doc_speed.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
             ]
         );
+
         //เลือกว่ามีการประทับตาไหม
         //if($request->checkbox_seal_point == 'seal_point'){
             $seal_point = $request->seal_point;
