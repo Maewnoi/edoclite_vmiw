@@ -85,7 +85,7 @@ use App\Http\Controllers\functionController;
                                                         @csrf
                                                         <input type="hidden" required name="group_id"
                                                             class="form-control" value="{{$row->group_id}}">
-                                                        <x-jet-button>
+                                                        <x-jet-button onclick="submitForm(this);">
                                                             {{ __('delete') }}
                                                         </x-jet-button>
                                                     </form>
@@ -191,7 +191,7 @@ use App\Http\Controllers\functionController;
                                                         <hr>
                                                         <input type="hidden" required name="group_id"
                                                             value="{{$row->group_id}}" class="form-control">
-                                                        <x-jet-button>
+                                                        <x-jet-button onclick="submitForm(this);">
                                                             {{ __('save') }}
                                                         </x-jet-button>
                                                     </form>
@@ -287,7 +287,7 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                                 <hr>
-                                <x-jet-button>
+                                <x-jet-button onclick="submitForm(this);">
                                     {{ __('save') }}
                                 </x-jet-button>
                             </form>

@@ -321,7 +321,7 @@ use App\Http\Controllers\functionController;
                                                                 class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-900 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:shadow-outline-blue disabled:opacity-25">
                                                                 {{ __('แสดงตัวอย่าง') }}
                                                             </button>
-                                                            <x-jet-button
+                                                            <x-jet-button onclick="submitForm(this);"
                                                                 id="documents_admission_work_allController_bt_respond" name="bt_respond" value="respond"
                                                                 disabled>
                                                                 {{ __('ตอบกลับ') }}

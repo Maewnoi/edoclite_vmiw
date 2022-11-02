@@ -71,7 +71,7 @@
                                                         @csrf
                                                         <input type="hidden" name="site_id" class="form-control"
                                                             value="{{$row->site_id}}">
-                                                        <x-jet-button>
+                                                        <x-jet-button onclick="submitForm(this);">
                                                             {{ __('delete') }}
                                                         </x-jet-button>
                                                     </form>
@@ -109,7 +109,7 @@
                                                         <hr>
                                                         <input type="hidden" name="site_id" value="{{$row->site_id}}"
                                                             class="form-control">
-                                                        <x-jet-button>
+                                                        <x-jet-button onclick="submitForm(this);">
                                                             {{ __('save') }}
                                                         </x-jet-button>
                                                     </form>
@@ -145,7 +145,7 @@
                                     
                                 </div>
                                 <hr>
-                                <x-jet-button>
+                                <x-jet-button onclick="submitForm(this);">
                                     {{ __('save') }}
                                 </x-jet-button>
                             </form>

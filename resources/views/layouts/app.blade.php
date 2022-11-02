@@ -87,6 +87,7 @@
     <div class="min-h-screen bg-gradient-to-b from-blue-200 to-blue-400">
         @livewire('navigation-menu')
         @include('sweetalert::alert')
+        
         <!-- Page Heading -->
         <!-- <header class="bg-white shadow">
                 <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -206,6 +207,16 @@ $.widget.bridge('uibutton', $.ui.button)
 <!-- SweetAlert2 -->
 <!-- <script src="{{ asset('/plugins/sweetalert2/sweetalert2.min.js') }}"></script> -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if ($errors->any())
+@foreach ($errors->all() as $error)
+    <script>
+        swal({
+            title: "{{ $error }}",
+            icon: "error",
+        });
+    </script>
+@endforeach
+@endif
 <!-- Toastr -->
 <script src="{{ asset('/plugins/toastr/toastr.min.js') }}"></script>
 <!-- search -->

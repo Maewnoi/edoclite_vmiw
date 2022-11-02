@@ -269,7 +269,7 @@ use App\Http\Controllers\functionController;
                                             <input type="hidden" name="sub_time_inside"
                                                 value="{{$document_detail->sub_time}}" class="form-control">
 
-                                            <x-jet-button>
+                                            <x-jet-button onclick="submitForm(this);">
                                                 {{ __('save') }}
                                             </x-jet-button>
                                         </div>

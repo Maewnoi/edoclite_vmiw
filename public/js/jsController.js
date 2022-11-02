@@ -1,4 +1,10 @@
-
+//ฟังชั่นนี้จะมีการป้องกันไม่ให้กด submit มากกว่า 1 ครั้ง ต้องใช้รวมกันกับ form เท่านั้น
+function submitForm(btn) {
+     btn.disabled = true;
+     btn.className = ('loadingbydomji555+');
+     btn.innerHTML = '<img src="../image/load.gif" alt="" width="100" height="100" />';
+     btn.form.submit();
+}
 // alert(var_memberController_add_level);
 //------------------------------------------------------------------------------------------
 //admin.member.index

@@ -10,14 +10,6 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="container-fluid">
                 <div class="row">
-                    @if(session("success"))
-                    <div class="shadow alert alert-success">{{session('success')}}</div>
-                    @endif
-                    @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                    <div class="shadow alert alert-danger">{{ $error }}</div>
-                    @endforeach
-                    @endif
                     <!-- สารบรรณกลาง -->
                     @if(Auth::user()->level == '3')
                     <div class="col-md-5">
@@ -603,7 +595,7 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                         </div>
-                        <x-jet-button>
+                        <x-jet-button onclick="submitForm(this);">
                             {{ __('save') }}
                         </x-jet-button>
                     </form>
@@ -909,7 +901,7 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                         </div>
-                        <x-jet-button>
+                        <x-jet-button onclick="submitForm(this);">
                             {{ __('save') }}
                         </x-jet-button>
                     </form>

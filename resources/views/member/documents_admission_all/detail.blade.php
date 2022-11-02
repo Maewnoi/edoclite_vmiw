@@ -234,7 +234,7 @@ use App\Http\Controllers\functionController;
                             </div>
                         </div>
                         <input type="hidden" name="doc_id" class="form-control" value="{{$document_detail->doc_id}}">
-                        <x-jet-button>
+                        <x-jet-button onclick="submitForm(this);">
                             {{ __('save') }}
                         </x-jet-button>
                     </form>
@@ -270,7 +270,7 @@ use App\Http\Controllers\functionController;
                         <input type="hidden" name="doc_id" class="form-control" value="{{$document_detail->doc_id}}">
                         <input type="hidden" name="old_doc_filedirec" class="form-control"
                             value="{{$document_detail->doc_filedirec}}">
-                        <x-jet-button>
+                        <x-jet-button onclick="submitForm(this);">
                             {{ __('save') }}
                         </x-jet-button>
                     </form>
@@ -294,7 +294,7 @@ use App\Http\Controllers\functionController;
                             value="{{$document_detail->doc_filedirec}}">
                         <input type="hidden" name="doc_attached_file" class="form-control"
                             value="{{$document_detail->doc_attached_file}}">
-                        <x-jet-button>
+                        <x-jet-button onclick="submitForm(this);">
                             {{ __('ยืนยัน') }}
                         </x-jet-button>
                     </form>

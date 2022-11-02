@@ -277,7 +277,7 @@ use App\Http\Controllers\functionController;
                                             <input type="hidden" name="doc_filedirec_1"
                                                 value="{{$document_detail->doc_filedirec_1}}" class="form-control">
 
-                                            <x-jet-button>
+                                            <x-jet-button onclick="submitForm(this);">
                                                 {{ __('save') }}
                                             </x-jet-button>
                                         </div>
