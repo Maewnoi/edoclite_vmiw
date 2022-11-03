@@ -13,8 +13,22 @@ class GroupmemController extends Controller
 {
     //หน้ากลัก
     public function index(){
-        $GroupmemS=Groupmem::orderBy('group_id', 'DESC')->get();
-        $sitesS=sites::get();
+       
+
+        if(Auth::user()->level=='0'){
+             $GroupmemS=Groupmem::orderBy('group_id', 'DESC')
+             ->get();
+             $sitesS=sites::get();
+        }else if(Auth::user()->level=='3'){
+
+            $GroupmemS=Groupmem::where('group_site_id',Auth::user()->site_id)
+            ->orderBy('group_id', 'DESC')
+             ->get();
+             $sitesS=sites::where('site_id',Auth::user()->site_id)
+             ->get();
+             
+        }
+        
         // dd($GroupmemS);
         return view('admin.groupmem.index',compact('GroupmemS','sitesS'));
     }
