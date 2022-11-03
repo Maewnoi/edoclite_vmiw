@@ -10,6 +10,7 @@ use App\Http\Controllers\sitesController;
 use App\Http\Controllers\GroupmemController;
 use App\Http\Controllers\memberController;
 use App\Http\Controllers\documents_admission_allController;
+use App\Http\Controllers\documents_admission_all_insideController;
 use App\Http\Controllers\functionController;
 use App\Http\Controllers\reserve_number_receive_allController;
 use App\Http\Controllers\documents_pendingController;
@@ -153,6 +154,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::post('/member/s_delete',[memberController::class,'delete'])->name('s_deleteMember');
     Route::post('/member/s_update',[memberController::class,'update'])->name('s_updateMember');
 
+    //groupmem
+    Route::get('/groupmem/s_all',[GroupmemController::class,'index'])->name('s_groupmem');
+    Route::post('/groupmem/s_add',[GroupmemController::class,'add'])->name('s_addGroupmem');
+    Route::post('/groupmem/s_delete',[GroupmemController::class,'delete'])->name('s_deleteGroupmem');
+    Route::post('/groupmem/s_update',[GroupmemController::class,'update'])->name('s_updateGroupmem');
+        
     //All admission documents เอกสารรับเข้าทั้งหมด ภายนอก
     Route::get('/documents_admission_all/all',[documents_admission_allController::class,'index'])->name('documents_admission_all');
     Route::get('/documents_admission_all/detail/{id}',[documents_admission_allController::class,'detail'])->name('documents_admission_detail');
@@ -239,6 +246,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/reserve_number_delivery_inside/all',[reserve_number_delivery_inside_allController::class,'index'])->name('reserve_number_delivery_inside_all');
     Route::post('/reserve_number_delivery_inside/add',[reserve_number_delivery_inside_allController::class,'add'])->name('add_reserve_number_delivery_inside_all');
     Route::post('/reserve_number_delivery_inside/cancel',[reserve_number_delivery_inside_allController::class,'cancel'])->name('cancel_reserve_number_delivery_inside_all');
+
+        //All admission documents เอกสารส่งออกภายใน
+        Route::get('/documents_admission_all_inside/all',[documents_admission_all_insideController::class,'index'])->name('documents_admission_all_inside');
+        Route::get('/documents_admission_all_inside/detail/{id}',[documents_admission_all_insideController::class,'detail'])->name('documents_admission_detail_inside');
+       // Route::post('/documents_admission_all_inside/updateGeneral',[documents_admission_allController::class,'updateGeneral'])->name('updateGeneral');
+       // Route::post('/documents_admission_all_inside/updateFile',[documents_admission_allController::class,'updateFile'])->name('updateFile');
+       // Route::post('/documents_admission_all_inside/delete',[documents_admission_allController::class,'delete'])->name('delete');
 
     //All admission documents group inside เอกสารรับเข้ากองงานทั้งหมด ภายใน
     Route::get('/documents_admission_group_inside/all/0',[documents_admission_group_inside_allController::class,'index_0'])->name('documents_admission_group_inside_all_0');

@@ -36,6 +36,18 @@ class memberController extends Controller
         $select_groupmemsS=Groupmem::join('sites','sites.site_id','groupmems.group_site_id')
         ->where('groupmems.group_site_id',Auth::user()->site_id)
         ->get();
+        }else if(Auth::user()->level=='6'){
+            $memberS=User::where('users.level', '!=' , '0')
+            ->where('users.site_id',Auth::user()->site_id)
+            ->where('users.group',Auth::user()->group)
+            ->leftJoin('groupmems','groupmems.group_id','users.group')
+             
+            ->orderBy('users.level', 'ASC')
+            ->get();
+        $select_groupmemsS=Groupmem::join('sites','sites.site_id','groupmems.group_site_id')
+        ->where('groupmems.group_id',Auth::user()->group)
+        ->where('groupmems.group_site_id',Auth::user()->site_id)
+        ->get();
         }
         
 

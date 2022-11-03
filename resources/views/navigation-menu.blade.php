@@ -371,10 +371,9 @@ use App\Http\Controllers\navigationController;
                                         data-target="#modal-Create-new-document-inside">
                                         {{ __('สร้างเอกสารภายใน') }}
                                     </x-jet-dropdown-link>
-                                    <div class="border-t border-gray-100"></div>
+                                    <div class="border-t border-gray-100"></div> 
                                     
-                                    <x-jet-dropdown-link type="button" data-toggle="modal" class="text-decoration-none"
-                                        data-target="#modal-Create-new-document-inside">
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_all_inside') }}" class="text-decoration-none">
                                         {{ __('เอกสารภายในทั้งหมด') }}
                                     </x-jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
@@ -548,11 +547,16 @@ use App\Http\Controllers\navigationController;
                             <x-jet-dropdown-link href="{{ route('profile.show') }}" class="text-decoration-none">
                                 {{ __('โปรไฟล์') }}
                             </x-jet-dropdown-link>
-                            
-
+                            @if(Auth::user()->level == '3')
+                            <x-jet-dropdown-link href="{{ route('s_groupmem') }}" class="text-decoration-none">
+                                {{ __('จัดการกองงาน') }}
+                            </x-jet-dropdown-link>
+                            @endif
+                            @if(Auth::user()->level == '3' || Auth::user()->level == '6')
                             <x-jet-dropdown-link href="{{ route('s_member') }}" class="text-decoration-none">
                                 {{ __('จัดการสมาชิก') }}
                             </x-jet-dropdown-link>
+                            @endif
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                             <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
