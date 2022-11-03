@@ -85,7 +85,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //doc_recnum_inside_dropped
     Route::get('/get_doc_recnum_inside_dropped/{id}', [functionController::class , 'getdoc_recnum_inside_dropped' ]);
 
-
     // //users_level_1_0
     // Route::get('/users_level_1_0/{id}',[functionController::class,'getuserS_1_documents_admission_division_allController_0']);
     // //users_level_2_0
@@ -162,7 +161,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
         
     //All admission documents เอกสารรับเข้าทั้งหมด ภายนอก
     Route::get('/documents_admission_all/all',[documents_admission_allController::class,'index'])->name('documents_admission_all');
-    Route::get('/documents_admission_all/detail/{id}',[documents_admission_allController::class,'detail'])->name('documents_admission_detail');
+    Route::get('/documents_admission_all/detail/{id}',[documents_admission_allController::class,'detail'])->name('documents_admission_detail')->middleware(['password.confirm']);
     Route::post('/documents_admission_all/updateGeneral',[documents_admission_allController::class,'updateGeneral'])->name('updateGeneral');
     Route::post('/documents_admission_all/updateFile',[documents_admission_allController::class,'updateFile'])->name('updateFile');
     Route::post('/documents_admission_all/delete',[documents_admission_allController::class,'delete'])->name('delete');
@@ -174,39 +173,39 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     //pending documents เอกสารรอพิจารณาจากหัวหน้าสำนักปลัดเท่านั้น ภายนอก
     Route::get('/documents_pending/all',[documents_pendingController::class,'index'])->name('documents_pending_all');
-    Route::get('/documents_pending/detail/{id}',[documents_pendingController::class,'detail'])->name('documents_pending_detail');
+    Route::get('/documents_pending/detail/{id}',[documents_pendingController::class,'detail'])->name('documents_pending_detail')->middleware(['password.confirm']);
     Route::post('/documents_pending/pending',[documents_pendingController::class,'pending'])->name('documents_pending_pending');
     
     //All admission documents group เอกสารรับเข้ากองงานทั้งหมด ภายนอก
     Route::get('/documents_admission_group/all/0',[documents_admission_group_allController::class,'index_0'])->name('documents_admission_group_all_0');
     Route::get('/documents_admission_group/all/1',[documents_admission_group_allController::class,'index_1'])->name('documents_admission_group_all_1');
     Route::get('/documents_admission_group/all/2',[documents_admission_group_allController::class,'index_2'])->name('documents_admission_group_all_2');
-    Route::get('/documents_admission_group/detail/{id}',[documents_admission_group_allController::class,'detail'])->name('documents_admission_group_detail');
+    Route::get('/documents_admission_group/detail/{id}',[documents_admission_group_allController::class,'detail'])->name('documents_admission_group_detail')->middleware(['password.confirm']);
     Route::post('/documents_admission_group/takedown',[documents_admission_group_allController::class,'takedown'])->name('documents_admission_group_takedown');
     Route::get('/getdoc_recnum_inside/{id}',[documents_admission_group_allController::class,'getdoc_recnum_inside']);
 
     //All admission documents department เอกสารรับเข้าหัวหน้าฝ่ายทั้งหมด ภายนอก
     Route::get('/documents_admission_department_all/all/0',[documents_admission_department_allController::class,'index_0'])->name('documents_admission_department_all_0');
     Route::get('/documents_admission_department_all/all/1',[documents_admission_department_allController::class,'index_1'])->name('documents_admission_department_all_1');
-    Route::get('/documents_admission_department_all/detail/{id}',[documents_admission_department_allController::class,'detail'])->name('documents_admission_department_detail');
+    Route::get('/documents_admission_department_all/detail/{id}',[documents_admission_department_allController::class,'detail'])->name('documents_admission_department_detail')->middleware(['password.confirm']);
     Route::post('/documents_admission_department_all/takedown',[documents_admission_department_allController::class,'takedown'])->name('documents_admission_department_takedown');
     
     //All admission documents division เอกสารรับเข้าหัวหน้ากองทั้งหมด ภายนอก
     Route::get('/documents_admission_division_all/all/0',[documents_admission_division_allController::class,'index_0'])->name('documents_admission_division_all_0');
     Route::get('/documents_admission_division_all/all/1',[documents_admission_division_allController::class,'index_1'])->name('documents_admission_division_all_1');
-    Route::get('/documents_admission_division_all/detail/{id}',[documents_admission_division_allController::class,'detail'])->name('documents_admission_division_detail');
+    Route::get('/documents_admission_division_all/detail/{id}',[documents_admission_division_allController::class,'detail'])->name('documents_admission_division_detail')->middleware(['password.confirm']);
     Route::post('/documents_admission_division_all/takedown',[documents_admission_division_allController::class,'takedown'])->name('documents_admission_division_takedown');
     
     //All admission documents work เอกสารรับเข้าคนทำงานทั้งหมด ภายนอก
     Route::get('/documents_admission_work_all/all/0',[documents_admission_work_allController::class,'index_0'])->name('documents_admission_work_all_0');
     Route::get('/documents_admission_work_all/all/1',[documents_admission_work_allController::class,'index_1'])->name('documents_admission_work_all_1');
-    Route::get('/documents_admission_work_all/detail/{id}',[documents_admission_work_allController::class,'detail'])->name('documents_admission_work_detail');
+    Route::get('/documents_admission_work_all/detail/{id}',[documents_admission_work_allController::class,'detail'])->name('documents_admission_work_detail')->middleware(['password.confirm']);
     Route::post('/documents_admission_work_all/respond',[documents_admission_work_allController::class,'respond'])->name('documents_admission_work_detail_respond');
 
     //All admission documents Minister  เอกสารรับเข้ารอนายกพิจารณาทั้งหมด ภายนอก
     Route::get('/documents_admission_minister_all/all/0',[documents_admission_minister_allController::class,'index_0'])->name('documents_admission_minister_all_0');
     Route::get('/documents_admission_minister_all/all/1',[documents_admission_minister_allController::class,'index_1'])->name('documents_admission_minister_all_1');
-    Route::get('/documents_admission_minister_all/detail/{id}',[documents_admission_minister_allController::class,'detail'])->name('documents_admission_minister_detail');
+    Route::get('/documents_admission_minister_all/detail/{id}',[documents_admission_minister_allController::class,'detail'])->name('documents_admission_minister_detail')->middleware(['password.confirm']);
     
     //reserve number delivery จองเลขส่ง
     Route::get('/reserve_number_delivery/all',[reserve_number_delivery_allController::class,'index'])->name('reserve_number_delivery_all');
@@ -235,49 +234,49 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     
     //All admission documents department retrun 
     Route::get('/documents_admission_department_retrun/all',[documents_admission_department_retrunController::class,'index'])->name('documents_admission_department_retrun');
-    Route::get('/documents_admission_department_retrun/detail/{id}',[documents_admission_department_retrunController::class,'detail'])->name('documents_admission_department_retrun_detail');
+    Route::get('/documents_admission_department_retrun/detail/{id}',[documents_admission_department_retrunController::class,'detail'])->name('documents_admission_department_retrun_detail')->middleware(['password.confirm']);
     Route::post('/documents_admission_department_retrun/understand',[documents_admission_department_retrunController::class,'understand'])->name('documents_admission_department_retrun_understand');
 
     //All admission documents division retrun 
     Route::get('/documents_admission_division_retrun/all',[documents_admission_division_retrunController::class,'index'])->name('documents_admission_division_retrun');
-    Route::get('/documents_admission_division_retrun/detail/{id}',[documents_admission_division_retrunController::class,'detail'])->name('documents_admission_division_retrun_detail');
+    Route::get('/documents_admission_division_retrun/detail/{id}',[documents_admission_division_retrunController::class,'detail'])->name('documents_admission_division_retrun_detail')->middleware(['password.confirm']);
 
     //reserve number delivery inside จองเลขส่งภายใน
     Route::get('/reserve_number_delivery_inside/all',[reserve_number_delivery_inside_allController::class,'index'])->name('reserve_number_delivery_inside_all');
     Route::post('/reserve_number_delivery_inside/add',[reserve_number_delivery_inside_allController::class,'add'])->name('add_reserve_number_delivery_inside_all');
     Route::post('/reserve_number_delivery_inside/cancel',[reserve_number_delivery_inside_allController::class,'cancel'])->name('cancel_reserve_number_delivery_inside_all');
 
-        //All admission documents เอกสารส่งออกภายใน
-        Route::get('/documents_admission_all_inside/all',[documents_admission_all_insideController::class,'index'])->name('documents_admission_all_inside');
-        Route::get('/documents_admission_all_inside/detail/{id}',[documents_admission_all_insideController::class,'detail'])->name('documents_admission_detail_inside');
-       // Route::post('/documents_admission_all_inside/updateGeneral',[documents_admission_allController::class,'updateGeneral'])->name('updateGeneral');
-       // Route::post('/documents_admission_all_inside/updateFile',[documents_admission_allController::class,'updateFile'])->name('updateFile');
-       // Route::post('/documents_admission_all_inside/delete',[documents_admission_allController::class,'delete'])->name('delete');
+    //All admission documents เอกสารส่งออกภายใน
+    Route::get('/documents_admission_all_inside/all',[documents_admission_all_insideController::class,'index'])->name('documents_admission_all_inside');
+    Route::get('/documents_admission_all_inside/detail/{id}',[documents_admission_all_insideController::class,'detail'])->name('documents_admission_detail_inside')->middleware(['password.confirm']);
+    // Route::post('/documents_admission_all_inside/updateGeneral',[documents_admission_allController::class,'updateGeneral'])->name('updateGeneral');
+    // Route::post('/documents_admission_all_inside/updateFile',[documents_admission_allController::class,'updateFile'])->name('updateFile');
+    // Route::post('/documents_admission_all_inside/delete',[documents_admission_allController::class,'delete'])->name('delete');
 
     //All admission documents group inside เอกสารรับเข้ากองงานทั้งหมด ภายใน
     Route::get('/documents_admission_group_inside/all/0',[documents_admission_group_inside_allController::class,'index_0'])->name('documents_admission_group_inside_all_0');
     Route::get('/documents_admission_group_inside/all/1',[documents_admission_group_inside_allController::class,'index_1'])->name('documents_admission_group_inside_all_1');
     Route::get('/documents_admission_group_inside/all/2',[documents_admission_group_inside_allController::class,'index_2'])->name('documents_admission_group_inside_all_2');
-    Route::get('/documents_admission_group_inside/detail/{id}',[documents_admission_group_inside_allController::class,'detail'])->name('documents_admission_group_inside_detail');
+    Route::get('/documents_admission_group_inside/detail/{id}',[documents_admission_group_inside_allController::class,'detail'])->name('documents_admission_group_inside_detail')->middleware(['password.confirm']);
     Route::get('/getdoc_recnum_inside_s/{id}',[documents_admission_group_inside_allController::class,'getdoc_recnum_inside']);
     Route::post('/documents_admission_group_inside/takedown',[documents_admission_group_inside_allController::class,'takedown'])->name('documents_admission_group_inside_takedown');
 
     //All admission documents division inside เอกสารรับเข้าหัวหน้ากองทั้งหมด ภายใน
     Route::get('/documents_admission_division_inside_all/all/0',[documents_admission_division_inside_allController::class,'index_0'])->name('documents_admission_division_inside_all_0');
     Route::get('/documents_admission_division_inside_all/all/1',[documents_admission_division_inside_allController::class,'index_1'])->name('documents_admission_division_inside_all_1');
-    Route::get('/documents_admission_division_inside_all/detail/{id}',[documents_admission_division_inside_allController::class,'detail'])->name('documents_admission_division_inside_detail');
+    Route::get('/documents_admission_division_inside_all/detail/{id}',[documents_admission_division_inside_allController::class,'detail'])->name('documents_admission_division_inside_detail')->middleware(['password.confirm']);
     Route::post('/documents_admission_division_inside_all/takedown',[documents_admission_division_inside_allController::class,'takedown'])->name('documents_admission_division_inside_takedown');
 
     //All admission documents department inside เอกสารรับเข้าหัวหน้าฝ่ายทั้งหมด ภายใน
     Route::get('/documents_admission_department_inside_all/all/0',[documents_admission_department_inside_allController::class,'index_0'])->name('documents_admission_department_inside_all_0');
     Route::get('/documents_admission_department_inside_all/all/1',[documents_admission_department_inside_allController::class,'index_1'])->name('documents_admission_department_inside_all_1');
-    Route::get('/documents_admission_department_inside_all/detail/{id}',[documents_admission_department_inside_allController::class,'detail'])->name('documents_admission_department_inside_detail');
+    Route::get('/documents_admission_department_inside_all/detail/{id}',[documents_admission_department_inside_allController::class,'detail'])->name('documents_admission_department_inside_detail')->middleware(['password.confirm']);
     Route::post('/documents_admission_department_inside_all/takedown',[documents_admission_department_inside_allController::class,'takedown'])->name('documents_admission_department_inside_takedown');
 
     //All admission documents work เอกสารรับเข้าคนทำงานทั้งหมด ภายนอก
     Route::get('/documents_admission_work_inside_all/all/0',[documents_admission_work_inside_allController::class,'index_0'])->name('documents_admission_work_inside_all_0');
     Route::get('/documents_admission_work_inside_all/all/1',[documents_admission_work_inside_allController::class,'index_1'])->name('documents_admission_work_inside_all_1');
-    Route::get('/documents_admission_work_inside_all/detail/{id}',[documents_admission_work_inside_allController::class,'detail'])->name('documents_admission_work_inside_detail');
+    Route::get('/documents_admission_work_inside_all/detail/{id}',[documents_admission_work_inside_allController::class,'detail'])->name('documents_admission_work_inside_detail')->middleware(['password.confirm']);
  
     //---------------------------------------------------------------------------------------------------
 });

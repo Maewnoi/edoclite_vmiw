@@ -425,11 +425,11 @@ unset($__errorArgs, $__bag); ?>
 
                                                             </button>
                                                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['id' => 'documents_admission_work_allController_bt_respond','name' => 'bt_respond','value' => 'respond','disabled' => true]]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);','id' => 'documents_admission_work_allController_bt_respond','name' => 'bt_respond','value' => 'respond','disabled' => true]]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'documents_admission_work_allController_bt_respond','name' => 'bt_respond','value' => 'respond','disabled' => true]); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);','id' => 'documents_admission_work_allController_bt_respond','name' => 'bt_respond','value' => 'respond','disabled' => true]); ?>
                                                                 <?php echo e(__('ตอบกลับ')); ?>
 
                                                              <?php echo $__env->renderComponent(); ?>
