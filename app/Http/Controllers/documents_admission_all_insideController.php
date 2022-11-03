@@ -21,7 +21,7 @@ class documents_admission_all_insideController extends Controller
             ->where('doc_template','!=', 'A')
             ->orderby('doc_date','DESC')
             ->get();
-            return view('member.documents_admission_all.index',compact('documents'));
+            return view('member.documents_admission_all_inside.index',compact('documents'));
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
