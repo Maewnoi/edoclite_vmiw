@@ -246,12 +246,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::post('/reserve_number_delivery_inside/add',[reserve_number_delivery_inside_allController::class,'add'])->name('add_reserve_number_delivery_inside_all');
     Route::post('/reserve_number_delivery_inside/cancel',[reserve_number_delivery_inside_allController::class,'cancel'])->name('cancel_reserve_number_delivery_inside_all');
 
-        //All admission documents เอกสารส่งออกภายใน
-        Route::get('/documents_admission_all_inside/all',[documents_admission_all_insideController::class,'index'])->name('documents_admission_all_inside');
-        Route::get('/documents_admission_all_inside/detail/{id}',[documents_admission_all_insideController::class,'detail'])->name('documents_admission_detail_inside');
-       // Route::post('/documents_admission_all_inside/updateGeneral',[documents_admission_allController::class,'updateGeneral'])->name('updateGeneral');
-       // Route::post('/documents_admission_all_inside/updateFile',[documents_admission_allController::class,'updateFile'])->name('updateFile');
-       // Route::post('/documents_admission_all_inside/delete',[documents_admission_allController::class,'delete'])->name('delete');
+    //All admission documents เอกสารส่งออกภายใน
+    Route::get('/documents_admission_all_inside/all',[documents_admission_all_insideController::class,'index'])->name('documents_admission_all_inside');
+    Route::get('/documents_admission_all_inside/detail/{id}',[documents_admission_all_insideController::class,'detail'])->name('documents_admission_detail_inside')->middleware(['password.confirm']);
+    // Route::post('/documents_admission_all_inside/updateGeneral',[documents_admission_allController::class,'updateGeneral'])->name('updateGeneral');
+    // Route::post('/documents_admission_all_inside/updateFile',[documents_admission_allController::class,'updateFile'])->name('updateFile');
+    // Route::post('/documents_admission_all_inside/delete',[documents_admission_allController::class,'delete'])->name('delete');
 
     //All admission documents group inside เอกสารรับเข้ากองงานทั้งหมด ภายใน
     Route::get('/documents_admission_group_inside/all/0',[documents_admission_group_inside_allController::class,'index_0'])->name('documents_admission_group_inside_all_0');
