@@ -37,10 +37,10 @@ use App\Http\Controllers\functionController;
                                         <td>
                                             @if($row->doc_date != NULL)
                                             <span class="badge bg-secondary">{{$row->doc_date}}</span>
-                                           <!-- <p class="text-sm text-muted">
+                                           <p class="text-sm text-muted">
                                                 <i class="mr-1 far fa-clock"></i>
                                                 {{Carbon\Carbon::parse($row->doc_date)->diffForHumans()}}
-                                            </p>-->
+                                            </p>
                                             @endif 
                                         </td>
                                         <td>
@@ -48,7 +48,7 @@ use App\Http\Controllers\functionController;
                                             <span class="badge bg-secondary">{{$row->doc_date_2}}</span>
                                             <p class="text-sm text-muted">
                                                 <i class="mr-1 far fa-clock"></i>
-                                                {{Carbon\Carbon::parse($row->doc_date_2." ".$row->doc_time)->diffForHumans()}}
+                                                {{Carbon\Carbon::parse($row->doc_date_2)->diffForHumans()}}
                                             </p>
                                             @endif
                                         </td>

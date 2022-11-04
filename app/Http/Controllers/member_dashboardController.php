@@ -26,19 +26,19 @@ class member_dashboardController extends Controller
             return view('member_dashboard');
         }else if(Auth::user()->level=='3'){
             //สารบรรณกลาง
-            //หาตัวเลขที่จองไว้
-            $reserved_numbersS = reserve_number::where('reserve_site',Auth::user()->site_id)
-            ->where('reserve_owner',Auth::user()->id)
-            ->where('reserve_type', '0')
-            ->where('reserve_template', 'A')
-            ->where('reserve_status', '0')
-            ->get();
-            //หาตัวเลขที่หลุดจอง
-            $dropped_numbersS = reserve_number::where('reserve_site',Auth::user()->site_id)
-            ->where('reserve_type', '0')
-            ->where('reserve_template', 'A')
-            ->where('reserve_status', '2')
-            ->get();
+            // //หาตัวเลขที่จองไว้
+            // $reserved_numbersS = reserve_number::where('reserve_site',Auth::user()->site_id)
+            // ->where('reserve_owner',Auth::user()->id)
+            // ->where('reserve_type', '0')
+            // ->where('reserve_template', 'A')
+            // ->where('reserve_status', '0')
+            // ->get();
+            // //หาตัวเลขที่หลุดจอง
+            // $dropped_numbersS = reserve_number::where('reserve_site',Auth::user()->site_id)
+            // ->where('reserve_type', '0')
+            // ->where('reserve_template', 'A')
+            // ->where('reserve_status', '2')
+            // ->get();
             //นับจำนวนงานใหม่ waiting
             $document_admission_all_waiting_count = document::where('doc_site_id',Auth::user()->site_id)
             ->where('doc_type', '0')
@@ -51,7 +51,7 @@ class member_dashboardController extends Controller
             ->where('doc_template', 'A')
             ->where('doc_status', 'success')
             ->count();
-            return view('member_dashboard',compact('reserved_numbersS','dropped_numbersS','document_admission_all_waiting_count','document_admission_all_success_count'));
+            return view('member_dashboard',compact('document_admission_all_waiting_count','document_admission_all_success_count'));
         }else if(Auth::user()->level=='4'){
             //หัวหน้ากอง
 
@@ -236,16 +236,16 @@ class member_dashboardController extends Controller
              ->where('sub_status', '8')
              ->count();
 
-             //หาชื่อและไอดี กอง miw
-            $GroupmemS = Groupmem::where('group_site_id',Auth::user()->site_id)
-            ->where('group_id','!=',Auth::user()->group)
-            ->get();
+            //  //หาชื่อและไอดี กอง miw
+            // $GroupmemS = Groupmem::where('group_site_id',Auth::user()->site_id)
+            // ->where('group_id','!=',Auth::user()->group)
+            // ->get();
             
-             //หาชื่อและไอดี พนักงาน miw
-             $UserS = User::where('group',Auth::user()->group)
-             ->get();
+            //  //หาชื่อและไอดี พนักงาน miw
+            //  $UserS = User::where('group',Auth::user()->group)
+            //  ->get();
 
-            return view('member_dashboard',compact('document_admission_all_group_count_0','document_admission_all_group_count_1','document_admission_all_group_count_2','document_admission_all_group_inside_count_0','document_admission_all_group_inside_count_1','document_admission_all_group_inside_count_2','GroupmemS','UserS'));
+            return view('member_dashboard',compact('document_admission_all_group_count_0','document_admission_all_group_count_1','document_admission_all_group_count_2','document_admission_all_group_inside_count_0','document_admission_all_group_inside_count_1','document_admission_all_group_inside_count_2'));
        
         }else if(Auth::user()->level=='7'){
             //งาน

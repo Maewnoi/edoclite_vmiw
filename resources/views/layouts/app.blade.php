@@ -253,3 +253,4 @@ $.widget.bridge('uibutton', $.ui.button)
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="{{ asset('/js/jsController.js') }}"></script>
+<script src="{{ asset('/js/query.js') }}"></script>

@@ -11,12 +11,68 @@ use App\Models\sub2_doc;
 use App\Models\sub3_doc;
 use App\Models\sub3_detail;
 use App\Models\Groupmem;
+use App\Models\User;
 
 class navigationController extends Controller
 {
     //------------------------------------------------------------------------------------------------------------------miw
      //หน้ากลัก
-   
+    public static function funtion_reserved_numbersS_level_3($id){
+        if($id == '3'){
+            //หาตัวเลขที่จองไว้
+            $reserved_numbersS = reserve_number::where('reserve_site',Auth::user()->site_id)
+            ->where('reserve_owner',Auth::user()->id)
+            ->where('reserve_type', '0')
+            ->where('reserve_template', 'A')
+            ->where('reserve_status', '0')
+            ->get();
+
+            return $reserved_numbersS;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_dropped_numbersS_level_3($id){
+        if($id == '3'){
+            //หาตัวเลขที่หลุดจอง
+            $dropped_numbersS = reserve_number::where('reserve_site',Auth::user()->site_id)
+            ->where('reserve_type', '0')
+            ->where('reserve_template', 'A')
+            ->where('reserve_status', '2')
+            ->get();
+
+            return $dropped_numbersS;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_GroupmemS_level_6($id){
+        if($id == '6'){
+            //หาชื่อและไอดี กอง miw
+            $GroupmemS = Groupmem::where('group_site_id',Auth::user()->site_id)
+            ->where('group_id','!=',Auth::user()->group)
+            ->get();
+
+            return $GroupmemS;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_UserS_level_6($id){
+        if($id == '6'){
+             //หาชื่อและไอดี พนักงาน miw
+             $UserS = User::where('group',Auth::user()->group)
+             ->get();
+
+             return $UserS;
+        }else{
+            return 0;
+        }
+    }
+    
 
     //*************************************************************************************************************************** */
     public static function funtion_document_admission_all_work_inside_count_1_level_7($id) {

@@ -17,9 +17,9 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    
+                   
                     <div class="shadow card">
-                        <div class="card-header bg-primary">เอกสารรับเข้าภายนอกทั้งหมด</div>
+                        <div class="card-header bg-primary">เอกสารรับเข้าภายนอก (กอง)</div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table">
                                 <thead>
@@ -36,7 +36,7 @@ use App\Http\Controllers\functionController;
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $__currentLoopData = $documents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $document_admission_all_group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <th><?php echo e($loop->index+1); ?></th>
                                         <td><?php echo e($row->doc_origin); ?></td>
@@ -45,10 +45,9 @@ use App\Http\Controllers\functionController;
                                         <td>
                                             <?php if($row->doc_date != NULL): ?>
                                             <span class="badge bg-secondary"><?php echo e($row->doc_date); ?></span>
-                                           <p class="text-sm text-muted">
+                                            <p class="text-sm text-muted">
                                                 <i class="mr-1 far fa-clock"></i>
-                                                <?php echo e(Carbon\Carbon::parse($row->doc_date)->diffForHumans()); ?>
-
+                                               <?php echo e(Carbon\Carbon::parse($row->doc_date)->diffForHumans()); ?> 
                                             </p>
                                             <?php endif; ?>
                                         </td>
@@ -66,16 +65,16 @@ use App\Http\Controllers\functionController;
                                         <td>
                                             <?php echo functionController::funtion_doc_speed($row->doc_speed); ?>
 
-                                            <?php echo functionController::funtion_doc_status($row->doc_status); ?>
+                                            <?php echo functionController::funtion_sub_status($row->sub_status); ?>
 
                                         </td>
                                         <td>
                                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.nav-link','data' => ['href' => ''.e(url('/documents_admission_all/detail/'.$row->doc_id)).'']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.nav-link','data' => ['href' => ''.e(url('/documents_admission_group/detail/'.$row->doc_id)).'']]); ?>
 <?php $component->withName('jet-nav-link'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['href' => ''.e(url('/documents_admission_all/detail/'.$row->doc_id)).'']); ?>
+<?php $component->withAttributes(['href' => ''.e(url('/documents_admission_group/detail/'.$row->doc_id)).'']); ?>
                                                 <i class="far fa-file-alt"></i>
                                              <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
@@ -112,4 +111,4 @@ use App\Http\Controllers\functionController;
 <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
 <?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
 <?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
-<?php endif; ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/member/documents_admission_all/index.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/member/documents_admission_group_all/index.blade.php ENDPATH**/ ?>
