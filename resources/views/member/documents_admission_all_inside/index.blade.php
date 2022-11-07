@@ -33,7 +33,7 @@ use App\Http\Controllers\functionController;
                                     @foreach($documents as $row)
                                     <tr>
                                         <th>{{$loop->index+1}}</th>
-                                        <td>{{$row->doc_origin}}</td>
+                                        <td>{{ functionController::funtion_typedoc($row->doc_template) }}</td>
                                         <td>{{$row->doc_recnum}}</td>
                                         <td>{{$row->doc_docnum}}</td>
                                         <td>
@@ -60,7 +60,7 @@ use App\Http\Controllers\functionController;
                                             {!! functionController::funtion_doc_status($row->doc_status) !!}
                                         </td>
                                         <td>
-                                            <x-jet-nav-link href="{{url('/documents_admission_all/detail/'.$row->doc_id)}}">
+                                            <x-jet-nav-link href="{{url('/documents_admission_all_inside/detail/'.$row->doc_id)}}">
                                                 <i class="far fa-file-alt"></i>
                                             </x-jet-nav-link>
                                             <!-- <x-jet-button>

@@ -1050,6 +1050,23 @@ class functionController extends Controller
         }
         return $txt_status;
     }
+     //ฟังชันเรียกประเภทเอกสาร
+     public static function funtion_typedoc($id) {
+        if($id == 'A'){
+            $txt_status = 'หนังสือรับ';
+        }elseif($id == 'B'){
+            $txt_status = 'หนังสือส่ง';
+        }elseif($id == 'C'){
+            $txt_status = 'หนังสือเลขประกาศ';
+        }elseif($id == 'D'){
+            $txt_status = 'หนังสือเลขคำสั่ง';
+        }elseif($id == 'E'){
+            $txt_status = 'หนังสือรับรอง';
+        }else{
+            return "ไม่ถูกนิยาม";
+        }
+        return $txt_status;
+    }
 
     //ฟังชันเรียกสถานะ sub_status tb: sub_docs ด้วย status
     public static function funtion_sub_status($status) {

@@ -261,4 +261,5 @@ $.widget.bridge('uibutton', $.ui.button)
     integrity="sha512-vSyPWqWsSHFHLnMSwxfmicOgfp0JuENoLwzbR+Hf5diwdYTJraf/m+EKrMb4ulTYmb/Ra75YmckeTQ4sHzg2hg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script src="<?php echo e(asset('/js/jsController.js')); ?>"></script><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/layouts/guest.blade.php ENDPATH**/ ?>
+<script src="<?php echo e(asset('/js/jsController.js')); ?>"></script>
+<script src="<?php echo e(asset('/js/query.js')); ?>"></script><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/layouts/guest.blade.php ENDPATH**/ ?>

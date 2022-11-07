@@ -100,15 +100,15 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-menu')->html();
-} elseif ($_instance->childHasBeenRendered('k61yt1l')) {
-    $componentId = $_instance->getRenderedChildComponentId('k61yt1l');
-    $componentTag = $_instance->getRenderedChildComponentTagName('k61yt1l');
+} elseif ($_instance->childHasBeenRendered('oUvPJwf')) {
+    $componentId = $_instance->getRenderedChildComponentId('oUvPJwf');
+    $componentTag = $_instance->getRenderedChildComponentTagName('oUvPJwf');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('k61yt1l');
+    $_instance->preserveRenderedChild('oUvPJwf');
 } else {
     $response = \Livewire\Livewire::mount('navigation-menu');
     $html = $response->html();
-    $_instance->logRenderedChild('k61yt1l', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('oUvPJwf', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -281,4 +281,5 @@ $.widget.bridge('uibutton', $.ui.button)
     integrity="sha512-vSyPWqWsSHFHLnMSwxfmicOgfp0JuENoLwzbR+Hf5diwdYTJraf/m+EKrMb4ulTYmb/Ra75YmckeTQ4sHzg2hg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script src="<?php echo e(asset('/js/jsController.js')); ?>"></script><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/layouts/app.blade.php ENDPATH**/ ?>
+<script src="<?php echo e(asset('/js/jsController.js')); ?>"></script>
+<script src="<?php echo e(asset('/js/query.js')); ?>"></script><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/layouts/app.blade.php ENDPATH**/ ?>

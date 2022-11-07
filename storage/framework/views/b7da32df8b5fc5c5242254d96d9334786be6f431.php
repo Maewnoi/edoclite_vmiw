@@ -43,11 +43,11 @@ use App\Http\Controllers\functionController;
                                         <td>
                                             <?php if($row->doc_date != NULL): ?>
                                             <span class="badge bg-secondary"><?php echo e($row->doc_date); ?></span>
-                                            <!--<p class="text-sm text-muted">
+                                            <p class="text-sm text-muted">
                                                 <i class="mr-1 far fa-clock"></i>
                                                 <?php echo e(Carbon\Carbon::parse($row->doc_date)->diffForHumans()); ?>
 
-                                            </p> -->
+                                            </p>
                                             <?php endif; ?>
                                         </td>
                                         <td>
@@ -55,7 +55,7 @@ use App\Http\Controllers\functionController;
                                             <span class="badge bg-secondary"><?php echo e($row->doc_date_2); ?></span>
                                             <p class="text-sm text-muted">
                                                 <i class="mr-1 far fa-clock"></i>
-                                                <?php echo e(Carbon\Carbon::parse($row->doc_date_2." ".$row->doc_time)->diffForHumans()); ?>
+                                                <?php echo e(Carbon\Carbon::parse($row->doc_date_2)->diffForHumans()); ?>
 
                                             </p>
                                             <?php endif; ?>

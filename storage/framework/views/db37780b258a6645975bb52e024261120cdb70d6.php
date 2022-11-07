@@ -39,17 +39,17 @@ use App\Http\Controllers\functionController;
                                     <?php $__currentLoopData = $documents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <th><?php echo e($loop->index+1); ?></th>
-                                        <td><?php echo e($row->doc_origin); ?></td>
+                                        <td><?php echo e(functionController::funtion_typedoc($row->doc_template)); ?></td>
                                         <td><?php echo e($row->doc_recnum); ?></td>
                                         <td><?php echo e($row->doc_docnum); ?></td>
                                         <td>
                                             <?php if($row->doc_date != NULL): ?>
                                             <span class="badge bg-secondary"><?php echo e($row->doc_date); ?></span>
-                                           <!-- <p class="text-sm text-muted">
+                                           <p class="text-sm text-muted">
                                                 <i class="mr-1 far fa-clock"></i>
                                                 <?php echo e(Carbon\Carbon::parse($row->doc_date)->diffForHumans()); ?>
 
-                                            </p> -->
+                                            </p>
                                             <?php endif; ?>
                                         </td>
                                         <td>
@@ -57,7 +57,7 @@ use App\Http\Controllers\functionController;
                                             <span class="badge bg-secondary"><?php echo e($row->doc_date_2); ?></span>
                                             <p class="text-sm text-muted">
                                                 <i class="mr-1 far fa-clock"></i>
-                                                <?php echo e(Carbon\Carbon::parse($row->doc_date_2." ".$row->doc_time)->diffForHumans()); ?>
+                                                <?php echo e(Carbon\Carbon::parse($row->doc_date_2)->diffForHumans()); ?>
 
                                             </p>
                                             <?php endif; ?>
@@ -71,11 +71,11 @@ use App\Http\Controllers\functionController;
                                         </td>
                                         <td>
                                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.nav-link','data' => ['href' => ''.e(url('/documents_admission_all/detail/'.$row->doc_id)).'']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.nav-link','data' => ['href' => ''.e(url('/documents_admission_all_inside/detail/'.$row->doc_id)).'']]); ?>
 <?php $component->withName('jet-nav-link'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['href' => ''.e(url('/documents_admission_all/detail/'.$row->doc_id)).'']); ?>
+<?php $component->withAttributes(['href' => ''.e(url('/documents_admission_all_inside/detail/'.$row->doc_id)).'']); ?>
                                                 <i class="far fa-file-alt"></i>
                                              <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
