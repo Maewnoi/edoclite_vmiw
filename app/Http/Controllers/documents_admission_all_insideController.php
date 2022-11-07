@@ -16,12 +16,12 @@ class documents_admission_all_insideController extends Controller
         
         if(Auth::user()->level=='6'){
         //สารบรรณกลาง
-            $documents = document::where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type','!=', '0')
-            ->where('doc_template','!=', 'A')
-            ->orderby('doc_date','DESC')
-            ->get();
-            return view('member.documents_admission_all_inside.index',compact('documents'));
+            // $documents = document::where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type','!=', '0')
+            // ->where('doc_template','!=', 'A')
+            // ->orderby('doc_date','DESC')
+            // ->get();
+            return view('member.documents_admission_all_inside.index');
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }

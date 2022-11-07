@@ -2516,4 +2516,125 @@ if(window.location.pathname == '/documents_admission_all/all'){
         table.ajax.reload(null, false);
     }, 3000 );
 
+}else if(window.location.pathname == '/documents_admission_all_inside/all'){
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // }, 
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "asc"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'doc_id' 
+            },
+            { 
+                data: 'doc_template' ,
+                render: function ( data) {
+                    if(data == 'A'){
+                        txt_status = 'หนังสือรับ';
+                    }else if(data == 'B'){
+                        txt_status = 'หนังสือส่ง';
+                    }else if(data == 'C'){
+                        txt_status = 'หนังสือเลขประกาศ';
+                    }else if(data == 'D'){
+                        txt_status = 'หนังสือเลขคำสั่ง';
+                    }else if(data == 'E'){
+                        txt_status = 'หนังสือรับรอง';
+                    }
+                    return (txt_status)
+                } 
+            },
+            { 
+                data: 'doc_recnum' 
+            },
+            {   
+                data: 'doc_docnum' 
+            },
+            {   
+                data: 'doc_date' ,
+                render: function ( data) {
+                    var year = data.toString().substring(0, 4);
+                    var month = data.toString().substring(5, 7);
+                    var day = data.toString().substring(8, 10);
+                    var date = [day, month, year].join('-');
+                    return (`<span class="badge bg-secondary">`+ date +`</span>`)
+                }
+            },
+            { 
+                data: 'doc_date_2' ,
+                render: function ( data) {
+                    var year = data.toString().substring(0, 4);
+                    var month = data.toString().substring(5, 7);
+                    var day = data.toString().substring(8, 10);
+                    var date = [day, month, year].join('-');
+                    return (`<span class="badge bg-secondary">`+ date +`</span>`)
+                }
+            },
+            {
+                data: 'doc_title' 
+            },
+            {
+                data: 'doc_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_doc_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_doc_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_doc_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_doc_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_doc_speed)
+                }
+            },
+            {
+                data: 'doc_status' ,
+                render: function ( data) {
+                    if(data == 'waiting'){
+                        txt_status = '<span class="badge bg-warning">รอพิจารณา</span>';
+                    }else if(data == 'success'){
+                        txt_status = '<span class="badge bg-success">พิจารณาแล้ว</span>';
+                    }else{
+                        txt_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_status)
+                }
+            },
+            {
+                data: 'doc_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_admission_all_inside/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
 }

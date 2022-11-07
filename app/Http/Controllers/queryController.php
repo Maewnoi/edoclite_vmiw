@@ -474,6 +474,20 @@ class queryController extends Controller
 
     }
 
+    public static function funtion_query_documents_admission_all_insideController_level_6(){
+        if(Auth::user()->level=='6'){
+            $documents = document::where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type','!=', '0')
+            ->where('doc_template','!=', 'A')
+            ->orderby('doc_date','DESC')
+            ->get();
+            return $documents;
+        }else{
+            return 0;
+        }
+
+    }
+
 
     
 

@@ -119,9 +119,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_admission_group_inside/all/0/query',[queryController::class,'funtion_query_documents_admission_group_inside_0_Controller_level_6']);
     Route::get('/documents_admission_group_inside/all/1/query',[queryController::class,'funtion_query_documents_admission_group_inside_1_Controller_level_6']);
     Route::get('/documents_admission_group_inside/all/2/query',[queryController::class,'funtion_query_documents_admission_group_inside_2_Controller_level_6']);
+
+    Route::get('/documents_admission_all_inside/all/query',[queryController::class,'funtion_query_documents_admission_all_insideController_level_6']);
+
     Route::get('/documents_admission_work_all/all/0/query',[queryController::class,'funtion_query_documents_admission_work_all_0_Controller_level_7']);
     Route::get('/documents_admission_work_all/all/1/query',[queryController::class,'funtion_query_documents_admission_work_all_1_Controller_level_7']);
-
     Route::get('/documents_admission_work_inside_all/all/0/query',[queryController::class,'funtion_query_documents_admission_work_inside_all_0_Controller_level_7']);
     Route::get('/documents_admission_work_inside_all/all/1/query',[queryController::class,'funtion_query_documents_admission_work_inside_all_1_Controller_level_7']);
 
