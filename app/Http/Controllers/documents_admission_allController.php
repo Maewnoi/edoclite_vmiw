@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\document;
 use App\Models\reserve_number;
 use App\Models\sub_doc;
+use App\Models\sub2_doc;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,12 +17,12 @@ class documents_admission_allController extends Controller
         
         if(Auth::user()->level=='3'){
         //สารบรรณกลาง
-            $documents = document::where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->orderby('doc_date','DESC')
-            ->get();
-            return view('member.documents_admission_all.index',compact('documents'));
+            // $documents = document::where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->orderby('doc_date','DESC')
+            // ->get();
+            return view('member.documents_admission_all.index');
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
@@ -33,17 +34,11 @@ class documents_admission_allController extends Controller
             $document_detail = document::where('doc_id', $id)->where('doc_site_id',Auth::user()->site_id)->first();
             if($document_detail->doc_status == 'success'){
                 $sub_docsS = sub_doc::where('sub_docid', $id)->get();
-                if($sub_docsS->sub_status == 8){
-                    //ฟังชันเรียกชื่องานที่ได้รับเอกสาร
-                    $sub2docsS = sub2_doc::where('sub2_subid', $sub_docsS->sub_id)->get();
-
-                }
-                
-
+              
             }else{
                 $sub_docsS = '';
             }
-            return view('member.documents_admission_all.detail',compact('document_detail','sub_docsS'.'sub2docsS'));
+            return view('member.documents_admission_all.detail',compact('document_detail','sub_docsS'));
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }

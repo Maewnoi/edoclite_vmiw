@@ -21,7 +21,7 @@ use App\Http\Controllers\functionController;
                     <div class="shadow card">
                         <div class="card-header bg-primary">
                             <div class="clearfix">
-                            เอกสารรับเข้าภายใน
+                            บันทึกข้อความ
                                 <div class="float-right spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
                                     <span class="sr-only">Loading...</span>
                                 </div>
@@ -32,17 +32,15 @@ use App\Http\Controllers\functionController;
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
-                                        <th scope="col">เลขที่รับส่วนงาน</th>
-                                        <th scope="col">เลขที่หนังสือ</th>
+                                        <th scope="col">ส่วนราชการ</th>
+                                        <th scope="col">ที่ร่าง</th>
                                         <th scope="col">วันที่</th>
-                                        <th scope="col">วันที่ลง</th>
                                         <th scope="col">เรื่อง</th>
                                         <th scope="col">ชั้นความเร็ว</th>
                                         <th scope="col">สถานะ</th>
                                         <th scope="col">รายละเอียด</th>
                                     </tr>
                                 </thead>
-                             
                             </table>
                         </div>
                     </div>
@@ -55,4 +53,4 @@ use App\Http\Controllers\functionController;
 <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
 <?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
 <?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
-<?php endif; ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/member/documents_admission_work_inside_all/index.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/member/documents_admission_department_retrun/index.blade.php ENDPATH**/ ?>

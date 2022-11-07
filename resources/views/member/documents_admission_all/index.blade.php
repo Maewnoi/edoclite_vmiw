@@ -11,11 +11,17 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    
                     <div class="shadow card">
-                        <div class="card-header bg-primary">เอกสารรับเข้าภายนอกทั้งหมด</div>
+                        <div class="card-header bg-primary">
+                            <div class="clearfix">
+                            เอกสารรับเข้าภายนอกทั้งหมด
+                                <div class="float-right spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-body table-responsive">
-                            <table id="example1" class="table">
+                            <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
@@ -25,51 +31,11 @@ use App\Http\Controllers\functionController;
                                         <th scope="col">วันที่</th>
                                         <th scope="col">วันที่ลง</th>
                                         <th scope="col">เรื่อง</th>
-                                        <th scope="col">ชั้นความเร็ว/สถานะ</th>
+                                        <th scope="col">ชั้นความเร็ว</th>
+                                        <th scope="col">สถานะ</th>
                                         <th scope="col">รายละเอียด</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach($documents as $row)
-                                    <tr>
-                                        <th>{{$loop->index+1}}</th>
-                                        <td>{{$row->doc_origin}}</td>
-                                        <td>{{$row->doc_recnum}}</td>
-                                        <td>{{$row->doc_docnum}}</td>
-                                        <td>
-                                            @if($row->doc_date != NULL)
-                                            <span class="badge bg-secondary">{{$row->doc_date}}</span>
-                                           <p class="text-sm text-muted">
-                                                <i class="mr-1 far fa-clock"></i>
-                                                {{Carbon\Carbon::parse($row->doc_date)->diffForHumans()}}
-                                            </p>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if($row->doc_date_2 != NULL)
-                                            <span class="badge bg-secondary">{{$row->doc_date_2}}</span>
-                                            <p class="text-sm text-muted">
-                                                <i class="mr-1 far fa-clock"></i>
-                                                {{Carbon\Carbon::parse($row->doc_date_2)->diffForHumans()}}
-                                            </p>
-                                            @endif
-                                        </td>
-                                        <td>{{$row->doc_title}}</td>
-                                        <td>
-                                            {!! functionController::funtion_doc_speed($row->doc_speed) !!}
-                                            {!! functionController::funtion_doc_status($row->doc_status) !!}
-                                        </td>
-                                        <td>
-                                            <x-jet-nav-link href="{{url('/documents_admission_all/detail/'.$row->doc_id)}}">
-                                                <i class="far fa-file-alt"></i>
-                                            </x-jet-nav-link>
-                                            <!-- <x-jet-button>
-                                                <i class="fas fa-trash-alt"></i>
-                                            </x-jet-button> -->
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
                             </table>
                         </div>
                     </div>

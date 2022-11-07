@@ -19,16 +19,16 @@ class documents_admission_group_allController extends Controller
     public function index_0(){
         if(Auth::user()->level=='6'){
             //สารบรรณกอง
-            $document_admission_all_group = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '0')
-            ->ORDERBY('doc_date' ,'DESC')
-            ->get();
-            return view('member.documents_admission_group_all.index',compact('document_admission_all_group'));
+            // $document_admission_all_group = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '0')
+            // ->ORDERBY('doc_date' ,'DESC')
+            // ->get();
+            return view('member.documents_admission_group_all.index');
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
@@ -38,18 +38,18 @@ class documents_admission_group_allController extends Controller
     public function index_1(){
         if(Auth::user()->level=='6'){
             //สารบรรณกอง
-            $document_admission_all_group = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status','!=','0')
-            ->where('sub_status','!=','8')
-            ->ORDERBY('doc_date' ,'DESC')
-            ->ORDERBY('doc_recnum' ,'DESC')
-            ->get();
-            return view('member.documents_admission_group_all.index',compact('document_admission_all_group'));
+            // $document_admission_all_group = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status','!=','0')
+            // ->where('sub_status','!=','8')
+            // ->ORDERBY('doc_date' ,'DESC')
+            // ->ORDERBY('doc_recnum' ,'DESC')
+            // ->get();
+            return view('member.documents_admission_group_all.index');
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
@@ -59,16 +59,16 @@ class documents_admission_group_allController extends Controller
     public function index_2(){
         if(Auth::user()->level=='6'){
             //สารบรรณกอง
-            $document_admission_all_group = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '8')
-            ->ORDERBY('doc_date' ,'DESC')
-            ->get();
-            return view('member.documents_admission_group_all.index',compact('document_admission_all_group'));
+            // $document_admission_all_group = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '8')
+            // ->ORDERBY('doc_date' ,'DESC')
+            // ->get();
+            return view('member.documents_admission_group_all.index');
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }

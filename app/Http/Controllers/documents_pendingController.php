@@ -22,12 +22,12 @@ class documents_pendingController extends Controller
 
         if(Auth::user()->level == '4' && $Groupmem->group_name == 'สำนักปลัด'){
         //หัวหน้าสำนักปลัด
-            $documents = document::where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'waiting')
-            ->get();
-            return view('member.documents_pending.index',compact('documents'));
+            // $documents = document::where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'waiting')
+            // ->get();
+            return view('member.documents_pending.index');
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }

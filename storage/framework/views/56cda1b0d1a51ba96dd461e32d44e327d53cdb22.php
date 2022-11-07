@@ -237,11 +237,11 @@ unset($__errorArgs, $__bag); ?>
                                             <input type="hidden" name="doc_origin" value="<?php echo e($document_detail->doc_origin); ?>" >
                                             <input type="hidden" name="doc_title" value="<?php echo e($document_detail->doc_title); ?>" >
                                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => []]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes([]); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
                                                 <?php echo e(__('save')); ?>
 
                                              <?php echo $__env->renderComponent(); ?>

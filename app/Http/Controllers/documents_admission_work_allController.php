@@ -22,18 +22,18 @@ class documents_admission_work_allController extends Controller
     public function index_0(){
         if(Auth::user()->level=='7'){
             //สารบรรณกอง
-            $document_admission_all_work = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '8')
-            ->where('sub2_status', '0')
-            ->where('sub2_recid', Auth::user()->id)
-            ->get();
-            return view('member.documents_admission_work_all.index',compact('document_admission_all_work'));
+            // $document_admission_all_work = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '8')
+            // ->where('sub2_status', '0')
+            // ->where('sub2_recid', Auth::user()->id)
+            // ->get();
+            return view('member.documents_admission_work_all.index');
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
@@ -43,18 +43,18 @@ class documents_admission_work_allController extends Controller
     public function index_1(){
         if(Auth::user()->level=='7'){
             //สารบรรณกอง
-            $document_admission_all_work = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '8')
-            ->where('sub2_status', '1')
-            ->where('sub2_recid', Auth::user()->id)
-            ->get();
-            return view('member.documents_admission_work_all.index',compact('document_admission_all_work'));
+            // $document_admission_all_work = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '8')
+            // ->where('sub2_status', '1')
+            // ->where('sub2_recid', Auth::user()->id)
+            // ->get();
+            return view('member.documents_admission_work_all.index');
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }

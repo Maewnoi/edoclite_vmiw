@@ -18,16 +18,16 @@ class documents_admission_department_allController extends Controller
     public function index_0(){
         if(Auth::user()->level=='5'){
             //หัวหน้าฝ่าย
-            $document_admission_department_all = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '1')
-            ->where('seal_id_0', Auth::user()->id)
-            ->get();
-            return view('member.documents_admission_department_all.index',compact('document_admission_department_all'));
+            // $document_admission_department_all = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '1')
+            // ->where('seal_id_0', Auth::user()->id)
+            // ->get();
+            return view('member.documents_admission_department_all.index');
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
@@ -36,17 +36,17 @@ class documents_admission_department_allController extends Controller
     public function index_1(){
         if(Auth::user()->level=='5'){
             //หัวหน้าฝ่าย
-            $document_admission_department_all = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '!=','1')
-            ->where('seal_id_0', Auth::user()->id)
-            ->where('seal_date_0', '!=', NULL)
-            ->get();
-            return view('member.documents_admission_department_all.index',compact('document_admission_department_all'));
+            // $document_admission_department_all = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '!=','1')
+            // ->where('seal_id_0', Auth::user()->id)
+            // ->where('seal_date_0', '!=', NULL)
+            // ->get();
+            return view('member.documents_admission_department_all.index');
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }

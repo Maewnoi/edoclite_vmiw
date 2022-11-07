@@ -17,11 +17,11 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                   
+                  
                     <div class="shadow card">
                         <div class="card-header bg-primary">
                             <div class="clearfix">
-                            เอกสารรับเข้าภายใน
+                            เอกสารรับเข้าภายนอก (หัวหน้าฝ่าย)
                                 <div class="float-right spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
                                     <span class="sr-only">Loading...</span>
                                 </div>
@@ -32,6 +32,7 @@ use App\Http\Controllers\functionController;
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
+                                        <th scope="col">หน่วยงานต้นเรื่อง</th>
                                         <th scope="col">เลขที่รับส่วนงาน</th>
                                         <th scope="col">เลขที่หนังสือ</th>
                                         <th scope="col">วันที่</th>
@@ -42,7 +43,6 @@ use App\Http\Controllers\functionController;
                                         <th scope="col">รายละเอียด</th>
                                     </tr>
                                 </thead>
-                             
                             </table>
                         </div>
                     </div>
@@ -55,4 +55,4 @@ use App\Http\Controllers\functionController;
 <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
 <?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
 <?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
-<?php endif; ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/member/documents_admission_work_inside_all/index.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/member/documents_admission_department_all/index.blade.php ENDPATH**/ ?>
