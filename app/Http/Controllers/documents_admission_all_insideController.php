@@ -33,17 +33,17 @@ class documents_admission_all_insideController extends Controller
             $document_detail = document::where('doc_id', $id)->where('doc_site_id',Auth::user()->site_id)->first();
             if($document_detail->doc_status == 'success'){
                 $sub_docsS = sub_doc::where('sub_docid', $id)->get();
-                if($sub_docsS->sub_status == 8){
+               /* if($sub_docsS->sub_status == 8){
                     //ฟังชันเรียกชื่องานที่ได้รับเอกสาร
                     $sub2docsS = sub2_doc::where('sub2_subid', $sub_docsS->sub_id)->get();
 
-                }
-                
+                },'sub2docsS'
+                */
 
             }else{
                 $sub_docsS = '';
             }
-            return view('member.documents_admission_all.detail',compact('document_detail','sub_docsS'.'sub2docsS'));
+            return view('member.documents_admission_all_inside.detail',compact('document_detail','sub_docsS'));
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }

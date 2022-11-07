@@ -97,12 +97,7 @@ use App\Http\Controllers\functionController;
                                     <div class="form-group">
                                         <x-jet-label class="text-md" for="doc_filedirec"
                                             value="{{ __('ไฟล์เอกสาร') }}" />
-                                        @if($document_detail->doc_status == 'waiting')
-                                            {!!functionController::display_pdf($document_detail->doc_filedirec)!!}
-                                        @elseif($document_detail->doc_status == 'success')
-                                            {!!functionController::display_pdf($document_detail->doc_filedirec_1)!!}
-                                        @endif
-                                        
+                                            {!!functionController::display_pdf($document_detail->doc_filedirec)!!}                                        
                                     </div>
                                 </div>
                                 <div class="col-md-3">
