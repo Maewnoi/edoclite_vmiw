@@ -20,7 +20,7 @@
             </div>
 
             <div class="flex justify-end mt-4">
-                <x-jet-button class="ml-4">
+                <x-jet-button class="ml-4" onclick="submitForm(this);">
                     {{ __('ยืนยัน') }}
                 </x-jet-button>
             </div>
