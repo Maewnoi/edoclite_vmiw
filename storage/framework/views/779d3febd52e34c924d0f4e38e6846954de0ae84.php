@@ -2065,7 +2065,6 @@ use App\Http\Controllers\functionController;
             </div>
         </div>
     </div>
-</nav>
 
     <!-- สร้างเอกสารใหม่ -->
     <?php if(Auth::user()->level == '3'): ?>
@@ -3376,4 +3375,7 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
     <?php endif; ?> 
+</nav>
+
+    
 <?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/navigation-menu.blade.php ENDPATH**/ ?>

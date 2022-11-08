@@ -925,7 +925,6 @@ use App\Http\Controllers\functionController;
             </div>
         </div>
     </div>
-</nav>
 
     <!-- สร้างเอกสารใหม่ -->
     @if(Auth::user()->level == '3')
@@ -1502,3 +1501,6 @@ use App\Http\Controllers\functionController;
         </div>
     </div>
     @endif 
+</nav>
+
+    
