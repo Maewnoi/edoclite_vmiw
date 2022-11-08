@@ -15,11 +15,11 @@
                 height="100">
          <?php $__env->endSlot(); ?>
         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-center text-lg','id' => 'txt-login','value' => ''.e(__('ระบบสารบรรณอิเล็กทรอนิกส์')).'']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-lg text-center','id' => 'txt-login','value' => ''.e(__('ระบบสารบรรณอิเล็กทรอนิกส์')).'']]); ?>
 <?php $component->withName('jet-label'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-center text-lg','id' => 'txt-login','value' => ''.e(__('ระบบสารบรรณอิเล็กทรอนิกส์')).'']); ?>
+<?php $component->withAttributes(['class' => 'text-lg text-center','id' => 'txt-login','value' => ''.e(__('ระบบสารบรรณอิเล็กทรอนิกส์')).'']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
@@ -40,7 +40,7 @@
 <?php endif; ?>
 
         <?php if(session('status')): ?>
-        <div class="mb-4 font-medium text-sm text-green-600">
+        <div class="mb-4 text-sm font-medium text-green-600">
             <?php echo e(session('status')); ?>
 
         </div>
@@ -63,11 +63,11 @@
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'email','class' => 'block mt-1 w-full','type' => 'text','name' => 'email','value' => old('email'),'required' => true,'autofocus' => true]]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'email','class' => 'block w-full mt-1','type' => 'text','name' => 'email','value' => old('email'),'required' => true,'autofocus' => true]]); ?>
 <?php $component->withName('jet-input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'email','class' => 'block mt-1 w-full','type' => 'text','name' => 'email','value' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(old('email')),'required' => true,'autofocus' => true]); ?>
+<?php $component->withAttributes(['id' => 'email','class' => 'block w-full mt-1','type' => 'text','name' => 'email','value' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(old('email')),'required' => true,'autofocus' => true]); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
@@ -90,11 +90,11 @@
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'password','class' => 'block mt-1 w-full','type' => 'password','name' => 'password','required' => true,'autocomplete' => 'current-password']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'password','class' => 'block w-full mt-1','type' => 'password','name' => 'password','required' => true,'autocomplete' => 'current-password']]); ?>
 <?php $component->withName('jet-input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'password','class' => 'block mt-1 w-full','type' => 'password','name' => 'password','required' => true,'autocomplete' => 'current-password']); ?>
+<?php $component->withAttributes(['id' => 'password','class' => 'block w-full mt-1','type' => 'password','name' => 'password','required' => true,'autocomplete' => 'current-password']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
@@ -123,18 +123,18 @@
 
             <div class="flex items-center justify-end mt-4">
                 <!-- <?php if(Route::has('password.request')): ?>
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="<?php echo e(route('password.request')); ?>">
+                    <a class="text-sm text-gray-600 underline hover:text-gray-900" href="<?php echo e(route('password.request')); ?>">
                         <?php echo e(__('Forgot your password?')); ?>
 
                     </a>
                 <?php endif; ?> -->
 
                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['class' => 'ml-4']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['class' => 'ml-4','onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'ml-4']); ?>
+<?php $component->withAttributes(['class' => 'ml-4','onclick' => 'submitForm(this);']); ?>
                     <?php echo e(__('Login')); ?>
 
                  <?php echo $__env->renderComponent(); ?>
@@ -159,7 +159,7 @@
     <div class="modal fade" id="modal-Test-Account">
         <div class="modal-dialog modal-l">
             <div class="modal-content">
-                <div class="modal-header bg-red-300">
+                <div class="bg-red-300 modal-header">
                     <label class="modal-title">Test Account
                     </label>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>

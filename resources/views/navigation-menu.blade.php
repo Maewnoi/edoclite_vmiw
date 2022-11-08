@@ -60,39 +60,29 @@ use App\Http\Controllers\functionController;
                                         <button type="button"
                                             class="inline-flex items-center px-3 py-1 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white rounded-md hover:text-gray-700 focus:outline-none">
                                             {{ __('ทะเบียนหนังสือภายนอก ') }}
-                                            <!-- นายก -->
-                                            @if(Auth::user()->level == '1')
-                                            <span class="badge bg-danger">
-                                                {{navigationController::funtion_documents_admission_minister_all_count_0_level_1(Auth::user()->level)}}
-                                            </span>
-                                            @endif
                                             
                                             <!-- หัวหน้ากอง -->
                                             @if(Auth::user()->level == '4')
-                                            <span class="badge bg-danger">
-                                                {{navigationController::funtion_document_waiting_level4_count_0_level_4(Auth::user()->level)}}
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_document_admission_division_all_count_0_level_4">
                                             </span>
                                             @endif
                                             
                                             <!-- หัวหน้าฝ่าย -->
                                             @if(Auth::user()->level == '5')
-                                            <span class="badge bg-danger">
-                                                {{navigationController::funtion_document_admission_department_all_count_0_level_5(Auth::user()->level)}}
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_document_admission_department_all_count_0_level_5">
                                             </span>
                                             @endif
                                             
                                             <!-- สารบรรกอง -->
                                             @if(Auth::user()->level == '6')
-                                            <span class="badge bg-danger">
-                                                {{navigationController::funtion_document_admission_all_group_count_0_level_6(Auth::user()->level)}}
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_document_admission_all_group_count_0_level_6">
                                             </span>
                                             @endif
                                             
                                             
                                             <!-- งาน -->
                                             @if(Auth::user()->level == '7')
-                                            <span class="badge bg-danger">
-                                                {{navigationController::funtion_document_admission_all_work_count_0_level_7(Auth::user()->level)}}
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_document_admission_all_work_count_0_level_7">
                                             </span>
                                             @endif
                                             <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -324,30 +314,26 @@ use App\Http\Controllers\functionController;
                                             
                                             <!-- หัวหน้ากอง -->
                                             @if(Auth::user()->level == '4')
-                                            <span class="badge bg-danger">
-                                                {{navigationController::funtion_document_admission_division_inside_all_count_0_level_4(Auth::user()->level)}}
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_document_admission_division_inside_all_count_0_level_4">
                                             </span>
                                             @endif
                                             
                                             <!-- หัวหน้าฝ่าย -->
                                             @if(Auth::user()->level == '5')
-                                            <span class="badge bg-danger">
-                                            {{navigationController::funtion_document_admission_department_all_count_0_level_5(Auth::user()->level)}}
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_document_admission_department_inside_all_count_0_level_5">
                                             </span>
                                             @endif
                                             
                                             <!-- สารบรรกอง -->
                                             @if(Auth::user()->level == '6')
-                                            <span class="badge bg-danger">
-                                            {{navigationController::funtion_document_admission_all_group_inside_count_0_level_6(Auth::user()->level)}}
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_document_admission_all_group_inside_count_0_level_6">
                                             </span>
                                             @endif
                                             
                                             
                                             <!-- งาน -->
                                             @if(Auth::user()->level == '7')
-                                            <span class="badge bg-danger">
-                                            {{navigationController::funtion_document_admission_all_work_inside_count_0_level_7(Auth::user()->level)}}
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_document_admission_all_work_inside_count_0_level_7">
                                             </span>
                                             @endif
 

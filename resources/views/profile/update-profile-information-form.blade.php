@@ -29,12 +29,12 @@ use App\Http\Controllers\functionController;
             <!-- Current Profile Photo -->
             <div class="mt-2" x-show="! photoPreview">
                 <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}"
-                    class="rounded-full h-20 w-20 object-cover">
+                    class="object-cover w-20 h-20 rounded-full">
             </div>
 
             <!-- New Profile Photo Preview -->
             <div class="mt-2" x-show="photoPreview">
-                <span class="block rounded-full w-20 h-20"
+                <span class="block w-20 h-20 rounded-full"
                     x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'">
                 </span>
             </div>
@@ -56,7 +56,7 @@ use App\Http\Controllers\functionController;
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="name" value="{{ __('ชื่อ-นามสกุล') }}" />
-            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name"
+            <x-jet-input id="name" type="text" class="block w-full mt-1" wire:model.defer="state.name"
                 autocomplete="name" />
             <x-jet-input-error for="name" class="mt-2" />
         </div>
@@ -64,21 +64,21 @@ use App\Http\Controllers\functionController;
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('ชื่อผู้ใช้หรืออีเมล') }}" />
-            <x-jet-input id="email" type="text" class="mt-1 block w-full" wire:model.defer="state.email" />
+            <x-jet-input id="email" type="text" class="block w-full mt-1" wire:model.defer="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
         </div>
 
         <!-- pos -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="pos" value="{{ __('ตำแหน่ง') }}" />
-            <x-jet-input id="pos" type="text" class="mt-1 block w-full" wire:model.defer="state.pos" />
+            <x-jet-input id="pos" type="text" class="block w-full mt-1" wire:model.defer="state.pos" />
             <x-jet-input-error for="pos" class="mt-2" />
         </div>
 
         <!-- tel -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="tel" value="{{ __('เบอร์โทรศัพท์') }}" />
-            <x-jet-input id="tel" type="text" class="mt-1 block w-full" wire:model.defer="state.tel" />
+            <x-jet-input id="tel" type="text" class="block w-full mt-1" wire:model.defer="state.tel" />
             <x-jet-input-error for="tel" class="mt-2" />
         </div>
 
@@ -107,13 +107,45 @@ use App\Http\Controllers\functionController;
             <x-jet-label for="sign" value="{{ __('รูปลายเซ็น') }}" />
             @if(Auth::user()->sign != '')
             <div class="mt-2">
-                <img src="{{ asset(Auth::user()->sign) }}" alt="" class="rounded-full h-20 w-20 object-cover">
+                <img src="{{ asset(Auth::user()->sign) }}" alt="" class="object-cover w-20 h-20 rounded-full">
             </div>
             @else
             <x-jet-label for="group" class="text-danger" value="{{ __('--ไม่พบรูป--') }}" />
             @endif
             <x-jet-secondary-button type="button" data-toggle="modal" data-target="#modal-addSign" class="mt-2 mr-2">
                 {{ __('อัพโหลดรูปลายเซ็น') }}</x-jet-secondary-button>
+
+            <div class="modal fade" id="modal-addSign">
+                <div class="modal-dialog modal-l">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">อัพโหลดรูปลายเซ็นของคุณ ?
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{route('addSign')}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @if(Auth::user()->sign != '')
+                                <x-jet-input type="hidden" value="{{Auth::user()->sign}}" name="old_sign"
+                                    class="block w-full mt-1 form-control" accept="image/*" />
+                                @endif
+                                <div class="row">
+                                    <div class="col-span-6 sm:col-span-4">
+                                        <x-jet-input type="file" name="sign" class="block w-full mt-1 form-control" required
+                                            accept="image/*" />
+                                    </div>
+                                </div>
+                                <x-jet-input type="hidden" value="{{Auth::user()->id}}" name="id"
+                                    class="block w-full mt-1 form-control"  />
+                                <br>
+                                <x-jet-button onclick="submitForm(this);">
+                                    {{ __('save') }}
+                                </x-jet-button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </x-slot>
 
@@ -127,37 +159,7 @@ use App\Http\Controllers\functionController;
         </x-jet-button>
     </x-slot>
 
+    
 
 </x-jet-form-section>
 
-<div class="modal fade" id="modal-addSign">
-    <div class="modal-dialog modal-l">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">คุณต้องการลบชื่อผู้ใช้นี้หรือไม่ ?
-                </h4>
-            </div>
-            <div class="modal-body">
-                <form action="{{route('addSign')}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    @if(Auth::user()->sign != '')
-                    <x-jet-input type="hidden" value="{{Auth::user()->sign}}" name="old_sign"
-                        class="form-control mt-1 block w-full" accept="image/*" />
-                    @endif
-                    <div class="row">
-                        <div class="col-span-6 sm:col-span-4">
-                            <x-jet-input type="file" name="sign" class="form-control mt-1 block w-full" required
-                                accept="image/*" />
-                        </div>
-                    </div>
-                    <x-jet-input type="hidden" value="{{Auth::user()->id}}" name="id"
-                        class="form-control mt-1 block w-full"  />
-                    <br>
-                    <x-jet-button>
-                        {{ __('save') }}
-                    </x-jet-button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>

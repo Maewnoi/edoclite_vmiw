@@ -1,3 +1,565 @@
+//ถ้าพบ element ตัวไหนใน views ไหนให้ ดึงข้อมูล ด้วย ajax นะครับบบ
+if($("#member_dashboard_input_documents_admission_all_waiting_count_level_3").val()&&$("#member_dashboard_input_documents_admission_all_success_count_level_3").val()){
+    var var_member_dashboard_input_documents_admission_all_waiting_count_level_3 = $("#member_dashboard_input_documents_admission_all_waiting_count_level_3").val();
+    var var_member_dashboard_input_documents_admission_all_success_count_level_3 = $("#member_dashboard_input_documents_admission_all_success_count_level_3").val();
+    var var_chart_level_3 = new CanvasJS.Chart("chart_level_3", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            fontFamily: "italic",
+            fontSize: 16,
+            text: ""
+        },
+        data: [{
+            type: "pie",
+            startAngle: 15,
+            toolTipContent: "<b>{label}</b>: {y} เรื่อง",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 12,
+            indexLabel: "{label} {y} เรื่อง",
+            dataPoints: [
+                { y: var_member_dashboard_input_documents_admission_all_waiting_count_level_3, label: "เอกสารรอพิจารณา" },
+                { y: var_member_dashboard_input_documents_admission_all_success_count_level_3, label: "เอกสารพิจารณาแล้ว" }
+            ]
+        }]
+    });
+    var_chart_level_3.render();
+}
+
+if($("#member_dashboard_input_documents_admission_division_all_count_0_level_4").val()&&$("#member_dashboard_input_documents_admission_division_all_count_1_level_4").val()){
+    var var_member_dashboard_input_documents_admission_division_all_count_0_level_4 = $("#member_dashboard_input_documents_admission_division_all_count_0_level_4").val();
+    var var_member_dashboard_input_documents_admission_division_all_count_1_level_4 = $("#member_dashboard_input_documents_admission_division_all_count_1_level_4").val();
+    var var_chart_level_4 = new CanvasJS.Chart("chart_level_4", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            fontFamily: "italic",
+            fontSize: 16,
+            text: ""
+        },
+        data: [{
+            type: "pie",
+            startAngle: 15,
+            toolTipContent: "<b>{label}</b>: {y} เรื่อง",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 12,
+            indexLabel: "{label} {y} เรื่อง",
+            dataPoints: [
+                { y: var_member_dashboard_input_documents_admission_division_all_count_0_level_4, label: "เอกสารรอพิจารณา" },
+                { y: var_member_dashboard_input_documents_admission_division_all_count_1_level_4, label: "เอกสารที่เซ็นแล้ว" }
+            ]
+        }]
+    });
+    var_chart_level_4.render();
+}
+
+if($("#member_dashboard_input_documents_admission_division_inside_all_count_0_level_4").val()&&$("#member_dashboard_input_documents_admission_division_inside_all_count_1_level_4").val()){
+    var var_member_dashboard_input_documents_admission_division_inside_all_count_0_level_4 = $("#member_dashboard_input_documents_admission_division_inside_all_count_0_level_4").val();
+    var var_member_dashboard_input_documents_admission_division_inside_all_count_1_level_4 = $("#member_dashboard_input_documents_admission_division_inside_all_count_1_level_4").val();
+    var var_chart_inside_level_4 = new CanvasJS.Chart("chart_inside_level_4", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            fontFamily: "italic",
+            fontSize: 16,
+            text: ""
+        },
+        data: [{
+            type: "pie",
+            startAngle: 15,
+            toolTipContent: "<b>{label}</b>: {y} เรื่อง",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 12,
+            indexLabel: "{label} {y} เรื่อง",
+            dataPoints: [
+                { y: var_member_dashboard_input_documents_admission_division_inside_all_count_0_level_4, label: "เอกสารรอพิจารณา" },
+                { y: var_member_dashboard_input_documents_admission_division_inside_all_count_1_level_4, label: "เอกสารที่เซ็นแล้ว" }
+            ]
+        }]
+    });
+    var_chart_inside_level_4.render();
+}
+
+if($("#member_dashboard_input_document_admission_department_all_count_0_level_5").val()&&$("#member_dashboard_input_document_admission_department_all_count_1_level_5").val()){
+    var var_member_dashboard_input_document_admission_department_all_count_0_level_5 = $("#member_dashboard_input_document_admission_department_all_count_0_level_5").val();
+    var var_member_dashboard_input_document_admission_department_all_count_1_level_5 = $("#member_dashboard_input_document_admission_department_all_count_1_level_5").val();
+    var var_chart_level_5 = new CanvasJS.Chart("chart_level_5", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            fontFamily: "italic",
+            fontSize: 16,
+            text: ""
+        },
+        data: [{
+            type: "pie",
+            startAngle: 15,
+            toolTipContent: "<b>{label}</b>: {y} เรื่อง",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 12,
+            indexLabel: "{label} {y} เรื่อง",
+            dataPoints: [
+                { y: var_member_dashboard_input_document_admission_department_all_count_0_level_5, label: "เอกสารรอพิจารณา" },
+                { y: var_member_dashboard_input_document_admission_department_all_count_1_level_5, label: "เอกสารที่เซ็นแล้ว" }
+            ]
+        }]
+    });
+    var_chart_level_5.render();
+}
+
+if($("#member_dashboard_input_document_admission_department_inside_all_count_0_level_5").val()&&$("#member_dashboard_input_document_admission_department_inside_all_count_1_level_5").val()){
+    var var_member_dashboard_input_document_admission_department_inside_all_count_0_level_5 = $("#member_dashboard_input_document_admission_department_inside_all_count_0_level_5").val();
+    var var_member_dashboard_input_document_admission_department_inside_all_count_1_level_5 = $("#member_dashboard_input_document_admission_department_inside_all_count_1_level_5").val();
+    var var_chart_inside_level_5 = new CanvasJS.Chart("chart_inside_level_5", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            fontFamily: "italic",
+            fontSize: 16,
+            text: ""
+        },
+        data: [{
+            type: "pie",
+            startAngle: 15,
+            toolTipContent: "<b>{label}</b>: {y} เรื่อง",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 12,
+            indexLabel: "{label} {y} เรื่อง",
+            dataPoints: [
+                { y: var_member_dashboard_input_document_admission_department_inside_all_count_0_level_5, label: "เอกสารรอพิจารณา" },
+                { y: var_member_dashboard_input_document_admission_department_inside_all_count_1_level_5, label: "เอกสารที่เซ็นแล้ว" }
+            ]
+        }]
+    });
+    var_chart_inside_level_5.render();
+}
+
+if($("#member_dashboard_input_document_admission_all_group_count_0_level_6").val()&&$("#member_dashboard_input_document_admission_all_group_count_1_level_6").val()&&$("#member_dashboard_input_document_admission_all_group_count_2_level_6").val()){
+    var var_member_dashboard_input_document_admission_all_group_count_0_level_6 = $("#member_dashboard_input_document_admission_all_group_count_0_level_6").val();
+    var var_member_dashboard_input_document_admission_all_group_count_1_level_6 = $("#member_dashboard_input_document_admission_all_group_count_1_level_6").val();
+    var var_member_dashboard_input_document_admission_all_group_count_2_level_6 = $("#member_dashboard_input_document_admission_all_group_count_2_level_6").val();
+    var var_chart_level_6 = new CanvasJS.Chart("chart_level_6", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            fontFamily: "italic",
+            fontSize: 16,
+            text: ""
+        },
+        data: [{
+            type: "pie",
+            startAngle: 15,
+            toolTipContent: "<b>{label}</b>: {y} เรื่อง",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 12,
+            indexLabel: "{label} {y} เรื่อง",
+            dataPoints: [
+                { y: var_member_dashboard_input_document_admission_all_group_count_0_level_6, label: "เอกสารใหม่" },
+                { y: var_member_dashboard_input_document_admission_all_group_count_1_level_6, label: "เอกสารรอดำเนินการ" },
+                { y: var_member_dashboard_input_document_admission_all_group_count_2_level_6, label: "เอกสารดำเนินการแล้ว" }
+            ]
+        }]
+    });
+    var_chart_level_6.render();
+}
+
+if($("#member_dashboard_input_document_admission_all_group_inside_count_0_level_6").val()&&$("#member_dashboard_input_document_admission_all_group_inside_count_1_level_6").val()&&$("#member_dashboard_input_document_admission_all_group_inside_count_2_level_6").val()){
+    var var_member_dashboard_input_document_admission_all_group_inside_count_0_level_6 = $("#member_dashboard_input_document_admission_all_group_inside_count_0_level_6").val();
+    var var_member_dashboard_input_document_admission_all_group_inside_count_1_level_6 = $("#member_dashboard_input_document_admission_all_group_inside_count_1_level_6").val();
+    var var_member_dashboard_input_document_admission_all_group_inside_count_2_level_6 = $("#member_dashboard_input_document_admission_all_group_inside_count_2_level_6").val();
+    var var_chart_inside_level_6 = new CanvasJS.Chart("chart_inside_level_6", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            fontFamily: "italic",
+            fontSize: 16,
+            text: ""
+        },
+        data: [{
+            type: "pie",
+            startAngle: 15,
+            toolTipContent: "<b>{label}</b>: {y} เรื่อง",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 12,
+            indexLabel: "{label} {y} เรื่อง",
+            dataPoints: [
+                { y: var_member_dashboard_input_document_admission_all_group_inside_count_0_level_6, label: "เอกสารใหม่" },
+                { y: var_member_dashboard_input_document_admission_all_group_inside_count_1_level_6, label: "เอกสารรอดำเนินการ" },
+                { y: var_member_dashboard_input_document_admission_all_group_inside_count_2_level_6, label: "เอกสารดำเนินการแล้ว" }
+            ]
+        }]
+    });
+    var_chart_inside_level_6.render();
+}
+
+if($("#member_dashboard_input_document_admission_all_work_count_0_level_7").val()&&$("#member_dashboard_input_document_admission_all_work_count_1_level_7").val()){
+    var var_member_dashboard_input_document_admission_all_work_count_0_level_7 = $("#member_dashboard_input_document_admission_all_work_count_0_level_7").val();
+    var var_member_dashboard_input_document_admission_all_work_count_1_level_7 = $("#member_dashboard_input_document_admission_all_work_count_1_level_7").val();
+    var var_chart_level_7 = new CanvasJS.Chart("chart_level_7", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            fontFamily: "italic",
+            fontSize: 16,
+            text: ""
+        },
+        data: [{
+            type: "pie",
+            startAngle: 15,
+            toolTipContent: "<b>{label}</b>: {y} เรื่อง",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 12,
+            indexLabel: "{label} {y} เรื่อง",
+            dataPoints: [
+                { y: var_member_dashboard_input_document_admission_all_work_count_0_level_7, label: "เอกสารรับเข้ายังไม่อ่าน" },
+                { y: var_member_dashboard_input_document_admission_all_work_count_1_level_7, label: "เอกสารรับเข้าอ่านแล้ว" }
+            ]
+        }]
+    });
+    var_chart_level_7.render();
+}
+
+if($("#member_dashboard_input_document_admission_all_work_inside_count_0_level_7").val()&&$("#member_dashboard_input_document_admission_all_work_inside_count_1_level_7").val()){
+    var var_member_dashboard_input_document_admission_all_work_inside_count_0_level_7 = $("#member_dashboard_input_document_admission_all_work_inside_count_0_level_7").val();
+    var var_member_dashboard_input_document_admission_all_work_inside_count_1_level_7 = $("#member_dashboard_input_document_admission_all_work_inside_count_1_level_7").val();
+    var var_chart_inside_level_7 = new CanvasJS.Chart("chart_inside_level_7", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            fontFamily: "italic",
+            fontSize: 16,
+            text: ""
+        },
+        data: [{
+            type: "pie",
+            startAngle: 15,
+            toolTipContent: "<b>{label}</b>: {y} เรื่อง",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 12,
+            indexLabel: "{label} {y} เรื่อง",
+            dataPoints: [
+                { y: var_member_dashboard_input_document_admission_all_work_inside_count_0_level_7, label: "เอกสารรับเข้ายังไม่อ่าน" },
+                { y: var_member_dashboard_input_document_admission_all_work_inside_count_1_level_7, label: "เอกสารรับเข้าอ่านแล้ว" }
+            ]
+        }]
+    });
+    var_chart_inside_level_7.render();
+}
+
+$('#member_dashboard_input_calendar_reserve_numbers').each(function () {
+    var var_member_dashboard_input_calendar_reserve_numbers = $("#member_dashboard_input_calendar_reserve_numbers").val();
+    $(function() {
+        function ini_events(ele) {
+            ele.each(function() {
+                var eventObject = {
+                    title: $.trim($(this).text())
+                }
+                $(this).data('eventObject', eventObject)
+                $(this).draggable({
+                    zIndex: 1070,
+                    revert: true,
+                    revertDuration: 0
+                })
+
+            })
+        }
+
+        ini_events($('#external-events div.external-event'))
+        var date = new Date()
+        var d = date.getDate(),
+            m = date.getMonth(),
+            y = date.getFullYear()
+
+        var Calendar = FullCalendar.Calendar;
+        var Draggable = FullCalendar.Draggable;
+
+        var containerEl = document.getElementById('external-events');
+        var checkbox = document.getElementById('drop-remove');
+        var calendarEl = document.getElementById('calendar');
+
+        new Draggable(containerEl, {
+            itemSelector: '.external-event',
+            eventData: function(eventEl) {
+                return {
+                    title: eventEl.innerText,
+                    backgroundColor: window.getComputedStyle(eventEl, null).getPropertyValue(
+                        'background-color'),
+                    borderColor: window.getComputedStyle(eventEl, null).getPropertyValue(
+                        'background-color'),
+                    textColor: window.getComputedStyle(eventEl, null).getPropertyValue('color'),
+                };
+            }
+        });
+
+        var calendar = new Calendar(calendarEl, {
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            eventLimit: true,
+            defaultDate: new Date(),
+            timezone: 'Asia/Bangkok',
+            events: {
+                url: "/calendarReserve/" + var_member_dashboard_input_calendar_reserve_numbers,
+            },
+            eventClick: function(info) {
+                info.jsEvent.preventDefault();
+
+                if (info.event.url) {
+                    window.open(info.event.url, 'Page 1');
+                }
+            },
+
+            loading: function(bool) {
+                $('#loading').toggle(bool);
+            },
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                // right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                right: ''
+            },
+            themeSystem: 'bootstrap',
+
+            editable: true,
+            droppable: true,
+            drop: function(info) {
+                if (checkbox.checked) {
+                    info.draggedEl.parentNode.removeChild(info.draggedEl);
+                }
+            }
+        });
+
+        var currColor = '#3c8dbc'
+        $('#color-chooser > li > a').click(function(e) {
+            e.preventDefault()
+            currColor = $(this).css('color')
+            $('#add-new-event').css({
+                'background-color': currColor,
+                'border-color': currColor
+            })
+        })
+        $('#add-new-event').click(function(e) {
+            e.preventDefault()
+            var val = $('#new-event').val()
+            if (val.length == 0) {
+                return
+            }
+            var event = $('<div />')
+            event.css({
+                'background-color': currColor,
+                'border-color': currColor,
+                'color': '#fff'
+            }).addClass('external-event')
+            event.text(val)
+            $('#external-events').prepend(event)
+            ini_events(event)
+            $('#new-event').val('')
+        })
+
+        calendar.render();
+        setInterval( function () {
+            calendar.refetchEvents();
+        }, 3000 );
+    });
+    // console.log(var_member_dashboard_input_calendar_reserve_numbers);
+});
+$('#funtion_document_admission_division_all_count_0_level_4').each(function () {
+    document.getElementById('funtion_document_admission_division_all_count_0_level_4').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_document_admission_division_all_count_0_level_4() {
+        $.ajax({
+            type: "GET",
+            url: "/document_admission_division/count/0/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_document_admission_division_all_count_0_level_4').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_document_admission_division_all_count_0_level_4').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_document_admission_division_all_count_0_level_4();
+    setInterval( function () {
+        funtion_document_admission_division_all_count_0_level_4();
+    }, 3000 );
+});
+$('#funtion_document_admission_division_inside_all_count_0_level_4').each(function () {
+    document.getElementById('funtion_document_admission_division_inside_all_count_0_level_4').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_document_admission_division_inside_all_count_0_level_4() {
+        $.ajax({
+            type: "GET",
+            url: "/document_admission_division_inside/count/0/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_document_admission_division_inside_all_count_0_level_4').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_document_admission_division_inside_all_count_0_level_4').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_document_admission_division_inside_all_count_0_level_4();
+    setInterval( function () {
+        funtion_document_admission_division_inside_all_count_0_level_4();
+    }, 3000 );
+});
+$('#funtion_document_admission_department_inside_all_count_0_level_5').each(function () {
+    document.getElementById('funtion_document_admission_department_inside_all_count_0_level_5').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_document_admission_department_inside_all_count_0_level_5() {
+        $.ajax({
+            type: "GET",
+            url: "/document_admission_department_inside/count/0/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_document_admission_department_inside_all_count_0_level_5').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_document_admission_department_inside_all_count_0_level_5').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_document_admission_department_inside_all_count_0_level_5();
+    setInterval( function () {
+        funtion_document_admission_department_inside_all_count_0_level_5();
+    }, 3000 );
+});
+$('#funtion_document_admission_department_all_count_0_level_5').each(function () {
+    document.getElementById('funtion_document_admission_department_all_count_0_level_5').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_document_admission_department_all_count_0_level_5() {
+        $.ajax({
+            type: "GET",
+            url: "/document_admission_department/count/0/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_document_admission_department_all_count_0_level_5').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_document_admission_department_all_count_0_level_5').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_document_admission_department_all_count_0_level_5();
+    setInterval( function () {
+        funtion_document_admission_department_all_count_0_level_5();
+    }, 3000 );
+});
+$('#funtion_document_admission_all_group_count_0_level_6').each(function () {
+    document.getElementById('funtion_document_admission_all_group_count_0_level_6').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_document_admission_all_group_count_0_level_6() {
+        $.ajax({
+            type: "GET",
+            url: "/document_admission_all_group/count/0/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_document_admission_all_group_count_0_level_6').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_document_admission_all_group_count_0_level_6').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_document_admission_all_group_count_0_level_6();
+    setInterval( function () {
+        funtion_document_admission_all_group_count_0_level_6();
+    }, 3000 );
+});
+$('#funtion_document_admission_all_group_inside_count_0_level_6').each(function () {
+    document.getElementById('funtion_document_admission_all_group_inside_count_0_level_6').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_document_admission_all_group_inside_count_0_level_6() {
+        $.ajax({
+            type: "GET",
+            url: "/document_admission_all_group_inside/count/0/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_document_admission_all_group_inside_count_0_level_6').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_document_admission_all_group_inside_count_0_level_6').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_document_admission_all_group_inside_count_0_level_6();
+    setInterval( function () {
+        funtion_document_admission_all_group_inside_count_0_level_6();
+    }, 3000 );
+});
+$('#funtion_document_admission_all_work_count_0_level_7').each(function () {
+    document.getElementById('funtion_document_admission_all_work_count_0_level_7').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_document_admission_all_work_count_0_level_7() {
+        $.ajax({
+            type: "GET",
+            url: "/document_admission_all_work/count/0/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_document_admission_all_work_count_0_level_7').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_document_admission_all_work_count_0_level_7').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_document_admission_all_work_count_0_level_7();
+    setInterval( function () {
+        funtion_document_admission_all_work_count_0_level_7();
+    }, 3000 );
+});
+$('#funtion_document_admission_all_work_inside_count_0_level_7').each(function () {
+    document.getElementById('funtion_document_admission_all_work_inside_count_0_level_7').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_document_admission_all_work_inside_count_0_level_7() {
+        $.ajax({
+            type: "GET",
+            url: "/document_admission_all_work_inside/count/0/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_document_admission_all_work_inside_count_0_level_7').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_document_admission_all_work_inside_count_0_level_7').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_document_admission_all_work_inside_count_0_level_7();
+    setInterval( function () {
+        funtion_document_admission_all_work_inside_count_0_level_7();
+    }, 3000 );
+});
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //ดึงข้อมูล ด้วย ajax ตาม path
 if(window.location.pathname == '/documents_admission_all/all'){
         var table = $('.table').DataTable({

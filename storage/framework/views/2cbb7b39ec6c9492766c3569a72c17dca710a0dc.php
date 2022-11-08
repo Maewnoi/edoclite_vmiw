@@ -262,4 +262,20 @@ $.widget.bridge('uibutton', $.ui.button)
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="<?php echo e(asset('/js/jsController.js')); ?>"></script>
-<script src="<?php echo e(asset('/js/query.js')); ?>"></script><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/layouts/guest.blade.php ENDPATH**/ ?>
+<script src="<?php echo e(asset('/js/query.js')); ?>"></script>
+
+<script>
+    window.addEventListener("offline", (event) => {
+        swal({
+            title: "ไม่พบการเชื่อมต่อ (offline)",
+            icon: "error",
+        });
+    });
+
+    window.addEventListener("online", (event) => {
+        swal({
+            title: "กลับมาออนไลน์ปกติ (online)",
+            icon: "success",
+        });
+    });
+</script><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/layouts/guest.blade.php ENDPATH**/ ?>

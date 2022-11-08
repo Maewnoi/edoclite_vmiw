@@ -254,3 +254,19 @@ $.widget.bridge('uibutton', $.ui.button)
 
 <script src="{{ asset('/js/jsController.js') }}"></script>
 <script src="{{ asset('/js/query.js') }}"></script>
+
+<script>
+    window.addEventListener("offline", (event) => {
+        swal({
+            title: "ไม่พบการเชื่อมต่อ (offline)",
+            icon: "error",
+        });
+    });
+
+    window.addEventListener("online", (event) => {
+        swal({
+            title: "กลับมาออนไลน์ปกติ (online)",
+            icon: "success",
+        });
+    });
+</script>
