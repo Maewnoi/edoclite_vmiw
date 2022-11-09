@@ -171,7 +171,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::post('/service/update/{id}',[ServiceController::class,'update']);
     Route::get('/service/delete/{id}',[ServiceController::class,'delete']);
     //---------------------------------------------------------------------------------------------------
-
+    //replace รักษาการแทน
+    Route::get('/replace/all',[replaceController::class,'index'])->name('replace');
+    Route::post('/replace/update',[replaceController::class,'update'])->name('updateReplace');
     //member 
     Route::get('/member_dashboard',[member_dashboardController::class,'index'])->name('member_dashboard');
     Route::post('/member_dashboard/document_accepting_new',[member_dashboardController::class,'document_accepting_new'])->name('document_accepting_new');

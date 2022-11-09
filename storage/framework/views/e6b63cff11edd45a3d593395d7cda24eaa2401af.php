@@ -17,11 +17,17 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    
                     <div class="shadow card">
-                        <div class="card-header bg-primary">บันทึกข้อความ</div>
+                        <div class="card-header bg-primary">
+                            <div class="clearfix">
+                            บันทึกข้อความ
+                                <div class="float-right spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-body table-responsive">
-                            <table id="example1" class="table">
+                            <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
@@ -29,55 +35,11 @@ use App\Http\Controllers\functionController;
                                         <th scope="col">ที่ร่าง</th>
                                         <th scope="col">วันที่</th>
                                         <th scope="col">เรื่อง</th>
-                                        <th scope="col">ชั้นความเร็ว/สถานะ</th>
+                                        <th scope="col">ชั้นความเร็ว</th>
+                                        <th scope="col">สถานะ</th>
                                         <th scope="col">รายละเอียด</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php $__currentLoopData = $document_admission_division_retrun; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <tr>
-                                        <th><?php echo e($loop->index+1); ?></th>
-                                        <td><?php echo e($row->sub3d_government); ?></td>
-                                        <td><?php echo e($row->sub3d_draft); ?></td>
-                                        <td><?php echo e($row->sub3d_date); ?></td>
-                                        <td><?php echo e($row->sub3d_topic); ?></td>
-                                        <td>
-                                            <?php echo functionController::funtion_doc_speed($row->sub3d_speed); ?>
-
-                                            <?php echo functionController::funtion_sub3_status($row->sub3_status); ?>
-
-                                        </td>
-                                        <td>
-                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.nav-link','data' => ['href' => ''.e(url('/documents_admission_division_retrun/detail/'.$row->doc_id)).'']]); ?>
-<?php $component->withName('jet-nav-link'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['href' => ''.e(url('/documents_admission_division_retrun/detail/'.$row->doc_id)).'']); ?>
-                                                <i class="far fa-file-alt"></i>
-                                             <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                            <!-- <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => []]); ?>
-<?php $component->withName('jet-button'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes([]); ?>
-                                                <i class="fas fa-trash-alt"></i>
-                                             <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?> -->
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </tbody>
                             </table>
                         </div>
                     </div>

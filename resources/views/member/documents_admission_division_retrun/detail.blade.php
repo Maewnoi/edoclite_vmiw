@@ -20,64 +20,76 @@ use App\Http\Controllers\functionController;
                             เอกสารรับเข้าภายนอกรายละเอียด : {{$document_detail->doc_origin}}
                         </div>
                         <div class="card-body table-responsive">
-                            <div class="card card-body">
-                                <x-jet-label class="text-lg" value="{{ __('ข้อมูลทั่วไป') }}" />
-                            </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_recnum"
-                                            value="{{ __('เลขที่รับส่วนงาน') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_recnum}}</label>
+                                        เลขที่รับส่วนงาน : 
+                                        <font class="text-primary">{{$document_detail->doc_recnum}}</font>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        เลขที่หนังสือ : 
+                                        <font class="text-primary">{{$document_detail->doc_docnum}}</font>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_docnum"
-                                            value="{{ __('เลขที่หนังสือ') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_docnum}}</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_date" value="{{ __('วันที่') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_date}}</label>
+                                        วันที่ :
+                                        <font class="text-primary">{{$document_detail->doc_date}}</font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_date_2" value="{{ __('ลงวันที่') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_date}}</label>
+                                        ลงวันที่ : 
+                                        <font class="text-primary">{{$document_detail->doc_date}}</font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_time" value="{{ __('เวลา') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_time}}</label>
+                                        เวลา : 
+                                        <font class="text-primary">{{$document_detail->doc_time}}</font>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        ชั้นความเร็ว/สถานะ : 
+                                        {!! functionController::funtion_doc_speed($document_detail->doc_speed) !!}
+                                        {!! functionController::funtion_doc_status($document_detail->doc_status) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_title" value="{{ __('เรื่อง') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_title}}</label>
+                                        เรื่อง : 
+                                        <font class="text-primary">{{$document_detail->doc_title}}</font>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <x-jet-label class="text-md" for="" value="{{ __('ชั้นความเร็ว/สถานะ') }}" />
-                                        {!! functionController::funtion_doc_speed($document_detail->sub3d_speed) !!}
-                                        {!! functionController::funtion_sub3_status($document_detail->sub3_status) !!}
+                                
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <button type="button" data-toggle="modal"
+                                             data-target="#modal-update-general{{$document_detail->doc_id}}"
+                                            class="btn btn-outline-warning "><i class="fa fa-edit"></i> แก้ไขข้อมูลทั่วไป</button>
+                                            
+                                            <button type="button" data-toggle="modal"
+                                                data-target="#modal-update-file{{$document_detail->doc_id}}"
+                                                class="btn btn-outline-warning "><i class="fa fa-edit"></i> เปลี่ยนไฟล์เอกสาร</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            
+                                            @error('doc_filedirec')
+                                            <div class="my-2">
+                                                <p class="mt-2 text-sm text-red-600">
+                                                    {{$message}}</p>
+                                            </div>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card card-body">
-                                <x-jet-label class="text-lg" value="{{ __('ข้อมูลเอกสาร') }}" />
-                                @error('doc_filedirec')
-                                <div class="my-2">
-                                    <p class="mt-2 text-sm text-red-600">
-                                        {{$message}}</p>
-                                </div>
-                                @enderror
+
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -89,7 +101,7 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
-                            
+                            ผู้บันทึกตอบกลับ : {{functionController::funtion_users($document_detail->sub2_recid)}}
                             <hr>
                         </div>
                     </div>
