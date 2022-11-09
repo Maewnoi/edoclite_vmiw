@@ -96,7 +96,6 @@
 
 <body>
     <div class="font-sans antialiased text-gray-900">
-        @include('sweetalert::alert')
         {{ $slot }}
     </div>
 </body>
@@ -213,7 +212,7 @@ $.widget.bridge('uibutton', $.ui.button)
 
 <!-- SweetAlert2 -->
 <!-- <script src="{{ asset('/plugins/sweetalert2/sweetalert2.min.js') }}"></script> -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
 @if ($errors->any())
 @foreach ($errors->all() as $error)
     <script>
@@ -223,6 +222,24 @@ $.widget.bridge('uibutton', $.ui.button)
         });
     </script>
 @endforeach
+@endif
+
+@if (session('error'))
+    <script>
+        swal({
+            title: "{{ session('error') }}",
+            icon: "error",
+        });
+    </script>
+@endif
+
+@if (session('success'))
+    <script>
+        swal({
+            title: "{{ session('success') }}",
+            icon: "success",
+        });
+    </script>
 @endif
 <!-- Toastr -->
 <script src="{{ asset('/plugins/toastr/toastr.min.js') }}"></script>
