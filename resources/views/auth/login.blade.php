@@ -4,11 +4,11 @@
             <img src="{{ asset('/image/logo_lei.png') }}" class="brand-image img-circle elevation-3" width="100"
                 height="100">
         </x-slot>
-        <x-jet-label class="text-center text-lg" id="txt-login" value="{{ __('ระบบสารบรรณอิเล็กทรอนิกส์') }}" />
+        <x-jet-label class="text-lg text-center" id="txt-login" value="{{ __('ระบบสารบรรณอิเล็กทรอนิกส์') }}" />
         <x-jet-validation-errors class="mb-4" />
 
         @if (session('status'))
-        <div class="mb-4 font-medium text-sm text-green-600">
+        <div class="mb-4 text-sm font-medium text-green-600">
             {{ session('status') }}
         </div>
         @endif
@@ -18,13 +18,13 @@
 
             <div>
                 <x-jet-label for="email" value="{{ __('Username') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')"
+                <x-jet-input id="email" class="block w-full mt-1" type="text" name="email" :value="old('email')"
                     required autofocus />
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                <x-jet-input id="password" class="block w-full mt-1" type="password" name="password" required
                     autocomplete="current-password" />
             </div>
 
@@ -37,12 +37,12 @@
 
             <div class="flex items-center justify-end mt-4">
                 <!-- @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                    <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif -->
 
-                <x-jet-button class="ml-4">
+                <x-jet-button class="ml-4" onclick="submitForm(this);">
                     {{ __('Login') }}
                 </x-jet-button>
             </div>
@@ -56,7 +56,7 @@
     <div class="modal fade" id="modal-Test-Account">
         <div class="modal-dialog modal-l">
             <div class="modal-content">
-                <div class="modal-header bg-red-300">
+                <div class="bg-red-300 modal-header">
                     <label class="modal-title">Test Account
                     </label>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>

@@ -119,13 +119,23 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_admission_group_inside/all/0/query',[queryController::class,'funtion_query_documents_admission_group_inside_0_Controller_level_6']);
     Route::get('/documents_admission_group_inside/all/1/query',[queryController::class,'funtion_query_documents_admission_group_inside_1_Controller_level_6']);
     Route::get('/documents_admission_group_inside/all/2/query',[queryController::class,'funtion_query_documents_admission_group_inside_2_Controller_level_6']);
-
     Route::get('/documents_admission_all_inside/all/query',[queryController::class,'funtion_query_documents_admission_all_insideController_level_6']);
-
     Route::get('/documents_admission_work_all/all/0/query',[queryController::class,'funtion_query_documents_admission_work_all_0_Controller_level_7']);
     Route::get('/documents_admission_work_all/all/1/query',[queryController::class,'funtion_query_documents_admission_work_all_1_Controller_level_7']);
     Route::get('/documents_admission_work_inside_all/all/0/query',[queryController::class,'funtion_query_documents_admission_work_inside_all_0_Controller_level_7']);
     Route::get('/documents_admission_work_inside_all/all/1/query',[queryController::class,'funtion_query_documents_admission_work_inside_all_1_Controller_level_7']);
+
+    Route::get('/document_admission_all_work_inside/count/0/query',[queryController::class,'funtion_query_nav_document_admission_all_work_inside_count_0_level_7']);
+    Route::get('/document_admission_all_work/count/0/query',[queryController::class,'funtion_query_nav_document_admission_all_work_count_0_level_7']);
+    Route::get('/document_admission_all_group_inside/count/0/query',[queryController::class,'funtion_query_nav_document_admission_all_group_inside_count_0_level_6']);
+    Route::get('/document_admission_all_group/count/0/query',[queryController::class,'funtion_query_nav_document_admission_all_group_count_0_level_6']);
+    Route::get('/document_admission_department/count/0/query',[queryController::class,'funtion_query_nav_document_admission_department_all_count_0_level_5']);
+    Route::get('/document_admission_department_inside/count/0/query',[queryController::class,'funtion_query_nav_document_admission_department_inside_all_count_0_level_5']);
+
+    Route::get('/document_admission_division_inside/count/0/query',[queryController::class,'funtion_query_nav_document_admission_division_inside_all_count_0_level_4']);
+    Route::get('/document_admission_division/count/0/query',[queryController::class,'funtion_query_nav_document_admission_division_all_count_0_level_4']);
+
+
 
     //---------------------------------------------------------------------------------------------------
     

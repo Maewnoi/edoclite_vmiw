@@ -13,6 +13,178 @@ use DataTables;
 class queryController extends Controller
 {
     //
+    public static function funtion_query_nav_document_admission_division_all_count_0_level_4() {
+        if(Auth::user()->level=='4'){
+            //นับจำนวนงานรอพิจารณาภายนอก
+            $document_waiting_count = document::where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '0')
+            ->where('doc_template', 'A')
+            ->where('doc_status', 'waiting')
+            ->count();
+            $document_admission_division_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '0')
+            ->where('doc_template', 'A')
+            ->where('doc_status', 'success')
+            ->where('sub_recid', Auth::user()->group)
+            ->where('sub_status', '2')
+            ->where('seal_id_1', Auth::user()->id)
+            ->count();
+            $level4_count_0_level_4 = $document_admission_division_all_count_0+$document_waiting_count;
+            return $level4_count_0_level_4;
+            
+        }else{
+
+        }
+    }
+    
+    public static function funtion_query_nav_document_admission_division_inside_all_count_0_level_4() {
+        if(Auth::user()->level=='4'){
+            //นับจำนวนงานรอพิจารณา
+            $document_admission_division_inside_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                    ->orWhere('doc_template', 'C')
+                    ->orWhere('doc_template', 'D')
+                    ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_recid', Auth::user()->group)
+            ->where('sub_status', '2')
+            ->where('seal_id_1', Auth::user()->id)
+            ->count();
+            return $document_admission_division_inside_all_count_0;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_query_nav_document_admission_department_inside_all_count_0_level_5() {
+        if(Auth::user()->level=='5'){
+            //นับจำนวนงานพิจารณาแล้ว
+            $document_admission_department_inside_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                    ->orWhere('doc_template', 'C')
+                    ->orWhere('doc_template', 'D')
+                    ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_recid', Auth::user()->group)
+            ->where('sub_status', '1')
+            ->where('seal_id_0', Auth::user()->id)
+            ->count();
+            return $document_admission_department_inside_all_count_0;
+        }else{
+            return 0;
+        }
+    }
+    public static function funtion_query_nav_document_admission_department_all_count_0_level_5() {
+        if(Auth::user()->level=='5'){
+            //นับจำนวนงานรอพิจารณา
+            $document_admission_department_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '0')
+            ->where('doc_template', 'A')
+            ->where('doc_status', 'success')
+            ->where('sub_recid', Auth::user()->group)
+            ->where('sub_status', '1')
+            ->where('seal_id_0', Auth::user()->id)
+            ->count();
+            return $document_admission_department_all_count_0;
+        }else{
+            return 0;
+        }
+    }
+    
+    public static function funtion_query_nav_document_admission_all_group_count_0_level_6() {
+        if(Auth::user()->level=='6'){
+            //นับจำนวนงานภายนอกใหม่
+            $document_admission_all_group_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '0')
+            ->where('doc_template', 'A')
+            ->where('doc_status', 'success')
+            ->where('sub_recid', Auth::user()->group)
+            ->where('sub_status', '0')
+            ->count();
+            return $document_admission_all_group_count_0;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_query_nav_document_admission_all_group_inside_count_0_level_6() {
+        if(Auth::user()->level=='6'){
+            $document_admission_all_group_inside_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                      ->orWhere('doc_template', 'C')
+                      ->orWhere('doc_template', 'D')
+                      ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_recid', Auth::user()->group)
+            ->where('sub_status', '0')
+            ->count();
+            return $document_admission_all_group_inside_count_0;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_query_nav_document_admission_all_work_count_0_level_7() {
+        if(Auth::user()->level=='7'){
+             //นักจำนวนงานยังไม่อ่าน
+             $document_admission_all_work_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+             ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+             ->where('doc_site_id',Auth::user()->site_id)
+             ->where('doc_type', '0')
+             ->where('doc_template', 'A')
+             ->where('doc_status', 'success')
+             ->where('sub_recid', Auth::user()->group)
+             ->where('sub_status', '8')
+             ->where('sub2_status', '0')
+             ->where('sub2_recid', Auth::user()->id)
+             ->count();
+             return $document_admission_all_work_count_0;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_query_nav_document_admission_all_work_inside_count_0_level_7() {
+        if(Auth::user()->level=='7'){
+            //นักจำนวนงานยังไม่อ่าน
+            $document_admission_all_work_inside_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                        ->orWhere('doc_template', 'C')
+                        ->orWhere('doc_template', 'D')
+                        ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_recid', Auth::user()->group)
+            ->where('sub_status', '8')
+            ->where('sub2_status', '0')
+            ->where('sub2_recid', Auth::user()->id)
+            ->count();
+            return $document_admission_all_work_inside_count_0;
+        }else{
+            return 0;
+        }
+      
+    }
+
     public static function funtion_query_documents_admission_allController_level_3(){
         if(Auth::user()->level=='3'){
             $documents = document::where('doc_site_id',Auth::user()->site_id)

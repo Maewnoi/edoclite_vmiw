@@ -47,12 +47,12 @@ use App\Http\Controllers\functionController;
             <!-- Current Profile Photo -->
             <div class="mt-2" x-show="! photoPreview">
                 <img src="<?php echo e($this->user->profile_photo_url); ?>" alt="<?php echo e($this->user->name); ?>"
-                    class="rounded-full h-20 w-20 object-cover">
+                    class="object-cover w-20 h-20 rounded-full">
             </div>
 
             <!-- New Profile Photo Preview -->
             <div class="mt-2" x-show="photoPreview">
-                <span class="block rounded-full w-20 h-20"
+                <span class="block w-20 h-20 rounded-full"
                     x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'">
                 </span>
             </div>
@@ -119,11 +119,11 @@ use App\Http\Controllers\functionController;
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'name','type' => 'text','class' => 'mt-1 block w-full','wire:model.defer' => 'state.name','autocomplete' => 'name']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'name','type' => 'text','class' => 'block w-full mt-1','wire:model.defer' => 'state.name','autocomplete' => 'name']]); ?>
 <?php $component->withName('jet-input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'name','type' => 'text','class' => 'mt-1 block w-full','wire:model.defer' => 'state.name','autocomplete' => 'name']); ?>
+<?php $component->withAttributes(['id' => 'name','type' => 'text','class' => 'block w-full mt-1','wire:model.defer' => 'state.name','autocomplete' => 'name']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
@@ -159,11 +159,11 @@ use App\Http\Controllers\functionController;
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'email','type' => 'text','class' => 'mt-1 block w-full','wire:model.defer' => 'state.email']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'email','type' => 'text','class' => 'block w-full mt-1','wire:model.defer' => 'state.email']]); ?>
 <?php $component->withName('jet-input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'email','type' => 'text','class' => 'mt-1 block w-full','wire:model.defer' => 'state.email']); ?>
+<?php $component->withAttributes(['id' => 'email','type' => 'text','class' => 'block w-full mt-1','wire:model.defer' => 'state.email']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
@@ -199,11 +199,11 @@ use App\Http\Controllers\functionController;
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'pos','type' => 'text','class' => 'mt-1 block w-full','wire:model.defer' => 'state.pos']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'pos','type' => 'text','class' => 'block w-full mt-1','wire:model.defer' => 'state.pos']]); ?>
 <?php $component->withName('jet-input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'pos','type' => 'text','class' => 'mt-1 block w-full','wire:model.defer' => 'state.pos']); ?>
+<?php $component->withAttributes(['id' => 'pos','type' => 'text','class' => 'block w-full mt-1','wire:model.defer' => 'state.pos']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
@@ -239,11 +239,11 @@ use App\Http\Controllers\functionController;
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'tel','type' => 'text','class' => 'mt-1 block w-full','wire:model.defer' => 'state.tel']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'tel','type' => 'text','class' => 'block w-full mt-1','wire:model.defer' => 'state.tel']]); ?>
 <?php $component->withName('jet-input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'tel','type' => 'text','class' => 'mt-1 block w-full','wire:model.defer' => 'state.tel']); ?>
+<?php $component->withAttributes(['id' => 'tel','type' => 'text','class' => 'block w-full mt-1','wire:model.defer' => 'state.tel']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
@@ -363,7 +363,7 @@ use App\Http\Controllers\functionController;
 <?php endif; ?>
             <?php if(Auth::user()->sign != ''): ?>
             <div class="mt-2">
-                <img src="<?php echo e(asset(Auth::user()->sign)); ?>" alt="" class="rounded-full h-20 w-20 object-cover">
+                <img src="<?php echo e(asset(Auth::user()->sign)); ?>" alt="" class="object-cover w-20 h-20 rounded-full">
             </div>
             <?php else: ?>
             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -391,6 +391,79 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
+
+            <div class="modal fade" id="modal-addSign">
+                <div class="modal-dialog modal-l">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">อัพโหลดรูปลายเซ็นของคุณ ?
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="<?php echo e(route('addSign')); ?>" method="post" enctype="multipart/form-data">
+                                <?php echo csrf_field(); ?>
+                                <?php if(Auth::user()->sign != ''): ?>
+                                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['type' => 'hidden','value' => ''.e(Auth::user()->sign).'','name' => 'old_sign','class' => 'block w-full mt-1 form-control','accept' => 'image/*']]); ?>
+<?php $component->withName('jet-input'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['type' => 'hidden','value' => ''.e(Auth::user()->sign).'','name' => 'old_sign','class' => 'block w-full mt-1 form-control','accept' => 'image/*']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                <?php endif; ?>
+                                <div class="row">
+                                    <div class="col-span-6 sm:col-span-4">
+                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['type' => 'file','name' => 'sign','class' => 'block w-full mt-1 form-control','required' => true,'accept' => 'image/*']]); ?>
+<?php $component->withName('jet-input'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['type' => 'file','name' => 'sign','class' => 'block w-full mt-1 form-control','required' => true,'accept' => 'image/*']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                    </div>
+                                </div>
+                                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['type' => 'hidden','value' => ''.e(Auth::user()->id).'','name' => 'id','class' => 'block w-full mt-1 form-control']]); ?>
+<?php $component->withName('jet-input'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['type' => 'hidden','value' => ''.e(Auth::user()->id).'','name' => 'id','class' => 'block w-full mt-1 form-control']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                <br>
+                                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
+<?php $component->withName('jet-button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
+                                    <?php echo e(__('save')); ?>
+
+                                 <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
      <?php $__env->endSlot(); ?>
 
@@ -426,6 +499,7 @@ use App\Http\Controllers\functionController;
 <?php endif; ?>
      <?php $__env->endSlot(); ?>
 
+    
 
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
@@ -434,75 +508,4 @@ use App\Http\Controllers\functionController;
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
 
-<div class="modal fade" id="modal-addSign">
-    <div class="modal-dialog modal-l">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">คุณต้องการลบชื่อผู้ใช้นี้หรือไม่ ?
-                </h4>
-            </div>
-            <div class="modal-body">
-                <form action="<?php echo e(route('addSign')); ?>" method="post" enctype="multipart/form-data">
-                    <?php echo csrf_field(); ?>
-                    <?php if(Auth::user()->sign != ''): ?>
-                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['type' => 'hidden','value' => ''.e(Auth::user()->sign).'','name' => 'old_sign','class' => 'form-control mt-1 block w-full','accept' => 'image/*']]); ?>
-<?php $component->withName('jet-input'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['type' => 'hidden','value' => ''.e(Auth::user()->sign).'','name' => 'old_sign','class' => 'form-control mt-1 block w-full','accept' => 'image/*']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                    <?php endif; ?>
-                    <div class="row">
-                        <div class="col-span-6 sm:col-span-4">
-                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['type' => 'file','name' => 'sign','class' => 'form-control mt-1 block w-full','required' => true,'accept' => 'image/*']]); ?>
-<?php $component->withName('jet-input'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['type' => 'file','name' => 'sign','class' => 'form-control mt-1 block w-full','required' => true,'accept' => 'image/*']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                        </div>
-                    </div>
-                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['type' => 'hidden','value' => ''.e(Auth::user()->id).'','name' => 'id','class' => 'form-control mt-1 block w-full']]); ?>
-<?php $component->withName('jet-input'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['type' => 'hidden','value' => ''.e(Auth::user()->id).'','name' => 'id','class' => 'form-control mt-1 block w-full']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                    <br>
-                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => []]); ?>
-<?php $component->withName('jet-button'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes([]); ?>
-                        <?php echo e(__('save')); ?>
-
-                     <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                </form>
-            </div>
-        </div>
-    </div>
-</div><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/profile/update-profile-information-form.blade.php ENDPATH**/ ?>
+<?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/profile/update-profile-information-form.blade.php ENDPATH**/ ?>

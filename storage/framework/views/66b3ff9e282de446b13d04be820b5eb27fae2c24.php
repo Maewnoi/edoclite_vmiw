@@ -100,15 +100,15 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-menu')->html();
-} elseif ($_instance->childHasBeenRendered('9PBZkzJ')) {
-    $componentId = $_instance->getRenderedChildComponentId('9PBZkzJ');
-    $componentTag = $_instance->getRenderedChildComponentTagName('9PBZkzJ');
+} elseif ($_instance->childHasBeenRendered('g3GuK9N')) {
+    $componentId = $_instance->getRenderedChildComponentId('g3GuK9N');
+    $componentTag = $_instance->getRenderedChildComponentTagName('g3GuK9N');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('9PBZkzJ');
+    $_instance->preserveRenderedChild('g3GuK9N');
 } else {
     $response = \Livewire\Livewire::mount('navigation-menu');
     $html = $response->html();
-    $_instance->logRenderedChild('9PBZkzJ', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('g3GuK9N', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -282,4 +282,20 @@ $.widget.bridge('uibutton', $.ui.button)
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="<?php echo e(asset('/js/jsController.js')); ?>"></script>
-<script src="<?php echo e(asset('/js/query.js')); ?>"></script><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/layouts/app.blade.php ENDPATH**/ ?>
+<script src="<?php echo e(asset('/js/query.js')); ?>"></script>
+
+<script>
+    window.addEventListener("offline", (event) => {
+        swal({
+            title: "ไม่พบการเชื่อมต่อ (offline)",
+            icon: "error",
+        });
+    });
+
+    window.addEventListener("online", (event) => {
+        swal({
+            title: "กลับมาออนไลน์ปกติ (online)",
+            icon: "success",
+        });
+    });
+</script><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/layouts/app.blade.php ENDPATH**/ ?>
