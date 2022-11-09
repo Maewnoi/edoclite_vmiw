@@ -739,28 +739,14 @@ if(window.location.pathname == '/documents_admission_all/all'){
                 }
             },
             {
-                data: 'sub_status' ,
+                data: 'doc_status' ,
                 render: function ( data) {
-                    if(data == '0'){
-                        txt_status = '<span class="badge bg-danger">ใหม่</span>';
-                    }else if(data == '1'){
-                        txt_status = '<span class="badge bg-warning">รอหัวหน้าฝ่ายพิจารณา</span>';
-                    }else if(data == '2'){
-                        txt_status = '<span class="badge bg-warning">รอหัวหน้ากองงานพิจารณา</span>';
-                    }else if(data == '3'){
-                        txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
-                    }else if(data == '4'){
-                        txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
-                    }else if(data == '5'){
-                        txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
-                    }else if(data == '6'){
-                        txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
-                    }else if(data == '7'){
-                        txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
-                    }else if(data == '8'){
-                        txt_status = '<span class="badge bg-success">สำเร็จ</span>';
+                    if(data == 'waiting'){
+                        txt_status = '<span class="badge bg-warning">รอพิจารณา</span>';
+                    }else if(data == 'success'){
+                        txt_status = '<span class="badge bg-success">พิจารณาแล้ว</span>';
                     }else{
-                        return "ไม่ถูกนิยาม";
+                        txt_status = "ไม่ถูกนิยาม";
                     }
                     return (txt_status)
                 }
