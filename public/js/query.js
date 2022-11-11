@@ -1,3 +1,49 @@
+$('#chart_level_0').each(function () {
+    
+    var dataPoints = [];
+    var dataLength = 20;
+    var var_chart_level_0 = new CanvasJS.Chart("chart_level_0", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            fontFamily: "italic",
+            fontSize: 16,
+            text: ""
+        },
+        axisY: {
+            lineThickness: 1
+        },
+        data: [{
+            toolTipContent: "<b>{label}</b>: จำนวนเอกสาร {y} เรื่อง",
+            dataPoints: dataPoints,
+            type: "line"
+        }]
+    });
+
+    var updateChart = function () {
+        $.ajax({
+            type: "GET",
+            url: "/dashboard/count/sub2_docs/query",
+            data: '',
+            success: function(data) {
+                jQuery.each(data, function(index, item) {
+                    // console.log(item);
+                    dataPoints.push({label: item['doc_date'], y: item['sub2_id']});
+                });
+                var_chart_level_0.render();
+                dataPoints = [];
+            },
+            error: function(request, status, error) {
+                document.getElementById('chart_level_0').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
+                console.log(error);
+            }
+        });
+    }
+    updateChart();
+    setInterval(function(){updateChart()}, 3000);
+    // console.log(dataPoints);
+});
 $('#funtion_query_dashboard_count_sites_level_0').each(function () {
     document.getElementById('funtion_query_dashboard_count_sites_level_0').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
     function funtion_query_dashboard_count_sites_level_0() {
@@ -20,6 +66,7 @@ $('#funtion_query_dashboard_count_sites_level_0').each(function () {
         funtion_query_dashboard_count_sites_level_0();
     }, 3000 );
 });
+
 $('#funtion_query_dashboard_count_groupmem_level_0').each(function () {
     document.getElementById('funtion_query_dashboard_count_groupmem_level_0').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
     function funtion_query_dashboard_count_groupmem_level_0() {
@@ -42,6 +89,7 @@ $('#funtion_query_dashboard_count_groupmem_level_0').each(function () {
         funtion_query_dashboard_count_groupmem_level_0();
     }, 3000 );
 });
+
 $('#funtion_query_dashboard_count_cottons_level_0').each(function () {
     document.getElementById('funtion_query_dashboard_count_cottons_level_0').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
     function funtion_query_dashboard_count_cottons_level_0() {
@@ -64,6 +112,7 @@ $('#funtion_query_dashboard_count_cottons_level_0').each(function () {
         funtion_query_dashboard_count_cottons_level_0();
     }, 3000 );
 });
+
 $('#funtion_query_dashboard_count_member_level_0').each(function () {
     document.getElementById('funtion_query_dashboard_count_member_level_0').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
     function funtion_query_dashboard_count_member_level_0() {
@@ -88,7 +137,7 @@ $('#funtion_query_dashboard_count_member_level_0').each(function () {
 });
 
 //ถ้าพบ element ตัวไหนใน views ไหนให้ ดึงข้อมูล ด้วย ajax นะครับบบ
-if($("#member_dashboard_input_documents_admission_all_waiting_count_level_3").val()&&$("#member_dashboard_input_documents_admission_all_success_count_level_3").val()){
+$('#chart_level_3').each(function () {
     var var_member_dashboard_input_documents_admission_all_waiting_count_level_3 = $("#member_dashboard_input_documents_admission_all_waiting_count_level_3").val();
     var var_member_dashboard_input_documents_admission_all_success_count_level_3 = $("#member_dashboard_input_documents_admission_all_success_count_level_3").val();
     var var_chart_level_3 = new CanvasJS.Chart("chart_level_3", {
@@ -115,9 +164,9 @@ if($("#member_dashboard_input_documents_admission_all_waiting_count_level_3").va
         }]
     });
     var_chart_level_3.render();
-}
+});
 
-if($("#member_dashboard_input_documents_admission_division_all_count_0_level_4").val()&&$("#member_dashboard_input_documents_admission_division_all_count_1_level_4").val()){
+$('#chart_level_4').each(function () {
     var var_member_dashboard_input_documents_admission_division_all_count_0_level_4 = $("#member_dashboard_input_documents_admission_division_all_count_0_level_4").val();
     var var_member_dashboard_input_documents_admission_division_all_count_1_level_4 = $("#member_dashboard_input_documents_admission_division_all_count_1_level_4").val();
     var var_chart_level_4 = new CanvasJS.Chart("chart_level_4", {
@@ -144,9 +193,9 @@ if($("#member_dashboard_input_documents_admission_division_all_count_0_level_4")
         }]
     });
     var_chart_level_4.render();
-}
+});
 
-if($("#member_dashboard_input_documents_admission_division_inside_all_count_0_level_4").val()&&$("#member_dashboard_input_documents_admission_division_inside_all_count_1_level_4").val()){
+$('#chart_inside_level_4').each(function () {
     var var_member_dashboard_input_documents_admission_division_inside_all_count_0_level_4 = $("#member_dashboard_input_documents_admission_division_inside_all_count_0_level_4").val();
     var var_member_dashboard_input_documents_admission_division_inside_all_count_1_level_4 = $("#member_dashboard_input_documents_admission_division_inside_all_count_1_level_4").val();
     var var_chart_inside_level_4 = new CanvasJS.Chart("chart_inside_level_4", {
@@ -173,9 +222,9 @@ if($("#member_dashboard_input_documents_admission_division_inside_all_count_0_le
         }]
     });
     var_chart_inside_level_4.render();
-}
+});
 
-if($("#member_dashboard_input_document_admission_department_all_count_0_level_5").val()&&$("#member_dashboard_input_document_admission_department_all_count_1_level_5").val()){
+$('#chart_level_5').each(function () {
     var var_member_dashboard_input_document_admission_department_all_count_0_level_5 = $("#member_dashboard_input_document_admission_department_all_count_0_level_5").val();
     var var_member_dashboard_input_document_admission_department_all_count_1_level_5 = $("#member_dashboard_input_document_admission_department_all_count_1_level_5").val();
     var var_chart_level_5 = new CanvasJS.Chart("chart_level_5", {
@@ -202,9 +251,9 @@ if($("#member_dashboard_input_document_admission_department_all_count_0_level_5"
         }]
     });
     var_chart_level_5.render();
-}
+});
 
-if($("#member_dashboard_input_document_admission_department_inside_all_count_0_level_5").val()&&$("#member_dashboard_input_document_admission_department_inside_all_count_1_level_5").val()){
+$('#chart_inside_level_5').each(function () {
     var var_member_dashboard_input_document_admission_department_inside_all_count_0_level_5 = $("#member_dashboard_input_document_admission_department_inside_all_count_0_level_5").val();
     var var_member_dashboard_input_document_admission_department_inside_all_count_1_level_5 = $("#member_dashboard_input_document_admission_department_inside_all_count_1_level_5").val();
     var var_chart_inside_level_5 = new CanvasJS.Chart("chart_inside_level_5", {
@@ -231,9 +280,9 @@ if($("#member_dashboard_input_document_admission_department_inside_all_count_0_l
         }]
     });
     var_chart_inside_level_5.render();
-}
+});
 
-if($("#member_dashboard_input_document_admission_all_group_count_0_level_6").val()&&$("#member_dashboard_input_document_admission_all_group_count_1_level_6").val()&&$("#member_dashboard_input_document_admission_all_group_count_2_level_6").val()){
+$('#chart_level_6').each(function () {
     var var_member_dashboard_input_document_admission_all_group_count_0_level_6 = $("#member_dashboard_input_document_admission_all_group_count_0_level_6").val();
     var var_member_dashboard_input_document_admission_all_group_count_1_level_6 = $("#member_dashboard_input_document_admission_all_group_count_1_level_6").val();
     var var_member_dashboard_input_document_admission_all_group_count_2_level_6 = $("#member_dashboard_input_document_admission_all_group_count_2_level_6").val();
@@ -262,9 +311,9 @@ if($("#member_dashboard_input_document_admission_all_group_count_0_level_6").val
         }]
     });
     var_chart_level_6.render();
-}
+});
 
-if($("#member_dashboard_input_document_admission_all_group_inside_count_0_level_6").val()&&$("#member_dashboard_input_document_admission_all_group_inside_count_1_level_6").val()&&$("#member_dashboard_input_document_admission_all_group_inside_count_2_level_6").val()){
+$('#chart_inside_level_6').each(function () {
     var var_member_dashboard_input_document_admission_all_group_inside_count_0_level_6 = $("#member_dashboard_input_document_admission_all_group_inside_count_0_level_6").val();
     var var_member_dashboard_input_document_admission_all_group_inside_count_1_level_6 = $("#member_dashboard_input_document_admission_all_group_inside_count_1_level_6").val();
     var var_member_dashboard_input_document_admission_all_group_inside_count_2_level_6 = $("#member_dashboard_input_document_admission_all_group_inside_count_2_level_6").val();
@@ -293,9 +342,9 @@ if($("#member_dashboard_input_document_admission_all_group_inside_count_0_level_
         }]
     });
     var_chart_inside_level_6.render();
-}
+});
 
-if($("#member_dashboard_input_document_admission_all_work_count_0_level_7").val()&&$("#member_dashboard_input_document_admission_all_work_count_1_level_7").val()){
+$('#chart_level_7').each(function () {
     var var_member_dashboard_input_document_admission_all_work_count_0_level_7 = $("#member_dashboard_input_document_admission_all_work_count_0_level_7").val();
     var var_member_dashboard_input_document_admission_all_work_count_1_level_7 = $("#member_dashboard_input_document_admission_all_work_count_1_level_7").val();
     var var_chart_level_7 = new CanvasJS.Chart("chart_level_7", {
@@ -322,9 +371,9 @@ if($("#member_dashboard_input_document_admission_all_work_count_0_level_7").val(
         }]
     });
     var_chart_level_7.render();
-}
+});
 
-if($("#member_dashboard_input_document_admission_all_work_inside_count_0_level_7").val()&&$("#member_dashboard_input_document_admission_all_work_inside_count_1_level_7").val()){
+$('#chart_inside_level_7').each(function () {
     var var_member_dashboard_input_document_admission_all_work_inside_count_0_level_7 = $("#member_dashboard_input_document_admission_all_work_inside_count_0_level_7").val();
     var var_member_dashboard_input_document_admission_all_work_inside_count_1_level_7 = $("#member_dashboard_input_document_admission_all_work_inside_count_1_level_7").val();
     var var_chart_inside_level_7 = new CanvasJS.Chart("chart_inside_level_7", {
@@ -351,7 +400,7 @@ if($("#member_dashboard_input_document_admission_all_work_inside_count_0_level_7
         }]
     });
     var_chart_inside_level_7.render();
-}
+});
 
 $('#member_dashboard_input_calendar_reserve_numbers').each(function () {
     var var_member_dashboard_input_calendar_reserve_numbers = $("#member_dashboard_input_calendar_reserve_numbers").val();

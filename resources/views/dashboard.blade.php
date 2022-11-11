@@ -61,7 +61,7 @@
                     <div class="col-md-12">
                         <div class="shadow card">
                             <div class="card-header">
-                                <h5 class="card-title">หน้าหลัก</h5>
+                                <h5 class="card-title">เอกสารทั้งหมด</h5>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -72,6 +72,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
+                                <div id="chart_level_0" style="height: 250px; width: 100%;"></div>
                             </div>
                             <div class="card-footer">
                             </div>

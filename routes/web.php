@@ -137,6 +137,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/dashboard/count/groupmem/query',[queryController::class,'funtion_query_dashboard_count_groupmem_level_0']);
     Route::get('/dashboard/count/cottons/query',[queryController::class,'funtion_query_dashboard_count_cottons_level_0']);
     Route::get('/dashboard/count/member/query',[queryController::class,'funtion_query_dashboard_count_member_level_0']);
+    Route::get('/dashboard/count/sub2_docs/query',[queryController::class,'funtion_query_dashboard_count_sub2_docs_level_0']);
 
     //---------------------------------------------------------------------------------------------------
     

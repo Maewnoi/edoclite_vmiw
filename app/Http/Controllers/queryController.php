@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\document;
 use App\Models\reserve_number;
 use App\Models\sub_doc;
-
+use App\Models\sub2_doc;
 use App\Models\sites;
 use App\Models\Groupmem;
 use App\Models\cottons;
@@ -18,6 +18,19 @@ use DataTables;
 class queryController extends Controller
 {
     //
+    
+    public static function funtion_query_dashboard_count_sub2_docs_level_0() {
+        if(Auth::user()->level=='0'){
+            $document_detail = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->selectRaw('count(sub2_id) as sub2_id, doc_date')
+            ->groupBy('doc_date')
+            ->get();
+            return $document_detail;
+        }else{
+            return 0;
+        }
+    }
     public static function funtion_query_dashboard_count_sites_level_0() {
         if(Auth::user()->level=='0'){
             //นับจำนวน sites
