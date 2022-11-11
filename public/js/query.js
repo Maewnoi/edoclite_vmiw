@@ -1,3 +1,92 @@
+$('#funtion_query_dashboard_count_sites_level_0').each(function () {
+    document.getElementById('funtion_query_dashboard_count_sites_level_0').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_query_dashboard_count_sites_level_0() {
+        $.ajax({
+            type: "GET",
+            url: "/dashboard/count/sites/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_query_dashboard_count_sites_level_0').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_query_dashboard_count_sites_level_0').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_query_dashboard_count_sites_level_0();
+    setInterval( function () {
+        funtion_query_dashboard_count_sites_level_0();
+    }, 3000 );
+});
+$('#funtion_query_dashboard_count_groupmem_level_0').each(function () {
+    document.getElementById('funtion_query_dashboard_count_groupmem_level_0').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_query_dashboard_count_groupmem_level_0() {
+        $.ajax({
+            type: "GET",
+            url: "/dashboard/count/groupmem/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_query_dashboard_count_groupmem_level_0').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_query_dashboard_count_groupmem_level_0').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_query_dashboard_count_groupmem_level_0();
+    setInterval( function () {
+        funtion_query_dashboard_count_groupmem_level_0();
+    }, 3000 );
+});
+$('#funtion_query_dashboard_count_cottons_level_0').each(function () {
+    document.getElementById('funtion_query_dashboard_count_cottons_level_0').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_query_dashboard_count_cottons_level_0() {
+        $.ajax({
+            type: "GET",
+            url: "/dashboard/count/cottons/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_query_dashboard_count_cottons_level_0').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_query_dashboard_count_cottons_level_0').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_query_dashboard_count_cottons_level_0();
+    setInterval( function () {
+        funtion_query_dashboard_count_cottons_level_0();
+    }, 3000 );
+});
+$('#funtion_query_dashboard_count_member_level_0').each(function () {
+    document.getElementById('funtion_query_dashboard_count_member_level_0').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_query_dashboard_count_member_level_0() {
+        $.ajax({
+            type: "GET",
+            url: "/dashboard/count/member/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_query_dashboard_count_member_level_0').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_query_dashboard_count_member_level_0').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_query_dashboard_count_member_level_0();
+    setInterval( function () {
+        funtion_query_dashboard_count_member_level_0();
+    }, 3000 );
+});
+
 //ถ้าพบ element ตัวไหนใน views ไหนให้ ดึงข้อมูล ด้วย ajax นะครับบบ
 if($("#member_dashboard_input_documents_admission_all_waiting_count_level_3").val()&&$("#member_dashboard_input_documents_admission_all_success_count_level_3").val()){
     var var_member_dashboard_input_documents_admission_all_waiting_count_level_3 = $("#member_dashboard_input_documents_admission_all_waiting_count_level_3").val();
@@ -575,7 +664,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
                 }
             ],
             order: [
-                [0, "asc"]
+                [0, "DESC"]
             ],
             ajax: {
                 url: window.location.pathname +'/query',
@@ -684,7 +773,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -789,7 +878,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -912,7 +1001,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -1035,7 +1124,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -1122,7 +1211,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -1241,7 +1330,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -1360,7 +1449,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -1482,7 +1571,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -1605,7 +1694,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
         }
     ],
     order: [
-        [0, "asc"]
+        [0, "DESC"]
     ],
     ajax: {
         url: window.location.pathname +'/query',
@@ -1681,7 +1770,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -1802,7 +1891,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -1921,7 +2010,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -2044,7 +2133,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -2168,7 +2257,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -2291,7 +2380,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -2412,7 +2501,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -2533,7 +2622,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -2654,7 +2743,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -2762,7 +2851,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -2870,7 +2959,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -2975,7 +3064,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',
@@ -3078,7 +3167,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
             }
         ],
         order: [
-            [0, "asc"]
+            [0, "DESC"]
         ],
         ajax: {
             url: window.location.pathname +'/query',

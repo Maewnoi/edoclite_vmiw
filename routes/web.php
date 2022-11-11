@@ -124,18 +124,19 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_admission_work_all/all/1/query',[queryController::class,'funtion_query_documents_admission_work_all_1_Controller_level_7']);
     Route::get('/documents_admission_work_inside_all/all/0/query',[queryController::class,'funtion_query_documents_admission_work_inside_all_0_Controller_level_7']);
     Route::get('/documents_admission_work_inside_all/all/1/query',[queryController::class,'funtion_query_documents_admission_work_inside_all_1_Controller_level_7']);
-
     Route::get('/document_admission_all_work_inside/count/0/query',[queryController::class,'funtion_query_nav_document_admission_all_work_inside_count_0_level_7']);
     Route::get('/document_admission_all_work/count/0/query',[queryController::class,'funtion_query_nav_document_admission_all_work_count_0_level_7']);
     Route::get('/document_admission_all_group_inside/count/0/query',[queryController::class,'funtion_query_nav_document_admission_all_group_inside_count_0_level_6']);
     Route::get('/document_admission_all_group/count/0/query',[queryController::class,'funtion_query_nav_document_admission_all_group_count_0_level_6']);
     Route::get('/document_admission_department/count/0/query',[queryController::class,'funtion_query_nav_document_admission_department_all_count_0_level_5']);
     Route::get('/document_admission_department_inside/count/0/query',[queryController::class,'funtion_query_nav_document_admission_department_inside_all_count_0_level_5']);
-
     Route::get('/document_admission_division_inside/count/0/query',[queryController::class,'funtion_query_nav_document_admission_division_inside_all_count_0_level_4']);
     Route::get('/document_admission_division/count/0/query',[queryController::class,'funtion_query_nav_document_admission_division_all_count_0_level_4']);
 
-
+    Route::get('/dashboard/count/sites/query',[queryController::class,'funtion_query_dashboard_count_sites_level_0']);
+    Route::get('/dashboard/count/groupmem/query',[queryController::class,'funtion_query_dashboard_count_groupmem_level_0']);
+    Route::get('/dashboard/count/cottons/query',[queryController::class,'funtion_query_dashboard_count_cottons_level_0']);
+    Route::get('/dashboard/count/member/query',[queryController::class,'funtion_query_dashboard_count_member_level_0']);
 
     //---------------------------------------------------------------------------------------------------
     

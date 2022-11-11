@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\member_dashboardController;
+use App\Models\sites;
+use App\Models\User;
+use App\Models\Groupmem;
+use App\Models\cottons;
 
 class dashboardController extends Controller
 {

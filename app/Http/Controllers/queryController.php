@@ -8,11 +8,52 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\document;
 use App\Models\reserve_number;
 use App\Models\sub_doc;
+
+use App\Models\sites;
+use App\Models\Groupmem;
+use App\Models\cottons;
+use App\Models\User;
 use DataTables;
 
 class queryController extends Controller
 {
     //
+    public static function funtion_query_dashboard_count_sites_level_0() {
+        if(Auth::user()->level=='0'){
+            //นับจำนวน sites
+            $sitesrS = sites::count();
+            return $sitesrS;
+        }else{
+            return 0;
+        }
+    }
+    public static function funtion_query_dashboard_count_groupmem_level_0() {
+        if(Auth::user()->level=='0'){
+            //นับจำนวน กลุ่ม
+            $GroupmemS = Groupmem::count();
+            return $GroupmemS;
+        }else{
+            return 0;
+        }
+    }
+    public static function funtion_query_dashboard_count_cottons_level_0() {
+        if(Auth::user()->level=='0'){
+            //นับจำนวน ฝ่าย
+            $cottonS = cottons::count();
+            return $cottonS;
+        }else{
+            return 0;
+        }
+    }
+    public static function funtion_query_dashboard_count_member_level_0() {
+        if(Auth::user()->level=='0'){
+            //นับจำนวนคน
+            $memberS = User::where('users.level', '!=' , '0')->count();
+            return $memberS;
+        }else{
+            return 0;
+        }
+    }
     public static function funtion_query_nav_document_admission_division_all_count_0_level_4() {
         if(Auth::user()->level=='4'){
             //นับจำนวนงานรอพิจารณาภายนอก
@@ -34,7 +75,7 @@ class queryController extends Controller
             return $level4_count_0_level_4;
             
         }else{
-
+            return 0;
         }
     }
     
@@ -206,6 +247,7 @@ class queryController extends Controller
             ->where('doc_type', '0')
             ->where('doc_template', 'A')
             ->where('doc_status', 'waiting')
+            ->orderby('doc_date','DESC')
             ->get();
 
             return $documents;
@@ -225,6 +267,7 @@ class queryController extends Controller
             ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '2')
             ->where('seal_id_1', Auth::user()->id)
+            ->orderby('doc_date','DESC')
             ->get();
 
             return $document_admission_division_all;
@@ -245,6 +288,7 @@ class queryController extends Controller
             ->where('sub_status', '!=','2')
             ->where('seal_id_1', Auth::user()->id)
             ->where('seal_date_1', '!=', NULL)
+            ->orderby('doc_date','DESC')
             ->get();
 
             return $document_admission_division_all;
@@ -269,6 +313,7 @@ class queryController extends Controller
             ->where('sub2_status', '1')
             ->where('sub3_status', '1')
             ->where('sub3_inspector_1', Auth::user()->id)
+            ->orderby('doc_date','DESC')
             ->get();
 
             return $document_admission_division_retrun;
@@ -293,6 +338,7 @@ class queryController extends Controller
             ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '2')
             ->where('seal_id_1', Auth::user()->id)
+            ->orderby('doc_date','DESC')
             ->get();
 
             return $document_admission_division_inside_all;
@@ -318,6 +364,7 @@ class queryController extends Controller
             ->where('sub_status', '!=','2')
             ->where('seal_id_1', Auth::user()->id)
             ->where('seal_date_1', '!=', NULL)
+            ->orderby('doc_date','DESC')
             ->get();
 
             return $document_admission_division_inside_all;
@@ -337,6 +384,7 @@ class queryController extends Controller
             ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '1')
             ->where('seal_id_0', Auth::user()->id)
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_department_all;
         }else{
@@ -356,6 +404,7 @@ class queryController extends Controller
             ->where('sub_status', '!=','1')
             ->where('seal_id_0', Auth::user()->id)
             ->where('seal_date_0', '!=', NULL)
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_department_all;
         }else{
@@ -379,6 +428,7 @@ class queryController extends Controller
             ->where('sub2_status', '1')
             ->where('sub3_status', '0')
             ->where('sub3_inspector_0', Auth::user()->id)
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_department_retrun;
         }else{
@@ -402,6 +452,7 @@ class queryController extends Controller
             ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '1')
             ->where('seal_id_0', Auth::user()->id)
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_department_inside_all;
         }else{
@@ -426,6 +477,7 @@ class queryController extends Controller
             ->where('sub_status', '!=','1')
             ->where('seal_id_0', Auth::user()->id)
             ->where('seal_date_0', '!=', NULL)
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_department_inside_all;
         }else{
@@ -443,7 +495,7 @@ class queryController extends Controller
             ->where('doc_status', 'success')
             ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '0')
-            ->ORDERBY('doc_date' ,'DESC')
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_all_group;
         }else{
@@ -462,8 +514,7 @@ class queryController extends Controller
             ->where('sub_recid', Auth::user()->group)
             ->where('sub_status','!=','0')
             ->where('sub_status','!=','8')
-            ->ORDERBY('doc_date' ,'DESC')
-            ->ORDERBY('doc_recnum' ,'DESC')
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_all_group;
         }else{
@@ -481,7 +532,7 @@ class queryController extends Controller
             ->where('doc_status', 'success')
             ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '8')
-            ->ORDERBY('doc_date' ,'DESC')
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_all_group;
         }else{
@@ -504,6 +555,7 @@ class queryController extends Controller
             ->where('doc_status', 'success')
             ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '0')
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_all_group_inside;
         }else{
@@ -527,6 +579,7 @@ class queryController extends Controller
             ->where('sub_recid', Auth::user()->group)
             ->where('sub_status','!=','0')
             ->where('sub_status','!=','8')
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_all_group_inside;
         }else{
@@ -548,6 +601,7 @@ class queryController extends Controller
             ->where('doc_status', 'success')
             ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '8')
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_all_group_inside;
         }else{
@@ -568,6 +622,7 @@ class queryController extends Controller
             ->where('sub_status', '8')
             ->where('sub2_status', '0')
             ->where('sub2_recid', Auth::user()->id)
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_all_work;
         }else{
@@ -588,6 +643,7 @@ class queryController extends Controller
             ->where('sub_status', '8')
             ->where('sub2_status', '1')
             ->where('sub2_recid', Auth::user()->id)
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_all_work;
         }else{
@@ -613,6 +669,7 @@ class queryController extends Controller
             ->where('sub_status', '8')
             ->where('sub2_status', '0')
             ->where('sub2_recid', Auth::user()->id)
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_all_work_inside;
         }else{
@@ -638,6 +695,7 @@ class queryController extends Controller
             ->where('sub_status', '8')
             ->where('sub2_status', '1')
             ->where('sub2_recid', Auth::user()->id)
+            ->orderby('doc_date','DESC')
             ->get();
             return $document_admission_all_work_inside;
         }else{

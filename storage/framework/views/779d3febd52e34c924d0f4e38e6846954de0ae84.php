@@ -1181,14 +1181,12 @@ use App\Http\Controllers\functionController;
                                 <?php echo csrf_field(); ?>
 
                                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('logout')).'','class' => 'text-decoration-none','onclick' => 'event.preventDefault();
-                                                this.closest(\'form\').submit();']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => '#','class' => 'text-decoration-none','onclick' => 'logout(this);']]); ?>
 <?php $component->withName('jet-dropdown-link'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['href' => ''.e(route('logout')).'','class' => 'text-decoration-none','onclick' => 'event.preventDefault();
-                                                this.closest(\'form\').submit();']); ?>
-                                    <?php echo e(__('ออกจากระบบ')); ?>
+<?php $component->withAttributes(['href' => '#','class' => 'text-decoration-none','onclick' => 'logout(this);']); ?>
+                                <?php echo e(__('ออกจากระบบ')); ?>
 
                                  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
@@ -1974,13 +1972,11 @@ use App\Http\Controllers\functionController;
                     <?php echo csrf_field(); ?>
 
                     <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['href' => ''.e(route('logout')).'','class' => 'text-decoration-none','onclick' => 'event.preventDefault();
-                                    this.closest(\'form\').submit();']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['href' => '#','class' => 'text-decoration-none','onclick' => 'logout(this);']]); ?>
 <?php $component->withName('jet-responsive-nav-link'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['href' => ''.e(route('logout')).'','class' => 'text-decoration-none','onclick' => 'event.preventDefault();
-                                    this.closest(\'form\').submit();']); ?>
+<?php $component->withAttributes(['href' => '#','class' => 'text-decoration-none','onclick' => 'logout(this);']); ?>
                         <?php echo e(__('ออกจากระบบ')); ?>
 
                      <?php echo $__env->renderComponent(); ?>
@@ -2315,12 +2311,62 @@ unset($__errorArgs, $__bag); ?>
 <?php endif; ?>
                                   <!--  <input type="range" name="seal_point" class="form-range hide" value="150" min="10"
                                         max="160" id="member_dashoardController_seal_point" step="1"> -->
-                                        <input type="radio" id="seal_point" name="seal_point" value="1"> ตำแหน่งที่ 1 &nbsp;&nbsp;
-                                        <input type="radio" id="seal_point" name="seal_point" value="2"> ตำแหน่งที่ 2 &nbsp;&nbsp;
-                                        <input type="radio" id="seal_point" name="seal_point" value="3"> ตำแหน่งที่ 3 &nbsp;&nbsp;
-                                        <input type="radio" id="seal_point" name="seal_point" value="4"> ตำแหน่งที่ 4  &nbsp;&nbsp;
-                                        <input type="radio" id="seal_point" name="seal_point" value="5" checked > ตำแหน่งที่ 5 &nbsp;&nbsp;<br/>
-                                        <img src="<?php echo e(asset('/image/seal_point.jpg')); ?>" alt="Girl in a jacket" width="500" height="auto">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="seal_point" id="seal_point1" value="1">
+                                                    <label class="form-check-label" for="seal_point1">
+                                                        ตำแหน่งที่ 1
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="seal_point" id="seal_point2" value="2">
+                                                    <label class="form-check-label" for="seal_point2">
+                                                        ตำแหน่งที่ 2
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="seal_point" id="seal_point3" value="3">
+                                                    <label class="form-check-label" for="seal_point3">
+                                                        ตำแหน่งที่ 3
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="seal_point" id="seal_point4" value="4">
+                                                    <label class="form-check-label" for="seal_point4">
+                                                        ตำแหน่งที่ 4
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="seal_point" id="seal_point5" value="5" checked>
+                                                    <label class="form-check-label" for="seal_point5" >
+                                                        ตำแหน่งที่ 5
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <table class="table table-bordered table-hover">
+                                            <tbody>
+                                                <tr data-widget="expandable-table" aria-expanded="false">
+                                                    <td><center>ดูรูปตัวอย่างตำแหน่งประทับตรา </center></td>
+                                                </tr>
+                                                <tr class="expandable-body">
+                                                    <td colspan="1">
+                                                        <p style="">
+                                                            <img src="<?php echo e(asset('/image/seal_point.jpg')); ?>" width="850" height="auto">
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                 </div>
                             </div>
                             <div class="col-sm-12">

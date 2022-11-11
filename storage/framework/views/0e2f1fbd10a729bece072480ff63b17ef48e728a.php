@@ -5,7 +5,7 @@
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
     <!--  <?php $__env->slot('header', null, []); ?> 
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
        
         </h2>
      <?php $__env->endSlot(); ?> -->
@@ -14,51 +14,59 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-3">
-                        <div class="info-box shadow">
-                            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                        <div class="mb-3 shadow info-box">
+                            <span class="info-box-icon bg-info elevation-2"><i class="fa fa-university"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">#</span>
+                                <span class="info-box-text">จำนวน Sites</span>
                                 <span class="info-box-number">
-                                    760
+                                    <lable id="funtion_query_dashboard_count_sites_level_0"></lable>
+                                    <small>Sites</small>
                                 </span>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-3">
-                        <div class="info-box mb-3 shadow">
-                            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                        <div class="mb-3 shadow info-box">
+                            <span class="info-box-icon bg-danger elevation-2"><i class="fas fa-users"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">#</span>
+                                <span class="info-box-text">จำนวนกลุ่มงาน</span>
                                 <span class="info-box-number">
-                                    10
-                                    <small>%</small></span>
+                                    <lable id="funtion_query_dashboard_count_groupmem_level_0"></lable>
+                                    <small>กลุ่ม</small>
+                                </span>
                             </div>
                         </div>
                     </div>
                     <!-- <div class="clearfix hidden-md-up"></div> -->
                     <div class="col-12 col-sm-6 col-md-3">
-                        <div class="info-box mb-3 shadow">
-                            <span class="info-box-icon bg-success elevation-1"><i
-                                    class="fas fa-shopping-cart"></i></span>
+                        <div class="mb-3 shadow info-box">
+                            <span class="info-box-icon bg-success elevation-2"><i
+                                    class="fa fa-address-book"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">#</span>
-                                <span class="info-box-number">760</span>
+                                <span class="info-box-text">จำนวนฝ่าย</span>
+                                <span class="info-box-number">
+                                    <lable id="funtion_query_dashboard_count_cottons_level_0"></lable>
+                                    <small>ฝ่าย</small>
+                                </span>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-3">
-                        <div class="info-box mb-3 shadow">
-                            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                        <div class="mb-3 shadow info-box">
+                            <span class="info-box-icon bg-warning elevation-2"><i class="fa fa-address-card"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">#</span>
-                                <span class="info-box-number">2,000</span>
+                                <span class="info-box-text">จำนวนผู้ใช้</span>
+                                <span class="info-box-number">
+                                    <lable id="funtion_query_dashboard_count_member_level_0"></lable>
+                                    <small>คน</small>
+                                </span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="card shadow">
+                        <div class="shadow card">
                             <div class="card-header">
-                                <h5 class="card-title">รายงาน</h5>
+                                <h5 class="card-title">หน้าหลัก</h5>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>

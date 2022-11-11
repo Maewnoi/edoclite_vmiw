@@ -5,6 +5,27 @@ function submitForm(btn) {
      btn.innerHTML = '<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>';
      btn.form.submit();
 }
+
+function logout(btn) {
+
+    swal ({
+        title: "คุณต้องการออกจากระบบใช่ไหม?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            // btn.preventDefault();
+            btn.closest('form').submit();
+            // swal("ออกจากระบบเรียบร้อย!", {
+            //     icon: "success",
+            // });
+        } else {
+             swal("คุณอาจจะหลงคลิก!");
+        }
+    });
+}
 // alert(var_memberController_add_level);
 //------------------------------------------------------------------------------------------
 //admin.member.index
