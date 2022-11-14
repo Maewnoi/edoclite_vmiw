@@ -40,201 +40,201 @@ class member_dashboardController extends Controller
             // ->where('reserve_status', '2')
             // ->get();
             //นับจำนวนงานใหม่ waiting
-            $document_admission_all_waiting_count = document::where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'waiting')
-            ->count();
+            // $document_admission_all_waiting_count = document::where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'waiting')
+            // ->count();
             //นับจำนวนงานใหม่ success
-            $document_admission_all_success_count = document::where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->count();
-            return view('member_dashboard',compact('document_admission_all_waiting_count','document_admission_all_success_count'));
+            // $document_admission_all_success_count = document::where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'success')
+            // ->count();
+            return view('member_dashboard');
         }else if(Auth::user()->level=='4'){
             //หัวหน้ากอง
 
-            $documents_admission_division_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '2')
-            ->where('seal_id_1', Auth::user()->id)
-            ->count();
+            // $documents_admission_division_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '2')
+            // ->where('seal_id_1', Auth::user()->id)
+            // ->count();
 
-            $documents_admission_division_all_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '!=','2')
-            ->where('seal_id_1', Auth::user()->id)
-            ->where('seal_date_1', '!=', NULL)
-            ->count();
+            // $documents_admission_division_all_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '!=','2')
+            // ->where('seal_id_1', Auth::user()->id)
+            // ->where('seal_date_1', '!=', NULL)
+            // ->count();
 
-            $documents_admission_division_inside_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '1')
-            ->where(function ($query) {
-                $query->where('doc_template', 'B')
-                      ->orWhere('doc_template', 'C')
-                      ->orWhere('doc_template', 'D')
-                      ->orWhere('doc_template', 'E');
-            })
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '2')
-            ->where('seal_id_1', Auth::user()->id)
-            ->count();
+            // $documents_admission_division_inside_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '1')
+            // ->where(function ($query) {
+            //     $query->where('doc_template', 'B')
+            //           ->orWhere('doc_template', 'C')
+            //           ->orWhere('doc_template', 'D')
+            //           ->orWhere('doc_template', 'E');
+            // })
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '2')
+            // ->where('seal_id_1', Auth::user()->id)
+            // ->count();
 
-            $documents_admission_division_inside_all_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '1')
-            ->where(function ($query) {
-                $query->where('doc_template', 'B')
-                      ->orWhere('doc_template', 'C')
-                      ->orWhere('doc_template', 'D')
-                      ->orWhere('doc_template', 'E');
-            })
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '!=','2')
-            ->where('seal_id_1', Auth::user()->id)
-            ->where('seal_date_1', '!=', NULL)
-            ->count();
-            return view('member_dashboard',compact('documents_admission_division_all_count_0','documents_admission_division_all_count_1','documents_admission_division_inside_all_count_0','documents_admission_division_inside_all_count_1'));
+            // $documents_admission_division_inside_all_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '1')
+            // ->where(function ($query) {
+            //     $query->where('doc_template', 'B')
+            //           ->orWhere('doc_template', 'C')
+            //           ->orWhere('doc_template', 'D')
+            //           ->orWhere('doc_template', 'E');
+            // })
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '!=','2')
+            // ->where('seal_id_1', Auth::user()->id)
+            // ->where('seal_date_1', '!=', NULL)
+            // ->count();
+            return view('member_dashboard');
         }else if(Auth::user()->level=='5'){
             //หัวหน้าฝ่าย
-            //นับจำนวนงานรอพิจารณา
-            $document_admission_department_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '1')
-            ->where('seal_id_0', Auth::user()->id)
-            ->count();
-            //นับจำนวนงานพิจารณาแล้ว
-            $document_admission_department_all_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '!=','1')
-            ->where('seal_id_0', Auth::user()->id)
-            ->where('seal_date_0', '!=', NULL)
-            ->count();
+            // //นับจำนวนงานรอพิจารณา
+            // $document_admission_department_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '1')
+            // ->where('seal_id_0', Auth::user()->id)
+            // ->count();
+            // //นับจำนวนงานพิจารณาแล้ว
+            // $document_admission_department_all_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '0')
+            // ->where('doc_template', 'A')
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '!=','1')
+            // ->where('seal_id_0', Auth::user()->id)
+            // ->where('seal_date_0', '!=', NULL)
+            // ->count();
 
-            $document_admission_department_inside_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '1')
-            ->where(function ($query) {
-                $query->where('doc_template', 'B')
-                      ->orWhere('doc_template', 'C')
-                      ->orWhere('doc_template', 'D')
-                      ->orWhere('doc_template', 'E');
-            })
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '1')
-            ->where('seal_id_0', Auth::user()->id)
-            ->count();
+            // $document_admission_department_inside_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '1')
+            // ->where(function ($query) {
+            //     $query->where('doc_template', 'B')
+            //           ->orWhere('doc_template', 'C')
+            //           ->orWhere('doc_template', 'D')
+            //           ->orWhere('doc_template', 'E');
+            // })
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '1')
+            // ->where('seal_id_0', Auth::user()->id)
+            // ->count();
 
-            $document_admission_department_inside_all_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '1')
-            ->where(function ($query) {
-                $query->where('doc_template', 'B')
-                      ->orWhere('doc_template', 'C')
-                      ->orWhere('doc_template', 'D')
-                      ->orWhere('doc_template', 'E');
-            })
-            ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
-            ->where('sub_status', '!=','1')
-            ->where('seal_id_0', Auth::user()->id)
-            ->where('seal_date_0', '!=', NULL)
-            ->count();
-            return view('member_dashboard',compact('document_admission_department_all_count_0','document_admission_department_all_count_1','document_admission_department_inside_all_count_0','document_admission_department_inside_all_count_1'));
+            // $document_admission_department_inside_all_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            // ->where('doc_site_id',Auth::user()->site_id)
+            // ->where('doc_type', '1')
+            // ->where(function ($query) {
+            //     $query->where('doc_template', 'B')
+            //           ->orWhere('doc_template', 'C')
+            //           ->orWhere('doc_template', 'D')
+            //           ->orWhere('doc_template', 'E');
+            // })
+            // ->where('doc_status', 'success')
+            // ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_status', '!=','1')
+            // ->where('seal_id_0', Auth::user()->id)
+            // ->where('seal_date_0', '!=', NULL)
+            // ->count();
+            return view('member_dashboard');
         }else if(Auth::user()->level=='6'){
             //สารบรรณกอง
-             //นับจำนวนงานภายนอกใหม่
-             $document_admission_all_group_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-             ->where('doc_site_id',Auth::user()->site_id)
-             ->where('doc_type', '0')
-             ->where('doc_template', 'A')
-             ->where('doc_status', 'success')
-             ->where('sub_recid', Auth::user()->group)
-             ->where('sub_status', '0')
-             ->count();
-             //นับจำนวนงานภายนอกรอดำเนินการ
-             $document_admission_all_group_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-             ->where('doc_site_id',Auth::user()->site_id)
-             ->where('doc_type', '0')
-             ->where('doc_template', 'A')
-             ->where('doc_status', 'success')
-             ->where('sub_recid', Auth::user()->group)
-             ->where('sub_status','!=','0')
-             ->where('sub_status','!=','8')
-             ->count();
-             //นับจำนวนงานภายนอกดำเนินการแล้ว
-             $document_admission_all_group_count_2 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-             ->where('doc_site_id',Auth::user()->site_id)
-             ->where('doc_type', '0')
-             ->where('doc_template', 'A')
-             ->where('doc_status', 'success')
-             ->where('sub_recid', Auth::user()->group)
-             ->where('sub_status', '8')
-             ->count();
+            //  //นับจำนวนงานภายนอกใหม่
+            //  $document_admission_all_group_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            //  ->where('doc_site_id',Auth::user()->site_id)
+            //  ->where('doc_type', '0')
+            //  ->where('doc_template', 'A')
+            //  ->where('doc_status', 'success')
+            //  ->where('sub_recid', Auth::user()->group)
+            //  ->where('sub_status', '0')
+            //  ->count();
+            //  //นับจำนวนงานภายนอกรอดำเนินการ
+            //  $document_admission_all_group_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            //  ->where('doc_site_id',Auth::user()->site_id)
+            //  ->where('doc_type', '0')
+            //  ->where('doc_template', 'A')
+            //  ->where('doc_status', 'success')
+            //  ->where('sub_recid', Auth::user()->group)
+            //  ->where('sub_status','!=','0')
+            //  ->where('sub_status','!=','8')
+            //  ->count();
+            //  //นับจำนวนงานภายนอกดำเนินการแล้ว
+            //  $document_admission_all_group_count_2 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            //  ->where('doc_site_id',Auth::user()->site_id)
+            //  ->where('doc_type', '0')
+            //  ->where('doc_template', 'A')
+            //  ->where('doc_status', 'success')
+            //  ->where('sub_recid', Auth::user()->group)
+            //  ->where('sub_status', '8')
+            //  ->count();
 
-             $document_admission_all_group_inside_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-             ->where('doc_site_id',Auth::user()->site_id)
-             ->where('doc_type', '1')
-             ->where(function ($query) {
-                 $query->where('doc_template', 'B')
-                       ->orWhere('doc_template', 'C')
-                       ->orWhere('doc_template', 'D')
-                       ->orWhere('doc_template', 'E');
-             })
-             ->where('doc_status', 'success')
-             ->where('sub_recid', Auth::user()->group)
-             ->where('sub_status', '0')
-             ->count();
+            //  $document_admission_all_group_inside_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            //  ->where('doc_site_id',Auth::user()->site_id)
+            //  ->where('doc_type', '1')
+            //  ->where(function ($query) {
+            //      $query->where('doc_template', 'B')
+            //            ->orWhere('doc_template', 'C')
+            //            ->orWhere('doc_template', 'D')
+            //            ->orWhere('doc_template', 'E');
+            //  })
+            //  ->where('doc_status', 'success')
+            //  ->where('sub_recid', Auth::user()->group)
+            //  ->where('sub_status', '0')
+            //  ->count();
 
-             $document_admission_all_group_inside_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-             ->where('doc_site_id',Auth::user()->site_id)
-             ->where('doc_type', '1')
-             ->where(function ($query) {
-                 $query->where('doc_template', 'B')
-                       ->orWhere('doc_template', 'C')
-                       ->orWhere('doc_template', 'D')
-                       ->orWhere('doc_template', 'E');
-             })
-             ->where('doc_status', 'success')
-             ->where('sub_recid', Auth::user()->group)
-             ->where('sub_status','!=','0')
-             ->where('sub_status','!=','8')
-             ->count();
+            //  $document_admission_all_group_inside_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            //  ->where('doc_site_id',Auth::user()->site_id)
+            //  ->where('doc_type', '1')
+            //  ->where(function ($query) {
+            //      $query->where('doc_template', 'B')
+            //            ->orWhere('doc_template', 'C')
+            //            ->orWhere('doc_template', 'D')
+            //            ->orWhere('doc_template', 'E');
+            //  })
+            //  ->where('doc_status', 'success')
+            //  ->where('sub_recid', Auth::user()->group)
+            //  ->where('sub_status','!=','0')
+            //  ->where('sub_status','!=','8')
+            //  ->count();
 
-             $document_admission_all_group_inside_count_2 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-             ->where('doc_site_id',Auth::user()->site_id)
-             ->where('doc_type', '1')
-             ->where(function ($query) {
-                 $query->where('doc_template', 'B')
-                       ->orWhere('doc_template', 'C')
-                       ->orWhere('doc_template', 'D')
-                       ->orWhere('doc_template', 'E');
-             })
-             ->where('doc_status', 'success')
-             ->where('sub_recid', Auth::user()->group)
-             ->where('sub_status', '8')
-             ->count();
+            //  $document_admission_all_group_inside_count_2 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            //  ->where('doc_site_id',Auth::user()->site_id)
+            //  ->where('doc_type', '1')
+            //  ->where(function ($query) {
+            //      $query->where('doc_template', 'B')
+            //            ->orWhere('doc_template', 'C')
+            //            ->orWhere('doc_template', 'D')
+            //            ->orWhere('doc_template', 'E');
+            //  })
+            //  ->where('doc_status', 'success')
+            //  ->where('sub_recid', Auth::user()->group)
+            //  ->where('sub_status', '8')
+            //  ->count();
 
             //  //หาชื่อและไอดี กอง miw
             // $GroupmemS = Groupmem::where('group_site_id',Auth::user()->site_id)
@@ -245,69 +245,69 @@ class member_dashboardController extends Controller
             //  $UserS = User::where('group',Auth::user()->group)
             //  ->get();
 
-            return view('member_dashboard',compact('document_admission_all_group_count_0','document_admission_all_group_count_1','document_admission_all_group_count_2','document_admission_all_group_inside_count_0','document_admission_all_group_inside_count_1','document_admission_all_group_inside_count_2'));
+            return view('member_dashboard');
        
         }else if(Auth::user()->level=='7'){
             //งาน
-           //นักจำนวนงานยังไม่อ่าน
-           $document_admission_all_work_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-           ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
-           ->where('doc_site_id',Auth::user()->site_id)
-           ->where('doc_type', '0')
-           ->where('doc_template', 'A')
-           ->where('doc_status', 'success')
-           ->where('sub_recid', Auth::user()->group)
-           ->where('sub_status', '8')
-           ->where('sub2_status', '0')
-           ->where('sub2_recid', Auth::user()->id)
-           ->count();
-           //นับจำนวนงานอ่านแล้ว
-           $document_admission_all_work_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-           ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
-           ->where('doc_site_id',Auth::user()->site_id)
-           ->where('doc_type', '0')
-           ->where('doc_template', 'A')
-           ->where('doc_status', 'success')
-           ->where('sub_recid', Auth::user()->group)
-           ->where('sub_status', '8')
-           ->where('sub2_status', '1')
-           ->where('sub2_recid', Auth::user()->id)
-           ->count();
+        //    //นักจำนวนงานยังไม่อ่าน
+        //    $document_admission_all_work_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+        //    ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+        //    ->where('doc_site_id',Auth::user()->site_id)
+        //    ->where('doc_type', '0')
+        //    ->where('doc_template', 'A')
+        //    ->where('doc_status', 'success')
+        //    ->where('sub_recid', Auth::user()->group)
+        //    ->where('sub_status', '8')
+        //    ->where('sub2_status', '0')
+        //    ->where('sub2_recid', Auth::user()->id)
+        //    ->count();
+        //    //นับจำนวนงานอ่านแล้ว
+        //    $document_admission_all_work_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+        //    ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+        //    ->where('doc_site_id',Auth::user()->site_id)
+        //    ->where('doc_type', '0')
+        //    ->where('doc_template', 'A')
+        //    ->where('doc_status', 'success')
+        //    ->where('sub_recid', Auth::user()->group)
+        //    ->where('sub_status', '8')
+        //    ->where('sub2_status', '1')
+        //    ->where('sub2_recid', Auth::user()->id)
+        //    ->count();
 
-           $document_admission_all_work_inside_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-           ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
-           ->where('doc_site_id',Auth::user()->site_id)
-           ->where('doc_type', '1')
-           ->where(function ($query) {
-               $query->where('doc_template', 'B')
-                     ->orWhere('doc_template', 'C')
-                     ->orWhere('doc_template', 'D')
-                     ->orWhere('doc_template', 'E');
-           })
-           ->where('doc_status', 'success')
-           ->where('sub_recid', Auth::user()->group)
-           ->where('sub_status', '8')
-           ->where('sub2_status', '0')
-           ->where('sub2_recid', Auth::user()->id)
-           ->count();
+        //    $document_admission_all_work_inside_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+        //    ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+        //    ->where('doc_site_id',Auth::user()->site_id)
+        //    ->where('doc_type', '1')
+        //    ->where(function ($query) {
+        //        $query->where('doc_template', 'B')
+        //              ->orWhere('doc_template', 'C')
+        //              ->orWhere('doc_template', 'D')
+        //              ->orWhere('doc_template', 'E');
+        //    })
+        //    ->where('doc_status', 'success')
+        //    ->where('sub_recid', Auth::user()->group)
+        //    ->where('sub_status', '8')
+        //    ->where('sub2_status', '0')
+        //    ->where('sub2_recid', Auth::user()->id)
+        //    ->count();
 
-           $document_admission_all_work_inside_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-           ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
-           ->where('doc_site_id',Auth::user()->site_id)
-           ->where('doc_type', '1')
-           ->where(function ($query) {
-               $query->where('doc_template', 'B')
-                     ->orWhere('doc_template', 'C')
-                     ->orWhere('doc_template', 'D')
-                     ->orWhere('doc_template', 'E');
-           })
-           ->where('doc_status', 'success')
-           ->where('sub_recid', Auth::user()->group)
-           ->where('sub_status', '8')
-           ->where('sub2_status', '1')
-           ->where('sub2_recid', Auth::user()->id)
-           ->count();
-            return view('member_dashboard',compact('document_admission_all_work_count_0','document_admission_all_work_count_1','document_admission_all_work_inside_count_0','document_admission_all_work_inside_count_1'));
+        //    $document_admission_all_work_inside_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+        //    ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+        //    ->where('doc_site_id',Auth::user()->site_id)
+        //    ->where('doc_type', '1')
+        //    ->where(function ($query) {
+        //        $query->where('doc_template', 'B')
+        //              ->orWhere('doc_template', 'C')
+        //              ->orWhere('doc_template', 'D')
+        //              ->orWhere('doc_template', 'E');
+        //    })
+        //    ->where('doc_status', 'success')
+        //    ->where('sub_recid', Auth::user()->group)
+        //    ->where('sub_status', '8')
+        //    ->where('sub2_status', '1')
+        //    ->where('sub2_recid', Auth::user()->id)
+        //    ->count();
+            return view('member_dashboard');
         }else{
             return route('logout');
         }

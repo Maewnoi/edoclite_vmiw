@@ -1,7 +1,5 @@
 $('#chart_level_0').each(function () {
-    
     var dataPoints = [];
-    var dataLength = 20;
     var var_chart_level_0 = new CanvasJS.Chart("chart_level_0", {
         theme: "light2", // "light1", "light2", "dark1", "dark2"
         exportEnabled: true,
@@ -32,7 +30,6 @@ $('#chart_level_0').each(function () {
                     dataPoints.push({label: item['doc_date'], y: item['sub2_id']});
                 });
                 var_chart_level_0.render();
-                dataPoints = [];
             },
             error: function(request, status, error) {
                 document.getElementById('chart_level_0').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
@@ -41,7 +38,10 @@ $('#chart_level_0').each(function () {
         });
     }
     updateChart();
-    setInterval(function(){updateChart()}, 3000);
+    setInterval(function(){
+        updateChart();
+        dataPoints.splice(0, 2);
+    }, 3000);
     // console.log(dataPoints);
 });
 $('#funtion_query_dashboard_count_sites_level_0').each(function () {
@@ -138,8 +138,7 @@ $('#funtion_query_dashboard_count_member_level_0').each(function () {
 
 //ถ้าพบ element ตัวไหนใน views ไหนให้ ดึงข้อมูล ด้วย ajax นะครับบบ
 $('#chart_level_3').each(function () {
-    var var_member_dashboard_input_documents_admission_all_waiting_count_level_3 = $("#member_dashboard_input_documents_admission_all_waiting_count_level_3").val();
-    var var_member_dashboard_input_documents_admission_all_success_count_level_3 = $("#member_dashboard_input_documents_admission_all_success_count_level_3").val();
+    var dataPoints = [];
     var var_chart_level_3 = new CanvasJS.Chart("chart_level_3", {
         theme: "light2", // "light1", "light2", "dark1", "dark2"
         exportEnabled: true,
@@ -157,18 +156,37 @@ $('#chart_level_3').each(function () {
             legendText: "{label}",
             indexLabelFontSize: 12,
             indexLabel: "{label} {y} เรื่อง",
-            dataPoints: [
-                { y: var_member_dashboard_input_documents_admission_all_waiting_count_level_3, label: "เอกสารรอพิจารณา" },
-                { y: var_member_dashboard_input_documents_admission_all_success_count_level_3, label: "เอกสารพิจารณาแล้ว" }
-            ]
+            dataPoints: dataPoints
         }]
     });
-    var_chart_level_3.render();
+
+    var updateChart = function () {
+        $.ajax({
+            type: "GET",
+            url: "/member_dashboard/count/chart/3/query",
+            data: '',
+            success: function(data) {
+                jQuery.each(data, function(index, item) {
+                    dataPoints.push({y: item, label: index});
+                    // console.log(dataPoints);
+                });
+                var_chart_level_3.render();
+            },
+            error: function(request, status, error) {
+                document.getElementById('chart_level_3').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
+                console.log(error);
+            }
+        });
+    }
+    updateChart();
+    setInterval(function(){
+        updateChart();
+        dataPoints.splice(0, 2);
+    }, 3000);
 });
 
 $('#chart_level_4').each(function () {
-    var var_member_dashboard_input_documents_admission_division_all_count_0_level_4 = $("#member_dashboard_input_documents_admission_division_all_count_0_level_4").val();
-    var var_member_dashboard_input_documents_admission_division_all_count_1_level_4 = $("#member_dashboard_input_documents_admission_division_all_count_1_level_4").val();
+    var dataPoints = [];
     var var_chart_level_4 = new CanvasJS.Chart("chart_level_4", {
         theme: "light2", // "light1", "light2", "dark1", "dark2"
         exportEnabled: true,
@@ -186,18 +204,36 @@ $('#chart_level_4').each(function () {
             legendText: "{label}",
             indexLabelFontSize: 12,
             indexLabel: "{label} {y} เรื่อง",
-            dataPoints: [
-                { y: var_member_dashboard_input_documents_admission_division_all_count_0_level_4, label: "เอกสารรอพิจารณา" },
-                { y: var_member_dashboard_input_documents_admission_division_all_count_1_level_4, label: "เอกสารที่เซ็นแล้ว" }
-            ]
+            dataPoints: dataPoints
         }]
     });
-    var_chart_level_4.render();
+    var updateChart = function () {
+        $.ajax({
+            type: "GET",
+            url: "/member_dashboard/count/chart/4/query",
+            data: '',
+            success: function(data) {
+                jQuery.each(data, function(index, item) {
+                    dataPoints.push({y: item, label: index});
+                    // console.log(dataPoints);
+                });
+                var_chart_level_4.render();
+            },
+            error: function(request, status, error) {
+                document.getElementById('chart_level_4').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
+                console.log(error);
+            }
+        });
+    }
+    updateChart();
+    setInterval(function(){
+        updateChart();
+        dataPoints.splice(0, 2);
+    }, 3000);
 });
 
 $('#chart_inside_level_4').each(function () {
-    var var_member_dashboard_input_documents_admission_division_inside_all_count_0_level_4 = $("#member_dashboard_input_documents_admission_division_inside_all_count_0_level_4").val();
-    var var_member_dashboard_input_documents_admission_division_inside_all_count_1_level_4 = $("#member_dashboard_input_documents_admission_division_inside_all_count_1_level_4").val();
+    var dataPoints = [];
     var var_chart_inside_level_4 = new CanvasJS.Chart("chart_inside_level_4", {
         theme: "light2", // "light1", "light2", "dark1", "dark2"
         exportEnabled: true,
@@ -215,18 +251,36 @@ $('#chart_inside_level_4').each(function () {
             legendText: "{label}",
             indexLabelFontSize: 12,
             indexLabel: "{label} {y} เรื่อง",
-            dataPoints: [
-                { y: var_member_dashboard_input_documents_admission_division_inside_all_count_0_level_4, label: "เอกสารรอพิจารณา" },
-                { y: var_member_dashboard_input_documents_admission_division_inside_all_count_1_level_4, label: "เอกสารที่เซ็นแล้ว" }
-            ]
+            dataPoints: dataPoints
         }]
     });
-    var_chart_inside_level_4.render();
+    var updateChart = function () {
+        $.ajax({
+            type: "GET",
+            url: "/member_dashboard/count/chart_inside/4/query",
+            data: '',
+            success: function(data) {
+                jQuery.each(data, function(index, item) {
+                    dataPoints.push({y: item, label: index});
+                    // console.log(dataPoints);
+                });
+                var_chart_inside_level_4.render();
+            },
+            error: function(request, status, error) {
+                document.getElementById('chart_inside_level_4').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
+                console.log(error);
+            }
+        });
+    }
+    updateChart();
+    setInterval(function(){
+        updateChart();
+        dataPoints.splice(0, 2);
+    }, 3000);
 });
 
 $('#chart_level_5').each(function () {
-    var var_member_dashboard_input_document_admission_department_all_count_0_level_5 = $("#member_dashboard_input_document_admission_department_all_count_0_level_5").val();
-    var var_member_dashboard_input_document_admission_department_all_count_1_level_5 = $("#member_dashboard_input_document_admission_department_all_count_1_level_5").val();
+    var dataPoints = [];
     var var_chart_level_5 = new CanvasJS.Chart("chart_level_5", {
         theme: "light2", // "light1", "light2", "dark1", "dark2"
         exportEnabled: true,
@@ -244,18 +298,36 @@ $('#chart_level_5').each(function () {
             legendText: "{label}",
             indexLabelFontSize: 12,
             indexLabel: "{label} {y} เรื่อง",
-            dataPoints: [
-                { y: var_member_dashboard_input_document_admission_department_all_count_0_level_5, label: "เอกสารรอพิจารณา" },
-                { y: var_member_dashboard_input_document_admission_department_all_count_1_level_5, label: "เอกสารที่เซ็นแล้ว" }
-            ]
+            dataPoints: dataPoints
         }]
     });
-    var_chart_level_5.render();
+    var updateChart = function () {
+        $.ajax({
+            type: "GET",
+            url: "/member_dashboard/count/chart/5/query",
+            data: '',
+            success: function(data) {
+                jQuery.each(data, function(index, item) {
+                    dataPoints.push({y: item, label: index});
+                    // console.log(dataPoints);
+                });
+                var_chart_level_5.render();
+            },
+            error: function(request, status, error) {
+                document.getElementById('chart_level_5').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
+                console.log(error);
+            }
+        });
+    }
+    updateChart();
+    setInterval(function(){
+        updateChart();
+        dataPoints.splice(0, 2);
+    }, 3000);
 });
 
 $('#chart_inside_level_5').each(function () {
-    var var_member_dashboard_input_document_admission_department_inside_all_count_0_level_5 = $("#member_dashboard_input_document_admission_department_inside_all_count_0_level_5").val();
-    var var_member_dashboard_input_document_admission_department_inside_all_count_1_level_5 = $("#member_dashboard_input_document_admission_department_inside_all_count_1_level_5").val();
+    var dataPoints = [];
     var var_chart_inside_level_5 = new CanvasJS.Chart("chart_inside_level_5", {
         theme: "light2", // "light1", "light2", "dark1", "dark2"
         exportEnabled: true,
@@ -273,19 +345,36 @@ $('#chart_inside_level_5').each(function () {
             legendText: "{label}",
             indexLabelFontSize: 12,
             indexLabel: "{label} {y} เรื่อง",
-            dataPoints: [
-                { y: var_member_dashboard_input_document_admission_department_inside_all_count_0_level_5, label: "เอกสารรอพิจารณา" },
-                { y: var_member_dashboard_input_document_admission_department_inside_all_count_1_level_5, label: "เอกสารที่เซ็นแล้ว" }
-            ]
+            dataPoints: dataPoints
         }]
     });
-    var_chart_inside_level_5.render();
+    var updateChart = function () {
+        $.ajax({
+            type: "GET",
+            url: "/member_dashboard/count/chart_inside/5/query",
+            data: '',
+            success: function(data) {
+                jQuery.each(data, function(index, item) {
+                    dataPoints.push({y: item, label: index});
+                    // console.log(dataPoints);
+                });
+                var_chart_inside_level_5.render();
+            },
+            error: function(request, status, error) {
+                document.getElementById('chart_inside_level_5').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
+                console.log(error);
+            }
+        });
+    }
+    updateChart();
+    setInterval(function(){
+        updateChart();
+        dataPoints.splice(0, 2);
+    }, 3000);
 });
 
 $('#chart_level_6').each(function () {
-    var var_member_dashboard_input_document_admission_all_group_count_0_level_6 = $("#member_dashboard_input_document_admission_all_group_count_0_level_6").val();
-    var var_member_dashboard_input_document_admission_all_group_count_1_level_6 = $("#member_dashboard_input_document_admission_all_group_count_1_level_6").val();
-    var var_member_dashboard_input_document_admission_all_group_count_2_level_6 = $("#member_dashboard_input_document_admission_all_group_count_2_level_6").val();
+    var dataPoints = [];
     var var_chart_level_6 = new CanvasJS.Chart("chart_level_6", {
         theme: "light2", // "light1", "light2", "dark1", "dark2"
         exportEnabled: true,
@@ -303,20 +392,36 @@ $('#chart_level_6').each(function () {
             legendText: "{label}",
             indexLabelFontSize: 12,
             indexLabel: "{label} {y} เรื่อง",
-            dataPoints: [
-                { y: var_member_dashboard_input_document_admission_all_group_count_0_level_6, label: "เอกสารใหม่" },
-                { y: var_member_dashboard_input_document_admission_all_group_count_1_level_6, label: "เอกสารรอดำเนินการ" },
-                { y: var_member_dashboard_input_document_admission_all_group_count_2_level_6, label: "เอกสารดำเนินการแล้ว" }
-            ]
+            dataPoints: dataPoints
         }]
     });
-    var_chart_level_6.render();
+    var updateChart = function () {
+        $.ajax({
+            type: "GET",
+            url: "/member_dashboard/count/chart/6/query",
+            data: '',
+            success: function(data) {
+                jQuery.each(data, function(index, item) {
+                    dataPoints.push({y: item, label: index});
+                    // console.log(dataPoints);
+                });
+                var_chart_level_6.render();
+            },
+            error: function(request, status, error) {
+                document.getElementById('chart_level_6').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
+                console.log(error);
+            }
+        });
+    }
+    updateChart();
+    setInterval(function(){
+        updateChart();
+        dataPoints.splice(0, 3);
+    }, 3000);
 });
 
 $('#chart_inside_level_6').each(function () {
-    var var_member_dashboard_input_document_admission_all_group_inside_count_0_level_6 = $("#member_dashboard_input_document_admission_all_group_inside_count_0_level_6").val();
-    var var_member_dashboard_input_document_admission_all_group_inside_count_1_level_6 = $("#member_dashboard_input_document_admission_all_group_inside_count_1_level_6").val();
-    var var_member_dashboard_input_document_admission_all_group_inside_count_2_level_6 = $("#member_dashboard_input_document_admission_all_group_inside_count_2_level_6").val();
+    var dataPoints = [];
     var var_chart_inside_level_6 = new CanvasJS.Chart("chart_inside_level_6", {
         theme: "light2", // "light1", "light2", "dark1", "dark2"
         exportEnabled: true,
@@ -334,19 +439,36 @@ $('#chart_inside_level_6').each(function () {
             legendText: "{label}",
             indexLabelFontSize: 12,
             indexLabel: "{label} {y} เรื่อง",
-            dataPoints: [
-                { y: var_member_dashboard_input_document_admission_all_group_inside_count_0_level_6, label: "เอกสารใหม่" },
-                { y: var_member_dashboard_input_document_admission_all_group_inside_count_1_level_6, label: "เอกสารรอดำเนินการ" },
-                { y: var_member_dashboard_input_document_admission_all_group_inside_count_2_level_6, label: "เอกสารดำเนินการแล้ว" }
-            ]
+            dataPoints: dataPoints
         }]
     });
-    var_chart_inside_level_6.render();
+    var updateChart = function () {
+        $.ajax({
+            type: "GET",
+            url: "/member_dashboard/count/chart_inside/6/query",
+            data: '',
+            success: function(data) {
+                jQuery.each(data, function(index, item) {
+                    dataPoints.push({y: item, label: index});
+                    // console.log(dataPoints);
+                });
+                var_chart_inside_level_6.render();
+            },
+            error: function(request, status, error) {
+                document.getElementById('chart_inside_level_6').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
+                console.log(error);
+            }
+        });
+    }
+    updateChart();
+    setInterval(function(){
+        updateChart();
+        dataPoints.splice(0, 3);
+    }, 3000);
 });
 
 $('#chart_level_7').each(function () {
-    var var_member_dashboard_input_document_admission_all_work_count_0_level_7 = $("#member_dashboard_input_document_admission_all_work_count_0_level_7").val();
-    var var_member_dashboard_input_document_admission_all_work_count_1_level_7 = $("#member_dashboard_input_document_admission_all_work_count_1_level_7").val();
+    var dataPoints = [];
     var var_chart_level_7 = new CanvasJS.Chart("chart_level_7", {
         theme: "light2", // "light1", "light2", "dark1", "dark2"
         exportEnabled: true,
@@ -364,18 +486,36 @@ $('#chart_level_7').each(function () {
             legendText: "{label}",
             indexLabelFontSize: 12,
             indexLabel: "{label} {y} เรื่อง",
-            dataPoints: [
-                { y: var_member_dashboard_input_document_admission_all_work_count_0_level_7, label: "เอกสารรับเข้ายังไม่อ่าน" },
-                { y: var_member_dashboard_input_document_admission_all_work_count_1_level_7, label: "เอกสารรับเข้าอ่านแล้ว" }
-            ]
+            dataPoints: dataPoints
         }]
     });
-    var_chart_level_7.render();
+    var updateChart = function () {
+        $.ajax({
+            type: "GET",
+            url: "/member_dashboard/count/chart/7/query",
+            data: '',
+            success: function(data) {
+                jQuery.each(data, function(index, item) {
+                    dataPoints.push({y: item, label: index});
+                    // console.log(dataPoints);
+                });
+                var_chart_level_7.render();
+            },
+            error: function(request, status, error) {
+                document.getElementById('chart_level_7').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
+                console.log(error);
+            }
+        });
+    }
+    updateChart();
+    setInterval(function(){
+        updateChart();
+        dataPoints.splice(0, 2);
+    }, 3000);
 });
 
 $('#chart_inside_level_7').each(function () {
-    var var_member_dashboard_input_document_admission_all_work_inside_count_0_level_7 = $("#member_dashboard_input_document_admission_all_work_inside_count_0_level_7").val();
-    var var_member_dashboard_input_document_admission_all_work_inside_count_1_level_7 = $("#member_dashboard_input_document_admission_all_work_inside_count_1_level_7").val();
+    var dataPoints = [];
     var var_chart_inside_level_7 = new CanvasJS.Chart("chart_inside_level_7", {
         theme: "light2", // "light1", "light2", "dark1", "dark2"
         exportEnabled: true,
@@ -393,13 +533,32 @@ $('#chart_inside_level_7').each(function () {
             legendText: "{label}",
             indexLabelFontSize: 12,
             indexLabel: "{label} {y} เรื่อง",
-            dataPoints: [
-                { y: var_member_dashboard_input_document_admission_all_work_inside_count_0_level_7, label: "เอกสารรับเข้ายังไม่อ่าน" },
-                { y: var_member_dashboard_input_document_admission_all_work_inside_count_1_level_7, label: "เอกสารรับเข้าอ่านแล้ว" }
-            ]
+            dataPoints: dataPoints
         }]
     });
-    var_chart_inside_level_7.render();
+    var updateChart = function () {
+        $.ajax({
+            type: "GET",
+            url: "/member_dashboard/count/chart_inside/7/query",
+            data: '',
+            success: function(data) {
+                jQuery.each(data, function(index, item) {
+                    dataPoints.push({y: item, label: index});
+                    // console.log(dataPoints);
+                });
+                var_chart_inside_level_7.render();
+            },
+            error: function(request, status, error) {
+                document.getElementById('chart_inside_level_7').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
+                console.log(error);
+            }
+        });
+    }
+    updateChart();
+    setInterval(function(){
+        updateChart();
+        dataPoints.splice(0, 2);
+    }, 3000);
 });
 
 $('#member_dashboard_input_calendar_reserve_numbers').each(function () {
@@ -467,8 +626,12 @@ $('#member_dashboard_input_calendar_reserve_numbers').each(function () {
                 }
             },
 
-            loading: function(bool) {
-                $('#loading').toggle(bool);
+            loading: function(isLoading) {
+                if (isLoading) {
+                    document.getElementById('calendar_isLoading').style.display = 'block';
+                }else{
+                    document.getElementById('calendar_isLoading').style.display = 'none';
+                }
             },
             headerToolbar: {
                 left: 'prev,next today',

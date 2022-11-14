@@ -132,12 +132,21 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/document_admission_department_inside/count/0/query',[queryController::class,'funtion_query_nav_document_admission_department_inside_all_count_0_level_5']);
     Route::get('/document_admission_division_inside/count/0/query',[queryController::class,'funtion_query_nav_document_admission_division_inside_all_count_0_level_4']);
     Route::get('/document_admission_division/count/0/query',[queryController::class,'funtion_query_nav_document_admission_division_all_count_0_level_4']);
-
     Route::get('/dashboard/count/sites/query',[queryController::class,'funtion_query_dashboard_count_sites_level_0']);
     Route::get('/dashboard/count/groupmem/query',[queryController::class,'funtion_query_dashboard_count_groupmem_level_0']);
     Route::get('/dashboard/count/cottons/query',[queryController::class,'funtion_query_dashboard_count_cottons_level_0']);
     Route::get('/dashboard/count/member/query',[queryController::class,'funtion_query_dashboard_count_member_level_0']);
     Route::get('/dashboard/count/sub2_docs/query',[queryController::class,'funtion_query_dashboard_count_sub2_docs_level_0']);
+    Route::get('/member_dashboard/count/chart/3/query',[queryController::class,'funtion_query_member_dashboard_chart_level_3']);
+    Route::get('/member_dashboard/count/chart/4/query',[queryController::class,'funtion_query_member_dashboard_chart_level_4']);
+    Route::get('/member_dashboard/count/chart_inside/4/query',[queryController::class,'funtion_query_member_dashboard_chart_inside_level_4']);
+    Route::get('/member_dashboard/count/chart/5/query',[queryController::class,'funtion_query_member_dashboard_chart_level_5']);
+    Route::get('/member_dashboard/count/chart_inside/5/query',[queryController::class,'funtion_query_member_dashboard_chart_inside_level_5']);
+    Route::get('/member_dashboard/count/chart/6/query',[queryController::class,'funtion_query_member_dashboard_chart_level_6']);
+    Route::get('/member_dashboard/count/chart_inside/6/query',[queryController::class,'funtion_query_member_dashboard_chart_inside_level_6']);
+    Route::get('/member_dashboard/count/chart/7/query',[queryController::class,'funtion_query_member_dashboard_chart_level_7']);
+    Route::get('/member_dashboard/count/chart_inside/7/query',[queryController::class,'funtion_query_member_dashboard_chart_inside_level_7']);
+
 
     //---------------------------------------------------------------------------------------------------
     
