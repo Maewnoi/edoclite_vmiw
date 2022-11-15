@@ -40,7 +40,7 @@ $('#chart_level_0').each(function () {
     updateChart();
     setInterval(function(){
         updateChart();
-        dataPoints.splice(0, 2);
+        dataPoints.splice(0);
     }, 3000);
     // console.log(dataPoints);
 });
@@ -181,7 +181,7 @@ $('#chart_level_3').each(function () {
     updateChart();
     setInterval(function(){
         updateChart();
-        dataPoints.splice(0, 2);
+        dataPoints.splice(0);
     }, 3000);
 });
 
@@ -228,7 +228,7 @@ $('#chart_level_4').each(function () {
     updateChart();
     setInterval(function(){
         updateChart();
-        dataPoints.splice(0, 2);
+        dataPoints.splice(0);
     }, 3000);
 });
 
@@ -275,7 +275,7 @@ $('#chart_inside_level_4').each(function () {
     updateChart();
     setInterval(function(){
         updateChart();
-        dataPoints.splice(0, 2);
+        dataPoints.splice(0);
     }, 3000);
 });
 
@@ -322,7 +322,7 @@ $('#chart_level_5').each(function () {
     updateChart();
     setInterval(function(){
         updateChart();
-        dataPoints.splice(0, 2);
+        dataPoints.splice(0);
     }, 3000);
 });
 
@@ -369,7 +369,7 @@ $('#chart_inside_level_5').each(function () {
     updateChart();
     setInterval(function(){
         updateChart();
-        dataPoints.splice(0, 2);
+        dataPoints.splice(0);
     }, 3000);
 });
 
@@ -416,7 +416,7 @@ $('#chart_level_6').each(function () {
     updateChart();
     setInterval(function(){
         updateChart();
-        dataPoints.splice(0, 3);
+        dataPoints.splice(0);
     }, 3000);
 });
 
@@ -463,7 +463,7 @@ $('#chart_inside_level_6').each(function () {
     updateChart();
     setInterval(function(){
         updateChart();
-        dataPoints.splice(0, 3);
+        dataPoints.splice(0);
     }, 3000);
 });
 
@@ -510,7 +510,7 @@ $('#chart_level_7').each(function () {
     updateChart();
     setInterval(function(){
         updateChart();
-        dataPoints.splice(0, 2);
+        dataPoints.splice(0);
     }, 3000);
 });
 
@@ -557,7 +557,7 @@ $('#chart_inside_level_7').each(function () {
     updateChart();
     setInterval(function(){
         updateChart();
-        dataPoints.splice(0, 2);
+        dataPoints.splice(0);
     }, 3000);
 });
 

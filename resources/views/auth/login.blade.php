@@ -5,14 +5,7 @@
                 height="100">
         </x-slot>
         <x-jet-label class="text-lg text-center" id="txt-login" value="{{ __('ระบบสารบรรณอิเล็กทรอนิกส์') }}" />
-        <x-jet-validation-errors class="mb-4" />
-
-        @if (session('status'))
-        <div class="mb-4 text-sm font-medium text-green-600">
-            {{ session('status') }}
-        </div>
-        @endif
-
+        <!-- <x-jet-validation-errors class="mb-4" /> -->
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
