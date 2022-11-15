@@ -1,3 +1,26 @@
+$('#funtion_document_documents_admission_jurisprudence_all_count').each(function () {
+    document.getElementById('funtion_document_documents_admission_jurisprudence_all_count').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_document_documents_admission_jurisprudence_all_count() {
+        $.ajax({
+            type: "GET",
+            url: "/documents_admission_jurisprudence/count/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_document_documents_admission_jurisprudence_all_count').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_document_documents_admission_jurisprudence_all_count').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_document_documents_admission_jurisprudence_all_count();
+    setInterval( function () {
+        funtion_document_documents_admission_jurisprudence_all_count();
+    }, 3000 );
+});
+
 $('#chart_level_0').each(function () {
     var dataPoints = [];
     var var_chart_level_0 = new CanvasJS.Chart("chart_level_0", {
@@ -1376,10 +1399,12 @@ if(window.location.pathname == '/documents_admission_all/all'){
             {
                 data: 'sub3_status' ,
                 render: function ( data) {
-                    if(data == 'waiting'){
+                    if(data == '0'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
-                    }else if(data == 'success'){
+                    }else if(data == '1'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else{
                         txt_sub3_status = "ไม่ถูกนิยาม";
                     }
@@ -1946,10 +1971,12 @@ if(window.location.pathname == '/documents_admission_all/all'){
         {
             data: 'sub3_status' ,
             render: function ( data) {
-                if(data == 'waiting'){
+                if(data == '0'){
                     txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
-                }else if(data == 'success'){
+                }else if(data == '1'){
                     txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                }else if(data == '2'){
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                 }else{
                     txt_sub3_status = "ไม่ถูกนิยาม";
                 }
@@ -3467,6 +3494,96 @@ if(window.location.pathname == '/documents_admission_all/all'){
                 data: 'doc_id' ,
                 render: function ( data) {
                     return (` <a href="/documents_admission_all_inside/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
+
+}else if(window.location.pathname == '/documents_admission_jurisprudence/all'){
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // },
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'doc_id' 
+            },
+            { 
+                data: 'sub3d_government' 
+            },
+            { 
+                data: 'sub3d_draft' 
+            },
+            {   
+                data: 'sub3d_date'
+            },
+            {
+                data: 'sub3d_topic' 
+            },
+            {
+                data: 'sub3d_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3d_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_sub3d_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_sub3d_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_sub3d_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_sub3d_speed)
+                }
+            },
+            {
+                data: 'sub3_status' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+                    }else if(data == '1'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+                    }else{
+                        txt_sub3_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_sub3_status)
+                }
+            },
+            {
+                data: 'doc_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_admission_jurisprudence/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
                 }
             }
         ]

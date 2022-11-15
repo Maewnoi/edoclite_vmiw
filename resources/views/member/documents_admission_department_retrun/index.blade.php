@@ -16,7 +16,7 @@ use App\Http\Controllers\functionController;
                         <div class="card-header bg-primary">
                             <div class="clearfix">
                             บันทึกข้อความ
-                                <div class="float-right spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
+                                <div class="float-right mt-1 ml-3 spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
                                     <span class="sr-only">Loading...</span>
                                 </div>
                             </div>

@@ -75,6 +75,7 @@
                                 <div id="chart_level_0" style="height: 250px; width: 100%;"></div>
                             </div>
                             <div class="card-footer">
+                    
                             </div>
                         </div>
                     </div>

@@ -36,6 +36,7 @@ class User extends Authenticatable
         'sign',
         'head',
         'password',
+        'jurisprudence',
         'level'
     ];
 

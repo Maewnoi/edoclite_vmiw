@@ -19,6 +19,22 @@ use Illuminate\Support\Facades\Auth;
 
 class functionController extends Controller
 {
+    public static function funtion_jurisprudence_update(Request $request) {
+        if($request->var_status == '0'){
+            $jurisprudence_update = User::where('id', $request->var_id)->update([
+                'jurisprudence'=>'0'
+            ]);
+            return array('status' => '200', 'text' => 'ปิดฟังก์ชั่นเรียบร้อย');
+        }else if($request->var_status == '1'){
+            $jurisprudence_update = User::where('id', $request->var_id)->update([
+                'jurisprudence'=>'1'
+            ]);
+            return array('status' => '200', 'text' => 'เปิดฟังก์ชั่นเรียบร้อย');
+        }else{
+            return array('status' => '404', 'text' => 'พบปัญหา [แจ้งผู้พัฒนาระบบ]');
+        }
+    }
+
     public static function funtion_generate_PDF_V($doc_filedirec_1, $doc_id){
         $pdf = new Fpdi();
         $pdf->AddPage();

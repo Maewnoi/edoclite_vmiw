@@ -1,27 +1,20 @@
-<?php
+@php
 use App\Http\Controllers\functionController;
-?>
-<?php if (isset($component)) { $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da = $component; } ?>
-<?php $component = $__env->getContainer()->make(App\View\Components\AppLayout::class, []); ?>
-<?php $component->withName('app-layout'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes([]); ?>
-    <!--  <?php $__env->slot('header', null, []); ?> 
+@endphp
+<x-app-layout>
+    <!-- <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            สวัสดี , <?php echo e(Auth::user()->name); ?>
-
+            สวัสดี , {{Auth::user()->name}}
         </h2>
-     <?php $__env->endSlot(); ?> -->
+    </x-slot> -->
     <div class="py-12">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                   
                     <div class="shadow card">
                         <div class="card-header bg-primary">
                             <div class="clearfix">
-                            บันทึกข้อความ
+                            อนุมัติเอกสารตอบกลับภายนอก
                                 <div class="float-right mt-1 ml-3 spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
                                     <span class="sr-only">Loading...</span>
                                 </div>
@@ -48,9 +41,4 @@ use App\Http\Controllers\functionController;
             </div>
         </div>
     </div>
- <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
-<?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
-<?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
-<?php endif; ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/member/documents_admission_department_retrun/index.blade.php ENDPATH**/ ?>
+</x-app-layout>

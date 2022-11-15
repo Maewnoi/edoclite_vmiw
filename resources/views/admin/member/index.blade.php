@@ -11,7 +11,6 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-                    
                     <div class="shadow card">
                         <div class="card-header">ตารางข้อมูลชื่อผู้ใช้</div>
                         <div class="card-body table-responsive">
@@ -21,10 +20,10 @@ use App\Http\Controllers\functionController;
                                         <th scope="col">ลำดับ</th>
                                         <th scope="col">ชื่อผู้ใช้/อีเมล</th>
                                         <th scope="col">ชื่อ-นามสกุล</th>
-                                        <th scope="col">ตำแหน่ง</th>
                                         <th scope="col">กองงาน</th>
                                         <th scope="col">สิทธิ์การเข้าถึง</th>
                                         <th scope="col">วันที่สร้าง</th>
+                                        <th scope="col">นิติการ</th>
                                         <th scope="col">จัดการ</th>
                                     </tr>
                                 </thead>
@@ -34,7 +33,6 @@ use App\Http\Controllers\functionController;
                                         <th>{{$loop->index+1}}</th>
                                         <td>{{$row->email}}</td>
                                         <td>{{$row->name}}</td>
-                                        <td>{{$row->pos}}</td>
                                         <td>
                                             @if($row->group_name != NULL)
                                             {{$row->group_name}}
@@ -70,7 +68,16 @@ use App\Http\Controllers\functionController;
                                             </p>
                                             @endif
                                         </td>
-
+                                        <td>
+                                            @if($row->level == '5' || $row->level == '7')
+                                            <div class="form-check">
+                                                <input class="form-check-input check_jurisprudence" type="checkbox" {{ $row->jurisprudence == '1' ? 'checked="checked"' : ''}}
+                                                 name="jurisprudence" id="check_jurisprudence" data-id="{{$row->id}}" data-token="{{ csrf_token() }}">
+                                                <label class="form-check-label" for=check_jurisprudence">
+                                                </label>
+                                            </div>
+                                            @endif
+                                        </td>
                                         <td>
                                             <button type="button" data-toggle="modal"
                                                 data-target="#modal-update{{$row->id}}"

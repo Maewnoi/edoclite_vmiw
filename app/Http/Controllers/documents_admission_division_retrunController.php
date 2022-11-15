@@ -54,4 +54,35 @@ class documents_admission_division_retrunController extends Controller
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     }
+
+    public function understand(Request $request){
+        //หา นิติการ
+        $userS_0 = User::where('jurisprudence', '1')
+        ->where('site_id',Auth::user()->site_id)
+        ->where('group', Auth::user()->group)
+        ->first();
+        if($userS_0){
+            $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
+                'sub3_check_1'=>'1',
+                'sub3_datetime_1'=>date('Y-m-d H:i:s'),
+                'sub3_status'=>'2',
+                'sub3_updated_at'=>date('Y-m-d H:i:s')
+            ]);
+            if($update_sub3_docs){
+                //linetoken
+                $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
+                ->where('group_id', Auth::user()->group)
+                ->first();
+                if($tokens_Check){
+                    $message = "\n⚠️ หัวหน้ากองรับทราบตอบกลับเอกสารภายนอก ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                    functionController::line_notify($message,$tokens_Check->group_token);
+                }
+                return redirect()->route('documents_admission_division_retrun')->with('success',"รับทราบเรียบร้อย");
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs] !');
+            }
+        }else{
+            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด ไม่พบนิติการในฝ่าย กรุณาแต่งตั้งนิติการในระบบก่อน [userS_0] !');
+        }
+    }
 }

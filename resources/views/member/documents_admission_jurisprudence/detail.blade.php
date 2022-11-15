@@ -65,7 +65,6 @@ use App\Http\Controllers\functionController;
                                         <font class="text-primary">{{$document_detail->doc_title}}</font>
                                     </div>
                                 </div>
-                                
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -77,8 +76,8 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
-                            @if($document_detail->sub3_status == '1')
-                                <form action="{{route('documents_admission_division_retrun_understand')}}" method="post" enctype="multipart/form-data">
+                            @if($document_detail->sub3_status == '2')
+                                <form action="" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="doc_id" value="{{$document_detail->doc_id}}">
                                     <input type="hidden" name="sub_id" value="{{$document_detail->sub_id}}">

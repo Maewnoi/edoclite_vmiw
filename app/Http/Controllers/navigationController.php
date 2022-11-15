@@ -15,6 +15,27 @@ use App\Models\User;
 
 class navigationController extends Controller
 {
+    public static function funtion_document_documents_admission_jurisprudence_all_count() {
+        if(Auth::user()->jurisprudence=='1'){
+            $document_admission_jurisprudence_count = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+            ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '0')
+            ->where('doc_template', 'A')
+            ->where('doc_status', 'success')
+            ->where('sub_recid', Auth::user()->group)
+            ->where('sub_status', '8')
+            ->where('sub2_status', '1')
+            ->where('sub3_status', '2')
+            ->count();
+            return $document_admission_jurisprudence_count;
+        }else{
+            return 0;
+        }
+    }
+
     //------------------------------------------------------------------------------------------------------------------miw
      //หน้ากลัก
     public static function funtion_reserved_numbersS_level_3($id){

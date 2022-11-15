@@ -125,6 +125,7 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
+
                     <!-- Dropdown ทะเบียนหนังสือภายนอก -->
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <div class="relative ml-1">
@@ -941,8 +942,71 @@ use App\Http\Controllers\functionController;
 <?php endif; ?>
                         </div>
                     </div>
-                    
                     <?php endif; ?>
+                    <?php if(Auth::user()->jurisprudence == '1'): ?>
+                    <!-- Dropdown นิติการ -->
+                    <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <div class="relative ml-1">
+                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown','data' => ['align' => 'right','width' => '48']]); ?>
+<?php $component->withName('jet-dropdown'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['align' => 'right','width' => '48']); ?>
+                                 <?php $__env->slot('trigger', null, []); ?> 
+                                    <span class="inline-flex rounded-md">
+                                        <button type="button"
+                                            class="inline-flex items-center px-3 py-1 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white rounded-md hover:text-gray-700 focus:outline-none">
+                                            <?php echo e(__('นิติการ')); ?>
+
+
+
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_document_documents_admission_jurisprudence_all_count">
+                                            </span>
+
+                                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    </span>
+                                 <?php $__env->endSlot(); ?>
+                                 <?php $__env->slot('content', null, []); ?> 
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                        <?php echo e(__('เมนู')); ?>
+
+                                    </div>
+                                    <div class="border-t border-gray-100"></div>
+                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_admission_jurisprudence_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_admission_jurisprudence_all')).'','class' => 'text-decoration-none']); ?>
+                                            <?php echo e(__('อนุมัติเอกสารตอบกลับภายนอก ( ')); ?>  
+                                            <?php echo e(navigationController::funtion_document_documents_admission_jurisprudence_all_count()); ?>
+
+                                            <?php echo e(__(' ) เรื่อง')); ?>
+
+                                         <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                 <?php $__env->endSlot(); ?>
+                             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
                     <?php endif; ?>
                 </div>
             </div>
@@ -1888,6 +1952,27 @@ use App\Http\Controllers\functionController;
                 <?php echo e(__('เอกสารที่เซ็นแล้ว ( ')); ?>
 
                 <?php echo e(navigationController::funtion_documents_admission_minister_all_count_1_level_1(Auth::user()->level)); ?>
+
+                <?php echo e(__(' ) เรื่อง')); ?>
+
+             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+            <?php endif; ?>
+           
+            <!-- นิติการ -->
+            <?php if(Auth::user()->jurisprudence == '1'): ?>
+            <div class="border-t border-gray-100"></div>
+            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['href' => ''.e(route('documents_admission_jurisprudence_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-responsive-nav-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_admission_jurisprudence_all')).'','class' => 'text-decoration-none']); ?>
+                <?php echo e(__('อนุมัติเอกสารตอบกลับภายนอก ( ')); ?>
 
                 <?php echo e(__(' ) เรื่อง')); ?>
 

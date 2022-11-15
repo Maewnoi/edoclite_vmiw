@@ -33,7 +33,7 @@ use App\Http\Controllers\documents_admission_division_inside_allController;
 use App\Http\Controllers\documents_admission_department_inside_allController;
 use App\Http\Controllers\documents_admission_work_inside_allController;
 use App\Http\Controllers\queryController;
-
+use App\Http\Controllers\documents_admission_jurisprudenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +86,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/get_doc_recnum_inside_reserve/{id}', [functionController::class , 'getdoc_recnum_inside_reserve' ]);
     //doc_recnum_inside_dropped
     Route::get('/get_doc_recnum_inside_dropped/{id}', [functionController::class , 'getdoc_recnum_inside_dropped' ]);
+
+    Route::post('/jurisprudence/update',[functionController::class , 'funtion_jurisprudence_update' ]);
 
     // //users_level_1_0
     // Route::get('/users_level_1_0/{id}',[functionController::class,'getuserS_1_documents_admission_division_allController_0']);
@@ -146,7 +148,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/member_dashboard/count/chart_inside/6/query',[queryController::class,'funtion_query_member_dashboard_chart_inside_level_6']);
     Route::get('/member_dashboard/count/chart/7/query',[queryController::class,'funtion_query_member_dashboard_chart_level_7']);
     Route::get('/member_dashboard/count/chart_inside/7/query',[queryController::class,'funtion_query_member_dashboard_chart_inside_level_7']);
-
+    Route::get('/documents_admission_jurisprudence/all/query',[queryController::class,'funtion_query_documents_admission_jurisprudenceController_level_5_7']);
+    Route::get('/documents_admission_jurisprudence/count/query',[queryController::class,'funtion_query_documents_admission_jurisprudence']);
 
     //---------------------------------------------------------------------------------------------------
     
@@ -293,6 +296,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //All admission documents division retrun 
     Route::get('/documents_admission_division_retrun/all',[documents_admission_division_retrunController::class,'index'])->name('documents_admission_division_retrun');
     Route::get('/documents_admission_division_retrun/detail/{id}',[documents_admission_division_retrunController::class,'detail'])->name('documents_admission_division_retrun_detail')->middleware(['password.confirm']);
+    Route::post('/documents_admission_division_retrun/understand',[documents_admission_division_retrunController::class,'understand'])->name('documents_admission_division_retrun_understand');
 
     //reserve number delivery inside จองเลขส่งภายใน
     Route::get('/reserve_number_delivery_inside/all',[reserve_number_delivery_inside_allController::class,'index'])->name('reserve_number_delivery_inside_all');
@@ -331,5 +335,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_admission_work_inside_all/all/1',[documents_admission_work_inside_allController::class,'index_1'])->name('documents_admission_work_inside_all_1');
     Route::get('/documents_admission_work_inside_all/detail/{id}',[documents_admission_work_inside_allController::class,'detail'])->name('documents_admission_work_inside_detail')->middleware(['password.confirm']);
  
+    //documents admission jurisprudence
+    Route::get('/documents_admission_jurisprudence/all',[documents_admission_jurisprudenceController::class,'index'])->name('documents_admission_jurisprudence_all');
+    Route::get('/documents_admission_jurisprudence/detail/{id}',[documents_admission_jurisprudenceController::class,'detail'])->name('documents_admission_jurisprudence_detail')->middleware(['password.confirm']);
+
     //---------------------------------------------------------------------------------------------------
 });

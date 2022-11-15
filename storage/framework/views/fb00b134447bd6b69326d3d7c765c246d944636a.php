@@ -84,33 +84,6 @@ use App\Http\Controllers\functionController;
                                         <font class="text-primary"><?php echo e($document_detail->doc_title); ?></font>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <button type="button" data-toggle="modal"
-                                             data-target="#modal-update-general<?php echo e($document_detail->doc_id); ?>"
-                                            class="btn btn-outline-warning "><i class="fa fa-edit"></i> แก้ไขข้อมูลทั่วไป</button>
-                                        <button type="button" data-toggle="modal"
-                                                data-target="#modal-update-file<?php echo e($document_detail->doc_id); ?>"
-                                                class="btn btn-outline-warning "><i class="fa fa-edit"></i> เปลี่ยนไฟล์เอกสาร</button>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <?php $__errorArgs = ['doc_filedirec'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                        <div class="my-2">
-                                            <p class="mt-2 text-sm text-red-600">
-                                                <?php echo e($message); ?></p>
-                                        </div>
-                                        <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                    </div>
-                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -133,8 +106,8 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
                             <hr>
-                            <?php if($document_detail->sub3_status == '1'): ?>
-                                <form action="<?php echo e(route('documents_admission_division_retrun_understand')); ?>" method="post" enctype="multipart/form-data">
+                            <?php if($document_detail->sub3_status == '2'): ?>
+                                <form action="" method="post" enctype="multipart/form-data">
                                     <?php echo csrf_field(); ?>
                                     <input type="hidden" name="doc_id" value="<?php echo e($document_detail->doc_id); ?>">
                                     <input type="hidden" name="sub_id" value="<?php echo e($document_detail->sub_id); ?>">
@@ -181,4 +154,4 @@ unset($__errorArgs, $__bag); ?>
 <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
 <?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
 <?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
-<?php endif; ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/member/documents_admission_division_retrun/detail.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/member/documents_admission_jurisprudence/detail.blade.php ENDPATH**/ ?>

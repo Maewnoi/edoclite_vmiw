@@ -30,6 +30,10 @@ class Sub3Docs extends Migration
             $table->integer('sub3_inspector_1')->nullable();
             $table->dateTime('sub3_datetime_1')->nullable();
 
+            $table->enum('sub3_check_2', array('0', '1'))->default('0');
+            $table->integer('sub3_inspector_2')->nullable();
+            $table->dateTime('sub3_datetime_2')->nullable();
+
             $table->string('sub3_sealdetail_0')->nullable();
             $table->string('sub3_sealnote_0')->nullable();
             $table->string('sub3_sealpos_0')->nullable();

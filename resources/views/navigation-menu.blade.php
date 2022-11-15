@@ -51,6 +51,7 @@ use App\Http\Controllers\functionController;
                         :active="request()->routeIs('member_dashboard')" class="text-decoration-none">
                         หน้าหลัก
                     </x-jet-nav-link>
+
                     <!-- Dropdown ทะเบียนหนังสือภายนอก -->
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <div class="relative ml-1">
@@ -433,8 +434,48 @@ use App\Http\Controllers\functionController;
                             </x-jet-dropdown>
                         </div>
                     </div>
-                    
                     @endif
+                    @if(Auth::user()->jurisprudence == '1')
+                    <!-- Dropdown นิติการ -->
+                    <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <div class="relative ml-1">
+                            <x-jet-dropdown align="right" width="48">
+                                <x-slot name="trigger">
+                                    <span class="inline-flex rounded-md">
+                                        <button type="button"
+                                            class="inline-flex items-center px-3 py-1 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white rounded-md hover:text-gray-700 focus:outline-none">
+                                            {{ __('นิติการ') }}
+
+
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_document_documents_admission_jurisprudence_all_count">
+                                            </span>
+
+                                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    </span>
+                                </x-slot>
+                                <x-slot name="content">
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                        {{ __('เมนู') }}
+                                    </div>
+                                    <div class="border-t border-gray-100"></div>
+                                        <x-jet-dropdown-link href="{{ route('documents_admission_jurisprudence_all') }}"
+                                            class="text-decoration-none">
+                                            {{ __('อนุมัติเอกสารตอบกลับภายนอก ( ') }}  
+                                            {{navigationController::funtion_document_documents_admission_jurisprudence_all_count()}}
+                                            {{ __(' ) เรื่อง') }}
+                                        </x-jet-dropdown-link>
+                                </x-slot>
+                            </x-jet-dropdown>
+                        </div>
+                    </div>
+                    @endif
+
                     @endif
                 </div>
             </div>
@@ -829,6 +870,15 @@ use App\Http\Controllers\functionController;
             <x-jet-responsive-nav-link href="{{ route('documents_admission_minister_all_1') }}" class="text-decoration-none">
                 {{ __('เอกสารที่เซ็นแล้ว ( ') }}
                 {{navigationController::funtion_documents_admission_minister_all_count_1_level_1(Auth::user()->level)}}
+                {{ __(' ) เรื่อง') }}
+            </x-jet-responsive-nav-link>
+            @endif
+           
+            <!-- นิติการ -->
+            @if(Auth::user()->jurisprudence == '1')
+            <div class="border-t border-gray-100"></div>
+            <x-jet-responsive-nav-link href="{{ route('documents_admission_jurisprudence_all') }}" class="text-decoration-none">
+                {{ __('อนุมัติเอกสารตอบกลับภายนอก ( ') }}
                 {{ __(' ) เรื่อง') }}
             </x-jet-responsive-nav-link>
             @endif

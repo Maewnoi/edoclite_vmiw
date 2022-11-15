@@ -86,32 +86,28 @@ use App\Http\Controllers\functionController;
                             </div>
                             <hr>
                             @if($document_detail->sub3_status == '0')
-                          
-                                    <form action="{{route('documents_admission_department_retrun_understand')}}"" method="post" enctype="multipart/form-data">
-                                        @csrf
-                                        
-                                                <input type="hidden" name="doc_id" value="{{$document_detail->doc_id}}">
-                                                <input type="hidden" name="sub_id" value="{{$document_detail->sub_id}}">
-                                                <input type="hidden" name="sub2_id"
+                                <form action="{{route('documents_admission_department_retrun_understand')}}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="doc_id" value="{{$document_detail->doc_id}}">
+                                    <input type="hidden" name="sub_id" value="{{$document_detail->sub_id}}">
+                                    <input type="hidden" name="sub2_id"
                                                     value="{{$document_detail->sub2_id}}">
-                                                <input type="hidden" name="sub3_id"
+                                    <input type="hidden" name="sub3_id"
                                                     value="{{$document_detail->sub3_id}}">
-                                                <input type="hidden" name="sub3d_id"
+                                    <input type="hidden" name="sub3d_id"
                                                     value="{{$document_detail->sub3d_id}}">
-
-                                                <input type="hidden" name="doc_docnum"
+                                    <input type="hidden" name="doc_docnum"
                                                     value="{{$document_detail->doc_docnum}}">
-                                                <input type="hidden" name="doc_origin"
+                                    <input type="hidden" name="doc_origin"
                                                     value="{{$document_detail->doc_origin}}">
-                                                <input type="hidden" name="doc_title"
+                                    <input type="hidden" name="doc_title"
                                                     value="{{$document_detail->doc_title}}">
-                                            <center>
-                                                <x-jet-button onclick="submitForm(this);">
-                                                    {{ __('รับทราบ') }}
-                                                </x-jet-button>
-                                            </center>
-                                    </form>
-                               
+                                    <center>
+                                        <x-jet-button onclick="submitForm(this);">
+                                            {{ __('รับทราบ') }}
+                                        </x-jet-button>
+                                    </center>
+                                </form>
                             @endif
                             <hr>
                         </div>

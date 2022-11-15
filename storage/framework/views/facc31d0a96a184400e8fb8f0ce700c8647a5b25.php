@@ -17,11 +17,10 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                   
                     <div class="shadow card">
                         <div class="card-header bg-primary">
                             <div class="clearfix">
-                            บันทึกข้อความ
+                            อนุมัติเอกสารตอบกลับภายนอก
                                 <div class="float-right mt-1 ml-3 spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
                                     <span class="sr-only">Loading...</span>
                                 </div>
@@ -53,4 +52,4 @@ use App\Http\Controllers\functionController;
 <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
 <?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
 <?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
-<?php endif; ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/member/documents_admission_department_retrun/index.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/member/documents_admission_jurisprudence/index.blade.php ENDPATH**/ ?>
