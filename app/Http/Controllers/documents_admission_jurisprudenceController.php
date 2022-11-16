@@ -37,9 +37,49 @@ class documents_admission_jurisprudenceController extends Controller
             ->where('sub_recid', Auth::user()->group)
             ->where('sub3_status', '2')
             ->first();
-            return view('member.documents_admission_jurisprudence.detail',compact('document_detail'));
+
+            $userS = User::where('level', '2')
+            ->where('site_id',Auth::user()->site_id)
+            ->get();
+            return view('member.documents_admission_jurisprudence.detail',compact('document_detail','userS'));
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
+    }
+
+    public function understand(Request $request){
+        //ตรวจสอบข้อมูลที่กรอกเข้ามาก่อน
+        $request->validate(
+            [
+                'sub3_sealid_0'=>'required|max:255'
+            ],
+            [
+                'sub3_sealid_0.required'=>"กรุณาเลือกผู้ลงนามด้วยครับ",
+                'sub3_sealid_0.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
+            ]
+        );
+
+        $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
+            'sub3_sealid_0'=>$request->sub3_sealid_0,
+            'sub3_status'=>'3',
+            'sub3_updated_at'=>date('Y-m-d H:i:s')
+        ]);
+        if($update_sub3_docs){
+            //linetoken
+            $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
+            ->where('group_id', Auth::user()->group)
+            ->first();
+            if($tokens_Check){
+                $message = "\n⚠️ นิติการอนุมัติตอบกลับเอกสารภายนอก ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                functionController::line_notify($message,$tokens_Check->group_token);
+            }
+            return redirect()->route('documents_admission_jurisprudence_all')->with('success',"รับทราบเรียบร้อย");
+        }else{
+            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs] !');
+        }
+    }
+
+    public function do_not_understand(Request $request){
+        return redirect('member_dashboard')->with('error','ยังไม่ทำ !');
     }
 }

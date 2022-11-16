@@ -56,68 +56,68 @@
                 </div>
                 <div class="modal-body">
                     <ul class="todo-list ui-sortable" data-widget="todo-list">
-                        <li class="done">
+                        <li>
                             <span class="handle ui-sortable-handle">
                                 <i class="fas fa-ellipsis-v"></i>
                                 <i class="fas fa-ellipsis-v"></i>
                             </span>
-                            <span class="text">นายก Username : lei01 Password : 1234</span>
-                        </li>
-                        <li class="done">
-                            <span class="handle ui-sortable-handle">
-                                <i class="fas fa-ellipsis-v"></i>
-                                <i class="fas fa-ellipsis-v"></i>
-                            </span>
-                            <span class="text">รองนายก Username : lei02 Password : 1234</span>
-                        </li>
-                        <li class="done">
-                            <span class="handle ui-sortable-handle">
-                                <i class="fas fa-ellipsis-v"></i>
-                                <i class="fas fa-ellipsis-v"></i>
-                            </span>
-                            <span class="text">ปลัด Username : lei02 Password : 1234</span>
-                        </li>
-                        <li class="done">
-                            <span class="handle ui-sortable-handle">
-                                <i class="fas fa-ellipsis-v"></i>
-                                <i class="fas fa-ellipsis-v"></i>
-                            </span>
-                            <span class="text">รองปลัด Username : lei02 Password : 1234</span>
+                            <span class="text">นายก(1) Username : lei011 Password : 1234</span>
                         </li>
                         <li>
                             <span class="handle ui-sortable-handle">
                                 <i class="fas fa-ellipsis-v"></i>
                                 <i class="fas fa-ellipsis-v"></i>
                             </span>
-                            <span class="text">สรรบรรณกลาง Username : lei03 Password : 1234</span>
+                            <span class="text">รองนายก(1) Username : lei012 Password : 1234</span>
                         </li>
                         <li>
                             <span class="handle ui-sortable-handle">
                                 <i class="fas fa-ellipsis-v"></i>
                                 <i class="fas fa-ellipsis-v"></i>
                             </span>
-                            <span class="text">หัวหน้ากอง Username : lei04 Password : 1234</span>
+                            <span class="text">ปลัด(2) Username : lei021 Password : 1234</span>
                         </li>
                         <li>
                             <span class="handle ui-sortable-handle">
                                 <i class="fas fa-ellipsis-v"></i>
                                 <i class="fas fa-ellipsis-v"></i>
                             </span>
-                            <span class="text">หัวหน้าฝ่าย Username : lei05 Password : 1234</span>
+                            <span class="text">รองปลัด(2) Username : lei022 Password : 1234</span>
                         </li>
                         <li>
                             <span class="handle ui-sortable-handle">
                                 <i class="fas fa-ellipsis-v"></i>
                                 <i class="fas fa-ellipsis-v"></i>
                             </span>
-                            <span class="text">สรรบรรณกอง Username : lei06 Password : 1234</span>
+                            <span class="text">สรรบรรณกลาง(3) Username : lei03 Password : 1234</span>
                         </li>
                         <li>
                             <span class="handle ui-sortable-handle">
                                 <i class="fas fa-ellipsis-v"></i>
                                 <i class="fas fa-ellipsis-v"></i>
                             </span>
-                            <span class="text">งาน Username : lei07 Password : 1234</span>
+                            <span class="text">หัวหน้ากอง(4) Username : lei04 Password : 1234</span>
+                        </li>
+                        <li>
+                            <span class="handle ui-sortable-handle">
+                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </span>
+                            <span class="text">หัวหน้าฝ่าย(5) Username : lei05 Password : 1234</span>
+                        </li>
+                        <li>
+                            <span class="handle ui-sortable-handle">
+                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </span>
+                            <span class="text">สรรบรรณกอง(6) Username : lei06 Password : 1234</span>
+                        </li>
+                        <li>
+                            <span class="handle ui-sortable-handle">
+                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </span>
+                            <span class="text">งาน(7) Username : lei07 Password : 1234</span>
                         </li>
                     </ul>
                 </div>

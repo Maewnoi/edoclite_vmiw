@@ -34,6 +34,8 @@ use App\Http\Controllers\documents_admission_department_inside_allController;
 use App\Http\Controllers\documents_admission_work_inside_allController;
 use App\Http\Controllers\queryController;
 use App\Http\Controllers\documents_admission_jurisprudenceController;
+use App\Http\Controllers\documents_admission_deputy_signController;
+use App\Http\Controllers\documents_admission_minister_signController;
 
 /*
 |--------------------------------------------------------------------------
@@ -150,6 +152,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/member_dashboard/count/chart_inside/7/query',[queryController::class,'funtion_query_member_dashboard_chart_inside_level_7']);
     Route::get('/documents_admission_jurisprudence/all/query',[queryController::class,'funtion_query_documents_admission_jurisprudenceController_level_5_7']);
     Route::get('/documents_admission_jurisprudence/count/query',[queryController::class,'funtion_query_documents_admission_jurisprudence']);
+    Route::get('/documents_admission_deputy_sign/all/0/query',[queryController::class,'funtion_query_documents_admission_deputy_sign_0_Controller_level_2']);
+    Route::get('/documents_admission_deputy_sign/all/1/query',[queryController::class,'funtion_query_documents_admission_deputy_sign_1_Controller_level_2']);
+    Route::get('/documents_admission_deputy_sign/count/query',[queryController::class,'funtion_query_documents_admission_deputy_sign_count_level_2']);
+    Route::get('/documents_admission_deputy_sign/chart/2/query',[queryController::class,'funtion_query_documents_admission_deputy_sign_chart_level_2']);
 
     //---------------------------------------------------------------------------------------------------
     
@@ -338,6 +344,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //documents admission jurisprudence
     Route::get('/documents_admission_jurisprudence/all',[documents_admission_jurisprudenceController::class,'index'])->name('documents_admission_jurisprudence_all');
     Route::get('/documents_admission_jurisprudence/detail/{id}',[documents_admission_jurisprudenceController::class,'detail'])->name('documents_admission_jurisprudence_detail')->middleware(['password.confirm']);
+    Route::post('/documents_admission_jurisprudence/understand',[documents_admission_jurisprudenceController::class,'understand'])->name('documents_admission_jurisprudence_understand');
+    Route::post('/documents_admission_jurisprudence/do_not_understand',[documents_admission_jurisprudenceController::class,'do_not_understand'])->name('documents_admission_jurisprudence_do_not_understand');
+
+    //documents admission deputy sign ปลัด รองปลัด ลงนาม
+    Route::get('/documents_admission_deputy_sign/all/0',[documents_admission_deputy_signController::class,'index_0'])->name('documents_admission_deputy_sign_all_0');
+    Route::get('/documents_admission_deputy_sign/all/1',[documents_admission_deputy_signController::class,'index_1'])->name('documents_admission_deputy_sign_all_1');
+    
+    //documents admission minister sign นายก รองนายก ลงนาม
+    Route::get('/documents_admission_minister_sign/all/0',[documents_admission_minister_signController::class,'index_0'])->name('documents_admission_minister_sign_all_0');
+    Route::get('/documents_admission_minister_sign/all/1',[documents_admission_minister_signController::class,'index_1'])->name('documents_admission_minister_sign_all_1');
 
     //---------------------------------------------------------------------------------------------------
 });

@@ -85,6 +85,7 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
+                            <div class="flex items-center justify-center mt-20">
                             @if($document_detail->sub3_status == '0')
                                 <form action="{{route('documents_admission_department_retrun_understand')}}" method="post" enctype="multipart/form-data">
                                     @csrf
@@ -102,13 +103,12 @@ use App\Http\Controllers\functionController;
                                                     value="{{$document_detail->doc_origin}}">
                                     <input type="hidden" name="doc_title"
                                                     value="{{$document_detail->doc_title}}">
-                                    <center>
-                                        <x-jet-button onclick="submitForm(this);">
-                                            {{ __('รับทราบ') }}
-                                        </x-jet-button>
-                                    </center>
+                                    <x-jet-button onclick="submitForm(this);">
+                                        {{ __('รับทราบ') }}
+                                    </x-jet-button>
                                 </form>
                             @endif
+                            </div>
                             <hr>
                         </div>
                     </div>

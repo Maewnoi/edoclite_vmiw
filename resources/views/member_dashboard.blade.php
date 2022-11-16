@@ -10,6 +10,52 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="container-fluid">
                 <div class="row">
+                    <!-- นายก รองนายก -->
+                    @if(Auth::user()->level == '1')
+                    <div class="col-md-6">
+                        <div class="shadow card">
+                            <div class="card-header bg-primary">
+                                <h5 class="card-title">ลงนามอิเล็กทรอนิกส์</h5>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chart_level_1" style="height: 250px; width: 100%;"></div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    <!-- ปลัด รองปลัด -->
+                    @if(Auth::user()->level == '2')
+                    <div class="col-md-6">
+                        <div class="shadow card">
+                            <div class="card-header bg-primary">
+                                <h5 class="card-title">ลงนามอิเล็กทรอนิกส์</h5>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chart_level_2" style="height: 250px; width: 100%;"></div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <!-- สารบรรณกลาง -->
                     @if(Auth::user()->level == '3')
                     <div class="col-md-5">

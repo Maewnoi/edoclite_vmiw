@@ -45,7 +45,11 @@ use App\Http\Controllers\functionController;
                     <x-jet-nav-link href="{{ route('services') }}" :active="request()->routeIs('services')">
                         Services
                     </x-jet-nav-link> -->
-                    @elseif(Auth::user()->level !='0')
+                    @elseif(Auth::user()->level == '3' ||
+                    Auth::user()->level == '4' ||
+                    Auth::user()->level == '5' ||
+                    Auth::user()->level == '6' ||
+                    Auth::user()->level == '7')
                     <!-- user -->
                     <x-jet-nav-link href="{{ route('member_dashboard') }}"
                         :active="request()->routeIs('member_dashboard')" class="text-decoration-none">
@@ -215,22 +219,7 @@ use App\Http\Controllers\functionController;
                                     </x-jet-dropdown-link>
                                     @endif
 
-                                    <!-- นายก -->
-                                    @if(Auth::user()->level == '1')
-                                    <x-jet-dropdown-link href="{{ route('documents_admission_minister_all_0') }}"
-                                        class="text-decoration-none">
-                                        {{ __('เอกสารรอพิจารณา ( ') }}
-                                        {{navigationController::funtion_documents_admission_minister_all_count_0_level_1(Auth::user()->level)}}
-                                        {{ __(' ) เรื่อง') }}
-                                    </x-jet-dropdown-link>
-                                    <div class="border-t border-gray-100"></div>
-                                    <x-jet-dropdown-link href="{{ route('documents_admission_minister_all_1') }}"
-                                        class="text-decoration-none">
-                                        {{ __('เอกสารที่เซ็นแล้ว ( ') }}
-                                        {{navigationController::funtion_documents_admission_minister_all_count_1_level_1(Auth::user()->level)}}
-                                        {{ __(' ) เรื่อง') }}
-                                    </x-jet-dropdown-link>
-                                    @endif
+                                    
                                 </x-slot>
                             </x-jet-dropdown>
                         </div>
@@ -475,6 +464,81 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                     @endif
+
+
+                    @elseif(Auth::user()->level == '1' || Auth::user()->level == '2')
+                    <x-jet-nav-link href="{{ route('member_dashboard') }}"
+                        :active="request()->routeIs('member_dashboard')" class="text-decoration-none">
+                        หน้าหลัก
+                    </x-jet-nav-link>
+
+                    <!-- Dropdown ลงนาม -->
+                    <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <div class="relative ml-1">
+                            <x-jet-dropdown align="right" width="48">
+                                <x-slot name="trigger">
+                                    <span class="inline-flex rounded-md">
+                                        <button type="button"
+                                            class="inline-flex items-center px-3 py-1 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white rounded-md hover:text-gray-700 focus:outline-none">
+                                            {{ __('ลงนามอิเล็กทรอนิกส์ ') }}
+
+                                            <!-- หัวหน้าฝ่าย -->
+                                            @if(Auth::user()->level == '2')
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_deputy_sign_count_level_2">
+                                            </span>
+                                            @endif
+
+                                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    </span>
+                                </x-slot>
+                                <x-slot name="content">
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                        {{ __('เมนู') }}
+                                    </div>
+                                    <div class="border-t border-gray-100"></div>
+                                    <!-- นายก รองนายก -->
+                                    @if(Auth::user()->level == '1')
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_minister_sign_all_0') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรอลงนาม ( ') }}
+                                      
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_minister_sign_all_1') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารที่ลงนามแล้ว ( ') }}
+                                   
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    @endif
+                                    <!-- ปลัด รองปลัด -->
+                                    @if(Auth::user()->level == '2')
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_deputy_sign_all_0') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรอลงนาม ( ') }}
+                                        {{navigationController::funtion_documents_admission_deputy_sign_count_0_level_2()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_deputy_sign_all_1') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารที่ลงนามแล้ว ( ') }}
+                                        {{navigationController::funtion_documents_admission_deputy_sign_count_1_level_2()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    @endif
+                                </x-slot>
+                            </x-jet-dropdown>
+                        </div>
+                    </div>
+                    
 
                     @endif
                 </div>
