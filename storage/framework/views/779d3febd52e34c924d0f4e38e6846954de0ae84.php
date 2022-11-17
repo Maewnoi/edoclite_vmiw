@@ -1003,8 +1003,12 @@ use App\Http\Controllers\functionController;
                                             class="inline-flex items-center px-3 py-1 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white rounded-md hover:text-gray-700 focus:outline-none">
                                             <?php echo e(__('ลงนามอิเล็กทรอนิกส์ ')); ?>
 
-
-                                            <!-- หัวหน้าฝ่าย -->
+                                            <!-- นายกและรองนายก -->
+                                            <?php if(Auth::user()->level == '1'): ?>
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_minister_sign_count_level_2">
+                                            </span>
+                                            <?php endif; ?>
+                                            <!-- ปลัดและรองปลัด -->
                                             <?php if(Auth::user()->level == '2'): ?>
                                             <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_deputy_sign_count_level_2">
                                             </span>
@@ -1035,7 +1039,8 @@ use App\Http\Controllers\functionController;
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_minister_sign_all_0')).'','class' => 'text-decoration-none']); ?>
                                         <?php echo e(__('เอกสารรอลงนาม ( ')); ?>
 
-                                      
+                                        <?php echo e(navigationController::funtion_documents_admission_minister_sign_count_0_level_2()); ?>
+
                                         <?php echo e(__(' ) เรื่อง')); ?>
 
                                      <?php echo $__env->renderComponent(); ?>
@@ -1053,7 +1058,8 @@ use App\Http\Controllers\functionController;
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_minister_sign_all_1')).'','class' => 'text-decoration-none']); ?>
                                         <?php echo e(__('เอกสารที่ลงนามแล้ว ( ')); ?>
 
-                                   
+                                        <?php echo e(navigationController::funtion_documents_admission_minister_sign_count_1_level_2()); ?>
+
                                         <?php echo e(__(' ) เรื่อง')); ?>
 
                                      <?php echo $__env->renderComponent(); ?>

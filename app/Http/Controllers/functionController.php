@@ -19,6 +19,74 @@ use Illuminate\Support\Facades\Auth;
 
 class functionController extends Controller
 {
+    public static function funtion_generate_PDF_VI($sub3d_file,$sub3_sealid_0,$sub3_sealid_1,$sub3_sealid_2){
+        $pdf = new Fpdi();
+        $pdf->AddPage();
+        //Font
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        //นับจำนวนหน้า
+        $sourceFilePages = $pdf->setSourceFile($sub3d_file);
+        for($pageNo = 1; $pageNo <= $sourceFilePages; $pageNo++){
+            $tplIdx = $pdf->importPage($pageNo);
+            $pdf->useTemplate($tplIdx, null, null, null);
+        }
+
+        if($sub3_sealid_0 == Auth::user()->id){
+            $pdf->SetTextColor(0, 0, 255);
+            $pdf->SetXY(30, 92);
+            $pdf->Write(0, iconv('UTF-8', 'cp874', 'sub3_sealid_0 '));
+
+            if($sub3_sealid_1 != null){
+
+            }
+
+            if($sub3_sealid_1 == null){
+
+            }
+        }else if($sub3_sealid_1 == Auth::user()->id){
+            $pdf->SetTextColor(0, 0, 255);
+            $pdf->SetXY(30, 102);
+            $pdf->Write(0, iconv('UTF-8', 'cp874', 'sub3_sealid_1 '));
+
+            if($sub3_sealid_0 != null){
+
+            }
+
+            if($sub3_sealid_0 == null){
+
+            }
+        }else if($sub3_sealid_2 == Auth::user()->id){
+            $pdf->SetTextColor(0, 0, 255);
+            $pdf->SetXY(30, 112);
+            $pdf->Write(0, iconv('UTF-8', 'cp874', 'sub3_sealid_2 '));
+
+            if($sub3_sealid_0 != null && $sub3_sealid_1 != null){
+                // //ลายเซ็น
+                // if(Auth::user()->sign == ''){
+                //     $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',85,140,20,20);
+                // }else{
+                //     $pdf->Image(Auth::user()->sign,85,140,20,20);
+                // }
+                // //ตำแหน่ง
+                // $pdf->SetTextColor(0, 0, 0);
+                // $pdf->SetXY(85, 165);
+                // $pdf->Write(0, iconv('UTF-8', 'cp874', $seal_pos_1));
+            }
+
+            if($sub3_sealid_0 != null && $sub3_sealid_1 == null){
+
+            }
+
+            if($sub3_sealid_0 == null && $sub3_sealid_1 != null){
+
+            }
+        }
+
+
+        return response($pdf->Output())->header('Content-Type', 'application/pdf');
+
+    }
     public static function funtion_jurisprudence_update(Request $request) {
         if($request->var_status == '0'){
             $jurisprudence_update = User::where('id', $request->var_id)->update([

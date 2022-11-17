@@ -1,3 +1,74 @@
+$('#chart_level_1').each(function () {
+    var dataPoints = [];
+    var var_chart_level_1 = new CanvasJS.Chart("chart_level_1", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            fontFamily: "italic",
+            fontSize: 16,
+            text: ""
+        },
+        data: [{
+            type: "pie",
+            startAngle: 15,
+            toolTipContent: "<b>{label}</b>: {y} เรื่อง",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 12,
+            indexLabel: "{label} {y} เรื่อง",
+            dataPoints: dataPoints
+        }]
+    });
+
+    var updateChart = function () {
+        $.ajax({
+            type: "GET",
+            url: "/documents_admission_minister_sign/chart/1/query",
+            data: '',
+            success: function(data) {
+                jQuery.each(data, function(index, item) {
+                    dataPoints.push({y: item, label: index});
+                    // console.log(dataPoints);
+                });
+                var_chart_level_1.render();
+            },
+            error: function(request, status, error) {
+                document.getElementById('chart_level_1').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
+                console.log(error);
+            }
+        });
+    }
+    updateChart();
+    setInterval(function(){
+        updateChart();
+        dataPoints.splice(0);
+    }, 3000);
+});
+
+$('#funtion_documents_admission_minister_sign_count_level_2').each(function () {
+    document.getElementById('funtion_documents_admission_minister_sign_count_level_2').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_documents_admission_minister_sign_count_level_2() {
+        $.ajax({
+            type: "GET",
+            url: "/documents_admission_minister_sign/count/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_documents_admission_minister_sign_count_level_2').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_documents_admission_minister_sign_count_level_2').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_documents_admission_minister_sign_count_level_2();
+    setInterval( function () {
+        funtion_documents_admission_minister_sign_count_level_2();
+    }, 3000 );
+});
+
 $('#chart_level_2').each(function () {
     var dataPoints = [];
     var var_chart_level_2 = new CanvasJS.Chart("chart_level_2", {
@@ -1480,6 +1551,10 @@ if(window.location.pathname == '/documents_admission_all/all'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
                     }else if(data == '4'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '5'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                    }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else{
                         txt_sub3_status = "ไม่ถูกนิยาม";
                     }
@@ -2056,6 +2131,10 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
                 }else if(data == '4'){
                     txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                }else if(data == '5'){
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                }else if(data == '6'){
+                    txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                 }else{
                     txt_sub3_status = "ไม่ถูกนิยาม";
                 }
@@ -3657,6 +3736,10 @@ if(window.location.pathname == '/documents_admission_all/all'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
                     }else if(data == '4'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '5'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                    }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else{
                         txt_sub3_status = "ไม่ถูกนิยาม";
                     }
@@ -3751,6 +3834,10 @@ if(window.location.pathname == '/documents_admission_all/all'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
                     }else if(data == '4'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '5'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                    }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else{
                         txt_sub3_status = "ไม่ถูกนิยาม";
                     }
@@ -3845,6 +3932,10 @@ if(window.location.pathname == '/documents_admission_all/all'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
                     }else if(data == '4'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '5'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                    }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else{
                         txt_sub3_status = "ไม่ถูกนิยาม";
                     }
@@ -3855,6 +3946,201 @@ if(window.location.pathname == '/documents_admission_all/all'){
                 data: 'doc_id' ,
                 render: function ( data) {
                     return (` <a href="/documents_admission_deputy_sign/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
+
+}else if(window.location.pathname == '/documents_admission_minister_sign/all/0'){ 
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // },
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'doc_id' 
+            },
+            { 
+                data: 'sub3d_government' 
+            },
+            { 
+                data: 'sub3d_draft' 
+            },
+            {   
+                data: 'sub3d_date'
+            },
+            {
+                data: 'sub3d_topic' 
+            },
+            {
+                data: 'sub3d_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3d_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_sub3d_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_sub3d_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_sub3d_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_sub3d_speed)
+                }
+            },
+            {
+                data: 'sub3_status' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+                    }else if(data == '1'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+                    }else if(data == '3'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '4'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '5'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                    }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else{
+                        txt_sub3_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_sub3_status)
+                }
+            },
+            {
+                data: 'doc_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_admission_minister_sign/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
+}else if(window.location.pathname == '/documents_admission_minister_sign/all/1'){ 
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // },
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'doc_id' 
+            },
+            { 
+                data: 'sub3d_government' 
+            },
+            { 
+                data: 'sub3d_draft' 
+            },
+            {   
+                data: 'sub3d_date'
+            },
+            {
+                data: 'sub3d_topic' 
+            },
+            {
+                data: 'sub3d_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3d_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_sub3d_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_sub3d_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_sub3d_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_sub3d_speed)
+                }
+            },
+            {
+                data: 'sub3_status' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+                    }else if(data == '1'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+                    }else if(data == '3'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '4'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '5'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                    }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else{
+                        txt_sub3_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_sub3_status)
+                }
+            },
+            {
+                data: 'doc_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_admission_minister_sign/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
                 }
             }
         ]

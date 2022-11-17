@@ -60,6 +60,9 @@ class documents_admission_jurisprudenceController extends Controller
         );
 
         $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
+            'sub3_check_2'=>'1',
+            'sub3_datetime_2'=>date('Y-m-d H:i:s'),
+            'sub3_inspector_2'=>Auth::user()->id,
             'sub3_sealid_0'=>$request->sub3_sealid_0,
             'sub3_status'=>'3',
             'sub3_updated_at'=>date('Y-m-d H:i:s')

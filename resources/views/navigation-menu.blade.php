@@ -481,8 +481,12 @@ use App\Http\Controllers\functionController;
                                         <button type="button"
                                             class="inline-flex items-center px-3 py-1 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white rounded-md hover:text-gray-700 focus:outline-none">
                                             {{ __('ลงนามอิเล็กทรอนิกส์ ') }}
-
-                                            <!-- หัวหน้าฝ่าย -->
+                                            <!-- นายกและรองนายก -->
+                                            @if(Auth::user()->level == '1')
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_minister_sign_count_level_2">
+                                            </span>
+                                            @endif
+                                            <!-- ปลัดและรองปลัด -->
                                             @if(Auth::user()->level == '2')
                                             <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_deputy_sign_count_level_2">
                                             </span>
@@ -507,14 +511,14 @@ use App\Http\Controllers\functionController;
                                     <x-jet-dropdown-link href="{{ route('documents_admission_minister_sign_all_0') }}"
                                         class="text-decoration-none">
                                         {{ __('เอกสารรอลงนาม ( ') }}
-                                      
+                                        {{navigationController::funtion_documents_admission_minister_sign_count_0_level_2()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
                                     <x-jet-dropdown-link href="{{ route('documents_admission_minister_sign_all_1') }}"
                                         class="text-decoration-none">
                                         {{ __('เอกสารที่ลงนามแล้ว ( ') }}
-                                   
+                                        {{navigationController::funtion_documents_admission_minister_sign_count_1_level_2()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     @endif
