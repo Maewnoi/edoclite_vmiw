@@ -2,7 +2,7 @@
 use App\Http\Controllers\navigationController;
 use App\Http\Controllers\functionController;
 ?>
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow">
+<nav x-data="{ open: false }" class="bg-white border shadow">
     <!-- Primary Navigation Menu -->
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -3685,8 +3685,24 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="border shadow card border-info">
-                                            <div class="card-body">
-
+                                            <div class="card-body table-responsive">
+                                                <table class="w-100 table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">ลำดับ</th>
+                                                            <th scope="col">หน่วยงานต้นเรื่อง</th>
+                                                            <th scope="col">เลขที่หนังสือ</th>
+                                                            <th scope="col">เรื่อง</th>
+                                                            <th scope="col">เอกสารนอก/ภายใน</th>
+                                                            <th scope="col">เลขที่รับส่วนงาน</th>
+                                                            <th scope="col">วันที่</th>
+                                                            <th scope="col">วันที่ลง</th>
+                                                            <th scope="col">ชั้นความลับ</th>
+                                                            <th scope="col">ชั้นความเร็ว</th>
+                                                            <th scope="col">สถานะ</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>

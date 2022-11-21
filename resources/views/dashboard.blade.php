@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="shadow card">
+                        <div class="border border shadow card border-info border-info">
                             <div class="card-header">
                                 <h5 class="card-title">เอกสารทั้งหมด</h5>
                                 <div class="card-tools">

@@ -11,7 +11,7 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header bg-primary">
                             <div class="clearfix">
                             ลงนามอิเล็กทรอนิกส์

@@ -17,7 +17,7 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-body table-responsive">
                             <ul class="flex-row nav nav-pills">
                                 <li class="nav-item">
@@ -36,7 +36,7 @@ use App\Http\Controllers\functionController;
                 </div>
                 <div class="col-md-9">
                     
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header bg-primary">รายการจองเลขรับภายในทั้งหมด</div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table">
@@ -157,7 +157,7 @@ use App\Http\Controllers\functionController;
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header bg-primary">จองเลข</div>
                         <div class="card-body">
                             <?php if(Auth::user()->level=='6'): ?>

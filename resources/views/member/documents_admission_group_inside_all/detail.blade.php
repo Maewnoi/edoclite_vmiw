@@ -12,7 +12,7 @@ use App\Http\Controllers\functionController;
             <div class="row">
                 <div class="col-md-12">
                  
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="text-lg card-header bg-primary">
                             <x-jet-nav-link href="{{url('/documents_pending/all')}}">
                                 <i class="fa fa-arrow-left"></i>

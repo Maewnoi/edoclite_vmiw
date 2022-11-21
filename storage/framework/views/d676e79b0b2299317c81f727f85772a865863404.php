@@ -18,7 +18,7 @@ use App\Http\Controllers\functionController;
                     <!-- สารบรรณกลาง -->
                     <?php if(Auth::user()->level == '3'): ?>
                     <div class="col-md-5">
-                        <div class="shadow card">
+                        <div class="border shadow card border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">เอกสารรับเข้าภายนอกทั้งหมด</h5>
                                 <div class="card-tools">
@@ -44,7 +44,7 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                     <div class="col-md-7">
-                        <div class="shadow card">
+                        <div class="border shadow card border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ปฏิทินเลขที่จอง</h5>
                                 <div class="card-tools">
@@ -72,7 +72,7 @@ use App\Http\Controllers\functionController;
                     <!-- หัวหน้ากอง -->
                     <?php if(Auth::user()->level == '4'): ?>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border shadow card border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ทะเบียนหนังสือภายนอก</h5>
                                 <div class="card-tools">
@@ -98,7 +98,7 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border shadow card border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ทะเบียนหนังสือภายใน</h5>
                                 <div class="card-tools">
@@ -127,7 +127,7 @@ use App\Http\Controllers\functionController;
                     <!-- หัวหน้าฝ่าย -->
                     <?php if(Auth::user()->level == '5'): ?>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border shadow card border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ทะเบียนหนังสือภายนอก</h5>
                                 <div class="card-tools">
@@ -153,7 +153,7 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border shadow card border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ทะเบียนหนังสือภายใน</h5>
                                 <div class="card-tools">
@@ -186,7 +186,7 @@ use App\Http\Controllers\functionController;
                     <div class="col-md-5">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="shadow card">
+                                <div class="border shadow card border-info">
                                     <div class="card-header bg-primary">
                                         <h5 class="card-title">เอกสารรับเข้าภายนอกทั้งหมด</h5>
                                         <div class="card-tools">
@@ -215,7 +215,7 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <div class="shadow card">
+                                <div class="border shadow card border-info">
                                     <div class="card-header bg-primary">
                                         <h5 class="card-title">เอกสารรับเข้าภายในทั้งหมด</h5>
                                         <div class="card-tools">
@@ -249,7 +249,7 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                     <div class="col-md-7">
-                        <div class="shadow card">
+                        <div class="border shadow card border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ปฏิทินเลขที่จอง</h5>
                                 <div class="card-tools">
@@ -283,7 +283,7 @@ use App\Http\Controllers\functionController;
                     <!-- งาน -->
                     <?php if(Auth::user()->level == '7'): ?>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border shadow card border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ทะเบียนหนังสือภายนอก</h5>
                                 <div class="card-tools">
@@ -309,7 +309,7 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border shadow card border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ทะเบียนหนังสือภายใน</h5>
                                 <div class="card-tools">

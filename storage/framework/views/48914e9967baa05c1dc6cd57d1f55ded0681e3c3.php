@@ -21,7 +21,7 @@ use App\Http\Controllers\functionController;
                     <div class="border shadow card border-info">
                         <div class="card-header bg-primary">รายการจองเลขคำสั่งทั้งหมด</div>
                         <div class="card-body table-responsive">
-                            <table id="example1" class="table">
+                            <table id="example1" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
@@ -107,11 +107,11 @@ use App\Http\Controllers\functionController;
                                                         <input type="hidden" name="reserve_number" class="form-control"
                                                             value="<?php echo e($row->reserve_number); ?>">
                                                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => []]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes([]); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
                                                             <?php echo e(__('ยืนยัน')); ?>
 
                                                          <?php echo $__env->renderComponent(); ?>
@@ -218,11 +218,11 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <hr>
                                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => []]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes([]); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
                                     <?php echo e(__('จอง')); ?>
 
                                  <?php echo $__env->renderComponent(); ?>
@@ -243,4 +243,4 @@ unset($__errorArgs, $__bag); ?>
 <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
 <?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
 <?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>
-<?php endif; ?><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/member/reserve_number_order_all/index.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/member/reserve_number_order_all/index.blade.php ENDPATH**/ ?>

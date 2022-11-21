@@ -18,7 +18,7 @@ use App\Http\Controllers\functionController;
             <div class="row">
                 <div class="col-md-9">
                     
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header">ตารางข้อมูลชื่อผู้ใช้</div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table">
@@ -408,7 +408,7 @@ unset($__errorArgs, $__bag); ?>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header">เพิ่มชื่อผู้ใช้</div>
                         <div class="card-body">
                             <form action="<?php echo e(route('addMember')); ?>" method="post" enctype="multipart/form-data">

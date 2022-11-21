@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-9">
 
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header">ตารางข้อมูล Sites</div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table table-striped">
@@ -124,7 +124,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header">เพิ่ม Sites</div>
                         <div class="card-body">
                             <form action="{{route('addSites')}}" method="post">
