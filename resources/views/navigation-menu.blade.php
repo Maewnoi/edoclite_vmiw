@@ -18,6 +18,7 @@ use App\Http\Controllers\functionController;
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
 
                     @if(Auth::user()->level=='0')
+             
                     <!-- admin -->
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')"
                         class="text-decoration-none">
@@ -39,6 +40,8 @@ use App\Http\Controllers\functionController;
                         class="text-decoration-none">
                         ชื่อผู้ใช้
                     </x-jet-nav-link>
+
+            
                     <!-- <x-jet-nav-link href="{{ route('department') }} " :active="request()->routeIs('department')">
                         Department
                     </x-jet-nav-link>
@@ -549,6 +552,16 @@ use App\Http\Controllers\functionController;
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <!-- ทุกสิทธิ์ยกเว้น แอดมิน -->
+                @if(Auth::user()->level != '0')
+                <div class="relative ml-3">
+                <x-jet-nav-link type="button" data-toggle="modal" class="text-decoration-none"
+                   data-target="#modal-search-documents">
+                    <i class="mr-2 fas fa-search"></i>{{ __('ค้นหาเอกสาร') }}
+                </x-jet-nav-link>
+                </div>
+                @endif
+                
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                 <div class="relative ml-3">
@@ -937,6 +950,11 @@ use App\Http\Controllers\functionController;
             </x-jet-responsive-nav-link>
             @endif
 
+            <div class="border-t border-gray-100"></div>
+            <x-jet-responsive-nav-link type="button" data-toggle="modal" class="text-decoration-none"
+                   data-target="#modal-search-documents">
+                   <i class="mr-2 fas fa-search"></i>{{ __('ค้นหาเอกสาร') }}
+            </x-jet-responsive-nav-link>
             @endif
         </div>
 
@@ -1178,10 +1196,10 @@ use App\Http\Controllers\functionController;
                                                 </div>
                                             </div>
                                         </div>
-                                        <table class="table table-bordered table-hover">
+                                        <table class="w-100 table-bordered table-hover">
                                             <tbody>
                                                 <tr data-widget="expandable-table" aria-expanded="false">
-                                                    <td><center>ดูรูปตัวอย่างตำแหน่งประทับตรา </center></td>
+                                                    <td class="text-primary"><center>ดูรูปตัวอย่างตำแหน่งประทับตรา </center></td>
                                                 </tr>
                                                 <tr class="expandable-body">
                                                     <td colspan="1">
@@ -1640,6 +1658,88 @@ use App\Http\Controllers\functionController;
                             {{ __('save') }}
                         </x-jet-button>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif 
+
+    <!-- ทุกสิทธิ์ยกเว้น แอดมิน -->
+    @if(Auth::user()->level != '0')
+    <div class="modal fade" id="modal-search-documents">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="bg-red-300 modal-header">
+                    <label class="modal-title">ค้นหาเอกสารทั้งหมด
+                    </label>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="py-12">
+                        <div class="container">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="border shadow card border-info">
+                                            <div class="card-body">
+                                                <div class="form-row">
+                                                    <div class="mb-3 col-md-3">
+                                                        <label for="validationDefault01">หน่วยงานต้นเรื่อง</label>
+                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="พิมพ์เพื่อค้นหา">
+                                                    </div>
+                                                    <div class="mb-3 col-md-3">
+                                                        <label for="validationDefault02">เลขที่หนังสือ</label>
+                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="พิมพ์เพื่อค้นหา">
+                                                    </div>
+                                                    <div class="mb-3 col-md-3">
+                                                        <label for="validationDefaultUsername">เรื่อง</label>
+                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="พิมพ์เพื่อค้นหา">
+                                                    </div>
+                                                    <div class="mb-3 col-md-3">
+                                                        <label for="validationDefaultUsername">เอกสารนอก/ภายใน</label>
+                                                        <select id="navigation_input_search_documents_"class=" form-control">
+                                                            <option value=""></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3 col-md-2">
+                                                        <label for="validationDefaultUsername">เลขที่รับส่วนงาน</label>
+                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="Last name" value="Otto" required>
+                                                    </div>
+                                                    <div class="mb-3 col-md-2">
+                                                        <label for="validationDefaultUsername">วันที่</label>
+                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="Last name" value="Otto" required>
+                                                    </div>
+                                                    <div class="mb-3 col-md-2">
+                                                        <label for="validationDefaultUsername">วันที่ลง</label>
+                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="Last name" value="Otto" required>
+                                                    </div>
+                                                    <div class="mb-3 col-md-2">
+                                                        <label for="validationDefaultUsername">ชั้นความลับ</label>
+                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="Last name" value="Otto" required>
+                                                    </div>
+                                                    <div class="mb-3 col-md-2">
+                                                        <label for="validationDefaultUsername">ชั้นความเร็ว</label>
+                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="Last name" value="Otto" required>
+                                                    </div>
+                                                    <div class="mb-3 col-md-2">
+                                                        <label for="validationDefaultUsername">สถานะ</label>
+                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="Last name" value="Otto" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="border shadow card border-info">
+                                            <div class="card-body">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
