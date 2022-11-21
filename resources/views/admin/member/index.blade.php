@@ -14,7 +14,7 @@ use App\Http\Controllers\functionController;
                     <div class="shadow card">
                         <div class="card-header">ตารางข้อมูลชื่อผู้ใช้</div>
                         <div class="card-body table-responsive">
-                            <table id="example1" class="table">
+                            <table id="example1" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>

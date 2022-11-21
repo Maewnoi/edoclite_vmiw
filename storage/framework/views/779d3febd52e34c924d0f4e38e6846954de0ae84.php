@@ -3651,27 +3651,33 @@ unset($__errorArgs, $__bag); ?>
                                                     </div>
                                                     <div class="mb-3 col-md-2">
                                                         <label for="validationDefaultUsername">เลขที่รับส่วนงาน</label>
-                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="Last name" value="Otto" required>
+                                                        <input type="number" class="form-control" id="navigation_input_search_documents_" placeholder="พิมพ์เพื่อค้นหา">
                                                     </div>
                                                     <div class="mb-3 col-md-2">
                                                         <label for="validationDefaultUsername">วันที่</label>
-                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="Last name" value="Otto" required>
+                                                        <input type="date" class="form-control" id="navigation_input_search_documents_">
                                                     </div>
                                                     <div class="mb-3 col-md-2">
                                                         <label for="validationDefaultUsername">วันที่ลง</label>
-                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="Last name" value="Otto" required>
+                                                        <input type="date" class="form-control" id="navigation_input_search_documents_">
                                                     </div>
                                                     <div class="mb-3 col-md-2">
                                                         <label for="validationDefaultUsername">ชั้นความลับ</label>
-                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="Last name" value="Otto" required>
+                                                        <select id="navigation_input_search_documents_"class=" form-control">
+                                                            <option value=""></option>
+                                                        </select>
                                                     </div>
                                                     <div class="mb-3 col-md-2">
                                                         <label for="validationDefaultUsername">ชั้นความเร็ว</label>
-                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="Last name" value="Otto" required>
+                                                        <select id="navigation_input_search_documents_"class=" form-control">
+                                                            <option value=""></option>
+                                                        </select>
                                                     </div>
                                                     <div class="mb-3 col-md-2">
                                                         <label for="validationDefaultUsername">สถานะ</label>
-                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="Last name" value="Otto" required>
+                                                        <select id="navigation_input_search_documents_"class=" form-control">
+                                                            <option value=""></option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>

@@ -22,7 +22,7 @@ use App\Http\Controllers\functionController;
                             </div>
                         </div>
                         <div class="card-body table-responsive">
-                            <table class="table">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
