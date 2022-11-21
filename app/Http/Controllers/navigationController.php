@@ -705,37 +705,5 @@ class navigationController extends Controller
         }
     }
 
-    public static function funtion_documents_admission_minister_all_count_0_level_1($id) {
-        if($id == '1'){
-            //นักจำนวนงานรอพิจารณา       // ->toSql();
-            $documents_admission_minister_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->whereRaw('CASE WHEN sub_docs.sub_status = "3" THEN sub_docs.seal_id_2 = '.Auth::user()->id.' WHEN sub_docs.sub_status = "4" THEN sub_docs.seal_id_3 = '.Auth::user()->id.' WHEN sub_docs.sub_status = "5" THEN sub_docs.seal_id_4 = '.Auth::user()->id.' WHEN sub_docs.sub_status = "6" THEN sub_docs.seal_id_5 = '.Auth::user()->id.' END')
-            ->count();
-            return $documents_admission_minister_all_count_0;
-        }else{
-            return 0;
-        }
-    }
-
-    public static function funtion_documents_admission_minister_all_count_1_level_1($id) {
-        if($id == '1'){
-            //นักจำนวนงานเซ็นหรือพิจารณาแล้ว 
-            $documents_admission_minister_all_count_1 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
-            ->where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'success')
-            ->whereRaw('CASE WHEN sub_docs.seal_id_2 = '.Auth::user()->id.' THEN sub_docs.seal_date_2 != "" WHEN sub_docs.seal_id_3 = '.Auth::user()->id.' THEN sub_docs.seal_date_3 != "" WHEN sub_docs.seal_id_4 = '.Auth::user()->id.' THEN sub_docs.seal_date_4 != "" WHEN sub_docs.seal_id_5 = '.Auth::user()->id.' THEN sub_docs.seal_date_5 != "" END')
-            ->count();
-            return $documents_admission_minister_all_count_1;
-        }else{
-            return 0;
-        }
-    }
-
 
 }

@@ -1028,6 +1028,7 @@ $('#funtion_document_admission_all_work_inside_count_0_level_7').each(function (
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //ดึงข้อมูล ด้วย ajax ตาม path
 if(window.location.pathname == '/documents_admission_all/all'){
+    $.fn.dataTable.ext.errMode = 'none';
         var table = $('.table').DataTable({
             // processing: true,
             // language: {
@@ -1136,7 +1137,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
         }, 3000 );
 
 }else if(window.location.pathname == '/documents_pending/all'){
-
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -1242,6 +1243,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
 
 }else if(window.location.pathname == '/documents_admission_division_all/all/0'){
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -1364,7 +1366,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
 
 }else if(window.location.pathname == '/documents_admission_division_all/all/1'){
-    // alert(window.location.pathname);
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -1487,7 +1489,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
 
 }else if(window.location.pathname == '/documents_admission_division_retrun/all'){
-    // alert(window.location.pathname);
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -1585,6 +1587,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
         table.ajax.reload(null, false);
     }, 3000 );
 }else if(window.location.pathname == '/documents_admission_division_inside_all/all/0'){
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -1704,6 +1707,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
 
 }else if(window.location.pathname == '/documents_admission_division_inside_all/all/1'){
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -1823,6 +1827,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
 
 }else if(window.location.pathname == '/documents_admission_department_all/all/0'){
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -1945,6 +1950,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
 
 }else if(window.location.pathname == '/documents_admission_department_all/all/1'){
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -2067,7 +2073,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
 
 }else if(window.location.pathname == '/documents_admission_department_retrun/all'){
-   // alert(window.location.pathname);
+    $.fn.dataTable.ext.errMode = 'none';
    var table = $('.table').DataTable({
     // processing: true,
     // language: {
@@ -2154,6 +2160,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     });
 
 }else if(window.location.pathname == '/documents_admission_department_inside_all/all/0'){
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -2274,7 +2281,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
 
 
 }else if(window.location.pathname == '/documents_admission_department_inside_all/all/1'){
-
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -2393,7 +2400,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
         table.ajax.reload(null, false);
     }, 3000 );
 }else if(window.location.pathname == '/documents_admission_group/all/0'){
-   
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -2516,7 +2523,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
 
 }else if(window.location.pathname == '/documents_admission_group/all/1'){
-   
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -2640,7 +2647,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
 
 
 }else if(window.location.pathname == '/documents_admission_group/all/2'){
-   
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -2763,7 +2770,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
 
 }else if(window.location.pathname == '/documents_admission_group_inside/all/0'){
-   
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -2884,7 +2891,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
 
 
 }else if(window.location.pathname == '/documents_admission_group_inside/all/1'){
-   
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -3005,7 +3012,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
 
 
 }else if(window.location.pathname == '/documents_admission_group_inside/all/2'){
-   
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -3126,7 +3133,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
 
 
 }else if(window.location.pathname == '/documents_admission_work_all/all/0'){
-//    alert('test');
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -3234,7 +3241,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
 
 
 }else if(window.location.pathname == '/documents_admission_work_all/all/1'){
-   
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -3342,7 +3349,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
 
 
 }else if(window.location.pathname == '/documents_admission_work_inside_all/all/0'){
-   
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -3447,7 +3454,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
 
 
 }else if(window.location.pathname == '/documents_admission_work_inside_all/all/1'){
-   
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -3551,6 +3558,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
 
 }else if(window.location.pathname == '/documents_admission_all_inside/all'){
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -3673,6 +3681,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
 
 }else if(window.location.pathname == '/documents_admission_jurisprudence/all'){
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -3771,6 +3780,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
 
 }else if(window.location.pathname == '/documents_admission_deputy_sign/all/0'){
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -3869,6 +3879,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
    
 }else if(window.location.pathname == '/documents_admission_deputy_sign/all/1'){ 
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -3967,6 +3978,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
     }, 3000 );
 
 }else if(window.location.pathname == '/documents_admission_minister_sign/all/0'){ 
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {
@@ -4064,6 +4076,7 @@ if(window.location.pathname == '/documents_admission_all/all'){
         table.ajax.reload(null, false);
     }, 3000 );
 }else if(window.location.pathname == '/documents_admission_minister_sign/all/1'){ 
+    $.fn.dataTable.ext.errMode = 'none';
     var table = $('.table').DataTable({
         // processing: true,
         // language: {

@@ -927,20 +927,6 @@ use App\Http\Controllers\functionController;
                 {{ __(' ) เรื่อง') }}
             </x-jet-responsive-nav-link>
             @endif
-
-            <!-- นายก -->
-            @if(Auth::user()->level == '1')
-            <x-jet-responsive-nav-link href="{{ route('documents_admission_minister_all_0') }}" class="text-decoration-none">
-                {{ __('เอกสารรอพิจารณา ( ') }}
-                {{navigationController::funtion_documents_admission_minister_all_count_0_level_1(Auth::user()->level)}}
-                {{ __(' ) เรื่อง') }}
-            </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('documents_admission_minister_all_1') }}" class="text-decoration-none">
-                {{ __('เอกสารที่เซ็นแล้ว ( ') }}
-                {{navigationController::funtion_documents_admission_minister_all_count_1_level_1(Auth::user()->level)}}
-                {{ __(' ) เรื่อง') }}
-            </x-jet-responsive-nav-link>
-            @endif
            
             <!-- นิติการ -->
             @if(Auth::user()->jurisprudence == '1')

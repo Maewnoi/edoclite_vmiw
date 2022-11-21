@@ -90,7 +90,7 @@ class documents_admission_deputy_signController extends Controller
         
         if(Auth::user()->id == $request->sub3_sealid_0){
             $sub3_sealdate = 'sub3_sealdate_0';
-            $sub3_sealpos = 'sub3_sealdate_0';
+            $sub3_sealpos = 'sub3_sealpos_0';
         }else if(Auth::user()->id == $request->sub3_sealid_1){
             $sub3_sealdate = 'sub3_sealdate_1';
             $sub3_sealpos = 'sub3_sealpos_1';
@@ -99,10 +99,38 @@ class documents_admission_deputy_signController extends Controller
         }
 
         if($request->sub3_sealid == 'not'){
-            dd('ยังไม่ทำ');
+            if(Auth::user()->id == $request->sub3_sealid_0){
+                $full_path = functionController::funtion_generate_PDF_VI(
+                    $request->sub3d_file,
+                    $request->sub3_sealid_0,
+                    $request->sub3_sealid_1,
+                    '',
+                    $request->sub3_sealpos,
+                    $request->sub3_sealpos_1,
+                    '',
+                    $request->doc_id
+                );
+            }else if(Auth::user()->id == $request->sub3_sealid_1){
+                $full_path = functionController::funtion_generate_PDF_VI(
+                    $request->sub3d_file,
+                    $request->sub3_sealid_0,
+                    $request->sub3_sealid_1,
+                    '',
+                    $request->sub3_sealpos_0,
+                    $request->sub3_sealpos,
+                    '',
+                    $request->doc_id
+                );
+            }
+            if(!$full_path){
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [funtion_generate_PDF_VI] !');
+            }
+            $update_sub3_details = sub3_detail::where('sub3d_sub_3id', $request->sub3_id)->update([
+                'sub3d_file'=>$full_path
+            ]);
             $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
                 $sub3_sealpos=>$request->sub3_sealpos,
-                $sub3_sealdate=>$date('Y-m-d H:i:s'),
+                $sub3_sealdate=>date('Y-m-d H:i:s'),
                 'sub3_status'=>'6',
                 'sub3_updated_at'=>date('Y-m-d H:i:s')
             ]);

@@ -116,11 +116,11 @@ use App\Http\Controllers\functionController;
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'sub3_sealid','value' => ''.e(__('ตำแหน่ง')).'']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'sub3_sealpos','value' => ''.e(__('ตำแหน่ง')).'']]); ?>
 <?php $component->withName('jet-label'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['for' => 'sub3_sealid','value' => ''.e(__('ตำแหน่ง')).'']); ?>
+<?php $component->withAttributes(['for' => 'sub3_sealpos','value' => ''.e(__('ตำแหน่ง')).'']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
@@ -179,6 +179,11 @@ unset($__errorArgs, $__bag); ?>
                                                                     value="<?php echo e($document_detail->sub3_sealid_1); ?>">
                                                 <input type="hidden" name="sub3_sealid_2"
                                                                     value="<?php echo e($document_detail->sub3_sealid_2); ?>">
+
+                                                <input type="hidden" name="sub3_sealpos_0"
+                                                                    value="<?php echo e($document_detail->sub3_sealpos_0); ?>">
+                                                <input type="hidden" name="sub3_sealpos_1"
+                                                                    value="<?php echo e($document_detail->sub3_sealpos_1); ?>">
                                                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>

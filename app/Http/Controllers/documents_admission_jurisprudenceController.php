@@ -38,9 +38,30 @@ class documents_admission_jurisprudenceController extends Controller
             ->where('sub3_status', '2')
             ->first();
 
-            $userS = User::where('level', '2')
+            if($document_detail->sub3_sealid_0 != null){
+                $sub3_sealid_0 = $document_detail->sub3_sealid_0;
+            }else{
+                $sub3_sealid_0 = null;
+            }
+            if($document_detail->sub3_sealid_1 != null){
+                $sub3_sealid_1 = $document_detail->sub3_sealid_1;
+            }else{
+                $sub3_sealid_1 = null;
+            }
+
+            $userS = User::where(function ($query) {
+                $query->where('level', '1')
+                      ->orWhere('level', '2');
+            })
+            ->when($sub3_sealid_0 != null, function ($builder_0) use ($sub3_sealid_0){
+                $builder_0->where('id','!=',$sub3_sealid_0);
+            })
+            ->when($sub3_sealid_1 != null, function ($builder_1) use ($sub3_sealid_1){
+                $builder_1->where('id','!=',$sub3_sealid_1);
+            })
             ->where('site_id',Auth::user()->site_id)
             ->get();
+
             return view('member.documents_admission_jurisprudence.detail',compact('document_detail','userS'));
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
@@ -51,22 +72,44 @@ class documents_admission_jurisprudenceController extends Controller
         //ตรวจสอบข้อมูลที่กรอกเข้ามาก่อน
         $request->validate(
             [
-                'sub3_sealid_0'=>'required|max:255'
+                'sub3_sealid'=>'required|max:255'
             ],
             [
-                'sub3_sealid_0.required'=>"กรุณาเลือกผู้ลงนามด้วยครับ",
-                'sub3_sealid_0.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
+                'sub3_sealid.required'=>"กรุณาเลือกผู้ลงนามด้วยครับ",
+                'sub3_sealid.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
             ]
         );
-
-        $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
-            'sub3_check_2'=>'1',
-            'sub3_datetime_2'=>date('Y-m-d H:i:s'),
-            'sub3_inspector_2'=>Auth::user()->id,
-            'sub3_sealid_0'=>$request->sub3_sealid_0,
-            'sub3_status'=>'3',
-            'sub3_updated_at'=>date('Y-m-d H:i:s')
-        ]);
+        if($request->sub3_sealid == 'not'){
+            $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
+                'sub3_check_2'=>'1',
+                'sub3_datetime_2'=>date('Y-m-d H:i:s'),
+                'sub3_inspector_2'=>Auth::user()->id,
+                'sub3_status'=>'6',
+                'sub3_updated_at'=>date('Y-m-d H:i:s')
+            ]);
+        }else{
+            $user = User::where('id',$request->sub3_sealid)->first();
+            if($user->level == '1'){
+                $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
+                    'sub3_check_2'=>'1',
+                    'sub3_datetime_2'=>date('Y-m-d H:i:s'),
+                    'sub3_inspector_2'=>Auth::user()->id,
+                    'sub3_sealid_2'=>$request->sub3_sealid,
+                    'sub3_status'=>'5',
+                    'sub3_updated_at'=>date('Y-m-d H:i:s')
+                ]);
+            }else if($user->level == '2'){
+                $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
+                    'sub3_check_2'=>'1',
+                    'sub3_datetime_2'=>date('Y-m-d H:i:s'),
+                    'sub3_inspector_2'=>Auth::user()->id,
+                    'sub3_sealid_0'=>$request->sub3_sealid,
+                    'sub3_status'=>'3',
+                    'sub3_updated_at'=>date('Y-m-d H:i:s')
+                ]);
+            }else{
+            }
+        }
         if($update_sub3_docs){
             //linetoken
             $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
@@ -80,9 +123,10 @@ class documents_admission_jurisprudenceController extends Controller
         }else{
             return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs] !');
         }
+        
     }
 
     public function do_not_understand(Request $request){
-        return redirect('member_dashboard')->with('error','ยังไม่ทำ !');
+        return redirect('member_dashboard')->with('error','ยังไม่ทำกรุณารอ!');
     }
 }

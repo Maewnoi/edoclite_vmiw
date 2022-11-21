@@ -84,33 +84,7 @@ use App\Http\Controllers\functionController;
                                         <font class="text-primary"><?php echo e($document_detail->doc_title); ?></font>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <button type="button" data-toggle="modal"
-                                             data-target="#modal-update-general<?php echo e($document_detail->doc_id); ?>"
-                                            class="btn btn-outline-warning "><i class="fa fa-edit"></i> แก้ไขข้อมูลทั่วไป</button>
-                                        <button type="button" data-toggle="modal"
-                                                data-target="#modal-update-file<?php echo e($document_detail->doc_id); ?>"
-                                                class="btn btn-outline-warning "><i class="fa fa-edit"></i> เปลี่ยนไฟล์เอกสาร</button>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <?php $__errorArgs = ['doc_filedirec'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                        <div class="my-2">
-                                            <p class="mt-2 text-sm text-red-600">
-                                                <?php echo e($message); ?></p>
-                                        </div>
-                                        <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                    </div>
-                                </div>
+                                
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -133,6 +107,7 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
                             <hr>
+                            <div class="flex items-center justify-center mt-20">
                             <?php if($document_detail->sub3_status == '1'): ?>
                                 <form action="<?php echo e(route('documents_admission_division_retrun_understand')); ?>" method="post" enctype="multipart/form-data">
                                     <?php echo csrf_field(); ?>
@@ -150,24 +125,23 @@ unset($__errorArgs, $__bag); ?>
                                                     value="<?php echo e($document_detail->doc_origin); ?>">
                                     <input type="hidden" name="doc_title"
                                                     value="<?php echo e($document_detail->doc_title); ?>">
-                                    <center>
-                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
-                                            <?php echo e(__('รับทราบ')); ?>
+                                        <?php echo e(__('รับทราบ')); ?>
 
-                                         <?php echo $__env->renderComponent(); ?>
+                                     <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                    </center>
                                 </form>
                             <?php endif; ?>
+                            </div>
                             <hr>
                         </div>
                     </div>

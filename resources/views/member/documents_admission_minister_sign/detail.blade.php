@@ -85,7 +85,7 @@ use App\Http\Controllers\functionController;
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        <x-jet-label for="sub3_sealid" value="{{ __('ตำแหน่ง') }}" />
+                                                        <x-jet-label for="sub3_sealpos" value="{{ __('ตำแหน่ง') }}" />
                                                         <input type="text" name="sub3_sealpos"
                                                             value="{{Auth::user()->pos}}"
                                                             class="form-control @error('sub3_sealpos') is-invalid @enderror"
@@ -124,6 +124,11 @@ use App\Http\Controllers\functionController;
                                                                     value="{{$document_detail->sub3_sealid_1}}">
                                                 <input type="hidden" name="sub3_sealid_2"
                                                                     value="{{$document_detail->sub3_sealid_2}}">
+
+                                                <input type="hidden" name="sub3_sealpos_0"
+                                                                    value="{{$document_detail->sub3_sealpos_0}}">
+                                                <input type="hidden" name="sub3_sealpos_1"
+                                                                    value="{{$document_detail->sub3_sealpos_1}}">
                                                 <x-jet-button onclick="submitForm(this);">
                                                     {{ __('ลงนาม') }}
                                                 </x-jet-button>

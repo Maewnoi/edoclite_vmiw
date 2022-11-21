@@ -50,9 +50,6 @@ class documents_admission_minister_signController extends Controller
     } 
 
     public function understand(Request $request){
-        dd('ยังไม่ทำ');
-        $full_path = functionController::funtion_generate_PDF_VI($request->sub3d_file,$request->sub3_sealid_0,$request->sub3_sealid_1,$request->sub3_sealid_2);
-        exit;
 
         //ตรวจสอบข้อมูลที่กรอกเข้ามาก่อน
         $request->validate(
@@ -65,24 +62,42 @@ class documents_admission_minister_signController extends Controller
             ]
         );
 
-        $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
-            'sub3_sealpos_2'=>$request->sub3_sealpos,
-            'sub3_sealdate_2'=>date('Y-m-d H:i:s'),
-            'sub3_status'=>'6',
-            'sub3_updated_at'=>date('Y-m-d H:i:s')
-        ]);
-        if($update_sub3_docs){
-            //linetoken
-            $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
-            ->where('group_id', $request->sub_recid)
-            ->first();
-            if($tokens_Check){
-                $message = "\n⚠️ นายกลงนามตอบกลับเอกสารภายนอก ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
-                functionController::line_notify($message,$tokens_Check->group_token);
+        $full_path = functionController::funtion_generate_PDF_VI(
+            $request->sub3d_file,
+            $request->sub3_sealid_0,
+            $request->sub3_sealid_1,
+            $request->sub3_sealid_2,
+            $request->sub3_sealpos_0,
+            $request->sub3_sealpos_1,
+            $request->sub3_sealpos,
+            $request->doc_id
+        );
+        if($full_path){
+            $update_sub3_details = sub3_detail::where('sub3d_sub_3id', $request->sub3_id)->update([
+                'sub3d_file'=>$full_path
+            ]);
+            $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
+                'sub3_sealpos_2'=>$request->sub3_sealpos,
+                'sub3_sealdate_2'=>date('Y-m-d H:i:s'),
+                'sub3_status'=>'6',
+                'sub3_updated_at'=>date('Y-m-d H:i:s')
+            ]);
+            if($update_sub3_docs && $update_sub3_details){
+                //linetoken
+                $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
+                ->where('group_id', $request->sub_recid)
+                ->first();
+                if($tokens_Check){
+                    $message = "\n⚠️ นายกลงนามตอบกลับเอกสารภายนอก ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                    functionController::line_notify($message,$tokens_Check->group_token);
+                }
+                return redirect()->route('documents_admission_minister_sign_all_0')->with('success',"ลงนามเรียบร้อย");
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs && update_sub3_details] !');
             }
-            return redirect()->route('documents_admission_minister_sign_all_0')->with('success',"ลงนามเรียบร้อย");
         }else{
-            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs] !');
+            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [funtion_generate_PDF_VI] !');
         }
+        
     }
 }
