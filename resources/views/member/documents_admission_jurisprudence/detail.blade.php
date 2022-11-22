@@ -12,7 +12,7 @@ use App\Http\Controllers\functionController;
             <div class="row">
                 <div class="col-md-12">
                    
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="text-lg card-header bg-primary">
                             <x-jet-nav-link href="{{url('/documents_pending/all')}}">
                                 <i class="fa fa-arrow-left"></i>
@@ -84,15 +84,16 @@ use App\Http\Controllers\functionController;
                                         <div class="card card-body">
                                             <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <x-jet-label for="sub3_sealid_0" value="{{ __('เลือกผู้ลงนาม') }}" />
-                                                    <select class="form-control select2bs4 @error('sub3_sealid_0') is-invalid @enderror"
-                                                        required name="sub3_sealid_0">
+                                                    <x-jet-label for="sub3_sealid" value="{{ __('เลือกผู้ลงนาม') }}" />
+                                                    <select class="form-control select2bs4 @error('sub3_sealid') is-invalid @enderror"
+                                                        required name="sub3_sealid">
                                                         <option value="">เลือกผู้ลงนาม</option>
+                                                        <option value="not">ไม่เลือก</option>
                                                         @foreach($userS as $row_user)
                                                         <option value="{{$row_user->id}}">{{$row_user->name}} [{{$row_user->pos}}]</option>
                                                         @endforeach
                                                     </select>
-                                                    @error('sub3_sealid_0')
+                                                    @error('sub3_sealid')
                                                     <div class="my-2">
                                                         <p class="mt-2 text-sm text-red-600">
                                                             {{$message}}</p>

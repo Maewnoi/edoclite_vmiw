@@ -18,7 +18,7 @@ use App\Http\Controllers\functionController;
             <div class="row">
                 <div class="col-md-12">
                    
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="text-lg card-header bg-primary">
                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.nav-link','data' => ['href' => ''.e(url('/documents_pending/all')).'']]); ?>
@@ -122,45 +122,41 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
                             <hr>
+                            <div class="flex items-center justify-center mt-20">
                             <?php if($document_detail->sub3_status == '0'): ?>
-                          
-                                    <form action="<?php echo e(route('documents_admission_department_retrun_understand')); ?>"" method="post" enctype="multipart/form-data">
-                                        <?php echo csrf_field(); ?>
-                                        
-                                                <input type="hidden" name="doc_id" value="<?php echo e($document_detail->doc_id); ?>">
-                                                <input type="hidden" name="sub_id" value="<?php echo e($document_detail->sub_id); ?>">
-                                                <input type="hidden" name="sub2_id"
+                                <form action="<?php echo e(route('documents_admission_department_retrun_understand')); ?>" method="post" enctype="multipart/form-data">
+                                    <?php echo csrf_field(); ?>
+                                    <input type="hidden" name="doc_id" value="<?php echo e($document_detail->doc_id); ?>">
+                                    <input type="hidden" name="sub_id" value="<?php echo e($document_detail->sub_id); ?>">
+                                    <input type="hidden" name="sub2_id"
                                                     value="<?php echo e($document_detail->sub2_id); ?>">
-                                                <input type="hidden" name="sub3_id"
+                                    <input type="hidden" name="sub3_id"
                                                     value="<?php echo e($document_detail->sub3_id); ?>">
-                                                <input type="hidden" name="sub3d_id"
+                                    <input type="hidden" name="sub3d_id"
                                                     value="<?php echo e($document_detail->sub3d_id); ?>">
-
-                                                <input type="hidden" name="doc_docnum"
+                                    <input type="hidden" name="doc_docnum"
                                                     value="<?php echo e($document_detail->doc_docnum); ?>">
-                                                <input type="hidden" name="doc_origin"
+                                    <input type="hidden" name="doc_origin"
                                                     value="<?php echo e($document_detail->doc_origin); ?>">
-                                                <input type="hidden" name="doc_title"
+                                    <input type="hidden" name="doc_title"
                                                     value="<?php echo e($document_detail->doc_title); ?>">
-                                            <center>
-                                                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
-                                                    <?php echo e(__('รับทราบ')); ?>
+                                        <?php echo e(__('รับทราบ')); ?>
 
-                                                 <?php echo $__env->renderComponent(); ?>
+                                     <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                            </center>
-                                    </form>
-                               
+                                </form>
                             <?php endif; ?>
+                            </div>
                             <hr>
                         </div>
                     </div>

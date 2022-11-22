@@ -12,10 +12,10 @@ use App\Http\Controllers\functionController;
             <div class="row">
                 <div class="col-md-9">
                     
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header bg-primary">รายการจองเลขรับทั้งหมด</div>
                         <div class="card-body table-responsive">
-                            <table id="example1" class="table">
+                            <table id="example1" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
@@ -93,7 +93,7 @@ use App\Http\Controllers\functionController;
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header bg-primary">จองเลข</div>
                         <div class="card-body">
                             <form action="{{route('add_reserve_number_delivery_all')}}" method="post">

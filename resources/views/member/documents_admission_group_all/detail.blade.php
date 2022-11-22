@@ -12,7 +12,7 @@ use App\Http\Controllers\functionController;
             <div class="row">
                 <div class="col-md-12">
                  
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="text-lg card-header bg-primary">
                             <x-jet-nav-link href="{{url('/documents_pending/all')}}">
                                 <i class="fa fa-arrow-left"></i>
@@ -171,10 +171,10 @@ use App\Http\Controllers\functionController;
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <table class="table table-bordered table-hover">
+                                                    <table class="w-100 table-bordered table-hover">
                                                         <tbody>
                                                             <tr data-widget="expandable-table" aria-expanded="false">
-                                                                <td><center>ดูรูปตัวอย่างตำแหน่งประทับตรา </center></td>
+                                                                <td class="text-primary"><center>ดูรูปตัวอย่างตำแหน่งประทับตรา </center></td>
                                                             </tr>
                                                             <tr class="expandable-body">
                                                                 <td colspan="1">

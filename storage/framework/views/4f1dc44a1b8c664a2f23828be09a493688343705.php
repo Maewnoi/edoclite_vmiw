@@ -18,7 +18,7 @@ use App\Http\Controllers\functionController;
                     <!-- นายก รองนายก -->
                     <?php if(Auth::user()->level == '1'): ?>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border border shadow card border-info border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ลงนามอิเล็กทรอนิกส์</h5>
                                 <div class="card-tools">
@@ -41,7 +41,7 @@ use App\Http\Controllers\functionController;
                     <!-- ปลัด รองปลัด -->
                     <?php if(Auth::user()->level == '2'): ?>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border border shadow card border-info border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ลงนามอิเล็กทรอนิกส์</h5>
                                 <div class="card-tools">
@@ -64,7 +64,7 @@ use App\Http\Controllers\functionController;
                     <!-- สารบรรณกลาง -->
                     <?php if(Auth::user()->level == '3'): ?>
                     <div class="col-md-5">
-                        <div class="shadow card">
+                        <div class="border border shadow card border-info border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">เอกสารรับเข้าภายนอกทั้งหมด</h5>
                                 <div class="card-tools">
@@ -84,7 +84,7 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                     <div class="col-md-7">
-                        <div class="shadow card">
+                        <div class="border border shadow card border-info border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ปฏิทินเลขที่จอง
                                     <div class="float-right mt-1 ml-3 spinner-grow spinner-grow-sm text-warning" role="status" id="calendar_isLoading"> 
@@ -116,7 +116,7 @@ use App\Http\Controllers\functionController;
                     <!-- หัวหน้ากอง -->
                     <?php if(Auth::user()->level == '4'): ?>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border border shadow card border-info border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ทะเบียนหนังสือภายนอก</h5>
                                 <div class="card-tools">
@@ -136,7 +136,7 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border border shadow card border-info border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ทะเบียนหนังสือภายใน</h5>
                                 <div class="card-tools">
@@ -159,7 +159,7 @@ use App\Http\Controllers\functionController;
                     <!-- หัวหน้าฝ่าย -->
                     <?php if(Auth::user()->level == '5'): ?>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border border shadow card border-info border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ทะเบียนหนังสือภายนอก</h5>
                                 <div class="card-tools">
@@ -179,7 +179,7 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border border shadow card border-info border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ทะเบียนหนังสือภายใน</h5>
                                 <div class="card-tools">
@@ -205,7 +205,7 @@ use App\Http\Controllers\functionController;
                     <div class="col-md-5">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="shadow card">
+                                <div class="border border shadow card border-info border-info">
                                     <div class="card-header bg-primary">
                                         <h5 class="card-title">เอกสารรับเข้าภายนอกทั้งหมด</h5>
                                         <div class="card-tools">
@@ -226,7 +226,7 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <div class="shadow card">
+                                <div class="border border shadow card border-info border-info">
                                     <div class="card-header bg-primary">
                                         <h5 class="card-title">เอกสารรับเข้าภายในทั้งหมด</h5>
                                         <div class="card-tools">
@@ -249,7 +249,7 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                     <div class="col-md-7">
-                        <div class="shadow card">
+                        <div class="border border shadow card border-info border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ปฏิทินเลขที่จอง 
                                     <div class="float-right mt-1 ml-3 spinner-grow spinner-grow-sm text-warning" role="status" id="calendar_isLoading"> 
@@ -287,7 +287,7 @@ use App\Http\Controllers\functionController;
                     <!-- งาน -->
                     <?php if(Auth::user()->level == '7'): ?>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border border shadow card border-info border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ทะเบียนหนังสือภายนอก</h5>
                                 <div class="card-tools">
@@ -307,7 +307,7 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="shadow card">
+                        <div class="border border shadow card border-info border-info">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title">ทะเบียนหนังสือภายใน</h5>
                                 <div class="card-tools">

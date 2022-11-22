@@ -2,7 +2,7 @@
 use App\Http\Controllers\navigationController;
 use App\Http\Controllers\functionController;
 @endphp
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow">
+<nav x-data="{ open: false }" class="bg-white border shadow">
     <!-- Primary Navigation Menu -->
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -18,6 +18,7 @@ use App\Http\Controllers\functionController;
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
 
                     @if(Auth::user()->level=='0')
+             
                     <!-- admin -->
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')"
                         class="text-decoration-none">
@@ -39,6 +40,8 @@ use App\Http\Controllers\functionController;
                         class="text-decoration-none">
                         ชื่อผู้ใช้
                     </x-jet-nav-link>
+
+            
                     <!-- <x-jet-nav-link href="{{ route('department') }} " :active="request()->routeIs('department')">
                         Department
                     </x-jet-nav-link>
@@ -481,8 +484,12 @@ use App\Http\Controllers\functionController;
                                         <button type="button"
                                             class="inline-flex items-center px-3 py-1 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white rounded-md hover:text-gray-700 focus:outline-none">
                                             {{ __('ลงนามอิเล็กทรอนิกส์ ') }}
-
-                                            <!-- หัวหน้าฝ่าย -->
+                                            <!-- นายกและรองนายก -->
+                                            @if(Auth::user()->level == '1')
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_minister_sign_count_level_2">
+                                            </span>
+                                            @endif
+                                            <!-- ปลัดและรองปลัด -->
                                             @if(Auth::user()->level == '2')
                                             <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_deputy_sign_count_level_2">
                                             </span>
@@ -507,14 +514,14 @@ use App\Http\Controllers\functionController;
                                     <x-jet-dropdown-link href="{{ route('documents_admission_minister_sign_all_0') }}"
                                         class="text-decoration-none">
                                         {{ __('เอกสารรอลงนาม ( ') }}
-                                      
+                                        {{navigationController::funtion_documents_admission_minister_sign_count_0_level_2()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
                                     <x-jet-dropdown-link href="{{ route('documents_admission_minister_sign_all_1') }}"
                                         class="text-decoration-none">
                                         {{ __('เอกสารที่ลงนามแล้ว ( ') }}
-                                   
+                                        {{navigationController::funtion_documents_admission_minister_sign_count_1_level_2()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     @endif
@@ -545,6 +552,16 @@ use App\Http\Controllers\functionController;
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <!-- ทุกสิทธิ์ยกเว้น แอดมิน -->
+                @if(Auth::user()->level != '0')
+                <div class="relative ml-3">
+                <x-jet-nav-link type="button" data-toggle="modal" class="text-decoration-none"
+                   data-target="#modal-search-documents">
+                    <i class="mr-2 fas fa-search"></i>{{ __('ค้นหาเอกสาร') }}
+                </x-jet-nav-link>
+                </div>
+                @endif
+                
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                 <div class="relative ml-3">
@@ -923,20 +940,6 @@ use App\Http\Controllers\functionController;
                 {{ __(' ) เรื่อง') }}
             </x-jet-responsive-nav-link>
             @endif
-
-            <!-- นายก -->
-            @if(Auth::user()->level == '1')
-            <x-jet-responsive-nav-link href="{{ route('documents_admission_minister_all_0') }}" class="text-decoration-none">
-                {{ __('เอกสารรอพิจารณา ( ') }}
-                {{navigationController::funtion_documents_admission_minister_all_count_0_level_1(Auth::user()->level)}}
-                {{ __(' ) เรื่อง') }}
-            </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('documents_admission_minister_all_1') }}" class="text-decoration-none">
-                {{ __('เอกสารที่เซ็นแล้ว ( ') }}
-                {{navigationController::funtion_documents_admission_minister_all_count_1_level_1(Auth::user()->level)}}
-                {{ __(' ) เรื่อง') }}
-            </x-jet-responsive-nav-link>
-            @endif
            
             <!-- นิติการ -->
             @if(Auth::user()->jurisprudence == '1')
@@ -947,6 +950,11 @@ use App\Http\Controllers\functionController;
             </x-jet-responsive-nav-link>
             @endif
 
+            <div class="border-t border-gray-100"></div>
+            <x-jet-responsive-nav-link type="button" data-toggle="modal" class="text-decoration-none"
+                   data-target="#modal-search-documents">
+                   <i class="mr-2 fas fa-search"></i>{{ __('ค้นหาเอกสาร') }}
+            </x-jet-responsive-nav-link>
             @endif
         </div>
 
@@ -1188,10 +1196,10 @@ use App\Http\Controllers\functionController;
                                                 </div>
                                             </div>
                                         </div>
-                                        <table class="table table-bordered table-hover">
+                                        <table class="w-100 table-bordered table-hover">
                                             <tbody>
                                                 <tr data-widget="expandable-table" aria-expanded="false">
-                                                    <td><center>ดูรูปตัวอย่างตำแหน่งประทับตรา </center></td>
+                                                    <td class="text-primary"><center>ดูรูปตัวอย่างตำแหน่งประทับตรา </center></td>
                                                 </tr>
                                                 <tr class="expandable-body">
                                                     <td colspan="1">
@@ -1650,6 +1658,110 @@ use App\Http\Controllers\functionController;
                             {{ __('save') }}
                         </x-jet-button>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif 
+
+    <!-- ทุกสิทธิ์ยกเว้น แอดมิน -->
+    @if(Auth::user()->level != '0')
+    <div class="modal fade" id="modal-search-documents">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="bg-red-300 modal-header">
+                    <label class="modal-title">ค้นหาเอกสารทั้งหมด
+                    </label>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="py-12">
+                        <div class="container">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="border shadow card border-info">
+                                            <div class="card-body">
+                                                <div class="form-row">
+                                                    <div class="mb-3 col-md-3">
+                                                        <label for="validationDefault01">หน่วยงานต้นเรื่อง</label>
+                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="พิมพ์เพื่อค้นหา">
+                                                    </div>
+                                                    <div class="mb-3 col-md-3">
+                                                        <label for="validationDefault02">เลขที่หนังสือ</label>
+                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="พิมพ์เพื่อค้นหา">
+                                                    </div>
+                                                    <div class="mb-3 col-md-3">
+                                                        <label for="validationDefaultUsername">เรื่อง</label>
+                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="พิมพ์เพื่อค้นหา">
+                                                    </div>
+                                                    <div class="mb-3 col-md-3">
+                                                        <label for="validationDefaultUsername">เอกสารนอก/ภายใน</label>
+                                                        <select id="navigation_input_search_documents_"class=" form-control">
+                                                            <option value=""></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3 col-md-2">
+                                                        <label for="validationDefaultUsername">เลขที่รับส่วนงาน</label>
+                                                        <input type="number" class="form-control" id="navigation_input_search_documents_" placeholder="พิมพ์เพื่อค้นหา">
+                                                    </div>
+                                                    <div class="mb-3 col-md-2">
+                                                        <label for="validationDefaultUsername">วันที่</label>
+                                                        <input type="date" class="form-control" id="navigation_input_search_documents_">
+                                                    </div>
+                                                    <div class="mb-3 col-md-2">
+                                                        <label for="validationDefaultUsername">วันที่ลง</label>
+                                                        <input type="date" class="form-control" id="navigation_input_search_documents_">
+                                                    </div>
+                                                    <div class="mb-3 col-md-2">
+                                                        <label for="validationDefaultUsername">ชั้นความลับ</label>
+                                                        <select id="navigation_input_search_documents_"class=" form-control">
+                                                            <option value=""></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3 col-md-2">
+                                                        <label for="validationDefaultUsername">ชั้นความเร็ว</label>
+                                                        <select id="navigation_input_search_documents_"class=" form-control">
+                                                            <option value=""></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3 col-md-2">
+                                                        <label for="validationDefaultUsername">สถานะ</label>
+                                                        <select id="navigation_input_search_documents_"class=" form-control">
+                                                            <option value=""></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="border shadow card border-info">
+                                            <div class="card-body table-responsive">
+                                                <table class="w-100 table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">ลำดับ</th>
+                                                            <th scope="col">หน่วยงานต้นเรื่อง</th>
+                                                            <th scope="col">เลขที่หนังสือ</th>
+                                                            <th scope="col">เรื่อง</th>
+                                                            <th scope="col">เอกสารนอก/ภายใน</th>
+                                                            <th scope="col">เลขที่รับส่วนงาน</th>
+                                                            <th scope="col">วันที่</th>
+                                                            <th scope="col">วันที่ลง</th>
+                                                            <th scope="col">ชั้นความลับ</th>
+                                                            <th scope="col">ชั้นความเร็ว</th>
+                                                            <th scope="col">สถานะ</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

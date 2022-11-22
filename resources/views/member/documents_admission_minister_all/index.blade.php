@@ -12,10 +12,10 @@ use App\Http\Controllers\functionController;
             <div class="row">
                 <div class="col-md-12">
                     
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header bg-primary">เอกสารรับเข้าภายนอก (นายก)</div>
                         <div class="card-body table-responsive">
-                            <table id="example1" class="table">
+                            <table id="example1" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>

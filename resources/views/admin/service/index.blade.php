@@ -11,7 +11,7 @@
                     
                     <div class="card">
                         <div class="card-header">ตารางข้อมูลบริการ</div>
-                        <table class="table table-bordered">
+                        <table class="table table-striped">
                         <thead>
                             <tr>
                             <th scope="col">ลำดับ</th>

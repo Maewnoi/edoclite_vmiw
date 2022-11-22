@@ -20,7 +20,7 @@ class Sub3Docs extends Migration
             $table->integer('sub3_subid');
             $table->integer('sub3_sub_2id');
             $table->enum('sub3_type', array('0', '1'));
-            $table->enum('sub3_status', array('0','1','2','3','4'))->default('0');
+            $table->enum('sub3_status', array('0','1','2','3','4','5','6'))->default('0');
             
             $table->enum('sub3_check_0', array('0', '1'))->default('0');
             $table->integer('sub3_inspector_0')->nullable();

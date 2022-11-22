@@ -17,17 +17,17 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header bg-primary">
                             <div class="clearfix">
                             เอกสารรับเข้าภายนอก (กอง)
-                                <div class="float-right spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
+                                <div class="float-right mt-1 ml-3 spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
                                     <span class="sr-only">Loading...</span>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body table-responsive">
-                            <table class="table">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>

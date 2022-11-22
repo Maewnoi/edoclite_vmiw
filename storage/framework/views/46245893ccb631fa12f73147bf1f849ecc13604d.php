@@ -25,7 +25,7 @@ use App\Http\Controllers\functionController;
                     <div class="shadow alert alert-danger"><?php echo e($error); ?></div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <?php endif; ?>
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header bg-primary">เอกสารรับเข้าภายใน </div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table">

@@ -18,7 +18,7 @@ use App\Http\Controllers\functionController;
             <div class="row">
                 <div class="col-md-12">
                    
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="text-lg card-header bg-primary">
                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.nav-link','data' => ['href' => ''.e(url('/documents_pending/all')).'']]); ?>
@@ -115,18 +115,18 @@ use App\Http\Controllers\functionController;
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'sub3_sealid_0','value' => ''.e(__('เลือกผู้ลงนาม')).'']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'sub3_sealid','value' => ''.e(__('เลือกผู้ลงนาม')).'']]); ?>
 <?php $component->withName('jet-label'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['for' => 'sub3_sealid_0','value' => ''.e(__('เลือกผู้ลงนาม')).'']); ?>
+<?php $component->withAttributes(['for' => 'sub3_sealid','value' => ''.e(__('เลือกผู้ลงนาม')).'']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                                    <select class="form-control select2bs4 <?php $__errorArgs = ['sub3_sealid_0'];
+                                                    <select class="form-control select2bs4 <?php $__errorArgs = ['sub3_sealid'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -134,13 +134,14 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                                        required name="sub3_sealid_0">
+                                                        required name="sub3_sealid">
                                                         <option value="">เลือกผู้ลงนาม</option>
+                                                        <option value="not">ไม่เลือก</option>
                                                         <?php $__currentLoopData = $userS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <option value="<?php echo e($row_user->id); ?>"><?php echo e($row_user->name); ?> [<?php echo e($row_user->pos); ?>]</option>
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                     </select>
-                                                    <?php $__errorArgs = ['sub3_sealid_0'];
+                                                    <?php $__errorArgs = ['sub3_sealid'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

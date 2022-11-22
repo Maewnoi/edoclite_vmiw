@@ -157,6 +157,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_admission_deputy_sign/count/query',[queryController::class,'funtion_query_documents_admission_deputy_sign_count_level_2']);
     Route::get('/documents_admission_deputy_sign/chart/2/query',[queryController::class,'funtion_query_documents_admission_deputy_sign_chart_level_2']);
 
+    Route::get('/documents_admission_minister_sign/all/0/query',[queryController::class,'funtion_query_documents_admission_minister_sign_0_Controller_level_1']);
+    Route::get('/documents_admission_minister_sign/all/1/query',[queryController::class,'funtion_query_documents_admission_minister_sign_1_Controller_level_1']);
+    Route::get('/documents_admission_minister_sign/count/query',[queryController::class,'funtion_query_documents_admission_minister_sign_count_level_1']);
+    Route::get('/documents_admission_minister_sign/chart/1/query',[queryController::class,'funtion_query_documents_admission_minister_sign_chart_level_1']);
+
     //---------------------------------------------------------------------------------------------------
     
     //admin
@@ -350,10 +355,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //documents admission deputy sign ปลัด รองปลัด ลงนาม
     Route::get('/documents_admission_deputy_sign/all/0',[documents_admission_deputy_signController::class,'index_0'])->name('documents_admission_deputy_sign_all_0');
     Route::get('/documents_admission_deputy_sign/all/1',[documents_admission_deputy_signController::class,'index_1'])->name('documents_admission_deputy_sign_all_1');
-    
+    Route::get('/documents_admission_deputy_sign/detail/{id}',[documents_admission_deputy_signController::class,'detail'])->name('documents_admission_deputy_sign_detail')->middleware(['password.confirm']);
+    Route::post('/documents_admission_deputy_sign/understand',[documents_admission_deputy_signController::class,'understand'])->name('documents_admission_deputy_sign_understand');
+
+
     //documents admission minister sign นายก รองนายก ลงนาม
     Route::get('/documents_admission_minister_sign/all/0',[documents_admission_minister_signController::class,'index_0'])->name('documents_admission_minister_sign_all_0');
     Route::get('/documents_admission_minister_sign/all/1',[documents_admission_minister_signController::class,'index_1'])->name('documents_admission_minister_sign_all_1');
+    Route::get('/documents_admission_minister_sign/detail/{id}',[documents_admission_minister_signController::class,'detail'])->name('documents_admission_minister_sign_detail')->middleware(['password.confirm']);
+    Route::post('/documents_admission_minister_sign/understand',[documents_admission_minister_signController::class,'understand'])->name('documents_admission_minister_sign_understand');
 
     //---------------------------------------------------------------------------------------------------
 });

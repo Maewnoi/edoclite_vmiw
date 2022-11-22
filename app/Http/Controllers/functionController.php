@@ -19,6 +19,180 @@ use Illuminate\Support\Facades\Auth;
 
 class functionController extends Controller
 {
+    public static function funtion_generate_PDF_VI(
+        $sub3d_file,
+        $sub3_sealid_0,
+        $sub3_sealid_1,
+        $sub3_sealid_2,
+        $sub3_sealpos_0,
+        $sub3_sealpos_1,
+        $sub3_sealpos_2,
+        $doc_id
+    ){
+        $pdf = new Fpdi();
+        $pdf->AddPage();
+        //Font
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        //นับจำนวนหน้า
+        $sourceFilePages = $pdf->setSourceFile($sub3d_file);
+        for($pageNo = 1; $pageNo <= $sourceFilePages; $pageNo++){
+            $tplIdx = $pdf->importPage($pageNo);
+            $pdf->useTemplate($tplIdx, null, null, null);
+        }
+
+        if($sub3_sealid_0 == Auth::user()->id){ //ถ้ารองปลัดเข้า
+            //ลายเซ็นรองปลัด
+            if(Auth::user()->sign == ''){
+                $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,260,10,10);
+            }else{
+                $pdf->Image(Auth::user()->sign,95,260,10,10);
+            }
+            $pdf->SetTextColor(0, 0, 0);
+            $pdf->SetXY(95, 276);
+            $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3_sealpos_0));
+
+            if($sub3_sealid_1 != null){ //ถ้าพบลายเซ็นปลัด
+                $user_1 = User::where('id',$sub3_sealid_1)->first();
+                //ลายเซ็นปลัดรองปลัด 
+                if($user_1->sign == ''){
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,240,10,10);
+                }else{
+                    $pdf->Image($user_1->sign,95,240,10,10);
+                }
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(95, 256);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3_sealpos_1));
+            }
+
+        }else if($sub3_sealid_1 == Auth::user()->id){ //ถ้าปลัดเข้า
+            //ลายเซ็นปลัด
+            if(Auth::user()->sign == ''){
+                $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,260,10,10);
+            }else{
+                $pdf->Image(Auth::user()->sign,95,260,10,10);
+            }
+            $pdf->SetTextColor(0, 0, 0);
+            $pdf->SetXY(95, 276);
+            $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3_sealpos_1));
+
+            if($sub3_sealid_0 != null){ //ถ้าพบลายเซ็นรองปลัด
+                $user_0 = User::where('id',$sub3_sealid_0)->first();
+                //ลายเซ็นปลัดรองปลัด 
+                if($user_0->sign == ''){
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,240,10,10);
+                }else{
+                    $pdf->Image($user_0->sign,95,240,10,10);
+                }
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(95, 256);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3_sealpos_0));
+            }
+        }else if($sub3_sealid_2 == Auth::user()->id){ //ถ้านายกเข้า
+            if($sub3_sealid_0 != null && $sub3_sealid_1 != null){ //ถ้าพบลายเซ็น รองปลัด ปลัด
+                //คิวหาลายเซ็น
+                $user_0 = User::where('id',$sub3_sealid_0)->first();
+                $user_1 = User::where('id',$sub3_sealid_1)->first();
+                //ลายเซ็นนายกรองนายก
+                if(Auth::user()->sign == ''){
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,260,10,10);
+                }else{
+                    $pdf->Image(Auth::user()->sign,95,260,10,10);
+                }
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(95, 276);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3_sealpos_2));
+
+                //ลายเซ็นปลัดรองปลัด 
+                if($user_1->sign == ''){
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,240,10,10);
+                }else{
+                    $pdf->Image($user_1->sign,95,240,10,10);
+                }
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(95, 256);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3_sealpos_1));
+
+                //ลายเซ็นปลัดรองปลัด 
+                if($user_0->sign == ''){
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,220,10,10);
+                }else{
+                    $pdf->Image($user_0->sign,95,220,10,10);
+                }
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(95, 236);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3_sealpos_0));
+            }else if($sub3_sealid_0 != null && $sub3_sealid_1 == null){ //ถ้าพบลายเซ็น รองปลัด
+                //คิวหาลายเซ็น
+                $user_0 = User::where('id',$sub3_sealid_0)->first();
+                //ลายเซ็นนายกรองนายก
+                if(Auth::user()->sign == ''){
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,260,10,10);
+                }else{
+                    $pdf->Image(Auth::user()->sign,95,260,10,10);
+                }
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(95, 276);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3_sealpos_2));
+
+                //ลายเซ็นปลัดรองปลัด
+                if($user_0->sign == ''){
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,240,10,10);
+                }else{
+                    $pdf->Image($user_0->sign,95,240,10,10);
+                }
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(95, 256);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3_sealpos_0));
+            }else if($sub3_sealid_0 == null && $sub3_sealid_1 != null){ //ถ้าพบลายเซ็น ปลัด
+                //คิวหาลายเซ็น
+                $user_1 = User::where('id',$sub3_sealid_1)->first();
+                //ลายเซ็นนายกรองนายก
+                if(Auth::user()->sign == ''){
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,260,10,10);
+                }else{
+                    $pdf->Image(Auth::user()->sign,95,260,10,10);
+                }
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(95, 276);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3_sealpos_2));
+
+                //ลายเซ็นปลัดรองปลัด 
+                if($user_1->sign == ''){
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,240,10,10);
+                }else{
+                    $pdf->Image($user_1->sign,95,240,10,10);
+                }
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(95, 256);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3_sealpos_1));
+                
+            }else{
+                //ลายเซ็นนายกรองนายก
+                if(Auth::user()->sign == ''){
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,260,10,10);
+                }else{
+                    $pdf->Image(Auth::user()->sign,95,260,10,10);
+                }
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(95, 276);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', $sub3_sealpos_2));
+            }
+        }else{ //error
+            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [sealid] !');
+        }
+
+        $date_new = date('Y-m-d');
+        $year_new = date('Y');
+        $upload_location = 'image/'.$year_new.'/respond/';
+        $name_gen_new = $doc_id."_".$date_new;
+        $full_path = $upload_location.$name_gen_new.'.pdf';
+        $pdf->Output('F', $full_path);
+        return $full_path;
+
+        // return response($pdf->Output())->header('Content-Type', 'application/pdf');
+
+    }
     public static function funtion_jurisprudence_update(Request $request) {
         if($request->var_status == '0'){
             $jurisprudence_update = User::where('id', $request->var_id)->update([

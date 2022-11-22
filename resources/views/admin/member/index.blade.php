@@ -11,10 +11,10 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header">ตารางข้อมูลชื่อผู้ใช้</div>
                         <div class="card-body table-responsive">
-                            <table id="example1" class="table">
+                            <table id="example1" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
@@ -240,7 +240,7 @@ use App\Http\Controllers\functionController;
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header">เพิ่มชื่อผู้ใช้</div>
                         <div class="card-body">
                             <form action="{{route('addMember')}}" method="post" enctype="multipart/form-data">

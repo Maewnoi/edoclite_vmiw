@@ -19,10 +19,10 @@ use App\Http\Controllers\functionController;
                 <div class="col-md-9">
 
                    
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header">ตารางข้อมูลกองงาน</div>
                         <div class="card-body table-responsive">
-                            <table id="example1" class="table">
+                            <table id="example1" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
@@ -299,7 +299,7 @@ unset($__errorArgs, $__bag); ?>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="card-header">เพิ่มกองงาน</div>
                         <div class="card-body">
                             <form action="<?php echo e(route('addGroupmem')); ?>" method="post">

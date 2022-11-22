@@ -18,7 +18,7 @@ use App\Http\Controllers\functionController;
             <div class="row">
                 <div class="col-md-12">
                  
-                    <div class="shadow card">
+                    <div class="border shadow card border-info">
                         <div class="text-lg card-header bg-primary">
                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.nav-link','data' => ['href' => ''.e(url('/documents_pending/all')).'']]); ?>
@@ -236,10 +236,10 @@ use App\Http\Controllers\functionController;
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <table class="table table-bordered table-hover">
+                                                    <table class="w-100 table-bordered table-hover">
                                                         <tbody>
                                                             <tr data-widget="expandable-table" aria-expanded="false">
-                                                                <td><center>ดูรูปตัวอย่างตำแหน่งประทับตรา </center></td>
+                                                                <td class="text-primary"><center>ดูรูปตัวอย่างตำแหน่งประทับตรา </center></td>
                                                             </tr>
                                                             <tr class="expandable-body">
                                                                 <td colspan="1">
