@@ -100,19 +100,18 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-menu')->html();
-} elseif ($_instance->childHasBeenRendered('GuGHMmg')) {
-    $componentId = $_instance->getRenderedChildComponentId('GuGHMmg');
-    $componentTag = $_instance->getRenderedChildComponentTagName('GuGHMmg');
+} elseif ($_instance->childHasBeenRendered('7EWVqqY')) {
+    $componentId = $_instance->getRenderedChildComponentId('7EWVqqY');
+    $componentTag = $_instance->getRenderedChildComponentTagName('7EWVqqY');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('GuGHMmg');
+    $_instance->preserveRenderedChild('7EWVqqY');
 } else {
     $response = \Livewire\Livewire::mount('navigation-menu');
     $html = $response->html();
-    $_instance->logRenderedChild('GuGHMmg', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('7EWVqqY', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
-        <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         
         <!-- Page Heading -->
         <!-- <header class="bg-white shadow">
@@ -235,7 +234,7 @@ $.widget.bridge('uibutton', $.ui.button)
 
 <!-- SweetAlert2 -->
 <!-- <script src="<?php echo e(asset('/plugins/sweetalert2/sweetalert2.min.js')); ?>"></script> -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
 <?php if($errors->any()): ?>
 <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <script>
@@ -245,6 +244,24 @@ $.widget.bridge('uibutton', $.ui.button)
         });
     </script>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php endif; ?>
+
+<?php if(session('error')): ?>
+    <script>
+        swal({
+            title: "<?php echo e(session('error')); ?>",
+            icon: "error",
+        });
+    </script>
+<?php endif; ?>
+
+<?php if(session('success')): ?>
+    <script>
+        swal({
+            title: "<?php echo e(session('success')); ?>",
+            icon: "success",
+        });
+    </script>
 <?php endif; ?>
 <!-- Toastr -->
 <script src="<?php echo e(asset('/plugins/toastr/toastr.min.js')); ?>"></script>
