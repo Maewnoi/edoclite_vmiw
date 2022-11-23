@@ -28,6 +28,253 @@ function logout(btn) {
 }
 // alert(var_memberController_add_level);
 //------------------------------------------------------------------------------------------
+//navigation_search_documents form
+$('#navigation_search_table').each(function () {
+    document.getElementById('processing_navigation_search_documents').style.display = 'none';
+    function function_fetch(){
+        // event.preventDefault();
+        var _token = $('#navigation_input_search_documents_csrf_token').val(); //_token
+        var _level = $('#navigation_input_search_documents_level').val(); //_level
+
+        var origin = $('#navigation_input_search_documents_origin').val(); //หน่วยงานต้นเรื่อง
+        var docnum = $('#navigation_input_search_documents_docnum').val(); //เลขที่หนังสือ
+        var title = $('#navigation_input_search_documents_title').val(); //เรื่อง
+        var template = $('#navigation_input_search_documents_template').val(); //เอกสารนอก/ภายใน
+        var recnum = $('#navigation_input_search_documents_recnum').val(); //เลขที่รับส่วนงาน
+        var date = $('#navigation_input_search_documents_date').val(); //วันที่
+        var date_2 = $('#navigation_input_search_documents_date_2').val(); //วันที่ลง
+        var secret = $('#navigation_input_search_documents_secret').val(); //ชั้นความลับ
+        var speed = $('#navigation_input_search_documents_speed').val(); //ชั้นความเร็ว
+        var var_data = {
+            origin: origin,
+            docnum: docnum,
+            title: title,
+            template: template,
+            recnum: recnum,
+            date: date,
+            date_2: date_2,
+            secret: secret,
+            speed: speed
+        };
+        // table.rows.add( var_data ).draw().
+        // var_data.splice(0);
+        $.fn.dataTable.ext.errMode = 'none';
+        var table = $('#navigation_search_table').DataTable({
+            oLanguage: {
+                sEmptyTable: "ไม่พบข้อมูลที่คุณต้องการ อิอิ"
+            },
+            processing: true,
+            paging: false,
+            searching: false,
+            language: {
+                processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+            },    
+            columnDefs: [
+                {
+                    searchable: false,
+                    orderable: false,
+                    targets: 0,
+                }
+            ],
+            order: [
+                [0, "DESC"]
+            ],
+            ajax: {
+                url: '/navigation/search',
+                type: 'POST',
+                dataType:"json",
+                headers: {
+                    'X-CSRF-Token': _token 
+                },
+                data: var_data,
+                dataSrc: ""
+            },
+            columns: [
+                { 
+                    data: 'doc_id' 
+                },
+                
+                {
+                    data: {doc_id:'doc_id',doc_type:'doc_type'} ,
+                    render: function ( data) {
+                        if(_level == '1'){
+                            //นายกรองนายก
+                            return (` <a href="/documents_admission_minister_sign/detail/`+ data.doc_id +`"><i class="far fa-file-alt"></i></a>`)
+                        }else if(_level == '2'){
+                            //ปลัดรองปลัด
+                            return (` <a href="/documents_admission_deputy_sign/detail/`+ data.doc_id +`"><i class="far fa-file-alt"></i></a>`)
+                        }else if(_level == '3'){
+                            //สรรบรรณกลาง
+                            return (` <a href="/documents_admission_all/detail/`+ data.doc_id +`"><i class="far fa-file-alt"></i></a>`)
+                        }else if(_level == '4'){
+                            //หัวหน้ากอง
+                            if(data.doc_type == '0'){
+                                return (` <a href="/documents_admission_division_all/detail/`+ data.doc_id +`"><i class="far fa-file-alt"></i></a>`)
+                            }else if(data.doc_type == '1'){
+                                return (` <a href="/documents_admission_division_inside_all/detail/`+ data.doc_id +`"><i class="far fa-file-alt"></i></a>`)
+                            }
+                        }else if(_level == '5'){
+                            //หัวหน้าฝ่าย
+                            if(data.doc_type == '0'){
+                                return (` <a href="/documents_admission_department_all/detail/`+ data.doc_id +`"><i class="far fa-file-alt"></i></a>`)
+                            }else if(data.doc_type == '1'){
+                                return (` <a href="/documents_admission_department_inside_all/detail/`+ data.doc_id +`"><i class="far fa-file-alt"></i></a>`)
+                            }
+                        }else if(_level == '6'){
+                            //สรรบรรณกอง
+                            if(data.doc_type == '0'){
+                                return (` <a href="/documents_admission_group/detail/`+ data.doc_id +`"><i class="far fa-file-alt"></i></a>`)
+                            }else if(data.doc_type == '1'){
+                                return (` <a href="/documents_admission_group_inside/detail/`+ data.doc_id +`"><i class="far fa-file-alt"></i></a>`)
+                            }
+                        }else if(_level == '7'){
+                            //งาน
+                            if(data.doc_type == '0'){
+                                return (` <a href="/documents_admission_work_all/detail/`+ data.doc_id +`"><i class="far fa-file-alt"></i></a>`)
+                            }else if(data.doc_type == '1'){
+                                return (` <a href="/documents_admission_work_inside_all/detail/`+ data.doc_id +`"><i class="far fa-file-alt"></i></a>`)
+                            }
+                        }
+                        
+                    }
+                },
+                { 
+                    data: 'doc_origin' 
+                },
+                { 
+                    data: 'doc_docnum' 
+                },
+                { 
+                    data: 'doc_template' ,
+                    render: function ( data) {
+                        if(data == 'A'){
+                            txt_doc_template = 'เอกสารภายนอก';
+                        }else if(data == 'B' || data == 'C' || data == 'D' || data == 'E'){
+                            txt_doc_template = 'เอกสารภายใน';
+                        }
+                        return (txt_doc_template)
+                    }
+                },
+                { 
+                    data: 'doc_recnum' 
+                },
+                { 
+                    data: 'doc_date' ,
+                    render: function ( data) {
+                        var year = data.toString().substring(0, 4);
+                        var month = data.toString().substring(5, 7);
+                        var day = data.toString().substring(8, 10);
+                        var date = [day, month, year].join('-');
+                        return (``+ date +``)
+                    }
+                },
+                { 
+                    data: 'doc_secret' ,
+                    render: function ( data) {
+                        if(data == '0'){
+                            txt_doc_secret = 'ปกติ';
+                        }else if(data == '1'){
+                            txt_doc_secret = 'ลับ';
+                        }else if(data == '2'){
+                            txt_doc_secret = 'ลับมาก';
+                        }else if(data == '3'){
+                            txt_doc_secret = 'ลับที่สุด!';
+                        }
+                        return (txt_doc_secret)
+                    }
+                },
+                { 
+                    data: 'doc_speed' ,
+                    render: function ( data) {
+                        if(data == '0'){
+                            txt_doc_speed = 'ปกติ';
+                        }else if(data == '1'){
+                            txt_doc_speed = 'ด่วน';
+                        }else if(data == '2'){
+                            txt_doc_speed = 'ด่วนมาก';
+                        }else if(data == '3'){
+                            txt_doc_speed = 'ด่วนที่สุด!';
+                        }
+                        return (txt_doc_speed)
+                    }
+                },
+                
+            ]
+        }).on( 'processing.dt', function ( e, settings, processing ) {
+            $('#processing_navigation_search_documents').css( 'display', processing ? 'block' : 'none' );
+        });
+        table.on('order.dt search.dt', function () {
+            let i = 1;
+     
+            table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                this.data(i++);
+            });
+        }).draw();
+        // table.ajax.reload(null, false);
+        $.fn.dataTable.ext.errMode = function(obj,param,err){
+            console.log('Handling DataTable issue of Table '+err);
+        };
+        // table.ajax.reload();
+ 
+        table.destroy();
+        // console.log(var_data);
+
+
+        // fetch('/navigation/search', {
+        //     method: 'POST',
+        //     headers: {
+        //     'Accept': 'application/json',
+        //     'Content-Type': 'application/json',
+        //     'X-CSRF-TOKEN': _token
+        // },
+        //     body:  JSON.stringify(var_data)
+        // })
+        // .then(response => response.json())
+        // .then(result => {
+        //     console.log(result);
+        // });
+
+    }
+    
+    $('#navigation_input_search_documents_origin').on('keyup',function(event) {
+        //หน่วยงานต้นเรื่อง
+        function_fetch();
+    });
+    $('#navigation_input_search_documents_docnum').on('keyup',function(event) {
+        //เลขที่หนังสือ
+        function_fetch();
+    });
+    $('#navigation_input_search_documents_title').on('keyup',function(event) {
+        //เรื่อง
+        function_fetch();
+    });
+    $('#navigation_input_search_documents_template').on('change',function(event) {
+        //เอกสารนอก/ภายใน
+        function_fetch();
+    });
+    $('#navigation_input_search_documents_recnum').on('keyup',function(event) {
+        //เลขที่รับส่วนงาน
+        function_fetch();
+    });
+    $('#navigation_input_search_documents_date').on('change',function(event) {
+        //วันที่
+        function_fetch();
+    });
+    $('#navigation_input_search_documents_date_2').on('change',function(event) {
+        //วันที่ลง
+        function_fetch();
+    });
+    $('#navigation_input_search_documents_secret').on('change',function(event) {
+        //ชั้นความลับ
+        function_fetch();
+    });
+    $('#navigation_input_search_documents_speed').on('change',function(event) {
+        function_fetch();
+    });
+});
+
+
+//------------------------------------------------------------------------------------------
 //admin.member.index
 $(".check_jurisprudence").click(function(event) { //มีการ loop เลยใช้ classname.
     // event.preventDefault();

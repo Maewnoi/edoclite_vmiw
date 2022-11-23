@@ -91,6 +91,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     Route::post('/jurisprudence/update',[functionController::class , 'funtion_jurisprudence_update' ]);
 
+    Route::post('/navigation/search',[functionController::class , 'funtion_navigation_search' ]);
+
+
     // //users_level_1_0
     // Route::get('/users_level_1_0/{id}',[functionController::class,'getuserS_1_documents_admission_division_allController_0']);
     // //users_level_2_0
@@ -156,7 +159,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_admission_deputy_sign/all/1/query',[queryController::class,'funtion_query_documents_admission_deputy_sign_1_Controller_level_2']);
     Route::get('/documents_admission_deputy_sign/count/query',[queryController::class,'funtion_query_documents_admission_deputy_sign_count_level_2']);
     Route::get('/documents_admission_deputy_sign/chart/2/query',[queryController::class,'funtion_query_documents_admission_deputy_sign_chart_level_2']);
-
     Route::get('/documents_admission_minister_sign/all/0/query',[queryController::class,'funtion_query_documents_admission_minister_sign_0_Controller_level_1']);
     Route::get('/documents_admission_minister_sign/all/1/query',[queryController::class,'funtion_query_documents_admission_minister_sign_1_Controller_level_1']);
     Route::get('/documents_admission_minister_sign/count/query',[queryController::class,'funtion_query_documents_admission_minister_sign_count_level_1']);

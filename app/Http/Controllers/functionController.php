@@ -19,6 +19,136 @@ use Illuminate\Support\Facades\Auth;
 
 class functionController extends Controller
 {
+    public static function funtion_navigation_search(Request $request){
+        $level = Auth::user()->level;
+
+        $origin = $request->origin;
+        $docnum = $request->docnum;
+        $title = $request->title;
+        $template = $request->template;
+        $recnum = $request->recnum;
+        $date = $request->date;
+        $date_2 = $request->date_2;
+        $secret = $request->secret;
+        $speed = $request->speed;
+        
+        if( $origin == '' &&
+            $docnum == '' &&
+            $title == '' &&
+            $template == '' &&
+            $recnum == '' &&
+            $date == '' &&
+            $date_2 == '' &&
+            $secret == '' &&
+            $speed == '' ){
+            $document = [];
+        }else{
+            $document = document::where('doc_site_id',Auth::user()->site_id)
+            ->when($origin != null, function ($builder) use ($origin){
+                $builder->where('doc_origin', 'like', '%' . $origin . '%');
+            })
+            ->when($docnum != null, function ($builder) use ($docnum){
+                $builder->where('doc_docnum', 'like', '%' . $docnum . '%');
+            })
+            ->when($title != null, function ($builder) use ($title){
+                $builder->where('doc_title', 'like', '%' . $title . '%');
+            })
+            ->when($template == 'documents', function ($builder) use ($template){
+                $builder->where('doc_template', 'A');
+            })
+            ->when($template == 'documents_inside', function ($builder) use ($template){
+                $builder->where('doc_template', 'B')
+                        ->orWhere('doc_template', 'C')
+                        ->orWhere('doc_template', 'D')
+                        ->orWhere('doc_template', 'E');
+            })
+            ->when($recnum != null, function ($builder) use ($recnum){
+                $builder->where('doc_recnum', $recnum);
+            })
+            ->when($date != null, function ($builder) use ($date){
+                $builder->where('doc_date', $date);
+            })
+            ->when($date_2 != null, function ($builder) use ($date_2){
+                $builder->where('doc_date_2', $date_2);
+            })
+            ->when($secret != null, function ($builder) use ($secret){
+                $builder->where('doc_secret', $secret);
+            })
+            ->when($speed != null, function ($builder) use ($speed){
+                $builder->where('doc_speed', $speed);
+            })
+            //นายกรองนายก
+            ->when($level == '1', function ($builder) use ($level){
+                $builder->join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+                ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+                ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+                ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+                ->where('doc_type', '0')
+                ->where('doc_status', 'success')
+                ->where('sub_status', '8')
+                ->where('sub2_status', '1')
+                ->where('sub3_sealid_2', Auth::user()->id);
+            })
+            //++++++++++=+++++=+++++=+++++=++++++++++
+            //ปลัดรองปลัด
+            ->when($level == '2', function ($builder) use ($level){
+                $builder->join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+                ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+                ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+                ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+                ->where('doc_type', '0')
+                ->where('doc_status', 'success')
+                ->where('sub_status', '8')
+                ->where('sub2_status', '1')
+                ->where(function ($query) {
+                    $query->where('sub3_sealid_0', Auth::user()->id)
+                        ->orWhere('sub3_sealid_1', Auth::user()->id);
+                });
+            })
+            //++++++++++=+++++=+++++=+++++=++++++++++
+            //สรรบรรณกลาง
+            ->when($level == '3', function ($builder) use ($level){
+                $builder->where('doc_type', '0');
+            })
+            //++++++++++=+++++=+++++=+++++=++++++++++
+            //หัวหน้ากอง
+            ->when($level == '4', function ($builder) use ($level){
+                $builder->leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+                ->where('doc_status', 'success')
+                ->where('sub_recid', Auth::user()->group)
+                ->where('seal_id_1', Auth::user()->id);
+            })
+            //++++++++++=+++++=+++++=+++++=++++++++++
+            //หัวหน้าฝ่าย
+            ->when($level == '5', function ($builder) use ($level){
+                $builder->leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+                ->where('doc_status', 'success')
+                ->where('sub_recid', Auth::user()->group)
+                ->where('seal_id_0', Auth::user()->id);
+            })
+            //++++++++++=+++++=+++++=+++++=++++++++++
+            //สรรบรรณกอง
+            ->when($level == '6', function ($builder) use ($level){
+                $builder->leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+                ->where('doc_status', 'success')
+                ->where('sub_recid', Auth::user()->group);
+            })
+            //++++++++++=+++++=+++++=+++++=++++++++++
+            //งาน
+            ->when($level == '7', function ($builder) use ($level){
+                $builder->leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+                ->leftJoin('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+                ->where('doc_status', 'success')
+                ->where('sub_recid', Auth::user()->group)
+                ->where('sub_status', '8')
+                ->where('sub2_recid', Auth::user()->id);
+            })
+            //++++++++++=+++++=+++++=+++++=++++++++++
+            ->get();
+        }
+        return $document;
+    }
+
     public static function funtion_generate_PDF_VI(
         $sub3d_file,
         $sub3_sealid_0,

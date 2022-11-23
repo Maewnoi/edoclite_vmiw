@@ -3626,87 +3626,100 @@ unset($__errorArgs, $__bag); ?>
                     <div class="py-12">
                         <div class="container">
                             <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="border shadow card border-info">
-                                            <div class="card-body">
-                                                <div class="form-row">
-                                                    <div class="mb-3 col-md-3">
-                                                        <label for="validationDefault01">หน่วยงานต้นเรื่อง</label>
-                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="พิมพ์เพื่อค้นหา">
-                                                    </div>
-                                                    <div class="mb-3 col-md-3">
-                                                        <label for="validationDefault02">เลขที่หนังสือ</label>
-                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="พิมพ์เพื่อค้นหา">
-                                                    </div>
-                                                    <div class="mb-3 col-md-3">
-                                                        <label for="validationDefaultUsername">เรื่อง</label>
-                                                        <input type="text" class="form-control" id="navigation_input_search_documents_" placeholder="พิมพ์เพื่อค้นหา">
-                                                    </div>
-                                                    <div class="mb-3 col-md-3">
-                                                        <label for="validationDefaultUsername">เอกสารนอก/ภายใน</label>
-                                                        <select id="navigation_input_search_documents_"class=" form-control">
-                                                            <option value=""></option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3 col-md-2">
-                                                        <label for="validationDefaultUsername">เลขที่รับส่วนงาน</label>
-                                                        <input type="number" class="form-control" id="navigation_input_search_documents_" placeholder="พิมพ์เพื่อค้นหา">
-                                                    </div>
-                                                    <div class="mb-3 col-md-2">
-                                                        <label for="validationDefaultUsername">วันที่</label>
-                                                        <input type="date" class="form-control" id="navigation_input_search_documents_">
-                                                    </div>
-                                                    <div class="mb-3 col-md-2">
-                                                        <label for="validationDefaultUsername">วันที่ลง</label>
-                                                        <input type="date" class="form-control" id="navigation_input_search_documents_">
-                                                    </div>
-                                                    <div class="mb-3 col-md-2">
-                                                        <label for="validationDefaultUsername">ชั้นความลับ</label>
-                                                        <select id="navigation_input_search_documents_"class=" form-control">
-                                                            <option value=""></option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3 col-md-2">
-                                                        <label for="validationDefaultUsername">ชั้นความเร็ว</label>
-                                                        <select id="navigation_input_search_documents_"class=" form-control">
-                                                            <option value=""></option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3 col-md-2">
-                                                        <label for="validationDefaultUsername">สถานะ</label>
-                                                        <select id="navigation_input_search_documents_"class=" form-control">
-                                                            <option value=""></option>
-                                                        </select>
+                                <form action="#" name="navigation_form_search" id="navigation_form_search">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="border shadow card border-info">
+                                                <div class="card-body">
+                                                    <div class="form-row">
+                                                        <div class="mb-3 col-md-3">
+                                                            <label for="navigation_input_search_documents_origin">หน่วยงานต้นเรื่อง</label>
+                                                            <input type="text" class="form-control" id="navigation_input_search_documents_origin" placeholder="พิมพ์เพื่อค้นหา">
+                                                        </div>
+                                                        <div class="mb-3 col-md-3">
+                                                            <label for="navigation_input_search_documents_docnum">เลขที่หนังสือ</label>
+                                                            <input type="text" class="form-control" id="navigation_input_search_documents_docnum" placeholder="พิมพ์เพื่อค้นหา">
+                                                        </div>
+                                                        <div class="mb-3 col-md-3">
+                                                            <label for="navigation_input_search_documents_title">เรื่อง</label>
+                                                            <input type="text" class="form-control" id="navigation_input_search_documents_title" placeholder="พิมพ์เพื่อค้นหา">
+                                                        </div>
+                                                        <div class="mb-3 col-md-3">
+                                                            <label for="navigation_input_search_documents_template">เอกสารนอก/ภายใน</label>
+                                                            <select id="navigation_input_search_documents_template"class=" form-control">
+                                                                <option value="">ทั้งหมด</option>
+                                                                <option value="documents">เอกสารภายนอก</option>
+                                                                <option value="documents_inside">เอกสารภายใน</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3 col-md-2">
+                                                            <label for="navigation_input_search_documents_recnum">เลขที่รับส่วนงาน</label>
+                                                            <input type="number" class="form-control" id="navigation_input_search_documents_recnum" placeholder="พิมพ์เพื่อค้นหา">
+                                                        </div>
+                                                        <div class="mb-3 col-md-3">
+                                                            <label for="navigation_input_search_documents_date">วันที่</label>
+                                                            <input type="date" class="form-control" id="navigation_input_search_documents_date">
+                                                        </div>
+                                                        <div class="mb-3 col-md-3">
+                                                            <label for="navigation_input_search_documents_date_2">วันที่ลง</label>
+                                                            <input type="date" class="form-control" id="navigation_input_search_documents_date_2">
+                                                        </div>
+                                                        <div class="mb-3 col-md-2">
+                                                            <label for="navigation_input_search_documents_secret">ชั้นความลับ</label>
+                                                            <select id="navigation_input_search_documents_secret"class=" form-control">
+                                                                <option value="">ทั้งหมด</option>
+                                                                <option value="0">ปกติ</option>
+                                                                <option value="1">ลับ</option>
+                                                                <option value="2">ลับมาก</option>
+                                                                <option value="3">ลับที่สุด</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3 col-md-2">
+                                                            <label for="navigation_input_search_documents_speed">ชั้นความเร็ว</label>
+                                                            <select id="navigation_input_search_documents_speed"class=" form-control">
+                                                                <option value="">ทั้งหมด</option>
+                                                                <option value="0">ปกติ</option>
+                                                                <option value="1">ด่วน</option>
+                                                                <option value="2">ด่วนมาก</option>
+                                                                <option value="3">ด่วนที่สุด</option>
+                                                            </select>
+                                                        </div>
+                                                        <input type="hidden" class="form-control" id="navigation_input_search_documents_csrf_token" value="<?php echo e(csrf_token()); ?>">
+                                                        <input type="hidden" class="form-control" id="navigation_input_search_documents_level" value="<?php echo e(Auth::user()->level); ?>">
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="border shadow card border-info">
-                                            <div class="card-body table-responsive">
-                                                <table class="w-100 table-bordered table-hover">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">ลำดับ</th>
-                                                            <th scope="col">หน่วยงานต้นเรื่อง</th>
-                                                            <th scope="col">เลขที่หนังสือ</th>
-                                                            <th scope="col">เรื่อง</th>
-                                                            <th scope="col">เอกสารนอก/ภายใน</th>
-                                                            <th scope="col">เลขที่รับส่วนงาน</th>
-                                                            <th scope="col">วันที่</th>
-                                                            <th scope="col">วันที่ลง</th>
-                                                            <th scope="col">ชั้นความลับ</th>
-                                                            <th scope="col">ชั้นความเร็ว</th>
-                                                            <th scope="col">สถานะ</th>
-                                                        </tr>
-                                                    </thead>
-                                                </table>
+                                        <div class="col-md-12">
+                                            <div class="border shadow card border-info">
+                                                <div class="modal-header bg-gray-50">
+                                                    <label class="modal-title">ผลลัพธ์</label>
+                                                    <div class="float-right mt-1 ml-3 spinner-grow spinner-grow-sm text-warning" role="status" id="processing_navigation_search_documents"> 
+                                                        <span class="sr-only">Loading...</span>
+                                                    </div>
+                                                </div>
+                                                <div class="relative overflow-x-auto shadow-md card-body table-responsive sm:rounded-lg">
+                                                    <table id="navigation_search_table" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                            <tr>
+                                                                <th scope="col">ลำดับ</th>
+                                                                <th scope="col">รายละเอียด</th>
+                                                                <th scope="col">หน่วยงานต้นเรื่อง</th>
+                                                                <th scope="col">เลขหนังสือ</th>
+                                                                <th scope="col">ประเภท</th>
+                                                                <th scope="col">เลขที่รับส่วนงาน</th>
+                                                                <th scope="col">วันที่</th>
+                                                                <th scope="col">ชั้นความลับ</th>
+                                                                <th scope="col">ชั้นความเร็ว</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>

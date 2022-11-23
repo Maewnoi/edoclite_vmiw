@@ -21,13 +21,13 @@ use App\Http\Controllers\functionController;
                         <div class="card-header bg-primary">
                             <div class="clearfix">
                             เอกสารรับเข้าภายใน (หัวหน้ากอง)
-                                <div class="float-right spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
+                                <div class="float-right mt-1 ml-3 spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
                                     <span class="sr-only">Loading...</span>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body table-responsive">
-                            <table class="table">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
