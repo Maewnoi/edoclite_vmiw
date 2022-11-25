@@ -18,7 +18,7 @@
                     <div class="border shadow card border-info">
                         <div class="card-header">ตารางข้อมูล Sites</div>
                         <div class="card-body table-responsive">
-                            <table id="example1" class="table">
+                            <table id="example1" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>

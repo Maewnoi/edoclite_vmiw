@@ -961,8 +961,8 @@ $("#documents_admission_work_allController_bt_preview-garuda").click(function(ev
             var blob = new Blob([result], { type: 'application/pdf' });
             var fileURL = URL.createObjectURL(blob);
                             
-            const isMobile = navigator.userAgentData.mobile;
-            if(isMobile){
+            // const isMobile = navigator.userAgentData.mobile;
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
             var newWin = window.open(fileURL);
                 newWin.focus();
                 var timer = setInterval(function() {
@@ -1102,8 +1102,8 @@ $("#documents_admission_work_allController_bt_preview").click(function(event) {
             var blob = new Blob([result], { type: 'application/pdf' });
             var fileURL = URL.createObjectURL(blob);
                             
-            const isMobile = navigator.userAgentData.mobile;
-            if(isMobile){
+            // const isMobile = navigator.userAgentData.mobile;
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
             var newWin = window.open(fileURL);
                 newWin.focus();
                 var timer = setInterval(function() {
