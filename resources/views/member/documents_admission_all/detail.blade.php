@@ -68,13 +68,13 @@ use App\Http\Controllers\functionController;
                                 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <button type="button" data-toggle="modal"
+                                            <x-jet-button type="button" data-toggle="modal"
                                              data-target="#modal-update-general{{$document_detail->doc_id}}"
-                                            class="btn btn-outline-warning "><i class="fa fa-edit"></i> แก้ไขข้อมูลทั่วไป</button>
+                                            ><i class="fa fa-edit"></i> แก้ไขข้อมูลทั่วไป</x-jet-button>
                                             
-                                            <button type="button" data-toggle="modal"
+                                            <x-jet-button type="button" data-toggle="modal"
                                                 data-target="#modal-update-file{{$document_detail->doc_id}}"
-                                                class="btn btn-outline-warning "><i class="fa fa-edit"></i> เปลี่ยนไฟล์เอกสาร</button>
+                                                ><i class="fa fa-edit"></i> เปลี่ยนไฟล์เอกสาร</x-jet-button>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -145,21 +145,14 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-outline-warning btn-block">
-                                            <i class="fa fa-edit"></i> แก้ไขกองงานที่เกี่ยวข้อง</button>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <button type="button" data-toggle="modal"
-                                            data-target="#modal-delete{{$document_detail->doc_id}}"
-                                            class="btn btn-outline-danger btn-block">
-                                            <i class="fa fa-trash"></i> ลบเอกสาร</button>
-                                    </div>
-                                </div>
+                          
+                            <div class="flex items-center justify-center mt-20">
+                                @if($document_detail->doc_status == 'success')
+                                <x-jet-button type="button"  data-toggle="modal" data-target="#modal-update-groupmems{{$document_detail->doc_id}}"><i class="fa fa-edit"></i> แก้ไขกองงานที่เกี่ยวข้อง</x-jet-button>
+                                @elseif($document_detail->doc_status == 'waiting')
+                                <x-jet-button type="button" data-toggle="modal" data-target="#modal-delete{{$document_detail->doc_id}}">
+                                            <i class="fa fa-trash"></i> ลบเอกสาร</x-jet-button>
+                                @endif
                             </div>
                             <hr>
                         </div>
@@ -302,4 +295,59 @@ use App\Http\Controllers\functionController;
             </div>
         </div>
     </div>
+
+    @if($document_detail->doc_status == 'success')
+    <div class="modal fade" id="modal-update-groupmems{{$document_detail->doc_id}}">
+        <div class="modal-dialog modal-l">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <label class="modal-title">แก้ไขกองงานที่เกี่ยวข้อง
+                    </label>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('updateGroupmem')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                        <div class="card card-body">
+                            <x-jet-label class="text-lg" value="{{ __('พิจารณาเลือกกองที่เกี่ยวข้อง') }}" />
+                            <div class="form-group">
+                                <select name="sub_recid[]" id="documents_admission_allController_update-groupmems_selected_multiple" multiple="multiple"
+                                    required class=" @error('sub_recid') is-invalid @enderror">
+                                    @foreach($sub_docsS as $row_sub_docs)
+                                        <option selected value="{{$row_sub_docs->sub_recid}}">
+                                        {{ functionController::funtion_groupmem_name($row_sub_docs->sub_recid) }}</option>
+                                    @endforeach
+                                    @foreach($GroupmemS as $row_Groupmem)
+                                    <option value="{{$row_Groupmem->group_id}}">
+                                        {{ $row_Groupmem->group_name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('sub_recid')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                @enderror
+                            </div>
+                            <select name="sub_recid_old[]" multiple="multiple" class="hide">
+                                @foreach($sub_docsS as $row_sub_docs)
+                                    <option selected value="{{$row_sub_docs->sub_recid}}">
+                                    {{ functionController::funtion_groupmem_name($row_sub_docs->sub_recid) }}</option>
+                                @endforeach
+                            </select>
+                            <input type="hidden" name="doc_id" class="form-control" value="{{$document_detail->doc_id}}">
+
+                            <input type="hidden" name="doc_recnum" class="form-control" value="{{$document_detail->doc_recnum}}">
+                            <input type="hidden" name="doc_docnum" class="form-control" value="{{$document_detail->doc_docnum}}">
+                            <input type="hidden" name="doc_title" class="form-control" value="{{$document_detail->doc_title}}">
+                            
+                            <x-jet-button onclick="submitForm(this);">
+                                {{ __('save') }}
+                            </x-jet-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 </x-app-layout>

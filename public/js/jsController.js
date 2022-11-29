@@ -1179,6 +1179,9 @@ $('#documents_admission_group_allController_selected_multiple_sub_recid_inside')
 //member_dashboard selected_multiple2
 $('#documents_admission_group_allController_selected_multiple_sub2_recid_inside').multiSelect();
 //------------------------------------------------------------------------------------------
+//selected_multiple
+$('#documents_admission_allController_update-groupmems_selected_multiple').multiSelect();
+//------------------------------------------------------------------------------------------
 //member_dashboard selected_multiple2
 // $('#documents_admission_work_allController_sub3d_podium').summernote({
 //     placeholder: 'อะ',

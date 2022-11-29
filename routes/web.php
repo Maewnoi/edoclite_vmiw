@@ -234,6 +234,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::post('/documents_admission_all/updateGeneral',[documents_admission_allController::class,'updateGeneral'])->name('updateGeneral');
     Route::post('/documents_admission_all/updateFile',[documents_admission_allController::class,'updateFile'])->name('updateFile');
     Route::post('/documents_admission_all/delete',[documents_admission_allController::class,'delete'])->name('delete');
+    Route::post('/documents_admission_all/updateGroupmem',[documents_admission_allController::class,'updateGroupmem'])->name('updateGroupmem');
 
     //reserve number receive จองเลขรับ ภายนอก
     Route::get('/reserve_number_receive/all',[reserve_number_receive_allController::class,'index'])->name('reserve_number_receive_all');
