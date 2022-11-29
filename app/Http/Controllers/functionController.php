@@ -612,27 +612,40 @@ class functionController extends Controller
         // $strip_tags_podium = strip_tags($request->sub3d_podium,"<b><p>");
         // console.log($strip_tags_podium);
         if($strlen_podium <='270'){
-            $MultiCell_H = 5;
-        }else if($strlen_podium >= '271' && $strlen_podium <= '540'){
-            $MultiCell_H = 10;
-        }else if($strlen_podium >= '541' && $strlen_podium <= '810'){
-            $MultiCell_H = 11;
-        }else if($strlen_podium >= '811' && $strlen_podium <= '1080'){
-            $MultiCell_H = 12;
-        }else if($strlen_podium >= '1081' && $strlen_podium <= '1350'){
-            $MultiCell_H = 13;
-        }else if($strlen_podium >= '1351' && $strlen_podium <= '1620'){
-            $MultiCell_H = 14;
-        }else if($strlen_podium >= '1621' && $strlen_podium <= '1890'){
-            $MultiCell_H = 15;
-        }else if($strlen_podium >= '1891'){
-            $MultiCell_H = 16;
+            $MultiCell_H = 6;
+        }else if($strlen_podium >= '271' && $strlen_podium <= '740'){
+            $MultiCell_H = 7;
+        }else if($strlen_podium >= '741' && $strlen_podium <= '1010'){
+            $MultiCell_H = 8;
+        }else if($strlen_podium >= '1011' ){
+            $MultiCell_H = 9;
         }
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetXY(25, 80); //+12
         $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
         $pdf->SetFont('THSarabunNew','',16);
-        $pdf->MultiCell(160,$MultiCell_H, iconv('UTF-8', 'cp874', $request->sub3d_podium_garuda),'0','L',false);
+        $pdf->MultiCell(160,$MultiCell_H, iconv('UTF-8', 'cp874', $request->sub3d_podium_garuda),'1','L',false);
+
+        if($MultiCell_H == 6){
+            $sign_H = 80+40;
+        }else if($MultiCell_H == 7){
+            $sign_H = 80+90;
+        }else if($MultiCell_H == 8){
+            $sign_H = 80+130;
+        }else if($MultiCell_H == 9){
+            $sign_H = 80+160;
+        }
+
+        //ลายเซ็น
+        if(Auth::user()->sign == ''){
+            $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',140,$sign_H,10,10);
+        }else{
+            $pdf->Image(Auth::user()->sign,140,$sign_H,10,10);
+        }
+        $pos_H = $sign_H+12;
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(140, $pos_H);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', Auth::user()->pos));
 
         if($request->action_garuda == 'preview'){
             return response($pdf->Output())->header('Content-Type', 'application/pdf');
@@ -718,27 +731,41 @@ class functionController extends Controller
         // $strip_tags_podium = strip_tags($request->sub3d_podium,"<b><p>");
         // console.log($strip_tags_podium);
         if($strlen_podium <='270'){
-            $MultiCell_H = 5;
-        }else if($strlen_podium >= '271' && $strlen_podium <= '540'){
-            $MultiCell_H = 10;
-        }else if($strlen_podium >= '541' && $strlen_podium <= '810'){
-            $MultiCell_H = 11;
-        }else if($strlen_podium >= '811' && $strlen_podium <= '1080'){
-            $MultiCell_H = 12;
-        }else if($strlen_podium >= '1081' && $strlen_podium <= '1350'){
-            $MultiCell_H = 13;
-        }else if($strlen_podium >= '1351' && $strlen_podium <= '1620'){
-            $MultiCell_H = 14;
-        }else if($strlen_podium >= '1621' && $strlen_podium <= '1890'){
-            $MultiCell_H = 15;
-        }else if($strlen_podium >= '1891'){
-            $MultiCell_H = 16;
+            $MultiCell_H = 6;
+        }else if($strlen_podium >= '271' && $strlen_podium <= '740'){
+            $MultiCell_H = 7;
+        }else if($strlen_podium >= '741' && $strlen_podium <= '1010'){
+            $MultiCell_H = 8;
+        }else if($strlen_podium >= '1011' ){
+            $MultiCell_H = 9;
         }
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetXY(25, 91); //+12
         $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
         $pdf->SetFont('THSarabunNew','',16);
         $pdf->MultiCell(160,$MultiCell_H, iconv('UTF-8', 'cp874', $request->sub3d_podium),'0','L',false); //strip_tags($request->sub3d_podium,"<b><i>&nbsp;")
+
+        if($MultiCell_H == 6){
+            $sign_H = 91+40;
+        }else if($MultiCell_H == 7){
+            $sign_H = 91+90;
+        }else if($MultiCell_H == 8){
+            $sign_H = 91+130;
+        }else if($MultiCell_H == 9){
+            $sign_H = 91+160;
+        }
+     
+        //ลายเซ็น
+        if(Auth::user()->sign == ''){
+            $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',140,$sign_H,10,10);
+        }else{
+            $pdf->Image(Auth::user()->sign,140,$sign_H,10,10);
+        }
+        $pos_H = $sign_H+12;
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(140, $pos_H);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', Auth::user()->pos));
+        
         // $pdf->Ln();
         // // ----------- ----------- ----------- ----------- ----------- -----------
         // $pdf->SetTextColor(0, 0, 0);
@@ -1096,18 +1123,17 @@ class functionController extends Controller
                 
                 //กำหนดแกน x ให้กับข้อความ
                   $x1 = 0; $x2 = 0; $x3 = 0;
-                  
+                  if($seal_point == '1'){ $sealpoint = 3; $x1 = 20; $x2 = 14; $x3 = 17; }
+                  if($seal_point == '2'){ $sealpoint = 43; $x1 = 60; $x2 = 54; $x3 = 57; }
+                  if($seal_point == '3'){ $sealpoint = 83; $x1 = 100; $x2 = 94; $x3 = 97; }
+                  if($seal_point == '4'){ $sealpoint = 123; $x1 = 140; $x2 = 135; $x3 = 138; }
+                  if($seal_point == '5'){ $sealpoint = 163;  $x1 = 180; $x2 = 175; $x3 = 178; }
+
                 //ตราแสตมป์
                 if($groupmems->group_seal == ''){
-                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',$seal_point,10,40,23);
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',$sealpoint,10,40,23);
                 }else{
-                        if($seal_point == '1'){ $sealpoint = 3; $x1 = 20; $x2 = 14; $x3 = 17; }
-                        if($seal_point == '2'){ $sealpoint = 43; $x1 = 60; $x2 = 54; $x3 = 57; }
-                        if($seal_point == '3'){ $sealpoint = 83; $x1 = 100; $x2 = 94; $x3 = 97; }
-                        if($seal_point == '4'){ $sealpoint = 123; $x1 = 140; $x2 = 135; $x3 = 138; }
-                        if($seal_point == '5'){ $sealpoint = 163;  $x1 = 180; $x2 = 175; $x3 = 178; }
-                        //$pdf->Image($tokens->token_seal,$sealpoint,10,40,23);
-                   
+                    //$pdf->Image($tokens->token_seal,$sealpoint,10,40,23);
                     $pdf->Image($groupmems->group_seal,$sealpoint,10,40,23);
                 }
                 
