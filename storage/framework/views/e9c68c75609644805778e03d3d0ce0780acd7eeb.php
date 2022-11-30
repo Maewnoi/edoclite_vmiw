@@ -130,7 +130,8 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                             </div>
-                            <?php if($document_detail->doc_status == 'success'): ?>
+                            <hr>
+                            
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -147,6 +148,7 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
+                                            <?php if($document_detail->doc_status == 'success'): ?>
                                             <table>
                                                 <?php $__currentLoopData = $sub_docsS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_sub_docs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <tr>
@@ -154,9 +156,9 @@ use App\Http\Controllers\functionController;
                                                     <td><?php echo functionController::funtion_sub_status_detail($row_sub_docs->sub_status); ?>
 
                                                     </td>
-                                                    <?php if($row_sub_docs->sub_status == 8): ?>
+                                                    <!-- <?php if($row_sub_docs->sub_status == 8): ?>
                                                         <td><?php echo functionController::funtion_sub2_recid_name($row_sub_docs->sub_id); ?><hr></td>
-                                                    <?php endif; ?>
+                                                    <?php endif; ?> -->
                                                     
 
                                                 </tr>
@@ -164,13 +166,56 @@ use App\Http\Controllers\functionController;
                                                 
                                                
                                             </table>
-                                            
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <hr>
-                            <?php endif; ?>
+                            
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="callout callout-danger"> 
+                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-lg','value' => ''.e(__('ผู้รับ')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-lg','value' => ''.e(__('ผู้รับ')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                            <?php if($document_detail->sub_status == '8'): ?>
+                                            <table>
+                                                <?php $__currentLoopData = $sub2_docs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_sub2_docs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <tr>
+                                                    <td><?php echo e(functionController::funtion_users($row_sub2_docs->sub2_recid)); ?></td>
+                                                    <td>**</td>
+                                                </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </table>
+                                            <?php else: ?>
+                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-red-500 text-md','value' => ''.e(__('--ยังไม่ถึงผู้รับงาน--')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-red-500 text-md','value' => ''.e(__('--ยังไม่ถึงผู้รับงาน--')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <?php if($document_detail->sub_status == '0'): ?>
                             <div class="row">

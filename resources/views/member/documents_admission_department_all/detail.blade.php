@@ -89,6 +89,29 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="callout callout-danger"> 
+                                            <x-jet-label class="text-lg" value="{{ __('ผู้รับ') }}" />
+                                            @if($document_detail->sub_status == '8')
+                                            <table>
+                                                @foreach($sub2_docs as $row_sub2_docs)
+                                                <tr>
+                                                    <td>{{ functionController::funtion_users($row_sub2_docs->sub2_recid) }}</td>
+                                                    <td>**</td>
+                                                </tr>
+                                                @endforeach
+                                            </table>
+                                            @else
+                                            <x-jet-label class="text-red-500 text-md"
+                                                            value="{{ __('--ยังไม่ถึงผู้รับงาน--') }}" />
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @if($document_detail->sub_status == '1')
                             <div class="row">
                                 <div class="col-md-12">

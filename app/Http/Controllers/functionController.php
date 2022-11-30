@@ -18,7 +18,7 @@ use App\Models\token;
 use Illuminate\Support\Facades\Auth;
 
 class functionController extends Controller
-{
+{ 
     public static function funtion_navigation_search(Request $request){
         $level = Auth::user()->level;
 
@@ -1376,11 +1376,21 @@ class functionController extends Controller
     //ฟังชันเรียกสถานะ sub3_status tb: sub3_docs ด้วย status
     public static function funtion_sub3_status($status) {
         if($status == '0'){
-            $txt_status = '<span class="badge bg-danger">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
-        }elseif($status == '1'){
-            $txt_status = '<span class="badge bg-danger">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+        }else if($status == '1'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+        }else if($status == '2'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+        }else if($status == '3'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+        }else if($status == '4'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+        }else if($status == '5'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+        }else if($status == '6'){
+            $txt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
         }else{
-            return "ไม่ถูกนิยาม";
+            $txt_status = "ไม่ถูกนิยาม";
         }
         return $txt_status;
     }

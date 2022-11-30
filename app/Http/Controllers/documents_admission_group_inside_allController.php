@@ -99,6 +99,18 @@ class documents_admission_group_inside_allController extends Controller
             ->where('sub_recid', Auth::user()->group)
             ->first();
 
+            if($document_detail->doc_status == 'success'){
+                $sub_docsS = sub_doc::where('sub_docid', $id) ->get();
+            }else{
+                $sub_docsS = '';
+            }
+
+            if($document_detail->sub_status == '8'){
+                $sub2_docs = sub2_doc::where('sub2_docid', $id)->get();
+            }else{
+                $sub2_docs = '';
+            }
+
             //หาตัวเลขที่จองไว้
             $reserved_numbersS = reserve_number::where('reserve_site',Auth::user()->site_id)
             ->where('reserve_owner',Auth::user()->id)
@@ -133,7 +145,7 @@ class documents_admission_group_inside_allController extends Controller
             ->get();
 
            
-            return view('member.documents_admission_group_inside_all.detail',compact('document_detail','userS_0','userS_1','userS_2','reserved_numbersS','dropped_numbersS'));
+            return view('member.documents_admission_group_inside_all.detail',compact('document_detail','sub_docsS','sub2_docs','userS_0','userS_1','userS_2','reserved_numbersS','dropped_numbersS'));
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }

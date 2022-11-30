@@ -97,7 +97,22 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
-                          
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="callout callout-danger"> 
+                                            <x-jet-label class="text-lg" value="{{ __('สถานะ') }}" />
+                                            @if($document_detail->sub2_status == '0')
+                                            <x-jet-label class="text-red-500 text-md"
+                                                            value="{{ __('--ยังไม่อ่าน--') }}" />
+                                            @elseif($document_detail->sub2_status == '1')
+                                            <x-jet-label class="text-green-500 text-md"
+                                                            value="{{ __('--อ่านแล้ว--') }}" />
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <hr>
                         </div>
                     </div>

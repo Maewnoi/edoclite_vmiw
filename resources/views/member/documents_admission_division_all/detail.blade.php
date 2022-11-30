@@ -93,19 +93,20 @@ use App\Http\Controllers\functionController;
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="callout callout-danger"> 
-                                            @if($document_detail->doc_status == 'success')
                                             <x-jet-label class="text-lg" value="{{ __('ผู้รับ') }}" />
+                                            @if($document_detail->sub_status == '8')
                                             <table>
-                                                @foreach($userS_2 as $row_sub_docs)
+                                                @foreach($sub2_docs as $row_sub2_docs)
                                                 <tr>
-                                                    <td>{{  $row_sub_docs->name }}</td>
+                                                    <td>{{ functionController::funtion_users($row_sub2_docs->sub2_recid) }}</td>
                                                     <td>**</td>
-                                                    
                                                 </tr>
                                                 @endforeach
                                             </table>
+                                            @else
+                                            <x-jet-label class="text-red-500 text-md"
+                                                            value="{{ __('--ยังไม่ถึงผู้รับงาน--') }}" />
                                             @endif
-                                            
                                         </div>
                                     </div>
                                 </div>

@@ -71,16 +71,21 @@ class documents_admission_work_allController extends Controller
             ->where('sub2_recid',Auth::user()->id)
             ->first();
 
+            $sub3_doc_detail = sub3_doc::join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+            ->where('sub3_docid', $id)
+            ->first();
+
+            
             if($document_detail->sub2_status == '0'){
                 //document_update_sub2_status อ่าน
                 $document_update_sub2_status = sub2_doc::where('sub2_id', $document_detail->sub2_id)->update([
                     'sub2_status'=>'1',
                     'sub2_updated_at'=>date('Y-m-d H:i:s')
                 ]);
-                return view('member.documents_admission_work_all.detail',compact('document_detail'))->with('success','อ่านเอกสารเรียบร้อย !');
+                return view('member.documents_admission_work_all.detail',compact('document_detail','sub3_doc_detail'))->with('success','อ่านเอกสารเรียบร้อย !');
                 
             }else{
-                return view('member.documents_admission_work_all.detail',compact('document_detail'));
+                return view('member.documents_admission_work_all.detail',compact('document_detail','sub3_doc_detail'));
             }
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');

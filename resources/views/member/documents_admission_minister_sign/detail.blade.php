@@ -76,6 +76,16 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="callout callout-danger"> 
+                                            <x-jet-label class="text-lg" value="{{ __('สถานะตอบกลับ') }}" />
+                                            {!!functionController::funtion_sub3_status($document_detail->sub3_status)!!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @if($document_detail->sub3_status == '5')
                             <div class="row">
                                 <div class="col-md-12">

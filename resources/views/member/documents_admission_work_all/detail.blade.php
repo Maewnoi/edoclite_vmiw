@@ -99,6 +99,37 @@ use App\Http\Controllers\functionController;
                                 @endif
                             </div>
                             <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="callout callout-danger"> 
+                                            <x-jet-label class="text-lg" value="{{ __('สถานะ') }}" />
+                                            @if($document_detail->sub2_status == '0')
+                                            <x-jet-label class="text-red-500 text-md"
+                                                            value="{{ __('--ยังไม่อ่าน--') }}" />
+                                            @elseif($document_detail->sub2_status == '1')
+                                            <x-jet-label class="text-green-500 text-md"
+                                                            value="{{ __('--อ่านแล้ว--') }}" />
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="callout callout-danger"> 
+                                            <x-jet-label class="text-lg" value="{{ __('สถานะตอบกลับ') }}" />
+                                            @if($sub3_doc_detail)
+                                            {!!functionController::funtion_sub3_status($sub3_doc_detail->sub3_status)!!}
+                                            @else
+                                            <x-jet-label class="text-green-500 text-md"
+                                                            value="{{ __('--ไม่ตอบกลับ--') }}" />
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                            @if($document_detail->sub2_status == '0')
                             <div class="row">
                                 <div class="col-md-12">

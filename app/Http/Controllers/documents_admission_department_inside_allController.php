@@ -85,7 +85,13 @@ class documents_admission_department_inside_allController extends Controller
             ->where('group', Auth::user()->group)
             ->where('cotton', Auth::user()->cotton)
             ->get();
-            return view('member.documents_admission_department_inside_all.detail',compact('document_detail','userS_0','userS_2'));
+
+            if($document_detail->sub_status == '8'){
+                $sub2_docs = sub2_doc::where('sub2_docid', $id)->get();
+            }else{
+                $sub2_docs = '';
+            }
+            return view('member.documents_admission_department_inside_all.detail',compact('document_detail','userS_0','userS_2','sub2_docs'));
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
