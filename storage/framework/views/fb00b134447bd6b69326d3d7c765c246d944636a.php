@@ -195,6 +195,14 @@ unset($__errorArgs, $__bag); ?>
                             <form action="<?php echo e(route('documents_admission_jurisprudence_do_not_understand')); ?>" method="post" enctype="multipart/form-data">
                             <?php echo csrf_field(); ?>
                                 <div class="flex items-center justify-center">
+                                    <input type="hidden" name="doc_id" value="<?php echo e($document_detail->doc_id); ?>">
+                                    <input type="hidden" name="sub_id" value="<?php echo e($document_detail->sub_id); ?>">
+                                    <input type="hidden" name="sub2_id" value="<?php echo e($document_detail->sub2_id); ?>">
+                                    <input type="hidden" name="sub3_id" value="<?php echo e($document_detail->sub3_id); ?>">
+                                    <input type="hidden" name="sub3d_id" value="<?php echo e($document_detail->sub3d_id); ?>">
+                                    <input type="hidden" name="doc_docnum" value="<?php echo e($document_detail->doc_docnum); ?>">
+                                    <input type="hidden" name="doc_origin" value="<?php echo e($document_detail->doc_origin); ?>">
+                                    <input type="hidden" name="doc_title" value="<?php echo e($document_detail->doc_title); ?>">
                                     <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>

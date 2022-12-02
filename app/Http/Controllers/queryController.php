@@ -18,6 +18,29 @@ use DataTables;
 class queryController extends Controller
 {
     //
+
+    public static function funtion_query_documents_admission_work_retrunController_level_7() {
+        if(Auth::user()->level=='7'){
+            $documents_admission_work_retrun = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+            ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '0')
+            ->where('doc_template', 'A')
+            ->where('doc_status', 'success')
+            ->where('sub_recid', Auth::user()->group)
+            ->where('sub_status', '8')
+            ->where('sub2_status', '1')
+            ->where('sub3_status', 'C')
+            ->where('sub2_recid', Auth::user()->id)
+            ->get();
+            return $documents_admission_work_retrun;
+        }else{
+            return 0;
+        }
+    }
+
     public static function funtion_query_documents_admission_minister_sign_chart_level_1() {
         if(Auth::user()->level=='1'){
             $document_admission_minister_sign_count_0 = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')

@@ -165,7 +165,11 @@
 }
 /* ++++++++++++++++++++++++++++++++++++++++++++++ */
 /* form pdf a4 นะจ๊ะ */
-#ocuments_admission_work_allController_page {
+#documents_admission_work_allController_page {
+    width: 21cm;
+    height: 29.7cm; 
+}
+#documents_admission_work_retrunController_page {
     width: 21cm;
     height: 29.7cm; 
 }

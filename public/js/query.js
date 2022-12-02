@@ -1557,6 +1557,8 @@ if(window.location.pathname == '/documents_admission_all/all'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
                     }else if(data == '6'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
                     }else{
                         txt_sub3_status = "ไม่ถูกนิยาม";
                     }
@@ -2141,6 +2143,8 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
                 }else if(data == '6'){
                     txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                }else if(data == 'C'){
+                    txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
                 }else{
                     txt_sub3_status = "ไม่ถูกนิยาม";
                 }
@@ -3749,6 +3753,8 @@ if(window.location.pathname == '/documents_admission_all/all'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
                     }else if(data == '6'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
                     }else{
                         txt_sub3_status = "ไม่ถูกนิยาม";
                     }
@@ -3848,6 +3854,8 @@ if(window.location.pathname == '/documents_admission_all/all'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
                     }else if(data == '6'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
                     }else{
                         txt_sub3_status = "ไม่ถูกนิยาม";
                     }
@@ -3947,6 +3955,8 @@ if(window.location.pathname == '/documents_admission_all/all'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
                     }else if(data == '6'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
                     }else{
                         txt_sub3_status = "ไม่ถูกนิยาม";
                     }
@@ -4046,6 +4056,8 @@ if(window.location.pathname == '/documents_admission_all/all'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
                     }else if(data == '6'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
                     }else{
                         txt_sub3_status = "ไม่ถูกนิยาม";
                     }
@@ -4144,6 +4156,8 @@ if(window.location.pathname == '/documents_admission_all/all'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
                     }else if(data == '6'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
                     }else{
                         txt_sub3_status = "ไม่ถูกนิยาม";
                     }
@@ -4154,6 +4168,107 @@ if(window.location.pathname == '/documents_admission_all/all'){
                 data: 'doc_id' ,
                 render: function ( data) {
                     return (` <a href="/documents_admission_minister_sign/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
+
+}else if(window.location.pathname == '/documents_admission_work_retrun/all'){ 
+    $.fn.dataTable.ext.errMode = 'none';
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // },
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'doc_id' 
+            },
+            { 
+                data: 'sub3d_government' 
+            },
+            { 
+                data: 'sub3d_draft' 
+            },
+            {   
+                data: 'sub3d_date'
+            },
+            {
+                data: 'sub3d_topic' 
+            },
+            {
+                data: 'sub3d_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3d_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_sub3d_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_sub3d_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_sub3d_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_sub3d_speed)
+                }
+            },
+            {
+                data: 'sub3_status' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+                    }else if(data == '1'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+                    }else if(data == '3'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '4'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '5'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                    }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
+                    }else{
+                        txt_sub3_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_sub3_status)
+                }
+            },
+            {
+                data: 'doc_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_admission_work_retrun/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
                 }
             }
         ]

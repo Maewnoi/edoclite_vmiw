@@ -36,6 +36,7 @@ use App\Http\Controllers\queryController;
 use App\Http\Controllers\documents_admission_jurisprudenceController;
 use App\Http\Controllers\documents_admission_deputy_signController;
 use App\Http\Controllers\documents_admission_minister_signController;
+use App\Http\Controllers\documents_admission_work_retrunController;
 
 /*
 |--------------------------------------------------------------------------
@@ -163,6 +164,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_admission_minister_sign/all/1/query',[queryController::class,'funtion_query_documents_admission_minister_sign_1_Controller_level_1']);
     Route::get('/documents_admission_minister_sign/count/query',[queryController::class,'funtion_query_documents_admission_minister_sign_count_level_1']);
     Route::get('/documents_admission_minister_sign/chart/1/query',[queryController::class,'funtion_query_documents_admission_minister_sign_chart_level_1']);
+    Route::get('/documents_admission_work_retrun/all/query',[queryController::class,'funtion_query_documents_admission_work_retrunController_level_7']);
 
     //---------------------------------------------------------------------------------------------------
     
@@ -344,7 +346,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_admission_department_inside_all/detail/{id}',[documents_admission_department_inside_allController::class,'detail'])->name('documents_admission_department_inside_detail')->middleware(['password.confirm']);
     Route::post('/documents_admission_department_inside_all/takedown',[documents_admission_department_inside_allController::class,'takedown'])->name('documents_admission_department_inside_takedown');
 
-    //All admission documents work เอกสารรับเข้าคนทำงานทั้งหมด ภายนอก
+    //All admission documents work เอกสารรับเข้าคนทำงานทั้งหมด ภายใน
     Route::get('/documents_admission_work_inside_all/all/0',[documents_admission_work_inside_allController::class,'index_0'])->name('documents_admission_work_inside_all_0');
     Route::get('/documents_admission_work_inside_all/all/1',[documents_admission_work_inside_allController::class,'index_1'])->name('documents_admission_work_inside_all_1');
     Route::get('/documents_admission_work_inside_all/detail/{id}',[documents_admission_work_inside_allController::class,'detail'])->name('documents_admission_work_inside_detail')->middleware(['password.confirm']);
@@ -368,5 +370,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_admission_minister_sign/detail/{id}',[documents_admission_minister_signController::class,'detail'])->name('documents_admission_minister_sign_detail')->middleware(['password.confirm']);
     Route::post('/documents_admission_minister_sign/understand',[documents_admission_minister_signController::class,'understand'])->name('documents_admission_minister_sign_understand');
 
+    //All admission documents work งานตอยกลับที่ไม่ได้รับการอนุมัติ
+    Route::get('/documents_admission_work_retrun/all',[documents_admission_work_retrunController::class,'index'])->name('documents_admission_work_retrun_all');
+    Route::get('/documents_admission_work_retrun/detail/{id}',[documents_admission_work_retrunController::class,'detail'])->name('documents_admission_work_retrun_detail')->middleware(['password.confirm']);
+    
     //---------------------------------------------------------------------------------------------------
 });

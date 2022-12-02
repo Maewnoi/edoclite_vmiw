@@ -187,7 +187,7 @@ use App\Http\Controllers\functionController;
                                                 <div class="col-md-12 table-responsive">
                                                     <div class="form-group hide"
                                                         id="documents_admission_work_allController_form-group_tb-sub3_details-garuda">
-                                                        <page id="ocuments_admission_work_allController_page"
+                                                        <page id="documents_admission_work_allController_page"
                                                             class="items-center block p-24 mx-auto bg-white shadow-2xl">
                                                             <div class="row">
                                                                 <div class="col-3 pt-14">
@@ -242,7 +242,7 @@ use App\Http\Controllers\functionController;
                                                                 {{ __('แสดงตัวอย่าง') }}
                                                             </button>
                                                             <x-jet-button
-                                                                id="documents_admission_work_allController_bt_respond-garudav" name="bt_respond" value="respond_garudav"
+                                                                id="documents_admission_work_allController_bt_respond-garuda" name="bt_respond" value="respond_garuda"
                                                                 disabled>
                                                                 {{ __('ตอบกลับ') }}
                                                             </x-jet-button>
@@ -252,7 +252,7 @@ use App\Http\Controllers\functionController;
                                                     </div>
                                                     <div class="form-group hide"
                                                         id="documents_admission_work_allController_form-group_tb-sub3_details-message-memo">
-                                                        <page id="ocuments_admission_work_allController_page"
+                                                        <page id="documents_admission_work_allController_page"
                                                             class="items-center block p-24 mx-auto bg-white shadow-2xl">
                                                             <div class="row">
                                                                 <div class="col-5">

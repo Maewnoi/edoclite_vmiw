@@ -467,6 +467,25 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
+                                    <div class="border-t border-gray-100"></div>
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_admission_work_retrun_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_admission_work_retrun_all')).'','class' => 'text-decoration-none']); ?>
+                                        <?php echo e(__('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ')); ?>
+
+                                        <?php echo e(navigationController::funtion_documents_admission_work_retrun_all_count_1_level_7(Auth::user()->level)); ?>
+
+                                        <?php echo e(__(' ) เรื่อง')); ?>
+
+                                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
                                     <?php endif; ?>
 
                                     
@@ -2011,6 +2030,24 @@ use App\Http\Controllers\functionController;
                 <?php echo e(__('เอกสารรับเข้าภายนอกที่อ่านแล้ว ( ')); ?>
 
                 <?php echo e(navigationController::funtion_document_admission_all_work_count_1_level_7(Auth::user()->level)); ?>
+
+                <?php echo e(__(' ) เรื่อง')); ?>
+
+             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['href' => ''.e(route('documents_admission_work_retrun_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-responsive-nav-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_admission_work_retrun_all')).'','class' => 'text-decoration-none']); ?>
+                <?php echo e(__('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ')); ?>
+
+                <?php echo e(navigationController::funtion_documents_admission_work_retrun_all_count_1_level_7(Auth::user()->level)); ?>
 
                 <?php echo e(__(' ) เรื่อง')); ?>
 

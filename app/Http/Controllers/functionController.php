@@ -624,7 +624,7 @@ class functionController extends Controller
         $pdf->SetXY(25, 80); //+12
         $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
         $pdf->SetFont('THSarabunNew','',16);
-        $pdf->MultiCell(160,$MultiCell_H, iconv('UTF-8', 'cp874', $request->sub3d_podium_garuda),'1','L',false);
+        $pdf->MultiCell(160,$MultiCell_H, iconv('UTF-8', 'cp874', $request->sub3d_podium_garuda),'0','L',false);
 
         if($MultiCell_H == 6){
             $sign_H = 80+40;
@@ -1389,6 +1389,8 @@ class functionController extends Controller
             $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
         }else if($status == '6'){
             $txt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+        }else if($status == 'C'){
+            $txt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
         }else{
             $txt_status = "ไม่ถูกนิยาม";
         }

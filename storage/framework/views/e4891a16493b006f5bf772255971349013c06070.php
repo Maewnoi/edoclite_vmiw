@@ -56,11 +56,11 @@
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                     <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'code','class' => 'block mt-1 w-full','type' => 'text','inputmode' => 'numeric','name' => 'code','autofocus' => true,'xRef' => 'code','autocomplete' => 'one-time-code']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'code','class' => 'block w-full mt-1','type' => 'text','inputmode' => 'numeric','name' => 'code','autofocus' => true,'xRef' => 'code','autocomplete' => 'one-time-code']]); ?>
 <?php $component->withName('jet-input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'code','class' => 'block mt-1 w-full','type' => 'text','inputmode' => 'numeric','name' => 'code','autofocus' => true,'x-ref' => 'code','autocomplete' => 'one-time-code']); ?>
+<?php $component->withAttributes(['id' => 'code','class' => 'block w-full mt-1','type' => 'text','inputmode' => 'numeric','name' => 'code','autofocus' => true,'x-ref' => 'code','autocomplete' => 'one-time-code']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
@@ -83,11 +83,11 @@
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                     <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'recovery_code','class' => 'block mt-1 w-full','type' => 'text','name' => 'recovery_code','xRef' => 'recovery_code','autocomplete' => 'one-time-code']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'recovery_code','class' => 'block w-full mt-1','type' => 'text','name' => 'recovery_code','xRef' => 'recovery_code','autocomplete' => 'one-time-code']]); ?>
 <?php $component->withName('jet-input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'recovery_code','class' => 'block mt-1 w-full','type' => 'text','name' => 'recovery_code','x-ref' => 'recovery_code','autocomplete' => 'one-time-code']); ?>
+<?php $component->withAttributes(['id' => 'recovery_code','class' => 'block w-full mt-1','type' => 'text','name' => 'recovery_code','x-ref' => 'recovery_code','autocomplete' => 'one-time-code']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
@@ -97,7 +97,7 @@
                 </div>
 
                 <div class="flex items-center justify-end mt-4">
-                    <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
+                    <button type="button" class="text-sm text-gray-600 underline cursor-pointer hover:text-gray-900"
                                     x-show="! recovery"
                                     x-on:click="
                                         recovery = true;
@@ -107,7 +107,7 @@
 
                     </button>
 
-                    <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
+                    <button type="button" class="text-sm text-gray-600 underline cursor-pointer hover:text-gray-900"
                                     x-show="recovery"
                                     x-on:click="
                                         recovery = false;
@@ -118,11 +118,11 @@
                     </button>
 
                     <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['class' => 'ml-4']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['class' => 'ml-4','onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'ml-4']); ?>
+<?php $component->withAttributes(['class' => 'ml-4','onclick' => 'submitForm(this);']); ?>
                         <?php echo e(__('Login')); ?>
 
                      <?php echo $__env->renderComponent(); ?>

@@ -220,6 +220,13 @@ use App\Http\Controllers\functionController;
                                         {{navigationController::funtion_document_admission_all_work_count_1_level_7(Auth::user()->level)}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_work_retrun_all') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ') }}
+                                        {{navigationController::funtion_documents_admission_work_retrun_all_count_1_level_7(Auth::user()->level)}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
                                     @endif
 
                                     
@@ -924,6 +931,12 @@ use App\Http\Controllers\functionController;
                 class="text-decoration-none">
                 {{ __('เอกสารรับเข้าภายนอกที่อ่านแล้ว ( ') }}
                 {{navigationController::funtion_document_admission_all_work_count_1_level_7(Auth::user()->level)}}
+                {{ __(' ) เรื่อง') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('documents_admission_work_retrun_all') }}"
+                class="text-decoration-none">
+                {{ __('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ') }}
+                {{navigationController::funtion_documents_admission_work_retrun_all_count_1_level_7(Auth::user()->level)}}
                 {{ __(' ) เรื่อง') }}
             </x-jet-responsive-nav-link>
             <div class="border-t border-gray-100"></div>

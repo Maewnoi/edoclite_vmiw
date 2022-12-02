@@ -332,7 +332,7 @@ unset($__errorArgs, $__bag); ?>
                                                 <div class="col-md-12 table-responsive">
                                                     <div class="form-group hide"
                                                         id="documents_admission_work_allController_form-group_tb-sub3_details-garuda">
-                                                        <page id="ocuments_admission_work_allController_page"
+                                                        <page id="documents_admission_work_allController_page"
                                                             class="items-center block p-24 mx-auto bg-white shadow-2xl">
                                                             <div class="row">
                                                                 <div class="col-3 pt-14">
@@ -388,11 +388,11 @@ unset($__errorArgs, $__bag); ?>
 
                                                             </button>
                                                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['id' => 'documents_admission_work_allController_bt_respond-garudav','name' => 'bt_respond','value' => 'respond_garudav','disabled' => true]]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['id' => 'documents_admission_work_allController_bt_respond-garuda','name' => 'bt_respond','value' => 'respond_garuda','disabled' => true]]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'documents_admission_work_allController_bt_respond-garudav','name' => 'bt_respond','value' => 'respond_garudav','disabled' => true]); ?>
+<?php $component->withAttributes(['id' => 'documents_admission_work_allController_bt_respond-garuda','name' => 'bt_respond','value' => 'respond_garuda','disabled' => true]); ?>
                                                                 <?php echo e(__('ตอบกลับ')); ?>
 
                                                              <?php echo $__env->renderComponent(); ?>
@@ -407,7 +407,7 @@ unset($__errorArgs, $__bag); ?>
                                                     </div>
                                                     <div class="form-group hide"
                                                         id="documents_admission_work_allController_form-group_tb-sub3_details-message-memo">
-                                                        <page id="ocuments_admission_work_allController_page"
+                                                        <page id="documents_admission_work_allController_page"
                                                             class="items-center block p-24 mx-auto bg-white shadow-2xl">
                                                             <div class="row">
                                                                 <div class="col-5">

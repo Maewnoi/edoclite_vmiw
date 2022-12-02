@@ -129,6 +129,14 @@ use App\Http\Controllers\functionController;
                             <form action="{{route('documents_admission_jurisprudence_do_not_understand')}}" method="post" enctype="multipart/form-data">
                             @csrf
                                 <div class="flex items-center justify-center">
+                                    <input type="hidden" name="doc_id" value="{{$document_detail->doc_id}}">
+                                    <input type="hidden" name="sub_id" value="{{$document_detail->sub_id}}">
+                                    <input type="hidden" name="sub2_id" value="{{$document_detail->sub2_id}}">
+                                    <input type="hidden" name="sub3_id" value="{{$document_detail->sub3_id}}">
+                                    <input type="hidden" name="sub3d_id" value="{{$document_detail->sub3d_id}}">
+                                    <input type="hidden" name="doc_docnum" value="{{$document_detail->doc_docnum}}">
+                                    <input type="hidden" name="doc_origin" value="{{$document_detail->doc_origin}}">
+                                    <input type="hidden" name="doc_title" value="{{$document_detail->doc_title}}">
                                     <x-jet-button onclick="submitForm(this);">
                                         {{ __('ไม่อนุมัติ') }}
                                     </x-jet-button>

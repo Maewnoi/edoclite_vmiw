@@ -119,7 +119,7 @@ class documents_admission_jurisprudenceController extends Controller
                 $message = "\n⚠️ นิติการอนุมัติตอบกลับเอกสารภายนอก ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
                 functionController::line_notify($message,$tokens_Check->group_token);
             }
-            return redirect()->route('documents_admission_jurisprudence_all')->with('success',"รับทราบเรียบร้อย");
+            return redirect()->route('documents_admission_jurisprudence_all')->with('success',"อนุมัติเรียบร้อย");
         }else{
             return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs] !');
         }
@@ -127,6 +127,33 @@ class documents_admission_jurisprudenceController extends Controller
     }
 
     public function do_not_understand(Request $request){
-        return redirect('member_dashboard')->with('error','ยังไม่ทำกรุณารอ!');
+        $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
+            'sub3_check_0'=>'0',
+            'sub3_inspector_0'=>null,
+            'sub3_datetime_0'=>null,
+            'sub3_check_1'=>'0',
+            'sub3_inspector_1'=>null,
+            'sub3_datetime_1'=>null,
+            'sub3_check_2'=>'0',
+            'sub3_inspector_2'=>null,
+            'sub3_datetime_2'=>null,
+            'sub3_status'=>'C',
+            'sub3_updated_at'=>date('Y-m-d H:i:s')
+        ]);
+
+        if($update_sub3_docs){
+            //linetoken
+            $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
+            ->where('group_id', Auth::user()->group)
+            ->first();
+            if($tokens_Check){
+                $message = "\n⚠️ นิติการ(ไม่)อนุมัติตอบกลับเอกสารภายนอก ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                functionController::line_notify($message,$tokens_Check->group_token);
+            }
+            return redirect()->route('documents_admission_jurisprudence_all')->with('success',"ไม่อนุมัติเรียบร้อย");
+        }else{
+            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs]!');
+        }
+        
     }
 }
