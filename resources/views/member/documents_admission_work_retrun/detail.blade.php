@@ -91,7 +91,7 @@ use App\Http\Controllers\functionController;
                             <hr>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form action="" method="post"
+                                    <form action="{{route('documents_admission_work_retrun_respond')}}" method="post"
                                         enctype="multipart/form-data">
                                        @csrf
                                         <div class="card card-body">
@@ -155,6 +155,8 @@ use App\Http\Controllers\functionController;
                                                             </div>
                                                         </div>
                                                     </page>
+                                                    <input type="hidden" name="sub3_id" value="{{$document_detail->sub3_id}}">
+                                                    <input type="hidden" name="sub3d_id" value="{{$document_detail->sub3d_id}}">
                                                     <input type="hidden" name="doc_id" value="{{$document_detail->doc_id}}">
                                                     <input type="hidden" name="sub_id" value="{{$document_detail->sub_id}}">
                                                     <input type="hidden" name="sub2_id" value="{{$document_detail->sub2_id}}">
@@ -162,6 +164,8 @@ use App\Http\Controllers\functionController;
                                                     <input type="hidden" name="doc_origin" value="{{$document_detail->doc_origin}}">
                                                     <input type="hidden" name="doc_title" value="{{$document_detail->doc_title}}">
                                                     <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}" />
+
+                                                    <input type="hidden" name="bt_respond" value="respond">
                                                     <div class="flex items-center justify-center mt-20">
                                                         <button type="button"
                                                             id="documents_admission_work_retrunController_bt_preview"
@@ -169,7 +173,7 @@ use App\Http\Controllers\functionController;
                                                             {{ __('แสดงตัวอย่าง') }}
                                                         </button>
                                                         <x-jet-button onclick="submitForm(this);"
-                                                            id="documents_admission_work_retrunController_bt_respond" name="bt_respond" value="respond"
+                                                            id="documents_admission_work_retrunController_bt_respond"
                                                             disabled>
                                                             {{ __('ตอบกลับอีกครั้ง') }}
                                                         </x-jet-button>
@@ -221,6 +225,8 @@ use App\Http\Controllers\functionController;
                                                             </div>
                                                         </div>
                                                     </page>
+                                                    <input type="hidden" name="sub3_id_garuda" value="{{$document_detail->sub3_id}}">
+                                                    <input type="hidden" name="sub3d_id_garuda" value="{{$document_detail->sub3d_id}}">
                                                     <input type="hidden" name="doc_id_garuda" value="{{$document_detail->doc_id}}">
                                                     <input type="hidden" name="sub_id_garuda" value="{{$document_detail->sub_id}}">
                                                     <input type="hidden" name="sub2_id_garuda" value="{{$document_detail->sub2_id}}">
@@ -228,14 +234,16 @@ use App\Http\Controllers\functionController;
                                                     <input type="hidden" name="doc_origin_garuda" value="{{$document_detail->doc_origin}}">
                                                     <input type="hidden" name="doc_title_garuda" value="{{$document_detail->doc_title}}">
                                                     <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}" />
+
+                                                    <input type="hidden" name="bt_respond" value="respond_garuda">
                                                     <div class="flex items-center justify-center mt-20">
                                                         <button type="button"
                                                             id="documents_admission_work_retrunController_bt_preview-garuda"
                                                             class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-900 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:shadow-outline-blue disabled:opacity-25">
                                                             {{ __('แสดงตัวอย่าง') }}
                                                         </button>
-                                                        <x-jet-button
-                                                            id="documents_admission_work_retrunController_bt_respond-garuda" name="bt_respond" value="respond_garudav"
+                                                        <x-jet-button onclick="submitForm(this);"
+                                                            id="documents_admission_work_retrunController_bt_respond-garuda"
                                                             disabled>
                                                             {{ __('ตอบกลับอีกครั้ง') }}
                                                         </x-jet-button>

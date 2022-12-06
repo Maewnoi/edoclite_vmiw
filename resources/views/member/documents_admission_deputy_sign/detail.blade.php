@@ -86,7 +86,7 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                             </div>
-                            @if($document_detail->sub3_status == '3' || $document_detail->sub3_status == '4')
+                            @if($document_detail->sub3_sealid_0 == Auth::user()->id && $document_detail->sub3_sealdate_0 == null || $document_detail->sub3_sealid_1 == Auth::user()->id && $document_detail->sub3_sealdate_1 == null)
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="{{route('documents_admission_deputy_sign_understand')}}" method="post" enctype="multipart/form-data">

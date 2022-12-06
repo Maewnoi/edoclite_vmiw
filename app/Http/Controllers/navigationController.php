@@ -15,6 +15,278 @@ use App\Models\User;
 
 class navigationController extends Controller
 {
+    public static function funtion_documents_admission_inside_work_retrun_all_count_1_level_7() {
+        if(Auth::user()->level=='7'){
+            $documents_admission_inside_work_retrun_count = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+            ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                      ->orWhere('doc_template', 'C')
+                      ->orWhere('doc_template', 'D')
+                      ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_recid', Auth::user()->group)
+            ->where('sub_status', '8')
+            ->where('sub2_status', '1')
+            ->where('sub3_status', 'C')
+            ->where('sub2_recid', Auth::user()->id)
+            ->count();
+            return $documents_admission_inside_work_retrun_count;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_documents_admission_inside_deputy_sign_count_1_level_2() {
+        if(Auth::user()->level=='2'){
+            $document_admission_inside_deputy_sign_0 = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+            ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                      ->orWhere('doc_template', 'C')
+                      ->orWhere('doc_template', 'D')
+                      ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_status', '8')
+            ->where('sub2_status', '1')
+            ->where('sub3_sealid_0', Auth::user()->id)
+            ->whereNotNull('sub3_sealdate_0')
+            ->where(function ($query) {
+                $query->where('sub3_status', '!=', '3')
+                      ->orWhere('sub3_status', '!=', '4');
+            })
+            ->count();
+
+            $document_admission_inside_deputy_sign_1 = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+            ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                      ->orWhere('doc_template', 'C')
+                      ->orWhere('doc_template', 'D')
+                      ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_status', '8')
+            ->where('sub2_status', '1')
+            ->where('sub3_sealid_1', Auth::user()->id)
+            ->whereNotNull('sub3_sealdate_1')
+            ->where(function ($query) {
+                $query->where('sub3_status', '!=', '3')
+                      ->orWhere('sub3_status', '!=', '4');
+            })
+            ->count();
+
+            return $document_admission_inside_deputy_sign_0 + $document_admission_inside_deputy_sign_1;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_documents_admission_inside_deputy_sign_count_0_level_2() {
+        if(Auth::user()->level=='2'){
+            $document_admission_inside_deputy_sign_0 = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+            ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                      ->orWhere('doc_template', 'C')
+                      ->orWhere('doc_template', 'D')
+                      ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_status', '8')
+            ->where('sub2_status', '1')
+            ->where('sub3_sealid_0', Auth::user()->id)
+            ->whereNull('sub3_sealdate_0')
+            ->where(function ($query) {
+                $query->where('sub3_status', '3')
+                      ->orWhere('sub3_status', '4');
+            })
+            ->count();
+
+            $document_admission_inside_deputy_sign_1 = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+            ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                      ->orWhere('doc_template', 'C')
+                      ->orWhere('doc_template', 'D')
+                      ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_status', '8')
+            ->where('sub2_status', '1')
+            ->where('sub3_sealid_1', Auth::user()->id)
+            ->whereNull('sub3_sealdate_1')
+            ->where(function ($query) {
+                $query->where('sub3_status', '3')
+                      ->orWhere('sub3_status', '4');
+            })
+            ->count();
+
+            return $document_admission_inside_deputy_sign_0 + $document_admission_inside_deputy_sign_1;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_documents_admission_inside_minister_sign_count_1_level_1() {
+        if(Auth::user()->level=='1'){
+            $document_admission_inside_minister_sign_count = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+            ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                      ->orWhere('doc_template', 'C')
+                      ->orWhere('doc_template', 'D')
+                      ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_status', '8')
+            ->where('sub2_status', '1')
+            ->where('sub3_sealid_2', Auth::user()->id)
+            ->whereNotNull('sub3_sealdate_2')
+            ->where('sub3_status', '!=', '5')
+            ->count();
+
+            return $document_admission_inside_minister_sign_count;
+        }else{
+            return 0;
+        }
+    }
+    public static function funtion_documents_admission_inside_minister_sign_count_0_level_1() {
+        if(Auth::user()->level=='1'){
+            $document_admission_inside_minister_sign_count = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+            ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                      ->orWhere('doc_template', 'C')
+                      ->orWhere('doc_template', 'D')
+                      ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_status', '8')
+            ->where('sub2_status', '1')
+            ->where('sub3_sealid_2', Auth::user()->id)
+            ->whereNull('sub3_sealdate_2')
+            ->where('sub3_status', '5')
+            ->count();
+
+            return $document_admission_inside_minister_sign_count;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_document_documents_admission_inside_jurisprudence_all_count(){
+        if(Auth::user()->jurisprudence=='1'){
+            $document_admission_inside_jurisprudence_count = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+            ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                      ->orWhere('doc_template', 'C')
+                      ->orWhere('doc_template', 'D')
+                      ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_recid', Auth::user()->group)
+            ->where('sub_status', '8')
+            ->where('sub2_status', '1')
+            ->where('sub3_status', '2')
+            ->count();
+            return $document_admission_inside_jurisprudence_count;
+        }else{
+            return 0;
+        }
+
+    }
+
+    public static function funtion_document_admission_division_inside_retrun_count_level_4() {
+        if(Auth::user()->level=='4'){
+            $documents_admission_division_retrun_count =document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+            ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                      ->orWhere('doc_template', 'C')
+                      ->orWhere('doc_template', 'D')
+                      ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_recid', Auth::user()->group)
+            ->where('sub_status', '8')
+            ->where('sub2_status', '1')
+            ->where('sub3_status', '1')
+            ->where('sub3_inspector_1', Auth::user()->id)
+            ->count();
+            return $documents_admission_division_retrun_count;
+
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_document_admission_department_inside_retrun_count_level_5() {
+        if(Auth::user()->level=='5'){
+            $documents_admission_department_retrun_count = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
+            ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
+            ->join('sub3_docs','sub3_docs.sub3_sub_2id','sub2_docs.sub2_id')
+            ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
+            ->where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '1')
+            ->where(function ($query) {
+                $query->where('doc_template', 'B')
+                      ->orWhere('doc_template', 'C')
+                      ->orWhere('doc_template', 'D')
+                      ->orWhere('doc_template', 'E');
+            })
+            ->where('doc_status', 'success')
+            ->where('sub_recid', Auth::user()->group)
+            ->where('sub_status', '8')
+            ->where('sub2_status', '1')
+            ->where('sub3_status', '0')
+            ->where('sub3_inspector_0', Auth::user()->id)
+            ->count();
+            return $documents_admission_department_retrun_count;
+        }else{
+            return 0;
+        }
+    }
+
     public static function funtion_documents_admission_work_retrun_all_count_1_level_7() {
         if(Auth::user()->level=='7'){
             $documents_admission_work_retrun_count = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
@@ -37,7 +309,7 @@ class navigationController extends Controller
         }
     }
 
-    public static function funtion_documents_admission_minister_sign_count_1_level_2() {
+    public static function funtion_documents_admission_minister_sign_count_1_level_1() {
         if(Auth::user()->level=='1'){
             $document_admission_minister_sign_count = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
             ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')
@@ -59,7 +331,7 @@ class navigationController extends Controller
             return 0;
         }
     }
-    public static function funtion_documents_admission_minister_sign_count_0_level_2() {
+    public static function funtion_documents_admission_minister_sign_count_0_level_1() {
         if(Auth::user()->level=='1'){
             $document_admission_minister_sign_count = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')
             ->join('sub2_docs','sub2_docs.sub2_subid','sub_docs.sub_id')

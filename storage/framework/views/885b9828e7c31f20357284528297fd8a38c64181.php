@@ -133,7 +133,7 @@ use App\Http\Controllers\functionController;
                             <hr>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form action="" method="post"
+                                    <form action="<?php echo e(route('documents_admission_work_retrun_respond')); ?>" method="post"
                                         enctype="multipart/form-data">
                                        <?php echo csrf_field(); ?>
                                         <div class="card card-body">
@@ -208,6 +208,8 @@ use App\Http\Controllers\functionController;
                                                             </div>
                                                         </div>
                                                     </page>
+                                                    <input type="hidden" name="sub3_id" value="<?php echo e($document_detail->sub3_id); ?>">
+                                                    <input type="hidden" name="sub3d_id" value="<?php echo e($document_detail->sub3d_id); ?>">
                                                     <input type="hidden" name="doc_id" value="<?php echo e($document_detail->doc_id); ?>">
                                                     <input type="hidden" name="sub_id" value="<?php echo e($document_detail->sub_id); ?>">
                                                     <input type="hidden" name="sub2_id" value="<?php echo e($document_detail->sub2_id); ?>">
@@ -215,6 +217,8 @@ use App\Http\Controllers\functionController;
                                                     <input type="hidden" name="doc_origin" value="<?php echo e($document_detail->doc_origin); ?>">
                                                     <input type="hidden" name="doc_title" value="<?php echo e($document_detail->doc_title); ?>">
                                                     <input type="hidden" name="_token" id="_token" value="<?php echo e(csrf_token()); ?>" />
+
+                                                    <input type="hidden" name="bt_respond" value="respond">
                                                     <div class="flex items-center justify-center mt-20">
                                                         <button type="button"
                                                             id="documents_admission_work_retrunController_bt_preview"
@@ -223,11 +227,11 @@ use App\Http\Controllers\functionController;
 
                                                         </button>
                                                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);','id' => 'documents_admission_work_retrunController_bt_respond','name' => 'bt_respond','value' => 'respond','disabled' => true]]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);','id' => 'documents_admission_work_retrunController_bt_respond','disabled' => true]]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['onclick' => 'submitForm(this);','id' => 'documents_admission_work_retrunController_bt_respond','name' => 'bt_respond','value' => 'respond','disabled' => true]); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);','id' => 'documents_admission_work_retrunController_bt_respond','disabled' => true]); ?>
                                                             <?php echo e(__('ตอบกลับอีกครั้ง')); ?>
 
                                                          <?php echo $__env->renderComponent(); ?>
@@ -284,6 +288,8 @@ use App\Http\Controllers\functionController;
                                                             </div>
                                                         </div>
                                                     </page>
+                                                    <input type="hidden" name="sub3_id_garuda" value="<?php echo e($document_detail->sub3_id); ?>">
+                                                    <input type="hidden" name="sub3d_id_garuda" value="<?php echo e($document_detail->sub3d_id); ?>">
                                                     <input type="hidden" name="doc_id_garuda" value="<?php echo e($document_detail->doc_id); ?>">
                                                     <input type="hidden" name="sub_id_garuda" value="<?php echo e($document_detail->sub_id); ?>">
                                                     <input type="hidden" name="sub2_id_garuda" value="<?php echo e($document_detail->sub2_id); ?>">
@@ -291,6 +297,8 @@ use App\Http\Controllers\functionController;
                                                     <input type="hidden" name="doc_origin_garuda" value="<?php echo e($document_detail->doc_origin); ?>">
                                                     <input type="hidden" name="doc_title_garuda" value="<?php echo e($document_detail->doc_title); ?>">
                                                     <input type="hidden" name="_token" id="_token" value="<?php echo e(csrf_token()); ?>" />
+
+                                                    <input type="hidden" name="bt_respond" value="respond_garuda">
                                                     <div class="flex items-center justify-center mt-20">
                                                         <button type="button"
                                                             id="documents_admission_work_retrunController_bt_preview-garuda"
@@ -299,11 +307,11 @@ use App\Http\Controllers\functionController;
 
                                                         </button>
                                                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['id' => 'documents_admission_work_retrunController_bt_respond-garuda','name' => 'bt_respond','value' => 'respond_garudav','disabled' => true]]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);','id' => 'documents_admission_work_retrunController_bt_respond-garuda','disabled' => true]]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'documents_admission_work_retrunController_bt_respond-garuda','name' => 'bt_respond','value' => 'respond_garudav','disabled' => true]); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);','id' => 'documents_admission_work_retrunController_bt_respond-garuda','disabled' => true]); ?>
                                                             <?php echo e(__('ตอบกลับอีกครั้ง')); ?>
 
                                                          <?php echo $__env->renderComponent(); ?>

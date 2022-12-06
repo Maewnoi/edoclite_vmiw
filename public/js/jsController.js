@@ -849,18 +849,148 @@ $("#documents_admission_division_allController_sign_goup_0").change(function(eve
 //     }
 // });
 //------------------------------------------------------------------------------------------
+//member.documents_admission_work_inside_all.detail
+$("#documents_admission_work_inside_allController_sub3_type").change(function(event) {
+    var var_documents_admission_work_inside_allController_sub3_type = $("#documents_admission_work_inside_allController_sub3_type").val();
+    if(var_documents_admission_work_inside_allController_sub3_type == '0'){
+        document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-message-memo').style.display = 'block';
+        document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-garuda').style.display = 'none';
+        document.getElementById('documents_admission_work_inside_allController_check_respond').value  = 'respond';
+    }else if(var_documents_admission_work_inside_allController_sub3_type == '1'){
+        document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-message-memo').style.display = 'none';
+        document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-garuda').style.display = 'block';
+        document.getElementById('documents_admission_work_inside_allController_check_respond').value  = 'respond_garuda';
+    }else{
+        document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-message-memo').style.display = 'none';
+        document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-garuda').style.display = 'none';
+        document.getElementById('documents_admission_work_inside_allController_check_respond').value  = '';
+    }
+});
+//------------------------------------------------------------------------------------------
 //member.documents_admission_work_all.detail
 $("#documents_admission_work_allController_sub3_type").change(function(event) {
     var var_documents_admission_work_allController_sub3_type = $("#documents_admission_work_allController_sub3_type").val();
     if(var_documents_admission_work_allController_sub3_type == '0'){
         document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-message-memo').style.display = 'block';
         document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-garuda').style.display = 'none';
+        document.getElementById('documents_admission_work_allController_check_respond').value  = 'respond';
     }else if(var_documents_admission_work_allController_sub3_type == '1'){
         document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-message-memo').style.display = 'none';
         document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-garuda').style.display = 'block';
+        document.getElementById('documents_admission_work_allController_check_respond').value  = 'respond_garuda';
     }else{
         document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-message-memo').style.display = 'none';
         document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-garuda').style.display = 'none';
+        document.getElementById('documents_admission_work_allController_check_respond').value  = '';
+    }
+});
+//------------------------------------------------------------------------------------------
+//member.documents_admission_inside_work_retrun.detail
+$("#documents_admission_inside_work_retrunController_sub3d_government-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_inside_work_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#ddocuments_admission_inside_work_retrunController_sub3d_draft-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_inside_work_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_admission_inside_work_retrunController_sub3d_date-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_inside_work_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_admission_inside_work_retrunController_sub3d_topic-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_inside_work_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_admission_inside_work_retrunController_sub3d_podium-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_inside_work_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_admission_inside_work_retrunController_bt_preview-garuda").click(function(event) {
+    let _token = $("#_token").val(); //csrf_token
+    let documents_admission_inside_work_retrunController_sub3d_government_garuda = $("#documents_admission_inside_work_retrunController_sub3d_government-garuda").val(); //ส่วนราชการ
+    let documents_admission_inside_work_retrunController_sub3d_draft_garuda = $("#documents_admission_inside_work_retrunController_sub3d_draft-garuda").val(); //ที่ร่าง
+    let documents_admission_inside_work_retrunController_sub3d_date_garuda = $("#documents_admission_inside_work_retrunController_sub3d_date-garuda").val(); //วันที่
+    let documents_admission_inside_work_retrunController_sub3d_topic_garuda = $("#documents_admission_inside_work_retrunController_sub3d_topic-garuda").val(); //เรื่อง
+    let documents_admission_inside_work_retrunController_sub3d_podium_garuda = $("#documents_admission_inside_work_retrunController_sub3d_podium-garuda").val(); //ข้อความตั้งแท่น
+    
+    if(documents_admission_inside_work_retrunController_sub3d_government_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ส่วนงานราชการ!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_inside_work_retrunController_sub3d_draft_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ที่ร่าง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_inside_work_retrunController_sub3d_date_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก วันที่!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_inside_work_retrunController_sub3d_topic_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก เรื่อง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_inside_work_retrunController_sub3d_podium_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก รายละเอียด!",
+            icon: "warning",
+        });
+        return;
+    }else{
+        const var_data = {
+            sub3d_government_garuda: documents_admission_inside_work_retrunController_sub3d_government_garuda,
+            sub3d_draft_garuda: documents_admission_inside_work_retrunController_sub3d_draft_garuda,
+            sub3d_date_garuda: documents_admission_inside_work_retrunController_sub3d_date_garuda,
+            sub3d_topic_garuda: documents_admission_inside_work_retrunController_sub3d_topic_garuda,
+            sub3d_podium_garuda: documents_admission_inside_work_retrunController_sub3d_podium_garuda,
+            action_garuda: 'preview',
+            sub3d_id_garuda: null,
+        };
+        // console.log(var_data);
+
+        fetch('/PDFRespond_garuda', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': _token
+        },
+        body:  JSON.stringify(var_data)
+        })
+        .then(response => response.arrayBuffer())
+        .then(result => {
+            // const content = await rawResponse.json();
+            $("#modal-preview").modal("show");
+            var blob = new Blob([result], { type: 'application/pdf' });
+            var fileURL = URL.createObjectURL(blob);
+                            
+            // const isMobile = navigator.userAgentData.mobile;
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            var newWin = window.open(fileURL);
+                newWin.focus();
+                var timer = setInterval(function() {
+                    if (newWin.closed) {
+                        clearInterval(timer);
+                        $("#modal-preview").modal("hide");
+                    }
+                }, 1000);
+            }else{
+                let input_cotton = document.querySelector("#documents_admission_inside_work_retrunController_pdf_preview");
+                input_cotton.src = fileURL;
+                $("#documents_admission_inside_work_retrunController_close-modal-preview").click(function(event) {
+                    $("#modal-preview").modal("hide");
+                });
+            }
+            document.getElementById("documents_admission_inside_work_retrunController_bt_respond-garuda").disabled = false;
+        });
     }
 });
 //------------------------------------------------------------------------------------------
@@ -1091,6 +1221,235 @@ $("#documents_admission_work_allController_bt_preview-garuda").click(function(ev
         });
 
         
+    }
+});
+//------------------------------------------------------------------------------------------
+//member.documents_admission_work_inside_all.detail
+$("#documents_admission_work_inside_allController_sub3d_government-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_work_inside_allController_bt_respond-garuda").disabled = true;
+});
+$("#documents_admission_work_inside_allController_sub3d_draft-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_work_inside_allController_bt_respond-garuda").disabled = true;
+});
+$("#documents_admission_work_inside_allController_sub3d_date-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_work_inside_allController_bt_respond-garuda").disabled = true;
+});
+$("#documents_admission_work_inside_allController_sub3d_topic-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_work_inside_allController_bt_respond-garuda").disabled = true;
+});
+$("#documents_admission_work_inside_allController_sub3d_podium-garuda").keyup(function(event) {
+    document.getElementById("documents_admission_work_inside_allController_bt_respond-garuda").disabled = true;
+});
+
+$("#documents_admission_work_inside_allController_bt_preview-garuda").click(function(event) {
+
+    let _token = $("#_token").val(); //csrf_token
+    let documents_admission_work_inside_allController_sub3d_speed_garuda = $("#documents_admission_work_inside_allController_sub3d_speed").val(); //ความเร็ว
+    let documents_admission_work_inside_allController_sub3d_government_garuda = $("#documents_admission_work_inside_allController_sub3d_government-garuda").val(); //ส่วนราชการ
+    let documents_admission_work_inside_allController_sub3d_draft_garuda = $("#documents_admission_work_inside_allController_sub3d_draft-garuda").val(); //ที่ร่าง
+    let documents_admission_work_inside_allController_sub3d_date_garuda = $("#documents_admission_work_inside_allController_sub3d_date-garuda").val(); //วันที่
+    let documents_admission_work_inside_allController_sub3d_topic_garuda = $("#documents_admission_work_inside_allController_sub3d_topic-garuda").val(); //เรื่อง
+    let documents_admission_work_inside_allController_sub3d_podium_garuda = $("#documents_admission_work_inside_allController_sub3d_podium-garuda").val(); //ข้อความตั้งแท่น
+
+    if(documents_admission_work_inside_allController_sub3d_government_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ส่วนงานราชการ!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_work_inside_allController_sub3d_draft_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ที่ร่าง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_work_inside_allController_sub3d_date_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก วันที่!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_work_inside_allController_sub3d_topic_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก เรื่อง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_work_inside_allController_sub3d_podium_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก รายละเอียด!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_work_inside_allController_sub3d_speed_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณาเลือก ชั้นความเร็ว!",
+            icon: "warning",
+        });
+        return;
+    }else{
+        const var_data = {
+            sub3d_government_garuda: documents_admission_work_inside_allController_sub3d_government_garuda,
+            sub3d_draft_garuda: documents_admission_work_inside_allController_sub3d_draft_garuda,
+            sub3d_date_garuda: documents_admission_work_inside_allController_sub3d_date_garuda,
+            sub3d_topic_garuda: documents_admission_work_inside_allController_sub3d_topic_garuda,
+            sub3d_podium_garuda: documents_admission_work_inside_allController_sub3d_podium_garuda,
+            action_garuda: 'preview',
+            sub3d_id_garuda: null,
+        };
+        // console.log(var_data);
+
+        fetch('/PDFRespond_garuda', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': _token
+        },
+        body:  JSON.stringify(var_data)
+        })
+        .then(response => response.arrayBuffer())
+        .then(result => {
+            // const content = await rawResponse.json();
+            $("#modal-preview").modal("show");
+            var blob = new Blob([result], { type: 'application/pdf' });
+            var fileURL = URL.createObjectURL(blob);
+                            
+            // const isMobile = navigator.userAgentData.mobile;
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            var newWin = window.open(fileURL);
+                newWin.focus();
+                var timer = setInterval(function() {
+                    if (newWin.closed) {
+                        clearInterval(timer);
+                        $("#modal-preview").modal("hide");
+                    }
+                }, 1000);
+            }else{
+                let input_cotton = document.querySelector("#documents_admission_work_inside_allController_pdf_preview");
+                input_cotton.src = fileURL;
+                $("#documents_admission_work_inside_allController_close-modal-preview").click(function(event) {
+                    $("#modal-preview").modal("hide");
+                });
+            }
+            document.getElementById("documents_admission_work_inside_allController_bt_respond-garuda").disabled = false;
+        });
+
+        
+    }
+});
+//------------------------------------------------------------------------------------------
+//member.documents_admission_inside_work_retrun.detail
+$("#documents_admission_inside_work_retrunController_sub3d_government").keyup(function(event) {
+    document.getElementById("documents_admission_inside_work_retrunController_bt_respond").disabled = true;
+});
+$("#documents_admission_inside_work_retrunController_sub3d_draft").keyup(function(event) {
+    document.getElementById("documents_admission_inside_work_retrunController_bt_respond").disabled = true;
+});
+$("#documents_admission_inside_work_retrunController_sub3d_date").keyup(function(event) {
+    document.getElementById("documents_admission_inside_work_retrunController_bt_respond").disabled = true;
+});
+$("#documents_admission_inside_work_retrunController_sub3d_topic").keyup(function(event) {
+    document.getElementById("documents_admission_inside_work_retrunController_bt_respond").disabled = true;
+});
+$("#documents_admission_inside_work_retrunController_sub3d_podium").keyup(function(event) {
+    document.getElementById("documents_admission_inside_work_retrunController_bt_respond").disabled = true;
+});
+$("#documents_admission_inside_work_retrunController_bt_preview").click(function(event) {
+    let _token = $("#_token").val(); //csrf_token
+    let documents_admission_inside_work_retrunController_sub3d_government = $("#documents_admission_inside_work_retrunController_sub3d_government").val(); //ส่วนราชการ
+    let documents_admission_inside_work_retrunController_sub3d_draft = $("#documents_admission_inside_work_retrunController_sub3d_draft").val(); //ที่ร่าง
+    let documents_admission_inside_work_retrunController_sub3d_date = $("#documents_admission_inside_work_retrunController_sub3d_date").val(); //วันที่
+    let documents_admission_inside_work_retrunController_sub3d_topic = $("#documents_admission_inside_work_retrunController_sub3d_topic").val(); //เรื่อง
+    let documents_admission_inside_work_retrunController_sub3d_podium = $("#documents_admission_inside_work_retrunController_sub3d_podium").val(); //ข้อความตั้งแท่น
+
+    if(documents_admission_inside_work_retrunController_sub3d_government == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ส่วนงานราชการ!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_inside_work_retrunController_sub3d_draft == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ที่ร่าง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_inside_work_retrunController_sub3d_date == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก วันที่!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_inside_work_retrunController_sub3d_topic == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก เรื่อง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_inside_work_retrunController_sub3d_podium == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก รายละเอียด!",
+            icon: "warning",
+        });
+        return;
+    }else{
+        const var_data = {
+            sub3d_government: documents_admission_inside_work_retrunController_sub3d_government,
+            sub3d_draft: documents_admission_inside_work_retrunController_sub3d_draft,
+            sub3d_date: documents_admission_inside_work_retrunController_sub3d_date,
+            sub3d_topic: documents_admission_inside_work_retrunController_sub3d_topic,
+            sub3d_podium: documents_admission_inside_work_retrunController_sub3d_podium,
+            action: 'preview',
+            sub3d_id: null,
+        };
+
+        fetch('/PDFRespond', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': _token
+        },
+        body:  JSON.stringify(var_data)
+        })
+        .then(response => response.arrayBuffer())
+        .then(result => {
+            // const content = await rawResponse.json();
+            $("#modal-preview").modal("show");
+            var blob = new Blob([result], { type: 'application/pdf' });
+            var fileURL = URL.createObjectURL(blob);
+                            
+            // const isMobile = navigator.userAgentData.mobile;
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            var newWin = window.open(fileURL);
+                newWin.focus();
+                var timer = setInterval(function() {
+                    if (newWin.closed) {
+                        clearInterval(timer);
+                        $("#modal-preview").modal("hide");
+                    }
+                }, 1000);
+            }else{
+                let input_cotton = document.querySelector("#documents_admission_inside_work_retrunController_pdf_preview");
+                input_cotton.src = fileURL;
+                $("#documents_admission_inside_work_retrunController_close-modal-preview").click(function(event) {
+                    $("#modal-preview").modal("hide");
+                });
+            }
+            document.getElementById("documents_admission_inside_work_retrunController_bt_respond").disabled = false;
+        });
     }
 });
 //------------------------------------------------------------------------------------------
@@ -1368,6 +1727,125 @@ $("#documents_admission_work_allController_bt_preview").click(function(event) {
         //     }
         //     document.getElementById("documents_admission_work_allController_bt_respond").disabled = false;
         // });
+    }
+});
+//------------------------------------------------------------------------------------------
+//member.documents_admission_work_inside_all.detail
+$("#documents_admission_work_inside_allController_sub3d_government").keyup(function(event) {
+    document.getElementById("documents_admission_work_inside_allController_bt_respond").disabled = true;
+});
+$("#documents_admission_work_inside_allController_sub3d_draft").keyup(function(event) {
+    document.getElementById("documents_admission_work_inside_allController_bt_respond").disabled = true;
+});
+$("#documents_admission_work_inside_allController_sub3d_date").keyup(function(event) {
+    document.getElementById("documents_admission_work_inside_allController_bt_respond").disabled = true;
+});
+$("#documents_admission_work_inside_allController_sub3d_topic").keyup(function(event) {
+    document.getElementById("documents_admission_work_inside_allController_bt_respond").disabled = true;
+});
+$("#documents_admission_work_inside_allController_sub3d_podium").keyup(function(event) {
+    document.getElementById("documents_admission_work_inside_allController_bt_respond").disabled = true;
+});
+
+$("#documents_admission_work_inside_allController_bt_preview").click(function(event) {
+    let _token = $("#_token").val(); //csrf_token
+    let documents_admission_work_inside_allController_sub3d_speed = $("#documents_admission_work_inside_allController_sub3d_speed").val(); //ความเร็ว
+    let documents_admission_work_inside_allController_sub3d_government = $("#documents_admission_work_inside_allController_sub3d_government").val(); //ส่วนราชการ
+    let documents_admission_work_inside_allController_sub3d_draft = $("#documents_admission_work_inside_allController_sub3d_draft").val(); //ที่ร่าง
+    let documents_admission_work_inside_allController_sub3d_date = $("#documents_admission_work_inside_allController_sub3d_date").val(); //วันที่
+    let documents_admission_work_inside_allController_sub3d_topic = $("#documents_admission_work_inside_allController_sub3d_topic").val(); //เรื่อง
+    let documents_admission_work_inside_allController_sub3d_podium = $("#documents_admission_work_inside_allController_sub3d_podium").val(); //ข้อความตั้งแท่น
+
+    if(documents_admission_work_inside_allController_sub3d_government == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ส่วนงานราชการ!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_work_inside_allController_sub3d_draft == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ที่ร่าง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_work_inside_allController_sub3d_date == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก วันที่!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_work_inside_allController_sub3d_topic == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก เรื่อง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_work_inside_allController_sub3d_podium == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก รายละเอียด!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_admission_work_inside_allController_sub3d_speed == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณาเลือก ชั้นความเร็ว!",
+            icon: "warning",
+        });
+        return;
+    }else{
+
+        const var_data = {
+                        sub3d_government: documents_admission_work_inside_allController_sub3d_government,
+                        sub3d_draft: documents_admission_work_inside_allController_sub3d_draft,
+                        sub3d_date: documents_admission_work_inside_allController_sub3d_date,
+                        sub3d_topic: documents_admission_work_inside_allController_sub3d_topic,
+                        sub3d_podium: documents_admission_work_inside_allController_sub3d_podium,
+                        action: 'preview',
+                        sub3d_id: null,
+        };
+        // console.log(var_data);
+        //post
+        fetch('/PDFRespond', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': _token
+        },
+        body:  JSON.stringify(var_data)
+        })
+        .then(response => response.arrayBuffer())
+        .then(result => {
+            // const content = await rawResponse.json();
+            $("#modal-preview").modal("show");
+            var blob = new Blob([result], { type: 'application/pdf' });
+            var fileURL = URL.createObjectURL(blob);
+                            
+            // const isMobile = navigator.userAgentData.mobile;
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            var newWin = window.open(fileURL);
+                newWin.focus();
+                var timer = setInterval(function() {
+                    if (newWin.closed) {
+                        clearInterval(timer);
+                        $("#modal-preview").modal("hide");
+                    }
+                }, 1000);
+            }else{
+                let input_cotton = document.querySelector("#documents_admission_work_inside_allController_pdf_preview");
+                input_cotton.src = fileURL;
+                $("#documents_admission_work_inside_allController_close-modal-preview").click(function(event) {
+                    $("#modal-preview").modal("hide");
+                });
+            }
+            document.getElementById("documents_admission_work_inside_allController_bt_respond").disabled = false;
+        });
     }
 });
 //------------------------------------------------------------------------------------------

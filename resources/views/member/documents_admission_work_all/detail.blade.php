@@ -130,12 +130,13 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                             </div>
-                           @if($document_detail->sub2_status == '0')
+                            @if($document_detail->sub2_status == '0')
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="{{route('documents_admission_work_detail_respond')}}" method="post"
                                         enctype="multipart/form-data">
                                        @csrf
+                                       <input type="hidden" id="documents_admission_work_allController_check_respond" name="bt_respond" value="">
                                         <div class="card card-body">
                                             <x-jet-label class="text-lg" value="{{ __('ตอบกลับ v45.65') }}" />
                                             <div class="row">
@@ -241,8 +242,8 @@ use App\Http\Controllers\functionController;
                                                                 class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-900 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:shadow-outline-blue disabled:opacity-25">
                                                                 {{ __('แสดงตัวอย่าง') }}
                                                             </button>
-                                                            <x-jet-button
-                                                                id="documents_admission_work_allController_bt_respond-garuda" name="bt_respond" value="respond_garuda"
+                                                            <x-jet-button onclick="submitForm(this);"
+                                                                id="documents_admission_work_allController_bt_respond-garuda"
                                                                 disabled>
                                                                 {{ __('ตอบกลับ') }}
                                                             </x-jet-button>
@@ -353,7 +354,7 @@ use App\Http\Controllers\functionController;
                                                                 {{ __('แสดงตัวอย่าง') }}
                                                             </button>
                                                             <x-jet-button onclick="submitForm(this);"
-                                                                id="documents_admission_work_allController_bt_respond" name="bt_respond" value="respond"
+                                                                id="documents_admission_work_allController_bt_respond"
                                                                 disabled>
                                                                 {{ __('ตอบกลับ') }}
                                                             </x-jet-button>

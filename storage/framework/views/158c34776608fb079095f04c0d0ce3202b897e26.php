@@ -21,14 +21,14 @@ use App\Http\Controllers\functionController;
                     <div class="border shadow card border-info">
                         <div class="card-header bg-primary">
                             <div class="clearfix">
-                            บันทึกข้อความ
+                            บันทึกข้อความภายนอก
                                 <div class="float-right mt-1 ml-3 spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
                                     <span class="sr-only">Loading...</span>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body table-responsive">
-                            <table class="table">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
