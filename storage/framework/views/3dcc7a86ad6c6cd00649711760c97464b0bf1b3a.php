@@ -277,9 +277,9 @@ unset($__errorArgs, $__bag); ?>
                                                     <td><?php echo functionController::funtion_sub_status_detail($row_sub_docs->sub_status); ?>
 
                                                     </td>
-                                                    <?php if($row_sub_docs->sub_status == 8): ?>
+                                                    <!-- <?php if($row_sub_docs->sub_status == 8): ?>
                                                         <td><?php echo functionController::funtion_sub2_recid_name($row_sub_docs->sub_id); ?><hr></td>
-                                                    <?php endif; ?>
+                                                    <?php endif; ?> -->
                                                     
 
                                                 </tr>

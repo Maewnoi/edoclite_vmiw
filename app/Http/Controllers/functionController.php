@@ -19,6 +19,54 @@ use Illuminate\Support\Facades\Auth;
 
 class functionController extends Controller
 { 
+    //ฟังชันเรียกประเภทเอกสารตอบกลับภายใน
+    public static function funtion_docrt_type($speed) {
+        if($speed == '0'){
+            $txt_docrt_speed = '<span class="badge bg-primary">บันทึกข้อความ</span>';
+        }elseif($speed == '1'){
+            $txt_docrt_speed = '<span class="badge bg-primary">ตราครุฑ</span>';
+        }
+        return $txt_docrt_speed;
+    }
+
+    //ฟังชันเรียกชื่อสิทธิ์ด้วย id
+    public static function funtion_docrtdt_speed($speed) {
+        if($speed == '0'){
+            $txt_docrt_speed = '<span class="badge bg-primary">ปกติ</span>';
+        }elseif($speed == '1'){
+            $txt_docrt_speed = '<span class="badge bg-success">ด่วน</span>';
+        }elseif($speed == '2'){
+            $txt_docrt_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+        }elseif($speed == '3'){
+            $txt_docrt_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+        }
+        return $txt_docrt_speed;
+    }
+
+    //ฟังชันเรียกสถานะ docrt_status tb: Documents_retruns ด้วย status
+    public static function funtion_docrt_status($status) {
+        if($status == '0'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+        }else if($status == '1'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+        }else if($status == '2'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+        }else if($status == '3'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+        }else if($status == '4'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+        }else if($status == '5'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+        }else if($status == '6'){
+            $txt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+        }else if($status == 'C'){
+            $txt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
+        }else{
+            $txt_status = "ไม่ถูกนิยาม";
+        }
+        return $txt_status;
+    }
+
     public static function funtion_navigation_search(Request $request){
         $level = Auth::user()->level;
 
@@ -664,6 +712,99 @@ class functionController extends Controller
         }
     }
 
+     //function pdf_preview
+     public static function funtion_PDFRespond_garuda_retrun(Request $request) {
+        $pdf = new Fpdi();
+        $pdf->AddPage();
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(25, 42.5);
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->docrtdt_draft_garuda));
+
+        $pdf->Image('image/Garuda.jpeg',90,25,25,25);
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(135, 40);
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->MultiCell(50,5, iconv('UTF-8', 'cp874', $request->docrtdt_government_garuda),'0','L',false); 
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(100, 60);
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->docrtdt_date_garuda));
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(25, 70); //+12
+        $pdf->AddFont('THSarabunNew','B','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','B',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', 'เรื่อง'));
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(40, 70); 
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->docrtdt_topic_garuda));
+
+        $strlen_podium = strlen($request->docrtdt_podium_garuda);
+        // $strip_tags_podium = strip_tags($request->docrtdt_podium,"<b><p>");
+        // console.log($strip_tags_podium);
+        if($strlen_podium <='270'){
+            $MultiCell_H = 6;
+        }else if($strlen_podium >= '271' && $strlen_podium <= '740'){
+            $MultiCell_H = 7;
+        }else if($strlen_podium >= '741' && $strlen_podium <= '1010'){
+            $MultiCell_H = 8;
+        }else if($strlen_podium >= '1011' ){
+            $MultiCell_H = 9;
+        }
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(25, 80); //+12
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->MultiCell(160,$MultiCell_H, iconv('UTF-8', 'cp874', $request->docrtdt_podium_garuda),'0','L',false);
+
+        if($MultiCell_H == 6){
+            $sign_H = 80+40;
+        }else if($MultiCell_H == 7){
+            $sign_H = 80+90;
+        }else if($MultiCell_H == 8){
+            $sign_H = 80+130;
+        }else if($MultiCell_H == 9){
+            $sign_H = 80+160;
+        }
+
+        //ลายเซ็น
+        if(Auth::user()->sign == ''){
+            $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',140,$sign_H,10,10);
+        }else{
+            $pdf->Image(Auth::user()->sign,140,$sign_H,10,10);
+        }
+        $pos_H = $sign_H+12;
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(140, $pos_H);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', Auth::user()->pos));
+
+        if($request->action_garuda == 'preview'){
+            return response($pdf->Output())->header('Content-Type', 'application/pdf');
+        }else if($request->action_garuda == 'respond'){
+            $date_new = date('Y-m-d');
+            $year_new = date('Y');
+            $upload_location = 'image/'.$year_new.'/respond_retrun/';
+            $name_gen_new = $request->docrt_id_garuda."_".$date_new;
+            // $name_gen_new = 'test_by_domji';
+            $full_path = $upload_location.$name_gen_new.'.pdf';
+            $pdf->Output('F', $full_path);
+            // return response($pdf->Output())->header('Content-Type', 'application/pdf');
+            return $full_path;
+        }else{
+            return "Error".$request;
+        }
+    }
+
     //function pdf_preview
     public static function funtion_PDFRespond(Request $request) {
         // return response()->json($request->sub3d_government,200);
@@ -787,6 +928,141 @@ class functionController extends Controller
             $year_new = date('Y');
             $upload_location = 'image/'.$year_new.'/respond/';
             $name_gen_new = $request->sub3d_id."_".$date_new;
+            // $name_gen_new = 'test_by_domji';
+            $full_path = $upload_location.$name_gen_new.'.pdf';
+            $pdf->Output('F', $full_path);
+            // return response($pdf->Output())->header('Content-Type', 'application/pdf');
+            return $full_path;
+        }else{
+            return "Error".$request;
+        }
+        
+
+    }
+
+    //function pdf_preview
+    public static function funtion_PDFRespond_retrun(Request $request) {
+        // return response()->json($request->sub3d_government,200);
+
+        $pdf = new Fpdi();
+        $pdf->AddPage();
+        $pdf->Image('image/Garuda.jpeg',25,25,20,20);
+        
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(95, 35);
+        $pdf->AddFont('THSarabunNew','B','THSarabunNew_b.php');
+        $pdf->SetFont('THSarabunNew','B',20);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', 'บันทึกข้อความ'));
+        // ----------- ----------- ----------- ----------- ----------- -----------
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(25, 55); //+12
+        $pdf->AddFont('THSarabunNew','B','THSarabunNew_b.php');
+        $pdf->SetFont('THSarabunNew','B',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', 'ส่วนราชการ'));
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(50, 55); //+12
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->docrtdt_government));
+        // ----------- ----------- ----------- ----------- ----------- -----------
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(25, 67); //+12
+        $pdf->AddFont('THSarabunNew','B','THSarabunNew_b.php');
+        $pdf->SetFont('THSarabunNew','B',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', 'ที่ร่าง'));
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(40, 67); //+12
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->docrtdt_draft));
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(125, 67); //+12
+        $pdf->AddFont('THSarabunNew','B','THSarabunNew_b.php');
+        $pdf->SetFont('THSarabunNew','B',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', 'วันที่'));
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(140, 67); //+12
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->docrtdt_date));
+        // ----------- ----------- ----------- ----------- ----------- -----------
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(25, 79); //+12
+        $pdf->AddFont('THSarabunNew','B','THSarabunNew_b.php');
+        $pdf->SetFont('THSarabunNew','B',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', 'เรื่อง'));
+
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(40, 79); //+12
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', $request->docrtdt_topic));
+        // ----------- ----------- ----------- ----------- ----------- -----------
+        // นำจำนวน
+        $strlen_podium = strlen($request->docrtdt_podium);
+        // $strip_tags_podium = strip_tags($request->sub3d_podium,"<b><p>");
+        // console.log($strip_tags_podium);
+        if($strlen_podium <='270'){
+            $MultiCell_H = 6;
+        }else if($strlen_podium >= '271' && $strlen_podium <= '740'){
+            $MultiCell_H = 7;
+        }else if($strlen_podium >= '741' && $strlen_podium <= '1010'){
+            $MultiCell_H = 8;
+        }else if($strlen_podium >= '1011' ){
+            $MultiCell_H = 9;
+        }
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(25, 91); //+12
+        $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+        $pdf->SetFont('THSarabunNew','',16);
+        $pdf->MultiCell(160,$MultiCell_H, iconv('UTF-8', 'cp874', $request->docrtdt_podium),'0','L',false); //strip_tags($request->sub3d_podium,"<b><i>&nbsp;")
+
+        if($MultiCell_H == 6){
+            $sign_H = 91+40;
+        }else if($MultiCell_H == 7){
+            $sign_H = 91+90;
+        }else if($MultiCell_H == 8){
+            $sign_H = 91+130;
+        }else if($MultiCell_H == 9){
+            $sign_H = 91+160;
+        }
+     
+        //ลายเซ็น
+        if(Auth::user()->sign == ''){
+            $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',140,$sign_H,10,10);
+        }else{
+            $pdf->Image(Auth::user()->sign,140,$sign_H,10,10);
+        }
+        $pos_H = $sign_H+12;
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(140, $pos_H);
+        $pdf->Write(0, iconv('UTF-8', 'cp874', Auth::user()->pos));
+        
+        // $pdf->Ln();
+        // // ----------- ----------- ----------- ----------- ----------- -----------
+        // $pdf->SetTextColor(0, 0, 0);
+        // $pdf->SetXY(75, 250); //+12
+        // $pdf->AddFont('THSarabunNew','B','THSarabunNew_b.php');
+        // $pdf->SetFont('THSarabunNew','B',16);
+        // $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_therefore));
+        // // ----------- ----------- ----------- ----------- ----------- -----------
+        // $pdf->SetTextColor(0, 0, 0);
+        // $pdf->SetXY(95, 260); //+12
+        // $pdf->AddFont('THSarabunNew','B','THSarabunNew_b.php');
+        // $pdf->SetFont('THSarabunNew','B',16);
+        // $pdf->Write(0, iconv('UTF-8', 'cp874', $request->sub3d_pos));
+
+        if($request->action == 'preview'){
+            return response($pdf->Output())->header('Content-Type', 'application/pdf');
+        }else if($request->action == 'respond'){
+            $date_new = date('Y-m-d');
+            $year_new = date('Y');
+            $upload_location = 'image/'.$year_new.'/respond_retrun/';
+            $name_gen_new = $request->docrt_id."_".$date_new;
             // $name_gen_new = 'test_by_domji';
             $full_path = $upload_location.$name_gen_new.'.pdf';
             $pdf->Output('F', $full_path);

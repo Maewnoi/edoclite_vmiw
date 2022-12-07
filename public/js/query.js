@@ -5208,4 +5208,307 @@ if(window.location.pathname == '/documents_admission_all/all'){
     setInterval( function () {
         table.ajax.reload(null, false);
     }, 3000 );
+
+}else if(window.location.pathname == '/documents_retrun_inside_work/all'){
+    $.fn.dataTable.ext.errMode = 'none';
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // },
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'docrt_id' 
+            },
+            { 
+                data: 'docrtdt_government' 
+            },
+            { 
+                data: 'docrtdt_draft' 
+            },
+            {   
+                data: 'docrtdt_date'
+            },
+            {
+                data: 'docrtdt_topic' 
+            },
+            {
+                data: 'docrtdt_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_docrtdt_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_docrtdt_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_docrtdt_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_docrtdt_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_docrtdt_speed)
+                }
+            },
+            {
+                data: 'docrt_status' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+                    }else if(data == '1'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+                    }else if(data == '3'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '4'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '5'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                    }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
+                    }else{
+                        txt_docrt_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_docrt_status)
+                }
+            },
+            {
+                data: 'docrt_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_retrun_inside_work/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
+
+}else if(window.location.pathname == '/documents_retrun_inside_department/all'){
+    $.fn.dataTable.ext.errMode = 'none';
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // },
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'docrt_id' 
+            },
+            { 
+                data: 'docrtdt_government' 
+            },
+            { 
+                data: 'docrtdt_draft' 
+            },
+            {   
+                data: 'docrtdt_date'
+            },
+            {
+                data: 'docrtdt_topic' 
+            },
+            {
+                data: 'docrtdt_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_docrtdt_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_docrtdt_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_docrtdt_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_docrtdt_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_docrtdt_speed)
+                }
+            },
+            {
+                data: 'docrt_status' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+                    }else if(data == '1'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+                    }else if(data == '3'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '4'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '5'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                    }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
+                    }else{
+                        txt_docrt_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_docrt_status)
+                }
+            },
+            {
+                data: 'docrt_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_retrun_inside_department/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
+
+}else if(window.location.pathname == '/documents_retrun_inside_department_sign/all'){
+    $.fn.dataTable.ext.errMode = 'none';
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // },
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'docrt_id' 
+            },
+            { 
+                data: 'docrtdt_government' 
+            },
+            { 
+                data: 'docrtdt_draft' 
+            },
+            {   
+                data: 'docrtdt_date'
+            },
+            {
+                data: 'docrtdt_topic' 
+            },
+            {
+                data: 'docrtdt_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_docrtdt_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_docrtdt_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_docrtdt_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_docrtdt_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_docrtdt_speed)
+                }
+            },
+            {
+                data: 'docrt_status' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+                    }else if(data == '1'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+                    }else if(data == '3'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '4'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    }else if(data == '5'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                    }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
+                    }else{
+                        txt_docrt_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_docrt_status)
+                }
+            },
+            {
+                data: 'docrt_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_retrun_inside_department_sign/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
 }

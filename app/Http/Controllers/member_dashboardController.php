@@ -12,10 +12,169 @@ use App\Http\Controllers\functionController;
 use App\Models\reserve_number;
 use App\Models\sub_doc;
 use App\Models\sub2_doc;
+use App\Models\documents_retrun;
+use App\Models\documents_retrun_detail;
 
 class member_dashboardController extends Controller
 {
     //
+    public function document_accepting_new_inside_retrun(Request $request){
+        if(Auth::user()->level=='7' || Auth::user()->level=='5' || Auth::user()->level=='4'){
+            if(Auth::user()->level=='7'){
+                //หาหัวหน้าฝ่าย
+                $userS_0 = User::where('level', '5')
+                ->where('site_id',Auth::user()->site_id)
+                ->where('group', Auth::user()->group)
+                ->where('cotton', Auth::user()->cotton)
+                ->first();
+            }else if(Auth::user()->level=='5'){
+                //หาหัวหน้ากอง
+                $userS_0 = User::where('level', '4')
+                ->where('site_id',Auth::user()->site_id)
+                ->where('group', Auth::user()->group)
+                ->first();
+            }else if(Auth::user()->level=='4'){
+                //หานิติการ
+            }
+            
+            if($userS_0){
+                if($request->bt_respond == 'respond_garuda'){
+                    if(Auth::user()->level=='7'){
+                        $insert_documents_retrun = documents_retrun::insertGetId([
+                            'docrt_owner'=>Auth::user()->id,
+                            'docrt_sites_id'=>Auth::user()->site_id,
+                            'docrt_groupmems_id'=>Auth::user()->group,
+                            'docrt_type'=>$request->docrt_type,
+                            'docrt_status' =>'0',
+                            'docrt_inspector_0'=>$userS_0->id,
+                            'docrt_created_at'=>date('Y-m-d H:i:s')
+                        ]);
+                        $insert_documents_retrun_detail = documents_retrun_detail::insertGetId([
+                            'docrtdt_docrt_id'=>$insert_documents_retrun,
+                            'docrtdt_government'=>$request->docrtdt_government_garuda,
+                            'docrtdt_draft'=>$request->docrtdt_draft_garuda,
+                            'docrtdt_date'=>$request->docrtdt_date_garuda,
+                            'docrtdt_topic'=>$request->docrtdt_topic_garuda,
+                            'docrtdt_podium' =>$request->docrtdt_podium_garuda,
+                            'docrtdt_speed'=>$request->docrtdt_speed
+                        ]);
+                    }else if(Auth::user()->level=='5'){
+                        $insert_documents_retrun = documents_retrun::insertGetId([
+                            'docrt_owner'=>Auth::user()->id,
+                            'docrt_sites_id'=>Auth::user()->site_id,
+                            'docrt_groupmems_id'=>Auth::user()->group,
+                            'docrt_type'=>$request->docrt_type,
+                            'docrt_status' =>'1',
+                            'docrt_inspector_1'=>$userS_0->id,
+                            'docrt_created_at'=>date('Y-m-d H:i:s')
+                        ]);
+                        $insert_documents_retrun_detail = documents_retrun_detail::insertGetId([
+                            'docrtdt_docrt_id'=>$insert_documents_retrun,
+                            'docrtdt_government'=>$request->docrtdt_government_garuda,
+                            'docrtdt_draft'=>$request->docrtdt_draft_garuda,
+                            'docrtdt_date'=>$request->docrtdt_date_garuda,
+                            'docrtdt_topic'=>$request->docrtdt_topic_garuda,
+                            'docrtdt_podium' =>$request->docrtdt_podium_garuda,
+                            'docrtdt_speed'=>$request->docrtdt_speed
+                        ]);
+                    }else if(Auth::user()->level=='4'){
+                    }
+                    $request->request->add(['docrt_id_garuda' => $insert_documents_retrun,'action_garuda' => 'respond']);
+                    event(new functionController($full_path = functionController::funtion_PDFRespond_garuda_retrun($request)));
+                    if(!$full_path){
+                        return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [funtion_PDFRespond_garuda] !');
+                    }
+                    $update_documents_retrun_detail = documents_retrun_detail::where('docrtdt_id', $insert_documents_retrun_detail)->update([
+                        'docrtdt_file'=>$full_path
+                    ]);
+                    if($insert_documents_retrun && $insert_documents_retrun_detail && $update_documents_retrun_detail){
+                        //linetoken
+                        $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
+                        ->where('group_id', Auth::user()->group)
+                        ->first();
+                        if($tokens_Check){
+                            $message = "\n⚠️ สร้างเอกสารตอบกลับภายใน ⚠️\n>เรื่อง :  ".$request->docrtdt_topic_garuda."\n>ที่ร่าง :  ".$request->docrtdt_draft_garuda."\n>วันที่ : ".$request->docrtdt_date_garuda."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                            functionController::line_notify($message,$tokens_Check->group_token);
+                        }
+                        return redirect()->back()->with('success',"สร้างเอกสารตอบกลับภายในเรียบร้อย");
+                    }else{
+                        return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [insert] !');
+                    }
+                }else if($request->bt_respond == 'respond'){
+                    if(Auth::user()->level=='7'){
+                        $insert_documents_retrun = documents_retrun::insertGetId([
+                            'docrt_owner'=>Auth::user()->id,
+                            'docrt_sites_id'=>Auth::user()->site_id,
+                            'docrt_groupmems_id'=>Auth::user()->group,
+                            'docrt_type'=>$request->docrt_type,
+                            'docrt_status' =>'0',
+                            'docrt_inspector_0'=>$userS_0->id,
+                            'docrt_created_at'=>date('Y-m-d H:i:s')
+                        ]);
+                        
+                        $insert_documents_retrun_detail = documents_retrun_detail::insertGetId([
+                            'docrtdt_docrt_id'=>$insert_documents_retrun,
+                            'docrtdt_government'=>$request->docrtdt_government,
+                            'docrtdt_draft'=>$request->docrtdt_draft,
+                            'docrtdt_date'=>$request->docrtdt_date,
+                            'docrtdt_topic'=>$request->docrtdt_topic,
+                            'docrtdt_podium' =>$request->docrtdt_podium,
+                            'docrtdt_speed'=>$request->docrtdt_speed
+                        ]);
+                    }else if(Auth::user()->level=='5'){
+                        $insert_documents_retrun = documents_retrun::insertGetId([
+                            'docrt_owner'=>Auth::user()->id,
+                            'docrt_sites_id'=>Auth::user()->site_id,
+                            'docrt_groupmems_id'=>Auth::user()->group,
+                            'docrt_type'=>$request->docrt_type,
+                            'docrt_status' =>'1',
+                            'docrt_inspector_1'=>$userS_0->id,
+                            'docrt_created_at'=>date('Y-m-d H:i:s')
+                        ]);
+                        $insert_documents_retrun_detail = documents_retrun_detail::insertGetId([
+                            'docrtdt_docrt_id'=>$insert_documents_retrun,
+                            'docrtdt_government'=>$request->docrtdt_government_garuda,
+                            'docrtdt_draft'=>$request->docrtdt_draft_garuda,
+                            'docrtdt_date'=>$request->docrtdt_date_garuda,
+                            'docrtdt_topic'=>$request->docrtdt_topic_garuda,
+                            'docrtdt_podium' =>$request->docrtdt_podium_garuda,
+                            'docrtdt_speed'=>$request->docrtdt_speed
+                        ]);
+                    }else if(Auth::user()->level=='4'){
+                    }
+
+                    $request->request->add(['docrt_id' => $insert_documents_retrun,'action' => 'respond']);
+                    event(new functionController($full_path = functionController::funtion_PDFRespond_retrun($request)));
+                    if(!$full_path){
+                        return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [funtion_PDFRespond] !');
+                    }
+                    $update_documents_retrun_detail = documents_retrun_detail::where('docrtdt_id', $insert_documents_retrun_detail)->update([
+                        'docrtdt_file'=>$full_path
+                    ]);
+                    if($insert_documents_retrun && $insert_documents_retrun_detail && $update_documents_retrun_detail){
+                        //linetoken
+                        $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
+                        ->where('group_id', Auth::user()->group)
+                        ->first();
+                        if($tokens_Check){
+                            $message = "\n⚠️ สร้างเอกสารตอบกลับภายใน ⚠️\n>เรื่อง :  ".$request->docrtdt_topic."\n>ที่ร่าง :  ".$request->docrtdt_draft."\n>วันที่ : ".$request->docrtdt_date."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                            functionController::line_notify($message,$tokens_Check->group_token);
+                        }
+                        return redirect()->back()->with('success',"สร้างเอกสารตอบกลับภายในเรียบร้อย");
+                    }else{
+                        return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [insert] !');
+                    }
+                }else{
+                    return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [bt_respond] !');
+                }
+            }else{
+                return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [userS_0] !');
+            }
+        }else{
+            return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
+        }
+    }
+
     public function index(){
         if(Auth::user()->level=='1'){
             //นายก

@@ -14,10 +14,50 @@ use App\Models\Groupmem;
 use App\Models\cottons;
 use App\Models\User;
 use DataTables;
+use App\Models\documents_retrun;
+use App\Models\documents_retrun_detail;
 
 class queryController extends Controller
 {
     //
+    public static function funtion_query_documents_retrun_inside_department_sign_Controller_level_5() {
+        if(Auth::user()->level=='5'){
+            $documents_retrun_inside_department_sign = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_sites_id',Auth::user()->site_id)
+            ->where('docrt_status', '0')
+            ->where('docrt_inspector_0', Auth::user()->id)
+            ->get();
+            return $documents_retrun_inside_department_sign;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_query_documents_retrun_inside_department_Controller_level_5() {
+        if(Auth::user()->level=='5'){
+            $documents_retrun_inside_department = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_owner',Auth::user()->id)
+            ->where('docrt_sites_id',Auth::user()->site_id)
+            ->get();
+            return $documents_retrun_inside_department;
+        }else{
+            return 0;
+        }
+    }
+
+
+    public static function funtion_query_documents_retrun_inside_work_Controller_level_7() {
+        if(Auth::user()->level=='7'){
+            $documents_retrun_inside_work = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_owner',Auth::user()->id)
+            ->where('docrt_sites_id',Auth::user()->site_id)
+            ->get();
+            return $documents_retrun_inside_work;
+        }else{
+            return 0;
+        }
+    }
+
     public static function funtion_query_documents_admission_inside_work_retrunController_level_7() {
         if(Auth::user()->level=='7'){
             $documents_admission_inside_work_retrun = document::join('sub_docs','sub_docs.sub_docid','documents.doc_id')

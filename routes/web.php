@@ -43,6 +43,10 @@ use App\Http\Controllers\documents_admission_inside_jurisprudenceController;
 use App\Http\Controllers\documents_admission_inside_deputy_signController;
 use App\Http\Controllers\documents_admission_inside_minister_signController;
 use App\Http\Controllers\documents_admission_inside_work_retrunController;
+use App\Http\Controllers\documents_retrun_inside_workController;
+use App\Http\Controllers\documents_retrun_inside_departmentController;
+use App\Http\Controllers\documents_retrun_inside_department_signController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +93,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //Route::get('/PDFRespond/{sub3d_government}/{sub3d_draft}/{sub3d_date}/{sub3d_topic}/{sub3d_podium}/{sub3d_therefore}/{sub3d_pos}/{action}/{sub3d_id}', [functionController::class , 'funtion_PDFRespond' ]);
     Route::post('/PDFRespond',[functionController::class , 'funtion_PDFRespond' ]);
     Route::post('/PDFRespond_garuda',[functionController::class , 'funtion_PDFRespond_garuda' ]);
+
+    Route::post('/PDFRespond_retrun',[functionController::class , 'funtion_PDFRespond_retrun' ]);
+    Route::post('/PDFRespond_garuda_retrun',[functionController::class , 'funtion_PDFRespond_garuda_retrun' ]);
+
     //doc_recnum_inside_run
     Route::get('/get_doc_recnum_inside_run/{id}', [functionController::class , 'getdoc_recnum_inside_run' ]);
     //doc_recnum_inside_reserve
@@ -182,8 +190,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_admission_inside_deputy_sign/all/1/query',[queryController::class,'funtion_query_documents_admission_inside_deputy_sign_1_Controller_level_2']);
     Route::get('/documents_admission_inside_minister_sign/all/0/query',[queryController::class,'funtion_query_documents_admission_inside_minister_sign_0_Controller_level_1']);
     Route::get('/documents_admission_inside_minister_sign/all/1/query',[queryController::class,'funtion_query_documents_admission_inside_minister_sign_1_Controller_level_1']);
-
     Route::get('/documents_admission_inside_work_retrun/all/query',[queryController::class,'funtion_query_documents_admission_inside_work_retrunController_level_7']);
+    Route::get('/documents_retrun_inside_work/all/query',[queryController::class,'funtion_query_documents_retrun_inside_work_Controller_level_7']);
+    Route::get('/documents_retrun_inside_department/all/query',[queryController::class,'funtion_query_documents_retrun_inside_department_Controller_level_5']);
+    Route::get('/documents_retrun_inside_department_sign/all/query',[queryController::class,'funtion_query_documents_retrun_inside_department_sign_Controller_level_5']);
 
     //---------------------------------------------------------------------------------------------------
     
@@ -237,6 +247,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::post('/member_dashboard/document_accepting_new',[member_dashboardController::class,'document_accepting_new'])->name('document_accepting_new');
     Route::get('/getdoc_recnum/{id}',[member_dashboardController::class,'getdoc_recnum']);
     Route::post('/member_dashboard/document_accepting_new_inside',[member_dashboardController::class,'document_accepting_new_inside'])->name('document_accepting_new_inside');
+    Route::post('/member_dashboard/document_accepting_new_inside_retrun',[member_dashboardController::class,'document_accepting_new_inside_retrun'])->name('document_accepting_new_inside_retrun');
 
     Route::get('/member/s_all',[memberController::class,'index'])->name('s_member');
     Route::post('/member/s_add',[memberController::class,'add'])->name('s_addMember');
@@ -428,5 +439,18 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
      Route::get('/documents_admission_inside_work_retrun/detail/{id}',[documents_admission_inside_work_retrunController::class,'detail'])->name('documents_admission_inside_work_retrun_detail')->middleware(['password.confirm']);
      Route::post('/documents_admission_inside_work_retrun/respond',[documents_admission_inside_work_retrunController::class,'respond'])->name('documents_admission_inside_work_retrun_respond');
  
+    //documents retrun inside work เอกสารตอบกลับท้ั้งหมด ของงาน
+    Route::get('/documents_retrun_inside_work/all',[documents_retrun_inside_workController::class,'index'])->name('documents_retrun_inside_work_all');
+    Route::get('/documents_retrun_inside_work/detail/{id}',[documents_retrun_inside_workController::class,'detail'])->name('documents_retrun_inside_work_detail')->middleware(['password.confirm']);
+
+    //documents retrun inside department เอกสารตอบกลับท้ั้งหมด ของหัวหน้าฝ่าย
+    Route::get('/documents_retrun_inside_department/all',[documents_retrun_inside_departmentController::class,'index'])->name('documents_retrun_inside_department_all');
+    Route::get('/documents_retrun_inside_department/detail/{id}',[documents_retrun_inside_departmentController::class,'detail'])->name('documents_retrun_inside_department_detail')->middleware(['password.confirm']);
+
+    //documents retrun inside department sign เอกสารตอบกลับรอพิจารณาท้ั้งหมด ของหัวหน้าฝ่าย
+    Route::get('/documents_retrun_inside_department_sign/all',[documents_retrun_inside_department_signController::class,'index'])->name('documents_retrun_inside_department_sign_all');
+    Route::get('/documents_retrun_inside_department_sign/detail/{id}',[documents_retrun_inside_department_signController::class,'detail'])->name('documents_retrun_inside_department_sign_detail')->middleware(['password.confirm']);
+    Route::post('/documents_retrun_inside_department_sign/understand',[documents_retrun_inside_department_signController::class,'understand'])->name('documents_retrun_inside_department_sign_understand');
+
     //---------------------------------------------------------------------------------------------------
 });
