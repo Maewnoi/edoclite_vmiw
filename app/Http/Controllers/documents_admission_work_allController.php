@@ -111,6 +111,12 @@ class documents_admission_work_allController extends Controller
                     'sub3_created_at'=>date('Y-m-d H:i:s')
                 ]);
                     
+                $request->request->add(['sub3_id_garuda' => $insert_sub3_docs,'action_garuda' => 'respond']);
+                event(new functionController($full_path = functionController::funtion_PDFRespond_garuda($request)));
+                if(!$full_path){
+                    return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [funtion_PDFRespond_garuda] !');
+                }
+
                 $insert_sub3_detail = sub3_detail::insertGetId([
                     'sub3d_sub_3id'=>$insert_sub3_docs,
                     'sub3d_government'=>$request->sub3d_government_garuda,
@@ -118,18 +124,11 @@ class documents_admission_work_allController extends Controller
                     'sub3d_date'=>$request->sub3d_date_garuda,
                     'sub3d_topic'=>$request->sub3d_topic_garuda,
                     'sub3d_podium' =>$request->sub3d_podium_garuda,
-                    'sub3d_speed'=>$request->sub3d_speed
-                ]);
-                
-                $request->request->add(['sub3d_id_garuda' => $insert_sub3_docs,'action_garuda' => 'respond']);
-                event(new functionController($full_path = functionController::funtion_PDFRespond_garuda($request)));
-                if(!$full_path){
-                    return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [funtion_PDFRespond_garuda] !');
-                }
-                $update_sub3_detail = sub3_detail::where('sub3d_id', $insert_sub3_detail)->update([
+                    'sub3d_speed'=>$request->sub3d_speed,
                     'sub3d_file'=>$full_path
                 ]);
-                if($insert_sub3_docs && $insert_sub3_detail && $update_sub3_detail){
+
+                if($insert_sub3_docs && $insert_sub3_detail){
                     //linetoken
                     $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
                     ->where('group_id', Auth::user()->group)
@@ -163,6 +162,12 @@ class documents_admission_work_allController extends Controller
                     'sub3_created_at'=>date('Y-m-d H:i:s')
                 ]);
                 
+                $request->request->add(['sub3_id' => $insert_sub3_docs,'action' => 'respond']);
+                event(new functionController($full_path = functionController::funtion_PDFRespond($request)));
+                if(!$full_path){
+                    return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [funtion_PDFRespond] !');
+                }
+
                 $insert_sub3_detail = sub3_detail::insertGetId([
                     'sub3d_sub_3id'=>$insert_sub3_docs,
                     'sub3d_government'=>$request->sub3d_government,
@@ -170,20 +175,11 @@ class documents_admission_work_allController extends Controller
                     'sub3d_date'=>$request->sub3d_date,
                     'sub3d_topic'=>$request->sub3d_topic,
                     'sub3d_podium' =>$request->sub3d_podium,
-                    // 'sub3d_therefore'=>$request->sub3d_therefore,
-                    // 'sub3d_pos'=>$request->sub3d_pos,
-                    'sub3d_speed'=>$request->sub3d_speed
-                ]);
-            
-                $request->request->add(['sub3d_id' => $insert_sub3_docs,'action' => 'respond']);
-                event(new functionController($full_path = functionController::funtion_PDFRespond($request)));
-                if(!$full_path){
-                    return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [funtion_PDFRespond] !');
-                }
-                $update_sub3_detail = sub3_detail::where('sub3d_id', $insert_sub3_detail)->update([
+                    'sub3d_speed'=>$request->sub3d_speed,
                     'sub3d_file'=>$full_path
                 ]);
-                if($insert_sub3_docs && $insert_sub3_detail && $update_sub3_detail){
+
+                if($insert_sub3_docs && $insert_sub3_detail){
                     //linetoken
                     $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
                     ->where('group_id', Auth::user()->group)

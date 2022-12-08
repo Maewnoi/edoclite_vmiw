@@ -403,6 +403,36 @@ use App\Http\Controllers\functionController;
                                         {{navigationController::funtion_document_admission_division_inside_retrun_count_level_4(Auth::user()->level)}}
                                         {{ __(' ) รายการ') }}
                                     </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                        {{ __('งานตอบกลับ') }}
+                                    </div>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link type="button" data-toggle="modal" class="text-decoration-none" data-target="#modal-Create-new-document-inside-retrun"
+                                        class="text-decoration-none">
+                                        {{ __('สร้างเอกสารตอบกลับ') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_retrun_inside_division_all') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารตอบกลับทั้งหมด ( ') }}
+                                        {{navigationController::funtion_documents_retrun_inside_division_count_level_4(Auth::user()->level)}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_retrun_inside_division_sign_all') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารตอบกลับรอพิจารณา ( ') }}
+                                        {{navigationController::funtion_documents_retrun_inside_division_sign_count_level_4(Auth::user()->level)}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_retrun_inside_division_retrun_all') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ') }}
+                                        {{navigationController::funtion_documents_retrun_inside_division_retrun_all_count_1_level_4(Auth::user()->level)}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
                                     @endif
 
                                     <!-- หัวหน้าฝ่าย -->
@@ -448,6 +478,13 @@ use App\Http\Controllers\functionController;
                                         {{navigationController::funtion_documents_retrun_inside_department_sign_count_level_5(Auth::user()->level)}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_retrun_inside_department_retrun_all') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ') }}
+                                        {{navigationController::funtion_documents_retrun_inside_department_retrun_all_count_1_level_5(Auth::user()->level)}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
                                     @endif
 
                                     <!-- งาน -->
@@ -468,7 +505,7 @@ use App\Http\Controllers\functionController;
                                     <div class="border-t border-gray-100"></div>
                                     <x-jet-dropdown-link href="{{ route('documents_admission_inside_work_retrun_all') }}"
                                         class="text-decoration-none">
-                                        {{ __('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ') }}
+                                        {{ __('เอกสารรับเข้าตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ') }}
                                         {{navigationController::funtion_documents_admission_inside_work_retrun_all_count_1_level_7(Auth::user()->level)}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
@@ -486,6 +523,13 @@ use App\Http\Controllers\functionController;
                                         class="text-decoration-none">
                                         {{ __('เอกสารตอบกลับทั้งหมด ( ') }}
                                         {{navigationController::funtion_documents_retrun_inside_work_count_level_7(Auth::user()->level)}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_retrun_inside_work_retrun_all') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ') }}
+                                        {{navigationController::funtion_documents_retrun_inside_work_retrun_all_count_1_level_7(Auth::user()->level)}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     @endif
@@ -525,14 +569,20 @@ use App\Http\Controllers\functionController;
                                     <div class="border-t border-gray-100"></div>
                                         <x-jet-dropdown-link href="{{ route('documents_admission_jurisprudence_all') }}"
                                             class="text-decoration-none">
-                                            {{ __('อนุมัติเอกสารตอบกลับภายนอก ( ') }}  
+                                            {{ __('อนุมัติเอกสารรับเข้าตอบกลับภายนอก ( ') }}  
                                             {{navigationController::funtion_document_documents_admission_jurisprudence_all_count()}}
                                             {{ __(' ) เรื่อง') }}
                                         </x-jet-dropdown-link>
                                         <x-jet-dropdown-link href="{{ route('documents_admission_inside_jurisprudence_all') }}"
                                             class="text-decoration-none">
-                                            {{ __('อนุมัติเอกสารตอบกลับภายใน ( ') }}  
+                                            {{ __('อนุมัติเอกสารรับเข้าตอบกลับภายใน ( ') }}  
                                             {{navigationController::funtion_document_documents_admission_inside_jurisprudence_all_count()}}
+                                            {{ __(' ) เรื่อง') }}
+                                        </x-jet-dropdown-link>
+                                        <x-jet-dropdown-link href="{{ route('documents_retrun_inside_jurisprudence_all') }}"
+                                            class="text-decoration-none">
+                                            {{ __('อนุมัติเอกสารตอบกลับภายใน ( ') }}  
+                                            {{navigationController::funtion_document_documents_retrun_inside_jurisprudence_all_count()}}
                                             {{ __(' ) เรื่อง') }}
                                         </x-jet-dropdown-link>
                                 </x-slot>
@@ -586,14 +636,14 @@ use App\Http\Controllers\functionController;
                                     @if(Auth::user()->level == '1')
                                     <x-jet-dropdown-link href="{{ route('documents_admission_minister_sign_all_0') }}"
                                         class="text-decoration-none">
-                                        {{ __('เอกสารรอลงนาม ( ') }}
+                                        {{ __('เอกสารรับเข้ารอลงนาม ( ') }}
                                         {{navigationController::funtion_documents_admission_minister_sign_count_0_level_1()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
                                     <x-jet-dropdown-link href="{{ route('documents_admission_minister_sign_all_1') }}"
                                         class="text-decoration-none">
-                                        {{ __('เอกสารที่ลงนามแล้ว ( ') }}
+                                        {{ __('เอกสารรับเข้าที่ลงนามแล้ว ( ') }}
                                         {{navigationController::funtion_documents_admission_minister_sign_count_1_level_1()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
@@ -602,14 +652,14 @@ use App\Http\Controllers\functionController;
                                     @if(Auth::user()->level == '2')
                                     <x-jet-dropdown-link href="{{ route('documents_admission_deputy_sign_all_0') }}"
                                         class="text-decoration-none">
-                                        {{ __('เอกสารรอลงนาม ( ') }}
+                                        {{ __('เอกสารรับเข้ารอลงนาม ( ') }}
                                         {{navigationController::funtion_documents_admission_deputy_sign_count_0_level_2()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
                                     <x-jet-dropdown-link href="{{ route('documents_admission_deputy_sign_all_1') }}"
                                         class="text-decoration-none">
-                                        {{ __('เอกสารที่ลงนามแล้ว ( ') }}
+                                        {{ __('เอกสารรับเข้าที่ลงนามแล้ว ( ') }}
                                         {{navigationController::funtion_documents_admission_deputy_sign_count_1_level_2()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
@@ -657,15 +707,33 @@ use App\Http\Controllers\functionController;
                                     @if(Auth::user()->level == '1')
                                     <x-jet-dropdown-link href="{{ route('documents_admission_inside_minister_sign_all_0') }}"
                                         class="text-decoration-none">
-                                        {{ __('เอกสารรอลงนาม ( ') }}
+                                        {{ __('เอกสารรับเข้ารอลงนาม ( ') }}
                                         {{navigationController::funtion_documents_admission_inside_minister_sign_count_0_level_1()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
                                     <x-jet-dropdown-link href="{{ route('documents_admission_inside_minister_sign_all_1') }}"
                                         class="text-decoration-none">
-                                        {{ __('เอกสารที่ลงนามแล้ว ( ') }}
+                                        {{ __('เอกสารรับเข้าที่ลงนามแล้ว ( ') }}
                                         {{navigationController::funtion_documents_admission_inside_minister_sign_count_1_level_1()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                        {{ __('งานตอบกลับ') }}
+                                    </div>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_retrun_inside_minister_sign_all_0') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรอลงนาม ( ') }}
+                                        {{navigationController::funtion_documents_retrun_inside_minister_sign_count_0_level_1()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_retrun_inside_minister_sign_all_1') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารที่ลงนามแล้ว ( ') }}
+                                        {{navigationController::funtion_documents_retrun_inside_minister_sign_count_1_level_1()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     @endif
@@ -673,15 +741,33 @@ use App\Http\Controllers\functionController;
                                     @if(Auth::user()->level == '2')
                                     <x-jet-dropdown-link href="{{ route('documents_admission_inside_deputy_sign_all_0') }}"
                                         class="text-decoration-none">
-                                        {{ __('เอกสารรอลงนาม ( ') }}
+                                        {{ __('เอกสารรับเข้ารอลงนาม ( ') }}
                                         {{navigationController::funtion_documents_admission_inside_deputy_sign_count_0_level_2()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
                                     <x-jet-dropdown-link href="{{ route('documents_admission_inside_deputy_sign_all_1') }}"
                                         class="text-decoration-none">
-                                        {{ __('เอกสารที่ลงนามแล้ว ( ') }}
+                                        {{ __('เอกสารรับเข้าที่ลงนามแล้ว ( ') }}
                                         {{navigationController::funtion_documents_admission_inside_deputy_sign_count_1_level_2()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                        {{ __('งานตอบกลับ') }}
+                                    </div>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_retrun_inside_deputy_sign_all_0') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรอลงนาม ( ') }}
+                                        {{navigationController::funtion_documents_retrun_inside_deputy_sign_count_0_level_2()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_retrun_inside_deputy_sign_all_1') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารที่ลงนามแล้ว ( ') }}
+                                        {{navigationController::funtion_documents_retrun_inside_deputy_sign_count_1_level_2()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     @endif
@@ -957,6 +1043,23 @@ use App\Http\Controllers\functionController;
                 {{navigationController::funtion_document_admission_division_inside_retrun_count_level_4(Auth::user()->level)}}
                 {{ __(' ) รายการ') }}
             </x-jet-responsive-nav-link>   
+            <div class="border-t border-gray-100"></div>
+            <x-jet-responsive-nav-link type="button" data-toggle="modal" class="text-decoration-none" data-target="#modal-Create-new-document-inside-retrun"
+                class="text-decoration-none">
+                {{ __('สร้างเอกสารตอบกลับ') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('documents_retrun_inside_division_all') }}"
+                class="text-decoration-none">
+                {{ __('เอกสารตอบกลับทั้งหมด ( ') }}
+                {{navigationController::funtion_documents_retrun_inside_division_count_level_4(Auth::user()->level)}}
+                {{ __(' ) เรื่อง') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('documents_retrun_inside_division_sign_all') }}"
+                class="text-decoration-none">
+                {{ __('เอกสารตอบกลับรอพิจารณา ( ') }}
+                {{navigationController::funtion_documents_retrun_inside_division_sign_count_level_4(Auth::user()->level)}}
+                {{ __(' ) เรื่อง') }}
+            </x-jet-responsive-nav-link>
             @endif
 
             <!-- หัวหน้าฝ่าย -->
@@ -1000,6 +1103,24 @@ use App\Http\Controllers\functionController;
                 {{navigationController::funtion_document_admission_department_inside_retrun_count_level_5(Auth::user()->level)}}
                 {{ __(' ) รายการ') }}
             </x-jet-responsive-nav-link>       
+            <div class="border-t border-gray-100"></div>
+            <x-jet-responsive-nav-link type="button" data-toggle="modal" class="text-decoration-none" data-target="#modal-Create-new-document-inside-retrun"
+                class="text-decoration-none">
+                {{ __('สร้างเอกสารตอบกลับ') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('documents_retrun_inside_department_all') }}"
+                class="text-decoration-none">
+                {{ __('เอกสารตอบกลับทั้งหมด ( ') }}
+                {{navigationController::funtion_documents_retrun_inside_department_count_level_5(Auth::user()->level)}}
+                {{ __(' ) เรื่อง') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('documents_retrun_inside_department_sign_all') }}"
+                class="text-decoration-none">
+                {{ __('เอกสารตอบกลับรอพิจารณา ( ') }}
+                {{navigationController::funtion_documents_retrun_inside_department_sign_count_level_5(Auth::user()->level)}}
+                {{ __(' ) เรื่อง') }}
+            </x-jet-responsive-nav-link>
+
             @endif
 
             <!-- สารบรรณกอง -->
@@ -1103,7 +1224,7 @@ use App\Http\Controllers\functionController;
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('documents_admission_inside_work_retrun_all') }}"
                 class="text-decoration-none">
-                {{ __('เอกสารตอบภายในกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ') }}
+                {{ __('เอกสารรับเข้าตอบกลับภายในที่ไม่ได้รับการอนุมัติจากนิติกร ( ') }}
                 {{navigationController::funtion_documents_admission_inside_work_retrun_all_count_1_level_7(Auth::user()->level)}}
                 {{ __(' ) เรื่อง') }}
             </x-jet-responsive-nav-link>
@@ -1118,19 +1239,30 @@ use App\Http\Controllers\functionController;
                 {{navigationController::funtion_documents_retrun_inside_work_count_level_7(Auth::user()->level)}}
                 {{ __(' ) เรื่อง') }}
             </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('documents_retrun_inside_work_retrun_all') }}"
+                class="text-decoration-none">
+                {{ __('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ') }}
+                {{navigationController::funtion_documents_retrun_inside_work_retrun_all_count_1_level_7(Auth::user()->level)}}
+                {{ __(' ) เรื่อง') }}
+            </x-jet-responsive-nav-link>
             @endif
            
             <!-- นิติการ -->
             @if(Auth::user()->jurisprudence == '1')
             <div class="border-t border-gray-100"></div>
             <x-jet-responsive-nav-link href="{{ route('documents_admission_jurisprudence_all') }}" class="text-decoration-none">
-                {{ __('อนุมัติเอกสารตอบกลับภายนอก ( ') }}
+                {{ __('อนุมัติเอกสารรับเข้าตอบกลับภายนอก ( ') }}
                 {{navigationController::funtion_document_documents_admission_jurisprudence_all_count(Auth::user()->level)}}
                 {{ __(' ) เรื่อง') }}
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('documents_admission_inside_jurisprudence_all') }}" class="text-decoration-none">
-                {{ __('อนุมัติเอกสารตอบกลับภายใน ( ') }}
+                {{ __('อนุมัติเอกสารรับเข้าตอบกลับภายใน ( ') }}
                 {{navigationController::funtion_document_documents_admission_inside_jurisprudence_all_count(Auth::user()->level)}}
+                {{ __(' ) เรื่อง') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('documents_retrun_inside_jurisprudence_all') }}" class="text-decoration-none">
+                {{ __('อนุมัติเอกสารตอบกลับภายใน ( ') }}
+                {{navigationController::funtion_document_documents_retrun_inside_jurisprudence_all_count(Auth::user()->level)}}
                 {{ __(' ) เรื่อง') }}
             </x-jet-responsive-nav-link>
             @endif

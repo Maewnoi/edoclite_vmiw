@@ -17,6 +17,158 @@ use App\Models\documents_retrun_detail;
 
 class navigationController extends Controller
 {
+    public static function funtion_documents_retrun_inside_division_retrun_all_count_1_level_4() {
+        if(Auth::user()->level=='4'){
+            $documents_retrun_inside_division_retrun_count = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_status', 'C')
+            ->where('docrt_owner', Auth::user()->id)
+            ->count();
+            return $documents_retrun_inside_division_retrun_count;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_documents_retrun_inside_department_retrun_all_count_1_level_5() {
+        if(Auth::user()->level=='5'){
+            $documents_retrun_inside_department_retrun_count = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_status', 'C')
+            ->where('docrt_owner', Auth::user()->id)
+            ->count();
+            return $documents_retrun_inside_department_retrun_count;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_documents_retrun_inside_work_retrun_all_count_1_level_7() {
+        if(Auth::user()->level=='7'){
+            $documents_retrun_inside_work_retrun_count = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_status', 'C')
+            ->where('docrt_owner', Auth::user()->id)
+            ->count();
+            return $documents_retrun_inside_work_retrun_count;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_documents_retrun_inside_minister_sign_count_1_level_1() {
+        if(Auth::user()->level=='1'){
+            $document_retrun_inside_minister_sign_count = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_sealid_2', Auth::user()->id)
+            ->whereNotNull('docrt_sealdate_2')
+            ->where('docrt_status', '!=', '5')
+            ->count();
+
+            return $document_retrun_inside_minister_sign_count;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_documents_retrun_inside_minister_sign_count_0_level_1() {
+        if(Auth::user()->level=='1'){
+            $document_retrun_inside_minister_sign_count = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_sealid_2', Auth::user()->id)
+            ->whereNull('docrt_sealdate_2')
+            ->where('docrt_status', '5')
+            ->count();
+
+            return $document_retrun_inside_minister_sign_count;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_documents_retrun_inside_deputy_sign_count_1_level_2() {
+        if(Auth::user()->level=='2'){
+            $document_retrun_inside_deputy_sign_0 = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_sealid_0', Auth::user()->id)
+            ->whereNotNull('docrt_sealdate_0')
+            ->where(function ($query) {
+                $query->where('docrt_status', '!=', '3')
+                      ->orWhere('docrt_status', '!=', '4');
+            })
+            ->count();
+
+            $document_retrun_inside_deputy_sign_1 = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_sealid_1', Auth::user()->id)
+            ->whereNotNull('docrt_sealdate_1')
+            ->where(function ($query) {
+                $query->where('docrt_status', '!=', '3')
+                      ->orWhere('docrt_status', '!=', '4');
+            })
+            ->count();
+
+            return $document_retrun_inside_deputy_sign_0 + $document_retrun_inside_deputy_sign_1;
+        }else{
+            return 0;
+        }
+    }
+    
+    public static function funtion_documents_retrun_inside_deputy_sign_count_0_level_2() {
+        if(Auth::user()->level=='2'){
+            $document_retrun_inside_deputy_sign_0 = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_sealid_0', Auth::user()->id)
+            ->whereNull('docrt_sealdate_0')
+            ->where(function ($query) {
+                $query->where('docrt_status', '3')
+                      ->orWhere('docrt_status', '4');
+            })
+            ->count();
+            $document_retrun_inside_deputy_sign_1 = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_sealid_1', Auth::user()->id)
+            ->whereNull('docrt_sealdate_1')
+            ->where(function ($query) {
+                $query->where('docrt_status', '3')
+                      ->orWhere('docrt_status', '4');
+            })
+            ->count();
+            return $document_retrun_inside_deputy_sign_0 + $document_retrun_inside_deputy_sign_1;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_document_documents_retrun_inside_jurisprudence_all_count() {
+        if(Auth::user()->jurisprudence=='1'){
+            $documents_retrun_inside_jurisprudence_count = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_sites_id',Auth::user()->site_id)
+            ->where('docrt_status', '2')
+            ->count();
+            return $documents_retrun_inside_jurisprudence_count;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_documents_retrun_inside_division_sign_count_level_4() {
+        if(Auth::user()->level=='4'){
+            $documents_retrun_inside_division_sign_count = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_sites_id',Auth::user()->site_id)
+            ->where('docrt_status', '1')
+            ->where('docrt_inspector_1', Auth::user()->id)
+            ->count();
+            return $documents_retrun_inside_division_sign_count;
+           
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_documents_retrun_inside_division_count_level_4() {
+        if(Auth::user()->level=='4'){
+            $documents_retrun_inside_division_count = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            ->where('docrt_owner',Auth::user()->id)
+            ->where('docrt_sites_id',Auth::user()->site_id)
+            ->count();
+            return $documents_retrun_inside_division_count;
+        }else{
+            return 0;
+        }
+    }
+
     public static function funtion_documents_retrun_inside_department_sign_count_level_5() {
         if(Auth::user()->level=='5'){
             $documents_retrun_inside_department_sign_count = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')

@@ -115,7 +115,7 @@ class documents_admission_inside_jurisprudenceController extends Controller
             ->where('group_id', Auth::user()->group)
             ->first();
             if($tokens_Check){
-                $message = "\n⚠️ นิติการอนุมัติตอบกลับเอกสารภายใน ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                $message = "\n⚠️ นิติการอนุมัติเอกสารรับเข้าตอบกลับภายใน ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
                 functionController::line_notify($message,$tokens_Check->group_token);
             }
             return redirect()->route('documents_admission_inside_jurisprudence_all')->with('success',"อนุมัติเรียบร้อย");
@@ -146,7 +146,7 @@ class documents_admission_inside_jurisprudenceController extends Controller
             ->where('group_id', Auth::user()->group)
             ->first();
             if($tokens_Check){
-                $message = "\n⚠️ นิติการ(ไม่)อนุมัติตอบกลับเอกสารภายใน ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                $message = "\n⚠️ นิติการ(ไม่)อนุมัติเอกสารรับเข้าตอบกลับภายใน ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
                 functionController::line_notify($message,$tokens_Check->group_token);
             }
             return redirect()->route('documents_admission_inside_jurisprudence_all')->with('success',"ไม่อนุมัติเรียบร้อย");

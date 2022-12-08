@@ -166,7 +166,7 @@ class documents_admission_inside_deputy_signController extends Controller
             ->where('group_id', $request->sub_recid)
             ->first();
             if($tokens_Check){
-                $message = "\n⚠️ ปลัดลงนามตอบกลับเอกสารภายใน ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                $message = "\n⚠️ ปลัดลงนามเอกสารรับเข้าตอบกลับภายใน ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
                 functionController::line_notify($message,$tokens_Check->group_token);
             }
             return redirect()->route('documents_admission_inside_deputy_sign_all_0')->with('success',"ลงนามเรียบร้อย");

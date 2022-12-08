@@ -62,7 +62,7 @@ class documents_retrun_inside_department_signController extends Controller
                 }
                 return redirect()->route('documents_retrun_inside_department_sign_all')->with('success',"รับทราบเรียบร้อย");
             }else{
-                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs] !');
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_documents_retrun] !');
             }
         }else{
             return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด ไม่พบหัวหน้ากองในระบบ [userS_0] !');

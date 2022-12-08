@@ -56,24 +56,23 @@ class documents_admission_work_retrunController extends Controller
                     'sub3_inspector_0' => $userS_0->id,
                     'sub3_updated_at' => date('Y-m-d H:i:s')
                 ]);
-                    
+
+                $request->request->add(['sub3_id_garuda' => $request->sub3_id_garuda,'action_garuda' => 'respond']);
+                event(new functionController($full_path = functionController::funtion_PDFRespond_garuda($request)));
+                if(!$full_path){
+                    return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [funtion_PDFRespond_garuda] !');
+                }
+
                 $update_sub3_detail = sub3_detail::where('sub3d_id', $request->sub3d_id_garuda)->update([
                     'sub3d_government'=>$request->sub3d_government_garuda,
                     'sub3d_draft'=>$request->sub3d_draft_garuda,
                     'sub3d_date'=>$request->sub3d_date_garuda,
                     'sub3d_topic'=>$request->sub3d_topic_garuda,
-                    'sub3d_podium' =>$request->sub3d_podium_garuda
-                ]);
-
-                $request->request->add(['sub3d_id_garuda' => $request->sub3d_id_garuda,'action_garuda' => 'respond']);
-                event(new functionController($full_path = functionController::funtion_PDFRespond_garuda($request)));
-                if(!$full_path){
-                    return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [funtion_PDFRespond_garuda] !');
-                }
-                $update_sub3_detail_full_path = sub3_detail::where('sub3d_id', $request->sub3d_id_garuda)->update([
+                    'sub3d_podium' =>$request->sub3d_podium_garuda,
                     'sub3d_file'=>$full_path
                 ]);
-                if($update_sub3_docs && $update_sub3_detail && $update_sub3_detail_full_path){
+
+                if($update_sub3_docs && $update_sub3_detail){
                     //linetoken
                     $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
                     ->where('group_id', Auth::user()->group)
@@ -103,23 +102,22 @@ class documents_admission_work_retrunController extends Controller
                     'sub3_updated_at'=>date('Y-m-d H:i:s')
                 ]);
                 
+                $request->request->add(['sub3_id' => $request->sub3_id,'action' => 'respond']);
+                event(new functionController($full_path = functionController::funtion_PDFRespond($request)));
+                if(!$full_path){
+                    return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [funtion_PDFRespond] !');
+                }
+
                 $update_sub3_detail = sub3_detail::where('sub3d_id', $request->sub3d_id)->update([
                     'sub3d_government'=>$request->sub3d_government,
                     'sub3d_draft'=>$request->sub3d_draft,
                     'sub3d_date'=>$request->sub3d_date,
                     'sub3d_topic'=>$request->sub3d_topic,
-                    'sub3d_podium' =>$request->sub3d_podium
-                ]);
-
-                $request->request->add(['sub3d_id' => $request->sub3d_id,'action' => 'respond']);
-                event(new functionController($full_path = functionController::funtion_PDFRespond($request)));
-                if(!$full_path){
-                    return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [funtion_PDFRespond] !');
-                }
-                $update_sub3_detail_full_path = sub3_detail::where('sub3d_id', $request->sub3d_id)->update([
+                    'sub3d_podium' =>$request->sub3d_podium,
                     'sub3d_file'=>$full_path
                 ]);
-                if($update_sub3_docs && $update_sub3_detail && $update_sub3_detail_full_path){
+
+                if($update_sub3_docs && $update_sub3_detail){
                     //linetoken
                     $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
                     ->where('group_id', Auth::user()->group)

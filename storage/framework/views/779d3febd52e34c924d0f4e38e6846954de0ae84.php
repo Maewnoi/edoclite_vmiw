@@ -856,6 +856,83 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
+                                    <div class="border-t border-gray-100"></div>
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                        <?php echo e(__('งานตอบกลับ')); ?>
+
+                                    </div>
+                                    <div class="border-t border-gray-100"></div>
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['type' => 'button','dataToggle' => 'modal','class' => 'text-decoration-none','dataTarget' => '#modal-Create-new-document-inside-retrun']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['type' => 'button','data-toggle' => 'modal','class' => 'text-decoration-none','data-target' => '#modal-Create-new-document-inside-retrun']); ?>
+                                        <?php echo e(__('สร้างเอกสารตอบกลับ')); ?>
+
+                                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                    <div class="border-t border-gray-100"></div>
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_retrun_inside_division_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_division_all')).'','class' => 'text-decoration-none']); ?>
+                                        <?php echo e(__('เอกสารตอบกลับทั้งหมด ( ')); ?>
+
+                                        <?php echo e(navigationController::funtion_documents_retrun_inside_division_count_level_4(Auth::user()->level)); ?>
+
+                                        <?php echo e(__(' ) เรื่อง')); ?>
+
+                                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                    <div class="border-t border-gray-100"></div>
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_retrun_inside_division_sign_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_division_sign_all')).'','class' => 'text-decoration-none']); ?>
+                                        <?php echo e(__('เอกสารตอบกลับรอพิจารณา ( ')); ?>
+
+                                        <?php echo e(navigationController::funtion_documents_retrun_inside_division_sign_count_level_4(Auth::user()->level)); ?>
+
+                                        <?php echo e(__(' ) เรื่อง')); ?>
+
+                                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                    <div class="border-t border-gray-100"></div>
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_retrun_inside_division_retrun_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_division_retrun_all')).'','class' => 'text-decoration-none']); ?>
+                                        <?php echo e(__('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ')); ?>
+
+                                        <?php echo e(navigationController::funtion_documents_retrun_inside_division_retrun_all_count_1_level_4(Auth::user()->level)); ?>
+
+                                        <?php echo e(__(' ) เรื่อง')); ?>
+
+                                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
                                     <?php endif; ?>
 
                                     <!-- หัวหน้าฝ่าย -->
@@ -974,6 +1051,25 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
+                                    <div class="border-t border-gray-100"></div>
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_retrun_inside_department_retrun_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_department_retrun_all')).'','class' => 'text-decoration-none']); ?>
+                                        <?php echo e(__('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ')); ?>
+
+                                        <?php echo e(navigationController::funtion_documents_retrun_inside_department_retrun_all_count_1_level_5(Auth::user()->level)); ?>
+
+                                        <?php echo e(__(' ) เรื่อง')); ?>
+
+                                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
                                     <?php endif; ?>
 
                                     <!-- งาน -->
@@ -1022,7 +1118,7 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_inside_work_retrun_all')).'','class' => 'text-decoration-none']); ?>
-                                        <?php echo e(__('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ')); ?>
+                                        <?php echo e(__('เอกสารรับเข้าตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ')); ?>
 
                                         <?php echo e(navigationController::funtion_documents_admission_inside_work_retrun_all_count_1_level_7(Auth::user()->level)); ?>
 
@@ -1064,6 +1160,25 @@ use App\Http\Controllers\functionController;
                                         <?php echo e(__('เอกสารตอบกลับทั้งหมด ( ')); ?>
 
                                         <?php echo e(navigationController::funtion_documents_retrun_inside_work_count_level_7(Auth::user()->level)); ?>
+
+                                        <?php echo e(__(' ) เรื่อง')); ?>
+
+                                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                    <div class="border-t border-gray-100"></div>
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_retrun_inside_work_retrun_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_work_retrun_all')).'','class' => 'text-decoration-none']); ?>
+                                        <?php echo e(__('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ')); ?>
+
+                                        <?php echo e(navigationController::funtion_documents_retrun_inside_work_retrun_all_count_1_level_7(Auth::user()->level)); ?>
 
                                         <?php echo e(__(' ) เรื่อง')); ?>
 
@@ -1126,7 +1241,7 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_jurisprudence_all')).'','class' => 'text-decoration-none']); ?>
-                                            <?php echo e(__('อนุมัติเอกสารตอบกลับภายนอก ( ')); ?>  
+                                            <?php echo e(__('อนุมัติเอกสารรับเข้าตอบกลับภายนอก ( ')); ?>  
                                             <?php echo e(navigationController::funtion_document_documents_admission_jurisprudence_all_count()); ?>
 
                                             <?php echo e(__(' ) เรื่อง')); ?>
@@ -1143,8 +1258,25 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_inside_jurisprudence_all')).'','class' => 'text-decoration-none']); ?>
-                                            <?php echo e(__('อนุมัติเอกสารตอบกลับภายใน ( ')); ?>  
+                                            <?php echo e(__('อนุมัติเอกสารรับเข้าตอบกลับภายใน ( ')); ?>  
                                             <?php echo e(navigationController::funtion_document_documents_admission_inside_jurisprudence_all_count()); ?>
+
+                                            <?php echo e(__(' ) เรื่อง')); ?>
+
+                                         <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_retrun_inside_jurisprudence_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_jurisprudence_all')).'','class' => 'text-decoration-none']); ?>
+                                            <?php echo e(__('อนุมัติเอกสารตอบกลับภายใน ( ')); ?>  
+                                            <?php echo e(navigationController::funtion_document_documents_retrun_inside_jurisprudence_all_count()); ?>
 
                                             <?php echo e(__(' ) เรื่อง')); ?>
 
@@ -1230,7 +1362,7 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_minister_sign_all_0')).'','class' => 'text-decoration-none']); ?>
-                                        <?php echo e(__('เอกสารรอลงนาม ( ')); ?>
+                                        <?php echo e(__('เอกสารรับเข้ารอลงนาม ( ')); ?>
 
                                         <?php echo e(navigationController::funtion_documents_admission_minister_sign_count_0_level_1()); ?>
 
@@ -1249,7 +1381,7 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_minister_sign_all_1')).'','class' => 'text-decoration-none']); ?>
-                                        <?php echo e(__('เอกสารที่ลงนามแล้ว ( ')); ?>
+                                        <?php echo e(__('เอกสารรับเข้าที่ลงนามแล้ว ( ')); ?>
 
                                         <?php echo e(navigationController::funtion_documents_admission_minister_sign_count_1_level_1()); ?>
 
@@ -1270,7 +1402,7 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_deputy_sign_all_0')).'','class' => 'text-decoration-none']); ?>
-                                        <?php echo e(__('เอกสารรอลงนาม ( ')); ?>
+                                        <?php echo e(__('เอกสารรับเข้ารอลงนาม ( ')); ?>
 
                                         <?php echo e(navigationController::funtion_documents_admission_deputy_sign_count_0_level_2()); ?>
 
@@ -1289,7 +1421,7 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_deputy_sign_all_1')).'','class' => 'text-decoration-none']); ?>
-                                        <?php echo e(__('เอกสารที่ลงนามแล้ว ( ')); ?>
+                                        <?php echo e(__('เอกสารรับเข้าที่ลงนามแล้ว ( ')); ?>
 
                                         <?php echo e(navigationController::funtion_documents_admission_deputy_sign_count_1_level_2()); ?>
 
@@ -1361,7 +1493,7 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_inside_minister_sign_all_0')).'','class' => 'text-decoration-none']); ?>
-                                        <?php echo e(__('เอกสารรอลงนาม ( ')); ?>
+                                        <?php echo e(__('เอกสารรับเข้ารอลงนาม ( ')); ?>
 
                                         <?php echo e(navigationController::funtion_documents_admission_inside_minister_sign_count_0_level_1()); ?>
 
@@ -1380,9 +1512,52 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_inside_minister_sign_all_1')).'','class' => 'text-decoration-none']); ?>
-                                        <?php echo e(__('เอกสารที่ลงนามแล้ว ( ')); ?>
+                                        <?php echo e(__('เอกสารรับเข้าที่ลงนามแล้ว ( ')); ?>
 
                                         <?php echo e(navigationController::funtion_documents_admission_inside_minister_sign_count_1_level_1()); ?>
+
+                                        <?php echo e(__(' ) เรื่อง')); ?>
+
+                                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                    <div class="border-t border-gray-100"></div>
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                        <?php echo e(__('งานตอบกลับ')); ?>
+
+                                    </div>
+                                    <div class="border-t border-gray-100"></div>
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_retrun_inside_minister_sign_all_0')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_minister_sign_all_0')).'','class' => 'text-decoration-none']); ?>
+                                        <?php echo e(__('เอกสารรอลงนาม ( ')); ?>
+
+                                        <?php echo e(navigationController::funtion_documents_retrun_inside_minister_sign_count_0_level_1()); ?>
+
+                                        <?php echo e(__(' ) เรื่อง')); ?>
+
+                                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                    <div class="border-t border-gray-100"></div>
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_retrun_inside_minister_sign_all_1')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_minister_sign_all_1')).'','class' => 'text-decoration-none']); ?>
+                                        <?php echo e(__('เอกสารที่ลงนามแล้ว ( ')); ?>
+
+                                        <?php echo e(navigationController::funtion_documents_retrun_inside_minister_sign_count_1_level_1()); ?>
 
                                         <?php echo e(__(' ) เรื่อง')); ?>
 
@@ -1401,7 +1576,7 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_inside_deputy_sign_all_0')).'','class' => 'text-decoration-none']); ?>
-                                        <?php echo e(__('เอกสารรอลงนาม ( ')); ?>
+                                        <?php echo e(__('เอกสารรับเข้ารอลงนาม ( ')); ?>
 
                                         <?php echo e(navigationController::funtion_documents_admission_inside_deputy_sign_count_0_level_2()); ?>
 
@@ -1420,9 +1595,52 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_inside_deputy_sign_all_1')).'','class' => 'text-decoration-none']); ?>
-                                        <?php echo e(__('เอกสารที่ลงนามแล้ว ( ')); ?>
+                                        <?php echo e(__('เอกสารรับเข้าที่ลงนามแล้ว ( ')); ?>
 
                                         <?php echo e(navigationController::funtion_documents_admission_inside_deputy_sign_count_1_level_2()); ?>
+
+                                        <?php echo e(__(' ) เรื่อง')); ?>
+
+                                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                    <div class="border-t border-gray-100"></div>
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                        <?php echo e(__('งานตอบกลับ')); ?>
+
+                                    </div>
+                                    <div class="border-t border-gray-100"></div>
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_retrun_inside_deputy_sign_all_0')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_deputy_sign_all_0')).'','class' => 'text-decoration-none']); ?>
+                                        <?php echo e(__('เอกสารรอลงนาม ( ')); ?>
+
+                                        <?php echo e(navigationController::funtion_documents_retrun_inside_deputy_sign_count_0_level_2()); ?>
+
+                                        <?php echo e(__(' ) เรื่อง')); ?>
+
+                                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                    <div class="border-t border-gray-100"></div>
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_retrun_inside_deputy_sign_all_1')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_deputy_sign_all_1')).'','class' => 'text-decoration-none']); ?>
+                                        <?php echo e(__('เอกสารที่ลงนามแล้ว ( ')); ?>
+
+                                        <?php echo e(navigationController::funtion_documents_retrun_inside_deputy_sign_count_1_level_2()); ?>
 
                                         <?php echo e(__(' ) เรื่อง')); ?>
 
@@ -2024,6 +2242,57 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>   
+            <div class="border-t border-gray-100"></div>
+            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['type' => 'button','dataToggle' => 'modal','class' => 'text-decoration-none','dataTarget' => '#modal-Create-new-document-inside-retrun']]); ?>
+<?php $component->withName('jet-responsive-nav-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['type' => 'button','data-toggle' => 'modal','class' => 'text-decoration-none','data-target' => '#modal-Create-new-document-inside-retrun']); ?>
+                <?php echo e(__('สร้างเอกสารตอบกลับ')); ?>
+
+             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['href' => ''.e(route('documents_retrun_inside_division_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-responsive-nav-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_division_all')).'','class' => 'text-decoration-none']); ?>
+                <?php echo e(__('เอกสารตอบกลับทั้งหมด ( ')); ?>
+
+                <?php echo e(navigationController::funtion_documents_retrun_inside_division_count_level_4(Auth::user()->level)); ?>
+
+                <?php echo e(__(' ) เรื่อง')); ?>
+
+             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['href' => ''.e(route('documents_retrun_inside_division_sign_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-responsive-nav-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_division_sign_all')).'','class' => 'text-decoration-none']); ?>
+                <?php echo e(__('เอกสารตอบกลับรอพิจารณา ( ')); ?>
+
+                <?php echo e(navigationController::funtion_documents_retrun_inside_division_sign_count_level_4(Auth::user()->level)); ?>
+
+                <?php echo e(__(' ) เรื่อง')); ?>
+
+             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
             <?php endif; ?>
 
             <!-- หัวหน้าฝ่าย -->
@@ -2139,6 +2408,58 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>       
+            <div class="border-t border-gray-100"></div>
+            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['type' => 'button','dataToggle' => 'modal','class' => 'text-decoration-none','dataTarget' => '#modal-Create-new-document-inside-retrun']]); ?>
+<?php $component->withName('jet-responsive-nav-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['type' => 'button','data-toggle' => 'modal','class' => 'text-decoration-none','data-target' => '#modal-Create-new-document-inside-retrun']); ?>
+                <?php echo e(__('สร้างเอกสารตอบกลับ')); ?>
+
+             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['href' => ''.e(route('documents_retrun_inside_department_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-responsive-nav-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_department_all')).'','class' => 'text-decoration-none']); ?>
+                <?php echo e(__('เอกสารตอบกลับทั้งหมด ( ')); ?>
+
+                <?php echo e(navigationController::funtion_documents_retrun_inside_department_count_level_5(Auth::user()->level)); ?>
+
+                <?php echo e(__(' ) เรื่อง')); ?>
+
+             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['href' => ''.e(route('documents_retrun_inside_department_sign_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-responsive-nav-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_department_sign_all')).'','class' => 'text-decoration-none']); ?>
+                <?php echo e(__('เอกสารตอบกลับรอพิจารณา ( ')); ?>
+
+                <?php echo e(navigationController::funtion_documents_retrun_inside_department_sign_count_level_5(Auth::user()->level)); ?>
+
+                <?php echo e(__(' ) เรื่อง')); ?>
+
+             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+
             <?php endif; ?>
 
             <!-- สารบรรณกอง -->
@@ -2438,7 +2759,7 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_inside_work_retrun_all')).'','class' => 'text-decoration-none']); ?>
-                <?php echo e(__('เอกสารตอบภายในกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ')); ?>
+                <?php echo e(__('เอกสารรับเข้าตอบกลับภายในที่ไม่ได้รับการอนุมัติจากนิติกร ( ')); ?>
 
                 <?php echo e(navigationController::funtion_documents_admission_inside_work_retrun_all_count_1_level_7(Auth::user()->level)); ?>
 
@@ -2483,6 +2804,24 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
+            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['href' => ''.e(route('documents_retrun_inside_work_retrun_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-responsive-nav-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_work_retrun_all')).'','class' => 'text-decoration-none']); ?>
+                <?php echo e(__('เอกสารตอบกลับที่ไม่ได้รับการอนุมัติจากนิติกร ( ')); ?>
+
+                <?php echo e(navigationController::funtion_documents_retrun_inside_work_retrun_all_count_1_level_7(Auth::user()->level)); ?>
+
+                <?php echo e(__(' ) เรื่อง')); ?>
+
+             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
             <?php endif; ?>
            
             <!-- นิติการ -->
@@ -2494,7 +2833,7 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_jurisprudence_all')).'','class' => 'text-decoration-none']); ?>
-                <?php echo e(__('อนุมัติเอกสารตอบกลับภายนอก ( ')); ?>
+                <?php echo e(__('อนุมัติเอกสารรับเข้าตอบกลับภายนอก ( ')); ?>
 
                 <?php echo e(navigationController::funtion_document_documents_admission_jurisprudence_all_count(Auth::user()->level)); ?>
 
@@ -2512,9 +2851,27 @@ use App\Http\Controllers\functionController;
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['href' => ''.e(route('documents_admission_inside_jurisprudence_all')).'','class' => 'text-decoration-none']); ?>
-                <?php echo e(__('อนุมัติเอกสารตอบกลับภายใน ( ')); ?>
+                <?php echo e(__('อนุมัติเอกสารรับเข้าตอบกลับภายใน ( ')); ?>
 
                 <?php echo e(navigationController::funtion_document_documents_admission_inside_jurisprudence_all_count(Auth::user()->level)); ?>
+
+                <?php echo e(__(' ) เรื่อง')); ?>
+
+             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['href' => ''.e(route('documents_retrun_inside_jurisprudence_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-responsive-nav-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_retrun_inside_jurisprudence_all')).'','class' => 'text-decoration-none']); ?>
+                <?php echo e(__('อนุมัติเอกสารตอบกลับภายใน ( ')); ?>
+
+                <?php echo e(navigationController::funtion_document_documents_retrun_inside_jurisprudence_all_count(Auth::user()->level)); ?>
 
                 <?php echo e(__(' ) เรื่อง')); ?>
 

@@ -46,6 +46,14 @@ use App\Http\Controllers\documents_admission_inside_work_retrunController;
 use App\Http\Controllers\documents_retrun_inside_workController;
 use App\Http\Controllers\documents_retrun_inside_departmentController;
 use App\Http\Controllers\documents_retrun_inside_department_signController;
+use App\Http\Controllers\documents_retrun_inside_divisionController;
+use App\Http\Controllers\documents_retrun_inside_division_signController;
+use App\Http\Controllers\documents_retrun_inside_jurisprudenceController;
+use App\Http\Controllers\documents_retrun_inside_deputy_signController;
+use App\Http\Controllers\documents_retrun_inside_minister_signController;
+use App\Http\Controllers\documents_retrun_inside_work_retrunController;
+use App\Http\Controllers\documents_retrun_inside_department_retrunController;
+use App\Http\Controllers\documents_retrun_inside_division_retrunController;
 
 
 /*
@@ -194,6 +202,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_retrun_inside_work/all/query',[queryController::class,'funtion_query_documents_retrun_inside_work_Controller_level_7']);
     Route::get('/documents_retrun_inside_department/all/query',[queryController::class,'funtion_query_documents_retrun_inside_department_Controller_level_5']);
     Route::get('/documents_retrun_inside_department_sign/all/query',[queryController::class,'funtion_query_documents_retrun_inside_department_sign_Controller_level_5']);
+    Route::get('/documents_retrun_inside_division/all/query',[queryController::class,'funtion_query_documents_retrun_inside_division_Controller_level_4']);
+    Route::get('/documents_retrun_inside_division_sign/all/query',[queryController::class,'funtion_query_documents_retrun_inside_division_sign_Controller_level_4']);
+    Route::get('/documents_retrun_inside_jurisprudence/all/query',[queryController::class,'funtion_query_documents_retrun_inside_jurisprudenceController_level_5_7']);
+    Route::get('/documents_retrun_inside_deputy_sign/all/0/query',[queryController::class,'funtion_query_documents_retrun_inside_deputy_sign_0_Controller_level_2']);
+    Route::get('/documents_retrun_inside_deputy_sign/all/1/query',[queryController::class,'funtion_query_documents_retrun_inside_deputy_sign_1_Controller_level_2']);
+    Route::get('/documents_retrun_inside_minister_sign/all/0/query',[queryController::class,'funtion_query_documents_retrun_inside_minister_sign_0_Controller_level_1']);
+    Route::get('/documents_retrun_inside_minister_sign/all/1/query',[queryController::class,'funtion_query_documents_retrun_inside_minister_sign_1_Controller_level_1']);
+    Route::get('/documents_retrun_inside_work_retrun/all/query',[queryController::class,'funtion_query_documents_retrun_inside_work_retrunController_level_7']);
+
+    Route::get('/documents_retrun_inside_department_retrun/all/query',[queryController::class,'funtion_query_documents_retrun_inside_department_retrunController_level_5']);
+    Route::get('/documents_retrun_inside_division_retrun/all/query',[queryController::class,'funtion_query_documents_retrun_inside_division_retrunController_level_4']);
 
     //---------------------------------------------------------------------------------------------------
     
@@ -452,5 +471,47 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_retrun_inside_department_sign/detail/{id}',[documents_retrun_inside_department_signController::class,'detail'])->name('documents_retrun_inside_department_sign_detail')->middleware(['password.confirm']);
     Route::post('/documents_retrun_inside_department_sign/understand',[documents_retrun_inside_department_signController::class,'understand'])->name('documents_retrun_inside_department_sign_understand');
 
+    //documents retrun inside division เอกสารตอบกลับท้ั้งหมด ของหัวหน้ากอง
+    Route::get('/documents_retrun_inside_division/all',[documents_retrun_inside_divisionController::class,'index'])->name('documents_retrun_inside_division_all');
+    Route::get('/documents_retrun_inside_division/detail/{id}',[documents_retrun_inside_divisionController::class,'detail'])->name('documents_retrun_inside_division_detail')->middleware(['password.confirm']);
+ 
+    //documents retrun inside division sign เอกสารตอบกลับรอพิจารณาท้ั้งหมด ของหัวหน้ากอง
+    Route::get('/documents_retrun_inside_division_sign/all',[documents_retrun_inside_division_signController::class,'index'])->name('documents_retrun_inside_division_sign_all');
+    Route::get('/documents_retrun_inside_division_sign/detail/{id}',[documents_retrun_inside_division_signController::class,'detail'])->name('documents_retrun_inside_division_sign_detail')->middleware(['password.confirm']);
+    Route::post('/documents_retrun_inside_division_sign/understand',[documents_retrun_inside_division_signController::class,'understand'])->name('documents_retrun_inside_division_sign_understand');
+ 
+    //documents retrun inside jurisprudence
+    Route::get('/documents_retrun_inside_jurisprudence/all',[documents_retrun_inside_jurisprudenceController::class,'index'])->name('documents_retrun_inside_jurisprudence_all');
+    Route::get('/documents_retrun_inside_jurisprudence/detail/{id}',[documents_retrun_inside_jurisprudenceController::class,'detail'])->name('documents_retrun_inside_jurisprudence_detail')->middleware(['password.confirm']);
+    Route::post('/documents_retrun_inside_jurisprudence/understand',[documents_retrun_inside_jurisprudenceController::class,'understand'])->name('documents_retrun_inside_jurisprudence_understand');
+    Route::post('/documents_retrun_inside_jurisprudence/do_not_understand',[documents_retrun_inside_jurisprudenceController::class,'do_not_understand'])->name('documents_retrun_inside_jurisprudence_do_not_understand');
+        
+    //documents retrun inside deputy sign ปลัด รองปลัด ลงนาม
+    Route::get('/documents_retrun_inside_deputy_sign/all/0',[documents_retrun_inside_deputy_signController::class,'index_0'])->name('documents_retrun_inside_deputy_sign_all_0');
+    Route::get('/documents_retrun_inside_deputy_sign/all/1',[documents_retrun_inside_deputy_signController::class,'index_1'])->name('documents_retrun_inside_deputy_sign_all_1');
+    Route::get('/documents_retrun_inside_deputy_sign/detail/{id}',[documents_retrun_inside_deputy_signController::class,'detail'])->name('documents_retrun_inside_deputy_sign_detail')->middleware(['password.confirm']);
+    Route::post('/documents_retrun_inside_deputy_sign/understand',[documents_retrun_inside_deputy_signController::class,'understand'])->name('documents_retrun_inside_deputy_sign_understand');
+        
+    //documents retrun inside minister sign นายก รองนายก ลงนาม
+    Route::get('/documents_retrun_inside_minister_sign/all/0',[documents_retrun_inside_minister_signController::class,'index_0'])->name('documents_retrun_inside_minister_sign_all_0');
+    Route::get('/documents_retrun_inside_minister_sign/all/1',[documents_retrun_inside_minister_signController::class,'index_1'])->name('documents_retrun_inside_minister_sign_all_1');
+    Route::get('/documents_retrun_inside_minister_sign/detail/{id}',[documents_retrun_inside_minister_signController::class,'detail'])->name('documents_retrun_inside_minister_sign_detail')->middleware(['password.confirm']);
+    Route::post('/documents_retrun_inside_minister_sign/understand',[documents_retrun_inside_minister_signController::class,'understand'])->name('documents_retrun_inside_minister_sign_understand');
+        
+    //All admission retrun inside work งานตอยกลับที่ไม่ได้รับการอนุมัติ
+    Route::get('/documents_retrun_inside_work_retrun/all',[documents_retrun_inside_work_retrunController::class,'index'])->name('documents_retrun_inside_work_retrun_all');
+    Route::get('/documents_retrun_inside_work_retrun/detail/{id}',[documents_retrun_inside_work_retrunController::class,'detail'])->name('documents_retrun_inside_work_retrun_detail')->middleware(['password.confirm']);
+    Route::post('/documents_retrun_inside_work_retrun/respond',[documents_retrun_inside_work_retrunController::class,'respond'])->name('documents_retrun_inside_work_retrun_respond');
+     
+    //All admission retrun inside department งานตอยกลับที่ไม่ได้รับการอนุมัติ
+    Route::get('/documents_retrun_inside_department_retrun/all',[documents_retrun_inside_department_retrunController::class,'index'])->name('documents_retrun_inside_department_retrun_all');
+    Route::get('/documents_retrun_inside_department_retrun/detail/{id}',[documents_retrun_inside_department_retrunController::class,'detail'])->name('documents_retrun_inside_department_retrun_detail')->middleware(['password.confirm']);
+    Route::post('/documents_retrun_inside_department_retrun/respond',[documents_retrun_inside_department_retrunController::class,'respond'])->name('documents_retrun_inside_department_retrun_respond');
+     
+    //All admission retrun inside division งานตอยกลับที่ไม่ได้รับการอนุมัติ
+    Route::get('/documents_retrun_inside_division_retrun/all',[documents_retrun_inside_division_retrunController::class,'index'])->name('documents_retrun_inside_division_retrun_all');
+    Route::get('/documents_retrun_inside_division_retrun/detail/{id}',[documents_retrun_inside_division_retrunController::class,'detail'])->name('documents_retrun_inside_division_retrun_detail')->middleware(['password.confirm']);
+    Route::post('/documents_retrun_inside_division_retrun/respond',[documents_retrun_inside_division_retrunController::class,'respond'])->name('documents_retrun_inside_division_retrun_respond');
+     
     //---------------------------------------------------------------------------------------------------
 });

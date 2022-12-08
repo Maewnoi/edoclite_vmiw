@@ -701,7 +701,7 @@ class functionController extends Controller
             $date_new = date('Y-m-d');
             $year_new = date('Y');
             $upload_location = 'image/'.$year_new.'/respond/';
-            $name_gen_new = $request->sub3d_id_garuda."_".$date_new;
+            $name_gen_new = $request->sub3_id_garuda."_".$date_new;
             // $name_gen_new = 'test_by_domji';
             $full_path = $upload_location.$name_gen_new.'.pdf';
             $pdf->Output('F', $full_path);
@@ -927,7 +927,7 @@ class functionController extends Controller
             $date_new = date('Y-m-d');
             $year_new = date('Y');
             $upload_location = 'image/'.$year_new.'/respond/';
-            $name_gen_new = $request->sub3d_id."_".$date_new;
+            $name_gen_new = $request->sub3_id."_".$date_new;
             // $name_gen_new = 'test_by_domji';
             $full_path = $upload_location.$name_gen_new.'.pdf';
             $pdf->Output('F', $full_path);

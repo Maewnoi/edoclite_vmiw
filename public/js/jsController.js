@@ -903,6 +903,331 @@ $("#navigationController_docrt_type").change(function(event) {
     }
 });
 //------------------------------------------------------------------------------------------
+//member.documents_retrun_inside_division_retrun.detail
+$("#documents_retrun_inside_division_retrunController_docrtdt_government-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_division_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#ddocuments_retrun_inside_division_retrunController_docrtdt_draft-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_division_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_retrun_inside_division_retrunController_docrtdt_date-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_division_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_retrun_inside_division_retrunController_docrtdt_topic-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_division_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_retrun_inside_division_retrunController_docrtdt_podium-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_division_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_retrun_inside_division_retrunController_bt_preview-garuda").click(function(event) {
+    let _token = $("#_token").val(); //csrf_token
+    let documents_retrun_inside_division_retrunController_docrtdt_government_garuda = $("#documents_retrun_inside_division_retrunController_docrtdt_government-garuda").val(); //ส่วนราชการ
+    let documents_retrun_inside_division_retrunController_docrtdt_draft_garuda = $("#documents_retrun_inside_division_retrunController_docrtdt_draft-garuda").val(); //ที่ร่าง
+    let documents_retrun_inside_division_retrunController_docrtdt_date_garuda = $("#documents_retrun_inside_division_retrunController_docrtdt_date-garuda").val(); //วันที่
+    let documents_retrun_inside_division_retrunController_docrtdt_topic_garuda = $("#documents_retrun_inside_division_retrunController_docrtdt_topic-garuda").val(); //เรื่อง
+    let documents_retrun_inside_division_retrunController_docrtdt_podium_garuda = $("#documents_retrun_inside_division_retrunController_docrtdt_podium-garuda").val(); //ข้อความตั้งแท่น
+    if(documents_retrun_inside_division_retrunController_docrtdt_government_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ส่วนงานราชการ!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_division_retrunController_docrtdt_draft_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ที่ร่าง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_division_retrunController_docrtdt_date_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก วันที่!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_division_retrunController_docrtdt_topic_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก เรื่อง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_division_retrunController_docrtdt_podium_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก รายละเอียด!",
+            icon: "warning",
+        });
+        return;
+    }else{
+        const var_data = {
+            docrtdt_government_garuda: documents_retrun_inside_division_retrunController_docrtdt_government_garuda,
+            docrtdt_draft_garuda: documents_retrun_inside_division_retrunController_docrtdt_draft_garuda,
+            docrtdt_date_garuda: documents_retrun_inside_division_retrunController_docrtdt_date_garuda,
+            docrtdt_topic_garuda: documents_retrun_inside_division_retrunController_docrtdt_topic_garuda,
+            docrtdt_podium_garuda: documents_retrun_inside_ddivision_retrunController_docrtdt_podium_garuda,
+            action_garuda: 'preview',
+            docrtdt_id_garuda: null,
+        };
+        // console.log(var_data);
+
+        fetch('/PDFRespond_garuda_retrun', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': _token
+        },
+        body:  JSON.stringify(var_data)
+        })
+        .then(response => response.arrayBuffer())
+        .then(result => {
+            // const content = await rawResponse.json();
+            $("#modal-preview").modal("show");
+            var blob = new Blob([result], { type: 'application/pdf' });
+            var fileURL = URL.createObjectURL(blob);
+                            
+            // const isMobile = navigator.userAgentData.mobile;
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            var newWin = window.open(fileURL);
+                newWin.focus();
+                var timer = setInterval(function() {
+                    if (newWin.closed) {
+                        clearInterval(timer);
+                        $("#modal-preview").modal("hide");
+                    }
+                }, 1000);
+            }else{
+                let input_cotton = document.querySelector("#documents_retrun_inside_division_retrunController_pdf_preview");
+                input_cotton.src = fileURL;
+                $("#documents_retrun_inside_division_retrunController_close-modal-preview").click(function(event) {
+                    $("#modal-preview").modal("hide");
+                });
+            }
+            document.getElementById("documents_retrun_inside_division_retrunController_bt_respond-garuda").disabled = false;
+        });
+    }
+});
+//------------------------------------------------------------------------------------------
+//member.documents_retrun_inside_department_retrun.detail
+$("#documents_retrun_inside_department_retrunController_docrtdt_government-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_department_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#ddocuments_retrun_inside_department_retrunController_docrtdt_draft-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_department_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_retrun_inside_department_retrunController_docrtdt_date-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_department_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_retrun_inside_department_retrunController_docrtdt_topic-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_department_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_retrun_inside_department_retrunController_docrtdt_podium-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_department_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_retrun_inside_department_retrunController_bt_preview-garuda").click(function(event) {
+    let _token = $("#_token").val(); //csrf_token
+    let documents_retrun_inside_department_retrunController_docrtdt_government_garuda = $("#documents_retrun_inside_department_retrunController_docrtdt_government-garuda").val(); //ส่วนราชการ
+    let documents_retrun_inside_department_retrunController_docrtdt_draft_garuda = $("#documents_retrun_inside_department_retrunController_docrtdt_draft-garuda").val(); //ที่ร่าง
+    let documents_retrun_inside_department_retrunController_docrtdt_date_garuda = $("#documents_retrun_inside_department_retrunController_docrtdt_date-garuda").val(); //วันที่
+    let documents_retrun_inside_department_retrunController_docrtdt_topic_garuda = $("#documents_retrun_inside_department_retrunController_docrtdt_topic-garuda").val(); //เรื่อง
+    let documents_retrun_inside_department_retrunController_docrtdt_podium_garuda = $("#documents_retrun_inside_department_retrunController_docrtdt_podium-garuda").val(); //ข้อความตั้งแท่น
+    if(documents_retrun_inside_department_retrunController_docrtdt_government_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ส่วนงานราชการ!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_department_retrunController_docrtdt_draft_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ที่ร่าง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_department_retrunController_docrtdt_date_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก วันที่!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_department_retrunController_docrtdt_topic_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก เรื่อง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_department_retrunController_docrtdt_podium_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก รายละเอียด!",
+            icon: "warning",
+        });
+        return;
+    }else{
+        const var_data = {
+            docrtdt_government_garuda: documents_retrun_inside_department_retrunController_docrtdt_government_garuda,
+            docrtdt_draft_garuda: documents_retrun_inside_department_retrunController_docrtdt_draft_garuda,
+            docrtdt_date_garuda: documents_retrun_inside_department_retrunController_docrtdt_date_garuda,
+            docrtdt_topic_garuda: documents_retrun_inside_department_retrunController_docrtdt_topic_garuda,
+            docrtdt_podium_garuda: documents_retrun_inside_department_retrunController_docrtdt_podium_garuda,
+            action_garuda: 'preview',
+            docrtdt_id_garuda: null,
+        };
+        // console.log(var_data);
+
+        fetch('/PDFRespond_garuda_retrun', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': _token
+        },
+        body:  JSON.stringify(var_data)
+        })
+        .then(response => response.arrayBuffer())
+        .then(result => {
+            // const content = await rawResponse.json();
+            $("#modal-preview").modal("show");
+            var blob = new Blob([result], { type: 'application/pdf' });
+            var fileURL = URL.createObjectURL(blob);
+                            
+            // const isMobile = navigator.userAgentData.mobile;
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            var newWin = window.open(fileURL);
+                newWin.focus();
+                var timer = setInterval(function() {
+                    if (newWin.closed) {
+                        clearInterval(timer);
+                        $("#modal-preview").modal("hide");
+                    }
+                }, 1000);
+            }else{
+                let input_cotton = document.querySelector("#documents_retrun_inside_department_retrunController_pdf_preview");
+                input_cotton.src = fileURL;
+                $("#documents_retrun_inside_department_retrunController_close-modal-preview").click(function(event) {
+                    $("#modal-preview").modal("hide");
+                });
+            }
+            document.getElementById("documents_retrun_inside_department_retrunController_bt_respond-garuda").disabled = false;
+        });
+    }
+});
+//------------------------------------------------------------------------------------------
+//member.documents_retrun_inside_work_retrun.detail
+$("#documents_retrun_inside_work_retrunController_docrtdt_government-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_work_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#ddocuments_retrun_inside_work_retrunController_docrtdt_draft-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_work_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_retrun_inside_work_retrunController_docrtdt_date-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_work_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_retrun_inside_work_retrunController_docrtdt_topic-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_work_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_retrun_inside_work_retrunController_docrtdt_podium-garuda").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_work_retrunController_bt_respond-garuda").disabled = true;
+});
+$("#documents_retrun_inside_work_retrunController_bt_preview-garuda").click(function(event) {
+    let _token = $("#_token").val(); //csrf_token
+    let documents_retrun_inside_work_retrunController_docrtdt_government_garuda = $("#documents_retrun_inside_work_retrunController_docrtdt_government-garuda").val(); //ส่วนราชการ
+    let documents_retrun_inside_work_retrunController_docrtdt_draft_garuda = $("#documents_retrun_inside_work_retrunController_docrtdt_draft-garuda").val(); //ที่ร่าง
+    let documents_retrun_inside_work_retrunController_docrtdt_date_garuda = $("#documents_retrun_inside_work_retrunController_docrtdt_date-garuda").val(); //วันที่
+    let documents_retrun_inside_work_retrunController_docrtdt_topic_garuda = $("#documents_retrun_inside_work_retrunController_docrtdt_topic-garuda").val(); //เรื่อง
+    let documents_retrun_inside_work_retrunController_docrtdt_podium_garuda = $("#documents_retrun_inside_work_retrunController_docrtdt_podium-garuda").val(); //ข้อความตั้งแท่น
+    if(documents_retrun_inside_work_retrunController_docrtdt_government_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ส่วนงานราชการ!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_work_retrunController_docrtdt_draft_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ที่ร่าง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_work_retrunController_docrtdt_date_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก วันที่!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_work_retrunController_docrtdt_topic_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก เรื่อง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_work_retrunController_docrtdt_podium_garuda == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก รายละเอียด!",
+            icon: "warning",
+        });
+        return;
+    }else{
+        const var_data = {
+            docrtdt_government_garuda: documents_retrun_inside_work_retrunController_docrtdt_government_garuda,
+            docrtdt_draft_garuda: documents_retrun_inside_work_retrunController_docrtdt_draft_garuda,
+            docrtdt_date_garuda: documents_retrun_inside_work_retrunController_docrtdt_date_garuda,
+            docrtdt_topic_garuda: documents_retrun_inside_work_retrunController_docrtdt_topic_garuda,
+            docrtdt_podium_garuda: documents_retrun_inside_work_retrunController_docrtdt_podium_garuda,
+            action_garuda: 'preview',
+            docrtdt_id_garuda: null,
+        };
+        // console.log(var_data);
+
+        fetch('/PDFRespond_garuda_retrun', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': _token
+        },
+        body:  JSON.stringify(var_data)
+        })
+        .then(response => response.arrayBuffer())
+        .then(result => {
+            // const content = await rawResponse.json();
+            $("#modal-preview").modal("show");
+            var blob = new Blob([result], { type: 'application/pdf' });
+            var fileURL = URL.createObjectURL(blob);
+                            
+            // const isMobile = navigator.userAgentData.mobile;
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            var newWin = window.open(fileURL);
+                newWin.focus();
+                var timer = setInterval(function() {
+                    if (newWin.closed) {
+                        clearInterval(timer);
+                        $("#modal-preview").modal("hide");
+                    }
+                }, 1000);
+            }else{
+                let input_cotton = document.querySelector("#documents_retrun_inside_work_retrunController_pdf_preview");
+                input_cotton.src = fileURL;
+                $("#documents_retrun_inside_work_retrunController_close-modal-preview").click(function(event) {
+                    $("#modal-preview").modal("hide");
+                });
+            }
+            document.getElementById("documents_retrun_inside_work_retrunController_bt_respond-garuda").disabled = false;
+        });
+    }
+
+});
+//------------------------------------------------------------------------------------------
 //member.documents_admission_inside_work_retrun.detail
 $("#documents_admission_inside_work_retrunController_sub3d_government-garuda").keyup(function(event) {
     document.getElementById("documents_admission_inside_work_retrunController_bt_respond-garuda").disabled = true;
@@ -1477,6 +1802,328 @@ $("#documents_admission_work_inside_allController_bt_preview-garuda").click(func
         });
 
         
+    }
+});
+//------------------------------------------------------------------------------------------
+//member.documents_retrun_inside_division_retrun.detail
+$("#documents_retrun_inside_division_retrunController_docrtdt_government").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_division_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_division_retrunController_docrtdt_draft").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_division_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_division_retrunController_docrtdt_date").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_division_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_division_retrunController_docrtdt_topic").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_division_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_division_retrunController_docrtdt_podium").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_division_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_division_retrunController_bt_preview").click(function(event) {
+    let _token = $("#_token").val(); //csrf_token
+    let documents_retrun_inside_division_retrunController_docrtdt_government = $("#documents_retrun_inside_division_retrunController_docrtdt_government").val(); //ส่วนราชการ
+    let documents_retrun_inside_division_retrunController_docrtdt_draft = $("#documents_retrun_inside_division_retrunController_docrtdt_draft").val(); //ที่ร่าง
+    let documents_retrun_inside_division_retrunController_docrtdt_date = $("#documents_retrun_inside_division_retrunController_docrtdt_date").val(); //วันที่
+    let documents_retrun_inside_division_retrunController_docrtdt_topic = $("#documents_retrun_inside_division_retrunController_docrtdt_topic").val(); //เรื่อง
+    let documents_retrun_inside_division_retrunController_docrtdt_podium = $("#documents_retrun_inside_division_retrunController_docrtdt_podium").val(); //ข้อความตั้งแท่น
+    if(documents_retrun_inside_division_retrunController_docrtdt_government == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ส่วนงานราชการ!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_division_retrunController_docrtdt_draft == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ที่ร่าง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_division_retrunController_docrtdt_date == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก วันที่!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_division_retrunController_docrtdt_topic == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก เรื่อง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_division_retrunController_docrtdt_podium == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก รายละเอียด!",
+            icon: "warning",
+        });
+        return;
+    }else{
+        const var_data = {
+            docrtdt_government: documents_retrun_inside_division_retrunController_docrtdt_government,
+            docrtdt_draft: documents_retrun_inside_division_retrunController_docrtdt_draft,
+            docrtdt_date: documents_retrun_inside_division_retrunController_docrtdt_date,
+            docrtdt_topic: documents_retrun_inside_division_retrunController_docrtdt_topic,
+            docrtdt_podium: documents_retrun_inside_division_retrunController_docrtdt_podium,
+            action: 'preview',
+            docrtdt_id: null,
+        };
+
+        fetch('/PDFRespond_retrun', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': _token
+        },
+        body:  JSON.stringify(var_data)
+        })
+        .then(response => response.arrayBuffer())
+        .then(result => {
+            // const content = await rawResponse.json();
+            $("#modal-preview").modal("show");
+            var blob = new Blob([result], { type: 'application/pdf' });
+            var fileURL = URL.createObjectURL(blob);
+                            
+            // const isMobile = navigator.userAgentData.mobile;
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            var newWin = window.open(fileURL);
+                newWin.focus();
+                var timer = setInterval(function() {
+                    if (newWin.closed) {
+                        clearInterval(timer);
+                        $("#modal-preview").modal("hide");
+                    }
+                }, 1000);
+            }else{
+                let input_cotton = document.querySelector("#documents_retrun_inside_division_retrunController_pdf_preview");
+                input_cotton.src = fileURL;
+                $("#documents_retrun_inside_division_retrunController_close-modal-preview").click(function(event) {
+                    $("#modal-preview").modal("hide");
+                });
+            }
+            document.getElementById("documents_retrun_inside_division_retrunController_bt_respond").disabled = false;
+        });
+    }
+});
+//------------------------------------------------------------------------------------------
+//member.documents_retrun_inside_department_retrun.detail
+$("#documents_retrun_inside_department_retrunController_docrtdt_government").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_department_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_department_retrunController_docrtdt_draft").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_department_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_department_retrunController_docrtdt_date").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_department_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_department_retrunController_docrtdt_topic").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_department_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_department_retrunController_docrtdt_podium").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_department_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_department_retrunController_bt_preview").click(function(event) {
+    let _token = $("#_token").val(); //csrf_token
+    let documents_retrun_inside_department_retrunController_docrtdt_government = $("#documents_retrun_inside_department_retrunController_docrtdt_government").val(); //ส่วนราชการ
+    let documents_retrun_inside_department_retrunController_docrtdt_draft = $("#documents_retrun_inside_department_retrunController_docrtdt_draft").val(); //ที่ร่าง
+    let documents_retrun_inside_department_retrunController_docrtdt_date = $("#documents_retrun_inside_department_retrunController_docrtdt_date").val(); //วันที่
+    let documents_retrun_inside_department_retrunController_docrtdt_topic = $("#documents_retrun_inside_department_retrunController_docrtdt_topic").val(); //เรื่อง
+    let documents_retrun_inside_department_retrunController_docrtdt_podium = $("#documents_retrun_inside_department_retrunController_docrtdt_podium").val(); //ข้อความตั้งแท่น
+    if(documents_retrun_inside_department_retrunController_docrtdt_government == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ส่วนงานราชการ!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_department_retrunController_docrtdt_draft == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ที่ร่าง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_department_retrunController_docrtdt_date == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก วันที่!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_department_retrunController_docrtdt_topic == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก เรื่อง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_department_retrunController_docrtdt_podium == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก รายละเอียด!",
+            icon: "warning",
+        });
+        return;
+    }else{
+        const var_data = {
+            docrtdt_government: documents_retrun_inside_department_retrunController_docrtdt_government,
+            docrtdt_draft: documents_retrun_inside_department_retrunController_docrtdt_draft,
+            docrtdt_date: documents_retrun_inside_department_retrunController_docrtdt_date,
+            docrtdt_topic: documents_retrun_inside_department_retrunController_docrtdt_topic,
+            docrtdt_podium: documents_retrun_inside_department_retrunController_docrtdt_podium,
+            action: 'preview',
+            docrtdt_id: null,
+        };
+
+        fetch('/PDFRespond_retrun', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': _token
+        },
+        body:  JSON.stringify(var_data)
+        })
+        .then(response => response.arrayBuffer())
+        .then(result => {
+            // const content = await rawResponse.json();
+            $("#modal-preview").modal("show");
+            var blob = new Blob([result], { type: 'application/pdf' });
+            var fileURL = URL.createObjectURL(blob);
+                            
+            // const isMobile = navigator.userAgentData.mobile;
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            var newWin = window.open(fileURL);
+                newWin.focus();
+                var timer = setInterval(function() {
+                    if (newWin.closed) {
+                        clearInterval(timer);
+                        $("#modal-preview").modal("hide");
+                    }
+                }, 1000);
+            }else{
+                let input_cotton = document.querySelector("#documents_retrun_inside_department_retrunController_pdf_preview");
+                input_cotton.src = fileURL;
+                $("#documents_retrun_inside_department_retrunController_close-modal-preview").click(function(event) {
+                    $("#modal-preview").modal("hide");
+                });
+            }
+            document.getElementById("documents_retrun_inside_department_retrunController_bt_respond").disabled = false;
+        });
+    }
+});
+//------------------------------------------------------------------------------------------
+//member.documents_retrun_inside_work_retrun.detail
+$("#documents_retrun_inside_work_retrunController_docrtdt_government").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_work_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_work_retrunController_docrtdt_draft").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_work_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_work_retrunController_docrtdt_date").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_work_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_work_retrunController_docrtdt_topic").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_work_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_work_retrunController_docrtdt_podium").keyup(function(event) {
+    document.getElementById("documents_retrun_inside_work_retrunController_bt_respond").disabled = true;
+});
+$("#documents_retrun_inside_work_retrunController_bt_preview").click(function(event) {
+    let _token = $("#_token").val(); //csrf_token
+    let documents_retrun_inside_work_retrunController_docrtdt_government = $("#documents_retrun_inside_work_retrunController_docrtdt_government").val(); //ส่วนราชการ
+    let documents_retrun_inside_work_retrunController_docrtdt_draft = $("#documents_retrun_inside_work_retrunController_docrtdt_draft").val(); //ที่ร่าง
+    let documents_retrun_inside_work_retrunController_docrtdt_date = $("#documents_retrun_inside_work_retrunController_docrtdt_date").val(); //วันที่
+    let documents_retrun_inside_work_retrunController_docrtdt_topic = $("#documents_retrun_inside_work_retrunController_docrtdt_topic").val(); //เรื่อง
+    let documents_retrun_inside_work_retrunController_docrtdt_podium = $("#documents_retrun_inside_work_retrunController_docrtdt_podium").val(); //ข้อความตั้งแท่น
+
+    if(documents_retrun_inside_work_retrunController_docrtdt_government == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ส่วนงานราชการ!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_work_retrunController_docrtdt_draft == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก ที่ร่าง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_work_retrunController_docrtdt_date == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก วันที่!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_work_retrunController_docrtdt_topic == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก เรื่อง!",
+            icon: "warning",
+        });
+        return;
+    }else if(documents_retrun_inside_work_retrunController_docrtdt_podium == ''){
+        swal({
+            title: "แจ้งเดือน",
+            text: "กรุณากรอก รายละเอียด!",
+            icon: "warning",
+        });
+        return;
+    }else{
+        const var_data = {
+            docrtdt_government: documents_retrun_inside_work_retrunController_docrtdt_government,
+            docrtdt_draft: documents_retrun_inside_work_retrunController_docrtdt_draft,
+            docrtdt_date: documents_retrun_inside_work_retrunController_docrtdt_date,
+            docrtdt_topic: documents_retrun_inside_work_retrunController_docrtdt_topic,
+            docrtdt_podium: documents_retrun_inside_work_retrunController_docrtdt_podium,
+            action: 'preview',
+            docrtdt_id: null,
+        };
+
+        fetch('/PDFRespond_retrun', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': _token
+        },
+        body:  JSON.stringify(var_data)
+        })
+        .then(response => response.arrayBuffer())
+        .then(result => {
+            // const content = await rawResponse.json();
+            $("#modal-preview").modal("show");
+            var blob = new Blob([result], { type: 'application/pdf' });
+            var fileURL = URL.createObjectURL(blob);
+                            
+            // const isMobile = navigator.userAgentData.mobile;
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            var newWin = window.open(fileURL);
+                newWin.focus();
+                var timer = setInterval(function() {
+                    if (newWin.closed) {
+                        clearInterval(timer);
+                        $("#modal-preview").modal("hide");
+                    }
+                }, 1000);
+            }else{
+                let input_cotton = document.querySelector("#documents_retrun_inside_work_retrunController_pdf_preview");
+                input_cotton.src = fileURL;
+                $("#documents_retrun_inside_work_retrunController_close-modal-preview").click(function(event) {
+                    $("#modal-preview").modal("hide");
+                });
+            }
+            document.getElementById("documents_retrun_inside_work_retrunController_bt_respond").disabled = false;
+        });
     }
 });
 //------------------------------------------------------------------------------------------

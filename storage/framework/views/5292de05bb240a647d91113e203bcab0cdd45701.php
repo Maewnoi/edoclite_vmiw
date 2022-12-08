@@ -355,7 +355,7 @@ unset($__errorArgs, $__bag); ?>
                                                                 <div class="col-3">
                                                                     <input class="mt-3 form-control form-control-border"
                                                                         id="documents_admission_work_allController_sub3d_date-garuda"
-                                                                        name="sub3d_date_garuda" type="text" value="21 oct 1988">
+                                                                        name="sub3d_date_garuda" type="text" value="21 ธันวาคม 1988">
                                                                 </div>
                                                                 <div class="col-4">
                                                                 </div>
