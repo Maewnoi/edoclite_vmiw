@@ -1535,32 +1535,37 @@ $("#navigationController_bt_preview-garuda").click(function(event) {
         })
         .then(response => response.arrayBuffer())
         .then(result => {
-            // const content = await rawResponse.json();
-            $("#modal-Create-new-document-inside-retrun-preview").modal("show");
+
+            // $("#modal-Create-new-document-inside-retrun-preview").modal("show");
             var blob = new Blob([result], { type: 'application/pdf' });
             var fileURL = URL.createObjectURL(blob);
                             
-            // const isMobile = navigator.userAgentData.mobile;
             if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
             var newWin = window.open(fileURL);
                 newWin.focus();
                 var timer = setInterval(function() {
                     if (newWin.closed) {
                         clearInterval(timer);
-                        $("#modal-Create-new-document-inside-retrun-preview").modal("hide");
+                        // $("#modal-Create-new-document-inside-retrun-preview").modal("hide");
                     }
                 }, 1000);
             }else{
-                let input_cotton = document.querySelector("#navigationController_pdf_preview");
+                document.getElementById('navigationController_pdf_preview-garuda').style.display = 'block';
+                document.getElementById('navigationController_page-garuda').style.display = 'none';
+                let input_cotton = document.querySelector("#navigationController_pdf_preview-garuda");
                 input_cotton.src = fileURL;
-                $("#navigationController_close-modal-preview").click(function(event) {
-                    $("#modal-Create-new-document-inside-retrun-preview").modal("hide");
-                });
+                // $("#navigationController_close-modal-preview").click(function(event) {
+                //     $("#modal-Create-new-document-inside-retrun-preview").modal("hide");
+                // });
             }
             document.getElementById("navigationController_bt_respond-garuda").disabled = false;
         });
 
     }
+});
+$("#navigationController_bt_preview-edit-garuda").click(function(event) {
+    document.getElementById('navigationController_pdf_preview-garuda').style.display = 'none';
+    document.getElementById('navigationController_page-garuda').style.display = 'block';
 });
 //------------------------------------------------------------------------------------------
 //member.documents_admission_work_all.detail
@@ -2434,12 +2439,11 @@ $("#navigationController_bt_preview").click(function(event) {
         })
         .then(response => response.arrayBuffer())
         .then(result => {
-            // const content = await rawResponse.json();
-            $("#modal-Create-new-document-inside-retrun-preview").modal("show");
+
+            // $("#modal-Create-new-document-inside-retrun-preview").modal("show");
             var blob = new Blob([result], { type: 'application/pdf' });
             var fileURL = URL.createObjectURL(blob);
                             
-            // const isMobile = navigator.userAgentData.mobile;
             if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
             var newWin = window.open(fileURL);
                 newWin.focus();
@@ -2450,17 +2454,23 @@ $("#navigationController_bt_preview").click(function(event) {
                     }
                 }, 1000);
             }else{
+                document.getElementById('navigationController_pdf_preview').style.display = 'block';
+                document.getElementById('navigationController_page').style.display = 'none';
                 let input_cotton = document.querySelector("#navigationController_pdf_preview");
                 input_cotton.src = fileURL;
-                $("#navigationController_close-modal-preview").click(function(event) {
-                    $("#modal-Create-new-document-inside-retrun-preview").modal("hide");
-                });
+                // $("#navigationController_close-modal-preview").click(function(event) {
+                //     $("#modal-Create-new-document-inside-retrun-preview").modal("hide");
+                // });
             }
             document.getElementById("navigationController_bt_respond").disabled = false;
         });
 
 
     }
+});
+$("#navigationController_bt_preview-edit").click(function(event) {
+    document.getElementById('navigationController_pdf_preview').style.display = 'none';
+    document.getElementById('navigationController_page').style.display = 'block';
 });
 //------------------------------------------------------------------------------------------
 //member.documents_admission_work_all.detail

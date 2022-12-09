@@ -4634,7 +4634,7 @@ unset($__errorArgs, $__bag); ?>
                                         <div class="col-md-12 table-responsive">
                                             <div class="form-group hide"
                                                 id="navigationController_form-group_tb-docrt_details-garuda">
-                                                <page id="navigationController_page"
+                                                <page id="navigationController_page-garuda"
                                                     class="items-center block p-24 mx-auto bg-white shadow-2xl">
                                                     <div class="row">
                                                         <div class="col-3 pt-14">
@@ -4675,12 +4675,21 @@ unset($__errorArgs, $__bag); ?>
                                                         </div>
                                                     </div>
                                                 </page>
-
+                                                <!-- // แสดงตัวอย่าง -->
+                                                <iframe id="navigationController_pdf_preview-garuda" class="hide" frameborder="0" height="800px"
+                                                    width="100%">
+                                                </iframe>
                                                 <div class="flex items-center justify-center mt-20">
                                                     <button type="button"
                                                         id="navigationController_bt_preview-garuda"
                                                         class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-900 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:shadow-outline-blue disabled:opacity-25">
                                                         <?php echo e(__('แสดงตัวอย่าง')); ?>
+
+                                                    </button>
+                                                    <button type="button"
+                                                        id="navigationController_bt_preview-edit-garuda" 
+                                                        class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-900 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:shadow-outline-blue disabled:opacity-25">
+                                                        <?php echo e(__('แก้ไขอีกครั้ง')); ?>
 
                                                     </button>
                                                     <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -4756,12 +4765,21 @@ unset($__errorArgs, $__bag); ?>
                                                         </div>
                                                     </div>
                                                 </page>
-                                                       
+                                                <!-- // แสดงตัวอย่าง -->
+                                                <iframe id="navigationController_pdf_preview" class="hide" frameborder="0" height="800px"
+                                                    width="100%">
+                                                </iframe>
                                                 <div class="flex items-center justify-center mt-20">
                                                     <button type="button"
                                                         id="navigationController_bt_preview"
                                                         class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-900 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:shadow-outline-blue disabled:opacity-25">
                                                         <?php echo e(__('แสดงตัวอย่าง')); ?>
+
+                                                    </button>
+                                                    <button type="button"
+                                                        id="navigationController_bt_preview-edit"
+                                                        class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-900 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:shadow-outline-blue disabled:opacity-25">
+                                                        <?php echo e(__('แก้ไขอีกครั้ง')); ?>
 
                                                     </button>
                                                     <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -4787,26 +4805,6 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </form>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal preview -->
-    <div class="modal fade" id="modal-Create-new-document-inside-retrun-preview">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="bg-indigo-300 modal-header">
-                    <label class="modal-title">ตัวอย่างเอกสาร
-                    </label>
-                    <button type="button"
-                        id="navigationController_close-modal-preview" type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="col-12">
-                        <iframe id="navigationController_pdf_preview" frameborder="0" height="800px"
-                            width="100%">
-                        </iframe>
                     </div>
                 </div>
             </div>
