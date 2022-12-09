@@ -54,7 +54,7 @@ use App\Http\Controllers\documents_retrun_inside_minister_signController;
 use App\Http\Controllers\documents_retrun_inside_work_retrunController;
 use App\Http\Controllers\documents_retrun_inside_department_retrunController;
 use App\Http\Controllers\documents_retrun_inside_division_retrunController;
-
+use App\Http\Controllers\route_domjiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -257,6 +257,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/service/edit/{id}',[ServiceController::class,'edit']);
     Route::post('/service/update/{id}',[ServiceController::class,'update']);
     Route::get('/service/delete/{id}',[ServiceController::class,'delete']);
+
+    Route::get('/domji',[route_domjiController::class,'index']);
+    Route::post('/domji/submit',[route_domjiController::class,'submit'])->name('domji_submit');
     //---------------------------------------------------------------------------------------------------
     //replace รักษาการแทน
     Route::get('/replace/all',[replaceController::class,'index'])->name('replace');
