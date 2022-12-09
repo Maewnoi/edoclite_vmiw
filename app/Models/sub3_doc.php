@@ -23,6 +23,11 @@ class sub3_doc extends Model
         'sub3_check_1',
         'sub3_inspector_1',
         'sub3_datetime_1',
+
+        'sub3_check_2',
+        'sub3_inspector_2',
+        'sub3_datetime_2',
+
         'sub3_sealdetail_0',
         'sub3_sealnote_0',
         'sub3_sealpos_0',

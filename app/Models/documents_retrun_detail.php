@@ -12,7 +12,7 @@ class documents_retrun_detail extends Model
 
     protected $fillable = [
         'docrtdt_id',
-        'docrtdt_sub_3id',
+        'docrtdt_docrt_id',
         'docrtdt_government',
         'docrtdt_draft',
         'docrtdt_date',

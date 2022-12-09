@@ -14,7 +14,7 @@ class documents_retrun_inside_division_signController extends Controller
     //
     public function index(){
         if(Auth::user()->level=='4'){
-            // $documents_retrun_inside_division_sign = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            // $documents_retrun_inside_division_sign = documents_retrun::join('documents_retrun_details','documents_retrun_details.docrtdt_docrt_id','documents_retruns.docrt_id')
             // ->where('docrt_sites_id',Auth::user()->site_id)
             // ->where('docrt_status', '1')
             // ->where('docrt_inspector_1', Auth::user()->id)
@@ -27,7 +27,7 @@ class documents_retrun_inside_division_signController extends Controller
     
     public function detail($id){
         if(Auth::user()->level=='4'){
-            $document_retrun_inside_detail = documents_retrun::join('Documents_retrun_details','Documents_retrun_details.docrtdt_docrt_id','Documents_retruns.docrt_id')
+            $document_retrun_inside_detail = documents_retrun::join('documents_retrun_details','documents_retrun_details.docrtdt_docrt_id','documents_retruns.docrt_id')
             ->where('docrt_id',$id)
             ->first();
             return view('member.documents_retrun_inside_division_sign.detail',compact('document_retrun_inside_detail'));

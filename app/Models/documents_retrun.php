@@ -23,6 +23,11 @@ class documents_retrun extends Model
         'docrt_check_1',
         'docrt_inspector_1',
         'docrt_datetime_1',
+
+        'docrt_check_2',
+        'docrt_inspector_2',
+        'docrt_datetime_2',
+
         'docrt_sealdetail_0',
         'docrt_sealnote_0',
         'docrt_sealpos_0',
