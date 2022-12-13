@@ -19,6 +19,44 @@ use Illuminate\Support\Facades\Auth;
 
 class functionController extends Controller
 { 
+    public static function format_Size($set_bytes){
+        $set_kb = 1024;
+        $set_mb = $set_kb * 1024;
+        $set_gb = $set_mb * 1024;
+        $set_tb = $set_gb * 1024;
+        if (($set_bytes >= 0) && ($set_bytes < $set_kb)){
+            return $set_bytes . ' B';
+        }elseif (($set_bytes >= $set_kb) && ($set_bytes < $set_mb)){
+            return ceil($set_bytes / $set_kb) . ' KB';
+        }elseif (($set_bytes >= $set_mb) && ($set_bytes < $set_gb)){
+            return ceil($set_bytes / $set_mb) . ' MB';
+        }elseif (($set_bytes >= $set_gb) && ($set_bytes < $set_tb)){
+            return ceil($set_bytes / $set_gb) . ' GB';
+        }elseif ($set_bytes >= $set_tb){
+            return ceil($set_bytes / $set_tb) . ' TB';
+        } else {
+            return $set_bytes . ' Bytes';
+        }
+    }
+
+    public static function folder_Size($set_dir){
+        $set_total_size = 0;
+        $set_count = 0;
+        $set_dir_array = scandir($set_dir);
+        foreach($set_dir_array as $key=>$set_filename){
+            if($set_filename!=".." && $set_filename!="."){
+                if(is_dir($set_dir."/".$set_filename)){
+                    $new_foldersize = functionController::folder_Size($set_dir."/".$set_filename);
+                    $set_total_size = $set_total_size+ $new_foldersize;
+                }else if(is_file($set_dir."/".$set_filename)){
+                    $set_total_size = $set_total_size + filesize($set_dir."/".$set_filename);
+                    $set_count++;
+                }
+            }
+        }
+        return $set_total_size;
+    }
+    
     //ฟังชันเรียกประเภทเอกสารตอบกลับภายใน
     public static function funtion_docrt_type($speed) {
         if($speed == '0'){

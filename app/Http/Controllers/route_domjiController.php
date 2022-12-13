@@ -20,10 +20,12 @@ class route_domjiController extends Controller
 
     public function submit(Request $request){
         if(Auth::user()->level=='0'){
-            $galleryId = 1;
-            $path = public_path().'/image/' . $galleryId;
-            File::makeDirectory($path, $mode = 0777, true, true);
-            dd($path);
+            
+
+            // $set_folder_path = "image/user";
+            // $show = format_Size(folder_Size($set_folder_path));
+            // dd($show);
+
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }

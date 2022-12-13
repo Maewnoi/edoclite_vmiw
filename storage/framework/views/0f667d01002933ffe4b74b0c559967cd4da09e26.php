@@ -1,3 +1,6 @@
+<?php
+use App\Http\Controllers\functionController;
+?>
 <?php if (isset($component)) { $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\AppLayout::class, []); ?>
 <?php $component->withName('app-layout'); ?>
@@ -24,6 +27,7 @@
                                         <th scope="col">ลำดับ</th>
                                         <th scope="col">ชื่อ</th>
                                         <th scope="col">เส้นทางเก็บไฟล์ (แก้ไขไม่ได้)</th>
+                                        <th scope="col">ขนาดการใช้งาน</th>
                                         <th scope="col">วันที่สร้าง</th>
                                         <th scope="col">วันที่อัพเดต</th>
                                         <th scope="col">จัดการ</th>
@@ -34,7 +38,8 @@
                                     <tr>
                                         <th><?php echo e($loop->index+1); ?></th>
                                         <td><?php echo e($row->site_name); ?></td>
-                                        <td><?php echo e($row->site_path_folder); ?></td>
+                                        <td><?php echo e(substr($row->site_path_folder, 0, -25)); ?></td>
+                                        <td><?php echo functionController::format_Size(functionController::folder_Size("image/".$row->site_path_folder)); ?></td>
                                         <td>
                                             <?php if($row->site_created_at != NULL): ?>
                                             <span

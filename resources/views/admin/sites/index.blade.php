@@ -1,3 +1,6 @@
+@php
+use App\Http\Controllers\functionController;
+@endphp
 <x-app-layout>
     <!-- <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
@@ -18,6 +21,7 @@
                                         <th scope="col">ลำดับ</th>
                                         <th scope="col">ชื่อ</th>
                                         <th scope="col">เส้นทางเก็บไฟล์ (แก้ไขไม่ได้)</th>
+                                        <th scope="col">ขนาดการใช้งาน</th>
                                         <th scope="col">วันที่สร้าง</th>
                                         <th scope="col">วันที่อัพเดต</th>
                                         <th scope="col">จัดการ</th>
@@ -28,7 +32,8 @@
                                     <tr>
                                         <th>{{$loop->index+1}}</th>
                                         <td>{{$row->site_name}}</td>
-                                        <td>{{$row->site_path_folder}}</td>
+                                        <td>{{substr($row->site_path_folder, 0, -25)}}</td>
+                                        <td>{!! functionController::format_Size(functionController::folder_Size("image/".$row->site_path_folder))!!}</td>
                                         <td>
                                             @if($row->site_created_at != NULL)
                                             <span

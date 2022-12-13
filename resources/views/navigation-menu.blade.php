@@ -884,11 +884,11 @@ use App\Http\Controllers\functionController;
                             <x-jet-dropdown-link href="{{ route('profile.show') }}" class="text-decoration-none">
                                 {{ __('โปรไฟล์') }}
                             </x-jet-dropdown-link>
-                            @if(Auth::user()->level == '4')
+                            <!-- @if(Auth::user()->level == '4')
                             <x-jet-dropdown-link href="{{ route('replace') }}" class="text-decoration-none">
                                 {{ __('รักษาการแทน') }}
                             </x-jet-dropdown-link>
-                            @endif
+                            @endif -->
 
                             @if(Auth::user()->level == '3')
                             <x-jet-dropdown-link href="{{ route('s_groupmem') }}" class="text-decoration-none">
