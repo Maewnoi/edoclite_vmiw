@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\document;
 use App\Models\Groupmem;
 use App\Models\User;
+use App\Models\sites;
 use App\Http\Controllers\functionController;
 use App\Models\reserve_number;
 use App\Models\sub_doc;
@@ -611,6 +612,8 @@ class member_dashboardController extends Controller
             }
         }
         
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+
         //หา ID documentล่าสุด
         $document_Check_doc_id = document::max('doc_id');
         $doc_id_new = $document_Check_doc_id + 1;
@@ -624,7 +627,7 @@ class member_dashboardController extends Controller
         $doc_filedirec_img_ext = strtolower($doc_filedirec->getClientOriginalExtension());
         $doc_filedirec_img_name = $name_gen_new.'.'.$doc_filedirec_img_ext;
         //อัพโหลดและบันทึกข้อมูล
-        $upload_location = 'image/'.$year_new.'/upload/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/upload/';
         $doc_filedirec_full_path = $upload_location.$doc_filedirec_img_name;
         $doc_filedirec->move($upload_location,$doc_filedirec_img_name);
 
@@ -635,7 +638,7 @@ class member_dashboardController extends Controller
             $doc_attached_file_img_ext = strtolower($doc_attached_file->getClientOriginalExtension());
             $doc_attached_file_img_ext_img_name = $name_gen_new.'.'.$doc_attached_file_img_ext;
             //อัพโหลดและบันทึกข้อมูล
-            $upload_location_doc_attached_file = 'image/'.$year_new.'/attachedfile/';
+            $upload_location_doc_attached_file = 'image/'.$sites->site_path_folder.'/'.$year_new.'/attachedfile/';
             $doc_attached_file_full_path = $upload_location_doc_attached_file.$doc_attached_file_img_ext_img_name;
             $doc_attached_file->move($upload_location_doc_attached_file,$doc_attached_file_img_ext_img_name);
         }else{
@@ -794,6 +797,8 @@ class member_dashboardController extends Controller
              }
          }
 
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+
         //หา ID documentล่าสุด
         $document_Check_doc_id = document::max('doc_id');
         $doc_id_new = $document_Check_doc_id + 1;
@@ -807,7 +812,7 @@ class member_dashboardController extends Controller
         $doc_filedirec_img_ext = strtolower($doc_filedirec->getClientOriginalExtension());
         $doc_filedirec_img_name = $name_gen_new.'.'.$doc_filedirec_img_ext;
         //อัพโหลดและบันทึกข้อมูล
-        $upload_location = 'image/'.$year_new.'/upload/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/upload/';
         $doc_filedirec_full_path = $upload_location.$doc_filedirec_img_name;
         $doc_filedirec->move($upload_location,$doc_filedirec_img_name);
 
@@ -818,7 +823,7 @@ class member_dashboardController extends Controller
             $doc_attached_file_img_ext = strtolower($doc_attached_file->getClientOriginalExtension());
             $doc_attached_file_img_ext_img_name = $name_gen_new.'.'.$doc_attached_file_img_ext;
             //อัพโหลดและบันทึกข้อมูล
-            $upload_location_doc_attached_file = 'image/'.$year_new.'/attachedfile/';
+            $upload_location_doc_attached_file = 'image/'.$sites->site_path_folder.'/'.$year_new.'/attachedfile/';
             $doc_attached_file_full_path = $upload_location_doc_attached_file.$doc_attached_file_img_ext_img_name;
             $doc_attached_file->move($upload_location_doc_attached_file,$doc_attached_file_img_ext_img_name);
         }else{

@@ -14,6 +14,7 @@ class sites extends Model
         'site_id',
         'site_name',
         'site_number_run',
+        'site_path_folder',
         'site_created_at',
         'site_updated_at'
     ];

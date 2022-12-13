@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\document;
 use App\Models\reserve_number;
 use App\Models\sub_doc;
+use App\Models\sites;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -114,7 +115,7 @@ class documents_admission_all_insideController extends Controller
                 'doc_filedirec.max'=>"รองรับขนาดไฟล์ไม่เกิน 10MB",
             ]
         );
-
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
         $date_new = date('Y-m-d');
         $year_new = date('Y');
 
@@ -126,7 +127,7 @@ class documents_admission_all_insideController extends Controller
         $doc_filedirec_img_ext = strtolower($doc_filedirec->getClientOriginalExtension());
         $doc_filedirec_img_name = $name_gen_new.'.'.$doc_filedirec_img_ext;
         //อัพโหลดและบันทึกข้อมูล
-        $upload_location = 'image/'.$year_new.'/upload/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/upload/';
         $doc_filedirec_full_path = $upload_location.$doc_filedirec_img_name;
 
         //ลบภาพเก่าและอัพภาพใหม่แทนที่

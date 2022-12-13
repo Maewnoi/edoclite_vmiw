@@ -17,6 +17,7 @@
                                     <tr>
                                         <th scope="col">ลำดับ</th>
                                         <th scope="col">ชื่อ</th>
+                                        <th scope="col">เส้นทางเก็บไฟล์ (แก้ไขไม่ได้)</th>
                                         <th scope="col">วันที่สร้าง</th>
                                         <th scope="col">วันที่อัพเดต</th>
                                         <th scope="col">จัดการ</th>
@@ -27,6 +28,7 @@
                                     <tr>
                                         <th>{{$loop->index+1}}</th>
                                         <td>{{$row->site_name}}</td>
+                                        <td>{{$row->site_path_folder}}</td>
                                         <td>
                                             @if($row->site_created_at != NULL)
                                             <span

@@ -359,10 +359,10 @@ class functionController extends Controller
         }else{ //error
             return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [sealid] !');
         }
-
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
         $date_new = date('Y-m-d');
         $year_new = date('Y');
-        $upload_location = 'image/'.$year_new.'/respond/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond/';
         $name_gen_new = $doc_id."_".$date_new;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
@@ -402,10 +402,10 @@ class functionController extends Controller
             $pdf->AddPage();
             $pdf->useTemplate($tplIdx, null, null, null);
         }
- 
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
         $date_new = date('Y-m-d');
         $year_new = date('Y');
-        $upload_location = 'image/'.$year_new.'/fileseal01/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/fileseal01/';
         $name_gen_new = $doc_id."_".$date_new;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
@@ -517,10 +517,10 @@ class functionController extends Controller
             $pdf->AddPage();
             $pdf->useTemplate($tplIdx, null, null, null);
         }
-
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
         $date_new = date('Y-m-d');
         $year_new = date('Y');
-        $upload_location = 'image/'.$year_new.'/fileseal00/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/fileseal00/';
         $name_gen_new = $doc_id."_".$date_new;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
@@ -698,9 +698,10 @@ class functionController extends Controller
         if($request->action_garuda == 'preview'){
             return response($pdf->Output())->header('Content-Type', 'application/pdf');
         }else if($request->action_garuda == 'respond'){
+            $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
             $date_new = date('Y-m-d');
             $year_new = date('Y');
-            $upload_location = 'image/'.$year_new.'/respond/';
+            $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond/';
             $name_gen_new = $request->sub3_id_garuda."_".$date_new;
             // $name_gen_new = 'test_by_domji';
             $full_path = $upload_location.$name_gen_new.'.pdf';
@@ -791,9 +792,10 @@ class functionController extends Controller
         if($request->action_garuda == 'preview'){
             return response($pdf->Output())->header('Content-Type', 'application/pdf');
         }else if($request->action_garuda == 'respond'){
+            $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
             $date_new = date('Y-m-d');
             $year_new = date('Y');
-            $upload_location = 'image/'.$year_new.'/respond_retrun/';
+            $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond_retrun/';
             $name_gen_new = $request->docrt_id_garuda."_".$date_new;
             // $name_gen_new = 'test_by_domji';
             $full_path = $upload_location.$name_gen_new.'.pdf';
@@ -924,9 +926,10 @@ class functionController extends Controller
         if($request->action == 'preview'){
             return response($pdf->Output())->header('Content-Type', 'application/pdf');
         }else if($request->action == 'respond'){
+            $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
             $date_new = date('Y-m-d');
             $year_new = date('Y');
-            $upload_location = 'image/'.$year_new.'/respond/';
+            $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond/';
             $name_gen_new = $request->sub3_id."_".$date_new;
             // $name_gen_new = 'test_by_domji';
             $full_path = $upload_location.$name_gen_new.'.pdf';
@@ -1059,9 +1062,10 @@ class functionController extends Controller
         if($request->action == 'preview'){
             return response($pdf->Output())->header('Content-Type', 'application/pdf');
         }else if($request->action == 'respond'){
+            $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
             $date_new = date('Y-m-d');
             $year_new = date('Y');
-            $upload_location = 'image/'.$year_new.'/respond_retrun/';
+            $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond_retrun/';
             $name_gen_new = $request->docrt_id."_".$date_new;
             // $name_gen_new = 'test_by_domji';
             $full_path = $upload_location.$name_gen_new.'.pdf';
@@ -1547,9 +1551,10 @@ class functionController extends Controller
                
             }
         }
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
         $date_new = date('Y-m-d');
         $year_new = date('Y');
-        $upload_location = 'image/'.$year_new.'/fileseal01/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/fileseal01/';
         $name_gen_new = $sub_id."_".$date_new;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
@@ -1639,9 +1644,10 @@ class functionController extends Controller
 
             }
         }
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
         $date_new = date('Y-m-d');
        $year_new = date('Y');
-        $upload_location = 'image/'.$year_new.'/fileseal01/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/fileseal01/';
        $name_gen_new = $sub_id."_".$date_new;
         $full_path = $upload_location.$name_gen_new.'.pdf';
        $pdf->Output('F', $full_path);
@@ -1878,10 +1884,10 @@ class functionController extends Controller
             $pdf->AddPage();
             $pdf->useTemplate($tplIdx, null, null, null);
         }
-        
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
         $date_new = date('Y-m-d');
         $year_new = date('Y');
-        $upload_location = 'image/'.$year_new.'/fileseal00/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/fileseal00/';
         $name_gen_new = $doc_id."_".$date_new;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
