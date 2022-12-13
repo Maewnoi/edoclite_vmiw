@@ -885,7 +885,7 @@ use App\Http\Controllers\functionController;
                                 {{ __('โปรไฟล์') }}
                             </x-jet-dropdown-link>
                             <!-- @if(Auth::user()->level == '4')
-                            <x-jet-dropdown-link href="{{ route('replace') }}" class="text-decoration-none">
+                            <x-jet-dropdown-link href="" class="text-decoration-none">
                                 {{ __('รักษาการแทน') }}
                             </x-jet-dropdown-link>
                             @endif -->
