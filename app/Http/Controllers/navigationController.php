@@ -18,6 +18,16 @@ use App\Models\replace;
 
 class navigationController extends Controller
 {
+    public static function funtion_replace_name_menu_level_7_5_4_2_1($id) {
+        if(Auth::user()->level == '7' || Auth::user()->level == '5' || Auth::user()->level == '4' || Auth::user()->level == '2' || Auth::user()->level == '1'){
+            $replace_S = replace::where('replace_user_id_acting', $id)
+            ->get();
+            return $replace_S;
+        }else{
+            return 0;
+        }
+    }
+
     public static function funtion_replace_check_menu_level_7_5_4_2_1($id) {
         if(Auth::user()->level == '7' || Auth::user()->level == '5' || Auth::user()->level == '4' || Auth::user()->level == '2' || Auth::user()->level == '1'){
             $replace_count_S = replace::where('replace_user_id_acting', $id)

@@ -802,9 +802,12 @@ use App\Http\Controllers\functionController;
                                     </span>
                                 </x-slot>
                                 <x-slot name="content">
+                                    @foreach(navigationController::funtion_replace_name_menu_level_7_5_4_2_1(Auth::user()->id) as $row_replace_name)
                                     <div class="block px-4 py-2 text-xs text-gray-400">
-                                        {{ __('เมนู') }}
+                                        {{ functionController::funtion_users($row_replace_name->replace_user_id) }}
                                     </div>
+                                    <div class="border-t border-gray-100"></div>
+                                    @endforeach
                                 </x-slot>
                             </x-jet-dropdown>
                         </div>
@@ -890,9 +893,7 @@ use App\Http\Controllers\functionController;
                                 <button type="button"
                                     class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none">
                                     {{ __('คุณ') }} {{ Auth::user()->name }}
-                                    <div class="block px-1 py-1 text-gray-400">
-                                        {{ __(' : ') }} {{ Auth::user()->pos }}
-                                    </div>
+                                   
                                     <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd"
@@ -913,7 +914,7 @@ use App\Http\Controllers\functionController;
                         <x-slot name="content">
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('โปรไฟล์ของฉัน') }}
+                                {{ Auth::user()->pos }}
                             </div>
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}" class="text-decoration-none">

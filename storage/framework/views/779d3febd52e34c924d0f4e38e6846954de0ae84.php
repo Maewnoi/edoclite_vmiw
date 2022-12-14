@@ -1692,10 +1692,13 @@ use App\Http\Controllers\functionController;
                                     </span>
                                  <?php $__env->endSlot(); ?>
                                  <?php $__env->slot('content', null, []); ?> 
+                                    <?php $__currentLoopData = navigationController::funtion_replace_name_menu_level_7_5_4_2_1(Auth::user()->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_replace_name): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="block px-4 py-2 text-xs text-gray-400">
-                                        <?php echo e(__('เมนู')); ?>
+                                        <?php echo e(functionController::funtion_users($row_replace_name->replace_user_id)); ?>
 
                                     </div>
+                                    <div class="border-t border-gray-100"></div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                  <?php $__env->endSlot(); ?>
                              <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
@@ -1848,10 +1851,7 @@ use App\Http\Controllers\functionController;
                                     class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none">
                                     <?php echo e(__('คุณ')); ?> <?php echo e(Auth::user()->name); ?>
 
-                                    <div class="block px-1 py-1 text-gray-400">
-                                        <?php echo e(__(' : ')); ?> <?php echo e(Auth::user()->pos); ?>
-
-                                    </div>
+                                   
                                     <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd"
@@ -1872,7 +1872,7 @@ use App\Http\Controllers\functionController;
                          <?php $__env->slot('content', null, []); ?> 
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                <?php echo e(__('โปรไฟล์ของฉัน')); ?>
+                                <?php echo e(Auth::user()->pos); ?>
 
                             </div>
 

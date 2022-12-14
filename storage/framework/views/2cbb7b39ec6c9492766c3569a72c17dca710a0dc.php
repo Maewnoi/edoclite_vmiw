@@ -298,11 +298,11 @@ $.widget.bridge('uibutton', $.ui.button)
 </script>
 
 <!-- ปิดระบบ -->
-<script>
+<!-- <script>
 setInterval( function () {
     swal({
             title: "ปิดปรับปรุงระบบสักครู่ (offline)",
             icon: "error",
     });
 }, 1000 );
-</script><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/layouts/guest.blade.php ENDPATH**/ ?>
+</script> --><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/layouts/guest.blade.php ENDPATH**/ ?>
