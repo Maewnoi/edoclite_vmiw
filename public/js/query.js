@@ -304,6 +304,29 @@ $('#funtion_document_documents_admission_jurisprudence_all_count').each(function
     }, 3000 );
 });
 
+$('#funtion_replace_check_menu_count_level_7_5_4_2_1').each(function () {
+    document.getElementById('funtion_replace_check_menu_count_level_7_5_4_2_1').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_replace_check_menu_count_level_7_5_4_2_1() {
+        $.ajax({
+            type: "GET",
+            url: "/replace_check_menu/count/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_replace_check_menu_count_level_7_5_4_2_1').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_replace_check_menu_count_level_7_5_4_2_1').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_replace_check_menu_count_level_7_5_4_2_1();
+    setInterval( function () {
+        funtion_replace_check_menu_count_level_7_5_4_2_1();
+    }, 3000 );
+});
+
 $('#chart_level_0').each(function () {
     var dataPoints = [];
     var var_chart_level_0 = new CanvasJS.Chart("chart_level_0", {

@@ -9,6 +9,7 @@ use App\Models\sites;
 use App\Models\User;
 use App\Models\document;
 use App\Models\cottons;
+use App\Models\replace;
 use App\Models\reserve_number;
 use App\Models\sub_doc;
 use App\Models\sub2_doc;
@@ -1441,11 +1442,11 @@ class functionController extends Controller
                 
                 //กำหนดแกน x ให้กับข้อความ
                   $x1 = 0; $x2 = 0; $x3 = 0;
-                  if($seal_point == '1'){ $sealpoint = 3; $x1 = 20; $x2 = 14; $x3 = 17; }
-                  if($seal_point == '2'){ $sealpoint = 43; $x1 = 60; $x2 = 54; $x3 = 57; }
-                  if($seal_point == '3'){ $sealpoint = 83; $x1 = 100; $x2 = 94; $x3 = 97; }
-                  if($seal_point == '4'){ $sealpoint = 123; $x1 = 140; $x2 = 135; $x3 = 138; }
-                  if($seal_point == '5'){ $sealpoint = 163;  $x1 = 180; $x2 = 175; $x3 = 178; }
+                  if($seal_point == '1'){ $sealpoint = 3; $x1 = 20; $x2 = 13; $x3 = 17; }
+                  if($seal_point == '2'){ $sealpoint = 43; $x1 = 60; $x2 = 53; $x3 = 57; }
+                  if($seal_point == '3'){ $sealpoint = 83; $x1 = 100; $x2 = 93; $x3 = 97; }
+                  if($seal_point == '4'){ $sealpoint = 123; $x1 = 140; $x2 = 134; $x3 = 138; }
+                  if($seal_point == '5'){ $sealpoint = 163;  $x1 = 180; $x2 = 174; $x3 = 178; }
 
                 //ตราแสตมป์
                 if($groupmems->group_seal == ''){
@@ -1847,11 +1848,11 @@ class functionController extends Controller
             $xx2 = 0;
             $xx3 = 0;
 
-            if($seal_point == '1'){ $sealpoint = 5; $x1 = 20; $x2 = 14; $x3 = 17; }
-            if($seal_point == '2'){ $sealpoint = 45; $x1 = 60; $x2 = 54; $x3 = 57; }
-            if($seal_point == '3'){ $sealpoint = 85; $x1 = 100; $x2 = 94; $x3 = 97; }
-            if($seal_point == '4'){ $sealpoint = 125; $x1 = 140; $x2 = 135; $x3 = 138; }
-            if($seal_point == '5'){ $sealpoint = 165;  $x1 = 180; $x2 = 175; $x3 = 178; }
+            if($seal_point == '1'){ $sealpoint = 5; $x1 = 20; $x2 = 13; $x3 = 17; }
+            if($seal_point == '2'){ $sealpoint = 45; $x1 = 60; $x2 = 53; $x3 = 57; }
+            if($seal_point == '3'){ $sealpoint = 85; $x1 = 100; $x2 = 93; $x3 = 97; }
+            if($seal_point == '4'){ $sealpoint = 125; $x1 = 140; $x2 = 134; $x3 = 138; }
+            if($seal_point == '5'){ $sealpoint = 165;  $x1 = 180; $x2 = 174; $x3 = 178; }
             $pdf->Image($tokens->token_seal,$sealpoint,10,40,23);
 
             //dd($tokens);
@@ -2204,6 +2205,18 @@ class functionController extends Controller
         return redirect()->back();
     }
 
+    //ฟังชันเรียก replaces ด้วย user_id
+    public static function funtion_replaces($id) {
+        $replace = replace::where('replace_user_id_acting', $id)
+        ->where('replace_user_id', Auth::user()->id)
+        ->first();
+        if($replace){
+            return "1";
+        }else{
+            return "0";
+        }
+    }
+
     //ฟังชันเรียกชื่อ cottons แสดง ด้วย id
     public static function funtion_cottons($id) {
         $cottons = cottons::where('cottons_id', $id)->first();
@@ -2211,6 +2224,16 @@ class functionController extends Controller
             return $cottons->cottons_name;
         }else{
             return "ไม่ถูกนิยาม";
+        }
+    }
+
+    //ฟังชันเรียก sites ด้วย id
+    public static function funtion_sites_site_path_folder($id) {
+        $site_path_folder = sites::where('sites.site_id', $id)->first();
+        if($site_path_folder){
+            return $site_path_folder->site_path_folder;
+        }else{
+            return 0;
         }
     }
 
@@ -2239,9 +2262,9 @@ class functionController extends Controller
     //ฟังชันเรียกชื่อสิทธิ์ด้วย id
     public static function funtion_user_level($level) {
         if($level == '1'){
-            $txt_user_level = 'นายก';
+            $txt_user_level = 'นายก|รองนายก';
         }elseif($level == '2'){
-            $txt_user_level = 'รองนายก|ปลัด|รองปลัด';
+            $txt_user_level = 'ปลัด|รองปลัด';
         }elseif($level == '3'){
             $txt_user_level = 'สารบรรณกลาง';
         }elseif($level == '4'){

@@ -894,8 +894,9 @@ class member_dashboardController extends Controller
             }
 
              //linetoken
-            $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
-            ->where('group_id', Auth::user()->group)
+             $tokens_Check = DB::table('tokens')
+            ->where('token_site_id', Auth::user()->site_id)
+            ->where('token_level', Auth::user()->level)
             ->first();
             if($tokens_Check){
                 $message = "\n⚠️ สร้างเอกสารส่งภายใน ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";

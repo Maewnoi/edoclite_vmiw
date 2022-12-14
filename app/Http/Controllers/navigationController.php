@@ -14,9 +14,20 @@ use App\Models\Groupmem;
 use App\Models\User;
 use App\Models\documents_retrun;
 use App\Models\documents_retrun_detail;
+use App\Models\replace;
 
 class navigationController extends Controller
 {
+    public static function funtion_replace_check_menu_level_7_5_4_2_1($id) {
+        if(Auth::user()->level == '7' || Auth::user()->level == '5' || Auth::user()->level == '4' || Auth::user()->level == '2' || Auth::user()->level == '1'){
+            $replace_count_S = replace::where('replace_user_id_acting', $id)
+            ->count();
+            return $replace_count_S;
+        }else{
+            return 0;
+        }
+    }
+
     public static function funtion_documents_retrun_inside_division_retrun_all_count_1_level_4() {
         if(Auth::user()->level=='4'){
             $documents_retrun_inside_division_retrun_count = documents_retrun::join('documents_retrun_details','documents_retrun_details.docrtdt_docrt_id','documents_retruns.docrt_id')

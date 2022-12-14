@@ -49,7 +49,6 @@ class documents_pendingController extends Controller
     }
 
     public function pending(Request $request){
-        
         //ตรวจสอบข้อมูลที่กรอกเข้ามาก่อน
         $request->validate(
             [

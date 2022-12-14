@@ -28,6 +28,57 @@ function logout(btn) {
 }
 // alert(var_memberController_add_level);
 //------------------------------------------------------------------------------------------
+// replaceController
+$('#replaceController-checkbox').each(function () {
+    var _token = $('#replaceController_token').val(); //_token
+    $(".name-replaceController-checkbox").click(function(event) {
+        if ($(this).is(':checked')) {
+            var id = $(this).data('id');
+            var act = 'true';
+
+        } else {
+            var id = $(this).data('id');
+            var act = 'false';
+        }
+        $.ajax({
+            type: "POST",
+            url: "/replace/update",
+            headers: {
+                'X-CSRF-Token': _token 
+            },
+            data: {
+                id: id,
+                act: act
+            },
+            success: function(data) {
+                if(data == 1){
+                    swal({
+                        title: "ทำรายการเรียบร้อย",
+                        icon: "success",
+                    });
+                }else if(data == 0){
+                    swal({
+                        title: 'แจ้งเตือน : ERROR ![act]',
+                        icon: "error",
+                    });
+                }else if(data == 3){
+                    swal({
+                        title: 'แจ้งเตือน : ERROR ![replace]',
+                        icon: "error",
+                    });
+                }
+            },
+            error: function(request, status, error) {
+                swal({
+                    title: 'แจ้งเตือน : ERROR ![' + request.responseText +']',
+                    icon: "error",
+                });
+            }
+        });
+        // console.log(var_data);
+    });
+});
+//------------------------------------------------------------------------------------------
 //navigation_search_documents form
 $('#navigation_search_table').each(function () {
     document.getElementById('processing_navigation_search_documents').style.display = 'none';

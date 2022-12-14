@@ -55,6 +55,7 @@ use App\Http\Controllers\documents_retrun_inside_work_retrunController;
 use App\Http\Controllers\documents_retrun_inside_department_retrunController;
 use App\Http\Controllers\documents_retrun_inside_division_retrunController;
 use App\Http\Controllers\route_domjiController;
+use App\Http\Controllers\replaceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -210,9 +211,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_retrun_inside_minister_sign/all/0/query',[queryController::class,'funtion_query_documents_retrun_inside_minister_sign_0_Controller_level_1']);
     Route::get('/documents_retrun_inside_minister_sign/all/1/query',[queryController::class,'funtion_query_documents_retrun_inside_minister_sign_1_Controller_level_1']);
     Route::get('/documents_retrun_inside_work_retrun/all/query',[queryController::class,'funtion_query_documents_retrun_inside_work_retrunController_level_7']);
-
     Route::get('/documents_retrun_inside_department_retrun/all/query',[queryController::class,'funtion_query_documents_retrun_inside_department_retrunController_level_5']);
     Route::get('/documents_retrun_inside_division_retrun/all/query',[queryController::class,'funtion_query_documents_retrun_inside_division_retrunController_level_4']);
+    Route::get('/replace_check_menu/count/query',[queryController::class,'funtion_query_replace_check_menu_count_level_7_5_4_2_1']);
 
     //---------------------------------------------------------------------------------------------------
     
@@ -262,8 +263,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::post('/domji/submit',[route_domjiController::class,'submit'])->name('domji_submit');
     //---------------------------------------------------------------------------------------------------
     //replace รักษาการแทน
-    // Route::get('/replace/all',[replaceController::class,'index'])->name('replace');
-    // Route::post('/replace/update',[replaceController::class,'update'])->name('updateReplace');
+    Route::get('/replace/all',[replaceController::class,'index'])->name('replace');
+    Route::post('/replace/update',[replaceController::class,'update'])->name('updateReplace');
+
     //member 
     Route::get('/member_dashboard',[member_dashboardController::class,'index'])->name('member_dashboard');
     Route::post('/member_dashboard/document_accepting_new',[member_dashboardController::class,'document_accepting_new'])->name('document_accepting_new');
