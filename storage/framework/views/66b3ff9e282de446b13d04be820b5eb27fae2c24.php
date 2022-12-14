@@ -100,15 +100,15 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-menu')->html();
-} elseif ($_instance->childHasBeenRendered('1ucak7R')) {
-    $componentId = $_instance->getRenderedChildComponentId('1ucak7R');
-    $componentTag = $_instance->getRenderedChildComponentTagName('1ucak7R');
+} elseif ($_instance->childHasBeenRendered('X4lrew9')) {
+    $componentId = $_instance->getRenderedChildComponentId('X4lrew9');
+    $componentTag = $_instance->getRenderedChildComponentTagName('X4lrew9');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('1ucak7R');
+    $_instance->preserveRenderedChild('X4lrew9');
 } else {
     $response = \Livewire\Livewire::mount('navigation-menu');
     $html = $response->html();
-    $_instance->logRenderedChild('1ucak7R', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('X4lrew9', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -315,4 +315,14 @@ $.widget.bridge('uibutton', $.ui.button)
             icon: "success",
         });
     });
-</script><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/layouts/app.blade.php ENDPATH**/ ?>
+</script>
+
+<!-- ปิดระบบ -->
+<!-- <script>
+setInterval( function () {
+    swal({
+            title: "ปิดปรับปรุงระบบสักครู่ (offline)",
+            icon: "error",
+    });
+}, 1000 );
+</script> --><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/edoclite_vmiw/resources/views/layouts/app.blade.php ENDPATH**/ ?>

@@ -294,3 +294,13 @@ $.widget.bridge('uibutton', $.ui.button)
         });
     });
 </script>
+
+<!-- ปิดระบบ -->
+<!-- <script>
+setInterval( function () {
+    swal({
+            title: "ปิดปรับปรุงระบบสักครู่ (offline)",
+            icon: "error",
+    });
+}, 1000 );
+</script> -->
