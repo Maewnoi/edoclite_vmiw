@@ -10,7 +10,7 @@ use App\Http\Controllers\functionController;
                 <!-- Logo -->
                 <div class="flex items-center flex-shrink-0">
                     <a href="{{ route('dashboard') }}" class="home-link router-link-active">
-                        <img src="{{ asset('/image/logo_lei.png') }}" alt="" class="brand-image img-circle elevation-3"
+                        <img src="{{ asset(functionController::get_site_img()) }}" alt="" class="brand-image img-circle elevation-3"
                             width="40" height="40">
                     </a>
                 </div>

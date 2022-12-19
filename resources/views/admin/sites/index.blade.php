@@ -47,7 +47,7 @@ use App\Http\Controllers\functionController;
                                         <td>
                                             @if($row->site_updated_at != NULL)
                                             <span
-                                                class="badge bg-secondary">$row->site_updated_at</span>
+                                                class="badge bg-secondary">{{$row->site_updated_at}}</span>
                                             <p class="text-sm text-muted">
                                                 <i class="mr-1 far fa-clock"></i>
                                                 {{Carbon\Carbon::parse($row->site_updated_at)->diffForHumans()}}
@@ -60,7 +60,7 @@ use App\Http\Controllers\functionController;
                                                 class="btn btn-outline-warning btn-sm"><i
                                                     class="fa fa-edit"></i></button>
                                             <hr>
-                                            <button type="button" data-toggle="modal"
+                                            <button type="button" data-toggle="modal" disabled
                                                 data-target="#modal-delete{{$row->site_id}}"
                                                 class="btn btn-outline-danger btn-sm"><i
                                                     class="fa fa-trash"></i></button>
@@ -94,7 +94,7 @@ use App\Http\Controllers\functionController;
                                                     </h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{route('updateSites')}}" method="post">
+                                                    <form action="{{route('updateSites')}}" method="post" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="row">
                                                             <div class="col-sm-12">
@@ -112,10 +112,47 @@ use App\Http\Controllers\functionController;
                                                                     @enderror
                                                                 </div>
                                                             </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <x-jet-label for="site_img" value="{{ __('โลโก้') }}" />
+                                                                    <input type="file" name="site_img" value="{{$row->site_img}}"
+                                                                        class="form-control @error('site_img') is-invalid @enderror"
+                                                                    required accept="image/*">
+                                                                @error('site_img')
+                                                                    <div class="my-2">
+                                                                        <p class="mt-2 text-sm text-red-600">
+                                                                        {{$message}}</p>
+                                                                    </div>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <x-jet-label for="site_color" value="{{ __('ธีม') }}" />
+                                                                    <select class="form-control select2bs4 @error('site_color') is-invalid @enderror"
+                                                                        name="site_color" required>
+                                                                        <option value="{{$row->site_color}}">{{$row->site_color}}
+                                                                        </option>    
+                                                                        <option value="blue">blue
+                                                                        </option>      
+                                                                        <option value="red">red
+                                                                        </option>   
+                                                                        <option value="green">green
+                                                                        </option>   
+                                                                    </select>
+                                                                    @error('site_color')
+                                                                    <div class="my-2">
+                                                                        <p class="mt-2 text-sm text-red-600">
+                                                                        {{$message}}</p>
+                                                                    </div>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <hr>
-                                                        <input type="hidden" name="site_id" value="{{$row->site_id}}"
-                                                            class="form-control">
+                                                        <input type="hidden" name="site_id" value="{{$row->site_id}}">
+                                                        <input type="hidden" name="old_site_img" value="{{$row->site_img}}">
+                                                      
                                                         <x-jet-button onclick="submitForm(this);">
                                                             {{ __('save') }}
                                                         </x-jet-button>
@@ -134,13 +171,13 @@ use App\Http\Controllers\functionController;
                     <div class="border shadow card border-info">
                         <div class="card-header">เพิ่ม Sites</div>
                         <div class="card-body">
-                            <form action="{{route('addSites')}}" method="post">
+                            <form action="{{route('addSites')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <x-jet-label for="site_name" value="{{ __('ชื่อ') }}" />
-                                            <input type="text" name="site_name" value="{{ old('site_name') }}"
+                                            <input type="text" name="site_name"
                                             required class="form-control @error('site_name') is-invalid @enderror">
                                             @error('site_name')
                                             <div class="my-2">
@@ -149,7 +186,42 @@ use App\Http\Controllers\functionController;
                                             @enderror
                                         </div>
                                     </div>
-                                    
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <x-jet-label for="site_img" value="{{ __('โลโก้') }}" />
+                                            <input type="file" name="site_img"
+                                                class="form-control @error('site_img') is-invalid @enderror"
+                                            required accept="image/*">
+                                           @error('site_img')
+                                            <div class="my-2">
+                                                <p class="mt-2 text-sm text-red-600">
+                                                {{$message}}</p>
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <x-jet-label for="site_color" value="{{ __('ธีม') }}" />
+                                            <select class="form-control select2bs4 @error('site_color') is-invalid @enderror"
+                                                name="site_color" required>
+                                                <option value="">บังคับเลือก
+                                                </option>
+                                                <option value="blue">blue
+                                                </option>      
+                                                <option value="red">red
+                                                </option>   
+                                                <option value="green">green
+                                                </option>     
+                                            </select>
+                                            @error('site_color')
+                                            <div class="my-2">
+                                                <p class="mt-2 text-sm text-red-600">
+                                                {{$message}}</p>
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <hr>
                                 <x-jet-button onclick="submitForm(this);">

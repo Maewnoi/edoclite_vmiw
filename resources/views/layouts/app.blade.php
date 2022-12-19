@@ -1,3 +1,6 @@
+@php
+use App\Http\Controllers\functionController;
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -6,12 +9,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="theme-color" content="#0066CC" />
+    <meta name="theme-color" content="{{functionController::get_site_color()}}" />
 
     <title>edoclite</title>
     <!-- icon -->
-    <link rel="apple-touch-icon" href="{{ asset('/image/logo_lei.png') }}" />
-    <link rel="icon" href="{!! asset('/image/logo_lei.png') !!}" />
+    <link rel="apple-touch-icon" href="{{ asset(functionController::get_site_img()) }}" />
+    <link rel="icon" href="{!! asset(functionController::get_site_img()) !!}" />
     <!-- load -->
     <link rel="stylesheet" href="{{ asset('/css/load.css') }}">
     <div class="loader">
@@ -84,7 +87,7 @@
 <body class="font-sans antialiased">
     <x-jet-banner />
 
-    <div class="min-h-screen bg-gradient-to-b from-blue-200 to-blue-400">
+    <div class="min-h-screen bg-gradient-to-b from-{{functionController::get_site_color()}}-200 to-{{functionController::get_site_color()}}-400">
         @livewire('navigation-menu')
         
         <!-- Page Heading -->

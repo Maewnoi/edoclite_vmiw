@@ -56,7 +56,7 @@ use App\Http\Controllers\documents_retrun_inside_department_retrunController;
 use App\Http\Controllers\documents_retrun_inside_division_retrunController;
 use App\Http\Controllers\route_domjiController;
 use App\Http\Controllers\replaceController;
-
+use App\Models\sites;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,18 +68,33 @@ use App\Http\Controllers\replaceController;
 |
 */
 
-//เมนูหลัก
-Route::get('/', function () {
-    if(isset(Auth::user()->level)){
-        if(Auth::user()->level == '0'){
-            return redirect('dashboard');
-        }else if(Auth::user()->level == '1'||Auth::user()->level == '2'||Auth::user()->level == '3'||Auth::user()->level == '4'||Auth::user()->level == '5'||Auth::user()->level == '6'||Auth::user()->level == '7'){
-            return redirect('member_dashboard');
+
+$routes_sites_check_S=sites::get();
+foreach($routes_sites_check_S as $row_sites){
+    $site_name = $row_sites->site_name;
+    //เมนูหลัก
+    Route::get('/'.$row_sites->site_name,  ['as'=>$site_name ,function () {
+        $name_site = Route::current()->getName();
+        if(functionController::get_cookie('site_ck')){
+            functionController::set_cookie('site_ck',$name_site);
+            if(isset(Auth::user()->level)){
+                if(Auth::user()->level == '0'){
+                    return redirect('dashboard');
+                }else if(Auth::user()->level == '1'||Auth::user()->level == '2'||Auth::user()->level == '3'||Auth::user()->level == '4'||Auth::user()->level == '5'||Auth::user()->level == '6'||Auth::user()->level == '7'){
+                    return redirect('member_dashboard');
+                }
+            }else{
+                $routes_sites_name_check=sites::where('site_name', $name_site)->first();
+                return view('auth.login',compact('routes_sites_name_check'));
+            }
+        }else{
+            functionController::set_cookie('site_ck',$name_site);
+            return redirect('/'.$name_site);
         }
-    }else{
-        return view('auth.login');
-    }
-});
+    }]);
+}
+
+
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     $users=DB::table('users')->get();

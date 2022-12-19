@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use File;
+use Illuminate\Support\Str;
 
 class route_domjiController extends Controller
 {
@@ -20,7 +21,8 @@ class route_domjiController extends Controller
 
     public function submit(Request $request){
         if(Auth::user()->level=='0'){
-            
+            $random1 = Str::random(2);
+            dd($random1);
 
             // $set_folder_path = "image/user";
             // $show = format_Size(folder_Size($set_folder_path));

@@ -19,6 +19,8 @@ class Site extends Migration
             $table->string('site_name');
             $table->enum('site_number_run', array('0', '1'));
             $table->string('site_path_folder');
+            $table->string('site_img');
+            $table->string('site_color');
             $table->timestamp('site_created_at')->nullable();
             $table->timestamp('site_updated_at')->nullable();
         });

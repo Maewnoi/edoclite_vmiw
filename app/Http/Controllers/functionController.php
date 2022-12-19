@@ -17,9 +17,58 @@ use App\Models\sub3_doc;
 use App\Models\sub3_detail;
 use App\Models\token;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
+use Cookie;
 
 class functionController extends Controller
 { 
+    public static function get_site_color(){
+        $site_check_color = sites::where('site_id', Auth::user()->site_id)->first();
+        if($site_check_color->site_color != null){
+            return $site_check_color->site_color;
+        }else{
+            return 'blue';
+        }
+    }
+
+    public static function get_site_color_not_auth(){
+        $site_check_color = sites::where('site_name', functionController::get_cookie('site_ck'))->first();
+        if($site_check_color->site_color != null){
+            return $site_check_color->site_color;
+        }else{
+            return 'blue';
+        }
+    }
+
+    public static function get_site_img_not_auth(){
+        $sites_check_img = sites::where('site_name', functionController::get_cookie('site_ck'))->first();
+        if($sites_check_img->site_img != null){
+            return $sites_check_img->site_img;
+        }else{
+            return 'https://sv1.picz.in.th/images/2022/08/02/XR72zv.png';
+        }
+    }
+
+    public static function get_site_img(){
+        $sites_check_img = sites::where('site_id', Auth::user()->site_id)->first();
+        if($sites_check_img->site_img != null){
+            return $sites_check_img->site_img;
+        }else{
+            return 'https://sv1.picz.in.th/images/2022/08/02/XR72zv.png';
+        }
+    }
+    public static function get_cookie($name){
+        $value = Cookie::get($name);
+        return $value;
+    }
+    
+    public static function set_cookie($name,$value){
+        // $response = new Response('Hello World');
+        // $response->withCookie(cookie()->forever('name-of-cookie', 'value-of-cookie'));
+        $response = Cookie::queue($name, $value, 43200);
+        return $response;
+    }
+
     public static function format_Size($set_bytes){
         $set_kb = 1024;
         $set_mb = $set_kb * 1024;

@@ -1,10 +1,10 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <img src="{{ asset('/image/logo_lei.png') }}" class="brand-image img-circle elevation-3" width="100"
+            <img src="@if($routes_sites_name_check->site_img != null) {{ asset($routes_sites_name_check->site_img) }}  @else  {{ asset('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png') }} @endif " class="brand-image img-circle elevation-3" width="100"
                 height="100">
         </x-slot>
-        <x-jet-label class="text-lg text-center" id="txt-login" value="{{ __('ระบบสารบรรณอิเล็กทรอนิกส์') }}" />
+        <x-jet-label class="text-lg text-center" id="txt-login" value="{{ __('ระบบสารบรรณอิเล็กทรอนิกส์') }} {{$routes_sites_name_check->site_name}}" />
         <!-- <x-jet-validation-errors class="mb-4" /> -->
         <form method="POST" action="{{ route('login') }}">
             @csrf

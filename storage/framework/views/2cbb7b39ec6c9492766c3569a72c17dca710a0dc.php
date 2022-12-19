@@ -1,3 +1,6 @@
+<?php
+use App\Http\Controllers\functionController;
+?>
 <!DOCTYPE html>
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 
@@ -6,12 +9,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
-    <meta name="theme-color" content="#0066CC" />
+    <meta name="theme-color" content="<?php echo e(functionController::get_site_color_not_auth()); ?>" />
 
     <title>edoclite</title>
     <!-- icon -->
-    <link rel="apple-touch-icon" href="<?php echo e(asset('/image/logo_lei.png')); ?>" />
-    <link rel="icon" href="<?php echo asset('/image/logo_lei.png'); ?>" />
+    <link rel="apple-touch-icon" href="<?php echo e(asset(functionController::get_site_img_not_auth())); ?>" />
+    <link rel="icon" href="<?php echo asset(functionController::get_site_img_not_auth()); ?>" />
     <!-- load -->
     <link rel="stylesheet" href="<?php echo e(asset('/css/load.css')); ?>">
     <div class="loader">

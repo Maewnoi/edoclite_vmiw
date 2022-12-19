@@ -10,7 +10,7 @@ use App\Http\Controllers\functionController;
                 <!-- Logo -->
                 <div class="flex items-center flex-shrink-0">
                     <a href="<?php echo e(route('dashboard')); ?>" class="home-link router-link-active">
-                        <img src="<?php echo e(asset('/image/logo_lei.png')); ?>" alt="" class="brand-image img-circle elevation-3"
+                        <img src="<?php echo e(asset(functionController::get_site_img())); ?>" alt="" class="brand-image img-circle elevation-3"
                             width="40" height="40">
                     </a>
                 </div>

@@ -44,9 +44,9 @@ use App\Http\Controllers\functionController;
                                         </td>
                                         <td>
                                             @if($row->level == '1')
-                                            นายก
+                                            นายก|รองนายก
                                             @elseif($row->level == '2')
-                                            รองนายก|ปลัด|รองปลัด
+                                            ปลัด|รองปลัด
                                             @elseif($row->level == '3')
                                             สารบรรณกลาง
                                             @elseif($row->level == '4')
@@ -163,41 +163,6 @@ use App\Http\Controllers\functionController;
                                                                         class="form-control @error('tel') is-invalid @enderror"
                                                                         required>
                                                                     @error('tel')
-                                                                    <div class="my-2">
-                                                                        <p class="mt-2 text-sm text-red-600">
-                                                                            {{$message}}</p>
-                                                                    </div>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <x-jet-label for="submem"
-                                                                        value="{{ __('submem') }}" />
-                                                                    <select
-                                                                        class="form-control @error('submem') is-invalid @enderror"
-                                                                        name="submem">
-                                                                        <option value="">ไม่บังคับเลือก
-                                                                        </option>
-                                                                    </select>
-                                                                    @error('submem')
-                                                                    <div class="my-2">
-                                                                        <p class="mt-2 text-sm text-red-600">
-                                                                            {{$message}}</p>
-                                                                    </div>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <x-jet-label for="head" value="{{ __('head') }}" />
-                                                                    <select
-                                                                        class="form-control @error('head') is-invalid @enderror"
-                                                                        name="head">
-                                                                        <option value="">ไม่บังคับเลือก
-                                                                        </option>
-                                                                    </select>
-                                                                    @error('head')
                                                                     <div class="my-2">
                                                                         <p class="mt-2 text-sm text-red-600">
                                                                             {{$message}}</p>
@@ -393,37 +358,6 @@ use App\Http\Controllers\functionController;
                                             <input type="number" name="tel" value="{{ old('tel') }}"
                                                 class="form-control @error('tel') is-invalid @enderror" required>
                                             @error('tel')
-                                            <div class="my-2">
-                                                <p class="mt-2 text-sm text-red-600">{{$message}}</p>
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <x-jet-label for="submem" value="{{ __('submem') }}" />
-                                            <select
-                                                class="form-control select2bs4 @error('submem') is-invalid @enderror"
-                                                name="submem">
-                                                <option value="">ไม่บังคับเลือก
-                                                </option>
-                                            </select>
-                                            @error('submem')
-                                            <div class="my-2">
-                                                <p class="mt-2 text-sm text-red-600">{{$message}}</p>
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <x-jet-label for="head" value="{{ __('head') }}" />
-                                            <select class="form-control select2bs4 @error('head') is-invalid @enderror"
-                                                name="head">
-                                                <option value="">ไม่บังคับเลือก
-                                                </option>
-                                            </select>
-                                            @error('head')
                                             <div class="my-2">
                                                 <p class="mt-2 text-sm text-red-600">{{$message}}</p>
                                             </div>

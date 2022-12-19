@@ -1540,12 +1540,22 @@ class queryController extends Controller
     }
     public static function funtion_query_nav_document_admission_division_all_count_0_level_4() {
         if(Auth::user()->level=='4'){
-            //นับจำนวนงานรอพิจารณาภายนอก
-            $document_waiting_count = document::where('doc_site_id',Auth::user()->site_id)
-            ->where('doc_type', '0')
-            ->where('doc_template', 'A')
-            ->where('doc_status', 'waiting')
-            ->count();
+                //Groupmem เช็คกองงาน
+            $Groupmem = Groupmem::where('group_site_id',Auth::user()->site_id)
+            ->where('group_id',Auth::user()->group)
+            ->first();
+
+            if(Auth::user()->level == '4' && $Groupmem->group_name == 'สำนักปลัด'){
+                //นับจำนวนงานรอพิจารณาภายนอก
+                $document_waiting_count = document::where('doc_site_id',Auth::user()->site_id)
+                ->where('doc_type', '0')
+                ->where('doc_template', 'A')
+                ->where('doc_status', 'waiting')
+                ->count();
+            }else{
+                $document_waiting_count = 0;
+            }
+            
             $document_admission_division_all_count_0 = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
             ->where('doc_site_id',Auth::user()->site_id)
             ->where('doc_type', '0')

@@ -217,6 +217,8 @@ class member_dashboardController extends Controller
     }
 
     public function index(){
+        
+
         if(Auth::user()->level=='1'){
             //นายก
             

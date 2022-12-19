@@ -1,4 +1,7 @@
-<div class="flex flex-col items-center min-h-screen pt-6 bg-gradient-to-b from-blue-200 to-blue-400 sm:justify-center sm:pt-0">
+<?php
+use App\Http\Controllers\functionController;
+?>
+<div class="flex flex-col items-center min-h-screen pt-6 bg-gradient-to-b from-<?php echo e(functionController::get_site_color_not_auth()); ?>-200 to-<?php echo e(functionController::get_site_color_not_auth()); ?>-400 sm:justify-center sm:pt-0">
     <div>
         <?php echo e($logo); ?>
 

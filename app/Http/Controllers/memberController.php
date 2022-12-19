@@ -69,8 +69,6 @@ class memberController extends Controller
                 'level'=>'required|max:255',
                 'pos'=>'required|max:255',
                 'tel'=>'required|unique:users|min:10|max:10',
-                'submem'=>'max:255|nullable',
-                'head'=>'max:255|nullable',
                 'sign'=>'max:255|nullable|mimes:jpg,jpeg,png,bmp,tiff |max:4096',
             ],
             [
@@ -106,18 +104,49 @@ class memberController extends Controller
         }
 
         if($request->group != ''){
-            $Select_Sites = Groupmem::where('groupmems.group_id', $request->group)
+            $Select_Groupmem = Groupmem::where('groupmems.group_id', $request->group)
             ->join('sites','sites.site_id','groupmems.group_site_id')
             ->first();
-            $sites = $Select_Sites->site_id;
+            $sites = $Select_Groupmem->site_id;
         }else{
             $sites = $request->sites;
         }
 
         //ตรวจสอบสิทธิฺซั้าในระบบ
-        if($request->level == '1'||$request->level == '3'||$request->level == '4'||$request->level == '6'){
+        if($request->level == '3'){
             $memberS_Check = User::where('users.level', $request->level)
             ->where('users.site_id', $sites)
+            ->first();
+            if($memberS_Check){
+                return redirect()->back()->with('error','ตรวจพบคุณ '.$memberS_Check->name.' ถือสิทธิ์ '.functionController::funtion_user_level($memberS_Check->level).' ในระบบแล้ว');
+            }
+        }
+
+        if($request->level == '4'){
+            $memberS_Check = User::where('users.level', $request->level)
+            ->where('users.site_id', $sites)
+            ->where('users.group', $request->group)
+            ->first();
+            if($memberS_Check){
+                return redirect()->back()->with('error','ตรวจพบคุณ '.$memberS_Check->name.' ถือสิทธิ์ '.functionController::funtion_user_level($memberS_Check->level).' ในระบบแล้ว');
+            }
+        }
+
+        if($request->level == '5'){
+            $memberS_Check = User::where('users.level', $request->level)
+            ->where('users.site_id', $sites)
+            ->where('users.group', $request->group)
+            ->where('users.cotton', $request->cotton)
+            ->first();
+            if($memberS_Check){
+                return redirect()->back()->with('error','ตรวจพบคุณ '.$memberS_Check->name.' ถือสิทธิ์ '.functionController::funtion_user_level($memberS_Check->level).' ในระบบแล้ว');
+            }
+        }
+
+        if($request->level == '6'){
+            $memberS_Check = User::where('users.level', $request->level)
+            ->where('users.site_id', $sites)
+            ->where('users.group', $request->group)
             ->first();
             if($memberS_Check){
                 return redirect()->back()->with('error','ตรวจพบคุณ '.$memberS_Check->name.' ถือสิทธิ์ '.functionController::funtion_user_level($memberS_Check->level).' ในระบบแล้ว');
@@ -155,8 +184,6 @@ class memberController extends Controller
             'group'=>$request->group,
             'cotton'=>$cotton,
             'tel'=>$request->tel,
-            'submem'=>$request->submem,
-            'head'=>$request->head,
             'sign'=>$full_path,
             'created_at'=>date('Y-m-d H:i:s')
         ]);
@@ -187,8 +214,6 @@ class memberController extends Controller
                 'email'=>'required|max:255',
                 'name'=>'required|max:255',
                 'tel'=>'required|min:10|max:10',
-                'submem'=>'max:255|nullable',
-                'head'=>'max:255|nullable',
                 'sign'=>'max:255|nullable|mimes:jpg,jpeg,png',
             ],
             [
@@ -256,8 +281,6 @@ class memberController extends Controller
                 'email'=>$request->email,
                 'name'=>$request->name,
                 'tel'=>$request->tel,
-                'submem'=>$request->submem,
-                'head'=>$request->head,
                 'sign'=>$full_path,
                 'updated_at'=>date('Y-m-d H:i:s')
             ]);
@@ -275,8 +298,6 @@ class memberController extends Controller
                 'email'=>$request->email,
                 'name'=>$request->name,
                 'tel'=>$request->tel,
-                'submem'=>$request->submem,
-                'head'=>$request->head,
                 'updated_at'=>date('Y-m-d H:i:s')
             ]);
 

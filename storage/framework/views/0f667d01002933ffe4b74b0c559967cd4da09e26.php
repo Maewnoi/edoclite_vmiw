@@ -54,7 +54,7 @@ use App\Http\Controllers\functionController;
                                         <td>
                                             <?php if($row->site_updated_at != NULL): ?>
                                             <span
-                                                class="badge bg-secondary">$row->site_updated_at</span>
+                                                class="badge bg-secondary"><?php echo e($row->site_updated_at); ?></span>
                                             <p class="text-sm text-muted">
                                                 <i class="mr-1 far fa-clock"></i>
                                                 <?php echo e(Carbon\Carbon::parse($row->site_updated_at)->diffForHumans()); ?>
@@ -68,7 +68,7 @@ use App\Http\Controllers\functionController;
                                                 class="btn btn-outline-warning btn-sm"><i
                                                     class="fa fa-edit"></i></button>
                                             <hr>
-                                            <button type="button" data-toggle="modal"
+                                            <button type="button" data-toggle="modal" disabled
                                                 data-target="#modal-delete<?php echo e($row->site_id); ?>"
                                                 class="btn btn-outline-danger btn-sm"><i
                                                     class="fa fa-trash"></i></button>
@@ -113,7 +113,7 @@ use App\Http\Controllers\functionController;
                                                     </h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="<?php echo e(route('updateSites')); ?>" method="post">
+                                                    <form action="<?php echo e(route('updateSites')); ?>" method="post" enctype="multipart/form-data">
                                                         <?php echo csrf_field(); ?>
                                                         <div class="row">
                                                             <div class="col-sm-12">
@@ -155,10 +155,98 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'site_img','value' => ''.e(__('โลโก้')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['for' => 'site_img','value' => ''.e(__('โลโก้')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                                    <input type="file" name="site_img" value="<?php echo e($row->site_img); ?>"
+                                                                        class="form-control <?php $__errorArgs = ['site_img'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                                    required accept="image/*">
+                                                                <?php $__errorArgs = ['site_img'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                                    <div class="my-2">
+                                                                        <p class="mt-2 text-sm text-red-600">
+                                                                        <?php echo e($message); ?></p>
+                                                                    </div>
+                                                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'site_color','value' => ''.e(__('ธีม')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['for' => 'site_color','value' => ''.e(__('ธีม')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                                    <select class="form-control select2bs4 <?php $__errorArgs = ['site_color'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                                        name="site_color" required>
+                                                                        <option value="<?php echo e($row->site_color); ?>"><?php echo e($row->site_color); ?>
+
+                                                                        </option>    
+                                                                        <option value="blue">blue
+                                                                        </option>      
+                                                                        <option value="red">red
+                                                                        </option>   
+                                                                        <option value="green">green
+                                                                        </option>   
+                                                                    </select>
+                                                                    <?php $__errorArgs = ['site_color'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                                    <div class="my-2">
+                                                                        <p class="mt-2 text-sm text-red-600">
+                                                                        <?php echo e($message); ?></p>
+                                                                    </div>
+                                                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <hr>
-                                                        <input type="hidden" name="site_id" value="<?php echo e($row->site_id); ?>"
-                                                            class="form-control">
+                                                        <input type="hidden" name="site_id" value="<?php echo e($row->site_id); ?>">
+                                                        <input type="hidden" name="old_site_img" value="<?php echo e($row->site_img); ?>">
+                                                      
                                                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>
@@ -188,7 +276,7 @@ unset($__errorArgs, $__bag); ?>
                     <div class="border shadow card border-info">
                         <div class="card-header">เพิ่ม Sites</div>
                         <div class="card-body">
-                            <form action="<?php echo e(route('addSites')); ?>" method="post">
+                            <form action="<?php echo e(route('addSites')); ?>" method="post" enctype="multipart/form-data">
                                 <?php echo csrf_field(); ?>
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -205,7 +293,7 @@ unset($__errorArgs, $__bag); ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                            <input type="text" name="site_name" value="<?php echo e(old('site_name')); ?>"
+                                            <input type="text" name="site_name"
                                             required class="form-control <?php $__errorArgs = ['site_name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -228,7 +316,92 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                         </div>
                                     </div>
-                                    
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'site_img','value' => ''.e(__('โลโก้')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['for' => 'site_img','value' => ''.e(__('โลโก้')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                            <input type="file" name="site_img"
+                                                class="form-control <?php $__errorArgs = ['site_img'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                            required accept="image/*">
+                                           <?php $__errorArgs = ['site_img'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                            <div class="my-2">
+                                                <p class="mt-2 text-sm text-red-600">
+                                                <?php echo e($message); ?></p>
+                                            </div>
+                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'site_color','value' => ''.e(__('ธีม')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['for' => 'site_color','value' => ''.e(__('ธีม')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                            <select class="form-control select2bs4 <?php $__errorArgs = ['site_color'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                name="site_color" required>
+                                                <option value="">บังคับเลือก
+                                                </option>
+                                                <option value="blue">blue
+                                                </option>      
+                                                <option value="red">red
+                                                </option>   
+                                                <option value="green">green
+                                                </option>     
+                                            </select>
+                                            <?php $__errorArgs = ['site_color'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                            <div class="my-2">
+                                                <p class="mt-2 text-sm text-red-600">
+                                                <?php echo e($message); ?></p>
+                                            </div>
+                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                        </div>
+                                    </div>
                                 </div>
                                 <hr>
                                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>

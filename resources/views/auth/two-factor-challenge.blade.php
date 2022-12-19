@@ -1,7 +1,10 @@
+@php
+use App\Http\Controllers\functionController;
+@endphp
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-        <img src="{{ asset('/image/logo_lei.png') }}" class="brand-image img-circle elevation-3" width="100"
+            <img src="{{ asset(functionController::get_site_img_not_auth()) }}" class="brand-image img-circle elevation-3" width="100"
                 height="100">
         </x-slot>
 

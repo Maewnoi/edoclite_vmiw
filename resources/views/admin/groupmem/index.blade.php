@@ -145,6 +145,9 @@ use App\Http\Controllers\functionController;
                                                                         <option value="กองการเจ้าหน้าที่">
                                                                             กองการเจ้าหน้าที่
                                                                         </option>
+                                                                        <option value="กองตรวจสอบภายใน">
+                                                                            กองตรวจสอบภายใน
+                                                                        </option>
                                                                     </select>
                                                                     @error('group_name')
                                                                     <div class="my-2">
@@ -249,6 +252,9 @@ use App\Http\Controllers\functionController;
                                                 </option>
                                                 <option value="กองการเจ้าหน้าที่">
                                                     กองการเจ้าหน้าที่
+                                                </option>
+                                                <option value="กองตรวจสอบภายใน">
+                                                    กองตรวจสอบภายใน
                                                 </option>
                                             </select>
                                             @error('group_name')
