@@ -320,6 +320,9 @@ foreach($sub_docsS as $row_check_sub_docs){
                         <div class="card card-body">
                             <x-jet-label class="text-lg" value="{{ __('พิจารณาเลือกกองที่เกี่ยวข้อง') }}" />
                             <div class="form-group">
+                                <button id='documents_admission_group_allController_selected_multiple_sub2_recid_cottons-select-all-select-all' class="h-10 px-5 m-2 text-sm text-purple-100 transition-colors duration-150 bg-purple-600 rounded-lg focus:shadow-outline hover:bg-purple-700">
+                                    เลือกทั้งหมด
+                                </button>
                                 <select name="sub_recid[]" id="documents_admission_allController_update-groupmems_selected_multiple" multiple="multiple"
                                     required class=" @error('sub_recid') is-invalid @enderror">
                                     @foreach($sub_docsS as $row_sub_docs)

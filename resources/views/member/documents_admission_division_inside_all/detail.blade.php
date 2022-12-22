@@ -179,6 +179,9 @@ use App\Http\Controllers\functionController;
                                                     <div class="form-group"
                                                         id="documents_admission_division_allController_form-group_selected_multiple_sub2_recid_inside">
                                                         <x-jet-label class="text-md" value="{{ __('เลือกผู้รับ') }}" />
+                                                        <button id='documents_admission_division_allController_selected_multiple_sub2_recid_inside-select-all' class="h-10 px-5 m-2 text-sm text-purple-100 transition-colors duration-150 bg-purple-600 rounded-lg focus:shadow-outline hover:bg-purple-700">
+                                                        เลือกทั้งหมด
+                                                        </button>
                                                         <select name="sub2_recid_inside[]"
                                                             id="documents_admission_division_allController_selected_multiple_sub2_recid_inside"
                                                             multiple="multiple" required
@@ -199,6 +202,9 @@ use App\Http\Controllers\functionController;
                                                     <div class="form-group"
                                                         id="documents_admission_division_allController_form-group_selected_multiple_sub2_recid_inside_cottons" style="display: none;">
                                                         <x-jet-label class="text-md" value="{{ __('เลือกหัวหน้าฝ่าย') }}" />
+                                                        <button id='documents_admission_division_allController_selected_multiple_sub2_recid_inside_cottons-select-all' class="h-10 px-5 m-2 text-sm text-purple-100 transition-colors duration-150 bg-purple-600 rounded-lg focus:shadow-outline hover:bg-purple-700">
+                                                        เลือกทั้งหมด
+                                                        </button>
                                                         <select name="sub2_recid_inside_cottons[]"
                                                             id="documents_admission_division_allController_selected_multiple_sub2_recid_inside_cottons"
                                                             multiple="multiple" required

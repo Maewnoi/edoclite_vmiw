@@ -152,6 +152,9 @@ use App\Http\Controllers\functionController;
                                                     <div class="form-group"
                                                         id="documents_admission_department_allController_form-group_selected_multiple_sub2_recid">
                                                         <x-jet-label class="text-md" value="{{ __('เลือกผู้รับ') }}" />
+                                                        <button id='documents_admission_department_allController_selected_multiple_sub2_recid-select-all' class="h-10 px-5 m-2 text-sm text-purple-100 transition-colors duration-150 bg-purple-600 rounded-lg focus:shadow-outline hover:bg-purple-700">
+                                                        เลือกทั้งหมด
+                                                        </button>
                                                         <select name="sub2_recid[]"
                                                             id="documents_admission_department_allController_selected_multiple_sub2_recid"
                                                             multiple="multiple" required

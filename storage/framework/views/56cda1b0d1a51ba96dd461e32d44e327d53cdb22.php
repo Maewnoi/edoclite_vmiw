@@ -160,6 +160,9 @@ foreach($sub_docsS as $row_check_sub_docs){
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                                             <div class="form-group">
+                                                <button id='select-all' class="h-10 px-5 m-2 text-sm text-purple-100 transition-colors duration-150 bg-purple-600 rounded-lg focus:shadow-outline hover:bg-purple-700">
+                                                เลือกทั้งหมด
+                                                </button>
                                                 <select name="sub_recid[]" id="selected_multiple" multiple="multiple"
                                                     required class=" <?php $__errorArgs = ['sub_recid'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

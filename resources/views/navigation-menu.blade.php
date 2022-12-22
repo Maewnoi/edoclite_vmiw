@@ -1972,6 +1972,9 @@ use App\Http\Controllers\functionController;
                                 <div class="form-group hide"
                                     id="documents_admission_group_allController_selected_multiple_sub_recid_inside_form-group">
                                     <x-jet-label for="sub_recid_inside" value="{{ __('เลือกกอง') }}" />
+                                    <button id='documents_admission_group_allController_selected_multiple_sub_recid_inside-select-all' class="h-10 px-5 m-2 text-sm text-purple-100 transition-colors duration-150 bg-purple-600 rounded-lg focus:shadow-outline hover:bg-purple-700">
+                                    เลือกทั้งหมด
+                                    </button>
                                     <select name="sub_recid_inside[]"
                                         id="documents_admission_group_allController_selected_multiple_sub_recid_inside"
                                         multiple="multiple" class=" @error('sub_recid_inside') is-invalid @enderror">
@@ -1991,6 +1994,9 @@ use App\Http\Controllers\functionController;
                                 <div class="form-group hide"
                                     id="documents_admission_group_allController_selected_multiple_sub2_recid_inside_form-group">
                                     <x-jet-label for="sub2_recid_inside" value="{{ __('เลือกผู้รับ') }}" />
+                                    <button id='documents_admission_group_allController_selected_multiple_sub2_recid_inside-select-all' class="h-10 px-5 m-2 text-sm text-purple-100 transition-colors duration-150 bg-purple-600 rounded-lg focus:shadow-outline hover:bg-purple-700">
+                                    เลือกทั้งหมด
+                                    </button>
                                     <select name="sub2_recid_inside[]"
                                         id="documents_admission_group_allController_selected_multiple_sub2_recid_inside"
                                         multiple="multiple" class=" @error('sub2_recid_inside') is-invalid @enderror">

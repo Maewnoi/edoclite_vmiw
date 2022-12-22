@@ -2890,37 +2890,93 @@ $("#documents_admission_work_inside_allController_bt_preview").click(function(ev
 //------------------------------------------------------------------------------------------
 //selected_multiple
 $('#selected_multiple').multiSelect();
+$('#select-all').click(function() {
+    $('#selected_multiple').multiSelect('select_all');
+    return false;
+});
 //------------------------------------------------------------------------------------------
 //member.documents_admission_group_all.detail selected_multiple
 $('#documents_admission_group_allController_selected_multiple_sub2_recid').multiSelect();
+$('#documents_admission_group_allController_selected_multiple_sub2_recid-select-all').click(function() {
+    $('#documents_admission_group_allController_selected_multiple_sub2_recid').multiSelect('select_all');
+    return false;
+});
 $('#documents_admission_group_allController_selected_multiple_sub2_recid_cottons').multiSelect();
+$('#documents_admission_group_allController_selected_multiple_sub2_recid_cottons-select-all').click(function() {
+    $('#documents_admission_group_allController_selected_multiple_sub2_recid_cottons').multiSelect('select_all');
+    return false;
+});
 //------------------------------------------------------------------------------------------
 //member.documents_admission_group_inside_all.detail selected_multiple
 $('#documents_admission_group_inside_allController_selected_multiple_sub2_recid').multiSelect();
+$('#documents_admission_group_inside_allController_selected_multiple_sub2_recid-select-all').click(function() {
+    $('#documents_admission_group_inside_allController_selected_multiple_sub2_recid').multiSelect('select_all');
+    return false;
+});
 $('#documents_admission_group_inside_allController_selected_multiple_sub2_recid_cottons').multiSelect();
+$('#documents_admission_group_inside_allController_selected_multiple_sub2_recid_cottons-select-all').click(function() {
+    $('#documents_admission_group_inside_allController_selected_multiple_sub2_recid_cottons').multiSelect('select_all');
+    return false;
+});
 //------------------------------------------------------------------------------------------
 //member.documents_admission_department_all.detail selected_multiple
 $('#documents_admission_department_allController_selected_multiple_sub2_recid').multiSelect();
+$('#documents_admission_department_allController_selected_multiple_sub2_recid-select-all').click(function() {
+    $('#documents_admission_department_allController_selected_multiple_sub2_recid').multiSelect('select_all');
+    return false;
+});
 //------------------------------------------------------------------------------------------
 //member.documents_admission_department_inside_all.detail selected_multiple
 $('#documents_admission_department_allController_selected_multiple_sub2_recid_inside').multiSelect();
+$('#documents_admission_department_allController_selected_multiple_sub2_recid_inside-select-all').click(function() {
+    $('#documents_admission_department_allController_selected_multiple_sub2_recid_inside').multiSelect('select_all');
+    return false;
+});
 //------------------------------------------------------------------------------------------
 //member.documents_admission_division_all.detail selected_multiple
 $('#documents_admission_division_allController_selected_multiple_sub2_recid').multiSelect();
+$('#documents_admission_division_allController_selected_multiple_sub2_recid-select-all').click(function() {
+    $('#documents_admission_division_allController_selected_multiple_sub2_recid').multiSelect('select_all');
+    return false;
+});
 $('#documents_admission_division_allController_selected_multiple_sub2_recid_cottons').multiSelect();
+$('#documents_admission_division_allController_selected_multiple_sub2_recid_cottons-select-all').click(function() {
+    $('#documents_admission_division_allController_selected_multiple_sub2_recid_cottons').multiSelect('select_all');
+    return false;
+});
 //------------------------------------------------------------------------------------------
 //member.documents_admission_division_inside_all.detail selected_multiple
 $('#documents_admission_division_allController_selected_multiple_sub2_recid_inside').multiSelect();
+$('#documents_admission_division_allController_selected_multiple_sub2_recid_inside-select-all').click(function() {
+    $('#documents_admission_division_allController_selected_multiple_sub2_recid_inside').multiSelect('select_all');
+    return false;
+});
 $('#documents_admission_division_allController_selected_multiple_sub2_recid_inside_cottons').multiSelect();
+$('#documents_admission_division_allController_selected_multiple_sub2_recid_inside_cottons-select-all').click(function() {
+    $('#documents_admission_division_allController_selected_multiple_sub2_recid_inside_cottons').multiSelect('select_all');
+    return false;
+});
 //------------------------------------------------------------------------------------------
 //member_dashboard selected_multiple
 $('#documents_admission_group_allController_selected_multiple_sub_recid_inside').multiSelect();
+$('#documents_admission_group_allController_selected_multiple_sub_recid_inside-select-all').click(function() {
+    $('#documents_admission_group_allController_selected_multiple_sub_recid_inside').multiSelect('select_all');
+    return false;
+});
 //------------------------------------------------------------------------------------------
 //member_dashboard selected_multiple2
 $('#documents_admission_group_allController_selected_multiple_sub2_recid_inside').multiSelect();
+$('#documents_admission_group_allController_selected_multiple_sub2_recid_inside-select-all').click(function() {
+    $('#documents_admission_group_allController_selected_multiple_sub2_recid_inside').multiSelect('select_all');
+    return false;
+});
 //------------------------------------------------------------------------------------------
 //selected_multiple
 $('#documents_admission_allController_update-groupmems_selected_multiple').multiSelect();
+$('#documents_admission_group_allController_selected_multiple_sub2_recid_cottons-select-all-select-all').click(function() {
+    $('#documents_admission_group_allController_selected_multiple_sub2_recid_cottons-select-all').multiSelect('select_all');
+    return false;
+});
 //------------------------------------------------------------------------------------------
 //member_dashboard selected_multiple2
 // $('#documents_admission_work_allController_sub3d_podium').summernote({

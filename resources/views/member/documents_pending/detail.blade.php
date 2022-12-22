@@ -109,6 +109,9 @@ foreach($sub_docsS as $row_check_sub_docs){
                                             <x-jet-label class="text-lg"
                                                 value="{{ __('พิจารณาเลือกกองที่เกี่ยวข้อง') }}" />
                                             <div class="form-group">
+                                                <button id='select-all' class="h-10 px-5 m-2 text-sm text-purple-100 transition-colors duration-150 bg-purple-600 rounded-lg focus:shadow-outline hover:bg-purple-700">
+                                                เลือกทั้งหมด
+                                                </button>
                                                 <select name="sub_recid[]" id="selected_multiple" multiple="multiple"
                                                     required class=" @error('sub_recid') is-invalid @enderror">
                                                     @foreach($GroupmemS as $row_Groupmem)
