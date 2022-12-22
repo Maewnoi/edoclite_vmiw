@@ -103,6 +103,15 @@ class documents_admission_department_allController extends Controller
 
         //เช็คผู้พิจารณา
         if($request->sign_goup_1 == ''){
+            $request->validate(
+                [
+                    'sub2_recid'=>'required|max:255'
+                ],
+                [
+                    'sub2_recid.required'=>"กรุณากรอกตำแหน่งด้วยครับ",
+                    'sub2_recid.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
+                ]
+            );
             //ถ้าไม่เลือกคนพิจารณา
             //นับจำนวนคนทำงาน
             for ($t = 0; $t < count($request->sub2_recid); $t++) {

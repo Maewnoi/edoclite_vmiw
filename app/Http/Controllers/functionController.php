@@ -1279,7 +1279,6 @@ class functionController extends Controller
             $reserve_numbers_t3_pa_count = reserve_number::
             select(reserve_number::raw("reserve_id"),reserve_number::raw("reserve_number"),reserve_number::raw("DATE_FORMAT(reserve_date, '%Y-%m-%d') as date_format"))
             ->where('reserve_owner',$id)
-            ->where('reserve_group',Auth::user()->group)
             ->where('reserve_type','1')
             ->where('reserve_template','C')
             ->where('reserve_status','0')
@@ -1290,7 +1289,6 @@ class functionController extends Controller
             $reserve_numbers_t4_pa_count = reserve_number::
             select(reserve_number::raw("reserve_id"),reserve_number::raw("reserve_number"),reserve_number::raw("DATE_FORMAT(reserve_date, '%Y-%m-%d') as date_format"))
             ->where('reserve_owner',$id)
-            ->where('reserve_group',Auth::user()->group)
             ->where('reserve_type','1')
             ->where('reserve_template','D')
             ->where('reserve_status','0')
@@ -1301,7 +1299,6 @@ class functionController extends Controller
             $reserve_numbers_t5_pa_count = reserve_number::
             select(reserve_number::raw("reserve_id"),reserve_number::raw("reserve_number"),reserve_number::raw("DATE_FORMAT(reserve_date, '%Y-%m-%d') as date_format"))
             ->where('reserve_owner',$id)
-            ->where('reserve_group',Auth::user()->group)
             ->where('reserve_type','1')
             ->where('reserve_template','E')
             ->where('reserve_status','0')
@@ -2095,7 +2092,6 @@ class functionController extends Controller
     public static function funtion_documents_doc_recnum_certificate_plus($id) {
         $document_count = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
         ->where('doc_site_id',$id)
-        ->where('doc_group',Auth::user()->group)
         ->where('doc_type','1')
         ->where('doc_template','E')
         ->max('doc_recnum');
@@ -2103,7 +2099,6 @@ class functionController extends Controller
 
         for ($i = $document_count_plus; $i < 20000; $i++) {
             $reserve_number_count = reserve_number::where('reserve_site',$id)
-            ->where('reserve_group',Auth::user()->group)
             ->where('reserve_status','!=','1')
             ->where('reserve_type', '1')
             ->where('reserve_template', 'E')
@@ -2121,7 +2116,6 @@ class functionController extends Controller
     public static function funtion_documents_doc_recnum_order_plus($id) {
         $document_count = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
         ->where('doc_site_id',$id)
-        ->where('doc_group',Auth::user()->group)
         ->where('doc_type','1')
         ->where('doc_template','D')
         ->max('doc_recnum');
@@ -2129,7 +2123,6 @@ class functionController extends Controller
 
         for ($i = $document_count_plus; $i < 20000; $i++) {
             $reserve_number_count = reserve_number::where('reserve_site',$id)
-            ->where('reserve_group',Auth::user()->group)
             ->where('reserve_status','!=','1')
             ->where('reserve_type', '1')
             ->where('reserve_template', 'D')
@@ -2147,7 +2140,6 @@ class functionController extends Controller
     public static function funtion_documents_doc_recnum_announce_plus($id) {
         $document_count = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
         ->where('doc_site_id',$id)
-        ->where('doc_group',Auth::user()->group)
         ->where('doc_type','1')
         ->where('doc_template','C')
         ->max('doc_recnum');
@@ -2155,7 +2147,6 @@ class functionController extends Controller
 
         for ($i = $document_count_plus; $i < 20000; $i++) {
             $reserve_number_count = reserve_number::where('reserve_site',$id)
-            ->where('reserve_group',Auth::user()->group)
             ->where('reserve_status','!=','1')
             ->where('reserve_type', '1')
             ->where('reserve_template', 'C')

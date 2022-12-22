@@ -760,19 +760,28 @@ function shoWreserve_date_documents_admission_group_all(data_id) {
 //------------------------------------------------------------------------------------------
 //member.documents_admission_group_inside_all.detail
 $("#documents_admission_group_inside_allController_sign_goup_0").change(function(event) {
-    var dnd = $('#documents_admission_group_inside_allController_sign_goup_0 :selected').parent().attr('label');
-    if(dnd == 'หัวหน้าฝ่าย'){
+    var dnd = $('#documents_admission_group_inside_allController_sign_goup_0 :selected').val();
+    if(dnd == 'cottons'){
         document.getElementById('documents_admission_group_inside_allController_form-group_selected_multiple_sub2_recid').style.display = 'none';
-        document.getElementById('documents_admission_group_inside_allController_form-group_selected_multiple_sub2_recid').value  = '';
         document.getElementById("documents_admission_group_inside_allController_selected_multiple_sub2_recid").required = false;
-    }else if(dnd == 'หัวหน้ากอง'){
+
+
+        document.getElementById('documents_admission_group_inside_allController_form-group_selected_multiple_sub2_recid_cottons').style.display = 'block';
+        document.getElementById("documents_admission_group_inside_allController_selected_multiple_sub2_recid_cottons").required = true;
+    }else if(dnd == 'groupmems'){
         document.getElementById('documents_admission_group_inside_allController_form-group_selected_multiple_sub2_recid').style.display = 'none';
-        document.getElementById('documents_admission_group_inside_allController_form-group_selected_multiple_sub2_recid').value  = '';
         document.getElementById("documents_admission_group_inside_allController_selected_multiple_sub2_recid").required = false;
+
+        
+        document.getElementById('documents_admission_group_inside_allController_form-group_selected_multiple_sub2_recid_cottons').style.display = 'none';
+        document.getElementById("documents_admission_group_inside_allController_selected_multiple_sub2_recid_cottons").required = false;
     }else{
         document.getElementById('documents_admission_group_inside_allController_form-group_selected_multiple_sub2_recid').style.display = 'block';
-        document.getElementById('documents_admission_group_inside_allController_form-group_selected_multiple_sub2_recid').value  = '';
         document.getElementById("documents_admission_group_inside_allController_selected_multiple_sub2_recid").required = true;
+
+
+        document.getElementById('documents_admission_group_inside_allController_form-group_selected_multiple_sub2_recid_cottons').style.display = 'none';
+        document.getElementById("documents_admission_group_inside_allController_selected_multiple_sub2_recid_cottons").required = false;
     }
 });
 
@@ -840,11 +849,19 @@ $("#documents_admission_department_allController_sign_goup_1_inside").change(fun
 //member.documents_admission_division_inside_all.detail
 $("#documents_admission_division_allController_sign_goup_0_inside").change(function(event) {
     //จับ label ของ optgroup
-    var dnd = $('#documents_admission_division_allController_sign_goup_0_inside :selected').parent().attr('label');
-    if(dnd == 'หัวหน้าฝ่าย'){
+    var dnd = $('#documents_admission_division_allController_sign_goup_0_inside :selected').val();
+    if(dnd == 'cottons'){
+        document.getElementById('documents_admission_division_allController_form-group_selected_multiple_sub2_recid_inside_cottons').style.display = 'block';
+        document.getElementById("documents_admission_division_allController_selected_multiple_sub2_recid_inside_cottons").required = true;
+
+
         document.getElementById('documents_admission_division_allController_form-group_selected_multiple_sub2_recid_inside').style.display = 'none';
         document.getElementById("documents_admission_division_allController_selected_multiple_sub2_recid_inside").required = false;
     }else{
+        document.getElementById('documents_admission_division_allController_form-group_selected_multiple_sub2_recid_inside_cottons').style.display = 'none';
+        document.getElementById("documents_admission_division_allController_selected_multiple_sub2_recid_inside_cottons").required = false;
+
+
         document.getElementById('documents_admission_division_allController_form-group_selected_multiple_sub2_recid_inside').style.display = 'block';
         document.getElementById("documents_admission_division_allController_selected_multiple_sub2_recid_inside").required = true;
     }
@@ -2877,10 +2894,10 @@ $('#selected_multiple').multiSelect();
 //member.documents_admission_group_all.detail selected_multiple
 $('#documents_admission_group_allController_selected_multiple_sub2_recid').multiSelect();
 $('#documents_admission_group_allController_selected_multiple_sub2_recid_cottons').multiSelect();
-$('#documents_admission_group_allController_selected_multiple_sub2_recid_groupmems').multiSelect();
 //------------------------------------------------------------------------------------------
 //member.documents_admission_group_inside_all.detail selected_multiple
 $('#documents_admission_group_inside_allController_selected_multiple_sub2_recid').multiSelect();
+$('#documents_admission_group_inside_allController_selected_multiple_sub2_recid_cottons').multiSelect();
 //------------------------------------------------------------------------------------------
 //member.documents_admission_department_all.detail selected_multiple
 $('#documents_admission_department_allController_selected_multiple_sub2_recid').multiSelect();
@@ -2894,6 +2911,7 @@ $('#documents_admission_division_allController_selected_multiple_sub2_recid_cott
 //------------------------------------------------------------------------------------------
 //member.documents_admission_division_inside_all.detail selected_multiple
 $('#documents_admission_division_allController_selected_multiple_sub2_recid_inside').multiSelect();
+$('#documents_admission_division_allController_selected_multiple_sub2_recid_inside_cottons').multiSelect();
 //------------------------------------------------------------------------------------------
 //member_dashboard selected_multiple
 $('#documents_admission_group_allController_selected_multiple_sub_recid_inside').multiSelect();

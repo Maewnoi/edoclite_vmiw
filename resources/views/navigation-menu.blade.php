@@ -1996,7 +1996,7 @@ use App\Http\Controllers\functionController;
                                         multiple="multiple" class=" @error('sub2_recid_inside') is-invalid @enderror">
                                         @foreach(navigationController::funtion_UserS_level_6(Auth::user()->level) as $row_UserS)
                                         <option value="{{$row_UserS->id}}">
-                                            {{$row_UserS ->name}}</option>
+                                            {{$row_UserS ->name}} {{functionController::funtion_cottons($row_UserS->cotton)}}</option>
                                         @endforeach
                                     </select>
                                     @error('sub2_recid_inside')

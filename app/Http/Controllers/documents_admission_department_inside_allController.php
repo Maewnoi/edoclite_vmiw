@@ -112,6 +112,15 @@ class documents_admission_department_inside_allController extends Controller
 
         //เช็คผู้พิจารณา
         if($request->sign_goup_1_inside == ''){
+            $request->validate(
+                [
+                    'sub2_recid_inside'=>'required|max:255'
+                ],
+                [
+                    'sub2_recid_inside.required'=>"กรุณากรอกตำแหน่งด้วยครับ",
+                    'sub2_recid_inside.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
+                ]
+            );
             //นับจำนวนคนทำงาน
             for ($t = 0; $t < count($request->sub2_recid_inside); $t++) {
                 $sub2_recid_inside[$t] = $request->sub2_recid_inside[$t];

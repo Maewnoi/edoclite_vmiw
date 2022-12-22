@@ -37,171 +37,48 @@ use App\Http\Controllers\functionController;
 
                         </div>
                         <div class="card-body table-responsive">
-                            <div class="card card-body">
-                                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-lg','value' => ''.e(__('ข้อมูลทั่วไป')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-lg','value' => ''.e(__('ข้อมูลทั่วไป')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                            </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'doc_recnum','value' => ''.e(__('เลขที่รับส่วนงาน')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-md','for' => 'doc_recnum','value' => ''.e(__('เลขที่รับส่วนงาน')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                        <label class="text-primary"><?php echo e($document_detail->doc_recnum); ?></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'doc_docnum','value' => ''.e(__('เลขที่หนังสือ')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-md','for' => 'doc_docnum','value' => ''.e(__('เลขที่หนังสือ')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                        <label class="text-primary"><?php echo e($document_detail->doc_docnum); ?></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'doc_date','value' => ''.e(__('วันที่')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-md','for' => 'doc_date','value' => ''.e(__('วันที่')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                        <label class="text-primary"><?php echo e($document_detail->doc_date); ?></label>
+                                       เลขที่รับส่วนงาน : <font class="text-primary"><?php echo e($document_detail->doc_recnum); ?></font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'doc_date_2','value' => ''.e(__('ลงวันที่')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-md','for' => 'doc_date_2','value' => ''.e(__('ลงวันที่')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                        <label class="text-primary"><?php echo e($document_detail->doc_date); ?></label>
+                                        เลขที่หนังสือ : <font class="text-primary"><?php echo e($document_detail->doc_docnum); ?></font>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                       วันที่ : <font class="text-primary"><?php echo e($document_detail->doc_date); ?></font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'doc_time','value' => ''.e(__('เวลา')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-md','for' => 'doc_time','value' => ''.e(__('เวลา')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                        <label class="text-primary"><?php echo e($document_detail->doc_time); ?></label>
+                                        ลงวันที่ : <font class="text-primary"><?php echo e($document_detail->doc_date); ?></font>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'doc_title','value' => ''.e(__('เรื่อง')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-md','for' => 'doc_title','value' => ''.e(__('เรื่อง')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                        <label class="text-primary"><?php echo e($document_detail->doc_title); ?></label>
+                                        เวลา : <font class="text-primary"><?php echo e($document_detail->doc_time); ?></font>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => '','value' => ''.e(__('ชั้นความเร็ว/สถานะ')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-md','for' => '','value' => ''.e(__('ชั้นความเร็ว/สถานะ')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
+                                        ชั้นความเร็ว/สถานะ : 
                                         <?php echo functionController::funtion_doc_speed($document_detail->doc_speed); ?>
 
                                         <?php echo functionController::funtion_sub_status($document_detail->sub_status); ?>
 
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card card-body">
-                                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-lg','value' => ''.e(__('ข้อมูลเอกสาร')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-lg','value' => ''.e(__('ข้อมูลเอกสาร')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                <?php $__errorArgs = ['doc_filedirec'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                <div class="my-2">
-                                    <p class="mt-2 text-sm text-red-600">
-                                        <?php echo e($message); ?></p>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        เรื่อง : <font class="text-primary"><?php echo e($document_detail->doc_title); ?></font>
+                                    </div>
                                 </div>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
                             </div>
+                            <hr/>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -334,12 +211,7 @@ unset($__errorArgs, $__bag); ?>"
                                                             name="sign_goup_0_inside"
                                                             id="documents_admission_division_allController_sign_goup_0_inside">
                                                             <option value="">ไม่มีผู้พิจารณา</option>
-                                                            <optgroup label="หัวหน้าฝ่าย">
-                                                                <?php $__currentLoopData = $userS_0; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_userS_0): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                <option value="<?php echo e($row_userS_0->id); ?>">
-                                                                    <?php echo e($row_userS_0->name); ?></option>
-                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                            </optgroup>
+                                                            <option value="cottons">หัวหน้าฝ่าย</option>
                                                             
                                                         </select>
 
@@ -439,11 +311,56 @@ endif;
 unset($__errorArgs, $__bag); ?>">
                                                             <?php $__currentLoopData = $userS_2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_userS_2): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <option value="<?php echo e($row_userS_2->id); ?>">
-                                                                <?php echo e($row_userS_2->name); ?></option>
+                                                                <?php echo e($row_userS_2->name); ?> <?php echo e(functionController::funtion_cottons($row_userS_2->cotton)); ?></option>
                                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         </select>
 
                                                         <?php $__errorArgs = ['sub2_recid_inside'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                        <div class="my-2">
+                                                            <p class="mt-2 text-sm text-red-600">
+                                                                <?php echo e($message); ?></p>
+                                                        </div>
+                                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                                    </div>
+                                                    <div class="form-group"
+                                                        id="documents_admission_division_allController_form-group_selected_multiple_sub2_recid_inside_cottons" style="display: none;">
+                                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','value' => ''.e(__('เลือกหัวหน้าฝ่าย')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','value' => ''.e(__('เลือกหัวหน้าฝ่าย')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                        <select name="sub2_recid_inside_cottons[]"
+                                                            id="documents_admission_division_allController_selected_multiple_sub2_recid_inside_cottons"
+                                                            multiple="multiple" required
+                                                            class=" <?php $__errorArgs = ['sub2_recid_inside_cottons'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                                            <?php $__currentLoopData = $userS_0; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_userS_0): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value="<?php echo e($row_userS_0->cottons_id); ?>">
+                                                                <?php echo e($row_userS_0->name); ?> <?php echo e($row_userS_0->cottons_name); ?></option>
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        </select>
+
+                                                        <?php $__errorArgs = ['sub2_recid_inside_cottons'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

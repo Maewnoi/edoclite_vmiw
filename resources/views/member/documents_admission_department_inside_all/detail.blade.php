@@ -20,65 +20,47 @@ use App\Http\Controllers\functionController;
                             เอกสารรับเข้าภายในรายละเอียด : {{$document_detail->doc_origin}}
                         </div>
                         <div class="card-body table-responsive">
-                            <div class="card card-body">
-                                <x-jet-label class="text-lg" value="{{ __('ข้อมูลทั่วไป') }}" />
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
+                           
+                        <div class="row">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_recnum"
-                                            value="{{ __('เลขที่รับส่วนงาน') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_recnum}}</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_docnum"
-                                            value="{{ __('เลขที่หนังสือ') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_docnum}}</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_date" value="{{ __('วันที่') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_date}}</label>
+                                        เลขที่รับส่วนงาน : <font class="text-primary">{{$document_detail->doc_recnum}}</font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_date_2" value="{{ __('ลงวันที่') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_date}}</label>
+                                       เลขที่หนังสือ : <font class="text-primary">{{$document_detail->doc_docnum}}</font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_time" value="{{ __('เวลา') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_time}}</label>
+                                       วันที่ : <font class="text-primary">{{$document_detail->doc_date}}</font>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_title" value="{{ __('เรื่อง') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_title}}</label>
+                                        ลงวันที่ : <font class="text-primary">{{$document_detail->doc_date}}</font>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="" value="{{ __('ชั้นความเร็ว/สถานะ') }}" />
+                                        เวลา : <font class="text-primary">{{$document_detail->doc_time}}</font>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        ชั้นความเร็ว/สถานะ : 
                                         {!! functionController::funtion_doc_speed($document_detail->doc_speed) !!}
                                         {!! functionController::funtion_sub_status($document_detail->sub_status) !!}
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card card-body">
-                                <x-jet-label class="text-lg" value="{{ __('ข้อมูลเอกสาร') }}" />
-                                @error('doc_filedirec')
-                                <div class="my-2">
-                                    <p class="mt-2 text-sm text-red-600">
-                                        {{$message}}</p>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        เรื่อง : <font class="text-primary">{{$document_detail->doc_title}}</font>
+                                    </div>
                                 </div>
-                                @enderror
                             </div>
+                            <hr>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -149,13 +131,11 @@ use App\Http\Controllers\functionController;
                                                             name="sign_goup_1_inside"
                                                             id="documents_admission_department_allController_sign_goup_1_inside">
                                                             <option value="">ไม่มีผู้พิจารณา</option>
-                                                            <optgroup label="หัวหน้ากอง">
                                                                 @foreach($userS_0 as $row_userS_0)
                                                                 <option
                                                                     value="{{$row_userS_0->id}}">
-                                                                    {{$row_userS_0->name}}</option>
+                                                                    หัวหน้ากอง {{$row_userS_0->name}}</option>
                                                                 @endforeach
-                                                            </optgroup>
                                                         </select>
                                                         @error('sign_goup_1_inside')
                                                         <div class="my-2">
@@ -178,7 +158,7 @@ use App\Http\Controllers\functionController;
                                                             class=" @error('sub2_recid_inside') is-invalid @enderror">
                                                             @foreach($userS_2 as $row_userS_2)
                                                             <option value="{{$row_userS_2->id}}">
-                                                                {{$row_userS_2->name}}</option>
+                                                                {{$row_userS_2->name}} {{functionController::funtion_cottons($row_userS_2->cotton)}}</option>
                                                             @endforeach
                                                         </select>
 

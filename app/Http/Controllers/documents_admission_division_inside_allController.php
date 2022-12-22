@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\sub_doc;
 use App\Models\sub2_doc;
 use App\Models\Groupmem;
+use App\Models\cottons;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\functionController;
@@ -74,9 +75,10 @@ class documents_admission_division_inside_allController extends Controller
             ->first();
 
             //หาชื่อ-นามสกุล หัวหน้าฝ่าย
-            $userS_0 = User::where('level', '5')
+            $userS_0 = cottons::Join('users','users.cotton','cottons.cottons_id')
+            ->where('level', '5')
+            ->where('cottons_group', Auth::user()->group)
             ->where('site_id',Auth::user()->site_id)
-            ->where('group', Auth::user()->group)
             ->get();
 
             //หาชื่อ-นามสกุล ผู้รับงาน
@@ -121,6 +123,15 @@ class documents_admission_division_inside_allController extends Controller
         );
 
         if($request->sign_goup_0_inside == ''){
+            $request->validate(
+                [
+                    'sub2_recid_inside'=>'required|max:255'
+                ],
+                [
+                    'sub2_recid_inside.required'=>"กรุณาเลือกผู้รับด้วยครับ",
+                    'sub2_recid_inside.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
+                ]
+            );
              //นับจำนวนคนทำงาน
              for ($t = 0; $t < count($request->sub2_recid_inside); $t++) {
                 $sub2_recid_inside[$t] = $request->sub2_recid_inside[$t];
@@ -135,30 +146,93 @@ class documents_admission_division_inside_allController extends Controller
             }
             //ประทับตราและเซ็น
             $full_path_inside = functionController::funtion_generate_PDF_III($request->doc_filedirec_1_inside, $request->seal_point_inside, $request->sub_recnum_inside, $request->sub_date_inside, $request->sub_time_inside, $request->sub_id_inside, $request->seal_pos_0_inside, $request->seal_date_1_inside, $request->seal_pos_1_inside, $request->seal_date_0_inside, $request->seal_id_1_inside, $request->seal_id_0_inside, $request->seal_detail_1_inside, $request->seal_detail_0_inside);
-            $sub_status_inside = '8';
+
+            $update_sub_docs = sub_doc::where('sub_id', $request->sub_id_inside)->update([
+                'seal_detail_1'=>$request->seal_detail_1_inside,
+                'seal_pos_1'=>$request->seal_pos_1_inside,
+                'seal_date_1'=>date('Y-m-d H:i:s'),
+                'sub_status'=>'8',
+                'seal_file'=>$full_path_inside,
+                'sub_updated_at'=>date('Y-m-d H:i:s')
+            ]);
         }else{
-            $user_check_level_goup_3 = User::where('id', $request->sign_goup_0_inside)
-            ->first();
-            if($user_check_level_goup_3->level == '5'){
-                //หัวหน้าฝ่าย
-                $update_sub_docs_0 = sub_doc::where('sub_id', $request->sub_id_inside)->update([
-                    'seal_id_0'=>$request->sign_goup_0_inside
-                ]);
-                $sub_status_inside = '1';
+            if($request->sign_goup_0_inside == 'cottons'){
+                $request->validate(
+                    [
+                        'sub2_recid_inside_cottons'=>'required|max:255'
+                    ],
+                    [
+                        'sub2_recid_inside_cottons.required'=>"กรุณาเลือกฝ่ายด้วยครับ",
+                        'sub2_recid_inside_cottons.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
+                    ]
+                );
+                   //ถ้าเลือกคนพิจารณา
+                //มีการเช็คสถานะ
+                $document_check = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+                ->where('sub_docid', $request->doc_id_inside)
+                ->where('sub_id', $request->sub_id_inside)
+                ->first();
+                if($document_check){
+                    for ($t = 0; $t < count($request->sub2_recid_inside_cottons); $t++) {
+                        $sub2_recid_inside_cottons[$t] = $request->sub2_recid_inside_cottons[$t];
+                        $user_check_level_5[$t] = User::where('level', '5')
+                        ->where('site_id',Auth::user()->site_id)
+                        ->where('group', Auth::user()->group)
+                        ->where('cotton', $sub2_recid_inside_cottons[$t])
+                        ->first();
+                        if($user_check_level_5[$t]){
+                            $update_sub_docs = sub_doc::insert([
+                                'sub_docid'=>$request->doc_id_inside,
+                                'sub_recnum'=>$document_check->sub_recnum,
+                                'sub_date'=>$document_check->sub_date,
+                                'sub_time'=>$document_check->sub_time,
+                                'sub_recid'=>Auth::user()->group,
+                                'sub_cotton'=>$sub2_recid_inside_cottons[$t],
+                                'sub_status'=>'1',
+                                'sub_created_at'=>date('Y-m-d H:i:s'),
+                                'sub_updated_at'=>date('Y-m-d H:i:s'),
+                                'seal_recname_0'=>$document_check->seal_recname_0,
+                                'seal_detail_0'=>$document_check->seal_detail_0,
+                                'seal_note_0'=>$document_check->seal_note_0,
+                                'seal_pos_0'=>$document_check->seal_pos_0,
+                                'seal_date_0'=>$document_check->seal_date_0,
+                                'seal_id_0'=>$user_check_level_5[$t]->id,
+                                'seal_point'=>$document_check->seal_point,
+                                'seal_id_1'=>$document_check->seal_id_1,
+                                'seal_detail_1'=>$request->seal_detail_1_inside,
+                                'seal_pos_1'=>$request->seal_pos_1_inside,
+                                'seal_date_1'=>date('Y-m-d H:i:s'),
+                            ]);
+
+                        }else{
+                            return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level_5]!');
+                        }
+                      
+                    }
+
+                    $delete = sub_doc::where('sub_id', $request->sub_id_inside)->delete();
+                }else{
+                    return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [document_check]!');
+                }
+
             }else{
-                return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level_goup_3]!');
+                return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level_5]!');
             }
+            // $user_check_level_goup_3 = User::where('id', $request->sign_goup_0_inside)
+            // ->first();
+            // if($user_check_level_goup_3->level == '5'){
+            //     //หัวหน้าฝ่าย
+            //     $update_sub_docs_0 = sub_doc::where('sub_id', $request->sub_id_inside)->update([
+            //         'seal_id_0'=>$request->sign_goup_0_inside
+            //     ]);
+            //     $sub_status_inside = '1';
+            // }else{
+            //     return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level_goup_3]!');
+            // }
             $full_path_inside = '';
         }
 
-        $update_sub_docs = sub_doc::where('sub_id', $request->sub_id_inside)->update([
-            'seal_detail_1'=>$request->seal_detail_1_inside,
-            'seal_pos_1'=>$request->seal_pos_1_inside,
-            'seal_date_1'=>date('Y-m-d H:i:s'),
-            'sub_status'=>$sub_status_inside,
-            'seal_file'=>$full_path_inside,
-            'sub_updated_at'=>date('Y-m-d H:i:s')
-        ]);
+      
 
         //linetoken
         $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)

@@ -4422,7 +4422,7 @@ endif;
 unset($__errorArgs, $__bag); ?>">
                                         <?php $__currentLoopData = navigationController::funtion_UserS_level_6(Auth::user()->level); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_UserS): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($row_UserS->id); ?>">
-                                            <?php echo e($row_UserS ->name); ?></option>
+                                            <?php echo e($row_UserS ->name); ?> <?php echo e(functionController::funtion_cottons($row_UserS->cotton)); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                     <?php $__errorArgs = ['sub2_recid_inside'];

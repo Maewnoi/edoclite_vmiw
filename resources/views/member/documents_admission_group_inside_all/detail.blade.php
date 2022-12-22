@@ -20,65 +20,46 @@ use App\Http\Controllers\functionController;
                             เอกสารรับเข้าภายในรายละเอียด : {{$document_detail->doc_origin}}
                         </div>
                         <div class="card-body table-responsive">
-                            <div class="card card-body">
-                                <x-jet-label class="text-lg" value="{{ __('ข้อมูลทั่วไป') }}" />
-                            </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_recnum"
-                                            value="{{ __('เลขที่รับส่วนงาน') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_recnum}}</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_docnum"
-                                            value="{{ __('เลขที่หนังสือ') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_docnum}}</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_date" value="{{ __('วันที่') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_date}}</label>
+                                        เลขที่รับส่วนงาน : <font class="text-primary">{{$document_detail->doc_recnum}}</font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_date_2" value="{{ __('ลงวันที่') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_date}}</label>
+                                       เลขที่หนังสือ : <font class="text-primary">{{$document_detail->doc_docnum}}</font>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_time" value="{{ __('เวลา') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_time}}</label>
+                                       วันที่ : <font class="text-primary">{{$document_detail->doc_date}}</font>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_title" value="{{ __('เรื่อง') }}" />
-                                        <label class="text-primary">{{$document_detail->doc_title}}</label>
+                                        ลงวันที่ : <font class="text-primary">{{$document_detail->doc_date}}</font>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="" value="{{ __('ชั้นความเร็ว/สถานะ') }}" />
+                                        เวลา : <font class="text-primary">{{$document_detail->doc_time}}</font>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        ชั้นความเร็ว/สถานะ : 
                                         {!! functionController::funtion_doc_speed($document_detail->doc_speed) !!}
                                         {!! functionController::funtion_sub_status($document_detail->sub_status) !!}
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card card-body">
-                                <x-jet-label class="text-lg" value="{{ __('ข้อมูลเอกสาร') }}" />
-                                @error('doc_filedirec')
-                                <div class="my-2">
-                                    <p class="mt-2 text-sm text-red-600">
-                                        {{$message}}</p>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        เรื่อง : <font class="text-primary">{{$document_detail->doc_title}}</font>
+                                    </div>
                                 </div>
-                                @enderror
                             </div>
+                            
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -115,18 +96,15 @@ use App\Http\Controllers\functionController;
                                             <x-jet-label class="text-lg" value="{{ __('สถานะการลงรับหนังสือ') }}" />
                                             @if($document_detail->doc_status == 'success')
                                             <table>
-                                                @foreach($sub_docsS as $row_sub_docs)
+                                            
                                                 <tr>
-                                                    <td>{{ functionController::funtion_groupmem_name($row_sub_docs->sub_recid) }}</td>
-                                                    <td>{!! functionController::funtion_sub_status_detail($row_sub_docs->sub_status) !!}
+                                                    <td>{{ functionController::funtion_groupmem_name($document_detail->sub_recid) }}</td>
+                                                    <td>{!! functionController::funtion_sub_status_detail($document_detail->sub_status) !!}
                                                     </td>
-                                                    <!-- @if($row_sub_docs->sub_status == 8)
-                                                        <td>{!!functionController::funtion_sub2_recid_name($row_sub_docs->sub_id) !!}<hr></td>
-                                                    @endif -->
                                                     
 
                                                 </tr>
-                                                @endforeach
+                                       
                                                 
                                                
                                             </table>
@@ -166,10 +144,66 @@ use App\Http\Controllers\functionController;
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="card card-body">
-                                            <x-jet-label class="text-lg" value="{{ __('ตำแหน่งประทับตรา') }}" />
                                             <div class="form-group">
-                                                <input type="range" name="seal_point_inside" class="form-range" min="10" value="20"
-                                                    max="160" step="1">
+                                                <x-jet-label class="text-lg" value="{{ __('ตำแหน่งประทับตรา') }}" />
+                                                <!-- <input type="range" name="seal_point_inside" class="form-range" min="10" value="20"
+                                                    max="160" step="1"> -->
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="seal_point_inside" id="seal_point_inside1" value="1">
+                                                                <label class="form-check-label" for="seal_point_inside1">
+                                                                    ตำแหน่งที่ 1
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="seal_point_inside" id="seal_point_inside2" value="2">
+                                                                <label class="form-check-label" for="seal_point_inside2">
+                                                                    ตำแหน่งที่ 2
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="seal_point_inside" id="seal_point_inside3" value="3">
+                                                                <label class="form-check-label" for="seal_point_inside3">
+                                                                    ตำแหน่งที่ 3
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="seal_point_inside" id="seal_point_inside4" value="4" checked>
+                                                                <label class="form-check-label" for="seal_point_inside4" >
+                                                                    ตำแหน่งที่ 4
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="seal_point_inside" id="seal_point_inside5" value="5">
+                                                                <label class="form-check-label" for="seal_point_inside5" >
+                                                                    ตำแหน่งที่ 5
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <table class="w-100 table-bordered table-hover">
+                                                        <tbody>
+                                                            <tr data-widget="expandable-table" aria-expanded="false">
+                                                                <td class="text-primary"><center>ดูรูปตัวอย่างตำแหน่งประทับตรา </center></td>
+                                                            </tr>
+                                                            <tr class="expandable-body">
+                                                                <td colspan="1">
+                                                                    <p style="">
+                                                                        <img src="{{ asset('/image/seal_point.jpg') }}" width="900" height="auto">
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -247,18 +281,8 @@ use App\Http\Controllers\functionController;
                                                             name="sign_goup_0_inside"
                                                             id="documents_admission_group_inside_allController_sign_goup_0">
                                                             <option value="">ไม่มีผู้พิจารณา</option>
-                                                            <optgroup label="หัวหน้าฝ่าย">
-                                                                @foreach($userS_0 as $row_userS_0)
-                                                                <option value="{{$row_userS_0->id}}">
-                                                                    {{$row_userS_0->name}}</option>
-                                                                @endforeach
-                                                            </optgroup>
-                                                            <optgroup label="หัวหน้ากอง">
-                                                                @foreach($userS_1 as $row_userS_1)
-                                                                <option value="{{$row_userS_1->id}}">
-                                                                    {{$row_userS_1->name}}</option>
-                                                                @endforeach
-                                                            </optgroup>
+                                                            <option value="cottons">หัวหน้าฝ่าย</option>
+                                                            <option value="groupmems">หัวหน้ากอง {{$user_Groupmem->name}}</option>
                                                         </select>
                                                     </div>
                                                     @error('sign_goup_0_inside')
@@ -278,10 +302,29 @@ use App\Http\Controllers\functionController;
                                                             class=" @error('sub2_recid_inside') is-invalid @enderror">
                                                             @foreach($userS_2 as $row_userS_2)
                                                             <option value="{{$row_userS_2->id}}">
-                                                                {{$row_userS_2->name}}</option>
+                                                                {{$row_userS_2->name}} {{functionController::funtion_cottons($row_userS_2->cotton)}}</option>
                                                             @endforeach
                                                         </select>
                                                         @error('sub2_recid_inside')
+                                                        <div class="my-2">
+                                                            <p class="mt-2 text-sm text-red-600">
+                                                                {{$message}}</p>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="form-group"
+                                                        id="documents_admission_group_inside_allController_form-group_selected_multiple_sub2_recid_cottons" style="display: none;">
+                                                        <x-jet-label class="text-md" value="{{ __('เลือกหัวหน้าฝ่าย') }}" />
+                                                        <select name="sub2_recid_inside_cottons[]"
+                                                            id="documents_admission_group_inside_allController_selected_multiple_sub2_recid_cottons"
+                                                            multiple="multiple" required
+                                                            class=" @error('sub2_recid_inside_cottons') is-invalid @enderror">
+                                                            @foreach($cottons_S as $row_cottons_S)
+                                                                <option value="{{$row_cottons_S->cottons_id}}">
+                                                                {{$row_cottons_S->name}} {{$row_cottons_S->cottons_name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('sub2_recid_inside_cottons')
                                                         <div class="my-2">
                                                             <p class="mt-2 text-sm text-red-600">
                                                                 {{$message}}</p>

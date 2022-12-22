@@ -17,7 +17,6 @@ class reserve_number_certificate_allController extends Controller
         if(Auth::user()->level=='6'){
             //สารบรรณกอง
             $reserve_certificate_numberS = reserve_number::where('reserve_site',Auth::user()->site_id)
-            ->where('reserve_group',Auth::user()->group)
             ->where('reserve_type','1')
             ->where('reserve_template','E')
             ->get();
@@ -42,7 +41,6 @@ class reserve_number_certificate_allController extends Controller
         $document_Check_reserve_number = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
         ->where('doc_recnum', $request->reserve_number)
         ->where('doc_site_id',Auth::user()->site_id)
-        ->where('doc_group',Auth::user()->group)
         ->where('doc_type', '1')
         ->where('doc_template', 'E')
         ->first();
@@ -53,7 +51,6 @@ class reserve_number_certificate_allController extends Controller
         $reserve_number_Check_reserve_number = reserve_number::where('reserve_number', $request->reserve_number)
         ->whereNull('reserve_group')
         ->where('reserve_site',Auth::user()->site_id)
-        ->where('reserve_group',Auth::user()->group)
         ->where('reserve_type', '1')
         ->where('reserve_template', 'E')
         ->first();

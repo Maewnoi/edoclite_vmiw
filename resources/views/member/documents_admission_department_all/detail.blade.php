@@ -21,7 +21,7 @@ use App\Http\Controllers\functionController;
                         </div>
                         <div class="card-body table-responsive">
                             
-                        <div class="row">
+                            <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         เลขที่รับส่วนงาน : <font class="text-primary">{{$document_detail->doc_recnum}}</font>
@@ -60,6 +60,7 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                             </div>
+                            <hr>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -130,13 +131,11 @@ use App\Http\Controllers\functionController;
                                                             name="sign_goup_1"
                                                             id="documents_admission_department_allController_sign_goup_1">
                                                             <option value="">ไม่มีผู้พิจารณา</option>
-                                                            <optgroup label="หัวหน้ากอง">
                                                                 @foreach($userS_0 as $row_userS_0)
                                                                 <option
                                                                     value="{{$row_userS_0->id}}">
-                                                                    {{$row_userS_0->name}}</option>
+                                                                    หัวหน้ากอง {{$row_userS_0->name}}</option>
                                                                 @endforeach
-                                                            </optgroup>
                                                         </select>
                                                         @error('sign_goup_1')
                                                         <div class="my-2">
