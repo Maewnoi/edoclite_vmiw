@@ -1737,6 +1737,22 @@ class queryController extends Controller
         }
 
     }
+    
+    public static function funtion_query_documents_pendingController_1_level_4(){
+        if(Auth::user()->level=='4'){
+            $documents = document::where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '0')
+            ->where('doc_template', 'A')
+            ->where('doc_status', 'success')
+            ->orderby('doc_date','DESC')
+            ->get();
+
+            return $documents;
+        }else{
+            return 0;
+        }
+
+    }
 
     public static function funtion_query_documents_pendingController_level_4(){
         if(Auth::user()->level=='4'){

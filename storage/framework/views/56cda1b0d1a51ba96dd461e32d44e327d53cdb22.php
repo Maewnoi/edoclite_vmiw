@@ -1,6 +1,15 @@
 <?php
 use App\Http\Controllers\functionController;
+
+$check_s = 0;
+foreach($sub_docsS as $row_check_sub_docs){
+    if($row_check_sub_docs->sub_status != '0'){
+        $check_s = 1;
+    }
+}
+
 ?>
+
 <?php if (isset($component)) { $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\AppLayout::class, []); ?>
 <?php $component->withName('app-layout'); ?>
@@ -131,6 +140,7 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
+                            <?php if($document_detail->doc_status == 'waiting'): ?>
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="<?php echo e(route('documents_pending_pending')); ?>" method="post"
@@ -254,6 +264,21 @@ unset($__errorArgs, $__bag); ?>
                                     </form>
                                 </div>
                             </div>
+                            <?php elseif($document_detail->doc_status == 'success' && $check_s == '0'): ?>
+                            <div class="flex items-center justify-center mt-20">
+                                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['type' => 'button','dataToggle' => 'modal','dataTarget' => '#modal-update-groupmems'.e($document_detail->doc_id).'']]); ?>
+<?php $component->withName('jet-button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['type' => 'button','data-toggle' => 'modal','data-target' => '#modal-update-groupmems'.e($document_detail->doc_id).'']); ?><i class="fa fa-edit"></i> แก้ไขกองงานที่เกี่ยวข้อง <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                            </div>
+                            <?php endif; ?>
                             <hr>
                         </div>
                     </div>
@@ -261,6 +286,98 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
     </div>
+
+
+    <?php if($document_detail->doc_status == 'success' && $check_s == '0'): ?>
+    <div class="modal fade" id="modal-update-groupmems<?php echo e($document_detail->doc_id); ?>">
+        <div class="modal-dialog modal-l">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <label class="modal-title">แก้ไขกองงานที่เกี่ยวข้อง
+                    </label>
+                </div>
+                <div class="modal-body">
+                    <form action="<?php echo e(route('documents_pending_updateGroupmem')); ?>" method="post" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
+                        <div class="card card-body">
+                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-lg','value' => ''.e(__('พิจารณาเลือกกองที่เกี่ยวข้อง')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-lg','value' => ''.e(__('พิจารณาเลือกกองที่เกี่ยวข้อง')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                            <div class="form-group">
+                                <select name="sub_recid[]" id="documents_admission_allController_update-groupmems_selected_multiple" multiple="multiple"
+                                    required class=" <?php $__errorArgs = ['sub_recid'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                    <?php $__currentLoopData = $sub_docsS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_sub_docs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option selected value="<?php echo e($row_sub_docs->sub_recid); ?>">
+                                        <?php echo e(functionController::funtion_groupmem_name($row_sub_docs->sub_recid)); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $GroupmemS_success; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_Groupmem_success): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($row_Groupmem_success->group_id); ?>">
+                                        <?php echo e($row_Groupmem_success->group_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <?php $__errorArgs = ['sub_recid'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            <?php echo e($message); ?></p>
+                                    </div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                            <select name="sub_recid_old[]" multiple="multiple" class="hide">
+                                <?php $__currentLoopData = $sub_docsS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_sub_docs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option selected value="<?php echo e($row_sub_docs->sub_recid); ?>">
+                                    <?php echo e(functionController::funtion_groupmem_name($row_sub_docs->sub_recid)); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+                            <input type="hidden" name="doc_id" class="form-control" value="<?php echo e($document_detail->doc_id); ?>">
+
+                            <input type="hidden" name="doc_recnum" class="form-control" value="<?php echo e($document_detail->doc_recnum); ?>">
+                            <input type="hidden" name="doc_docnum" class="form-control" value="<?php echo e($document_detail->doc_docnum); ?>">
+                            <input type="hidden" name="doc_title" class="form-control" value="<?php echo e($document_detail->doc_title); ?>">
+                            
+                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
+<?php $component->withName('jet-button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
+                                <?php echo e(__('save')); ?>
+
+                             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>

@@ -1,6 +1,15 @@
 @php
 use App\Http\Controllers\functionController;
+
+$check_s = 0;
+foreach($sub_docsS as $row_check_sub_docs){
+    if($row_check_sub_docs->sub_status != '0'){
+        $check_s = 1;
+    }
+}
+
 @endphp
+
 <x-app-layout>
     <!-- <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
@@ -90,6 +99,7 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
+                            @if($document_detail->doc_status == 'waiting')
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="{{route('documents_pending_pending')}}" method="post"
@@ -150,6 +160,11 @@ use App\Http\Controllers\functionController;
                                     </form>
                                 </div>
                             </div>
+                            @elseif($document_detail->doc_status == 'success' && $check_s == '0')
+                            <div class="flex items-center justify-center mt-20">
+                                <x-jet-button type="button"  data-toggle="modal" data-target="#modal-update-groupmems{{$document_detail->doc_id}}"><i class="fa fa-edit"></i> แก้ไขกองงานที่เกี่ยวข้อง</x-jet-button>
+                            </div>
+                            @endif
                             <hr>
                         </div>
                     </div>
@@ -157,4 +172,60 @@ use App\Http\Controllers\functionController;
             </div>
         </div>
     </div>
+
+
+    @if($document_detail->doc_status == 'success' && $check_s == '0')
+    <div class="modal fade" id="modal-update-groupmems{{$document_detail->doc_id}}">
+        <div class="modal-dialog modal-l">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <label class="modal-title">แก้ไขกองงานที่เกี่ยวข้อง
+                    </label>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('documents_pending_updateGroupmem')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                        <div class="card card-body">
+                            <x-jet-label class="text-lg" value="{{ __('พิจารณาเลือกกองที่เกี่ยวข้อง') }}" />
+                            <div class="form-group">
+                                <select name="sub_recid[]" id="documents_admission_allController_update-groupmems_selected_multiple" multiple="multiple"
+                                    required class=" @error('sub_recid') is-invalid @enderror">
+                                    @foreach($sub_docsS as $row_sub_docs)
+                                        <option selected value="{{$row_sub_docs->sub_recid}}">
+                                        {{ functionController::funtion_groupmem_name($row_sub_docs->sub_recid) }}</option>
+                                    @endforeach
+                                    @foreach($GroupmemS_success as $row_Groupmem_success)
+                                    <option value="{{$row_Groupmem_success->group_id}}">
+                                        {{ $row_Groupmem_success->group_name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('sub_recid')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                @enderror
+                            </div>
+                            <select name="sub_recid_old[]" multiple="multiple" class="hide">
+                                @foreach($sub_docsS as $row_sub_docs)
+                                    <option selected value="{{$row_sub_docs->sub_recid}}">
+                                    {{ functionController::funtion_groupmem_name($row_sub_docs->sub_recid) }}</option>
+                                @endforeach
+                            </select>
+                            <input type="hidden" name="doc_id" class="form-control" value="{{$document_detail->doc_id}}">
+
+                            <input type="hidden" name="doc_recnum" class="form-control" value="{{$document_detail->doc_recnum}}">
+                            <input type="hidden" name="doc_docnum" class="form-control" value="{{$document_detail->doc_docnum}}">
+                            <input type="hidden" name="doc_title" class="form-control" value="{{$document_detail->doc_title}}">
+                            
+                            <x-jet-button onclick="submitForm(this);">
+                                {{ __('save') }}
+                            </x-jet-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 </x-app-layout>

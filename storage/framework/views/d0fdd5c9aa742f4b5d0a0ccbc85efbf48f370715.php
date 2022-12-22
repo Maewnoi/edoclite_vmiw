@@ -1,5 +1,13 @@
 <?php
 use App\Http\Controllers\functionController;
+
+$check_s = 0;
+foreach($sub_docsS as $row_check_sub_docs){
+    if($row_check_sub_docs->sub_status != '0'){
+        $check_s = 1;
+    }
+}
+
 ?>
 <?php if (isset($component)) { $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\AppLayout::class, []); ?>
@@ -222,7 +230,7 @@ unset($__errorArgs, $__bag); ?>
                             <hr>
                           
                             <div class="flex items-center justify-center mt-20">
-                                <?php if($document_detail->doc_status == 'success'): ?>
+                                <?php if($document_detail->doc_status == 'success' && $check_s == '0'): ?>
                                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['type' => 'button','dataToggle' => 'modal','dataTarget' => '#modal-update-groupmems'.e($document_detail->doc_id).'']]); ?>
 <?php $component->withName('jet-button'); ?>
@@ -247,6 +255,8 @@ unset($__errorArgs, $__bag); ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
+                                <?php else: ?>
+                                
                                 <?php endif; ?>
                             </div>
                             <hr>
@@ -549,7 +559,7 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
 
-    <?php if($document_detail->doc_status == 'success'): ?>
+    <?php if($document_detail->doc_status == 'success' && $check_s == '0'): ?>
     <div class="modal fade" id="modal-update-groupmems<?php echo e($document_detail->doc_id); ?>">
         <div class="modal-dialog modal-l">
             <div class="modal-content">
@@ -558,7 +568,7 @@ unset($__errorArgs, $__bag); ?>
                     </label>
                 </div>
                 <div class="modal-body">
-                    <form action="<?php echo e(route('updateGroupmem')); ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?php echo e(route('documents_admission_updateGroupmem')); ?>" method="post" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
                         <div class="card card-body">
                             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>

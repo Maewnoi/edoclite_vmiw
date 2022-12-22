@@ -150,6 +150,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //query
     Route::get('/documents_admission_all/all/query',[queryController::class,'funtion_query_documents_admission_allController_level_3']);
     Route::get('/documents_pending/all/query',[queryController::class,'funtion_query_documents_pendingController_level_4']);
+    Route::get('/documents_pending/all/query_1',[queryController::class,'funtion_query_documents_pendingController_1_level_4']);
     Route::get('/documents_admission_division_all/all/0/query',[queryController::class,'funtion_query_documents_admission_division_all_0_Controller_level_4']);
     Route::get('/documents_admission_division_all/all/1/query',[queryController::class,'funtion_query_documents_admission_division_all_1_Controller_level_4']);
     Route::get('/documents_admission_division_retrun/all/query',[queryController::class,'funtion_query_documents_admission_division_retrunController_level_4']);
@@ -306,7 +307,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::post('/documents_admission_all/updateGeneral',[documents_admission_allController::class,'updateGeneral'])->name('updateGeneral');
     Route::post('/documents_admission_all/updateFile',[documents_admission_allController::class,'updateFile'])->name('updateFile');
     Route::post('/documents_admission_all/delete',[documents_admission_allController::class,'delete'])->name('delete');
-    Route::post('/documents_admission_all/updateGroupmem',[documents_admission_allController::class,'updateGroupmem'])->name('updateGroupmem');
+    Route::post('/documents_admission_all/updateGroupmem',[documents_admission_allController::class,'updateGroupmem'])->name('documents_admission_updateGroupmem');
 
     //reserve number receive จองเลขรับ ภายนอก
     Route::get('/reserve_number_receive/all',[reserve_number_receive_allController::class,'index'])->name('reserve_number_receive_all');
@@ -317,7 +318,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_pending/all',[documents_pendingController::class,'index'])->name('documents_pending_all');
     Route::get('/documents_pending/detail/{id}',[documents_pendingController::class,'detail'])->name('documents_pending_detail')->middleware(['password.confirm']);
     Route::post('/documents_pending/pending',[documents_pendingController::class,'pending'])->name('documents_pending_pending');
-    
+    Route::post('/documents_pending/updateGroupmem',[documents_pendingController::class,'updateGroupmem'])->name('documents_pending_updateGroupmem');
+
     //All admission documents group เอกสารรับเข้ากองงานทั้งหมด ภายนอก
     Route::get('/documents_admission_group/all/0',[documents_admission_group_allController::class,'index_0'])->name('documents_admission_group_all_0');
     Route::get('/documents_admission_group/all/1',[documents_admission_group_allController::class,'index_1'])->name('documents_admission_group_all_1');
