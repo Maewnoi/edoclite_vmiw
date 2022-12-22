@@ -21,6 +21,7 @@ class SubDocs extends Migration
             $table->date('sub_date')->nullable();
             $table->time('sub_time')->nullable();
             $table->integer('sub_recid');
+            $table->integer('sub_cotton');
             $table->enum('sub_status', array('0', '1', '2', '3', '4', '5', '6', '7', '8'))->default('0');
             $table->enum('sub_check', array('0', '1'))->default('0');
             $table->timestamp('sub_created_at')->nullable();

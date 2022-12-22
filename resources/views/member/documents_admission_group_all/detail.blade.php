@@ -97,18 +97,15 @@ use App\Http\Controllers\functionController;
                                             <x-jet-label class="text-lg" value="{{ __('สถานะการลงรับหนังสือ') }}" />
                                             @if($document_detail->doc_status == 'success')
                                             <table>
-                                                @foreach($sub_docsS as $row_sub_docs)
+                                            
                                                 <tr>
-                                                    <td>{{ functionController::funtion_groupmem_name($row_sub_docs->sub_recid) }}</td>
-                                                    <td>{!! functionController::funtion_sub_status_detail($row_sub_docs->sub_status) !!}
+                                                    <td>{{ functionController::funtion_groupmem_name($document_detail->sub_recid) }}</td>
+                                                    <td>{!! functionController::funtion_sub_status_detail($document_detail->sub_status) !!}
                                                     </td>
-                                                    <!-- @if($row_sub_docs->sub_status == 8)
-                                                        <td>{!!functionController::funtion_sub2_recid_name($row_sub_docs->sub_id) !!}<hr></td>
-                                                    @endif -->
                                                     
 
                                                 </tr>
-                                                @endforeach
+                                       
                                                 
                                                
                                             </table>
@@ -286,18 +283,8 @@ use App\Http\Controllers\functionController;
                                                             name="sign_goup_0"
                                                             id="documents_admission_group_allController_sign_goup_0">
                                                             <option value="">ไม่มีผู้พิจารณา</option>
-                                                            <optgroup label="หัวหน้าฝ่าย">
-                                                                @foreach($userS_0 as $row_userS_0)
-                                                                <option value="{{$row_userS_0->id}}">
-                                                                    {{$row_userS_0->name." ".$row_userS_0->pos}}</option>
-                                                                @endforeach
-                                                            </optgroup>
-                                                            <optgroup label="หัวหน้ากอง">
-                                                                @foreach($userS_1 as $row_userS_1)
-                                                                <option value="{{$row_userS_1->id}}">
-                                                                    {{$row_userS_1->name." ".$row_userS_0->pos}}</option>
-                                                                @endforeach
-                                                            </optgroup>
+                                                            <option value="cottons">หัวหน้าฝ่าย</option>
+                                                            <option value="groupmems">หัวหน้ากอง {{$user_Groupmem->name}}</option>
                                                         </select>
                                                     </div>
                                                     @error('sign_goup_0')
@@ -316,11 +303,31 @@ use App\Http\Controllers\functionController;
                                                             multiple="multiple" required
                                                             class=" @error('sub2_recid') is-invalid @enderror">
                                                             @foreach($userS_2 as $row_userS_2)
-                                                            <option value="{{$row_userS_2->id}}">
-                                                                {{$row_userS_2->name}}</option>
+                                                                <option value="{{$row_userS_2->id}}">
+                                                                    {{$row_userS_2->name}} {{functionController::funtion_cottons($row_userS_2->cotton)}}</option>
                                                             @endforeach
                                                         </select>
                                                         @error('sub2_recid')
+                                                        <div class="my-2">
+                                                            <p class="mt-2 text-sm text-red-600">
+                                                                {{$message}}</p>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="form-group"
+                                                        id="documents_admission_group_allController_form-group_selected_multiple_sub2_recid_cottons" style="display: none;">
+                                                        <x-jet-label class="text-md" value="{{ __('เลือกหัวหน้าฝ่าย') }}" />
+                                                        <select name="sub2_recid_cottons[]"
+                                                            id="documents_admission_group_allController_selected_multiple_sub2_recid_cottons"
+                                                            multiple="multiple" required
+                                                            class=" @error('sub2_recid_cottons') is-invalid @enderror">
+                                                            @foreach($cottons_S as $row_cottons_S)
+                                                                <option value="{{$row_cottons_S->cottons_id}}">
+                                                                {{$row_cottons_S->name}} {{$row_cottons_S->cottons_name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('sub2_recid_cottons')
                                                         <div class="my-2">
                                                             <p class="mt-2 text-sm text-red-600">
                                                                 {{$message}}</p>

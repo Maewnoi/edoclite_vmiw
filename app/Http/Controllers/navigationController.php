@@ -1093,6 +1093,7 @@ class navigationController extends Controller
              ->where('doc_template', 'A')
              ->where('doc_status', 'success')
              ->where('sub_recid', Auth::user()->group)
+             ->where('sub_cotton', Auth::user()->cotton)
              ->where('sub_status', '1')
              ->where('seal_id_0', Auth::user()->id)
              ->count();
@@ -1110,6 +1111,7 @@ class navigationController extends Controller
              ->where('doc_template', 'A')
              ->where('doc_status', 'success')
              ->where('sub_recid', Auth::user()->group)
+             ->where('sub_cotton', Auth::user()->cotton)
              ->where('sub_status', '!=','1')
              ->where('seal_id_0', Auth::user()->id)
              ->where('seal_date_0', '!=', NULL)

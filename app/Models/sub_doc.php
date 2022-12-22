@@ -16,6 +16,7 @@ class sub_doc extends Model
         'sub_date',
         'sub_time',
         'sub_recid',
+        'sub_cotton',
         'sub_status',
         'sub_check',
         'sub_created_at',

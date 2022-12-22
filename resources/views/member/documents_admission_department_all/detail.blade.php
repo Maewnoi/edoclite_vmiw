@@ -159,7 +159,7 @@ use App\Http\Controllers\functionController;
                                                             class=" @error('sub2_recid') is-invalid @enderror">
                                                             @foreach($userS_2 as $row_userS_2)
                                                             <option value="{{$row_userS_2->id}}">
-                                                                {{$row_userS_2->name}}</option>
+                                                                {{$row_userS_2->name}} {{functionController::funtion_cottons($row_userS_2->cotton)}}</option>
                                                             @endforeach
                                                         </select>
 

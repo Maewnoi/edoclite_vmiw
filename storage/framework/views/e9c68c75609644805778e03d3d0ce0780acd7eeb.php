@@ -150,19 +150,16 @@ use App\Http\Controllers\functionController;
 <?php endif; ?>
                                             <?php if($document_detail->doc_status == 'success'): ?>
                                             <table>
-                                                <?php $__currentLoopData = $sub_docsS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_sub_docs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            
                                                 <tr>
-                                                    <td><?php echo e(functionController::funtion_groupmem_name($row_sub_docs->sub_recid)); ?></td>
-                                                    <td><?php echo functionController::funtion_sub_status_detail($row_sub_docs->sub_status); ?>
+                                                    <td><?php echo e(functionController::funtion_groupmem_name($document_detail->sub_recid)); ?></td>
+                                                    <td><?php echo functionController::funtion_sub_status_detail($document_detail->sub_status); ?>
 
                                                     </td>
-                                                    <!-- <?php if($row_sub_docs->sub_status == 8): ?>
-                                                        <td><?php echo functionController::funtion_sub2_recid_name($row_sub_docs->sub_id); ?><hr></td>
-                                                    <?php endif; ?> -->
                                                     
 
                                                 </tr>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                       
                                                 
                                                
                                             </table>
@@ -466,18 +463,8 @@ unset($__errorArgs, $__bag); ?>"
                                                             name="sign_goup_0"
                                                             id="documents_admission_group_allController_sign_goup_0">
                                                             <option value="">ไม่มีผู้พิจารณา</option>
-                                                            <optgroup label="หัวหน้าฝ่าย">
-                                                                <?php $__currentLoopData = $userS_0; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_userS_0): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                <option value="<?php echo e($row_userS_0->id); ?>">
-                                                                    <?php echo e($row_userS_0->name." ".$row_userS_0->pos); ?></option>
-                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                            </optgroup>
-                                                            <optgroup label="หัวหน้ากอง">
-                                                                <?php $__currentLoopData = $userS_1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_userS_1): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                <option value="<?php echo e($row_userS_1->id); ?>">
-                                                                    <?php echo e($row_userS_1->name." ".$row_userS_0->pos); ?></option>
-                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                            </optgroup>
+                                                            <option value="cottons">หัวหน้าฝ่าย</option>
+                                                            <option value="groupmems">หัวหน้ากอง <?php echo e($user_Groupmem->name); ?></option>
                                                         </select>
                                                     </div>
                                                     <?php $__errorArgs = ['sign_goup_0'];
@@ -521,11 +508,56 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>">
                                                             <?php $__currentLoopData = $userS_2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_userS_2): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                            <option value="<?php echo e($row_userS_2->id); ?>">
-                                                                <?php echo e($row_userS_2->name); ?></option>
+                                                                <option value="<?php echo e($row_userS_2->id); ?>">
+                                                                    <?php echo e($row_userS_2->name); ?> <?php echo e(functionController::funtion_cottons($row_userS_2->cotton)); ?></option>
                                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         </select>
                                                         <?php $__errorArgs = ['sub2_recid'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                        <div class="my-2">
+                                                            <p class="mt-2 text-sm text-red-600">
+                                                                <?php echo e($message); ?></p>
+                                                        </div>
+                                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                                    </div>
+
+                                                    <div class="form-group"
+                                                        id="documents_admission_group_allController_form-group_selected_multiple_sub2_recid_cottons" style="display: none;">
+                                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','value' => ''.e(__('เลือกหัวหน้าฝ่าย')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','value' => ''.e(__('เลือกหัวหน้าฝ่าย')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                        <select name="sub2_recid_cottons[]"
+                                                            id="documents_admission_group_allController_selected_multiple_sub2_recid_cottons"
+                                                            multiple="multiple" required
+                                                            class=" <?php $__errorArgs = ['sub2_recid_cottons'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                                            <?php $__currentLoopData = $cottons_S; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_cottons_S): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                <option value="<?php echo e($row_cottons_S->cottons_id); ?>">
+                                                                <?php echo e($row_cottons_S->name); ?> <?php echo e($row_cottons_S->cottons_name); ?></option>
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        </select>
+                                                        <?php $__errorArgs = ['sub2_recid_cottons'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

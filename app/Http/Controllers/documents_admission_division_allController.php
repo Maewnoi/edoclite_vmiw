@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\sub_doc;
 use App\Models\sub2_doc;
 use App\Models\Groupmem;
+use App\Models\cottons;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\functionController;
@@ -64,9 +65,10 @@ class documents_admission_division_allController extends Controller
             ->first();
 
             //หาชื่อ-นามสกุล หัวหน้าฝ่าย
-            $userS_0 = User::where('level', '5')
+            $userS_0 = cottons::Join('users','users.cotton','cottons.cottons_id')
+            ->where('level', '5')
+            ->where('cottons_group', Auth::user()->group)
             ->where('site_id',Auth::user()->site_id)
-            ->where('group', Auth::user()->group)
             ->get();
 
             //หาชื่อ-นามสกุล ผู้รับงาน
@@ -114,6 +116,15 @@ class documents_admission_division_allController extends Controller
 
         //เช็คผู้พิจารณา
         if($request->sign_goup_0 == ''){
+            $request->validate(
+                [
+                    'sub2_recid'=>'required|max:255'
+                ],
+                [
+                    'sub2_recid.required'=>"กรุณาเลือกผู้รับด้วยครับ",
+                    'sub2_recid.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
+                ]
+            );
             //ถ้าไม่เลือกคนพิจารณา
             //นับจำนวนคนทำงาน
             for ($t = 0; $t < count($request->sub2_recid); $t++) {
@@ -129,57 +140,115 @@ class documents_admission_division_allController extends Controller
             }
             //ประทับตราและเซ็น
             $full_path = functionController::funtion_generate_PDF_III($request->doc_filedirec_1,$request->seal_point,$request->sub_recnum,$request->sub_date,$request->sub_time,$request->sub_id,$request->seal_pos_0,$request->seal_date_1,$request->seal_pos_1,$request->seal_date_0,$request->seal_id_1,$request->seal_id_0,$request->seal_detail_1,$request->seal_detail_0);
-            $sub_status = '8';
+
+            $update_sub_docs = sub_doc::where('sub_id', $request->sub_id)
+            ->update([
+                 'seal_detail_1'=>$request->seal_detail_1,
+                 'seal_pos_1'=>$request->seal_pos_1,
+                 'seal_date_1'=>date('Y-m-d H:i:s'),
+                 'sub_status'=>'8',
+                 'seal_file'=>$full_path,
+                 'sub_updated_at'=>date('Y-m-d H:i:s')
+            ]);
         }else{
-            //ถ้าเลือกคนพิจารณา
-            //มีการเช็คสถานะ
-            $user_check_level_goup_3 = User::where('id', $request->sign_goup_0)
-            ->first();
-            if($user_check_level_goup_3->level == '5'){
-                //หัวหน้าฝ่าย
-                $update_sub_docs_0 = sub_doc::where('sub_id', $request->sub_id)->update([
-                    'seal_id_0'=>$request->sign_goup_0
-                ]);
-                $sub_status = '1';
-            // }elseif($user_check_level_goup_3->level == '1'||$user_check_level_goup_3->level == '2'){
-            //     //นายก  รองนายก|ปลัด|รองปลัด
-            //     $update_sub_docs_2 = sub_doc::where('sub_id', $request->sub_id)->update([
-            //         'seal_id_2'=>$request->sign_goup_3
-            //     ]);
-            //     $sub_status = '3';
+            if($request->sign_goup_0 == 'cottons'){
+                $request->validate(
+                    [
+                        'sub2_recid_cottons'=>'required|max:255'
+                    ],
+                    [
+                        'sub2_recid_cottons.required'=>"กรุณาเลือกฝ่ายด้วยครับ",
+                        'sub2_recid_cottons.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
+                    ]
+                );
+                //ถ้าเลือกคนพิจารณา
+                //มีการเช็คสถานะ
+                $document_check = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+                ->where('sub_docid', $request->doc_id)
+                ->where('sub_id', $request->sub_id)
+                ->first();
+                if($document_check){
+                    for ($t = 0; $t < count($request->sub2_recid_cottons); $t++) {
+                        $sub2_recid_cottons[$t] = $request->sub2_recid_cottons[$t];
+                        $user_check_level_5[$t] = User::where('level', '5')
+                        ->where('site_id',Auth::user()->site_id)
+                        ->where('group', Auth::user()->group)
+                        ->where('cotton', $sub2_recid_cottons[$t])
+                        ->first();
+                        if($user_check_level_5[$t]){
+                            $update_sub_docs = sub_doc::insert([
+                                'sub_docid'=>$request->doc_id,
+                                'sub_recnum'=>$document_check->sub_recnum,
+                                'sub_date'=>$document_check->sub_date,
+                                'sub_time'=>$document_check->sub_time,
+                                'sub_recid'=>Auth::user()->group,
+                                'sub_cotton'=>$sub2_recid_cottons[$t],
+                                'sub_status'=>'1',
+                                'sub_created_at'=>date('Y-m-d H:i:s'),
+                                'sub_updated_at'=>date('Y-m-d H:i:s'),
+                                'seal_recname_0'=>$document_check->seal_recname_0,
+                                'seal_detail_0'=>$document_check->seal_detail_0,
+                                'seal_note_0'=>$document_check->seal_note_0,
+                                'seal_pos_0'=>$document_check->seal_pos_0,
+                                'seal_date_0'=>$document_check->seal_date_0,
+                                'seal_id_0'=>$user_check_level_5[$t]->id,
+                                'seal_point'=>$document_check->seal_point,
+                                'seal_id_1'=>$document_check->seal_id_1,
+                                'seal_detail_1'=>$request->seal_detail_1,
+                                'seal_pos_1'=>$request->seal_pos_1,
+                                'seal_date_1'=>date('Y-m-d H:i:s'),
+                            ]);
 
-            //     if($request->sign_goup_4 != ''){
-            //         //ถ้าเลือกผู้พิจารณาคนที่ 2
-            //         $update_sub_docs_3 = sub_doc::where('sub_id', $request->sub_id)->update([
-            //             'seal_id_3'=>$request->sign_goup_4
-            //         ]);
-            //     }
-            //     if($request->sign_goup_5 != ''){
-            //         //ถ้าเลือกผู้พิจารณาคนที่ 3
-            //         $update_sub_docs_4 = sub_doc::where('sub_id', $request->sub_id)->update([
-            //             'seal_id_4'=>$request->sign_goup_5
-            //         ]);
-            //     }
-            //     if($request->sign_goup_6 != ''){
-            //         //ถ้าเลือกผู้พิจารณาคนที่ 4
-            //         $update_sub_docs_5 = sub_doc::where('sub_id', $request->sub_id)->update([
-            //             'seal_id_5'=>$request->sign_goup_6
-            //         ]);
-            //     }
+                        }else{
+                            return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level_5]!');
+                        }
+                      
+                    }
+
+                    $delete = sub_doc::where('sub_id', $request->sub_id)->delete();
+                }else{
+                    return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [document_check]!');
+                }
+               
+
+                // $user_check_level_goup_3 = User::where('id', $request->sign_goup_0)
+                // ->first();
+                // if($user_check_level_goup_3->level == '5'){
+                //     //หัวหน้าฝ่าย
+                //     $update_sub_docs_0 = sub_doc::where('sub_id', $request->sub_id)->update([
+                //         'seal_id_0'=>$request->sign_goup_0
+                //     ]);
+                //     $sub_status = '1';
+                // }elseif($user_check_level_goup_3->level == '1'||$user_check_level_goup_3->level == '2'){
+                //     //นายก  รองนายก|ปลัด|รองปลัด
+                //     $update_sub_docs_2 = sub_doc::where('sub_id', $request->sub_id)->update([
+                //         'seal_id_2'=>$request->sign_goup_3
+                //     ]);
+                //     $sub_status = '3';
+
+                //     if($request->sign_goup_4 != ''){
+                //         //ถ้าเลือกผู้พิจารณาคนที่ 2
+                //         $update_sub_docs_3 = sub_doc::where('sub_id', $request->sub_id)->update([
+                //             'seal_id_3'=>$request->sign_goup_4
+                //         ]);
+                //     }
+                //     if($request->sign_goup_5 != ''){
+                //         //ถ้าเลือกผู้พิจารณาคนที่ 3
+                //         $update_sub_docs_4 = sub_doc::where('sub_id', $request->sub_id)->update([
+                //             'seal_id_4'=>$request->sign_goup_5
+                //         ]);
+                //     }
+                //     if($request->sign_goup_6 != ''){
+                //         //ถ้าเลือกผู้พิจารณาคนที่ 4
+                //         $update_sub_docs_5 = sub_doc::where('sub_id', $request->sub_id)->update([
+                //             'seal_id_5'=>$request->sign_goup_6
+                //         ]);
+                //     }
             }else{
-                return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level_goup_3]!');
+                return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level_5]!');
             }
-            $full_path = '';
-        }
 
-       $update_sub_docs = sub_doc::where('sub_id', $request->sub_id)->update([
-            'seal_detail_1'=>$request->seal_detail_1,
-            'seal_pos_1'=>$request->seal_pos_1,
-            'seal_date_1'=>date('Y-m-d H:i:s'),
-            'sub_status'=>$sub_status,
-            'seal_file'=>$full_path,
-            'sub_updated_at'=>date('Y-m-d H:i:s')
-        ]);
+        }
 
         //linetoken
         $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)

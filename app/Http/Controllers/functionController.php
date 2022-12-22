@@ -260,6 +260,7 @@ class functionController extends Controller
                 $builder->leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
                 ->where('doc_status', 'success')
                 ->where('sub_recid', Auth::user()->group)
+                ->where('sub_cotton', Auth::user()->cotton)
                 ->where('seal_id_0', Auth::user()->id);
             })
             //++++++++++=+++++=+++++=+++++=++++++++++

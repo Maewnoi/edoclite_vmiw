@@ -103,15 +103,15 @@ use App\Http\Controllers\functionController;
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-menu')->html();
-} elseif ($_instance->childHasBeenRendered('YfOPub9')) {
-    $componentId = $_instance->getRenderedChildComponentId('YfOPub9');
-    $componentTag = $_instance->getRenderedChildComponentTagName('YfOPub9');
+} elseif ($_instance->childHasBeenRendered('OZo70nJ')) {
+    $componentId = $_instance->getRenderedChildComponentId('OZo70nJ');
+    $componentTag = $_instance->getRenderedChildComponentTagName('OZo70nJ');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('YfOPub9');
+    $_instance->preserveRenderedChild('OZo70nJ');
 } else {
     $response = \Livewire\Livewire::mount('navigation-menu');
     $html = $response->html();
-    $_instance->logRenderedChild('YfOPub9', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('OZo70nJ', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

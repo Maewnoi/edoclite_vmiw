@@ -264,7 +264,7 @@ endif;
 unset($__errorArgs, $__bag); ?>">
                                                             <?php $__currentLoopData = $userS_2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_userS_2): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <option value="<?php echo e($row_userS_2->id); ?>">
-                                                                <?php echo e($row_userS_2->name); ?></option>
+                                                                <?php echo e($row_userS_2->name); ?> <?php echo e(functionController::funtion_cottons($row_userS_2->cotton)); ?></option>
                                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         </select>
 

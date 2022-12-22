@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('head')->nullable()->comment('ไม่รู้อะไร'); //ไม่รู้อะไร
             $table->string('password')->comment('รหัสผ่าน'); //รหัสผ่าน
             $table->enum('jurisprudence', ['0', '1'])->default('0')->comment('นิติการ'); //นิติการ
+            $table->enum('center', ['0', '1'])->default('0')->comment('ผู้พิจารณา'); //นิติการ
             $table->text('two_factor_secret')->nullable();
             $table->text('two_factor_recovery_codes')->nullable();
             $table->enum('level', ['0', '1', '2', '3', '4', '5', '6', '7'])->comment('0=แอดมิน\1=นายก\2=รองนายก,ปลัด,รองปลัด\3=สารบรรณกลาง\4=หัวหน้ากอง\5=หัวหน้าฝ่าย\6=สารบรรณกอง\7=งาน'); //สิทธิ์การเข้าถึง  0=แอดมิน\1=นายก\2=รองนายก,ปลัด,รองปลัด\3=สารบรรณกลาง\4=หัวหน้ากอง\5=หัวหน้าฝ่าย\6=สารบรรณกอง\7=งาน

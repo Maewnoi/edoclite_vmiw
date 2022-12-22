@@ -30,6 +30,7 @@ use App\Http\Controllers\functionController;
                                         <th scope="col">สิทธิ์การเข้าถึง</th>
                                         <th scope="col">วันที่สร้าง</th>
                                         <th scope="col">นิติการ</th>
+                                        <th scope="col">ผู้ลงรับ</th>
                                         <th scope="col">จัดการ</th>
                                     </tr>
                                 </thead>
@@ -51,9 +52,9 @@ use App\Http\Controllers\functionController;
                                         </td>
                                         <td>
                                             <?php if($row->level == '1'): ?>
-                                            นายก
+                                            นายก|รองนายก
                                             <?php elseif($row->level == '2'): ?>
-                                            รองนายก|ปลัด|รองปลัด
+                                            ปลัด|รองปลัด
                                             <?php elseif($row->level == '3'): ?>
                                             สารบรรณกลาง
                                             <?php elseif($row->level == '4'): ?>
@@ -83,6 +84,17 @@ use App\Http\Controllers\functionController;
 
                                                  name="jurisprudence" id="check_jurisprudence" data-id="<?php echo e($row->id); ?>" data-token="<?php echo e(csrf_token()); ?>">
                                                 <label class="form-check-label" for=check_jurisprudence">
+                                                </label>
+                                            </div>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php if($row->level == '3' || $row->level == '4' || $row->level == '5' || $row->level == '6' || $row->level == '7'): ?>
+                                            <div class="form-check">
+                                                <input class="form-check-input check_user_center" type="checkbox" <?php echo e($row->center == '1' ? 'checked="checked"' : ''); ?>
+
+                                                 name="user_center" id="check_user_center" data-id="<?php echo e($row->id); ?>" data-token="<?php echo e(csrf_token()); ?>">
+                                                <label class="form-check-label" for=check_user_center">
                                                 </label>
                                             </div>
                                             <?php endif; ?>
@@ -248,90 +260,6 @@ endif;
 unset($__errorArgs, $__bag); ?>"
                                                                         required>
                                                                     <?php $__errorArgs = ['tel'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                                                    <div class="my-2">
-                                                                        <p class="mt-2 text-sm text-red-600">
-                                                                            <?php echo e($message); ?></p>
-                                                                    </div>
-                                                                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'submem','value' => ''.e(__('submem')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['for' => 'submem','value' => ''.e(__('submem')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                                                    <select
-                                                                        class="form-control <?php $__errorArgs = ['submem'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                                                                        name="submem">
-                                                                        <option value="">ไม่บังคับเลือก
-                                                                        </option>
-                                                                    </select>
-                                                                    <?php $__errorArgs = ['submem'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                                                    <div class="my-2">
-                                                                        <p class="mt-2 text-sm text-red-600">
-                                                                            <?php echo e($message); ?></p>
-                                                                    </div>
-                                                                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'head','value' => ''.e(__('head')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['for' => 'head','value' => ''.e(__('head')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                                                    <select
-                                                                        class="form-control <?php $__errorArgs = ['head'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                                                                        name="head">
-                                                                        <option value="">ไม่บังคับเลือก
-                                                                        </option>
-                                                                    </select>
-                                                                    <?php $__errorArgs = ['head'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -799,87 +727,6 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" required>
                                             <?php $__errorArgs = ['tel'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                            <div class="my-2">
-                                                <p class="mt-2 text-sm text-red-600"><?php echo e($message); ?></p>
-                                            </div>
-                                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'submem','value' => ''.e(__('submem')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['for' => 'submem','value' => ''.e(__('submem')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                            <select
-                                                class="form-control select2bs4 <?php $__errorArgs = ['submem'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                                                name="submem">
-                                                <option value="">ไม่บังคับเลือก
-                                                </option>
-                                            </select>
-                                            <?php $__errorArgs = ['submem'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                            <div class="my-2">
-                                                <p class="mt-2 text-sm text-red-600"><?php echo e($message); ?></p>
-                                            </div>
-                                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'head','value' => ''.e(__('head')).'']]); ?>
-<?php $component->withName('jet-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['for' => 'head','value' => ''.e(__('head')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                            <select class="form-control select2bs4 <?php $__errorArgs = ['head'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                                                name="head">
-                                                <option value="">ไม่บังคับเลือก
-                                                </option>
-                                            </select>
-                                            <?php $__errorArgs = ['head'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

@@ -133,12 +133,7 @@ use App\Http\Controllers\functionController;
                                                             name="sign_goup_0"
                                                             id="documents_admission_division_allController_sign_goup_0">
                                                             <option value="">ไม่มีผู้พิจารณา</option>
-                                                            <optgroup label="หัวหน้าฝ่าย">
-                                                                @foreach($userS_0 as $row_userS_0)
-                                                                <option value="{{$row_userS_0->id}}">
-                                                                    {{$row_userS_0->name}}</option>
-                                                                @endforeach
-                                                            </optgroup>
+                                                            <option value="cottons">หัวหน้าฝ่าย</option>
                                                             
                                                         </select>
 
@@ -192,11 +187,31 @@ use App\Http\Controllers\functionController;
                                                             class=" @error('sub2_recid') is-invalid @enderror">
                                                             @foreach($userS_2 as $row_userS_2)
                                                             <option value="{{$row_userS_2->id}}">
-                                                                {{$row_userS_2->name}}</option>
+                                                                {{$row_userS_2->name}} {{functionController::funtion_cottons($row_userS_2->cotton)}}</option>
                                                             @endforeach
                                                         </select>
 
                                                         @error('sub2_recid')
+                                                        <div class="my-2">
+                                                            <p class="mt-2 text-sm text-red-600">
+                                                                {{$message}}</p>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="form-group"
+                                                        id="documents_admission_division_allController_form-group_selected_multiple_sub2_recid_cottons" style="display: none;">
+                                                        <x-jet-label class="text-md" value="{{ __('เลือกหัวหน้าฝ่าย') }}" />
+                                                        <select name="sub2_recid_cottons[]"
+                                                            id="documents_admission_division_allController_selected_multiple_sub2_recid_cottons"
+                                                            multiple="multiple" required
+                                                            class=" @error('sub2_recid_cottons') is-invalid @enderror">
+                                                            @foreach($userS_0 as $row_userS_0)
+                                                            <option value="{{$row_userS_0->cottons_id}}">
+                                                                {{$row_userS_0->name}} {{$row_userS_0->cottons_name}}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        @error('sub2_recid_cottons')
                                                         <div class="my-2">
                                                             <p class="mt-2 text-sm text-red-600">
                                                                 {{$message}}</p>
