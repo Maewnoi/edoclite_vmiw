@@ -202,7 +202,9 @@ class documents_admission_group_allController extends Controller
                 ]);
             }
         }
-    
+        //ประทับตรา
+        $full_path = functionController::funtion_generate_PDF_II($request->doc_filedirec_1,$request->seal_point,$request->sub_recnum,$request->sub_date,$request->sub_time,$request->sub_id,$request->sign_goup_0);
+
             
         if($request->sign_goup_0 == ''){
               //ตรวจสอบข้อมูลที่กรอกเข้ามาก่อน
@@ -228,9 +230,7 @@ class documents_admission_group_allController extends Controller
                     'sub2_created_at'=>date('Y-m-d H:i:s')
                 ]);
             }
-            //ประทับตรา
-            $full_path = functionController::funtion_generate_PDF_II($request->doc_filedirec_1,$request->seal_point,$request->sub_recnum,$request->sub_date,$request->sub_time,$request->sub_id);
-
+ 
             $update_sub_docs = sub_doc::where('sub_id', $request->sub_id)
             ->update([
                 'seal_point'=>$request->seal_point,
@@ -277,6 +277,7 @@ class documents_admission_group_allController extends Controller
                             'sub_time'=>$request->sub_time,
                             'sub_status'=>'1',
                             'seal_id_0'=>$user_check_level_5[$t]->id,
+                            'seal_file'=>$full_path,
                             'sub_updated_at'=>date('Y-m-d H:i:s')
                         ]);
                     }else{
@@ -306,7 +307,8 @@ class documents_admission_group_allController extends Controller
                         'sub_date'=>$request->sub_date,
                         'sub_time'=>$request->sub_time,
                         'sub_status'=>'2',
-                        'seal_id_1'=>$user_check_level_4->id,     
+                        'seal_id_1'=>$user_check_level_4->id,
+                        'seal_file'=>$full_path,   
                         'sub_updated_at'=>date('Y-m-d H:i:s')
                     ]);
                     // dd($request->sub2_recid_groupmems);
@@ -314,7 +316,6 @@ class documents_admission_group_allController extends Controller
                     return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level_4]!');
                 }
             }
-            $full_path = '';
         }
 
         

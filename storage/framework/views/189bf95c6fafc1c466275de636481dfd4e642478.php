@@ -38,7 +38,7 @@ use App\Http\Controllers\functionController;
                         </div>
                         <div class="card-body table-responsive">
                             
-                        <div class="row">
+                            <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         เลขที่รับส่วนงาน : <font class="text-primary"><?php echo e($document_detail->doc_recnum); ?></font>
@@ -79,6 +79,7 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                             </div>
+                            <hr>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -94,11 +95,11 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                        <?php if($document_detail->sub_status == '8'): ?>
-                                            <?php echo functionController::display_pdf($document_detail->seal_file); ?>
+                                            <?php if($document_detail->sub_status == '0'): ?>
+                                        <?php echo functionController::display_pdf($document_detail->doc_filedirec_1); ?>
 
                                         <?php else: ?>
-                                            <?php echo functionController::display_pdf($document_detail->doc_filedirec_1); ?>
+                                        <?php echo functionController::display_pdf($document_detail->seal_file); ?>
 
                                         <?php endif; ?>
                                     </div>
@@ -210,13 +211,11 @@ unset($__errorArgs, $__bag); ?>"
                                                             name="sign_goup_1"
                                                             id="documents_admission_department_allController_sign_goup_1">
                                                             <option value="">ไม่มีผู้พิจารณา</option>
-                                                            <optgroup label="หัวหน้ากอง">
                                                                 <?php $__currentLoopData = $userS_0; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_userS_0): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <option
                                                                     value="<?php echo e($row_userS_0->id); ?>">
-                                                                    <?php echo e($row_userS_0->name); ?></option>
+                                                                    หัวหน้ากอง <?php echo e($row_userS_0->name); ?></option>
                                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                            </optgroup>
                                                         </select>
                                                         <?php $__errorArgs = ['sign_goup_1'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -373,6 +372,9 @@ unset($__errorArgs, $__bag); ?>
                                                 
                                             <input type="hidden" name="doc_filedirec_1"
                                                 value="<?php echo e($document_detail->doc_filedirec_1); ?>" class="form-control">
+
+                                            <input type="hidden" name="seal_file"
+                                                value="<?php echo e($document_detail->seal_file); ?>" class="form-control">
                                                 
                                             <input type="hidden" name="sub_recnum"
                                                 value="<?php echo e($document_detail->sub_recnum); ?>" class="form-control">

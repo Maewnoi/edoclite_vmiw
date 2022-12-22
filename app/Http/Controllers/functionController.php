@@ -511,14 +511,14 @@ class functionController extends Controller
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
         $date_new = date('Y-m-d');
         $year_new = date('Y');
-        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/fileseal01/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/work/';
         $name_gen_new = $doc_id."_".$date_new;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
         return $full_path;
 
     }
-    public static function funtion_generate_PDF_IV($seal_point, $sub_recnum, $sub_date, $sub_time, $doc_docnum, $doc_title, $doc_filedirec, $doc_id){
+    public static function funtion_generate_PDF_IV($seal_point, $sub_recnum, $sub_date, $sub_time, $doc_docnum, $doc_title, $doc_filedirec, $doc_id, $sign_goup_0){
         $groupmems = Groupmem::where('group_id', Auth::user()->group)
         ->where('group_site_id',Auth::user()->site_id)
         ->first();
@@ -623,10 +623,19 @@ class functionController extends Controller
             $pdf->AddPage();
             $pdf->useTemplate($tplIdx, null, null, null);
         }
+
+        if($sign_goup_0 == ''){
+            $path_ = 'work';
+        }else if($sign_goup_0 == 'cottons'){
+            $path_ = 'department';
+        }else if($sign_goup_0 == 'groupmems'){
+            $path_ = 'division';
+        }
+
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
         $date_new = date('Y-m-d');
         $year_new = date('Y');
-        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/fileseal00/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/'.$path_.'/';
         $name_gen_new = $doc_id."_".$date_new;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
@@ -1483,6 +1492,237 @@ class functionController extends Controller
         return $userS;
     }
 
+    
+    public static function funtion_generate_PDF_department_to_division($seal_file ,$seal_detail_0 ,$seal_id_0 ,$seal_pos_0 ,$sub_id) {
+        // ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+        $groupmems = Groupmem::where('group_id', Auth::user()->group)
+        ->where('group_site_id',Auth::user()->site_id)
+        ->first();
+
+        $pdf = new Fpdi();
+        //นับจำนวนหน้า
+        $sourceFilePages = $pdf->setSourceFile($seal_file);
+        for($pageNo = 1; $pageNo <= $sourceFilePages; $pageNo++){
+            $tplIdx = $pdf->importPage($pageNo);
+            $pdf->AddPage();
+            $pdf->useTemplate($tplIdx, null, null, null);
+            //เอาแค่หน้าแรก
+            if($pageNo == 1){
+                $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+                $pdf->SetFont('THSarabunNew','',16);
+
+                $x = 210;
+                //หมายเหตุ   
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(70, $x);
+                $pdf->MultiCell(105,10, iconv('UTF-8', 'cp874', $seal_detail_0),'0','L',false);
+
+                //ลายเซ็นหัวหน้ากอง
+                $user_Check = User::where('id', $seal_id_0)
+                ->first();
+                $x = $x + 20;
+                if($user_Check->sign == ''){
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',85,$x,20,20);
+                }else{
+                    $pdf->Image($user_Check->sign,85,$x,20,20);
+                }
+                
+                $x = $x + 25;
+                //ตำแหน่ง 25
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(85, $x);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', $seal_pos_0));
+                
+                //วันที่เซ็น 6
+                $x = $x + 6;
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(90, $x);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', functionController::funtion_date_format(date('Y-m-d H:i:s'))));
+            }
+        }
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+        $date_new = date('Y-m-d');
+        $year_new = date('Y');
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/division/';
+        $name_gen_new = $sub_id."_".$date_new;
+        $full_path = $upload_location.$name_gen_new.'.pdf';
+        $pdf->Output('F', $full_path);
+        return $full_path;
+        //  return response($pdf->Output())->header('Content-Type', 'application/pdf');
+    }
+    public static function funtion_generate_PDF_department_to_work($seal_file ,$seal_detail_0 ,$seal_id_0 ,$seal_pos_0 ,$sub_id) {
+        // ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+        $groupmems = Groupmem::where('group_id', Auth::user()->group)
+        ->where('group_site_id',Auth::user()->site_id)
+        ->first();
+
+        $pdf = new Fpdi();
+        //นับจำนวนหน้า
+        $sourceFilePages = $pdf->setSourceFile($seal_file);
+        for($pageNo = 1; $pageNo <= $sourceFilePages; $pageNo++){
+            $tplIdx = $pdf->importPage($pageNo);
+            $pdf->AddPage();
+            $pdf->useTemplate($tplIdx, null, null, null);
+            //เอาแค่หน้าแรก
+            if($pageNo == 1){
+                $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+                $pdf->SetFont('THSarabunNew','',16);
+
+                $x = 210;
+                //หมายเหตุ   
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(70, $x);
+                $pdf->MultiCell(105,10, iconv('UTF-8', 'cp874', $seal_detail_0),'0','L',false);
+
+                //ลายเซ็นหัวหน้ากอง
+                $user_Check = User::where('id', $seal_id_0)
+                ->first();
+                $x = $x + 20;
+                if($user_Check->sign == ''){
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',85,$x,20,20);
+                }else{
+                    $pdf->Image($user_Check->sign,85,$x,20,20);
+                }
+                
+                $x = $x + 25;
+                //ตำแหน่ง 25
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(85, $x);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', $seal_pos_0));
+                
+                //วันที่เซ็น 6
+                $x = $x + 6;
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(90, $x);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', functionController::funtion_date_format(date('Y-m-d H:i:s'))));
+            }
+        }
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+        $date_new = date('Y-m-d');
+        $year_new = date('Y');
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/work/';
+        $name_gen_new = $sub_id."_".$date_new;
+        $full_path = $upload_location.$name_gen_new.'.pdf';
+        $pdf->Output('F', $full_path);
+        return $full_path;
+        //  return response($pdf->Output())->header('Content-Type', 'application/pdf');
+    }
+    
+    public static function funtion_generate_PDF_division_to_department($seal_file ,$seal_detail_1 ,$seal_id_1 ,$seal_pos_1 ,$sub_id) {
+         // ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+         $groupmems = Groupmem::where('group_id', Auth::user()->group)
+         ->where('group_site_id',Auth::user()->site_id)
+         ->first();
+    
+         $pdf = new Fpdi();
+         //นับจำนวนหน้า
+         $sourceFilePages = $pdf->setSourceFile($seal_file);
+         for($pageNo = 1; $pageNo <= $sourceFilePages; $pageNo++){
+             $tplIdx = $pdf->importPage($pageNo);
+             $pdf->AddPage();
+             $pdf->useTemplate($tplIdx, null, null, null);
+             //เอาแค่หน้าแรก
+             if($pageNo == 1){
+                 $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+                 $pdf->SetFont('THSarabunNew','',16);
+ 
+                 $x = 140;
+                 //หมายเหตุ   
+                 $pdf->SetTextColor(0, 0, 0);
+                 $pdf->SetXY(70, $x);
+                 $pdf->MultiCell(105,10, iconv('UTF-8', 'cp874', $seal_detail_1),'0','L',false);
+ 
+                 //ลายเซ็นหัวหน้ากอง
+                 $user_Check = User::where('id', $seal_id_1)
+                 ->first();
+                 $x = $x + 20;
+                 if($user_Check->sign == ''){
+                     $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',85,$x,20,20);
+                 }else{
+                     $pdf->Image($user_Check->sign,85,$x,20,20);
+                 }
+                 
+                 $x = $x + 25;
+                 //ตำแหน่ง 25
+                 $pdf->SetTextColor(0, 0, 0);
+                 $pdf->SetXY(85, $x);
+                 $pdf->Write(0, iconv('UTF-8', 'cp874', $seal_pos_1));
+                 
+                 //วันที่เซ็น 6
+                 $x = $x + 6;
+                 $pdf->SetTextColor(0, 0, 0);
+                 $pdf->SetXY(90, $x);
+                 $pdf->Write(0, iconv('UTF-8', 'cp874', functionController::funtion_date_format(date('Y-m-d H:i:s'))));
+             }
+         }
+         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+         $date_new = date('Y-m-d');
+         $year_new = date('Y');
+         $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/department/';
+         $name_gen_new = $sub_id."_".$date_new;
+         $full_path = $upload_location.$name_gen_new.'.pdf';
+         $pdf->Output('F', $full_path);
+         return $full_path;
+        //  return response($pdf->Output())->header('Content-Type', 'application/pdf');
+    }
+    
+    public static function funtion_generate_PDF_division_to_work($seal_file ,$seal_detail_1 ,$seal_id_1 ,$seal_pos_1 ,$sub_id) {
+        // ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+        $groupmems = Groupmem::where('group_id', Auth::user()->group)
+        ->where('group_site_id',Auth::user()->site_id)
+        ->first();
+   
+        $pdf = new Fpdi();
+        //นับจำนวนหน้า
+        $sourceFilePages = $pdf->setSourceFile($seal_file);
+        for($pageNo = 1; $pageNo <= $sourceFilePages; $pageNo++){
+            $tplIdx = $pdf->importPage($pageNo);
+            $pdf->AddPage();
+            $pdf->useTemplate($tplIdx, null, null, null);
+            //เอาแค่หน้าแรก
+            if($pageNo == 1){
+                $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+                $pdf->SetFont('THSarabunNew','',16);
+
+                $x = 140;
+                //หมายเหตุ   
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(70, $x);
+                $pdf->MultiCell(105,10, iconv('UTF-8', 'cp874', $seal_detail_1),'0','L',false);
+
+                //ลายเซ็นหัวหน้ากอง
+                $user_Check = User::where('id', $seal_id_1)
+                ->first();
+                $x = $x + 20;
+                if($user_Check->sign == ''){
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',85,$x,20,20);
+                }else{
+                    $pdf->Image($user_Check->sign,85,$x,20,20);
+                }
+                
+                $x = $x + 25;
+                //ตำแหน่ง 25
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(85, $x);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', $seal_pos_1));
+                
+                //วันที่เซ็น 6
+                $x = $x + 6;
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->SetXY(90, $x);
+                $pdf->Write(0, iconv('UTF-8', 'cp874', functionController::funtion_date_format(date('Y-m-d H:i:s'))));
+            }
+        }
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+        $date_new = date('Y-m-d');
+        $year_new = date('Y');
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/work/';
+        $name_gen_new = $sub_id."_".$date_new;
+        $full_path = $upload_location.$name_gen_new.'.pdf';
+        $pdf->Output('F', $full_path);
+        return $full_path;
+        // return response($pdf->Output())->header('Content-Type', 'application/pdf');
+    }
     //function ประทับตราและเซน ของหัวหน้าฝ่ายหรือหัวหน้ากอง
     public static function funtion_generate_PDF_III($doc_filedirec_1 ,$seal_point ,$sub_recnum ,$sub_date ,$sub_time ,$sub_id ,$seal_pos_0 ,$seal_date_1 ,$seal_pos_1 ,$seal_date_0 ,$seal_id_1 ,$seal_id_0 ,$seal_detail_1 ,$seal_detail_0) {
         // ini_set('max_execution_time', 300); //300 seconds = 5 minutes
@@ -1657,12 +1897,12 @@ class functionController extends Controller
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
         $date_new = date('Y-m-d');
         $year_new = date('Y');
-        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/fileseal01/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/work/';
         $name_gen_new = $sub_id."_".$date_new;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
         return $full_path;
-       //  return response($pdf->Output())->header('Content-Type', 'application/pdf');
+        // return response($pdf->Output())->header('Content-Type', 'application/pdf');
     }
 
     //function เรียก cottons ด้วย id group
@@ -1674,7 +1914,7 @@ class functionController extends Controller
     }
 
     //function ประทับตรา ของสารบรรณกอง
-    public static function funtion_generate_PDF_II($doc_filedirec_1 ,$seal_point ,$sub_recnum ,$sub_date ,$sub_time ,$sub_id) {
+    public static function funtion_generate_PDF_II($doc_filedirec_1 ,$seal_point ,$sub_recnum ,$sub_date ,$sub_time ,$sub_id ,$sign_goup_0) {
         // ini_set('max_execution_time', 300); //300 seconds = 5 minutes
         $groupmems = Groupmem::where('group_id', Auth::user()->group)
         ->where('group_site_id',Auth::user()->site_id)
@@ -1747,15 +1987,23 @@ class functionController extends Controller
 
             }
         }
+        if($sign_goup_0 == ''){
+            $path_ = 'work';
+        }else if($sign_goup_0 == 'cottons'){
+            $path_ = 'department';
+        }else if($sign_goup_0 == 'groupmems'){
+            $path_ = 'division';
+        }
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
         $date_new = date('Y-m-d');
-       $year_new = date('Y');
-        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/fileseal01/';
-       $name_gen_new = $sub_id."_".$date_new;
+        $year_new = date('Y');
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/'.$path_.'/';
+        $name_gen_new = $sub_id."_".$date_new;
         $full_path = $upload_location.$name_gen_new.'.pdf';
-       $pdf->Output('F', $full_path);
-       //  return response($pdf->Output())->header('Content-Type', 'application/pdf');
+        $pdf->Output('F', $full_path);
         return $full_path;
+        // return response($pdf->Output())->header('Content-Type', 'application/pdf');
+   
     }
 
     //ฟังชันเรียกสถานะ sub3_status tb: sub3_docs ด้วย status
@@ -1990,7 +2238,7 @@ class functionController extends Controller
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
         $date_new = date('Y-m-d');
         $year_new = date('Y');
-        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/fileseal00/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/center/';
         $name_gen_new = $doc_id."_".$date_new;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);

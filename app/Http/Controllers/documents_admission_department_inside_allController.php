@@ -133,7 +133,9 @@ class documents_admission_department_inside_allController extends Controller
                     'sub2_created_at'=>date('Y-m-d H:i:s')
                 ]);
             }
-            $full_path_inside = functionController::funtion_generate_PDF_III($request->doc_filedirec_1_inside, $request->seal_point_inside, $request->sub_recnum_inside, $request->sub_date_inside, $request->sub_time_inside, $request->sub_id_inside, $request->seal_pos_0_inside, $request->seal_date_1_inside, $request->seal_pos_1_inside, $request->seal_date_0_inside, $request->seal_id_1_inside, $request->seal_id_0_inside, $request->seal_detail_1_inside, $request->seal_detail_0_inside);
+            // $full_path_inside = functionController::funtion_generate_PDF_III($request->doc_filedirec_1_inside, $request->seal_point_inside, $request->sub_recnum_inside, $request->sub_date_inside, $request->sub_time_inside, $request->sub_id_inside, $request->seal_pos_0_inside, $request->seal_date_1_inside, $request->seal_pos_1_inside, $request->seal_date_0_inside, $request->seal_id_1_inside, $request->seal_id_0_inside, $request->seal_detail_1_inside, $request->seal_detail_0_inside);
+            $full_path_inside = functionController::funtion_generate_PDF_department_to_work($request->seal_file_inside ,$request->seal_detail_0_inside ,$request->seal_id_0_inside ,$request->seal_pos_0_inside ,$request->sub_id_inside);
+
             $sub_status_inside = '8';
         }else{
             //มีการเช็คสถานะ
@@ -141,6 +143,8 @@ class documents_admission_department_inside_allController extends Controller
             ->first();
             if($user_check_level->level == '4'){
                 //หัวหน้ากอง
+                $full_path_inside = functionController::funtion_generate_PDF_department_to_division($request->seal_file_inside ,$request->seal_detail_0_inside ,$request->seal_id_0_inside ,$request->seal_pos_0_inside ,$request->sub_id_inside);
+
                 $update_sub_docs_0 = sub_doc::where('sub_id', $request->sub_id_inside)->update([
                     'seal_id_1'=>$request->sign_goup_1_inside
                 ]);
@@ -148,7 +152,6 @@ class documents_admission_department_inside_allController extends Controller
             }else{
                 return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level]!');
             }
-            $full_path_inside = '';
         }
 
         $update_sub_docs = sub_doc::where('sub_id', $request->sub_id_inside)->update([

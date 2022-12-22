@@ -219,7 +219,7 @@ class documents_admission_group_inside_allController extends Controller
              }
          }
 
-        $full_path_inside = functionController::funtion_generate_PDF_IV($request->seal_point_inside, $request->sub_recnum_inside, $request->sub_date_inside, $request->sub_time_inside, $request->doc_docnum_inside, $request->doc_title_inside, $request->doc_filedirec_inside, $request->doc_id_inside);
+        $full_path_inside = functionController::funtion_generate_PDF_IV($request->seal_point_inside, $request->sub_recnum_inside, $request->sub_date_inside, $request->sub_time_inside, $request->doc_docnum_inside, $request->doc_title_inside, $request->doc_filedirec_inside, $request->doc_id_inside, $request->sign_goup_0_inside);
         //เช็คผู้พิจารณา
         if($request->sign_goup_0_inside == ''){
             //ตรวจสอบข้อมูลที่กรอกเข้ามาก่อน
@@ -245,7 +245,6 @@ class documents_admission_group_inside_allController extends Controller
                     'sub2_created_at'=>date('Y-m-d H:i:s')
                 ]);
             }
-            $full_path_seal_file = functionController::funtion_generate_PDF_V($full_path_inside, $request->doc_id_inside);
 
             $update_sub_docs = sub_doc::where('sub_id', $request->sub_id_inside)->update([
                 'seal_point'=>$request->seal_point_inside,
@@ -253,15 +252,15 @@ class documents_admission_group_inside_allController extends Controller
                 'sub_date'=>$request->sub_date_inside,
                 'sub_time'=>$request->sub_time_inside,
                 'sub_status'=>'8',
-                'seal_file'=>$full_path_seal_file,        
+                'seal_file'=>$full_path_inside,        
                 'sub_updated_at'=>date('Y-m-d H:i:s')
             ]);
             
-            //update tb documents
-            $update_documents = document::where('doc_id', $request->doc_id_inside)->update([
-                'doc_filedirec_1'=>$full_path_inside,
-                'doc_updated_at'=>date('Y-m-d H:i:s')
-            ]);
+            // //update tb documents
+            // $update_documents = document::where('doc_id', $request->doc_id_inside)->update([
+            //     'doc_filedirec_1'=>$full_path_inside,
+            //     'doc_updated_at'=>date('Y-m-d H:i:s')
+            // ]);
 
         }else{
             if($request->sign_goup_0_inside == 'cottons'){
@@ -298,6 +297,7 @@ class documents_admission_group_inside_allController extends Controller
                             'sub_time'=>$request->sub_time_inside,
                             'sub_status'=>'1',
                             'seal_id_0'=>$user_check_level_5[$t]->id,
+                            'seal_file'=>$full_path_inside,
                             'sub_updated_at'=>date('Y-m-d H:i:s')
                         ]);
                     }else{
@@ -324,7 +324,8 @@ class documents_admission_group_inside_allController extends Controller
                           'sub_date'=>$request->sub_date_inside,
                           'sub_time'=>$request->sub_time_inside,
                           'sub_status'=>'2',
-                          'seal_id_1'=>$user_check_level_4->id,     
+                          'seal_id_1'=>$user_check_level_4->id,
+                          'seal_file'=>$full_path_inside,  
                           'sub_updated_at'=>date('Y-m-d H:i:s')
                       ]);
                       // dd($request->sub2_recid_groupmems);
@@ -334,11 +335,11 @@ class documents_admission_group_inside_allController extends Controller
 
             }
 
-            //update tb documents
-            $update_documents = document::where('doc_id', $request->doc_id_inside)->update([
-                'doc_filedirec_1'=>$full_path_inside,
-                'doc_updated_at'=>date('Y-m-d H:i:s')
-            ]);
+            // //update tb documents
+            // $update_documents = document::where('doc_id', $request->doc_id_inside)->update([
+            //     'doc_filedirec_1'=>$full_path_inside,
+            //     'doc_updated_at'=>date('Y-m-d H:i:s')
+            // ]);
             //ถ้าเลือกคนพิจารณา
             //มีการเช็คสถานะ ผู้พิจารณาว่าเป็น หัวหน้ากอง หรือ หัวหน้าฝ่าย
             // $user_check_level = User::where('id', $request->sign_goup_0_inside)

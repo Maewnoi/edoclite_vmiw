@@ -126,7 +126,7 @@ class documents_admission_department_allController extends Controller
                 ]);
             }
             //ประทับตราและเซ็น
-            $full_path = functionController::funtion_generate_PDF_III($request->doc_filedirec_1,$request->seal_point,$request->sub_recnum,$request->sub_date,$request->sub_time,$request->sub_id,$request->seal_pos_0,$request->seal_date_1,$request->seal_pos_1,$request->seal_date_0,$request->seal_id_1,$request->seal_id_0,$request->seal_detail_1,$request->seal_detail_0);
+            $full_path = functionController::funtion_generate_PDF_department_to_work($request->seal_file ,$request->seal_detail_0 ,$request->seal_id_0 ,$request->seal_pos_0 ,$request->sub_id);
             $sub_status = '8';
         }else{
             //ถ้าเลือกคนพิจารณา
@@ -134,6 +134,7 @@ class documents_admission_department_allController extends Controller
             $user_check_level = User::where('id', $request->sign_goup_1)
             ->first();
             if($user_check_level->level == '4'){
+                $full_path = functionController::funtion_generate_PDF_department_to_division($request->seal_file ,$request->seal_detail_0 ,$request->seal_id_0 ,$request->seal_pos_0 ,$request->sub_id);
                 //หัวหน้ากอง
                 $update_sub_docs_0 = sub_doc::where('sub_id', $request->sub_id)->update([
                     'seal_id_1'=>$request->sign_goup_1
@@ -142,7 +143,6 @@ class documents_admission_department_allController extends Controller
             }else{
                 return redirect()->back()->with('error','พบปัญหาการอัพเดตข้อมูลกรุณาแจ้งผู้พัฒนา [user_check_level]!');
             }
-            $full_path = '';
         }
 
         $update_sub_docs = sub_doc::where('sub_id', $request->sub_id)->update([

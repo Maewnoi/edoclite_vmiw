@@ -144,8 +144,9 @@ class documents_admission_division_inside_allController extends Controller
                     'sub2_created_at'=>date('Y-m-d H:i:s')
                 ]);
             }
-            //ประทับตราและเซ็น
-            $full_path_inside = functionController::funtion_generate_PDF_III($request->doc_filedirec_1_inside, $request->seal_point_inside, $request->sub_recnum_inside, $request->sub_date_inside, $request->sub_time_inside, $request->sub_id_inside, $request->seal_pos_0_inside, $request->seal_date_1_inside, $request->seal_pos_1_inside, $request->seal_date_0_inside, $request->seal_id_1_inside, $request->seal_id_0_inside, $request->seal_detail_1_inside, $request->seal_detail_0_inside);
+            //เซ็น
+            $full_path_inside = functionController::funtion_generate_PDF_division_to_work($request->seal_file_inside ,$request->seal_detail_1_inside ,$request->seal_id_1_inside ,$request->seal_pos_1_inside ,$request->sub_id_inside);
+            // $full_path_inside = functionController::funtion_generate_PDF_III($request->doc_filedirec_1_inside, $request->seal_point_inside, $request->sub_recnum_inside, $request->sub_date_inside, $request->sub_time_inside, $request->sub_id_inside, $request->seal_pos_0_inside, $request->seal_date_1_inside, $request->seal_pos_1_inside, $request->seal_date_0_inside, $request->seal_id_1_inside, $request->seal_id_0_inside, $request->seal_detail_1_inside, $request->seal_detail_0_inside);
 
             $update_sub_docs = sub_doc::where('sub_id', $request->sub_id_inside)->update([
                 'seal_detail_1'=>$request->seal_detail_1_inside,
@@ -173,6 +174,8 @@ class documents_admission_division_inside_allController extends Controller
                 ->where('sub_id', $request->sub_id_inside)
                 ->first();
                 if($document_check){
+                    $full_path_inside = functionController::funtion_generate_PDF_division_to_department($request->seal_file_inside ,$request->seal_detail_1_inside ,$request->seal_id_1_inside ,$request->seal_pos_1_inside ,$request->sub_id_inside);
+
                     for ($t = 0; $t < count($request->sub2_recid_inside_cottons); $t++) {
                         $sub2_recid_inside_cottons[$t] = $request->sub2_recid_inside_cottons[$t];
                         $user_check_level_5[$t] = User::where('level', '5')
@@ -201,6 +204,7 @@ class documents_admission_division_inside_allController extends Controller
                                 'seal_id_1'=>$document_check->seal_id_1,
                                 'seal_detail_1'=>$request->seal_detail_1_inside,
                                 'seal_pos_1'=>$request->seal_pos_1_inside,
+                                'seal_file'=>$full_path_inside,
                                 'seal_date_1'=>date('Y-m-d H:i:s'),
                             ]);
 

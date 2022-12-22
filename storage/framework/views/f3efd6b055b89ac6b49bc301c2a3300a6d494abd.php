@@ -94,13 +94,13 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                        <?php if($document_detail->sub_status == '8'): ?>
-                                        <?php echo functionController::display_pdf($document_detail->seal_file); ?>
+                                            <?php if($document_detail->sub_status == '0'): ?>
+                                            <?php echo functionController::display_pdf($document_detail->doc_filedirec_1); ?>
 
-                                        <?php else: ?>
-                                        <?php echo functionController::display_pdf($document_detail->doc_filedirec_1); ?>
+                                            <?php else: ?>
+                                            <?php echo functionController::display_pdf($document_detail->seal_file); ?>
 
-                                        <?php endif; ?>
+                                            <?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -466,6 +466,8 @@ unset($__errorArgs, $__bag); ?>
 
                                             <input type="hidden" name="doc_filedirec_1_inside"
                                                 value="<?php echo e($document_detail->doc_filedirec_1); ?>" class="form-control">
+                                                <input type="hidden" name="seal_file_inside"
+                                                value="<?php echo e($document_detail->seal_file); ?>" class="form-control">
 
                                             <input type="hidden" name="sub_recnum_inside"
                                                 value="<?php echo e($document_detail->sub_recnum); ?>" class="form-control">

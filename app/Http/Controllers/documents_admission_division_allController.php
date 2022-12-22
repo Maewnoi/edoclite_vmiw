@@ -138,8 +138,9 @@ class documents_admission_division_allController extends Controller
                     'sub2_created_at'=>date('Y-m-d H:i:s')
                 ]);
             }
-            //ประทับตราและเซ็น
-            $full_path = functionController::funtion_generate_PDF_III($request->doc_filedirec_1,$request->seal_point,$request->sub_recnum,$request->sub_date,$request->sub_time,$request->sub_id,$request->seal_pos_0,$request->seal_date_1,$request->seal_pos_1,$request->seal_date_0,$request->seal_id_1,$request->seal_id_0,$request->seal_detail_1,$request->seal_detail_0);
+            //เซ็น
+            $full_path = functionController::funtion_generate_PDF_division_to_work($request->seal_file ,$request->seal_detail_1 ,$request->seal_id_1 ,$request->seal_pos_1 ,$request->sub_id);
+            // $full_path = functionController::funtion_generate_PDF_III($request->doc_filedirec_1,$request->seal_point,$request->sub_recnum,$request->sub_date,$request->sub_time,$request->sub_id,$request->seal_pos_0,$request->seal_date_1,$request->seal_pos_1,$request->seal_date_0,$request->seal_id_1,$request->seal_id_0,$request->seal_detail_1,$request->seal_detail_0);
 
             $update_sub_docs = sub_doc::where('sub_id', $request->sub_id)
             ->update([
@@ -168,6 +169,8 @@ class documents_admission_division_allController extends Controller
                 ->where('sub_id', $request->sub_id)
                 ->first();
                 if($document_check){
+                    $full_path = functionController::funtion_generate_PDF_division_to_department($request->seal_file ,$request->seal_detail_1 ,$request->seal_id_1 ,$request->seal_pos_1 ,$request->sub_id);
+
                     for ($t = 0; $t < count($request->sub2_recid_cottons); $t++) {
                         $sub2_recid_cottons[$t] = $request->sub2_recid_cottons[$t];
                         $user_check_level_5[$t] = User::where('level', '5')
@@ -196,6 +199,7 @@ class documents_admission_division_allController extends Controller
                                 'seal_id_1'=>$document_check->seal_id_1,
                                 'seal_detail_1'=>$request->seal_detail_1,
                                 'seal_pos_1'=>$request->seal_pos_1,
+                                'seal_file'=>$full_path,
                                 'seal_date_1'=>date('Y-m-d H:i:s'),
                             ]);
 

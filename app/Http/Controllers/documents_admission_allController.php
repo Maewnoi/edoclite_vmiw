@@ -45,8 +45,8 @@ class documents_admission_allController extends Controller
                 ->whereNotIn('group_id', $sub_recid_arr)
                 ->get();
             }else{
-                $sub_docsS = '';
-                $GroupmemS = '';
+                $sub_docsS = array();
+                $GroupmemS = array();
             }
             return view('member.documents_admission_all.detail',compact('document_detail','sub_docsS','GroupmemS'));
         }else{
@@ -131,7 +131,7 @@ class documents_admission_allController extends Controller
         $doc_filedirec_img_ext = strtolower($doc_filedirec->getClientOriginalExtension());
         $doc_filedirec_img_name = $name_gen_new.'.'.$doc_filedirec_img_ext;
         //อัพโหลดและบันทึกข้อมูล
-        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/upload/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/original/';
         $doc_filedirec_full_path = $upload_location.$doc_filedirec_img_name;
 
         //ลบภาพเก่าและอัพภาพใหม่แทนที่

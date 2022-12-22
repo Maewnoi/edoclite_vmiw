@@ -49,17 +49,26 @@ class sitesController extends Controller
             $path_year = $path_site_path_folder.'/'.$year_new;
             $make_year = File::makeDirectory($path_year, $mode = 0777, true, true);
             if($make_year){
-                $path_details_attachedfile = $path_year.'/attachedfile';
-                $make_details_attachedfile = File::makeDirectory($path_details_attachedfile, $mode = 0777, true, true);
+                $path_details_attached = $path_year.'/attached';
+                $make_details_attached = File::makeDirectory($path_details_attached, $mode = 0777, true, true);
                 //++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++
-                $path_details_fileseal00 = $path_year.'/fileseal00';
-                $make_details_fileseal00 = File::makeDirectory($path_details_fileseal00, $mode = 0777, true, true);
+                $path_details_original = $path_year.'/original';
+                $make_details_original = File::makeDirectory($path_details_original, $mode = 0777, true, true);
                 //++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++
-                $path_details_fileseal01 = $path_year.'/fileseal01';
-                $make_details_fileseal01 = File::makeDirectory($path_details_fileseal01, $mode = 0777, true, true);
+                $path_details_center = $path_year.'/center';
+                $make_details_center = File::makeDirectory($path_details_center, $mode = 0777, true, true);
                 //++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++
-                $path_details_upload = $path_year.'/upload';
-                $make_details_upload = File::makeDirectory($path_details_upload, $mode = 0777, true, true);
+                $path_details_group = $path_year.'/group';
+                $make_details_group = File::makeDirectory($path_details_group, $mode = 0777, true, true);
+                //++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++
+                $path_details_division = $path_year.'/division';
+                $make_details_division = File::makeDirectory($path_details_division, $mode = 0777, true, true);
+                //++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++
+                $path_details_department = $path_year.'/department';
+                $make_details_department = File::makeDirectory($path_details_department, $mode = 0777, true, true);
+                //++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++
+                $path_details_work = $path_year.'/work';
+                $make_details_work = File::makeDirectory($path_details_work, $mode = 0777, true, true);
                 //++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++
                 $path_details_respond = $path_year.'/respond';
                 $make_details_respond = File::makeDirectory($path_details_respond, $mode = 0777, true, true);
@@ -73,8 +82,9 @@ class sitesController extends Controller
             return redirect()->back()->with('error','พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา [make_site_path_folder]!');
         }
 
-        if($make_details_attachedfile && $make_details_fileseal00 && $make_details_fileseal01 &&
-        $make_details_upload && $make_details_respond && $make_details_respond_retrun){
+        if($make_details_attached && $make_details_original && $make_details_center &&
+        $make_details_group && $make_details_division && $make_details_department &&
+        $make_details_work && $make_details_respond && $make_details_respond_retrun){
 
             //การเข้ารหัสรูปภาพ
             $sign_image = $request->file('site_img');

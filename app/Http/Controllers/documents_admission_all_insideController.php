@@ -127,7 +127,7 @@ class documents_admission_all_insideController extends Controller
         $doc_filedirec_img_ext = strtolower($doc_filedirec->getClientOriginalExtension());
         $doc_filedirec_img_name = $name_gen_new.'.'.$doc_filedirec_img_ext;
         //อัพโหลดและบันทึกข้อมูล
-        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/upload/';
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/original/';
         $doc_filedirec_full_path = $upload_location.$doc_filedirec_img_name;
 
         //ลบภาพเก่าและอัพภาพใหม่แทนที่

@@ -65,11 +65,11 @@ use App\Http\Controllers\functionController;
                                     <div class="form-group">
                                         <x-jet-label class="text-md" for="doc_filedirec_1"
                                             value="{{ __('ไฟล์เอกสาร') }}" />
-                                        @if($document_detail->sub_status == '8')
-                                        {!!functionController::display_pdf($document_detail->seal_file)!!}
-                                        @else
-                                        {!!functionController::display_pdf($document_detail->doc_filedirec_1)!!}
-                                        @endif
+                                            @if($document_detail->sub_status == '0')
+                                            {!!functionController::display_pdf($document_detail->doc_filedirec_1)!!}
+                                            @else
+                                            {!!functionController::display_pdf($document_detail->seal_file)!!}
+                                            @endif
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -280,6 +280,8 @@ use App\Http\Controllers\functionController;
 
                                             <input type="hidden" name="doc_filedirec_1_inside"
                                                 value="{{$document_detail->doc_filedirec_1}}" class="form-control">
+                                                <input type="hidden" name="seal_file_inside"
+                                                value="{{$document_detail->seal_file}}" class="form-control">
 
                                             <input type="hidden" name="sub_recnum_inside"
                                                 value="{{$document_detail->sub_recnum}}" class="form-control">

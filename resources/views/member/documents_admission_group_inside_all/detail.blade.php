@@ -66,7 +66,11 @@ use App\Http\Controllers\functionController;
                                         <x-jet-label class="text-md" for="doc_filedirec_1"
                                             value="{{ __('ไฟล์เอกสาร') }}" />
                                      
+                                            @if($document_detail->sub_status == '0')
                                         {!!functionController::display_pdf($document_detail->doc_filedirec)!!}
+                                        @else
+                                        {!!functionController::display_pdf($document_detail->seal_file)!!}
+                                        @endif
              
 
                                     </div>
