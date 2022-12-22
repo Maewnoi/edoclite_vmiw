@@ -30,7 +30,7 @@ use App\Http\Controllers\functionController;
                                         <th scope="col">สิทธิ์การเข้าถึง</th>
                                         <th scope="col">วันที่สร้าง</th>
                                         <th scope="col">นิติการ</th>
-                                        <th scope="col">ผู้ลงรับ</th>
+                                        <th scope="col">ผู้พิจารณา</th>
                                         <th scope="col">จัดการ</th>
                                     </tr>
                                 </thead>
@@ -89,11 +89,11 @@ use App\Http\Controllers\functionController;
                                             <?php endif; ?>
                                         </td>
                                         <td>
-                                            <?php if($row->level == '3' || $row->level == '4' || $row->level == '5' || $row->level == '6' || $row->level == '7'): ?>
+                                            <?php if($row->level == '4' || $row->level == '5' || $row->level == '6' || $row->level == '7'): ?>
                                             <div class="form-check">
                                                 <input class="form-check-input check_user_center" type="checkbox" <?php echo e($row->center == '1' ? 'checked="checked"' : ''); ?>
 
-                                                 name="user_center" id="check_user_center" data-id="<?php echo e($row->id); ?>" data-token="<?php echo e(csrf_token()); ?>">
+                                                 name="center" id="check_user_center" data-id="<?php echo e($row->id); ?>" data-token="<?php echo e(csrf_token()); ?>">
                                                 <label class="form-check-label" for=check_user_center">
                                                 </label>
                                             </div>

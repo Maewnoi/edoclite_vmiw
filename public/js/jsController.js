@@ -372,6 +372,51 @@ $(".check_jurisprudence").click(function(event) { //มีการ loop เล�
     });
 });
 
+$(".check_user_center").click(function(event) { //มีการ loop เลยใช้ classname.
+    // event.preventDefault();
+    var var_id = $(this).data('id');
+    var var_token = $(this).data('token');
+
+    if ($(this).is(':checked')) {
+        var var_data = {
+            var_id: var_id,
+            var_status: '1'
+        };
+    }else{
+        var var_data = {
+            var_id: var_id,
+            var_status: '0'
+        };
+    }
+
+    fetch('/user_center/update', {
+        method: 'POST',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': var_token
+    },
+    body:  JSON.stringify(var_data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        // console.log(result);
+        if(result['status'] == '200'){
+            swal({
+                title: "แจ้งเดือน",
+                text: result['text'],
+                icon: "success",
+            });
+        }else if(result['status'] == '404'){
+            swal({
+                title: "แจ้งเดือน",
+                text: result['text'],
+                icon: "error",
+            });
+        }
+    });
+});
+
 $("#memberController_add_level").change(function(event) {
     var var_memberController_add_level = $("#memberController_add_level").val();
     if(var_memberController_add_level=='0'||var_memberController_add_level=='1'||var_memberController_add_level=='2'||var_memberController_add_level=='3'){

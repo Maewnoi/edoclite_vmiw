@@ -24,6 +24,7 @@ use App\Http\Controllers\functionController;
                                         <th scope="col">สิทธิ์การเข้าถึง</th>
                                         <th scope="col">วันที่สร้าง</th>
                                         <th scope="col">นิติการ</th>
+                                        <th scope="col">ผู้พิจารณา</th>
                                         <th scope="col">จัดการ</th>
                                     </tr>
                                 </thead>
@@ -74,6 +75,16 @@ use App\Http\Controllers\functionController;
                                                 <input class="form-check-input check_jurisprudence" type="checkbox" {{ $row->jurisprudence == '1' ? 'checked="checked"' : ''}}
                                                  name="jurisprudence" id="check_jurisprudence" data-id="{{$row->id}}" data-token="{{ csrf_token() }}">
                                                 <label class="form-check-label" for=check_jurisprudence">
+                                                </label>
+                                            </div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($row->level == '4' || $row->level == '5' || $row->level == '6' || $row->level == '7')
+                                            <div class="form-check">
+                                                <input class="form-check-input check_user_center" type="checkbox" {{ $row->center == '1' ? 'checked="checked"' : ''}}
+                                                 name="center" id="check_user_center" data-id="{{$row->id}}" data-token="{{ csrf_token() }}">
+                                                <label class="form-check-label" for=check_user_center">
                                                 </label>
                                             </div>
                                             @endif

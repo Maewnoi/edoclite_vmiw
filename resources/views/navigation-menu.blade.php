@@ -108,6 +108,17 @@ use App\Http\Controllers\functionController;
                                     </div>
                                     <div class="border-t border-gray-100"></div>
 
+                                    @if(Auth::user()->center == '1')
+                                    <!-- สำนักปลัดเท่านั้น -->
+                                    <x-jet-dropdown-link href="{{ route('documents_pending_all') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรอพิจารณาจากสารบรรณกลาง ( ') }}
+                                        {{navigationController::funtion_document_waiting_count_level_4(Auth::user()->level)}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    @endif
+
                                     <!-- สารบรรณกลาง -->
                                     @if(Auth::user()->level == '3')
                                     <x-jet-dropdown-link type="button" data-toggle="modal" class="text-decoration-none"
@@ -125,17 +136,6 @@ use App\Http\Controllers\functionController;
 
                                     <!-- หัวหน้ากอง -->
                                     @if(Auth::user()->level == '4')
-                                    @if(navigationController::funtion_Groupmem_check_group_name_level_4(Auth::user()->level)
-                                    == 'สำนักปลัด')
-                                    <!-- สำนักปลัดเท่านั้น -->
-                                    <x-jet-dropdown-link href="{{ route('documents_pending_all') }}"
-                                        class="text-decoration-none">
-                                        {{ __('เอกสารรอพิจารณาจากสารบรรณกลาง ( ') }}
-                                        {{navigationController::funtion_document_waiting_count_level_4(Auth::user()->level)}}
-                                        {{ __(' ) เรื่อง') }}
-                                    </x-jet-dropdown-link>
-                                    <div class="border-t border-gray-100"></div>
-                                    @endif
                                     <x-jet-dropdown-link href="{{ route('documents_admission_division_all_0') }}"
                                         class="text-decoration-none">
                                         {{ __('มีเอกสารภายนอกรอพิจารณา ( ') }}
@@ -1011,6 +1011,17 @@ use App\Http\Controllers\functionController;
                 {{ __('หน้าหลัก') }}
             </x-jet-responsive-nav-link>
             <div class="border-t border-gray-100"></div>
+
+            @if(Auth::user()->center == '1')
+            <!-- สำนักปลัดเท่านั้น -->
+            <x-jet-responsive-nav-link href="{{ route('documents_pending_all') }}" class="text-decoration-none">
+                {{ __('เอกสารรอพิจารณาจากสารบรรณกลาง ( ') }}
+                {{navigationController::funtion_document_waiting_count_level_4(Auth::user()->level)}}
+                {{ __(' ) เรื่อง') }}
+            </x-jet-responsive-nav-link>
+            <div class="border-t border-gray-100"></div>
+            @endif
+
             <!-- สารบรรณกลาง -->
             @if(Auth::user()->level == '3')
             <x-jet-responsive-nav-link type="button" data-toggle="modal" class="text-decoration-none"
@@ -1030,16 +1041,6 @@ use App\Http\Controllers\functionController;
 
             <!-- หัวหน้ากอง -->
             @if(Auth::user()->level == '4')
-            @if(navigationController::funtion_Groupmem_check_group_name_level_4(Auth::user()->level)
-            == 'สำนักปลัด')
-            <!-- สำนักปลัดเท่านั้น -->
-            <x-jet-responsive-nav-link href="{{ route('documents_pending_all') }}" class="text-decoration-none">
-                {{ __('เอกสารรอพิจารณาจากสารบรรณกลาง ( ') }}
-                {{navigationController::funtion_document_waiting_count_level_4(Auth::user()->level)}}
-                {{ __(' ) เรื่อง') }}
-            </x-jet-responsive-nav-link>
-            <div class="border-t border-gray-100"></div>
-            @endif
             <x-jet-responsive-nav-link href="{{ route('documents_admission_division_all_0') }}"
                 class="text-decoration-none">
                 {{ __('มีเอกสารภายนอกรอพิจารณา ( ') }}

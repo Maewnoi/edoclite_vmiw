@@ -460,17 +460,34 @@ class functionController extends Controller
         // return response($pdf->Output())->header('Content-Type', 'application/pdf');
 
     }
+
+    public static function funtion_user_center_update(Request $request) {
+        if($request->var_status == '0'){
+            $user_center_update = User::where('id', $request->var_id)->update([
+                'center'=>'0'
+            ]);
+            return array('status' => '200', 'text' => 'ปิดผู้พิจารณาเรียบร้อย');
+        }else if($request->var_status == '1'){
+            $user_center_update = User::where('id', $request->var_id)->update([
+                'center'=>'1'
+            ]);
+            return array('status' => '200', 'text' => 'เปิดผู้พิจารณาเรียบร้อย');
+        }else{
+            return array('status' => '404', 'text' => 'พบปัญหา [แจ้งผู้พัฒนาระบบ]');
+        }
+    }
+
     public static function funtion_jurisprudence_update(Request $request) {
         if($request->var_status == '0'){
             $jurisprudence_update = User::where('id', $request->var_id)->update([
                 'jurisprudence'=>'0'
             ]);
-            return array('status' => '200', 'text' => 'ปิดฟังก์ชั่นเรียบร้อย');
+            return array('status' => '200', 'text' => 'ปิดนิติการเรียบร้อย');
         }else if($request->var_status == '1'){
             $jurisprudence_update = User::where('id', $request->var_id)->update([
                 'jurisprudence'=>'1'
             ]);
-            return array('status' => '200', 'text' => 'เปิดฟังก์ชั่นเรียบร้อย');
+            return array('status' => '200', 'text' => 'เปิดนิติการเรียบร้อย');
         }else{
             return array('status' => '404', 'text' => 'พบปัญหา [แจ้งผู้พัฒนาระบบ]');
         }

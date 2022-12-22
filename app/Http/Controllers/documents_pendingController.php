@@ -20,7 +20,7 @@ class documents_pendingController extends Controller
         ->where('group_id',Auth::user()->group)
         ->first();
 
-        if(Auth::user()->level == '4' && $Groupmem->group_name == 'สำนักปลัด'){
+        if(Auth::user()->center == '1'){
         //หัวหน้าสำนักปลัด
             // $documents = document::where('doc_site_id',Auth::user()->site_id)
             // ->where('doc_type', '0')
@@ -38,7 +38,7 @@ class documents_pendingController extends Controller
         ->where('group_id',Auth::user()->group)
         ->first();
 
-        if(Auth::user()->level == '4' && $Groupmem->group_name == 'สำนักปลัด'){
+        if(Auth::user()->center == '1'){
         //หัวหน้าสำนักปลัด
         $document_detail = document::where('doc_id', $id)->where('doc_site_id',Auth::user()->site_id)->first();
         $GroupmemS = Groupmem::where('group_site_id',Auth::user()->site_id)->get();

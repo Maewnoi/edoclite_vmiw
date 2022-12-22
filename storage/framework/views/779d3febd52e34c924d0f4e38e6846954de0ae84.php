@@ -189,6 +189,29 @@ use App\Http\Controllers\functionController;
                                     </div>
                                     <div class="border-t border-gray-100"></div>
 
+                                    <?php if(Auth::user()->center == '1'): ?>
+                                    <!-- สำนักปลัดเท่านั้น -->
+                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_pending_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_pending_all')).'','class' => 'text-decoration-none']); ?>
+                                        <?php echo e(__('เอกสารรอพิจารณาจากสารบรรณกลาง ( ')); ?>
+
+                                        <?php echo e(navigationController::funtion_document_waiting_count_level_4(Auth::user()->level)); ?>
+
+                                        <?php echo e(__(' ) เรื่อง')); ?>
+
+                                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                    <div class="border-t border-gray-100"></div>
+                                    <?php endif; ?>
+
                                     <!-- สารบรรณกลาง -->
                                     <?php if(Auth::user()->level == '3'): ?>
                                     <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -228,29 +251,6 @@ use App\Http\Controllers\functionController;
 
                                     <!-- หัวหน้ากอง -->
                                     <?php if(Auth::user()->level == '4'): ?>
-                                    <?php if(navigationController::funtion_Groupmem_check_group_name_level_4(Auth::user()->level)
-                                    == 'สำนักปลัด'): ?>
-                                    <!-- สำนักปลัดเท่านั้น -->
-                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_pending_all')).'','class' => 'text-decoration-none']]); ?>
-<?php $component->withName('jet-dropdown-link'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['href' => ''.e(route('documents_pending_all')).'','class' => 'text-decoration-none']); ?>
-                                        <?php echo e(__('เอกสารรอพิจารณาจากสารบรรณกลาง ( ')); ?>
-
-                                        <?php echo e(navigationController::funtion_document_waiting_count_level_4(Auth::user()->level)); ?>
-
-                                        <?php echo e(__(' ) เรื่อง')); ?>
-
-                                     <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                    <div class="border-t border-gray-100"></div>
-                                    <?php endif; ?>
                                     <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.dropdown-link','data' => ['href' => ''.e(route('documents_admission_division_all_0')).'','class' => 'text-decoration-none']]); ?>
 <?php $component->withName('jet-dropdown-link'); ?>
@@ -2101,6 +2101,30 @@ use App\Http\Controllers\functionController;
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
             <div class="border-t border-gray-100"></div>
+
+            <?php if(Auth::user()->center == '1'): ?>
+            <!-- สำนักปลัดเท่านั้น -->
+            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['href' => ''.e(route('documents_pending_all')).'','class' => 'text-decoration-none']]); ?>
+<?php $component->withName('jet-responsive-nav-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['href' => ''.e(route('documents_pending_all')).'','class' => 'text-decoration-none']); ?>
+                <?php echo e(__('เอกสารรอพิจารณาจากสารบรรณกลาง ( ')); ?>
+
+                <?php echo e(navigationController::funtion_document_waiting_count_level_4(Auth::user()->level)); ?>
+
+                <?php echo e(__(' ) เรื่อง')); ?>
+
+             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+            <div class="border-t border-gray-100"></div>
+            <?php endif; ?>
+
             <!-- สารบรรณกลาง -->
             <?php if(Auth::user()->level == '3'): ?>
             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -2154,29 +2178,6 @@ use App\Http\Controllers\functionController;
 
             <!-- หัวหน้ากอง -->
             <?php if(Auth::user()->level == '4'): ?>
-            <?php if(navigationController::funtion_Groupmem_check_group_name_level_4(Auth::user()->level)
-            == 'สำนักปลัด'): ?>
-            <!-- สำนักปลัดเท่านั้น -->
-            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['href' => ''.e(route('documents_pending_all')).'','class' => 'text-decoration-none']]); ?>
-<?php $component->withName('jet-responsive-nav-link'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['href' => ''.e(route('documents_pending_all')).'','class' => 'text-decoration-none']); ?>
-                <?php echo e(__('เอกสารรอพิจารณาจากสารบรรณกลาง ( ')); ?>
-
-                <?php echo e(navigationController::funtion_document_waiting_count_level_4(Auth::user()->level)); ?>
-
-                <?php echo e(__(' ) เรื่อง')); ?>
-
-             <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-            <div class="border-t border-gray-100"></div>
-            <?php endif; ?>
             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.responsive-nav-link','data' => ['href' => ''.e(route('documents_admission_division_all_0')).'','class' => 'text-decoration-none']]); ?>
 <?php $component->withName('jet-responsive-nav-link'); ?>
