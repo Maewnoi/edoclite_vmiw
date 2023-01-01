@@ -95,7 +95,7 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
-                            <?php if($document_retrun_inside_detail->docrt_sealid_0 == Auth::user()->id && $document_retrun_inside_detail->docrt_sealdate_0 == null || $document_retrun_inside_detail->docrt_sealid_1 == Auth::user()->id && $document_retrun_inside_detail->docrt_sealdate_1 == null): ?>
+                            <?php if($document_retrun_inside_detail->docrt_sealid_2 == Auth::user()->id && $document_retrun_inside_detail->docrt_sealdate_2 == null || $document_retrun_inside_detail->docrt_sealid_3 == Auth::user()->id && $document_retrun_inside_detail->docrt_sealdate_3 == null): ?>
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="<?php echo e(route('documents_retrun_inside_deputy_sign_understand')); ?>" method="post" enctype="multipart/form-data">
@@ -124,9 +124,9 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                                            required name="docrt_sealid">
+                                                            required name="docrt_sealid" id="documents_retrun_inside_deputy_signController_docrt_sealid">
                                                             <option value="">เลือกผู้ลงนามต่อไป</option>
-                                                            <option value="not">ไม่เลือก</option>
+                                                            <option value="ตีกลับ">ตีกลับ</option>
                                                             <?php $__currentLoopData = $userS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <option value="<?php echo e($row_user->id); ?>"><?php echo e($row_user->name); ?> [<?php echo e($row_user->pos); ?>]</option>
                                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -144,6 +144,24 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group hide" id="documents_retrun_inside_deputy_signController_form-group_docrt_note">
+                                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'docrt_note','value' => ''.e(__('ข้อความ')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','for' => 'docrt_note','value' => ''.e(__('ข้อความ')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                        <input class="form-control"
+                                                            name="docrt_note" type="text" value="">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
@@ -200,7 +218,12 @@ unset($__errorArgs, $__bag); ?>
                                                                     value="<?php echo e($document_retrun_inside_detail->docrt_sealpos_0); ?>">
                                                 <input type="hidden" name="docrt_sealpos_1"
                                                                     value="<?php echo e($document_retrun_inside_detail->docrt_sealpos_1); ?>">
-
+                                                <input type="hidden" name="docrt_sealid_2"
+                                                                    value="<?php echo e($document_retrun_inside_detail->docrt_sealid_2); ?>">
+                                                <input type="hidden" name="docrt_sealid_3"
+                                                                    value="<?php echo e($document_retrun_inside_detail->docrt_sealid_3); ?>">
+                                                <input type="hidden" name="docrt_groupmems_id"
+                                                                value="<?php echo e($document_retrun_inside_detail->docrt_groupmems_id); ?>">
                                                 <input type="hidden" name="docrt_id" value="<?php echo e($document_retrun_inside_detail->docrt_id); ?>">
                                                 <input type="hidden" name="docrtdt_topic" value="<?php echo e($document_retrun_inside_detail->docrtdt_topic); ?>">
                                                 <input type="hidden" name="docrtdt_draft"

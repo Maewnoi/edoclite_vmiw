@@ -43,7 +43,127 @@ class member_dashboardController extends Controller
             }
             
             if($userS_0){
-                if($request->bt_respond == 'respond_garuda'){
+                if($request->bt_respond == 'respond_normal'){
+                    if(Auth::user()->level=='7'){
+                        $insert_documents_retrun = documents_retrun::insertGetId([
+                            'docrt_owner'=>Auth::user()->id,
+                            'docrt_sites_id'=>Auth::user()->site_id,
+                            'docrt_groupmems_id'=>Auth::user()->group,
+                            'docrt_type'=>$request->docrt_type,
+                            'docrt_status' =>'0',
+                            'docrt_inspector_0'=>$userS_0->id,
+                            'docrt_created_at'=>date('Y-m-d H:i:s')
+                        ]);
+
+                        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+                        $date_new = date('Y-m-d');
+                        $year_new = date('Y');
+                        //การเข้ารหัสไฟล์_doc_filedirec
+                        $docrt_file = $request->file('docrtdt_file');
+                        //Generate ชื่อไฟล์
+                        $name_gen_new = $insert_documents_retrun."_".$date_new;
+                        // ดึงนามสกุลไฟล์
+                        $docrt_file_img_ext = strtolower($docrt_file->getClientOriginalExtension());
+                        $docrt_file_img_name = $name_gen_new.'.'.$docrt_file_img_ext;
+                        //อัพโหลดและบันทึกข้อมูล
+                        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond_retrun/';
+                        $full_path = $upload_location.$docrt_file_img_name;
+                        $docrt_file->move($upload_location,$docrt_file_img_name);
+
+                        $insert_documents_retrun_detail = documents_retrun_detail::insertGetId([
+                            'docrtdt_docrt_id'=>$insert_documents_retrun,
+                            'docrtdt_government'=>$request->docrtdt_government_normal,
+                            'docrtdt_draft'=>$request->docrtdt_draft_normal,
+                            'docrtdt_date'=>$request->docrtdt_date_normal,
+                            'docrtdt_topic'=>$request->docrtdt_topic_normal,
+                            'docrtdt_speed'=>$request->docrtdt_speed,
+                            'docrtdt_file'=>$full_path
+                        ]);
+                    }else if(Auth::user()->level=='5'){
+                        $insert_documents_retrun = documents_retrun::insertGetId([
+                            'docrt_owner'=>Auth::user()->id,
+                            'docrt_sites_id'=>Auth::user()->site_id,
+                            'docrt_groupmems_id'=>Auth::user()->group,
+                            'docrt_type'=>$request->docrt_type,
+                            'docrt_status' =>'1',
+                            'docrt_inspector_1'=>$userS_0->id,
+                            'docrt_created_at'=>date('Y-m-d H:i:s')
+                        ]);
+
+                        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+                        $date_new = date('Y-m-d');
+                        $year_new = date('Y');
+                        //การเข้ารหัสไฟล์_doc_filedirec
+                        $docrt_file = $request->file('docrtdt_file');
+                        //Generate ชื่อไฟล์
+                        $name_gen_new = $insert_documents_retrun."_".$date_new;
+                        // ดึงนามสกุลไฟล์
+                        $docrt_file_img_ext = strtolower($docrt_file->getClientOriginalExtension());
+                        $docrt_file_img_name = $name_gen_new.'.'.$docrt_file_img_ext;
+                        //อัพโหลดและบันทึกข้อมูล
+                        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond_retrun/';
+                        $full_path = $upload_location.$docrt_file_img_name;
+                        $docrt_file->move($upload_location,$docrt_file_img_name);
+
+                        $insert_documents_retrun_detail = documents_retrun_detail::insertGetId([
+                            'docrtdt_docrt_id'=>$insert_documents_retrun,
+                            'docrtdt_government'=>$request->docrtdt_government_normal,
+                            'docrtdt_draft'=>$request->docrtdt_draft_normal,
+                            'docrtdt_date'=>$request->docrtdt_date_normal,
+                            'docrtdt_topic'=>$request->docrtdt_topic_normal,
+                            'docrtdt_speed'=>$request->docrtdt_speed,
+                            'docrtdt_file'=>$full_path
+                        ]);
+                    }else if(Auth::user()->level=='4'){
+                        $insert_documents_retrun = documents_retrun::insertGetId([
+                            'docrt_owner'=>Auth::user()->id,
+                            'docrt_sites_id'=>Auth::user()->site_id,
+                            'docrt_groupmems_id'=>Auth::user()->group,
+                            'docrt_type'=>$request->docrt_type,
+                            'docrt_status' =>'2',
+                            'docrt_inspector_2'=>$userS_0->id,
+                            'docrt_created_at'=>date('Y-m-d H:i:s')
+                        ]);
+
+                        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+                        $date_new = date('Y-m-d');
+                        $year_new = date('Y');
+                        //การเข้ารหัสไฟล์_doc_filedirec
+                        $docrt_file = $request->file('docrtdt_file');
+                        //Generate ชื่อไฟล์
+                        $name_gen_new = $insert_documents_retrun."_".$date_new;
+                        // ดึงนามสกุลไฟล์
+                        $docrt_file_img_ext = strtolower($docrt_file->getClientOriginalExtension());
+                        $docrt_file_img_name = $name_gen_new.'.'.$docrt_file_img_ext;
+                        //อัพโหลดและบันทึกข้อมูล
+                        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond_retrun/';
+                        $full_path = $upload_location.$docrt_file_img_name;
+                        $docrt_file->move($upload_location,$docrt_file_img_name);
+
+                        $insert_documents_retrun_detail = documents_retrun_detail::insertGetId([
+                            'docrtdt_docrt_id'=>$insert_documents_retrun,
+                            'docrtdt_government'=>$request->docrtdt_government_normal,
+                            'docrtdt_draft'=>$request->docrtdt_draft_normal,
+                            'docrtdt_date'=>$request->docrtdt_date_normal,
+                            'docrtdt_topic'=>$request->docrtdt_topic_normal,
+                            'docrtdt_speed'=>$request->docrtdt_speed,
+                            'docrtdt_file'=>$full_path
+                        ]);
+                    }
+                    if($insert_documents_retrun && $insert_documents_retrun_detail){
+                        //linetoken
+                        $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
+                        ->where('group_id', Auth::user()->group)
+                        ->first();
+                        if($tokens_Check){
+                            $message = "\n⚠️ สร้างเอกสารตอบกลับภายใน ⚠️\n>เรื่อง :  ".$request->docrtdt_topic_garuda."\n>ที่ร่าง :  ".$request->docrtdt_draft_garuda."\n>วันที่ : ".$request->docrtdt_date_garuda."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                            functionController::line_notify($message,$tokens_Check->group_token);
+                        }
+                        return redirect()->back()->with('success','สร้างเอกสารตอบกลับภายในเรียบร้อย');
+                    }else{
+                        return redirect('member_dashboard')->with('error','พบปัญหาบางอย่างผิดพลาด [insert] !');
+                    }
+                }else if($request->bt_respond == 'respond_garuda'){
                     if(Auth::user()->level=='7'){
                         $insert_documents_retrun = documents_retrun::insertGetId([
                             'docrt_owner'=>Auth::user()->id,
@@ -509,6 +629,9 @@ class member_dashboardController extends Controller
         //    ->where('sub2_status', '1')
         //    ->where('sub2_recid', Auth::user()->id)
         //    ->count();
+            return view('member_dashboard');
+
+        }else if(Auth::user()->level=='8'){
             return view('member_dashboard');
         }else{
             return route('logout');

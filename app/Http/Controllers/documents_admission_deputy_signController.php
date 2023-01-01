@@ -43,26 +43,26 @@ class documents_admission_deputy_signController extends Controller
             ->where('doc_site_id',Auth::user()->site_id)
             ->first();
          
-            if($document_detail->sub3_sealid_0 != null){
-                $sub3_sealid_0 = $document_detail->sub3_sealid_0;
+            if($document_detail->sub3_sealid_2 != null){
+                $sub3_sealid_2 = $document_detail->sub3_sealid_2;
             }else{
-                $sub3_sealid_0 = null;
+                $sub3_sealid_2 = null;
             }
-            if($document_detail->sub3_sealid_1 != null){
-                $sub3_sealid_1 = $document_detail->sub3_sealid_1;
+            if($document_detail->sub3_sealid_3 != null){
+                $sub3_sealid_3 = $document_detail->sub3_sealid_3;
             }else{
-                $sub3_sealid_1 = null;
+                $sub3_sealid_3 = null;
             }
 
             $userS = User::where(function ($query) {
                 $query->where('level', '1')
                       ->orWhere('level', '2');
             })
-            ->when($sub3_sealid_0 != null, function ($builder_0) use ($sub3_sealid_0){
-                $builder_0->where('id','!=',$sub3_sealid_0);
+            ->when($sub3_sealid_2 != null, function ($builder_2) use ($sub3_sealid_2){
+                $builder_2->where('id','!=',$sub3_sealid_2);
             })
-            ->when($sub3_sealid_1 != null, function ($builder_1) use ($sub3_sealid_1){
-                $builder_1->where('id','!=',$sub3_sealid_1);
+            ->when($sub3_sealid_3 != null, function ($builder_3) use ($sub3_sealid_3){
+                $builder_3->where('id','!=',$sub3_sealid_3);
             })
             ->where('site_id',Auth::user()->site_id)
             ->get();
@@ -87,90 +87,165 @@ class documents_admission_deputy_signController extends Controller
                 'sub3_sealpos.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
             ]
         );
-        
-        if(Auth::user()->id == $request->sub3_sealid_0){
-            $sub3_sealdate = 'sub3_sealdate_0';
-            $sub3_sealpos = 'sub3_sealpos_0';
-        }else if(Auth::user()->id == $request->sub3_sealid_1){
-            $sub3_sealdate = 'sub3_sealdate_1';
-            $sub3_sealpos = 'sub3_sealpos_1';
-        }else{
-            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [Auth_id!=sub3_sealid] !');
-        }
 
-        if($request->sub3_sealid == 'not'){
-            if(Auth::user()->id == $request->sub3_sealid_0){
-                $full_path = functionController::funtion_generate_PDF_VI(
-                    $request->sub3d_file,
-                    $request->sub3_sealid_0,
-                    $request->sub3_sealid_1,
-                    '',
-                    $request->sub3_sealpos,
-                    $request->sub3_sealpos_1,
-                    '',
-                    $request->doc_id
-                );
-            }else if(Auth::user()->id == $request->sub3_sealid_1){
-                $full_path = functionController::funtion_generate_PDF_VI(
-                    $request->sub3d_file,
-                    $request->sub3_sealid_0,
-                    $request->sub3_sealid_1,
-                    '',
-                    $request->sub3_sealpos_0,
-                    $request->sub3_sealpos,
-                    '',
-                    $request->doc_id
-                );
-            }
-            if(!$full_path){
-                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [funtion_generate_PDF_VI] !');
-            }
-            $update_sub3_details = sub3_detail::where('sub3d_sub_3id', $request->sub3_id)->update([
-                'sub3d_file'=>$full_path
-            ]);
+        if($request->sub3_sealid == 'ตีกลับ'){
             $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
-                $sub3_sealpos=>$request->sub3_sealpos,
-                $sub3_sealdate=>date('Y-m-d H:i:s'),
-                'sub3_status'=>'6',
+                'sub3_check_0'=>'0',
+                'sub3_inspector_0'=>null,
+                'sub3_datetime_0'=>null,
+                'sub3_check_1'=>'0',
+                'sub3_inspector_1'=>null,
+                'sub3_datetime_1'=>null,
+                'sub3_check_2'=>'0',
+                'sub3_inspector_2'=>null,
+                'sub3_datetime_2'=>null,
+
+                'sub3_sealdetail_0'=>null,
+                'sub3_sealnote_0'=>null,
+                'sub3_sealpos_0'=>null,
+                'sub3_sealdate_0'=>null,
+                'sub3_sealid_0'=>null,
+
+                'sub3_sealdetail_1'=>null,
+                'sub3_sealnote_1'=>null,
+                'sub3_sealpos_1'=>null,
+                'sub3_sealdate_1'=>null,
+                'sub3_sealid_1'=>null,
+
+                'sub3_sealdetail_2'=>null,
+                'sub3_sealnote_2'=>null,
+                'sub3_sealpos_2'=>null,
+                'sub3_sealdate_2'=>null,
+                'sub3_sealid_2'=>null,
+
+                'sub3_sealdetail_3'=>null,
+                'sub3_sealnote_3'=>null,
+                'sub3_sealpos_3'=>null,
+                'sub3_sealdate_3'=>null,
+                'sub3_sealid_3'=>null,
+
+                'sub3_note'=>$request->sub3_note,
+                'sub3_status'=>'C',
                 'sub3_updated_at'=>date('Y-m-d H:i:s')
             ]);
-        }else{
-            $user = User::where('id',$request->sub3_sealid)->first();
-            if($user->level == '1'){
-                //นายก
-                $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
-                    $sub3_sealpos=>$request->sub3_sealpos,
-                    $sub3_sealdate=>date('Y-m-d H:i:s'),
-                    'sub3_sealid_2'=>$request->sub3_sealid,
-                    'sub3_status'=>'5',
-                    'sub3_updated_at'=>date('Y-m-d H:i:s')
-                ]);
-            }else if($user->level == '2'){
-                //ปลัด
-                $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
-                    $sub3_sealpos=>$request->sub3_sealpos,
-                    $sub3_sealdate=>date('Y-m-d H:i:s'),
-                    'sub3_sealid_1'=>$request->sub3_sealid,
-                    'sub3_status'=>'4',
-                    'sub3_updated_at'=>date('Y-m-d H:i:s')
-                ]);
-            }else{
-                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [user_level_null] !');
-            }
-        }
 
-        if($update_sub3_docs){
-            //linetoken
-            $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
-            ->where('group_id', $request->sub_recid)
-            ->first();
-            if($tokens_Check){
-                $message = "\n⚠️ ปลัดลงนามเอกสารรับเข้าตอบกลับภายนอก ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
-                functionController::line_notify($message,$tokens_Check->group_token);
+            if($update_sub3_docs){
+                //linetoken
+                $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
+                ->where('group_id', $request->sub_recid)
+                ->first();
+
+                if($tokens_Check){
+                    $message = "\n⚠️ รองปลัด|ปลัด ตีกลับเอกสารรับเข้าตอบกลับภายนอก ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                    functionController::line_notify($message,$tokens_Check->group_token);
+                }
+                return redirect()->route('documents_admission_secretary_retrun_all_0')->with('success',"ตีกลับเรียบร้อย");
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs]!');
             }
-            return redirect()->route('documents_admission_deputy_sign_all_0')->with('success',"ลงนามเรียบร้อย");
+
         }else{
-            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs] !');
+
+            if(Auth::user()->id == $request->sub3_sealid_2){
+                $sub3_sealdate = 'sub3_sealdate_2';
+                $sub3_sealpos = 'sub3_sealpos_2';
+
+                $sub3_sealid = 'sub3_sealid_3';
+                $sub3_status = '6';
+
+                $full_path = functionController::funtion_generate_PDF_deputy_AND_minister(
+                    $request->sub3d_file,
+                    $request->sub3_id,
+                    $request->sub3_sealid_2,
+                    '',
+                    '',
+                    '',
+                    $request->sub3_sealpos,
+                    '',
+                    '',
+                    ''
+                );
+            }else if(Auth::user()->id == $request->sub3_sealid_3){
+                $sub3_sealdate = 'sub3_sealdate_3';
+                $sub3_sealpos = 'sub3_sealpos_3';
+
+                $sub3_sealid = 'sub3_sealid_2';
+                $sub3_status = '5';
+
+                $full_path = functionController::funtion_generate_PDF_deputy_AND_minister(
+                    $request->sub3d_file,
+                    $request->sub3_id,
+                    '',
+                    $request->sub3_sealid_3,
+                    '',
+                    '',
+                    '',
+                    $request->sub3_sealpos,
+                    '',
+                    ''
+                );
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [Auth_id!=sub3_sealid] !');
+            }
+
+            $user_check = User::where('id', $request->sub3_sealid)
+            ->first();
+            if($user_check->level == '2'){
+                $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
+                    $sub3_sealdate=>date('Y-m-d H:i:s'),
+                    $sub3_sealpos=>$request->sub3_sealpos,
+                    $sub3_sealid=>$request->sub3_sealid,
+                    'sub3_status'=>$sub3_status,
+                    'sub3_updated_at'=>date('Y-m-d H:i:s')
+                ]);
+
+                $update_sub3_detail = sub3_detail::where('sub3d_sub_3id', $request->sub3_id)->update([
+                    'sub3d_file'=>$full_path
+                ]);
+
+                //linetoken
+                $tokens_Check = DB::table('tokens')
+                ->where('token_site_id', Auth::user()->site_id)
+                ->where('token_level', $user_check->level)
+                ->first();
+                if($tokens_Check){
+                    $message = "\n⚠️ รองปลัด|ปลัด ลงนามเอกสารรับเข้าตอบกลับภายนอก ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                    functionController::line_notify($message,$tokens_Check->token_token);
+                }
+
+            }else if($user_check->level == '1'){
+                $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
+                    $sub3_sealdate=>date('Y-m-d H:i:s'),
+                    $sub3_sealpos=>$request->sub3_sealpos,
+                    'sub3_sealid_4'=>$request->sub3_sealid,
+                    'sub3_status'=>'7',
+                    'sub3_updated_at'=>date('Y-m-d H:i:s')
+                ]);
+
+                $update_sub3_detail = sub3_detail::where('sub3d_sub_3id', $request->sub3_id)->update([
+                    'sub3d_file'=>$full_path
+                ]);
+
+                //linetoken
+                $tokens_Check = DB::table('tokens')
+                ->where('token_site_id', Auth::user()->site_id)
+                ->where('token_level', $user_check->level)
+                ->first();
+                if($tokens_Check){
+                    $message = "\n⚠️ รองปลัด|ปลัด ลงนามเอกสารรับเข้าตอบกลับภายนอก ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                    functionController::line_notify($message,$tokens_Check->token_token);
+                }
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [user_check]!');
+            }
+
+            if($update_sub3_docs){
+                return redirect()->route('documents_admission_deputy_sign_all_0')->with('success',"ลงนามเรียบร้อย");
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs] !');
+            }
+
         }
+    
     }
 }

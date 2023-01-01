@@ -130,7 +130,7 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                             </div>
-                            @if($document_detail->sub2_status == '0')
+                            @if(!$sub3_doc_detail)
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="{{route('documents_admission_work_detail_respond')}}" method="post"
@@ -149,11 +149,14 @@ use App\Http\Controllers\functionController;
                                                             <option value="">
                                                                 เลือกประเภท
                                                             </option>
+                                                            <option value="2">
+                                                                แนบไฟล์
+                                                            </option>
                                                             <option value="0">
-                                                                บันทึกข้อความ
+                                                                บันทึกข้อความ (ทดสอบ)
                                                             </option>
                                                             <option value="1">
-                                                                ตราครุฑ
+                                                                ตราครุฑ (ทดสอบ)
                                                             </option>
                                                         </select>
                                                         @error('sub3_type')
@@ -186,6 +189,60 @@ use App\Http\Controllers\functionController;
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 table-responsive">
+                                                    <div class="form-group hide"
+                                                        id="documents_admission_work_allController_form-group_tb-sub3_details-normal">
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <x-jet-label class="text-md" for="sub3d_government_normal"
+                                                                    value="{{ __('ส่วนราชการ') }}" />
+                                                                    <input class="form-control"
+                                                                        name="sub3d_government_normal" type="text" value="">
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <x-jet-label class="text-md" for="sub3d_draft_normal"
+                                                                    value="{{ __('ที่ร่าง') }}" />
+                                                                    <input class="form-control"
+                                                                        name="sub3d_draft_normal" type="text" value="">
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <x-jet-label class="text-md" for="sub3d_date_normal"
+                                                                    value="{{ __('วันที่') }}" />
+                                                                    <input class="form-control"
+                                                                        name="sub3d_date_normal" type="text" value="21 ธันวาคม 1988">
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <x-jet-label class="text-md" for="sub3d_topic_normal"
+                                                                    value="{{ __('เรื่อง') }}" />
+                                                                    <input class="form-control"
+                                                                        name="sub3d_topic_normal" type="text" value="">
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="doc_id_normal" value="{{$document_detail->doc_id}}">
+                                                        <input type="hidden" name="sub_id_normal" value="{{$document_detail->sub_id}}">
+                                                        <input type="hidden" name="sub2_id_normal" value="{{$document_detail->sub2_id}}">
+                                                        <input type="hidden" name="doc_docnum_normal" value="{{$document_detail->doc_docnum}}">
+                                                        <input type="hidden" name="doc_origin_normal" value="{{$document_detail->doc_origin}}">
+                                                        <input type="hidden" name="doc_title_normal" value="{{$document_detail->doc_title}}">
+                                                        
+                                                        <div class="items-center justify-center mt-10">
+                                                            <x-jet-label class="text-md" for="sub3d_file"
+                                                                    value="{{ __('เอกสาร') }}" />
+                                                            <input type="file" name="sub3d_file" accept="application/pdf"
+                                                                id="documents_admission_work_allController_sub3d_file_normal"
+                                                                class="form-control @error('sub3d_file') is-invalid @enderror">
+                                                        </div>
+                                                        
+                                                        <div class="flex items-center justify-center mt-20">
+                                                    
+                                                            <x-jet-button onclick="submitForm(this);"
+                                                                id="documents_admission_work_allController_bt_respond-normal"
+                                                                disabled>
+                                                                {{ __('ตอบกลับ') }}
+                                                            </x-jet-button>
+                                                        </div>
+                                                        
+                                                        <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
+                                                    </div>
                                                     <div class="form-group hide"
                                                         id="documents_admission_work_allController_form-group_tb-sub3_details-garuda">
                                                         <page id="documents_admission_work_allController_page"

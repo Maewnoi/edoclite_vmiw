@@ -112,9 +112,10 @@ use App\Http\Controllers\functionController;
                                     <form action="<?php echo e(route('documents_admission_inside_jurisprudence_understand')); ?>" method="post" enctype="multipart/form-data">
                                     <?php echo csrf_field(); ?>
                                         <div class="card card-body">
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+                                        <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'sub3_sealid','value' => ''.e(__('เลือกผู้ลงนาม')).'']]); ?>
 <?php $component->withName('jet-label'); ?>
 <?php if ($component->shouldRender()): ?>
@@ -126,7 +127,7 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                                    <select class="form-control select2bs4 <?php $__errorArgs = ['sub3_sealid'];
+                                                        <select class="form-control select2bs4 <?php $__errorArgs = ['sub3_sealid'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -134,26 +135,45 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                                        required name="sub3_sealid">
-                                                        <option value="">เลือกผู้ลงนาม</option>
-                                                        <option value="not">ไม่เลือก</option>
-                                                        <?php $__currentLoopData = $userS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <option value="<?php echo e($row_user->id); ?>"><?php echo e($row_user->name); ?> [<?php echo e($row_user->pos); ?>]</option>
-                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                    </select>
-                                                    <?php $__errorArgs = ['sub3_sealid'];
+                                                            required name="sub3_sealid" id="documents_admission_inside_jurisprudenceController_sub3_sealid">
+                                                            <option value="">เลือกผู้ลงนาม</option>
+                                                            <option value="ตีกลับ">ตีกลับ</option>
+                                                            <?php $__currentLoopData = $userS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value="<?php echo e($row_user->id); ?>"><?php echo e($row_user->name); ?> [<?php echo e($row_user->pos); ?>]</option>
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        </select>
+                                                        <?php $__errorArgs = ['sub3_sealid'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                    <div class="my-2">
-                                                        <p class="mt-2 text-sm text-red-600">
-                                                            <?php echo e($message); ?></p>
-                                                    </div>
-                                                    <?php unset($message);
+                                                        <div class="my-2">
+                                                            <p class="mt-2 text-sm text-red-600">
+                                                                <?php echo e($message); ?></p>
+                                                        </div>
+                                                        <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group hide" id="documents_admission_inside_jurisprudenceController_form-group_sub3_note">
+                                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'sub3_note','value' => ''.e(__('ข้อความ')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','for' => 'sub3_note','value' => ''.e(__('ข้อความ')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                        <input class="form-control"
+                                                            name="sub3_note" type="text" value="">
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -192,33 +212,6 @@ unset($__errorArgs, $__bag); ?>
                                     </form>
                                 </div>
                             </div>
-                            <form action="<?php echo e(route('documents_admission_inside_jurisprudence_do_not_understand')); ?>" method="post" enctype="multipart/form-data">
-                            <?php echo csrf_field(); ?>
-                                <div class="flex items-center justify-center">
-                                    <input type="hidden" name="doc_id" value="<?php echo e($document_detail->doc_id); ?>">
-                                    <input type="hidden" name="sub_id" value="<?php echo e($document_detail->sub_id); ?>">
-                                    <input type="hidden" name="sub2_id" value="<?php echo e($document_detail->sub2_id); ?>">
-                                    <input type="hidden" name="sub3_id" value="<?php echo e($document_detail->sub3_id); ?>">
-                                    <input type="hidden" name="sub3d_id" value="<?php echo e($document_detail->sub3d_id); ?>">
-                                    <input type="hidden" name="doc_docnum" value="<?php echo e($document_detail->doc_docnum); ?>">
-                                    <input type="hidden" name="doc_origin" value="<?php echo e($document_detail->doc_origin); ?>">
-                                    <input type="hidden" name="doc_title" value="<?php echo e($document_detail->doc_title); ?>">
-                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
-<?php $component->withName('jet-button'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
-                                        <?php echo e(__('ไม่อนุมัติ')); ?>
-
-                                     <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                </div>
-                            </form>
                             <?php endif; ?>
                             <hr>
                         </div>

@@ -54,6 +54,17 @@ use App\Http\Controllers\functionController;
                                         
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <x-jet-label class="text-md" for="doc_filedirec_1"
+                                                value="{{ __('ไฟล์เอกสาร') }}" />
+                                            {!!functionController::display_pdf($document_retrun_inside_detail->docrtdt_file)!!}
+                                          
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <hr>
                             <div class="row">
@@ -207,6 +218,60 @@ use App\Http\Controllers\functionController;
                                                     </div>
                                                     <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
                                                 </div>
+                                                @elseif($document_retrun_inside_detail->docrt_type == '2')
+                                                <div class="form-group"
+                                                    id="documents_retrun_inside_department_retrunController_form-group_tb-docrt_details-normal">
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <x-jet-label class="text-md" for="docrtdt_government_normal"
+                                                                value="{{ __('ส่วนราชการ') }}" />
+                                                                <input class="form-control"
+                                                                    name="docrtdt_government_normal" type="text" value="{{$document_retrun_inside_detail->docrtdt_government}}">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <x-jet-label class="text-md" for="docrtdt_draft_normal"
+                                                                value="{{ __('ที่ร่าง') }}" />
+                                                                <input class="form-control"
+                                                                    name="docrtdt_draft_normal" type="text" value="{{$document_retrun_inside_detail->docrtdt_draft}}">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <x-jet-label class="text-md" for="docrtdt_date_normal"
+                                                                value="{{ __('วันที่') }}" />
+                                                                <input class="form-control"
+                                                                    name="docrtdt_date_normal" type="text" value="{{$document_retrun_inside_detail->docrtdt_date}}">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <x-jet-label class="text-md" for="docrtdt_topic_normal"
+                                                                value="{{ __('เรื่อง') }}" />
+                                                                <input class="form-control"
+                                                                    name="docrtdt_topic_normal" type="text" value="{{$document_retrun_inside_detail->docrtdt_topic}}">
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="docrt_id_normal" value="{{$document_retrun_inside_detail->docrt_id}}">
+                                                    <input type="hidden" name="docrtdt_id_normal"
+                                                                        value="{{$document_retrun_inside_detail->docrtdt_id}}">
+                                                    <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}" />
+                                                        
+                                                    <div class="items-center justify-center mt-10">
+                                                        <x-jet-label class="text-md" for="docrtdt_file"
+                                                                value="{{ __('เอกสาร') }}" />
+                                                        <input type="file" name="docrtdt_file" accept="application/pdf"
+                                                            id="documents_retrun_inside_department_retrunController_docrtdt_file_normal"
+                                                            class="form-control @error('docrtdt_file') is-invalid @enderror">
+                                                    </div>
+                                                    <input type="hidden" name="bt_respond" value="respond_normal">
+                                                    <div class="flex items-center justify-center mt-20">
+                                                    
+                                                        <x-jet-button onclick="submitForm(this);"
+                                                             id="documents_retrun_inside_department_retrunController_bt_respond-normal"
+                                                            disabled>
+                                                            {{ __('ตอบกลับอีกครั้ง') }}
+                                                        </x-jet-button>
+                                                    </div>
+                                                        
+                                                    <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
+                                                </div>
+                                                @endif
                                                 @endif
                                                 </div>
                                             </div>

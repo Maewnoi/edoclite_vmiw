@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Groupmem;
 use App\Models\User;
 use App\Models\documents_retrun;
@@ -35,26 +36,26 @@ class documents_retrun_inside_deputy_signController extends Controller
             ->where('docrt_sites_id',Auth::user()->site_id)
             ->first();
          
-            if($document_retrun_inside_detail->docrt_sealid_0 != null){
-                $docrt_sealid_0 = $document_retrun_inside_detail->docrt_sealid_0;
+            if($document_retrun_inside_detail->docrt_sealid_2 != null){
+                $docrt_sealid_2 = $document_retrun_inside_detail->docrt_sealid_2;
             }else{
-                $docrt_sealid_0 = null;
+                $docrt_sealid_2 = null;
             }
-            if($document_retrun_inside_detail->docrt_sealid_1 != null){
-                $docrt_sealid_1 = $document_retrun_inside_detail->docrt_sealid_1;
+            if($document_retrun_inside_detail->docrt_sealid_3 != null){
+                $docrt_sealid_3 = $document_retrun_inside_detail->docrt_sealid_3;
             }else{
-                $docrt_sealid_1 = null;
+                $docrt_sealid_3 = null;
             }
 
             $userS = User::where(function ($query) {
                 $query->where('level', '1')
                       ->orWhere('level', '2');
             })
-            ->when($docrt_sealid_0 != null, function ($builder_0) use ($docrt_sealid_0){
-                $builder_0->where('id','!=',$docrt_sealid_0);
+            ->when($docrt_sealid_2!= null, function ($builder_2) use ($docrt_sealid_2){
+                $builder_2->where('id','!=',$docrt_sealid_2);
             })
-            ->when($docrt_sealid_1 != null, function ($builder_1) use ($docrt_sealid_1){
-                $builder_1->where('id','!=',$docrt_sealid_1);
+            ->when($docrt_sealid_3 != null, function ($builder_3) use ($docrt_sealid_3){
+                $builder_3->where('id','!=',$docrt_sealid_3);
             })
             ->where('site_id',Auth::user()->site_id)
             ->get();
@@ -80,89 +81,162 @@ class documents_retrun_inside_deputy_signController extends Controller
             ]
         );
         
-        if(Auth::user()->id == $request->docrt_sealid_0){
-            $docrt_sealdate = 'docrt_sealdate_0';
-            $docrt_sealpos = 'docrt_sealpos_0';
-        }else if(Auth::user()->id == $request->docrt_sealid_1){
-            $docrt_sealdate = 'docrt_sealdate_1';
-            $docrt_sealpos = 'docrt_sealpos_1';
-        }else{
-            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [Auth_id!=docrt_sealid] !');
-        }
-
-        if($request->docrt_sealid == 'not'){
-            if(Auth::user()->id == $request->sdocrt_sealid_0){
-                $full_path = functionController::funtion_generate_PDF_VI(
-                    $request->docrtdt_file,
-                    $request->docrt_sealid_0,
-                    $request->docrt_sealid_1,
-                    '',
-                    $request->docrt_sealpos,
-                    $request->docrt_sealpos_1,
-                    '',
-                    $request->docrt_id
-                );
-            }else if(Auth::user()->id == $request->docrt_sealid_1){
-                $full_path = functionController::funtion_generate_PDF_VI(
-                    $request->docrtdt_file,
-                    $request->docrt_sealid_0,
-                    $request->docrt_sealid_1,
-                    '',
-                    $request->docrt_sealpos_0,
-                    $request->docrt_sealpos,
-                    '',
-                    $request->docrt_id
-                );
-            }
-            if(!$full_path){
-                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [funtion_generate_PDF_VI] !');
-            }
-            $update_documents_retrun_detail = documents_retrun_detail::where('docrtdt_docrt_id', $request->docrt_id)->update([
-                'docrtdt_file'=>$full_path
-            ]);
+        if($request->docrt_sealid == 'ตีกลับ'){
             $update_documents_retrun = documents_retrun::where('docrt_id', $request->docrt_id)->update([
-                $docrt_sealpos=>$request->docrt_sealpos,
-                $docrt_sealdate=>date('Y-m-d H:i:s'),
-                'docrt_status'=>'6',
+                'docrt_check_0'=>'0',
+                'docrt_inspector_0'=>null,
+                'docrt_datetime_0'=>null,
+                'docrt_check_1'=>'0',
+                'docrt_inspector_1'=>null,
+                'docrt_datetime_1'=>null,
+                'docrt_check_2'=>'0',
+                'docrt_inspector_2'=>null,
+                'docrt_datetime_2'=>null,
+
+                'docrt_sealdetail_0'=>null,
+                'docrt_sealnote_0'=>null,
+                'docrt_sealpos_0'=>null,
+                'docrt_sealdate_0'=>null,
+                'docrt_sealid_0'=>null,
+
+                'docrt_sealdetail_1'=>null,
+                'docrt_sealnote_1'=>null,
+                'docrt_sealpos_1'=>null,
+                'docrt_sealdate_1'=>null,
+                'docrt_sealid_1'=>null,
+
+                'docrt_sealdetail_2'=>null,
+                'docrt_sealnote_2'=>null,
+                'docrt_sealpos_2'=>null,
+                'docrt_sealdate_2'=>null,
+                'docrt_sealid_2'=>null,
+
+                'docrt_sealdetail_3'=>null,
+                'docrt_sealnote_3'=>null,
+                'docrt_sealpos_3'=>null,
+                'docrt_sealdate_3'=>null,
+                'docrt_sealid_3'=>null,
+
+                'docrt_note'=>$request->docrt_note,
+                'docrt_status'=>'C',
                 'docrt_updated_at'=>date('Y-m-d H:i:s')
             ]);
-        }else{
-            $user = User::where('id',$request->docrt_sealid)->first();
-            if($user->level == '1'){
-                //นายก
-                $update_documents_retrun = documents_retrun::where('docrt_id', $request->docrt_id)->update([
-                    $docrt_sealpos=>$request->docrt_sealpos,
-                    $docrt_sealdate=>date('Y-m-d H:i:s'),
-                    'docrt_sealid_2'=>$request->docrt_sealid,
-                    'docrt_status'=>'5',
-                    'docrt_updated_at'=>date('Y-m-d H:i:s')
-                ]);
-            }else if($user->level == '2'){
-                //ปลัด
-                $update_documents_retrun = documents_retrun::where('docrt_id', $request->docrt_id)->update([
-                    $docrt_sealpos=>$request->docrt_sealpos,
-                    $docrt_sealdate=>date('Y-m-d H:i:s'),
-                    'docrt_sealid_1'=>$request->docrt_sealid,
-                    'docrt_status'=>'4',
-                    'docrt_updated_at'=>date('Y-m-d H:i:s')
-                ]);
-            }else{
-                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [user_level_null] !');
-            }
-        }
 
-        if($update_documents_retrun){
-            //linetoken
-            $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
-            ->where('group_id', $request->docrt_groupmems_id)
-            ->first();
-            if($tokens_Check){
-                $message = "\n⚠️ ปลัดลงนามเอกสารตอบกลับภายใน ⚠️\n>เรื่อง :  ".$request->docrtdt_topic."\n>ที่ร่าง :  ".$request->docrtdt_draft."\n>วันที่ : ".$request->docrtdt_date."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
-                functionController::line_notify($message,$tokens_Check->group_token);
+            if($update_docrt_docs){
+                //linetoken
+                $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
+                ->where('group_id', $request->docrt_groupmems_id)
+                ->first();
+
+                if($tokens_Check){
+                    $message = "\n⚠️ รองปลัด|ปลัด ตีกลับเอกสารรับเข้าตอบกลับภายใน ⚠️\n>เรื่อง :  ".$request->docrtdt_topic."\n>ที่ร่าง :  ".$request->docrtdt_draft."\n>วันที่ : ".$request->docrtdt_date."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                    functionController::line_notify($message,$tokens_Check->group_token);
+                }
+                return redirect()->route('documents_retrun_inside_deputy_sign_all_0')->with('success',"ตีกลับเรียบร้อย");
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_docrt_docs]!');
             }
-            return redirect()->route('documents_admission_inside_deputy_sign_all_0')->with('success',"ลงนามเรียบร้อย");
         }else{
-            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_documents_retrun] !');
+            if(Auth::user()->id == $request->docrt_sealid_2){
+                $docrt_sealdate = 'docrt_sealdate_2';
+                $docrt_sealpos = 'docrt_sealpos_2';
+
+                $docrt_sealid = 'docrt_sealid_3';
+                $docrt_status = '6';
+
+                $full_path = functionController::funtion_generate_PDF_deputy_AND_minister(
+                    $request->docrtdt_file,
+                    $request->docrt_id,
+                    $request->docrt_sealid_2,
+                    '',
+                    '',
+                    '',
+                    $request->docrt_sealpos,
+                    '',
+                    '',
+                    ''
+                );
+            }else if(Auth::user()->id == $request->docrt_sealid_3){
+                $docrt_sealdate = 'docrt_sealdate_3';
+                $docrt_sealpos = 'docrt_sealpos_3';
+
+                $docrt_sealid = 'docrt_sealid_2';
+                $docrt_status = '5';
+
+                $full_path = functionController::funtion_generate_PDF_deputy_AND_minister(
+                    $request->docrtdt_file,
+                    $request->docrt_id,
+                    '',
+                    $request->docrt_sealid_3,
+                    '',
+                    '',
+                    '',
+                    $request->docrt_sealpos,
+                    '',
+                    ''
+                );
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [Auth_id!=docrt_sealid] !');
+            }
+
+            $user_check = User::where('id', $request->docrt_sealid)
+            ->first();
+            if($user_check->level == '2'){
+                $update_documents_retrun = documents_retrun::where('docrt_id', $request->docrt_id)->update([
+                    $docrt_sealdate=>date('Y-m-d H:i:s'),
+                    $docrt_sealpos=>$request->docrt_sealpos,
+                    $docrt_sealid=>$request->docrt_sealid,
+                    'docrt_status'=>$docrt_status,
+                    'docrt_updated_at'=>date('Y-m-d H:i:s')
+                ]);
+
+                $update_documents_retrun_detail = documents_retrun_detail::where('docrtdt_docrt_id', $request->docrt_id)->update([
+                    'docrtdt_file'=>$full_path
+                ]);
+
+                //linetoken
+                $tokens_Check = DB::table('tokens')
+                ->where('token_site_id', Auth::user()->site_id)
+                ->where('token_level', $user_check->level)
+                ->first();
+                if($tokens_Check){
+                    $message = "\n⚠️ รองปลัด|ปลัด ลงนามเอกสารรับเข้าตอบกลับภายใน ⚠️\n>เรื่อง :  ".$request->docrtdt_topic."\n>ที่ร่าง :  ".$request->docrtdt_draft."\n>วันที่ : ".$request->docrtdt_date."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                    functionController::line_notify($message,$tokens_Check->token_token);
+                }
+
+            }else if($user_check->level == '1'){
+                $update_documents_retrun = documents_retrun::where('docrt_id', $request->docrt_id)->update([
+                    $docrt_sealdate=>date('Y-m-d H:i:s'),
+                    $docrt_sealpos=>$request->docrt_sealpos,
+                    'docrt_sealid_4'=>$request->docrt_sealid,
+                    'docrt_status'=>'7',
+                    'docrt_updated_at'=>date('Y-m-d H:i:s')
+                ]);
+
+                $update_documents_retrun_detail = documents_retrun_detail::where('docrtdt_docrt_id', $request->docrt_id)->update([
+                    'docrtdt_file'=>$full_path
+                ]);
+
+                //linetoken
+                $tokens_Check = DB::table('tokens')
+                ->where('token_site_id', Auth::user()->site_id)
+                ->where('token_level', $user_check->level)
+                ->first();
+                if($tokens_Check){
+                    $message = "\n⚠️ รองปลัด|ปลัด ลงนามเอกสารรับเข้าตอบกลับภายใน ⚠️\n>เรื่อง :  ".$request->docrtdt_topic."\n>ที่ร่าง :  ".$request->docrtdt_draft."\n>วันที่ : ".$request->docrtdt_date."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                    functionController::line_notify($message,$tokens_Check->token_token);
+                }
+
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [user_check]!');
+            }
+
+            if($update_documents_retrun){
+                return redirect()->route('documents_retrun_inside_deputy_sign_all_0')->with('success',"ลงนามเรียบร้อย");
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_docrt_docs] !');
+            }
+
         }
     }
 }

@@ -65,6 +65,8 @@ use App\Http\Controllers\functionController;
                                             สารบรรณกอง
                                             <?php elseif($row->level == '7'): ?>
                                             งาน
+                                            <?php elseif($row->level == '8'): ?>
+                                            หน้าห้องปลัด|หน้าห้องนายก
                                             <?php endif; ?>
                                         </td>
                                         <td>
@@ -542,6 +544,10 @@ unset($__errorArgs, $__bag); ?>"
                                                 <option value="6">สารบรรณกอง
                                                 </option>
                                                 <option value="7">งาน
+                                                </option>
+                                                <option value="8">หน้าห้องปลัด
+                                                </option>
+                                                <option value="8">หน้าห้องนายก
                                                 </option>
                                             </select>
                                             <?php $__errorArgs = ['level'];

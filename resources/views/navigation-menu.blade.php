@@ -592,7 +592,7 @@ use App\Http\Controllers\functionController;
                     @endif
 
 
-                    @elseif(Auth::user()->level == '1' || Auth::user()->level == '2')
+                    @elseif(Auth::user()->level == '1' || Auth::user()->level == '2' || Auth::user()->level == '8')
                     <x-jet-nav-link href="{{ route('member_dashboard') }}"
                         :active="request()->routeIs('member_dashboard')" class="text-decoration-none">
                         หน้าหลัก
@@ -615,6 +615,12 @@ use App\Http\Controllers\functionController;
                                             <!-- ปลัดและรองปลัด -->
                                             @if(Auth::user()->level == '2')
                                             <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_deputy_sign_count_level_2">
+                                            </span>
+                                            @endif
+
+                                            <!-- หน้าห้องปลัดและนายก -->
+                                            @if(Auth::user()->level == '8')
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_secretary_count_level_8">
                                             </span>
                                             @endif
 
@@ -664,6 +670,23 @@ use App\Http\Controllers\functionController;
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     @endif
+
+                                    <!-- หน้าห้องปลัดและนายก secretary -->
+                                    @if(Auth::user()->level == '8')
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_secretary_retrun_all_0') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรับเข้ารอลงนาม ( ') }}
+                                        {{navigationController::funtion_documents_admission_secretary_retrun_count_0_level_8()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_secretary_retrun_all_1') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรับเข้าที่ลงนามแล้ว ( ') }}
+                                        {{navigationController::funtion_documents_admission_secretary_retrun_count_1_level_8()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    @endif
                                 </x-slot>
                             </x-jet-dropdown>
                         </div>
@@ -686,6 +709,12 @@ use App\Http\Controllers\functionController;
                                             <!-- ปลัดและรองปลัด -->
                                             @if(Auth::user()->level == '2')
                                             <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_inside_deputy_sign_count_level_2">
+                                            </span>
+                                            @endif
+
+                                            <!-- หน้าห้องปลัดและนายก -->
+                                            @if(Auth::user()->level == '8')
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_inside_secretary_count_level_8">
                                             </span>
                                             @endif
 
@@ -768,6 +797,41 @@ use App\Http\Controllers\functionController;
                                         class="text-decoration-none">
                                         {{ __('เอกสารที่ลงนามแล้ว ( ') }}
                                         {{navigationController::funtion_documents_retrun_inside_deputy_sign_count_1_level_2()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    @endif
+
+                                    <!-- หน้าห้องปลัดและนายก -->
+                                    @if(Auth::user()->level == '8')
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_inside_secretary_retrun_all_0') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรับเข้ารอลงนาม ( ') }}
+                                        {{navigationController::funtion_documents_admission_inside_secretary_retrun_count_0_level_8()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_inside_secretary_retrun_all_1') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรับเข้าที่ลงนามแล้ว ( ') }}
+                                        {{navigationController::funtion_documents_admission_inside_secretary_retrun_count_1_level_8()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                        {{ __('งานตอบกลับ') }}
+                                    </div>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_retrun_inside_secretary_all_0') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรอลงนาม ( ') }}
+                                        {{navigationController::funtion_documents_retrun_inside_secretary_count_0_level_8()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_retrun_inside_secretary_all_1') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารที่ลงนามแล้ว ( ') }}
+                                        {{navigationController::funtion_documents_retrun_inside_secretary_count_1_level_8()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     @endif
@@ -2170,9 +2234,18 @@ use App\Http\Controllers\functionController;
                                                 <select name="docrt_type"
                                                 id="navigationController_docrt_type" required
                                                 class="form-control select2bs4 @error('docrt_type') is-invalid @enderror">
-                                                    <option value="">เลือกประเภท</option>
-                                                    <option value="0">บันทึกข้อความ </option>
-                                                    <option value="1">ตราครุฑ</option>
+                                                        <option value="">
+                                                            เลือกประเภท
+                                                        </option>
+                                                        <option value="2">
+                                                            แนบไฟล์
+                                                        </option>
+                                                        <option value="0">
+                                                            บันทึกข้อความ (ทดสอบ)
+                                                        </option>
+                                                        <option value="1">
+                                                            ตราครุฑ (ทดสอบ)
+                                                        </option>
                                                 </select>
                                                 @error('docrt_type')
                                                 <div class="my-2">
@@ -2341,6 +2414,54 @@ use App\Http\Controllers\functionController;
                                                     </button>
                                                     <x-jet-button onclick="submitForm(this);"
                                                         id="navigationController_bt_respond"
+                                                        disabled>
+                                                        {{ __('ตอบกลับ') }}
+                                                    </x-jet-button>
+                                                </div>
+                                                        
+                                                <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
+                                            </div>
+                                            <div class="form-group hide"
+                                                id="navigationController_form-group_tb-docrt_details-normal">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <x-jet-label class="text-md" for="docrtdt_government_normal"
+                                                            value="{{ __('ส่วนราชการ') }}" />
+                                                            <input class="form-control"
+                                                                name="docrtdt_government_normal" type="text" value="">
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <x-jet-label class="text-md" for="docrtdt_draft_normal"
+                                                            value="{{ __('ที่ร่าง') }}" />
+                                                            <input class="form-control"
+                                                                name="docrtdt_draft_normal" type="text" value="">
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <x-jet-label class="text-md" for="docrtdt_date_normal"
+                                                            value="{{ __('วันที่') }}" />
+                                                            <input class="form-control"
+                                                                name="docrtdt_date_normal" type="text" value="21 ธันวาคม 1988">
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <x-jet-label class="text-md" for="docrtdt_topic_normal"
+                                                            value="{{ __('เรื่อง') }}" />
+                                                            <input class="form-control"
+                                                                name="docrtdt_topic_normal" type="text" value="">
+                                                    </div>
+                                                </div>
+                                                        
+                                                <div class="items-center justify-center mt-10">
+                                                    <x-jet-label class="text-md" for="docrtdt_file"
+                                                            value="{{ __('เอกสาร') }}" />
+                                                    <input type="file" name="docrtdt_file" accept="application/pdf"
+                                                        id="navigationController_docrtdt_file_normal"
+                                                        class="form-control @error('docrtdt_file') is-invalid @enderror">
+                                                </div>
+                                                        
+                                                <div class="flex items-center justify-center mt-20">
+                                                    
+                                                    <x-jet-button onclick="submitForm(this);"
+                                                        id="navigationController_bt_respond-normal"
                                                         disabled>
                                                         {{ __('ตอบกลับ') }}
                                                     </x-jet-button>

@@ -236,7 +236,7 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                             </div>
-                            <?php if($document_detail->sub2_status == '0'): ?>
+                            <?php if(!$sub3_doc_detail): ?>
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="<?php echo e(route('documents_admission_work_detail_respond')); ?>" method="post"
@@ -273,11 +273,14 @@ unset($__errorArgs, $__bag); ?>">
                                                             <option value="">
                                                                 เลือกประเภท
                                                             </option>
+                                                            <option value="2">
+                                                                แนบไฟล์
+                                                            </option>
                                                             <option value="0">
-                                                                บันทึกข้อความ
+                                                                บันทึกข้อความ (ทดสอบ)
                                                             </option>
                                                             <option value="1">
-                                                                ตราครุฑ
+                                                                ตราครุฑ (ทดสอบ)
                                                             </option>
                                                         </select>
                                                         <?php $__errorArgs = ['sub3_type'];
@@ -331,6 +334,126 @@ unset($__errorArgs, $__bag); ?>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 table-responsive">
+                                                    <div class="form-group hide"
+                                                        id="documents_admission_work_allController_form-group_tb-sub3_details-normal">
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'sub3d_government_normal','value' => ''.e(__('ส่วนราชการ')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','for' => 'sub3d_government_normal','value' => ''.e(__('ส่วนราชการ')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                                    <input class="form-control"
+                                                                        name="sub3d_government_normal" type="text" value="">
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'sub3d_draft_normal','value' => ''.e(__('ที่ร่าง')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','for' => 'sub3d_draft_normal','value' => ''.e(__('ที่ร่าง')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                                    <input class="form-control"
+                                                                        name="sub3d_draft_normal" type="text" value="">
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'sub3d_date_normal','value' => ''.e(__('วันที่')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','for' => 'sub3d_date_normal','value' => ''.e(__('วันที่')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                                    <input class="form-control"
+                                                                        name="sub3d_date_normal" type="text" value="21 ธันวาคม 1988">
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'sub3d_topic_normal','value' => ''.e(__('เรื่อง')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','for' => 'sub3d_topic_normal','value' => ''.e(__('เรื่อง')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                                    <input class="form-control"
+                                                                        name="sub3d_topic_normal" type="text" value="">
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="doc_id_normal" value="<?php echo e($document_detail->doc_id); ?>">
+                                                        <input type="hidden" name="sub_id_normal" value="<?php echo e($document_detail->sub_id); ?>">
+                                                        <input type="hidden" name="sub2_id_normal" value="<?php echo e($document_detail->sub2_id); ?>">
+                                                        <input type="hidden" name="doc_docnum_normal" value="<?php echo e($document_detail->doc_docnum); ?>">
+                                                        <input type="hidden" name="doc_origin_normal" value="<?php echo e($document_detail->doc_origin); ?>">
+                                                        <input type="hidden" name="doc_title_normal" value="<?php echo e($document_detail->doc_title); ?>">
+                                                        
+                                                        <div class="items-center justify-center mt-10">
+                                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'sub3d_file','value' => ''.e(__('เอกสาร')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','for' => 'sub3d_file','value' => ''.e(__('เอกสาร')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                            <input type="file" name="sub3d_file" accept="application/pdf"
+                                                                id="documents_admission_work_allController_sub3d_file_normal"
+                                                                class="form-control <?php $__errorArgs = ['sub3d_file'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                                        </div>
+                                                        
+                                                        <div class="flex items-center justify-center mt-20">
+                                                    
+                                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);','id' => 'documents_admission_work_allController_bt_respond-normal','disabled' => true]]); ?>
+<?php $component->withName('jet-button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);','id' => 'documents_admission_work_allController_bt_respond-normal','disabled' => true]); ?>
+                                                                <?php echo e(__('ตอบกลับ')); ?>
+
+                                                             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                        </div>
+                                                        
+                                                        <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
+                                                    </div>
                                                     <div class="form-group hide"
                                                         id="documents_admission_work_allController_form-group_tb-sub3_details-garuda">
                                                         <page id="documents_admission_work_allController_page"

@@ -419,7 +419,8 @@ $(".check_user_center").click(function(event) { //มีการ loop เลย
 
 $("#memberController_add_level").change(function(event) {
     var var_memberController_add_level = $("#memberController_add_level").val();
-    if(var_memberController_add_level=='0'||var_memberController_add_level=='1'||var_memberController_add_level=='2'||var_memberController_add_level=='3'){
+    if(var_memberController_add_level=='0'||var_memberController_add_level=='1'||var_memberController_add_level=='2'||var_memberController_add_level=='3'
+    ||var_memberController_add_level=='8'){
         document.getElementById('memberController_add_form-group_group').style.display = 'none';
         document.getElementById("memberController_add_group").required = false;
 
@@ -785,6 +786,87 @@ $("#documents_admission_group_inside_allController_sign_goup_0").change(function
     }
 });
 
+$("#documents_admission_secretary_retrunController_sub3_sealid").change(function(event) {
+    var dnd = $('#documents_admission_secretary_retrunController_sub3_sealid :selected').val();
+    if(dnd == 'ตีกลับ'){
+        document.getElementById('documents_admission_secretary_retrunController_form-group_sub3_note').style.display = 'block';
+    }else{
+        document.getElementById('documents_admission_secretary_retrunController_form-group_sub3_note').style.display = 'none';
+    }
+});
+
+$("#documents_admission_inside_secretary_retrunController_sub3_sealid").change(function(event) {
+    var dnd = $('#documents_admission_inside_secretary_retrunController_sub3_sealid :selected').val();
+    if(dnd == 'ตีกลับ'){
+        document.getElementById('documents_admission_inside_secretary_retrunController_form-group_sub3_note').style.display = 'block';
+    }else{
+        document.getElementById('documents_admission_inside_secretary_retrunController_form-group_sub3_note').style.display = 'none';
+    }
+});
+
+$("#documents_admission_jurisprudenceController_sub3_sealid").change(function(event) {
+    var dnd = $('#documents_admission_jurisprudenceController_sub3_sealid :selected').val();
+    if(dnd == 'ตีกลับ'){
+        document.getElementById('documents_admission_jurisprudenceController_form-group_sub3_note').style.display = 'block';
+    }else{
+        document.getElementById('documents_admission_jurisprudenceController_form-group_sub3_note').style.display = 'none';
+    }
+});
+
+$("#documents_admission_inside_jurisprudenceController_sub3_sealid").change(function(event) {
+    var dnd = $('#documents_admission_inside_jurisprudenceController_sub3_sealid :selected').val();
+    if(dnd == 'ตีกลับ'){
+        document.getElementById('documents_admission_inside_jurisprudenceController_form-group_sub3_note').style.display = 'block';
+    }else{
+        document.getElementById('documents_admission_inside_jurisprudenceController_form-group_sub3_note').style.display = 'none';
+    }
+});
+
+$("#documents_retrun_inside_secretaryController_docrt_sealid").change(function(event) {
+    var dnd = $('#documents_retrun_inside_secretaryController_docrt_sealid :selected').val();
+    if(dnd == 'ตีกลับ'){
+        document.getElementById('documents_retrun_inside_secretaryController_form-group_docrt_note').style.display = 'block';
+    }else{
+        document.getElementById('documents_retrun_inside_secretaryController_form-group_docrt_note').style.display = 'none';
+    }
+});
+
+$("#documents_retrun_inside_jurisprudenceController_docrt_sealid").change(function(event) {
+    var dnd = $('#documents_retrun_inside_jurisprudenceController_docrt_sealid :selected').val();
+    if(dnd == 'ตีกลับ'){
+        document.getElementById('documents_retrun_inside_jurisprudenceController_form-group_docrt_note').style.display = 'block';
+    }else{
+        document.getElementById('documents_retrun_inside_jurisprudenceController_form-group_docrt_note').style.display = 'none';
+    }
+});
+
+$("#documents_admission_deputy_signController_sub3_sealid").change(function(event) {
+    var dnd = $('#documents_admission_deputy_signController_sub3_sealid :selected').val();
+    if(dnd == 'ตีกลับ'){
+        document.getElementById('documents_admission_deputy_signController_form-group_sub3_note').style.display = 'block';
+    }else{
+        document.getElementById('documents_admission_deputy_signController_form-group_sub3_note').style.display = 'none';
+    }
+});
+
+$("#documents_admission_inside_deputy_signController_sub3_sealid").change(function(event) {
+    var dnd = $('#documents_admission_inside_deputy_signController_sub3_sealid :selected').val();
+    if(dnd == 'ตีกลับ'){
+        document.getElementById('documents_admission_inside_deputy_signController_form-group_sub3_note').style.display = 'block';
+    }else{
+        document.getElementById('documents_admission_inside_deputy_signController_form-group_sub3_note').style.display = 'none';
+    }
+});
+
+$("#documents_retrun_inside_deputy_signController_docrt_sealid").change(function(event) {
+    var dnd = $('#documents_retrun_inside_deputy_signController_docrt_sealid :selected').val();
+    if(dnd == 'ตีกลับ'){
+        document.getElementById('documents_retrun_inside_deputy_signController_form-group_docrt_note').style.display = 'block';
+    }else{
+        document.getElementById('documents_retrun_inside_deputy_signController_form-group_docrt_note').style.display = 'none';
+    }
+});
+
 $("#documents_admission_group_inside_allController_sub_recnum").change(function(event) {
     var dnd = $('#documents_admission_group_inside_allController_sub_recnum :selected').parent().attr('label');
     if(dnd == 'เลขที่จองไว้'){
@@ -985,14 +1067,22 @@ $("#documents_admission_work_inside_allController_sub3_type").change(function(ev
     if(var_documents_admission_work_inside_allController_sub3_type == '0'){
         document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-message-memo').style.display = 'block';
         document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-garuda').style.display = 'none';
+        document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-normal').style.display = 'none';
         document.getElementById('documents_admission_work_inside_allController_check_respond').value  = 'respond';
     }else if(var_documents_admission_work_inside_allController_sub3_type == '1'){
         document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-message-memo').style.display = 'none';
         document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-garuda').style.display = 'block';
+        document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-normal').style.display = 'none';
         document.getElementById('documents_admission_work_inside_allController_check_respond').value  = 'respond_garuda';
+    }else if(var_documents_admission_work_inside_allController_sub3_type == '2'){
+        document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-message-memo').style.display = 'none';
+        document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-garuda').style.display = 'none';
+        document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-normal').style.display = 'block';
+        document.getElementById('documents_admission_work_inside_allController_check_respond').value  = 'respond_normal';
     }else{
         document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-message-memo').style.display = 'none';
         document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-garuda').style.display = 'none';
+        document.getElementById('documents_admission_work_inside_allController_form-group_tb-sub3_details-normal').style.display = 'none';
         document.getElementById('documents_admission_work_inside_allController_check_respond').value  = '';
     }
 });
@@ -1003,16 +1093,48 @@ $("#documents_admission_work_allController_sub3_type").change(function(event) {
     if(var_documents_admission_work_allController_sub3_type == '0'){
         document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-message-memo').style.display = 'block';
         document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-garuda').style.display = 'none';
+        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-normal').style.display = 'none';
         document.getElementById('documents_admission_work_allController_check_respond').value  = 'respond';
     }else if(var_documents_admission_work_allController_sub3_type == '1'){
         document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-message-memo').style.display = 'none';
         document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-garuda').style.display = 'block';
+        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-normal').style.display = 'none';
         document.getElementById('documents_admission_work_allController_check_respond').value  = 'respond_garuda';
+    }else if(var_documents_admission_work_allController_sub3_type == '2'){
+        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-message-memo').style.display = 'none';
+        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-garuda').style.display = 'none';
+        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-normal').style.display = 'block';
+        document.getElementById('documents_admission_work_allController_check_respond').value  = 'respond_normal';
     }else{
         document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-message-memo').style.display = 'none';
         document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-garuda').style.display = 'none';
+        document.getElementById('documents_admission_work_allController_form-group_tb-sub3_details-normal').style.display = 'none';
         document.getElementById('documents_admission_work_allController_check_respond').value  = '';
     }
+});
+
+$("#documents_admission_work_allController_sub3d_file_normal").change(function(event) {
+    document.getElementById("documents_admission_work_allController_bt_respond-normal").disabled = false;
+});
+
+$("#documents_admission_work_retrun_sub3d_file_normal").change(function(event) {
+    document.getElementById("documents_admission_work_retrun_bt_respond-normal").disabled = false;
+});
+
+$("#documents_admission_inside_work_retrun_sub3d_file_normal").change(function(event) {
+    document.getElementById("documents_admission_inside_work_retrun_bt_respond-normal").disabled = false;
+});
+
+$("#documents_retrun_inside_work_retrunController_docrtdt_file_normal").change(function(event) {
+    document.getElementById("documents_retrun_inside_work_retrunController_bt_respond-normal").disabled = false;
+});
+
+$("#documents_admission_work_inside_allController_sub3d_file_normal").change(function(event) {
+    document.getElementById("documents_admission_work_inside_allController_bt_respond-normal").disabled = false;
+});
+
+$("#navigationController_docrtdt_file_normal").change(function(event) {
+    document.getElementById("navigationController_bt_respond-normal").disabled = false;
 });
 //------------------------------------------------------------------------------------------
 //navigationController
@@ -1021,14 +1143,22 @@ $("#navigationController_docrt_type").change(function(event) {
     if(var_navigationController_docrt_type == '0'){
         document.getElementById('navigationController_form-group_tb-docrt_details-message-memo').style.display = 'block';
         document.getElementById('navigationController_form-group_tb-docrt_details-garuda').style.display = 'none';
+        document.getElementById('navigationController_form-group_tb-docrt_details-normal').style.display = 'none';
         document.getElementById('navigationController_check_respond').value  = 'respond';
     }else if(var_navigationController_docrt_type == '1'){
         document.getElementById('navigationController_form-group_tb-docrt_details-message-memo').style.display = 'none';
         document.getElementById('navigationController_form-group_tb-docrt_details-garuda').style.display = 'block';
+        document.getElementById('navigationController_form-group_tb-docrt_details-normal').style.display = 'none';
         document.getElementById('navigationController_check_respond').value  = 'respond_garuda';
+    }else if(var_navigationController_docrt_type == '2'){
+        document.getElementById('navigationController_form-group_tb-docrt_details-message-memo').style.display = 'none';
+        document.getElementById('navigationController_form-group_tb-docrt_details-garuda').style.display = 'none';
+        document.getElementById('navigationController_form-group_tb-docrt_details-normal').style.display = 'block';
+        document.getElementById('navigationController_check_respond').value  = 'respond_normal';
     }else{
         document.getElementById('navigationController_form-group_tb-docrt_details-message-memo').style.display = 'none';
         document.getElementById('navigationController_form-group_tb-docrt_details-garuda').style.display = 'none';
+        document.getElementById('navigationController_form-group_tb-docrt_details-normal').style.display = 'none';
         document.getElementById('navigationController_check_respond').value  = '';
     }
 });

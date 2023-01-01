@@ -77,30 +77,69 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
-                            <div class="flex items-center justify-center mt-20">
                             @if($document_detail->sub3_status == '1')
-                                <form action="{{route('documents_admission_division_inside_retrun_understand')}}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="hidden" name="doc_id" value="{{$document_detail->doc_id}}">
-                                    <input type="hidden" name="sub_id" value="{{$document_detail->sub_id}}">
-                                    <input type="hidden" name="sub2_id"
-                                                    value="{{$document_detail->sub2_id}}">
-                                    <input type="hidden" name="sub3_id"
-                                                    value="{{$document_detail->sub3_id}}">
-                                    <input type="hidden" name="sub3d_id"
-                                                    value="{{$document_detail->sub3d_id}}">
-                                    <input type="hidden" name="doc_docnum"
-                                                    value="{{$document_detail->doc_docnum}}">
-                                    <input type="hidden" name="doc_origin"
-                                                    value="{{$document_detail->doc_origin}}">
-                                    <input type="hidden" name="doc_title"
-                                                    value="{{$document_detail->doc_title}}">
-                                    <x-jet-button onclick="submitForm(this);">
-                                        {{ __('รับทราบ') }}
-                                    </x-jet-button>
-                                </form>
-                            @endif
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form action="{{route('documents_admission_division_inside_retrun_understand')}}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="card card-body">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <x-jet-label class="text-md"
+                                                        value="{{ __('ดำเนินการต่อ') }}" />
+                                                    <select
+                                                        class="form-control select2bs4 @error('sub3_sealid') is-invalid @enderror"
+                                                        name="sub3_sealid" required
+                                                        id="documents_admission_division_inside_retrunController_sub3_sealid">
+                                                        <option value="">เลือก</option>
+                                                        <option value="นิติการ">นิติการ</option>
+                                                        <optgroup label="หน้าห้องปลัด || หน้าห้องนายก">
+                                                            @foreach($userS_8 as $row_userS_8)
+                                                            <option value="{{$row_userS_8->id}}">
+                                                                {{$row_userS_8->name}} ({{$row_userS_8->pos}})</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                        <optgroup label="รองปลัด || ปลัด">
+                                                            @foreach($userS_2 as $row_userS_2)
+                                                            <option value="{{$row_userS_2->id}}">
+                                                                {{$row_userS_2->name}} ({{$row_userS_2->pos}})</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                                <!-- <div class="col-md-6">
+                                                    <div class="form-group hide" id="documents_admission_division_inside_retrunController_form-group_sub3_note">
+                                                        <x-jet-label class="text-md" for="sub3_note"
+                                                            value="{{ __('ข้อความ') }}" />
+                                                        <input class="form-control"
+                                                            name="sub3_note" type="text" value="">
+                                                    </div>
+                                                </div> -->
+                                            <div class="flex items-center justify-center">
+                                                <input type="hidden" name="doc_id" value="{{$document_detail->doc_id}}">
+                                                <input type="hidden" name="sub_id" value="{{$document_detail->sub_id}}">
+                                                <input type="hidden" name="sub2_id"
+                                                                value="{{$document_detail->sub2_id}}">
+                                                <input type="hidden" name="sub3_id"
+                                                                value="{{$document_detail->sub3_id}}">
+                                                <input type="hidden" name="sub3d_id"
+                                                                value="{{$document_detail->sub3d_id}}">
+                                                <input type="hidden" name="doc_docnum"
+                                                                value="{{$document_detail->doc_docnum}}">
+                                                <input type="hidden" name="doc_origin"
+                                                                value="{{$document_detail->doc_origin}}">
+                                                <input type="hidden" name="doc_title"
+                                                                value="{{$document_detail->doc_title}}">
+                                                <x-jet-button onclick="submitForm(this);">
+                                                    {{ __('ส่ง') }}
+                                                </x-jet-button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
+                            @endif
                             <hr>
                         </div>
                     </div>

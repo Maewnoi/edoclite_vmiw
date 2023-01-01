@@ -250,6 +250,63 @@ use App\Http\Controllers\functionController;
                                                     </div>
                                                     <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
                                                 </div>
+                                                @elseif($document_detail->sub3_type == '2')
+                                                <div class="form-group"
+                                                    id="documents_admission_work_retrun_form-group_tb-sub3_details-normal">
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <x-jet-label class="text-md" for="sub3d_government_normal"
+                                                                value="{{ __('ส่วนราชการ') }}" />
+                                                                <input class="form-control"
+                                                                    name="sub3d_government_normal" type="text" value="{{$document_detail->sub3d_government}}">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <x-jet-label class="text-md" for="sub3d_draft_normal"
+                                                                value="{{ __('ที่ร่าง') }}" />
+                                                                <input class="form-control"
+                                                                    name="sub3d_draft_normal" type="text" value="{{$document_detail->sub3d_draft}}">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <x-jet-label class="text-md" for="sub3d_date_normal"
+                                                                value="{{ __('วันที่') }}" />
+                                                                <input class="form-control"
+                                                                    name="sub3d_date_normal" type="text" value="{{$document_detail->sub3d_date}}">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <x-jet-label class="text-md" for="sub3d_topic_normal"
+                                                                value="{{ __('เรื่อง') }}" />
+                                                                <input class="form-control"
+                                                                    name="sub3d_topic_normal" type="text" value="{{$document_detail->sub3d_topic}}">
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="doc_id_normal" value="{{$document_detail->doc_id}}">
+                                                    <input type="hidden" name="sub3_id_normal" value="{{$document_detail->sub3_id}}">
+                                                    <input type="hidden" name="sub3d_id_normal" value="{{$document_detail->sub3d_id}}">
+                                                    <input type="hidden" name="sub_id_normal" value="{{$document_detail->sub_id}}">
+                                                    <input type="hidden" name="sub2_id_normal" value="{{$document_detail->sub2_id}}">
+                                                    <input type="hidden" name="doc_docnum_normal" value="{{$document_detail->doc_docnum}}">
+                                                    <input type="hidden" name="doc_origin_normal" value="{{$document_detail->doc_origin}}">
+                                                    <input type="hidden" name="doc_title_normal" value="{{$document_detail->doc_title}}">
+                                                        
+                                                    <div class="items-center justify-center mt-10">
+                                                        <x-jet-label class="text-md" for="sub3d_file"
+                                                                value="{{ __('เอกสาร') }}" />
+                                                        <input type="file" name="sub3d_file" accept="application/pdf"
+                                                            id="documents_admission_work_retrun_sub3d_file_normal"
+                                                            class="form-control @error('sub3d_file') is-invalid @enderror">
+                                                    </div>
+                                                    <input type="hidden" name="bt_respond" value="respond_normal">
+                                                    <div class="flex items-center justify-center mt-20">
+                                                    
+                                                        <x-jet-button onclick="submitForm(this);"
+                                                             id="documents_admission_work_retrun_bt_respond-normal"
+                                                            disabled>
+                                                            {{ __('ตอบกลับอีกครั้ง') }}
+                                                        </x-jet-button>
+                                                    </div>
+                                                        
+                                                    <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
+                                                </div>
                                                 @endif
                                                 </div>
                                             </div>

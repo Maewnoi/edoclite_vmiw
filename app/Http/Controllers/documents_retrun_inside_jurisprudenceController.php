@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Groupmem;
 use App\Models\User;
 use App\Models\documents_retrun;
+use Illuminate\Support\Facades\DB;
 use App\Models\documents_retrun_detail;
 
 
@@ -33,29 +34,13 @@ class documents_retrun_inside_jurisprudenceController extends Controller
             ->where('docrt_status', '2')
             ->first();
 
-            if($document_retrun_inside_detail->docrt_sealid_0 != null){
-                $docrt_sealid_0 = $document_retrun_inside_detail->docrt_sealid_0;
-            }else{
-                $docrt_sealid_0 = null;
-            }
-            if($document_retrun_inside_detail->docrt_sealid_1 != null){
-                $docrt_sealid_1 = $document_retrun_inside_detail->docrt_sealid_1;
-            }else{
-                $docrt_sealid_1 = null;
-            }
-
             $userS = User::where(function ($query) {
-                $query->where('level', '1')
+                $query->where('level', '8')
                       ->orWhere('level', '2');
-            })
-            ->when($docrt_sealid_0 != null, function ($builder_0) use ($docrt_sealid_0){
-                $builder_0->where('id','!=',$docrt_sealid_0);
-            })
-            ->when($docrt_sealid_1 != null, function ($builder_1) use ($docrt_sealid_1){
-                $builder_1->where('id','!=',$docrt_sealid_1);
             })
             ->where('site_id',Auth::user()->site_id)
             ->get();
+
             return view('member.documents_retrun_inside_jurisprudence.detail',compact('document_retrun_inside_detail','userS'));
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
@@ -73,26 +58,41 @@ class documents_retrun_inside_jurisprudenceController extends Controller
                 'docrt_sealid.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
             ]
         );
-        if($request->docrt_sealid == 'not'){
+        if($request->docrt_sealid == 'ตีกลับ'){
             $update_documents_retruns = documents_retrun::where('docrt_id', $request->docrt_id)->update([
-                'docrt_check_2'=>'1',
-                'docrt_datetime_2'=>date('Y-m-d H:i:s'),
-                'docrt_inspector_2'=>Auth::user()->id,
-                'docrt_status'=>'6',
+                'docrt_check_0'=>'0',
+                'docrt_inspector_0'=>null,
+                'docrt_datetime_0'=>null,
+                'docrt_check_1'=>'0',
+                'docrt_inspector_1'=>null,
+                'docrt_datetime_1'=>null,
+                'docrt_check_2'=>'0',
+                'docrt_inspector_2'=>null,
+                'docrt_datetime_2'=>null,
+
+                'docrt_note'=>$request->docrt_note,
+                'docrt_status'=>'C',
                 'docrt_updated_at'=>date('Y-m-d H:i:s')
             ]);
+
+            if($update_documents_retruns){
+                //linetoken
+                $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
+                ->where('group_id', $request->docrt_groupmems_id)
+                ->first();
+                if($tokens_Check){
+                    $message = "\n⚠️ นิติการตีกลับเอกสารรับเข้าตอบกลับภายใน ⚠️\n>เรื่อง :  ".$request->docrtdt_topic."\n>ที่ร่าง :  ".$request->docrtdt_draft."\n>วันที่ : ".$request->docrtdt_date."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                    functionController::line_notify($message,$tokens_Check->group_token);
+                }
+                return redirect()->route('documents_retrun_inside_jurisprudence_all')->with('success',"ตีกลับเรียบร้อย");
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_docrt_docs]!');
+            }
         }else{
-            $user = User::where('id',$request->docrt_sealid)->first();
-            if($user->level == '1'){
-                $update_documents_retruns = documents_retrun::where('docrt_id', $request->docrt_id)->update([
-                    'docrt_check_2'=>'1',
-                    'docrt_datetime_2'=>date('Y-m-d H:i:s'),
-                    'docrt_inspector_2'=>Auth::user()->id,
-                    'docrt_sealid_2'=>$request->docrt_sealid,
-                    'docrt_status'=>'5',
-                    'docrt_updated_at'=>date('Y-m-d H:i:s')
-                ]);
-            }else if($user->level == '2'){
+            $user_check = User::where('id', $request->docrt_sealid)
+            ->first();
+            if($user_check->level == '8'){
+                //หน้าห้อง
                 $update_documents_retruns = documents_retrun::where('docrt_id', $request->docrt_id)->update([
                     'docrt_check_2'=>'1',
                     'docrt_datetime_2'=>date('Y-m-d H:i:s'),
@@ -101,52 +101,45 @@ class documents_retrun_inside_jurisprudenceController extends Controller
                     'docrt_status'=>'3',
                     'docrt_updated_at'=>date('Y-m-d H:i:s')
                 ]);
+
+                //linetoken
+                $tokens_Check = DB::table('tokens')
+                ->where('token_site_id', Auth::user()->site_id)
+                ->where('token_level', $user_check->level)
+                ->first();
+                if($tokens_Check){
+                    $message = "\n⚠️ นิติการอนุมัติเอกสารรับเข้าตอบกลับภายใน ⚠️\n>เรื่อง :  ".$request->docrtdt_topic."\n>ที่ร่าง :  ".$request->docrtdt_draft."\n>วันที่ : ".$request->docrtdt_date."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                    functionController::line_notify($message,$tokens_Check->token_token);
+                }
+            }else if($user_check->level == '2'){
+                //รองปลัดและปลัด
+                $update_documents_retruns = documents_retrun::where('docrt_id', $request->docrt_id)->update([
+                    'docrt_check_2'=>'1',
+                    'docrt_datetime_2'=>date('Y-m-d H:i:s'),
+                    'docrt_inspector_2'=>Auth::user()->id,
+                    'docrt_sealid_2'=>$request->docrt_sealid,
+                    'docrt_status'=>'5',
+                    'docrt_updated_at'=>date('Y-m-d H:i:s')
+                ]);
+
+                 //linetoken
+                 $tokens_Check = DB::table('tokens')
+                 ->where('token_site_id', Auth::user()->site_id)
+                 ->where('token_level', $user_check->level)
+                 ->first();
+                 if($tokens_Check){
+                     $message = "\n⚠️ นิติการอนุมัติเอกสารรับเข้าตอบกลับภายใน ⚠️\n>เรื่อง :  ".$request->docrtdt_topic."\n>ที่ร่าง :  ".$request->docrtdt_draft."\n>วันที่ : ".$request->docrtdt_date."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                     functionController::line_notify($message,$tokens_Check->token_token);
+                 }
             }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [user_check]!');
             }
-        }
-        if($update_documents_retruns){
-            //linetoken
-            $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
-            ->where('group_id', Auth::user()->group)
-            ->first();
-            if($tokens_Check){
-                $message = "\n⚠️ นิติการอนุมัติตอบกลับเอกสารภายใน ⚠️\n>เรื่อง :  ".$request->docrtdt_topic."\n>ที่ร่าง :  ".$request->docrtdt_draft."\n>วันที่ : ".$request->docrtdt_date."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
-                functionController::line_notify($message,$tokens_Check->group_token);
-            }
-            return redirect()->route('documents_retrun_inside_jurisprudence_all')->with('success',"อนุมัติเรียบร้อย");
-        }else{
-            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_documents_retruns] !');
-        }
-        
-    }
 
-    public function do_not_understand(Request $request){
-        $update_documents_retruns = documents_retrun::where('docrt_id', $request->docrt_id)->update([
-            'docrt_check_0'=>'0',
-            'docrt_inspector_0'=>null,
-            'docrt_datetime_0'=>null,
-            'docrt_check_1'=>'0',
-            'docrt_inspector_1'=>null,
-            'docrt_datetime_1'=>null,
-            'docrt_check_2'=>'0',
-            'docrt_inspector_2'=>null,
-            'docrt_datetime_2'=>null,
-            'docrt_status'=>'C',
-            'docrt_updated_at'=>date('Y-m-d H:i:s')
-        ]);
-
-        if($update_documents_retruns){
-            //linetoken
-            $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
-            ->where('group_id', Auth::user()->group)
-            ->first();
-            if($tokens_Check){
-                $message = "\n⚠️ นิติการ(ไม่)อนุมัติเอกสารตอบกลับภายใน ⚠️\n>เรื่อง :  ".$request->docrtdt_topic."\n>ที่ร่าง :  ".$request->docrtdt_draft."\n>วันที่ : ".$request->docrtdt_date."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
-                functionController::line_notify($message,$tokens_Check->group_token);
+            if($update_documents_retruns){
+                return redirect()->route('documents_retrun_inside_jurisprudence_all')->with('success',"อนุมัติเรียบร้อย");
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs] !');
             }
-            return redirect()->route('documents_retrun_inside_jurisprudence_all')->with('success',"ไม่อนุมัติเรียบร้อย");
-        }else{
-            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_documents_retruns]!');
         }
         
     }
