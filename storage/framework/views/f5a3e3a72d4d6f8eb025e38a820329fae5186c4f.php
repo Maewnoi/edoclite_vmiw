@@ -114,12 +114,12 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <!-- <?php if(Route::has('password.request')): ?>
+                <?php if(Route::has('password.request')): ?>
                     <a class="text-sm text-gray-600 underline hover:text-gray-900" href="<?php echo e(route('password.request')); ?>">
-                        <?php echo e(__('Forgot your password?')); ?>
+                        <?php echo e(__('คุณลืมรหัสผ่านใช่ไหม?')); ?>
 
                     </a>
-                <?php endif; ?> -->
+                <?php endif; ?>
 
                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['class' => 'ml-4','onclick' => 'submitForm(this);']]); ?>
