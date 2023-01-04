@@ -5,7 +5,7 @@
                 height="100">
         </x-slot>
         <x-jet-label class="text-lg text-center" id="txt-login" value="{{ __('ระบบสารบรรณอิเล็กทรอนิกส์') }} {{$routes_sites_name_check->site_name}}" />
-        <!-- <x-jet-validation-errors class="mb-4" /> -->
+        <x-jet-validation-errors class="mb-4" />
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
