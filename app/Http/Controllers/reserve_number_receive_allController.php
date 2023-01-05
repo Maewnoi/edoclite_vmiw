@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\reserve_number;
 use App\Models\document;
+use App\Models\User;
 
 class reserve_number_receive_allController extends Controller
 {
@@ -26,6 +27,7 @@ class reserve_number_receive_allController extends Controller
             ->whereNull('reserve_group')
             ->where('reserve_type','0')
             ->where('reserve_template','A')
+            ->orderby('reserve_number','DESC')
             ->get();
             return view('member.reserve_number_receive_all.index',compact('reserve_numberS'));
         }else{
@@ -64,13 +66,25 @@ class reserve_number_receive_allController extends Controller
             return redirect()->back()->with('error','ไม่กี่วินาทีตรวจพบเลข '.$request->reserve_number.' มีการจองในระบบแล้ว');
         }
 
+        if(Auth::user()->level=='3'){
+            $reserve_owner = Auth::user()->id;
+        }else if(Auth::user()->level=='6'){
+            $check_User_l_3=User::where('level', '3')
+            ->where('site_id',Auth::user()->site_id)
+            ->first();
+            if(!$check_User_l_3){
+                return redirect()->back()->with('error','พบปัญหาการจองเลข [!check_User_l_3]');
+            }
+            $reserve_owner = $check_User_l_3->id;
+        }
+
         $insert_reserve_number_receive = reserve_number::insert([
             'reserve_number'=>$request->reserve_number,
             'reserve_date'=>date('Y-m-d H:i:s'),
             'reserve_status'=>'0',
             'reserve_type'=>'0',
             'reserve_template' =>'A',
-            'reserve_owner'=>Auth::user()->id,
+            'reserve_owner'=>$reserve_owner,
             'reserve_site'=>Auth::user()->site_id,
             'reserve_created_at'=>date('Y-m-d H:i:s')
         ]);

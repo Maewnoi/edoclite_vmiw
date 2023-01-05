@@ -148,7 +148,7 @@ use App\Http\Controllers\functionController;
                             </div>
                             <div class="card-footer">
                                 <span class="badge badge-info">เลขรับภายนอก</span> <span
-                                    class="badge badge-secondary">เลขรับภายใน</span>
+                                    class="badge badge-secondary">เลขส่งภายนอก</span>
                             </div>
                         </div>
                     </div>

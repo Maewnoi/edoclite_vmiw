@@ -18,6 +18,17 @@ use App\Models\replace;
 
 class navigationController extends Controller
 {
+    public static function funtion_document_transmission_all_count_level_3($id) {
+        if(Auth::user()->level == '3'){
+            $document_transmission_all_count = document::where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '0')
+            ->where('doc_template', 'B')
+            ->count();
+            return $document_transmission_all_count;
+        }else{
+            return 0;
+        }
+    }
     public static function funtion_documents_retrun_inside_secretary_count_1_level_8() {
         if(Auth::user()->level == '8'){
             $document_retrun_inside_secretary_0 = documents_retrun::join('documents_retrun_details','documents_retrun_details.docrtdt_docrt_id','documents_retruns.docrt_id')
@@ -1039,7 +1050,39 @@ class navigationController extends Controller
     }
 
     //------------------------------------------------------------------------------------------------------------------miw
-     //หน้ากลัก
+    //หน้ากลัก
+
+    public static function funtion_reserved_numbersS_delivery_level_3($id){
+        if($id == '3'){
+            //หาตัวเลขที่จองไว้
+            $reserved_numbersS = reserve_number::where('reserve_site',Auth::user()->site_id)
+            ->where('reserve_owner',Auth::user()->id)
+            ->where('reserve_type', '0')
+            ->where('reserve_template', 'B')
+            ->where('reserve_status', '0')
+            ->get();
+  
+            return $reserved_numbersS;
+        }else{
+            return 0;
+        }
+    }
+
+    public static function funtion_dropped_numbersS_delivery_level_3($id){
+        if($id == '3'){
+            //หาตัวเลขที่หลุดจอง
+            $dropped_numbersS = reserve_number::where('reserve_site',Auth::user()->site_id)
+            ->where('reserve_type', '0')
+            ->where('reserve_template', 'B')
+            ->where('reserve_status', '2')
+            ->get();
+
+            return $dropped_numbersS;
+        }else{
+            return 0;
+        }
+    }
+
     public static function funtion_reserved_numbersS_level_3($id){
         if($id == '3'){
             //หาตัวเลขที่จองไว้

@@ -19,7 +19,7 @@ use App\Http\Controllers\functionController;
                 <div class="col-md-9">
                   
                     <div class="border shadow card border-info">
-                        <div class="card-header bg-primary">รายการจองเลขคำสั่งทั้งหมด</div>
+                        <div class="card-header bg-primary">รายการจองเลขคำสั่งภายในทั้งหมด</div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table table-striped">
                                 <thead>

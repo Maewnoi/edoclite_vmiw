@@ -61,6 +61,7 @@ use App\Http\Controllers\documents_retrun_secretaryController;
 use App\Http\Controllers\documents_admission_secretary_retrunController;
 use App\Http\Controllers\documents_admission_inside_secretary_retrunController;
 use App\Http\Controllers\documents_retrun_inside_secretaryController;
+use App\Http\Controllers\documents_transmission_allController;
 
 /*
 |--------------------------------------------------------------------------
@@ -244,9 +245,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_admission_inside_secretary_retrun/chart/8/query',[queryController::class,'funtion_query_documents_admission_inside_secretary_retrun_chart_level_8']);
     Route::get('/documents_admission_inside_secretary_retrun/all/0/query',[queryController::class,'funtion_query_documents_admission_inside_secretary_retrun_0_Controller_level_8']);
     Route::get('/documents_admission_inside_secretary_retrun/all/1/query',[queryController::class,'funtion_query_documents_admission_inside_secretary_retrun_1_Controller_level_8']);
-
     Route::get('/documents_retrun_inside_secretary/all/0/query',[queryController::class,'funtion_query_documents_retrun_inside_secretary_0_Controller_level_8']);
     Route::get('/documents_retrun_inside_secretary/all/1/query',[queryController::class,'funtion_query_documents_retrun_inside_secretary_1_Controller_level_8']);
+
+    Route::get('/documents_transmission_all/all/query',[queryController::class,'funtion_query_documents_transmission_allController_level_3']);
+
     //---------------------------------------------------------------------------------------------------
     
     //admin
@@ -301,6 +304,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //member 
     Route::get('/member_dashboard',[member_dashboardController::class,'index'])->name('member_dashboard');
     Route::post('/member_dashboard/document_accepting_new',[member_dashboardController::class,'document_accepting_new'])->name('document_accepting_new');
+    Route::post('/member_dashboard/document_accepting_new_b',[member_dashboardController::class,'document_accepting_new_b'])->name('document_accepting_new_b');
     Route::get('/getdoc_recnum/{id}',[member_dashboardController::class,'getdoc_recnum']);
     Route::post('/member_dashboard/document_accepting_new_inside',[member_dashboardController::class,'document_accepting_new_inside'])->name('document_accepting_new_inside');
     Route::post('/member_dashboard/document_accepting_new_inside_retrun',[member_dashboardController::class,'document_accepting_new_inside_retrun'])->name('document_accepting_new_inside_retrun');
@@ -568,6 +572,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_retrun_inside_secretary/all/1',[documents_retrun_inside_secretaryController::class,'index_1'])->name('documents_retrun_inside_secretary_all_1');
     Route::get('/documents_retrun_inside_secretary/detail/{id}',[documents_retrun_inside_secretaryController::class,'detail'])->name('documents_retrun_inside_secretary_detail')->middleware(['password.confirm']);
     Route::post('/documents_retrun_inside_secretary/understand',[documents_retrun_inside_secretaryController::class,'understand'])->name('documents_retrun_inside_secretary_understand');
+  
+    //All documents_transmission_allController เอกสารส่งภายนอก
+    Route::get('/documents_transmission_all/all',[documents_transmission_allController::class,'index'])->name('documents_transmission_all');
+    Route::get('/documents_transmission_all/detail/{id}',[documents_transmission_allController::class,'detail'])->name('documents_transmission_detail')->middleware(['password.confirm']);
 
     //---------------------------------------------------------------------------------------------------
 });

@@ -109,41 +109,40 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                 </div>
-               
-                @if(Auth::user()->level == 3)
                 <div class="col-md-3">
                     <div class="border shadow card border-info">
                         <div class="card-header bg-primary">จองเลข</div>
-                        <div class="card-body">
-                            <form action="{{route('add_reserve_number_receive_all')}}" method="post">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <x-jet-label for="reserve_number" value="{{ __('เลขที่ต้องการ') }}" />
-                                            <input type="number" name="reserve_number"
-                                                min="{{functionController::funtion_documents_doc_recnum_plus(Auth::user()->site_id)}}"
-                                                value="{{functionController::funtion_documents_doc_recnum_plus(Auth::user()->site_id)}}"
-                                                class="form-control @error('reserve_number') is-invalid @enderror"
-                                                required>
-                                            @error('reserve_number')
-                                            <div class="my-2">
-                                                <p class="mt-2 text-sm text-red-600">{{$message}}</p>
+                            <div class="card-body">
+                                @if(Auth::user()->level == 3 || Auth::user()->level == 6)
+                                <form action="{{route('add_reserve_number_receive_all')}}" method="post">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <x-jet-label for="reserve_number" value="{{ __('เลขที่ต้องการ') }}" />
+                                                <input type="number" name="reserve_number"
+                                                    min="{{functionController::funtion_documents_doc_recnum_plus(Auth::user()->site_id)}}"
+                                                    value="{{functionController::funtion_documents_doc_recnum_plus(Auth::user()->site_id)}}"
+                                                    class="form-control @error('reserve_number') is-invalid @enderror"
+                                                    required>
+                                                @error('reserve_number')
+                                                <div class="my-2">
+                                                    <p class="mt-2 text-sm text-red-600">{{$message}}</p>
+                                                </div>
+                                                @enderror
                                             </div>
-                                            @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <hr>
-                                <x-jet-button onclick="submitForm(this);">
-                                    {{ __('จอง') }}
-                                </x-jet-button>
-                            </form>
+                                    <hr>
+                                    <x-jet-button onclick="submitForm(this);">
+                                        {{ __('จอง') }}
+                                    </x-jet-button>
+                                </form>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
-                @endif
-
             </div>
         </div>
     </div>

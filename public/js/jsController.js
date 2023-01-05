@@ -492,6 +492,22 @@ function date_format(reserve_date) {
 }
 //------------------------------------------------------------------------------------------
 //member_dashboard
+
+$("#member_dashoardController_doc_recnum_b").change(function(event) {
+    var dnd = $('#member_dashoardController_doc_recnum_b :selected').parent().attr('label');
+    //alert($(this).find(':selected').data('id'));
+    if(dnd == 'เลขที่จองไว้'){
+        document.getElementById("member_dashoardController_doc_date_2_b").readOnly = true;
+        shoWreserve_date_member_b_dashboard($(this).find(':selected').data('id'));
+    }else if(dnd == 'เลขที่หลุดจอง'){
+        document.getElementById("member_dashoardController_doc_date_2_b").readOnly = true;
+        shoWreserve_date_member_b_dashboard($(this).find(':selected').data('id'));
+    }else{
+        document.getElementById("member_dashoardController_doc_date_2_b").readOnly = false;
+        document.getElementById('member_dashoardController_doc_date_2_b').value = date_now_format();
+    }
+});
+
 $("#member_dashoardController_doc_recnum").change(function(event) {
     var dnd = $('#member_dashoardController_doc_recnum :selected').parent().attr('label');
     //alert($(this).find(':selected').data('id'));
@@ -674,6 +690,22 @@ function shoWreserve_date_member_dashboard(data_id) {
         });
 }
 
+function shoWreserve_date_member_b_dashboard(data_id) {
+    let url = "/getdoc_recnum/" + data_id;
+    fetch(url)
+        .then(response => response.text())
+        .then(result => {
+            var date = result;
+            // alert(result);
+            var day = result.toString().substring(0, 2);
+            var month = result.toString().substring(2, 4);
+            var year = result.toString().substring(4, 8);
+            //console.log([day, month, year].join('-'));
+            var date = [year, month, day].join('-');
+            document.getElementById("member_dashoardController_doc_date_2_b").value = date;
+        });
+}
+
 
 
 $("#member_dashoardController_RadioAttachments_0").click(function(event) {
@@ -683,6 +715,15 @@ $("#member_dashoardController_RadioAttachments_0").click(function(event) {
 $("#member_dashoardController_RadioAttachments_1").click(function(event) {
     document.getElementById('member_dashoardController_doc_attached_file_form-group_group').style.display = 'block';
     document.getElementById("member_dashoardController_doc_attached_file").required = true;
+});
+
+$("#member_dashoardController_RadioAttachments_0_b").click(function(event) {
+    document.getElementById('member_dashoardController_doc_attached_file_form-group_group_b').style.display = 'none';
+    document.getElementById("member_dashoardController_doc_attached_file_b").required = false;
+});
+$("#member_dashoardController_RadioAttachments_1_b").click(function(event) {
+    document.getElementById('member_dashoardController_doc_attached_file_form-group_group_b').style.display = 'block';
+    document.getElementById("member_dashoardController_doc_attached_file_b").required = true;
 });
 
 $("#member_dashoardController_checkbox_seal_point").click(function(event) {

@@ -639,7 +639,7 @@ class member_dashboardController extends Controller
   
     }
 
-    public function document_accepting_new(Request $request){
+    public function document_accepting_new_b(Request $request){
         //ตรวจสอบข้อมูลที่กรอกเข้ามาก่อน
         $request->validate(
             [
@@ -652,6 +652,7 @@ class member_dashboardController extends Controller
                 'doc_title'=>'required|max:255',
                 'doc_filedirec'=>'required|mimes:pdf|max:10000',
                 'doc_speed'=>'required|max:255',
+                'doc_secret'=>'required|max:255',
             ],
             [
                 'doc_recnum.required'=>"กรุณาป้อนเลขที่รับส่วนงานด้วยครับ",
@@ -679,6 +680,175 @@ class member_dashboardController extends Controller
 
                 'doc_speed.required'=>"กรุณาเลือกชั้นความเร็วด้วยครับ",
                 'doc_speed.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+
+                'doc_secret.required'=>"กรุณาเลือกชั้นความลับด้วยครับ",
+                'doc_secret.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+            ]
+        );
+
+        //เช็คเลขที่หนังสือค่าซํ้า
+        if($request->doc_docnum != '-'){
+            $document_Check_doc_docnum = document::where('doc_docnum', $request->doc_docnum)
+            ->where('doc_type', '0')
+            ->where('doc_template', 'B')
+            ->where('doc_site_id', Auth::user()->site_id)
+            ->first();
+            if($document_Check_doc_docnum){
+                return redirect()->back()->with('error','ตรวจพบเลขที่หนังสือ '.$request->doc_docnum.' ซํ้าในระบบ');
+            }
+        }
+
+        //เช็ค tb: reserve_numbers
+        $reserve_number_Check_reserve_number = reserve_number::where('reserve_number', $request->doc_recnum)
+        ->where('reserve_type', '0')
+        ->where('reserve_template', 'B')
+        ->where('reserve_site',Auth::user()->site_id)
+        ->first();
+
+
+        //เช็คค่าซํ่าเลขที่รับส่วนงาน
+        $document_Check_doc_recnum = document::where('doc_recnum', $request->doc_recnum)
+        ->where('doc_type', '0')
+        ->where('doc_template', 'B')
+        ->where('doc_site_id', Auth::user()->site_id)
+        ->first();
+        if($document_Check_doc_recnum){
+            if($reserve_number_Check_reserve_number){
+                return redirect()->back()->with('error','ตรวจพบเลขที่รับส่วนงาน '.$request->doc_recnum.' ซํ้าในระบบ');
+            }else{
+                $doc_recnum = $request->doc_recnum + 1;
+            }
+        }else{
+            $doc_recnum = $request->doc_recnum;
+            if($reserve_number_Check_reserve_number){
+                $update_reserve_number = reserve_number::where('reserve_number', $request->doc_recnum)
+                ->where('reserve_type', '0')
+                ->where('reserve_template', 'B')
+                ->where('reserve_site',Auth::user()->site_id)
+                ->update([
+                    'reserve_status'=>'1',
+                    'reserve_used'=>Auth::user()->id,
+                    'reserve_topic'=>$request->doc_title,
+                    'reserve_updated_at'=>date('Y-m-d H:i:s')
+                ]);
+            }
+        }
+
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+
+        //หา ID documentล่าสุด
+        $document_Check_doc_id = document::max('doc_id');
+        $doc_id_new = $document_Check_doc_id + 1;
+        $date_new = date('Y-m-d');
+        $year_new = date('Y');
+        //การเข้ารหัสไฟล์_doc_filedirec
+        $doc_filedirec = $request->file('doc_filedirec');
+        //Generate ชื่อไฟล์
+        $name_gen_new = $doc_id_new."_".$date_new;
+        // ดึงนามสกุลไฟล์
+        $doc_filedirec_img_ext = strtolower($doc_filedirec->getClientOriginalExtension());
+        $doc_filedirec_img_name = $name_gen_new.'.'.$doc_filedirec_img_ext;
+        //อัพโหลดและบันทึกข้อมูล
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/original/';
+        $doc_filedirec_full_path = $upload_location.$doc_filedirec_img_name;
+        $doc_filedirec->move($upload_location,$doc_filedirec_img_name);
+
+        //เช็คว่ามีการแนบไฟล์รูป_doc_attached_file_ไหม
+        $doc_attached_file = $request->file('doc_attached_file');
+        if($doc_attached_file){
+            // ดึงนามสกุลไฟล์
+            $doc_attached_file_img_ext = strtolower($doc_attached_file->getClientOriginalExtension());
+            $doc_attached_file_img_ext_img_name = $name_gen_new.'.'.$doc_attached_file_img_ext;
+            //อัพโหลดและบันทึกข้อมูล
+            $upload_location_doc_attached_file = 'image/'.$sites->site_path_folder.'/'.$year_new.'/attached/';
+            $doc_attached_file_full_path = $upload_location_doc_attached_file.$doc_attached_file_img_ext_img_name;
+            $doc_attached_file->move($upload_location_doc_attached_file,$doc_attached_file_img_ext_img_name);
+        }else{
+            $doc_attached_file_full_path = '';
+        }
+
+        $insert_document = document::insert([
+            'doc_site_id'=>Auth::user()->site_id,
+            'doc_recnum'=>$doc_recnum,
+            'doc_docnum'=>$request->doc_docnum,
+            'doc_date'=>$request->doc_date,
+            'doc_date_2' =>$request->doc_date_2,
+            'doc_time'=>$request->doc_time,
+            'doc_origin'=>$request->doc_origin,
+            'doc_title'=>$request->doc_title,
+            'doc_filedirec'=>$doc_filedirec_full_path,
+            'doc_attached_file'=>$doc_attached_file_full_path,
+            'doc_type'=>'0',
+            'doc_template'=>'B',
+            'doc_speed'=>$request->doc_speed,
+            'doc_secret'=>$request->doc_secret,
+            'doc_status'=>'success',
+            'doc_owner'=>Auth::user()->id,
+            'doc_created_at'=>date('Y-m-d H:i:s')
+        ]);
+
+        //linetoken
+        $tokens_Check = DB::table('tokens')
+        ->where('token_site_id', Auth::user()->site_id)
+        ->where('token_level', Auth::user()->level)
+        ->first();
+        if($tokens_Check){
+            $message = "\n⚠️ สร้างเอกสารส่งภายนอกใหม่ ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+            functionController::line_notify($message,$tokens_Check->token_token);
+        }
+  
+        if($insert_document){
+            return redirect()->back()->with('success',"สร้างเอกสารใหม่เรียบร้อย");
+        }else{
+            return redirect()->back()->with('error','พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา !');
+        }
+
+    }
+
+    public function document_accepting_new(Request $request){
+        //ตรวจสอบข้อมูลที่กรอกเข้ามาก่อน
+        $request->validate(
+            [
+                'doc_recnum'=>'required|max:255',
+                'doc_docnum'=>'required|max:255',
+                'doc_date'=>'required',
+                'doc_date_2'=>'required',
+                'doc_time'=>'required',
+                'doc_origin'=>'required|max:255',
+                'doc_title'=>'required|max:255',
+                'doc_filedirec'=>'required|mimes:pdf|max:10000',
+                'doc_speed'=>'required|max:255',
+                'doc_secret'=>'required|max:255',
+            ],
+            [
+                'doc_recnum.required'=>"กรุณาป้อนเลขที่รับส่วนงานด้วยครับ",
+                'doc_recnum.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+
+                'doc_docnum.required'=>"กรุณาป้อนเลขที่หนังสือด้วยครับ",
+                'doc_docnum.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+
+                'doc_date.required'=>"กรุณาเลือกวันที่ด้วยครับ",
+
+                'doc_date_2.required'=>"กรุณาเลือกลงวันที่ด้วยครับ", 
+
+                'doc_time.required'=>"กรุณาเลือกเวลาด้วยครับ",
+
+
+                'doc_origin.required'=>"กรุณาป้อนหน่วยงานเจ้าของเรื่องด้วยครับ",
+                'doc_origin.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+
+                'doc_title.required'=>"กรุณาป้อนเรื่องด้วยครับ",
+                'doc_title.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+
+                'doc_filedirec.required'=>"กรุณาแนบอัพโหลดไฟล์เอกสารด้วยครับ",
+                'doc_filedirec.mimes'=>"รองรับไฟล์นามสกุล PDF เท่านั้น",
+                'doc_filedirec.max'=>"รองรับขนาดไฟล์ไม่เกิน 10MB",
+
+                'doc_speed.required'=>"กรุณาเลือกชั้นความเร็วด้วยครับ",
+                'doc_speed.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+
+                'doc_secret.required'=>"กรุณาเลือกชั้นความลับด้วยครับ",
+                'doc_secret.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
             ]
         );
 
@@ -802,7 +972,7 @@ class member_dashboardController extends Controller
         }
 
         if($insert_document){
-            return redirect()->back()->with('success',"สร้างเอกสารใหม่เรียบร้อย  s");
+            return redirect()->back()->with('success',"สร้างเอกสารใหม่เรียบร้อย");
         }else{
             return redirect()->back()->with('error','พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา !');
         }

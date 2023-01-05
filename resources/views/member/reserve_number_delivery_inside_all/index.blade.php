@@ -10,17 +10,34 @@ use App\Http\Controllers\functionController;
     <div class="py-12">
         <div class="container">
             <div class="row">
-                <div class="col-md-9">
-                   
+                <div class="col-md-12">
                     <div class="border shadow card border-info">
-                        <div class="card-header bg-primary">รายการจองเลขรับทั้งหมด</div>
+                        <div class="card-body table-responsive">
+                            <ul class="flex-row nav nav-pills">
+                                <li class="nav-item">
+                                    <a href="{{ route('reserve_number_delivery_all') }}" class="nav-link">
+                                        <i class="fas fa-inbox"></i> เลขส่งภายนอก
+                                    </a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a href="#" class="nav-link active">
+                                        <i class="far fa-envelope"></i> เลขส่งภายใน
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="border shadow card border-info">
+                        <div class="card-header bg-primary">รายการจองเลขส่งภายในทั้งหมด</div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
                                         <th scope="col">เลขที่ถูกจอง</th>
-                                        <th scope="col">เรื่อง</th>
+                                   
                                         <th scope="col">ผู้จอง</th>
                                         <th scope="col">วันที่จอง</th>
                                         <th scope="col">สถานะ</th>
@@ -32,7 +49,7 @@ use App\Http\Controllers\functionController;
                                     <tr>
                                         <th>{{$loop->index+1}}</th>
                                         <td>{{$row->reserve_number}}</td>
-                                        <td>{{$row->reserve_topic}}</td>
+                             
                                         <td>{{ functionController::funtion_users($row->reserve_owner) }}</td>
                                         <td>
                                             @if($row->reserve_date != NULL)
@@ -95,32 +112,35 @@ use App\Http\Controllers\functionController;
                 <div class="col-md-3">
                     <div class="border shadow card border-info">
                         <div class="card-header bg-primary">จองเลข</div>
-                        <div class="card-body">
-                            <form action="{{route('add_reserve_number_delivery_inside_all')}}" method="post">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <x-jet-label for="reserve_number" value="{{ __('เลขที่ต้องการ') }}" />
-                                            <input type="number" name="reserve_number"
-                                                min="{{functionController::funtion_documents_doc_recnum_delivery_inside_plus(Auth::user()->site_id)}}"
-                                                value="{{functionController::funtion_documents_doc_recnum_delivery_inside_plus(Auth::user()->site_id)}}"
-                                                class="form-control @error('reserve_number') is-invalid @enderror"
-                                                required>
-                                            @error('reserve_number')
-                                            <div class="my-2">
-                                                <p class="mt-2 text-sm text-red-600">{{$message}}</p>
+                            <div class="card-body">
+                                @if(Auth::user()->level=='6')
+                                <form action="{{route('add_reserve_number_delivery_inside_all')}}" method="post">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <x-jet-label for="reserve_number" value="{{ __('เลขที่ต้องการ') }}" />
+                                                <input type="number" name="reserve_number"
+                                                    min="{{functionController::funtion_documents_doc_recnum_delivery_inside_plus(Auth::user()->site_id)}}"
+                                                    value="{{functionController::funtion_documents_doc_recnum_delivery_inside_plus(Auth::user()->site_id)}}"
+                                                    class="form-control @error('reserve_number') is-invalid @enderror"
+                                                    required>
+                                                @error('reserve_number')
+                                                <div class="my-2">
+                                                    <p class="mt-2 text-sm text-red-600">{{$message}}</p>
+                                                </div>
+                                                @enderror
                                             </div>
-                                            @enderror
                                         </div>
+                                        
                                     </div>
-                                    
-                                </div>
-                                <hr>
-                                <x-jet-button onclick="submitForm(this);">
-                                    {{ __('จอง') }}
-                                </x-jet-button>
-                            </form>
+                                    <hr>
+                                    <x-jet-button onclick="submitForm(this);">
+                                        {{ __('จอง') }}
+                                    </x-jet-button>
+                                </form>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -20,6 +20,20 @@ use App\Models\replace;
 
 class queryController extends Controller
 {
+    
+    public static function funtion_query_documents_transmission_allController_level_3() {
+        if(Auth::user()->level == '3'){
+            $documents = document::where('doc_site_id',Auth::user()->site_id)
+            ->where('doc_type', '0')
+            ->where('doc_template', 'B')
+            ->orderby('doc_date','DESC')
+            ->get();
+
+            return $documents;
+        }else{
+            return 0;
+        }
+    }  
 
     public static function funtion_query_documents_retrun_inside_secretary_1_Controller_level_8() {
         if(Auth::user()->level == '8'){
