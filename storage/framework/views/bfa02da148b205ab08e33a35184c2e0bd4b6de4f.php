@@ -35,7 +35,6 @@ use App\Http\Controllers\functionController;
                     </div>
                 </div>
                 <div class="col-md-9">
-                 
                     <div class="border shadow card border-info">
                         <div class="card-header bg-primary">รายการจองเลขรับภายนอกทั้งหมด</div>
                         <div class="card-body table-responsive">
@@ -148,17 +147,20 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                 </div>
+             
                 <div class="col-md-3">
-                    <div class="border shadow card border-info">
-                        <div class="card-header bg-primary">จองเลข</div>
-                            <div class="card-body">
-                                <?php if(Auth::user()->level == 3 || Auth::user()->level == 6): ?>
-                                <form action="<?php echo e(route('add_reserve_number_receive_all')); ?>" method="post">
-                                    <?php echo csrf_field(); ?>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+                    <div class="row">
+                        <?php if(Auth::user()->level == 3 || Auth::user()->level == 6): ?>
+                        <div class="col-md-12">
+                            <div class="border shadow card border-info">
+                                <div class="card-header bg-primary">จองเลข</div>
+                                    <div class="card-body">
+                                        <form action="<?php echo e(route('add_reserve_number_receive_all')); ?>" method="post">
+                                            <?php echo csrf_field(); ?>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'reserve_number','value' => ''.e(__('เลขที่ต้องการ')).'']]); ?>
 <?php $component->withName('jet-label'); ?>
 <?php if ($component->shouldRender()): ?>
@@ -170,10 +172,10 @@ use App\Http\Controllers\functionController;
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                                <input type="number" name="reserve_number"
-                                                    min="<?php echo e(functionController::funtion_documents_doc_recnum_plus(Auth::user()->site_id)); ?>"
-                                                    value="<?php echo e(functionController::funtion_documents_doc_recnum_plus(Auth::user()->site_id)); ?>"
-                                                    class="form-control <?php $__errorArgs = ['reserve_number'];
+                                                        <input type="number" name="reserve_number"
+                                                            min="<?php echo e(functionController::funtion_documents_doc_recnum_plus(Auth::user()->site_id)); ?>"
+                                                            value="<?php echo e(functionController::funtion_documents_doc_recnum_plus(Auth::user()->site_id)); ?>"
+                                                            class="form-control <?php $__errorArgs = ['reserve_number'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -181,41 +183,102 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                                    required>
-                                                <?php $__errorArgs = ['reserve_number'];
+                                                            required>
+                                                        <?php $__errorArgs = ['reserve_number'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                <div class="my-2">
-                                                    <p class="mt-2 text-sm text-red-600"><?php echo e($message); ?></p>
-                                                </div>
-                                                <?php unset($message);
+                                                        <div class="my-2">
+                                                            <p class="mt-2 text-sm text-red-600"><?php echo e($message); ?></p>
+                                                        </div>
+                                                        <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+                                            <hr>
+                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
-                                        <?php echo e(__('จอง')); ?>
+                                                <?php echo e(__('จอง')); ?>
 
-                                     <?php echo $__env->renderComponent(); ?>
+                                             <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                </form>
-                                <?php endif; ?>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <?php endif; ?>
+
+                        <!-- จองเลขอัตโนมัติ -->
+                        <?php if(Auth::user()->level == 3): ?>
+                        <div class="col-md-12">
+                            <div class="border shadow card border-info">
+                                <div class="card-header bg-danger">ตั้งค่าการจองเลขอัตโนมัติ</div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <!-- เปิด ปิด -->
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off" checked>
+                                                    <label class="btn btn-outline-danger" for="danger-outlined">ปิด</label>
+
+                                                    <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="on">
+                                                    <label class="btn btn-outline-success" for="success-outlined">เปิด</label>
+                                                </div>
+                                            </div>
+                                            <!-- จำนวนเลข -->
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => '','value' => ''.e(__('จำนวนเลขที่ต้องการจอง')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['for' => '','value' => ''.e(__('จำนวนเลขที่ต้องการจอง')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                    <select class="form-control select2bs4"
+                                                        name="" id="" required>
+                                                        <option selected value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="" value="receive">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mt-2 text-danger">หมายเหตุ : ระบบจะจองเลขอัตโนมัติเวลา 00.01 ของทุกวันเมื่อมีการเปิดใช้งาน</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

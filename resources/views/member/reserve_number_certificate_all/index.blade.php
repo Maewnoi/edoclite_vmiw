@@ -11,7 +11,6 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-                   
                     <div class="border shadow card border-info">
                         <div class="card-header bg-primary">รายการจองเลขหนังสือรับรองภายในทั้งหมด</div>
                         <div class="card-body table-responsive">
@@ -93,46 +92,101 @@ use App\Http\Controllers\functionController;
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="border shadow card border-info">
-                        <div class="card-header bg-primary">จองเลข</div>
-                        <div class="card-body">
-                            <form action="{{route('add_reserve_number_certificate_all')}}" method="post">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <x-jet-label for="reserve_number" value="{{ __('เลขที่ต้องการ') }}" />
-                                            <input type="number" name="reserve_number"
-                                                min="{{functionController::funtion_documents_doc_recnum_certificate_plus(Auth::user()->site_id)}}"
-                                                value="{{functionController::funtion_documents_doc_recnum_certificate_plus(Auth::user()->site_id)}}"
-                                                class="form-control @error('reserve_number') is-invalid @enderror"
-                                                required>
-                                            @error('reserve_number')
-                                            <div class="my-2">
-                                                <p class="mt-2 text-sm text-red-600">{{$message}}</p>
+                    <div class="row">
+                        @if(Auth::user()->level=='6')
+                        <div class="col-md-12">
+                            <div class="border shadow card border-info">
+                                <div class="card-header bg-primary">จองเลข</div>
+                                    <div class="card-body">
+                                        <form action="{{route('add_reserve_number_certificate_all')}}" method="post">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <x-jet-label for="reserve_number" value="{{ __('เลขที่ต้องการ') }}" />
+                                                        <input type="number" name="reserve_number"
+                                                            min="{{functionController::funtion_documents_doc_recnum_certificate_plus(Auth::user()->site_id)}}"
+                                                            value="{{functionController::funtion_documents_doc_recnum_certificate_plus(Auth::user()->site_id)}}"
+                                                            class="form-control @error('reserve_number') is-invalid @enderror"
+                                                            required>
+                                                        @error('reserve_number')
+                                                        <div class="my-2">
+                                                            <p class="mt-2 text-sm text-red-600">{{$message}}</p>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <x-jet-label for="reserve_topic" value="{{ __('เรื่อง') }}" />
+                                                        <textarea name="reserve_topic" rows="4" cols="50"
+                                                            class="form-control @error('reserve_topic') is-invalid @enderror"></textarea>
+                                                        @error('reserve_topic')
+                                                        <div class="my-2">
+                                                            <p class="mt-2 text-sm text-red-600">{{$message}}</p>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                             </div>
-                                            @enderror
-                                        </div>
+                                            <hr>
+                                            <x-jet-button onclick="submitForm(this);">
+                                                {{ __('จอง') }}
+                                            </x-jet-button>
+                                        </form>
                                     </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <x-jet-label for="reserve_topic" value="{{ __('เรื่อง') }}" />
-                                            <textarea name="reserve_topic" rows="4" cols="50"
-                                                class="form-control @error('reserve_topic') is-invalid @enderror"></textarea>
-                                            @error('reserve_topic')
-                                            <div class="my-2">
-                                                <p class="mt-2 text-sm text-red-600">{{$message}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
+                        <!-- จองเลขอัตโนมัติ -->
+                        @if(Auth::user()->level=='6')
+                        <div class="col-md-12">
+                            <div class="border shadow card border-info">
+                                <div class="card-header bg-danger">ตั้งค่าการจองเลขอัตโนมัติ</div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <!-- เปิด ปิด -->
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off" checked>
+                                                    <label class="btn btn-outline-danger" for="danger-outlined">ปิด</label>
+
+                                                    <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="on">
+                                                    <label class="btn btn-outline-success" for="success-outlined">เปิด</label>
+                                                </div>
                                             </div>
-                                            @enderror
+                                            <!-- จำนวนเลข -->
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <x-jet-label for="" value="{{ __('จำนวนเลขที่ต้องการจอง') }}" />
+                                                    <select class="form-control select2bs4"
+                                                        name="" id="" required>
+                                                        <option selected value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="" value="certificate">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mt-2 text-danger">หมายเหตุ : ระบบจะจองเลขอัตโนมัติเวลา 00.01 ของทุกวันเมื่อมีการเปิดใช้งาน</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <hr>
-                                <x-jet-button onclick="submitForm(this);">
-                                    {{ __('จอง') }}
-                                </x-jet-button>
-                            </form>
+                            </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
