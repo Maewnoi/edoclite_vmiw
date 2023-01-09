@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\reserve_number;
 use App\Models\document;
+use App\Models\auto_reserve_numbers;
 
 class reserve_number_order_allController extends Controller
 {
@@ -18,7 +19,10 @@ class reserve_number_order_allController extends Controller
             ->where('reserve_type','1')
             ->where('reserve_template','D')
             ->get();
-            return view('member.reserve_number_order_all.index',compact('reserve_order_numberS'));
+            $check_auto_reserve_number = auto_reserve_numbers::where('arn_user_id',Auth::user()->id)
+            ->where('arn_template','order')
+            ->first();
+            return view('member.reserve_number_order_all.index',compact('reserve_order_numberS','check_auto_reserve_number'));
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }

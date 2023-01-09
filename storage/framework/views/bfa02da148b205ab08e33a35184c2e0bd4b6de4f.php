@@ -225,23 +225,28 @@ unset($__errorArgs, $__bag); ?>
                         <?php if(Auth::user()->level == 3): ?>
                         <div class="col-md-12">
                             <div class="border shadow card border-info">
-                                <div class="card-header bg-danger">ตั้งค่าการจองเลขอัตโนมัติ</div>
+                                <div id="auto_reserve_number_header_card" class="card-header <?php if($check_auto_reserve_number): ?> <?php echo e('bg-success'); ?> <?php else: ?> <?php echo e('bg-danger'); ?>  <?php endif; ?> ">ตั้งค่าการจองเลขอัตโนมัติ</div>
                                     <div class="card-body">
                                         <div class="row">
                                             <!-- เปิด ปิด -->
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off" checked>
-                                                    <label class="btn btn-outline-danger" for="danger-outlined">ปิด</label>
+                                                    <input type="radio" class="btn-check" name="auto_reserve_number_options-radio" value="0"
+                                                    id="auto_reserve_number_danger-radio" autocomplete="off" <?php if(!$check_auto_reserve_number): ?> checked <?php endif; ?> >
+                                                    <label class="btn btn-outline-danger" for="auto_reserve_number_danger-radio">ปิด</label>
 
-                                                    <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="on">
-                                                    <label class="btn btn-outline-success" for="success-outlined">เปิด</label>
+                                                    <input type="radio" class="btn-check" name="auto_reserve_number_options-radio" value="1"
+                                                    id="auto_reserve_number_success-radio" autocomplete="on" <?php if($check_auto_reserve_number): ?> checked <?php endif; ?>>
+                                                    <label class="btn btn-outline-success" for="auto_reserve_number_success-radio">เปิด</label>
                                                 </div>
+                                                <hr>
                                             </div>
-                                            <!-- จำนวนเลข -->
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+                                         
+                                            <div class="<?php if($check_auto_reserve_number): ?> <?php else: ?> <?php echo e('hide'); ?> <?php endif; ?> " id="auto_reserve_number_form_card">
+                                                <!-- จำนวนเลข -->
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => '','value' => ''.e(__('จำนวนเลขที่ต้องการจอง')).'']]); ?>
 <?php $component->withName('jet-label'); ?>
 <?php if ($component->shouldRender()): ?>
@@ -253,24 +258,31 @@ unset($__errorArgs, $__bag); ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                                    <select class="form-control select2bs4"
-                                                        name="" id="" required>
-                                                        <option selected value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                    </select>
+                                                        <select class="form-control select2bs4"
+                                                            name="arn_quantity" id="auto_reserve_number_arn_quantity" required>
+                                                            <?php if($check_auto_reserve_number): ?>
+                                                            <option selected value="<?php echo e($check_auto_reserve_number->arn_quantity); ?>"><?php echo e($check_auto_reserve_number->arn_quantity); ?></option>
+                                                            <?php else: ?>
+                                                            <option selected value="1">1</option>
+                                                            <?php endif; ?>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <input type="hidden" id="" value="receive">
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mt-2 text-danger">หมายเหตุ : ระบบจะจองเลขอัตโนมัติเวลา 00.01 ของทุกวันเมื่อมีการเปิดใช้งาน</label>
+                                                <input type="hidden" id="auto_reserve_number_arn_template" value="receive">
+                                                <input type="hidden" id="auto_reserve_number_arn_user_id" value="<?php echo e(Auth::user()->id); ?>">
+                                                <input type="hidden" id="auto_reserve_number_csrf_token" value="<?php echo e(csrf_token()); ?>">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="mt-2 text-danger">หมายเหตุ : ระบบจะจองเลขอัตโนมัติเวลา 00.01 ของทุกวันเมื่อมีการเปิดใช้งาน</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

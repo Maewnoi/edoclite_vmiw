@@ -139,6 +139,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     Route::post('/navigation/search',[functionController::class , 'funtion_navigation_search' ]);
 
+    Route::post('/auto_reserve_number/update',[functionController::class , 'funtion_auto_reserve_number' ]);
+    Route::post('/auto_reserve_number/quantity',[functionController::class , 'funtion_auto_reserve_number_quantity' ]);
 
     // //users_level_1_0
     // Route::get('/users_level_1_0/{id}',[functionController::class,'getuserS_1_documents_admission_division_allController_0']);

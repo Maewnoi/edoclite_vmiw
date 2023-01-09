@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\reserve_number;
 use App\Models\document;
 use App\Models\Groupmem;
-
+use App\Models\auto_reserve_numbers;
 
 class reserve_number_delivery_inside_allController extends Controller
 {
@@ -22,7 +22,10 @@ class reserve_number_delivery_inside_allController extends Controller
             ->where('reserve_template','B')
             ->orderby('reserve_number','DESC')
             ->get();
-            return view('member.reserve_number_delivery_inside_all.index',compact('reserve_delivery_inside_numberS'));
+            $check_auto_reserve_number = auto_reserve_numbers::where('arn_user_id',Auth::user()->id)
+            ->where('arn_template','delivery_inside')
+            ->first();
+            return view('member.reserve_number_delivery_inside_all.index',compact('reserve_delivery_inside_numberS','check_auto_reserve_number'));
         }elseif(Auth::user()->level=='3'){
             //สารบรรณกลาง
             $reserve_delivery_inside_numberS = reserve_number::where('reserve_site',Auth::user()->site_id)

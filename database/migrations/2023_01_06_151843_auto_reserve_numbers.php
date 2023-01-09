@@ -16,6 +16,8 @@ class AutoReserveNumbers extends Migration
         //
         Schema::create('auto_reserve_numbers', function (Blueprint $table) {
             $table->id('arn_id');
+            $table->integer('arn_site_id');
+            $table->integer('arn_level');
             $table->integer('arn_user_id');
             $table->integer('arn_quantity')->default('1');
             $table->enum('arn_template', array('receive', 'receive_inside', 'delivery', 'delivery_inside', 'announce', 'order', 'certificate'))->default('0');

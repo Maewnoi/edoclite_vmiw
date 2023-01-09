@@ -152,41 +152,54 @@ use App\Http\Controllers\functionController;
                         @if(Auth::user()->level=='6')
                         <div class="col-md-12">
                             <div class="border shadow card border-info">
-                                <div class="card-header bg-danger">ตั้งค่าการจองเลขอัตโนมัติ</div>
+                                <div id="auto_reserve_number_header_card" class="card-header @if($check_auto_reserve_number) {{ 'bg-success'}} @else {{ 'bg-danger' }}  @endif ">ตั้งค่าการจองเลขอัตโนมัติ</div>
                                     <div class="card-body">
                                         <div class="row">
                                             <!-- เปิด ปิด -->
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off" checked>
-                                                    <label class="btn btn-outline-danger" for="danger-outlined">ปิด</label>
+                                                    <input type="radio" class="btn-check" name="auto_reserve_number_options-radio" value="0"
+                                                    id="auto_reserve_number_danger-radio" autocomplete="off" @if(!$check_auto_reserve_number) checked @endif >
+                                                    <label class="btn btn-outline-danger" for="auto_reserve_number_danger-radio">ปิด</label>
 
-                                                    <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="on">
-                                                    <label class="btn btn-outline-success" for="success-outlined">เปิด</label>
+                                                    <input type="radio" class="btn-check" name="auto_reserve_number_options-radio" value="1"
+                                                    id="auto_reserve_number_success-radio" autocomplete="on" @if($check_auto_reserve_number) checked @endif>
+                                                    <label class="btn btn-outline-success" for="auto_reserve_number_success-radio">เปิด</label>
                                                 </div>
+                                                <hr>
                                             </div>
-                                            <!-- จำนวนเลข -->
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <x-jet-label for="" value="{{ __('จำนวนเลขที่ต้องการจอง') }}" />
-                                                    <select class="form-control select2bs4"
-                                                        name="" id="" required>
-                                                        <option selected value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                    </select>
+                                         
+                                            <div class="@if($check_auto_reserve_number) @else {{ 'hide' }} @endif " id="auto_reserve_number_form_card">
+                                                <!-- จำนวนเลข -->
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <x-jet-label for="" value="{{ __('จำนวนเลขที่ต้องการจอง') }}" />
+                                                        <select class="form-control select2bs4"
+                                                            name="arn_quantity" id="auto_reserve_number_arn_quantity" required>
+                                                            @if($check_auto_reserve_number)
+                                                            <option selected value="{{$check_auto_reserve_number->arn_quantity}}">{{$check_auto_reserve_number->arn_quantity}}</option>
+                                                            <option value="1">1</option>
+                                                            @else
+                                                            <option selected value="1">1</option>
+                                                            @endif
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <input type="hidden" id="" value="delivery_inside">
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mt-2 text-danger">หมายเหตุ : ระบบจะจองเลขอัตโนมัติเวลา 00.01 ของทุกวันเมื่อมีการเปิดใช้งาน</label>
+                                                <input type="hidden" id="auto_reserve_number_arn_template" value="delivery_inside">
+                                                <input type="hidden" id="auto_reserve_number_arn_user_id" value="{{Auth::user()->id}}">
+                                                <input type="hidden" id="auto_reserve_number_csrf_token" value="{{ csrf_token() }}">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="mt-2 text-danger">หมายเหตุ : ระบบจะจองเลขอัตโนมัติเวลา 00.01 ของทุกวันเมื่อมีการเปิดใช้งาน</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

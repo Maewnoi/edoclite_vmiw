@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\reserve_number;
 use App\Models\document;
 use App\Models\User;
+use App\Models\auto_reserve_numbers;
 
 class reserve_number_receive_allController extends Controller
 {
@@ -20,7 +21,11 @@ class reserve_number_receive_allController extends Controller
             ->where('reserve_template','A')
             ->orderby('reserve_number','DESC')
             ->get();
-            return view('member.reserve_number_receive_all.index',compact('reserve_numberS'));
+
+            $check_auto_reserve_number = auto_reserve_numbers::where('arn_user_id',Auth::user()->id)
+            ->where('arn_template','receive')
+            ->first();
+            return view('member.reserve_number_receive_all.index',compact('reserve_numberS','check_auto_reserve_number'));
         }elseif(Auth::user()->level=='6'){
             //สารบรรณกอง
             $reserve_numberS = reserve_number::where('reserve_site',Auth::user()->site_id)

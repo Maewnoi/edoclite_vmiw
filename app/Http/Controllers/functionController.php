@@ -16,12 +16,99 @@ use App\Models\sub2_doc;
 use App\Models\sub3_doc;
 use App\Models\sub3_detail;
 use App\Models\token;
+use App\Models\auto_reserve_numbers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 use Cookie;
 
 class functionController extends Controller
 { 
+    public static function get_arn_template($value){
+        //ตรวจสอบประเภทเลข
+        if($value == 'receive'){
+            $txt_arn_template = 'เลขรับภายนอก';
+        }else if($value == 'receive_inside'){
+            $txt_arn_template = 'เลขรับภายใน';
+        }else if($value == 'delivery'){
+            $txt_arn_template = 'เลขส่งภายนอก';
+        }else if($value == 'delivery_inside'){
+            $txt_arn_template = 'เลขส่งภายใน';
+        }else if($value == 'announce'){
+            $txt_arn_template = 'เลขประกาศภายใน';
+        }else if($value == 'order'){
+            $txt_arn_template = 'เลขคำสั่งภายใน';
+        }else if($value == 'certificate'){
+            $txt_arn_template = 'เลขรับรองภายใน';
+        }else{
+            $txt_arn_template = 'ไม่ถูกนิยาม';
+        }
+        return $txt_arn_template;
+    }
+
+    public static function funtion_auto_reserve_number_quantity(Request $request){
+        $check_auto_reserve_numbers = auto_reserve_numbers::where('arn_user_id', $request->id)
+        ->where('arn_template',$request->template)
+        ->first();
+        if($check_auto_reserve_numbers){
+            $update_auto_reserve_numbers = auto_reserve_numbers::where('arn_user_id', $request->id)
+            ->where('arn_template',$request->template)
+            ->update([
+                'arn_quantity'=>$request->quantity,
+                'arn_updated_at'=>date('Y-m-d H:i:s')
+            ]);
+            if($update_auto_reserve_numbers){
+                return array('status' => '200', 'text' => 'เปลี่ยนจำนวนเลขจองเรียบร้อย');
+            }else{
+                return array('status' => '404', 'text' => 'พบปัญหา [update_auto_reserve_numbers][แจ้งผู้พัฒนาระบบ]');
+            }
+        }else{
+            return array('status' => '404', 'text' => 'พบปัญหา [check_auto_reserve_numbers][แจ้งผู้พัฒนาระบบ]');
+        }
+    }
+
+    public static function funtion_auto_reserve_number(Request $request){
+        if($request->act == '0'){
+            $check_auto_reserve_numbers = auto_reserve_numbers::where('arn_user_id', $request->id)
+            ->where('arn_template',$request->template)
+            ->first();
+            if($check_auto_reserve_numbers){
+                $del_auto_reserve_numbers = auto_reserve_numbers::where('arn_user_id', $request->id)
+                ->where('arn_template',$request->template)
+                ->delete();
+                if($del_auto_reserve_numbers){
+                    return array('status' => '200', 'text' => 'ปิดการจองเลขอัตโนมัติเรียบร้อย');
+                }else{
+                    return array('status' => '404', 'text' => 'พบปัญหา [del_auto_reserve_numbers][แจ้งผู้พัฒนาระบบ]');
+                }
+            }else{
+                return array('status' => '404', 'text' => 'พบปัญหา [check_auto_reserve_numbers][แจ้งผู้พัฒนาระบบ]');
+            }
+        }else if($request->act == '1'){
+            $check_auto_reserve_numbers = auto_reserve_numbers::where('arn_user_id', $request->id)
+            ->where('arn_template',$request->template)
+            ->first();
+            if(!$check_auto_reserve_numbers){
+                $insert_auto_reserve_numbers = auto_reserve_numbers::insert([
+                    'arn_site_id'=>Auth::user()->site_id,
+                    'arn_level'=>Auth::user()->level,
+                    'arn_user_id'=>$request->id,
+                    'arn_quantity'=>$request->quantity,
+                    'arn_template'=>$request->template,
+                    'arn_created_at'=>date('Y-m-d H:i:s')
+                ]);
+                if($insert_auto_reserve_numbers){
+                    return array('status' => '200', 'text' => 'เปิดการจองเลขอัตโนมัติเรียบร้อย');
+                }else{
+                    return array('status' => '404', 'text' => 'พบปัญหา [insert_auto_reserve_numbers][แจ้งผู้พัฒนาระบบ]');
+                }
+            }else{
+                return array('status' => '404', 'text' => 'พบปัญหา [check_auto_reserve_numbers][แจ้งผู้พัฒนาระบบ]');
+            }
+        }else{
+            return array('status' => '404', 'text' => 'พบปัญหา [act][แจ้งผู้พัฒนาระบบ]');
+        }
+    }
+
     public static function get_site_color(){
         $site_check_color = sites::where('site_id', Auth::user()->site_id)->first();
         if($site_check_color->site_color != null){
@@ -1508,6 +1595,29 @@ class functionController extends Controller
         return $sub_doc_count_plus;
     }
 
+    //ฟังชันเรียก เลขรับภายในล่าสุด +1 tb : sub ด้วย id_group
+    public static function funtion_documents_doc_recnum_inside_plus_1($id,$group) {
+        $sub_doc_count = sub_doc::where('sub_recid',$group)
+        ->max('sub_recnum');
+
+        $sub_doc_count_plus = $sub_doc_count + 1;
+
+        for ($i = $sub_doc_count_plus; $i < 20000; $i++) {
+            $reserve_number_count = reserve_number::where('reserve_site',$id)
+            ->where('reserve_group',$group)
+            ->where('reserve_status','!=','1')
+            ->where('reserve_type', '1')
+            ->where('reserve_template', 'A')
+            ->where('reserve_number',$i)
+            ->count();
+            if($reserve_number_count == '0'){
+                $sub_doc_count_plus = $i;
+                break;
+            }
+        }
+        return $sub_doc_count_plus;
+    }
+
     //function เรียก users ด้วย id เรียกสิทธื์ นายก
     public function getuserS_1_documents_admission_division_allController_2($id,$id_1,$id_2)
     {
@@ -2435,6 +2545,33 @@ class functionController extends Controller
         }
         return $document_count_plus;
     }
+
+      //ฟังชันเรียก เลขหนังสือรับรองภายนอกล่าสุด +1 tb : documents ด้วย id_site
+      public static function funtion_documents_doc_recnum_delivery_inside_plus_1($id,$group) {
+        $document_count = document::leftJoin('sub_docs','sub_docs.sub_docid','documents.doc_id')
+        ->where('doc_site_id',$id)
+        ->where('doc_group',$group)
+        ->where('doc_type','1')
+        ->where('doc_template','B')
+        ->max('doc_recnum');
+        $document_count_plus = $document_count + 1;
+
+        for ($i = $document_count_plus; $i < 20000; $i++) {
+            $reserve_number_count = reserve_number::where('reserve_site',$id)
+            ->where('reserve_group',$group)
+            ->where('reserve_status','!=','1')
+            ->where('reserve_type', '1')
+            ->where('reserve_template', 'B')
+            ->where('reserve_number',$i)
+            ->count();
+            if($reserve_number_count == '0'){
+                $document_count_plus = $i;
+                break;
+            }
+        }
+        return $document_count_plus;
+    }
+
 
     //ฟังชันเรียก เลขหนังสือรับรองภายนอกล่าสุด +1 tb : documents ด้วย id_site
     public static function funtion_documents_doc_recnum_certificate_plus($id) {

@@ -28,6 +28,107 @@ function logout(btn) {
 }
 // alert(var_memberController_add_level);
 //------------------------------------------------------------------------------------------
+//auto_reserve_number
+$("input[name='auto_reserve_number_options-radio']").click(function(event) {
+    if($(this).val() == '0'){
+        //ปิด
+        document.getElementById('auto_reserve_number_form_card').style.display = 'none';
+        document.getElementById('auto_reserve_number_header_card').className = 'card-header bg-danger';
+
+        var act = $(this).val();
+    }else if($(this).val() == '1'){
+        //เปิด
+        document.getElementById('auto_reserve_number_form_card').style.display = 'block';
+        document.getElementById('auto_reserve_number_header_card').className = 'card-header bg-success';
+
+        var act = $(this).val();
+    }
+    var quantity = $('#auto_reserve_number_arn_quantity').val();
+    var template = $('#auto_reserve_number_arn_template').val();
+    var id = $('#auto_reserve_number_arn_user_id').val();
+    var _token = $('#auto_reserve_number_csrf_token').val(); //_token
+    $.ajax({
+        type: "POST",
+        url: "/auto_reserve_number/update",
+        headers: {
+            'X-CSRF-Token': _token 
+        },
+        data: {
+            id: id,
+            template: template,
+            act: act,
+            quantity: quantity
+        },
+        success: function(data) {
+            if(data['status'] == '200'){
+                swal({
+                    title: data['text'],
+                    icon: "success",
+                });
+            }else if(data['status'] == '404'){
+                swal({
+                    title: 'แจ้งเตือน : ' + data['text'],
+                    icon: "error",
+                });
+            }else{
+                swal({
+                    title: 'แจ้งเตือน : ERROR ![status]',
+                    icon: "error",
+                });
+            }
+        },
+        error: function(request, status, error) {
+            swal({
+                title: 'แจ้งเตือน : ERROR ![' + request.responseText +']',
+                icon: "error",
+            });
+        }
+    }); 
+});
+
+$("#auto_reserve_number_arn_quantity").change(function(event) {
+    var template = $('#auto_reserve_number_arn_template').val();
+    var id = $('#auto_reserve_number_arn_user_id').val();
+    var _token = $('#auto_reserve_number_csrf_token').val(); //_token
+    var quantity = $('#auto_reserve_number_arn_quantity').val();
+    $.ajax({
+        type: "POST",
+        url: "/auto_reserve_number/quantity",
+        headers: {
+            'X-CSRF-Token': _token 
+        },
+        data: {
+            id: id,
+            template: template,
+            quantity: quantity
+        },
+        success: function(data) {
+            if(data['status'] == '200'){
+                // swal({
+                //     title: data['text'],
+                //     icon: "success",
+                // });
+            }else if(data['status'] == '404'){
+                swal({
+                    title: 'แจ้งเตือน : ' + data['text'],
+                    icon: "error",
+                });
+            }else{
+                swal({
+                    title: 'แจ้งเตือน : ERROR ![status]',
+                    icon: "error",
+                });
+            }
+        },
+        error: function(request, status, error) {
+            swal({
+                title: 'แจ้งเตือน : ERROR ![' + request.responseText +']',
+                icon: "error",
+            });
+        }
+    }); 
+});
+//------------------------------------------------------------------------------------------
 // replaceController
 $('#replaceController-checkbox').each(function () {
     var _token = $('#replaceController_token').val(); //_token

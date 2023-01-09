@@ -12,6 +12,8 @@ class auto_reserve_numbers extends Model
 
     protected $fillable = [
         'arn_id',
+        'arn_site_id',
+        'arn_level',
         'arn_user_id',
         'arn_quantity',
         'arn_template',
