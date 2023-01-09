@@ -17,11 +17,17 @@ use App\Http\Controllers\functionController;
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                   
                     <div class="border shadow card border-info">
-                        <div class="card-header bg-primary">เอกสารรับเข้าภายนอก (กอง)</div>
+                        <div class="card-header bg-primary">
+                            <div class="clearfix">
+                            เอกสารรับเข้าภายนอก (กอง)
+                                <div class="float-right mt-1 ml-3 spinner-grow spinner-grow-sm text-warning" role="status" id="processingIndicator"> 
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-body table-responsive">
-                            <table id="example1" class="table">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ลำดับ</th>
@@ -31,74 +37,11 @@ use App\Http\Controllers\functionController;
                                         <th scope="col">วันที่</th>
                                         <th scope="col">วันที่ลง</th>
                                         <th scope="col">เรื่อง</th>
-                                        <th scope="col">ชั้นความเร็ว/สถานะ</th>
+                                        <th scope="col">ชั้นความเร็ว</th>
+                                        <th scope="col">สถานะ</th>
                                         <th scope="col">รายละเอียด</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php $__currentLoopData = $document_admission_all_group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <tr>
-                                        <th><?php echo e($loop->index+1); ?></th>
-                                        <td><?php echo e($row->doc_origin); ?></td>
-                                        <td><?php echo e($row->doc_recnum); ?></td>
-                                        <td><?php echo e($row->doc_docnum); ?></td>
-                                        <td>
-                                            <?php if($row->doc_date != NULL): ?>
-                                            <span class="badge bg-secondary"><?php echo e($row->doc_date); ?></span>
-                                            <p class="text-sm text-muted">
-                                                <i class="mr-1 far fa-clock"></i>
-                                               <?php echo e(Carbon\Carbon::parse($row->doc_date)->diffForHumans()); ?> 
-                                            </p>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td>
-                                            <?php if($row->doc_date_2 != NULL): ?>
-                                            <span class="badge bg-secondary"><?php echo e($row->doc_date_2); ?></span>
-                                            <p class="text-sm text-muted">
-                                                <i class="mr-1 far fa-clock"></i>
-                                                <?php echo e(Carbon\Carbon::parse($row->doc_date_2)->diffForHumans()); ?>
-
-                                            </p>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td><?php echo e($row->doc_title); ?></td>
-                                        <td>
-                                            <?php echo functionController::funtion_doc_speed($row->doc_speed); ?>
-
-                                            <?php echo functionController::funtion_sub_status($row->sub_status); ?>
-
-                                        </td>
-                                        <td>
-                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.nav-link','data' => ['href' => ''.e(url('/documents_admission_group/detail/'.$row->doc_id)).'']]); ?>
-<?php $component->withName('jet-nav-link'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['href' => ''.e(url('/documents_admission_group/detail/'.$row->doc_id)).'']); ?>
-                                                <i class="far fa-file-alt"></i>
-                                             <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                            <!-- <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => []]); ?>
-<?php $component->withName('jet-button'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes([]); ?>
-                                                <i class="fas fa-trash-alt"></i>
-                                             <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?> -->
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </tbody>
                             </table>
                         </div>
                     </div>

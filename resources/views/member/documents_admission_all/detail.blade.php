@@ -152,6 +152,12 @@ foreach($sub_docsS as $row_check_sub_docs){
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <x-jet-button type="button"  data-toggle="modal" onclick="window.print();" class="btn btn-primary" > print</x-jet-button>
+                                    
+                                </div>
+                            </div>
                             <hr>
                           
                             <div class="flex items-center justify-center mt-20">

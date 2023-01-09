@@ -11,22 +11,22 @@
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
          <?php $__env->slot('logo', null, []); ?> 
-            <img src="<?php echo e(asset('/image/logo_lei.png')); ?>" class="brand-image img-circle elevation-3" width="100"
+            <img src="<?php if($routes_sites_name_check->site_img != null): ?> <?php echo e(asset($routes_sites_name_check->site_img)); ?>  <?php else: ?>  <?php echo e(asset('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png')); ?> <?php endif; ?> " class="brand-image img-circle elevation-3" width="100"
                 height="100">
          <?php $__env->endSlot(); ?>
         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-lg text-center','id' => 'txt-login','value' => ''.e(__('ระบบสารบรรณอิเล็กทรอนิกส์')).'']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-lg text-center','id' => 'txt-login','value' => ''.e(__('ระบบสารบรรณอิเล็กทรอนิกส์')).' '.e($routes_sites_name_check->site_name).'']]); ?>
 <?php $component->withName('jet-label'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-lg text-center','id' => 'txt-login','value' => ''.e(__('ระบบสารบรรณอิเล็กทรอนิกส์')).'']); ?>
+<?php $component->withAttributes(['class' => 'text-lg text-center','id' => 'txt-login','value' => ''.e(__('ระบบสารบรรณอิเล็กทรอนิกส์')).' '.e($routes_sites_name_check->site_name).'']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+        <!-- <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.validation-errors','data' => ['class' => 'mb-4']]); ?>
 <?php $component->withName('jet-validation-errors'); ?>
 <?php if ($component->shouldRender()): ?>
@@ -37,15 +37,7 @@
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-
-        <?php if(session('status')): ?>
-        <div class="mb-4 text-sm font-medium text-green-600">
-            <?php echo e(session('status')); ?>
-
-        </div>
-        <?php endif; ?>
-
+<?php endif; ?> -->
         <form method="POST" action="<?php echo e(route('login')); ?>">
             <?php echo csrf_field(); ?>
 
@@ -166,68 +158,68 @@
                 </div>
                 <div class="modal-body">
                     <ul class="todo-list ui-sortable" data-widget="todo-list">
-                        <li class="done">
+                        <li>
                             <span class="handle ui-sortable-handle">
                                 <i class="fas fa-ellipsis-v"></i>
                                 <i class="fas fa-ellipsis-v"></i>
                             </span>
-                            <span class="text">นายก Username : lei01 Password : 1234</span>
-                        </li>
-                        <li class="done">
-                            <span class="handle ui-sortable-handle">
-                                <i class="fas fa-ellipsis-v"></i>
-                                <i class="fas fa-ellipsis-v"></i>
-                            </span>
-                            <span class="text">รองนายก Username : lei02 Password : 1234</span>
-                        </li>
-                        <li class="done">
-                            <span class="handle ui-sortable-handle">
-                                <i class="fas fa-ellipsis-v"></i>
-                                <i class="fas fa-ellipsis-v"></i>
-                            </span>
-                            <span class="text">ปลัด Username : lei02 Password : 1234</span>
-                        </li>
-                        <li class="done">
-                            <span class="handle ui-sortable-handle">
-                                <i class="fas fa-ellipsis-v"></i>
-                                <i class="fas fa-ellipsis-v"></i>
-                            </span>
-                            <span class="text">รองปลัด Username : lei02 Password : 1234</span>
+                            <span class="text">นายก(1) Username : lei011 Password : 1234</span>
                         </li>
                         <li>
                             <span class="handle ui-sortable-handle">
                                 <i class="fas fa-ellipsis-v"></i>
                                 <i class="fas fa-ellipsis-v"></i>
                             </span>
-                            <span class="text">สรรบรรณกลาง Username : lei03 Password : 1234</span>
+                            <span class="text">รองนายก(1) Username : lei012 Password : 1234</span>
                         </li>
                         <li>
                             <span class="handle ui-sortable-handle">
                                 <i class="fas fa-ellipsis-v"></i>
                                 <i class="fas fa-ellipsis-v"></i>
                             </span>
-                            <span class="text">หัวหน้ากอง Username : lei04 Password : 1234</span>
+                            <span class="text">ปลัด(2) Username : lei021 Password : 1234</span>
                         </li>
                         <li>
                             <span class="handle ui-sortable-handle">
                                 <i class="fas fa-ellipsis-v"></i>
                                 <i class="fas fa-ellipsis-v"></i>
                             </span>
-                            <span class="text">หัวหน้าฝ่าย Username : lei05 Password : 1234</span>
+                            <span class="text">รองปลัด(2) Username : lei022 Password : 1234</span>
                         </li>
                         <li>
                             <span class="handle ui-sortable-handle">
                                 <i class="fas fa-ellipsis-v"></i>
                                 <i class="fas fa-ellipsis-v"></i>
                             </span>
-                            <span class="text">สรรบรรณกอง Username : lei06 Password : 1234</span>
+                            <span class="text">สรรบรรณกลาง(3) Username : lei03 Password : 1234</span>
                         </li>
                         <li>
                             <span class="handle ui-sortable-handle">
                                 <i class="fas fa-ellipsis-v"></i>
                                 <i class="fas fa-ellipsis-v"></i>
                             </span>
-                            <span class="text">งาน Username : lei07 Password : 1234</span>
+                            <span class="text">หัวหน้ากอง(4) Username : lei04 Password : 1234</span>
+                        </li>
+                        <li>
+                            <span class="handle ui-sortable-handle">
+                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </span>
+                            <span class="text">หัวหน้าฝ่าย(5) Username : lei05 Password : 1234</span>
+                        </li>
+                        <li>
+                            <span class="handle ui-sortable-handle">
+                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </span>
+                            <span class="text">สรรบรรณกอง(6) Username : lei06 Password : 1234</span>
+                        </li>
+                        <li>
+                            <span class="handle ui-sortable-handle">
+                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </span>
+                            <span class="text">งาน(7) Username : lei07 Password : 1234</span>
                         </li>
                     </ul>
                 </div>
