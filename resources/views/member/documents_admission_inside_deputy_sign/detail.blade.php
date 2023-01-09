@@ -86,7 +86,7 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                             </div>
-                            @if($document_detail->sub3_sealid_0 == Auth::user()->id && $document_detail->sub3_sealdate_0 == null || $document_detail->sub3_sealid_1 == Auth::user()->id && $document_detail->sub3_sealdate_1 == null)
+                            @if($document_detail->sub3_sealid_2 == Auth::user()->id && $document_detail->sub3_sealdate_2 == null || $document_detail->sub3_sealid_3 == Auth::user()->id && $document_detail->sub3_sealdate_3 == null)
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="{{route('documents_admission_inside_deputy_sign_understand')}}" method="post" enctype="multipart/form-data">
@@ -95,11 +95,11 @@ use App\Http\Controllers\functionController;
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        <x-jet-label for="sub3_sealid" value="{{ __('เลือกผู้ลงนามต่อไป') }}" />
+                                                        <x-jet-label for="sub3_sealid" value="{{ __('ดำเนินการต่อ') }}" />
                                                         <select class="form-control select2bs4 @error('sub3_sealid') is-invalid @enderror"
-                                                            required name="sub3_sealid">
-                                                            <option value="">เลือกผู้ลงนามต่อไป</option>
-                                                            <option value="not">ไม่เลือก</option>
+                                                            required name="sub3_sealid" id="documents_admission_inside_deputy_signController_sub3_sealid">
+                                                            <option value="">เลือก</option>
+                                                            <option value="ตีกลับ">ตีกลับ</option>
                                                             @foreach($userS as $row_user)
                                                             <option value="{{$row_user->id}}">{{$row_user->name}} [{{$row_user->pos}}]</option>
                                                             @endforeach
@@ -110,6 +110,14 @@ use App\Http\Controllers\functionController;
                                                                 {{$message}}</p>
                                                         </div>
                                                         @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group hide" id="documents_admission_inside_deputy_signController_form-group_sub3_note">
+                                                        <x-jet-label class="text-md" for="sub3_note"
+                                                            value="{{ __('ข้อความ') }}" />
+                                                        <input class="form-control"
+                                                            name="sub3_note" type="text" value="">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
@@ -129,7 +137,7 @@ use App\Http\Controllers\functionController;
                                                 </div>
                                             </div>
                                             <div class="flex items-center justify-center">
-                                                <input type="hidden" name="doc_id" value="{{$document_detail->doc_id}}">
+                                            <input type="hidden" name="doc_id" value="{{$document_detail->doc_id}}">
                                                 <input type="hidden" name="sub_id" value="{{$document_detail->sub_id}}">
                                                 <input type="hidden" name="sub2_id"
                                                                     value="{{$document_detail->sub2_id}}">
@@ -145,17 +153,20 @@ use App\Http\Controllers\functionController;
                                                                     value="{{$document_detail->doc_title}}">
                                                 <input type="hidden" name="sub_recid"
                                                                     value="{{$document_detail->sub_recid}}">
-                                                <input type="hidden" name="sub3_sealid_0"
-                                                                    value="{{$document_detail->sub3_sealid_0}}">
-                                                <input type="hidden" name="sub3_sealid_1"
-                                                                    value="{{$document_detail->sub3_sealid_1}}">
+                                                <input type="hidden" name="sub3_sealid_2"
+                                                                    value="{{$document_detail->sub3_sealid_2}}">
+                                                <input type="hidden" name="sub3_sealid_3"
+                                                                    value="{{$document_detail->sub3_sealid_3}}">
                                                 <input type="hidden" name="sub3d_file"
                                                                     value="{{$document_detail->sub3d_file}}">
                                                                     
-                                                <input type="hidden" name="sub3_sealpos_0"
-                                                                    value="{{$document_detail->sub3_sealpos_0}}">
-                                                <input type="hidden" name="sub3_sealpos_1"
-                                                                    value="{{$document_detail->sub3_sealpos_1}}">
+                                                <input type="hidden" name="sub_recid" value="{{$document_detail->sub_recid}}">
+
+                                                                
+                                                <input type="hidden" name="sub3_sealpos_2"
+                                                                    value="{{$document_detail->sub3_sealpos_2}}">
+                                                <input type="hidden" name="sub3_sealpos_3"
+                                                                    value="{{$document_detail->sub3_sealpos_3}}">
                                                 <x-jet-button onclick="submitForm(this);">
                                                     {{ __('ลงนาม') }}
                                                 </x-jet-button>

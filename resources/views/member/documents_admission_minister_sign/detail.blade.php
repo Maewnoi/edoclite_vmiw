@@ -86,13 +86,32 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                             </div>
-                            @if($document_detail->sub3_status == '5')
+                            @if($document_detail->sub3_sealid_4 == Auth::user()->id && $document_detail->sub3_sealdate_4 == null || $document_detail->sub3_sealid_5 == Auth::user()->id && $document_detail->sub3_sealdate_5 == null)
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="{{route('documents_admission_minister_sign_understand')}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                         <div class="card card-body">
                                             <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <x-jet-label for="sub3_sealid" value="{{ __('ดำเนินการต่อ') }}" />
+                                                        <select class="form-control select2bs4 @error('sub3_sealid') is-invalid @enderror"
+                                                            required name="sub3_sealid" id="documents_admission_minister_signController_sub3_sealid">
+                                                            <option value="">เลือก</option>
+                                                            <option value="ไม่มีผู้ลงนามต่อ">ไม่มีผู้ลงนามต่อ</option>
+                                                            @foreach($userS as $row_user)
+                                                            <option value="{{$row_user->id}}">{{$row_user->name}} [{{$row_user->pos}}]</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('sub3_sealid')
+                                                        <div class="my-2">
+                                                            <p class="mt-2 text-sm text-red-600">
+                                                                {{$message}}</p>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <x-jet-label for="sub3_sealpos" value="{{ __('ตำแหน่ง') }}" />
@@ -128,17 +147,17 @@ use App\Http\Controllers\functionController;
                                                                     value="{{$document_detail->sub_recid}}">
                                                 <input type="hidden" name="sub3d_file"
                                                                     value="{{$document_detail->sub3d_file}}">
-                                                <input type="hidden" name="sub3_sealid_0"
-                                                                    value="{{$document_detail->sub3_sealid_0}}">
-                                                <input type="hidden" name="sub3_sealid_1"
-                                                                    value="{{$document_detail->sub3_sealid_1}}">
-                                                <input type="hidden" name="sub3_sealid_2"
-                                                                    value="{{$document_detail->sub3_sealid_2}}">
+                                                <input type="hidden" name="sub3_sealid_4"
+                                                                    value="{{$document_detail->sub3_sealid_4}}">
+                                                <input type="hidden" name="sub3_sealid_5"
+                                                                    value="{{$document_detail->sub3_sealid_5}}">
 
-                                                <input type="hidden" name="sub3_sealpos_0"
-                                                                    value="{{$document_detail->sub3_sealpos_0}}">
-                                                <input type="hidden" name="sub3_sealpos_1"
-                                                                    value="{{$document_detail->sub3_sealpos_1}}">
+                                                <input type="hidden" name="sub_recid" value="{{$document_detail->sub_recid}}">
+
+                                                <input type="hidden" name="sub3_sealpos_4"
+                                                                    value="{{$document_detail->sub3_sealpos_4}}">
+                                                <input type="hidden" name="sub3_sealpos_5"
+                                                                    value="{{$document_detail->sub3_sealpos_5}}">
                                                 <x-jet-button onclick="submitForm(this);">
                                                     {{ __('ลงนาม') }}
                                                 </x-jet-button>

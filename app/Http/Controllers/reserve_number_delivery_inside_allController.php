@@ -20,6 +20,15 @@ class reserve_number_delivery_inside_allController extends Controller
             ->where('reserve_group',Auth::user()->group)
             ->where('reserve_type','1')
             ->where('reserve_template','B')
+            ->orderby('reserve_number','DESC')
+            ->get();
+            return view('member.reserve_number_delivery_inside_all.index',compact('reserve_delivery_inside_numberS'));
+        }elseif(Auth::user()->level=='3'){
+            //สารบรรณกลาง
+            $reserve_delivery_inside_numberS = reserve_number::where('reserve_site',Auth::user()->site_id)
+            ->where('reserve_type','1')
+            ->where('reserve_template','B')
+            ->orderby('reserve_number','DESC')
             ->get();
             return view('member.reserve_number_delivery_inside_all.index',compact('reserve_delivery_inside_numberS'));
         }else{

@@ -132,6 +132,18 @@ use App\Http\Controllers\functionController;
                                         {{navigationController::funtion_document_admission_all_count_level_3(Auth::user()->level)}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link type="button" data-toggle="modal" class="text-decoration-none"
+                                        data-target="#modal-Create-new-document-b">
+                                        {{ __('สร้างเอกสารส่งภายนอก') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_transmission_all') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรับเข้าทั้งหมด ( ') }}
+                                        {{navigationController::funtion_document_transmission_all_count_level_3(Auth::user()->level)}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
                                     @endif
 
                                     <!-- หัวหน้ากอง -->
@@ -265,10 +277,12 @@ use App\Http\Controllers\functionController;
                                         class="text-decoration-none">
                                         {{ __('จองเลขรับ') }}
                                     </x-jet-dropdown-link>
-                                    <!-- <x-jet-dropdown-link class="disabled" href="{{ route('reserve_number_delivery_all') }}">
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link class="disabled" href="{{ route('reserve_number_delivery_all') }}"
+                                        class="text-decoration-none">
                                         {{ __('จองเลขส่ง') }}
                                     </x-jet-dropdown-link>
-                                    -->
+                                   
                                     @endif
 
                                     <!-- สารบรรณกอง -->
@@ -592,7 +606,7 @@ use App\Http\Controllers\functionController;
                     @endif
 
 
-                    @elseif(Auth::user()->level == '1' || Auth::user()->level == '2')
+                    @elseif(Auth::user()->level == '1' || Auth::user()->level == '2' || Auth::user()->level == '8')
                     <x-jet-nav-link href="{{ route('member_dashboard') }}"
                         :active="request()->routeIs('member_dashboard')" class="text-decoration-none">
                         หน้าหลัก
@@ -615,6 +629,12 @@ use App\Http\Controllers\functionController;
                                             <!-- ปลัดและรองปลัด -->
                                             @if(Auth::user()->level == '2')
                                             <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_deputy_sign_count_level_2">
+                                            </span>
+                                            @endif
+
+                                            <!-- หน้าห้องปลัดและนายก -->
+                                            @if(Auth::user()->level == '8')
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_secretary_count_level_8">
                                             </span>
                                             @endif
 
@@ -664,6 +684,23 @@ use App\Http\Controllers\functionController;
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     @endif
+
+                                    <!-- หน้าห้องปลัดและนายก secretary -->
+                                    @if(Auth::user()->level == '8')
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_secretary_retrun_all_0') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรับเข้ารอลงนาม ( ') }}
+                                        {{navigationController::funtion_documents_admission_secretary_retrun_count_0_level_8()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_secretary_retrun_all_1') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรับเข้าที่ลงนามแล้ว ( ') }}
+                                        {{navigationController::funtion_documents_admission_secretary_retrun_count_1_level_8()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    @endif
                                 </x-slot>
                             </x-jet-dropdown>
                         </div>
@@ -686,6 +723,12 @@ use App\Http\Controllers\functionController;
                                             <!-- ปลัดและรองปลัด -->
                                             @if(Auth::user()->level == '2')
                                             <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_inside_deputy_sign_count_level_2">
+                                            </span>
+                                            @endif
+
+                                            <!-- หน้าห้องปลัดและนายก -->
+                                            @if(Auth::user()->level == '8')
+                                            <span class="badge badge-pill badge-danger ml-2 -mr-0.5" id="funtion_documents_admission_inside_secretary_count_level_8">
                                             </span>
                                             @endif
 
@@ -768,6 +811,41 @@ use App\Http\Controllers\functionController;
                                         class="text-decoration-none">
                                         {{ __('เอกสารที่ลงนามแล้ว ( ') }}
                                         {{navigationController::funtion_documents_retrun_inside_deputy_sign_count_1_level_2()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    @endif
+
+                                    <!-- หน้าห้องปลัดและนายก -->
+                                    @if(Auth::user()->level == '8')
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_inside_secretary_retrun_all_0') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรับเข้ารอลงนาม ( ') }}
+                                        {{navigationController::funtion_documents_admission_inside_secretary_retrun_count_0_level_8()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_admission_inside_secretary_retrun_all_1') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรับเข้าที่ลงนามแล้ว ( ') }}
+                                        {{navigationController::funtion_documents_admission_inside_secretary_retrun_count_1_level_8()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                        {{ __('งานตอบกลับ') }}
+                                    </div>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_retrun_inside_secretary_all_0') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารรอลงนาม ( ') }}
+                                        {{navigationController::funtion_documents_retrun_inside_secretary_count_0_level_8()}}
+                                        {{ __(' ) เรื่อง') }}
+                                    </x-jet-dropdown-link>
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('documents_retrun_inside_secretary_all_1') }}"
+                                        class="text-decoration-none">
+                                        {{ __('เอกสารที่ลงนามแล้ว ( ') }}
+                                        {{navigationController::funtion_documents_retrun_inside_secretary_count_1_level_8()}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     @endif
@@ -1391,15 +1469,268 @@ use App\Http\Controllers\functionController;
             </div>
         </div>
     </div>
-
-    <!-- สร้างเอกสารใหม่ -->
+    <!-- สร้างเอกสารส่งภายนอกใหม่ -->
+    @if(Auth::user()->level == '3')
+    <div class="modal fade" id="modal-Create-new-document-b">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title"><i class="nav-icon fas fa-file-signature"></i>
+                        สร้างเอกสารส่งภายนอกใหม่
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('document_accepting_new_b')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <x-jet-label for="doc_recnum" value="{{ __('เลขที่รับส่วนงาน') }}" />
+                                    <select class="form-control select2bs4 @error('doc_recnum') is-invalid @enderror"
+                                        name="doc_recnum" id="member_dashoardController_doc_recnum_b" required>
+                                        <optgroup label="เลขรันปกติ">
+                                            <option
+                                                value="{{functionController::funtion_documents_doc_recnum_delivery_plus(Auth::user()->site_id)}}">
+                                                (
+                                                {{functionController::funtion_documents_doc_recnum_delivery_plus(Auth::user()->site_id)}}
+                                                )
+                                            </option>
+                                        </optgroup>
+                                        <optgroup label="เลขที่จองไว้">
+                                            @foreach(navigationController::funtion_reserved_numbersS_delivery_level_3(Auth::user()->level) as $row_reserved_numbers)
+                                            <option value="{{$row_reserved_numbers->reserve_number}}"
+                                                data-id="{{$row_reserved_numbers->reserve_id}}">
+                                                ( {{$row_reserved_numbers->reserve_number}} )
+                                                {{functionController::funtion_date_format($row_reserved_numbers->reserve_date)}}
+                                            </option>
+                                            @endforeach
+                                        </optgroup>
+                                        <optgroup label="เลขที่หลุดจอง">
+                                            @foreach(navigationController::funtion_dropped_numbersS_delivery_level_3(Auth::user()->level) as $row_dropped_numbers)
+                                            <option value="{{$row_dropped_numbers->reserve_number}}"
+                                                data-id="{{$row_dropped_numbers->reserve_id}}">
+                                                ( {{$row_dropped_numbers->reserve_number}} )
+                                                {{functionController::funtion_date_format($row_dropped_numbers->reserve_date)}}
+                                            </option>
+                                            @endforeach
+                                        </optgroup>
+                                    </select>
+                                    @error('doc_recnum')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <x-jet-label for="doc_docnum" value="{{ __('เลขที่หนังสือ') }}" />
+                                    <input type="text" name="doc_docnum"
+                                        class="form-control @error('doc_docnum') is-invalid @enderror" required>
+                                    @error('doc_docnum')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <x-jet-label for="doc_date" value="{{ __('วันที่') }}" />
+                                    <input type="date" name="doc_date" value="{{date('Y-m-d')}}"
+                                        class="form-control @error('doc_date') is-invalid @enderror" required>
+                                    @error('doc_date')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <x-jet-label for="doc_date_2" value="{{ __('ลงวันที่') }}" />
+                                    <input type="date" name="doc_date_2" value="{{date('Y-m-d')}}"
+                                        id="member_dashoardController_doc_date_2_b"
+                                        class="form-control @error('doc_date_2') is-invalid @enderror" required>
+                                    @error('doc_date_2')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <x-jet-label for="doc_time" value="{{ __('เวลา') }}" />
+                                    <input type="time" name="doc_time" value="{{date('H:i')}}"
+                                        class="form-control @error('doc_time') is-invalid @enderror" required>
+                                    @error('doc_time')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <x-jet-label for="doc_origin" value="{{ __('หน่วยงานเจ้าของเรื่อง') }}" />
+                                    <input type="text" name="doc_origin"
+                                        class="form-control @error('doc_origin') is-invalid @enderror" required>
+                                    @error('doc_origin')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <x-jet-label for="doc_title" value="{{ __('เรื่อง') }}" />
+                                    <textarea name="doc_title" rows="4" cols="50"
+                                        class="form-control @error('doc_title') is-invalid @enderror"
+                                        required></textarea>
+                                    @error('doc_title')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <x-jet-label for="doc_filedirec" value="{{ __('อัพโหลดไฟล์เอกสาร') }}" />
+                                    <input type="file" name="doc_filedirec" accept="application/pdf"
+                                        class="form-control @error('doc_filedirec') is-invalid @enderror" required>
+                                    @error('doc_filedirec')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input  @error('') is-invalid @enderror" value="0"
+                                                type="radio" name="RadioAttachments"
+                                                id="member_dashoardController_RadioAttachments_0_b" checked>
+                                            <label class="form-check-label"
+                                                for="member_dashoardController_RadioAttachments_0_b">
+                                                <x-jet-label for="member_dashoardController_RadioAttachments_0_b"
+                                                    value="{{ __('ไม่มีไฟล์แนบ') }}" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input  @error('') is-invalid @enderror" value="1"
+                                                type="radio" name="RadioAttachments"
+                                                id="member_dashoardController_RadioAttachments_1_b">
+                                            <label class="form-check-label"
+                                                for="member_dashoardController_RadioAttachments_1_b">
+                                                <x-jet-label for="member_dashoardController_RadioAttachments_1_b"
+                                                    value="{{ __('มีไฟล์แนบ') }}" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                    </div>
+                                    @error('')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group hide"
+                                    id="member_dashoardController_doc_attached_file_form-group_group_b">
+                                    <x-jet-label for="doc_attached_file" class="text-primary"
+                                        value="{{ __('(เพิ่มไฟล์แนบ)') }}" />
+                                    <input type="file" name="doc_attached_file"
+                                        id="member_dashoardController_doc_attached_file_b"
+                                        class="form-control @error('doc_attached_file') is-invalid @enderror">
+                                    <p class="text-sm text-primary">
+                                        ไฟล์เอกสารที่สามารถแนบกับไฟล์เอกสารอัพโหลดได้ต้องมีนามสกุล .gif, .jpg,
+                                        .jpeg,
+                                        .pdf, .png, .csv, .xls, .xlsx, .doc และ .docx เท่านั้น
+                                        หากมีไฟล์แนบมากกว่า 1 ไฟล์ กรุณา zip ก่อนอัพโหลด</p>
+                                    @error('doc_attached_file')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <x-jet-label for="doc_speed" value="{{ __('ชั้นความเร็ว') }}" />
+                                    <select class="form-control select2bs4 @error('doc_speed') is-invalid @enderror"
+                                        required name="doc_speed">
+                                        <option value="0">ปกติ</option>
+                                        <option value="1">ด่วน</option>
+                                        <option value="2">ด่วนมาก</option>
+                                        <option value="3">ด่วนที่สุด</option>
+                                    </select>
+                                    @error('doc_speed')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <x-jet-label for="doc_secret" value="{{ __('ชั้นความลับ') }}" />
+                                    <select class="form-control select2bs4 @error('doc_secret') is-invalid @enderror"
+                                        required name="doc_secret">
+                                        <option value="0">ปกติ</option>
+                                        <option value="1">ลับ</option>
+                                        <option value="2">ลับมาก</option>
+                                        <option value="3">ลับที่สุด</option>
+                                    </select>
+                                    @error('doc_secret')
+                                    <div class="my-2">
+                                        <p class="mt-2 text-sm text-red-600">
+                                            {{$message}}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <x-jet-button onclick="submitForm(this);">
+                            {{ __('save') }}
+                        </x-jet-button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+    
+    <!-- สร้างเอกสารลงรับใหม่ -->
     @if(Auth::user()->level == '3')
     <div class="modal fade" id="modal-Create-new-document">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h4 class="modal-title"><i class="nav-icon fas fa-file-signature"></i>
-                        สร้างเอกสารใหม่
+                        สร้างเอกสารลงรับใหม่
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -2170,9 +2501,18 @@ use App\Http\Controllers\functionController;
                                                 <select name="docrt_type"
                                                 id="navigationController_docrt_type" required
                                                 class="form-control select2bs4 @error('docrt_type') is-invalid @enderror">
-                                                    <option value="">เลือกประเภท</option>
-                                                    <option value="0">บันทึกข้อความ </option>
-                                                    <option value="1">ตราครุฑ</option>
+                                                        <option value="">
+                                                            เลือกประเภท
+                                                        </option>
+                                                        <option value="2">
+                                                            แนบไฟล์
+                                                        </option>
+                                                        <option value="0">
+                                                            บันทึกข้อความ (ทดสอบ)
+                                                        </option>
+                                                        <option value="1">
+                                                            ตราครุฑ (ทดสอบ)
+                                                        </option>
                                                 </select>
                                                 @error('docrt_type')
                                                 <div class="my-2">
@@ -2341,6 +2681,54 @@ use App\Http\Controllers\functionController;
                                                     </button>
                                                     <x-jet-button onclick="submitForm(this);"
                                                         id="navigationController_bt_respond"
+                                                        disabled>
+                                                        {{ __('ตอบกลับ') }}
+                                                    </x-jet-button>
+                                                </div>
+                                                        
+                                                <label class="mt-2">หมายเหตุ : การตอบกลับนี้เอกสารจะเข้าหัวหน้าฝ่าย</label>
+                                            </div>
+                                            <div class="form-group hide"
+                                                id="navigationController_form-group_tb-docrt_details-normal">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <x-jet-label class="text-md" for="docrtdt_government_normal"
+                                                            value="{{ __('ส่วนราชการ') }}" />
+                                                            <input class="form-control"
+                                                                name="docrtdt_government_normal" type="text" value="">
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <x-jet-label class="text-md" for="docrtdt_draft_normal"
+                                                            value="{{ __('ที่ร่าง') }}" />
+                                                            <input class="form-control"
+                                                                name="docrtdt_draft_normal" type="text" value="">
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <x-jet-label class="text-md" for="docrtdt_date_normal"
+                                                            value="{{ __('วันที่') }}" />
+                                                            <input class="form-control"
+                                                                name="docrtdt_date_normal" type="text" value="21 ธันวาคม 1988">
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <x-jet-label class="text-md" for="docrtdt_topic_normal"
+                                                            value="{{ __('เรื่อง') }}" />
+                                                            <input class="form-control"
+                                                                name="docrtdt_topic_normal" type="text" value="">
+                                                    </div>
+                                                </div>
+                                                        
+                                                <div class="items-center justify-center mt-10">
+                                                    <x-jet-label class="text-md" for="docrtdt_file"
+                                                            value="{{ __('เอกสาร') }}" />
+                                                    <input type="file" name="docrtdt_file" accept="application/pdf"
+                                                        id="navigationController_docrtdt_file_normal"
+                                                        class="form-control @error('docrtdt_file') is-invalid @enderror">
+                                                </div>
+                                                        
+                                                <div class="flex items-center justify-center mt-20">
+                                                    
+                                                    <x-jet-button onclick="submitForm(this);"
+                                                        id="navigationController_bt_respond-normal"
                                                         disabled>
                                                         {{ __('ตอบกลับ') }}
                                                     </x-jet-button>

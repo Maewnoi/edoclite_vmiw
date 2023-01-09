@@ -82,23 +82,33 @@ use App\Http\Controllers\functionController;
                                     <form action="{{route('documents_admission_inside_jurisprudence_understand')}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                         <div class="card card-body">
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <x-jet-label for="sub3_sealid" value="{{ __('เลือกผู้ลงนาม') }}" />
-                                                    <select class="form-control select2bs4 @error('sub3_sealid') is-invalid @enderror"
-                                                        required name="sub3_sealid">
-                                                        <option value="">เลือกผู้ลงนาม</option>
-                                                        <option value="not">ไม่เลือก</option>
-                                                        @foreach($userS as $row_user)
-                                                        <option value="{{$row_user->id}}">{{$row_user->name}} [{{$row_user->pos}}]</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('sub3_sealid')
-                                                    <div class="my-2">
-                                                        <p class="mt-2 text-sm text-red-600">
-                                                            {{$message}}</p>
+                                        <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <x-jet-label for="sub3_sealid" value="{{ __('เลือกผู้ลงนาม') }}" />
+                                                        <select class="form-control select2bs4 @error('sub3_sealid') is-invalid @enderror"
+                                                            required name="sub3_sealid" id="documents_admission_inside_jurisprudenceController_sub3_sealid">
+                                                            <option value="">เลือกผู้ลงนาม</option>
+                                                            <option value="ตีกลับ">ตีกลับ</option>
+                                                            @foreach($userS as $row_user)
+                                                            <option value="{{$row_user->id}}">{{$row_user->name}} [{{$row_user->pos}}]</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('sub3_sealid')
+                                                        <div class="my-2">
+                                                            <p class="mt-2 text-sm text-red-600">
+                                                                {{$message}}</p>
+                                                        </div>
+                                                        @enderror
                                                     </div>
-                                                    @enderror
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group hide" id="documents_admission_inside_jurisprudenceController_form-group_sub3_note">
+                                                        <x-jet-label class="text-md" for="sub3_note"
+                                                            value="{{ __('ข้อความ') }}" />
+                                                        <input class="form-control"
+                                                            name="sub3_note" type="text" value="">
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -126,22 +136,6 @@ use App\Http\Controllers\functionController;
                                     </form>
                                 </div>
                             </div>
-                            <form action="{{route('documents_admission_inside_jurisprudence_do_not_understand')}}" method="post" enctype="multipart/form-data">
-                            @csrf
-                                <div class="flex items-center justify-center">
-                                    <input type="hidden" name="doc_id" value="{{$document_detail->doc_id}}">
-                                    <input type="hidden" name="sub_id" value="{{$document_detail->sub_id}}">
-                                    <input type="hidden" name="sub2_id" value="{{$document_detail->sub2_id}}">
-                                    <input type="hidden" name="sub3_id" value="{{$document_detail->sub3_id}}">
-                                    <input type="hidden" name="sub3d_id" value="{{$document_detail->sub3d_id}}">
-                                    <input type="hidden" name="doc_docnum" value="{{$document_detail->doc_docnum}}">
-                                    <input type="hidden" name="doc_origin" value="{{$document_detail->doc_origin}}">
-                                    <input type="hidden" name="doc_title" value="{{$document_detail->doc_title}}">
-                                    <x-jet-button onclick="submitForm(this);">
-                                        {{ __('ไม่อนุมัติ') }}
-                                    </x-jet-button>
-                                </div>
-                            </form>
                             @endif
                             <hr>
                         </div>

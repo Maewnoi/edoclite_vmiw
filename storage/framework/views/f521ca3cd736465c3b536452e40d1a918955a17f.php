@@ -128,7 +128,7 @@ use App\Http\Controllers\functionController;
                                     </div>
                                 </div>
                             </div>
-                            <?php if($document_detail->sub3_status == '3' || $document_detail->sub3_status == '4'): ?>
+                            <?php if($document_detail->sub3_sealid_2 == Auth::user()->id && $document_detail->sub3_sealdate_2 == null || $document_detail->sub3_sealid_3 == Auth::user()->id && $document_detail->sub3_sealdate_3 == null): ?>
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="<?php echo e(route('documents_admission_deputy_sign_understand')); ?>" method="post" enctype="multipart/form-data">
@@ -157,9 +157,9 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                                            required name="sub3_sealid">
+                                                            required name="sub3_sealid" id="documents_admission_deputy_signController_sub3_sealid">
                                                             <option value="">เลือกผู้ลงนามต่อไป</option>
-                                                            <option value="not">ไม่เลือก</option>
+                                                            <option value="ตีกลับ">ตีกลับ</option>
                                                             <?php $__currentLoopData = $userS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row_user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <option value="<?php echo e($row_user->id); ?>"><?php echo e($row_user->name); ?> [<?php echo e($row_user->pos); ?>]</option>
                                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -177,6 +177,24 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group hide" id="documents_admission_deputy_signController_form-group_sub3_note">
+                                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'sub3_note','value' => ''.e(__('ข้อความ')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'text-md','for' => 'sub3_note','value' => ''.e(__('ข้อความ')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                        <input class="form-control"
+                                                            name="sub3_note" type="text" value="">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
@@ -237,17 +255,20 @@ unset($__errorArgs, $__bag); ?>
                                                                     value="<?php echo e($document_detail->doc_title); ?>">
                                                 <input type="hidden" name="sub_recid"
                                                                     value="<?php echo e($document_detail->sub_recid); ?>">
-                                                <input type="hidden" name="sub3_sealid_0"
-                                                                    value="<?php echo e($document_detail->sub3_sealid_0); ?>">
-                                                <input type="hidden" name="sub3_sealid_1"
-                                                                    value="<?php echo e($document_detail->sub3_sealid_1); ?>">
+                                                <input type="hidden" name="sub3_sealid_2"
+                                                                    value="<?php echo e($document_detail->sub3_sealid_2); ?>">
+                                                <input type="hidden" name="sub3_sealid_3"
+                                                                    value="<?php echo e($document_detail->sub3_sealid_3); ?>">
                                                 <input type="hidden" name="sub3d_file"
                                                                     value="<?php echo e($document_detail->sub3d_file); ?>">
                                                                     
-                                                <input type="hidden" name="sub3_sealpos_0"
-                                                                    value="<?php echo e($document_detail->sub3_sealpos_0); ?>">
-                                                <input type="hidden" name="sub3_sealpos_1"
-                                                                    value="<?php echo e($document_detail->sub3_sealpos_1); ?>">
+                                                <input type="hidden" name="sub_recid" value="<?php echo e($document_detail->sub_recid); ?>">
+
+                                                                
+                                                <input type="hidden" name="sub3_sealpos_2"
+                                                                    value="<?php echo e($document_detail->sub3_sealpos_2); ?>">
+                                                <input type="hidden" name="sub3_sealpos_3"
+                                                                    value="<?php echo e($document_detail->sub3_sealpos_3); ?>">
                                                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
 <?php $component->withName('jet-button'); ?>

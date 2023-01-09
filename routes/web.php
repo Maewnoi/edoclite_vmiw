@@ -57,6 +57,12 @@ use App\Http\Controllers\documents_retrun_inside_division_retrunController;
 use App\Http\Controllers\route_domjiController;
 use App\Http\Controllers\replaceController;
 use App\Models\sites;
+use App\Http\Controllers\documents_retrun_secretaryController;
+use App\Http\Controllers\documents_admission_secretary_retrunController;
+use App\Http\Controllers\documents_admission_inside_secretary_retrunController;
+use App\Http\Controllers\documents_retrun_inside_secretaryController;
+use App\Http\Controllers\documents_transmission_allController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -80,7 +86,7 @@ foreach($routes_sites_check_S as $row_sites){
             if(isset(Auth::user()->level)){
                 if(Auth::user()->level == '0'){
                     return redirect('dashboard');
-                }else if(Auth::user()->level == '1'||Auth::user()->level == '2'||Auth::user()->level == '3'||Auth::user()->level == '4'||Auth::user()->level == '5'||Auth::user()->level == '6'||Auth::user()->level == '7'){
+                }else if(Auth::user()->level == '1'||Auth::user()->level == '2'||Auth::user()->level == '3'||Auth::user()->level == '4'||Auth::user()->level == '5'||Auth::user()->level == '6'||Auth::user()->level == '7'||Auth::user()->level == '8'){
                     return redirect('member_dashboard');
                 }
             }else{
@@ -231,6 +237,18 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_retrun_inside_department_retrun/all/query',[queryController::class,'funtion_query_documents_retrun_inside_department_retrunController_level_5']);
     Route::get('/documents_retrun_inside_division_retrun/all/query',[queryController::class,'funtion_query_documents_retrun_inside_division_retrunController_level_4']);
     Route::get('/replace_check_menu/count/query',[queryController::class,'funtion_query_replace_check_menu_count_level_7_5_4_2_1']);
+    Route::get('/documents_admission_secretary_retrun/count/query',[queryController::class,'funtion_query_documents_admission_secretary_retrun_count_level_8']);
+    Route::get('/documents_admission_secretary_retrun/chart/8/query',[queryController::class,'funtion_query_documents_admission_secretary_retrun_chart_level_8']);
+    Route::get('/documents_admission_secretary_retrun/all/0/query',[queryController::class,'funtion_query_documents_admission_secretary_retrun_0_Controller_level_8']);
+    Route::get('/documents_admission_secretary_retrun/all/1/query',[queryController::class,'funtion_query_documents_admission_secretary_retrun_1_Controller_level_8']);
+    Route::get('/documents_admission_inside_secretary_retrun/count/query',[queryController::class,'funtion_query_documents_admission_inside_secretary_retrun_count_level_8']);
+    Route::get('/documents_admission_inside_secretary_retrun/chart/8/query',[queryController::class,'funtion_query_documents_admission_inside_secretary_retrun_chart_level_8']);
+    Route::get('/documents_admission_inside_secretary_retrun/all/0/query',[queryController::class,'funtion_query_documents_admission_inside_secretary_retrun_0_Controller_level_8']);
+    Route::get('/documents_admission_inside_secretary_retrun/all/1/query',[queryController::class,'funtion_query_documents_admission_inside_secretary_retrun_1_Controller_level_8']);
+    Route::get('/documents_retrun_inside_secretary/all/0/query',[queryController::class,'funtion_query_documents_retrun_inside_secretary_0_Controller_level_8']);
+    Route::get('/documents_retrun_inside_secretary/all/1/query',[queryController::class,'funtion_query_documents_retrun_inside_secretary_1_Controller_level_8']);
+
+    Route::get('/documents_transmission_all/all/query',[queryController::class,'funtion_query_documents_transmission_allController_level_3']);
 
     //---------------------------------------------------------------------------------------------------
     
@@ -286,6 +304,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //member 
     Route::get('/member_dashboard',[member_dashboardController::class,'index'])->name('member_dashboard');
     Route::post('/member_dashboard/document_accepting_new',[member_dashboardController::class,'document_accepting_new'])->name('document_accepting_new');
+    Route::post('/member_dashboard/document_accepting_new_b',[member_dashboardController::class,'document_accepting_new_b'])->name('document_accepting_new_b');
     Route::get('/getdoc_recnum/{id}',[member_dashboardController::class,'getdoc_recnum']);
     Route::post('/member_dashboard/document_accepting_new_inside',[member_dashboardController::class,'document_accepting_new_inside'])->name('document_accepting_new_inside');
     Route::post('/member_dashboard/document_accepting_new_inside_retrun',[member_dashboardController::class,'document_accepting_new_inside_retrun'])->name('document_accepting_new_inside_retrun');
@@ -428,7 +447,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_admission_jurisprudence/all',[documents_admission_jurisprudenceController::class,'index'])->name('documents_admission_jurisprudence_all');
     Route::get('/documents_admission_jurisprudence/detail/{id}',[documents_admission_jurisprudenceController::class,'detail'])->name('documents_admission_jurisprudence_detail')->middleware(['password.confirm']);
     Route::post('/documents_admission_jurisprudence/understand',[documents_admission_jurisprudenceController::class,'understand'])->name('documents_admission_jurisprudence_understand');
-    Route::post('/documents_admission_jurisprudence/do_not_understand',[documents_admission_jurisprudenceController::class,'do_not_understand'])->name('documents_admission_jurisprudence_do_not_understand');
+    // Route::post('/documents_admission_jurisprudence/do_not_understand',[documents_admission_jurisprudenceController::class,'do_not_understand'])->name('documents_admission_jurisprudence_do_not_understand');
 
     //documents admission deputy sign ปลัด รองปลัด ลงนาม
     Route::get('/documents_admission_deputy_sign/all/0',[documents_admission_deputy_signController::class,'index_0'])->name('documents_admission_deputy_sign_all_0');
@@ -535,6 +554,28 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/documents_retrun_inside_division_retrun/all',[documents_retrun_inside_division_retrunController::class,'index'])->name('documents_retrun_inside_division_retrun_all');
     Route::get('/documents_retrun_inside_division_retrun/detail/{id}',[documents_retrun_inside_division_retrunController::class,'detail'])->name('documents_retrun_inside_division_retrun_detail')->middleware(['password.confirm']);
     Route::post('/documents_retrun_inside_division_retrun/respond',[documents_retrun_inside_division_retrunController::class,'respond'])->name('documents_retrun_inside_division_retrun_respond');
-     
+ 
+    //All documents_admission_secretary_retrunController เลขานอก
+    Route::get('/documents_admission_secretary_retrun/all/0',[documents_admission_secretary_retrunController::class,'index_0'])->name('documents_admission_secretary_retrun_all_0');
+    Route::get('/documents_admission_secretary_retrun/all/1',[documents_admission_secretary_retrunController::class,'index_1'])->name('documents_admission_secretary_retrun_all_1');
+    Route::get('/documents_admission_secretary_retrun/detail/{id}',[documents_admission_secretary_retrunController::class,'detail'])->name('documents_admission_secretary_retrun_detail')->middleware(['password.confirm']);
+    Route::post('/documents_admission_secretary_retrun/understand',[documents_admission_secretary_retrunController::class,'understand'])->name('documents_admission_secretary_retrun_understand');
+
+     //All documents_admission_inside_secretary_retrunController เลขาใน
+    Route::get('/documents_admission_inside_secretary_retrun/all/0',[documents_admission_inside_secretary_retrunController::class,'index_0'])->name('documents_admission_inside_secretary_retrun_all_0');
+    Route::get('/documents_admission_inside_secretary_retrun/all/1',[documents_admission_inside_secretary_retrunController::class,'index_1'])->name('documents_admission_inside_secretary_retrun_all_1');
+    Route::get('/documents_admission_inside_secretary_retrun/detail/{id}',[documents_admission_inside_secretary_retrunController::class,'detail'])->name('documents_admission_inside_secretary_retrun_detail')->middleware(['password.confirm']);
+    Route::post('/documents_admission_inside_secretary_retrun/understand',[documents_admission_inside_secretary_retrunController::class,'understand'])->name('documents_admission_inside_secretary_retrun_understand');
+
+    //All documents_retrun_inside_secretary_all เลขาใน
+    Route::get('/documents_retrun_inside_secretary/all/0',[documents_retrun_inside_secretaryController::class,'index_0'])->name('documents_retrun_inside_secretary_all_0');
+    Route::get('/documents_retrun_inside_secretary/all/1',[documents_retrun_inside_secretaryController::class,'index_1'])->name('documents_retrun_inside_secretary_all_1');
+    Route::get('/documents_retrun_inside_secretary/detail/{id}',[documents_retrun_inside_secretaryController::class,'detail'])->name('documents_retrun_inside_secretary_detail')->middleware(['password.confirm']);
+    Route::post('/documents_retrun_inside_secretary/understand',[documents_retrun_inside_secretaryController::class,'understand'])->name('documents_retrun_inside_secretary_understand');
+  
+    //All documents_transmission_allController เอกสารส่งภายนอก
+    Route::get('/documents_transmission_all/all',[documents_transmission_allController::class,'index'])->name('documents_transmission_all');
+    Route::get('/documents_transmission_all/detail/{id}',[documents_transmission_allController::class,'detail'])->name('documents_transmission_detail')->middleware(['password.confirm']);
+
     //---------------------------------------------------------------------------------------------------
 });

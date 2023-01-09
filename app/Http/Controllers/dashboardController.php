@@ -19,7 +19,7 @@ class dashboardController extends Controller
         if($level=='0'){
             return view('dashboard');
             // return view('dashboard',compact('users'));
-        }else if($level=='1'||$level=='2'||$level=='3'||$level=='4'||$level=='5'||$level=='6'||$level=='7'){
+        }else if($level=='1'||$level=='2'||$level=='3'||$level=='4'||$level=='5'||$level=='6'||$level=='7'||$level=='8'){
             return redirect('member_dashboard');
         }else{
             return route('logout');

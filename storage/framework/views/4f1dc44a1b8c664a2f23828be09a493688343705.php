@@ -148,7 +148,7 @@ use App\Http\Controllers\functionController;
                             </div>
                             <div class="card-footer">
                                 <span class="badge badge-info">เลขรับภายนอก</span> <span
-                                    class="badge badge-secondary">เลขรับภายใน</span>
+                                    class="badge badge-secondary">เลขส่งภายนอก</span>
                             </div>
                         </div>
                     </div>
@@ -367,6 +367,51 @@ use App\Http\Controllers\functionController;
                         </div>
                     </div>
                     <?php endif; ?>
+
+                    <!-- หน้าห้องปลัดและนายก -->
+                    <?php if(Auth::user()->level == '8'): ?>
+                    <div class="col-md-6">
+                        <div class="border shadow card border-info">
+                            <div class="card-header bg-primary">
+                                <h5 class="card-title">ลงนามอิเล็กทรอนิกส์เอกสารภายนอก</h5>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chart_level_8" style="height: 250px; width: 100%;"></div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="border shadow card border-info">
+                            <div class="card-header bg-primary">
+                                <h5 class="card-title">ลงนามอิเล็กทรอนิกส์เอกสารภายใน</h5>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chart_inside_level_8" style="height: 250px; width: 100%;"></div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                    
                 </div>
             </div>
         </div>

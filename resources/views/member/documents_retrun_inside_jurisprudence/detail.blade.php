@@ -71,26 +71,35 @@ use App\Http\Controllers\functionController;
                                     <form action="{{route('documents_retrun_inside_jurisprudence_understand')}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                         <div class="card card-body">
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <x-jet-label for="docrt_sealid" value="{{ __('เลือกผู้ลงนาม') }}" />
-                                                    <select class="form-control select2bs4 @error('docrt_sealid') is-invalid @enderror"
-                                                        required name="docrt_sealid">
-                                                        <option value="">เลือกผู้ลงนาม</option>
-                                                        <option value="not">ไม่เลือก</option>
-                                                        @foreach($userS as $row_user)
-                                                        <option value="{{$row_user->id}}">{{$row_user->name}} [{{$row_user->pos}}]</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('docrt_sealid')
-                                                    <div class="my-2">
-                                                        <p class="mt-2 text-sm text-red-600">
-                                                            {{$message}}</p>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <x-jet-label for="docrt_sealid" value="{{ __('เลือกผู้ลงนาม') }}" />
+                                                        <select class="form-control select2bs4 @error('docrt_sealid') is-invalid @enderror"
+                                                            required name="docrt_sealid" id="documents_retrun_inside_jurisprudenceController_docrt_sealid">
+                                                            <option value="">เลือกผู้ลงนาม</option>
+                                                            <option value="ตีกลับ">ตีกลับ</option>
+                                                            @foreach($userS as $row_user)
+                                                            <option value="{{$row_user->id}}">{{$row_user->name}} [{{$row_user->pos}}]</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('docrt_sealid')
+                                                        <div class="my-2">
+                                                            <p class="mt-2 text-sm text-red-600">
+                                                                {{$message}}</p>
+                                                        </div>
+                                                        @enderror
                                                     </div>
-                                                    @enderror
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group hide" id="documents_retrun_inside_jurisprudenceController_form-group_docrt_note">
+                                                        <x-jet-label class="text-md" for="docrt_note"
+                                                            value="{{ __('ข้อความ') }}" />
+                                                        <input class="form-control"
+                                                            name="docrt_note" type="text" value="">
+                                                    </div>
                                                 </div>
                                             </div>
-
                                             <div class="flex items-center justify-center">
                                                 <input type="hidden" name="docrt_id" value="{{$document_retrun_inside_detail->docrt_id}}">
                                                 <input type="hidden" name="docrtdt_topic" value="{{$document_retrun_inside_detail->docrtdt_topic}}">
@@ -98,6 +107,9 @@ use App\Http\Controllers\functionController;
                                                                 value="{{$document_retrun_inside_detail->docrtdt_draft}}">
                                                 <input type="hidden" name="docrtdt_date"
                                                                 value="{{$document_retrun_inside_detail->docrtdt_date}}">
+                                                
+                                                <input type="hidden" name="docrt_groupmems_id"
+                                                                value="{{$document_retrun_inside_detail->docrt_groupmems_id}}">
                                                             
                                                 <x-jet-button onclick="submitForm(this);">
                                                     {{ __('อนุมัติ') }}
@@ -107,20 +119,7 @@ use App\Http\Controllers\functionController;
                                     </form>
                                 </div>
                             </div>
-                            <form action="{{route('documents_retrun_inside_jurisprudence_do_not_understand')}}" method="post" enctype="multipart/form-data">
-                            @csrf
-                                <div class="flex items-center justify-center">
-                                    <input type="hidden" name="docrt_id" value="{{$document_retrun_inside_detail->docrt_id}}">
-                                    <input type="hidden" name="docrtdt_topic" value="{{$document_retrun_inside_detail->docrtdt_topic}}">
-                                    <input type="hidden" name="docrtdt_draft"
-                                                    value="{{$document_retrun_inside_detail->docrtdt_draft}}">
-                                    <input type="hidden" name="docrtdt_date"
-                                                    value="{{$document_retrun_inside_detail->docrtdt_date}}">
-                                    <x-jet-button onclick="submitForm(this);">
-                                        {{ __('ไม่อนุมัติ') }}
-                                    </x-jet-button>
-                                </div>
-                            </form>
+    
                             @endif
                             <hr>
                         </div>

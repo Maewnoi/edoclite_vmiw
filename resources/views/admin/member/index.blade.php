@@ -58,6 +58,8 @@ use App\Http\Controllers\functionController;
                                             สารบรรณกอง
                                             @elseif($row->level == '7')
                                             งาน
+                                            @elseif($row->level == '8')
+                                            หน้าห้องปลัด|หน้าห้องนายก
                                             @endif
                                         </td>
                                         <td>
@@ -297,6 +299,10 @@ use App\Http\Controllers\functionController;
                                                 <option value="6">สารบรรณกอง
                                                 </option>
                                                 <option value="7">งาน
+                                                </option>
+                                                <option value="8">หน้าห้องปลัด
+                                                </option>
+                                                <option value="8">หน้าห้องนายก
                                                 </option>
                                             </select>
                                             @error('level')

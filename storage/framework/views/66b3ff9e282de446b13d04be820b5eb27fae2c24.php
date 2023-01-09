@@ -103,15 +103,15 @@ use App\Http\Controllers\functionController;
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-menu')->html();
-} elseif ($_instance->childHasBeenRendered('OZo70nJ')) {
-    $componentId = $_instance->getRenderedChildComponentId('OZo70nJ');
-    $componentTag = $_instance->getRenderedChildComponentTagName('OZo70nJ');
+} elseif ($_instance->childHasBeenRendered('mJAhhL3')) {
+    $componentId = $_instance->getRenderedChildComponentId('mJAhhL3');
+    $componentTag = $_instance->getRenderedChildComponentTagName('mJAhhL3');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('OZo70nJ');
+    $_instance->preserveRenderedChild('mJAhhL3');
 } else {
     $response = \Livewire\Livewire::mount('navigation-menu');
     $html = $response->html();
-    $_instance->logRenderedChild('OZo70nJ', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('mJAhhL3', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -238,17 +238,6 @@ $.widget.bridge('uibutton', $.ui.button)
 <!-- SweetAlert2 -->
 <!-- <script src="<?php echo e(asset('/plugins/sweetalert2/sweetalert2.min.js')); ?>"></script> -->
 <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
-<?php if($errors->any()): ?>
-<?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <script>
-        swal({
-            title: "<?php echo e($error); ?>",
-            icon: "error",
-        });
-    </script>
-<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-<?php endif; ?>
-
 <?php if(session('error')): ?>
     <script>
         swal({
@@ -265,6 +254,17 @@ $.widget.bridge('uibutton', $.ui.button)
             icon: "success",
         });
     </script>
+<?php endif; ?>
+
+<?php if($errors->any()): ?>
+<?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <script>
+        swal({
+            title: "<?php echo e($error); ?>",
+            icon: "error",
+        });
+    </script>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 <?php endif; ?>
 <!-- Toastr -->
 <script src="<?php echo e(asset('/plugins/toastr/toastr.min.js')); ?>"></script>

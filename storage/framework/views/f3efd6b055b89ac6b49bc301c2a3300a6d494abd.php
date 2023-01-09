@@ -298,6 +298,9 @@ unset($__errorArgs, $__bag); ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
+                                                        <button id='documents_admission_division_allController_selected_multiple_sub2_recid_inside-select-all' class="h-10 px-5 m-2 text-sm text-purple-100 transition-colors duration-150 bg-purple-600 rounded-lg focus:shadow-outline hover:bg-purple-700">
+                                                        เลือกทั้งหมด
+                                                        </button>
                                                         <select name="sub2_recid_inside[]"
                                                             id="documents_admission_division_allController_selected_multiple_sub2_recid_inside"
                                                             multiple="multiple" required
@@ -343,6 +346,9 @@ unset($__errorArgs, $__bag); ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
+                                                        <button id='documents_admission_division_allController_selected_multiple_sub2_recid_inside_cottons-select-all' class="h-10 px-5 m-2 text-sm text-purple-100 transition-colors duration-150 bg-purple-600 rounded-lg focus:shadow-outline hover:bg-purple-700">
+                                                        เลือกทั้งหมด
+                                                        </button>
                                                         <select name="sub2_recid_inside_cottons[]"
                                                             id="documents_admission_division_allController_selected_multiple_sub2_recid_inside_cottons"
                                                             multiple="multiple" required

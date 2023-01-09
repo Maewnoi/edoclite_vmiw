@@ -74,54 +74,50 @@ foreach($sub_docsS as $row_check_sub_docs){
                                     </div>
                                 </div>
                                 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <x-jet-button type="button" data-toggle="modal"
-                                             data-target="#modal-update-general{{$document_detail->doc_id}}"
-                                            ><i class="fa fa-edit"></i> แก้ไขข้อมูลทั่วไป</x-jet-button>
-                                            
-                                            <x-jet-button type="button" data-toggle="modal"
-                                                data-target="#modal-update-file{{$document_detail->doc_id}}"
-                                                ><i class="fa fa-edit"></i> เปลี่ยนไฟล์เอกสาร</x-jet-button>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            
-                                            @error('doc_filedirec')
-                                            <div class="my-2">
-                                                <p class="mt-2 text-sm text-red-600">
-                                                    {{$message}}</p>
-                                            </div>
-                                            @enderror
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <x-jet-button type="button" data-toggle="modal"
+                                            data-target="#modal-update-general{{$document_detail->doc_id}}"
+                                        ><i class="fa fa-edit"></i> แก้ไขข้อมูลทั่วไป</x-jet-button>
+                                         
+                                        <x-jet-button type="button" data-toggle="modal"
+                                            data-target="#modal-update-file{{$document_detail->doc_id}}"
+                                            ><i class="fa fa-edit"></i> เปลี่ยนไฟล์เอกสาร</x-jet-button>
                                     </div>
                                 </div>
-
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @error('doc_filedirec')
+                                        <div class="my-2">
+                                            <p class="mt-2 text-sm text-red-600">
+                                                {{$message}}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card card-body">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <x-jet-label class="text-md" for="doc_filedirec"
+                                         <x-jet-label class="text-md" for="doc_filedirec"
                                             value="{{ __('ไฟล์เอกสาร') }}" />
                                         @if($document_detail->doc_status == 'waiting')
                                             {!!functionController::display_pdf($document_detail->doc_filedirec)!!}
                                         @elseif($document_detail->doc_status == 'success')
                                             {!!functionController::display_pdf($document_detail->doc_filedirec_1)!!}
                                         @endif
-                                        
+                                            
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class="form-group">
-                                        ไฟล์เอกสารแนบ : 
-                                        @if($document_detail->doc_attached_file != '')
-                                        <button type="button" id="open_doc_attached_file"
-                                            value="{{asset($document_detail->doc_attached_file)}}"
-                                            class="btn btn-outline-primary col start">
-                                            <i class="fas fa-upload"></i>
-                                            <span>open & download</span>
+                                      <div class="form-group">
+                                         ไฟล์เอกสารแนบ : 
+                                         @if($document_detail->doc_attached_file != '')
+                                         <button type="button" id="open_doc_attached_file"
+                                             value="{{asset($document_detail->doc_attached_file)}}"
+                                             class="btn btn-outline-primary col start">
+                                             <i class="fas fa-upload"></i>
+                                             <span>open & download</span>
                                         </button>
                                         @else
                                         <label class="text-danger">{{ __('--ไม่พบไฟล์เอกสารแนบ--') }}</label>

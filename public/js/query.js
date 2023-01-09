@@ -235,6 +235,102 @@ $('#chart_level_2').each(function () {
     }, 3000);
 });
 
+$('#chart_level_8').each(function () {
+    var dataPoints = [];
+    var var_chart_level_8 = new CanvasJS.Chart("chart_level_8", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            fontFamily: "italic",
+            fontSize: 16,
+            text: ""
+        },
+        data: [{
+            type: "pie",
+            startAngle: 15,
+            toolTipContent: "<b>{label}</b>: {y} เรื่อง",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 12,
+            indexLabel: "{label} {y} เรื่อง",
+            dataPoints: dataPoints
+        }]
+    });
+
+    var updateChart = function () {
+        $.ajax({
+            type: "GET",
+            url: "/documents_admission_secretary_retrun/chart/8/query",
+            data: '',
+            success: function(data) {
+                jQuery.each(data, function(index, item) {
+                    dataPoints.push({y: item, label: index});
+                    // console.log(dataPoints);
+                });
+                var_chart_level_8.render();
+            },
+            error: function(request, status, error) {
+                document.getElementById('chart_level_8').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
+                console.log(error);
+            }
+        });
+    }
+    updateChart();
+    setInterval(function(){
+        updateChart();
+        dataPoints.splice(0);
+    }, 3000);
+});
+
+$('#chart_inside_level_8').each(function () {
+    var dataPoints = [];
+    var var_chart_inside_level_8 = new CanvasJS.Chart("chart_inside_level_8", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            fontFamily: "italic",
+            fontSize: 16,
+            text: ""
+        },
+        data: [{
+            type: "pie",
+            startAngle: 15,
+            toolTipContent: "<b>{label}</b>: {y} เรื่อง",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 12,
+            indexLabel: "{label} {y} เรื่อง",
+            dataPoints: dataPoints
+        }]
+    });
+
+    var updateChart = function () {
+        $.ajax({
+            type: "GET",
+            url: "/documents_admission_inside_secretary_retrun/chart/8/query",
+            data: '',
+            success: function(data) {
+                jQuery.each(data, function(index, item) {
+                    dataPoints.push({y: item, label: index});
+                    // console.log(dataPoints);
+                });
+                var_chart_inside_level_8.render();
+            },
+            error: function(request, status, error) {
+                document.getElementById('chart_inside_level_8').innerHTML = '<center><i class="spinner-border" style="width: 200px;height: 200px;"></i><span class="sr-only">Loading...</span></center>';
+                console.log(error);
+            }
+        });
+    }
+    updateChart();
+    setInterval(function(){
+        updateChart();
+        dataPoints.splice(0);
+    }, 3000);
+});
+
 $('#funtion_documents_admission_deputy_sign_count_level_2').each(function () {
     document.getElementById('funtion_documents_admission_deputy_sign_count_level_2').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
     function funtion_documents_admission_deputy_sign_count_level_2() {
@@ -255,6 +351,52 @@ $('#funtion_documents_admission_deputy_sign_count_level_2').each(function () {
     funtion_documents_admission_deputy_sign_count_level_2();
     setInterval( function () {
         funtion_documents_admission_deputy_sign_count_level_2();
+    }, 3000 );
+});
+
+$('#funtion_documents_admission_secretary_count_level_8').each(function () {
+    document.getElementById('funtion_documents_admission_secretary_count_level_8').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_documents_admission_secretary_count_level_8() {
+        $.ajax({
+            type: "GET",
+            url: "/documents_admission_secretary_retrun/count/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_documents_admission_secretary_count_level_8').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_documents_admission_secretary_count_level_8').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_documents_admission_secretary_count_level_8();
+    setInterval( function () {
+        funtion_documents_admission_secretary_count_level_8();
+    }, 3000 );
+});
+
+$('#funtion_documents_admission_inside_secretary_count_level_8').each(function () {
+    document.getElementById('funtion_documents_admission_inside_secretary_count_level_8').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+    function funtion_documents_admission_inside_secretary_count_level_8() {
+        $.ajax({
+            type: "GET",
+            url: "/documents_admission_inside_secretary_retrun/count/query",
+            data: '',
+            success: function(data) {
+                document.getElementById('funtion_documents_admission_inside_secretary_count_level_8').innerHTML = data;
+                // console.log(data);
+            },
+            error: function(request, status, error) {
+                document.getElementById('funtion_documents_admission_inside_secretary_count_level_8').innerHTML = '<i class="spinner-border" style="width: 10px;height: 10px;"></i><span class="sr-only">Loading...</span>';
+                console.log(error);
+            }
+        });
+    }
+    funtion_documents_admission_inside_secretary_count_level_8();
+    setInterval( function () {
+        funtion_documents_admission_inside_secretary_count_level_8();
     }, 3000 );
 });
 
@@ -1817,12 +1959,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -2403,12 +2551,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                 }else if(data == '2'){
                     txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                 }else if(data == '3'){
-                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                 }else if(data == '4'){
-                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                 }else if(data == '5'){
-                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                 }else if(data == '6'){
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                }else if(data == '7'){
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                }else if(data == '8'){
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                }else if(data == '9'){
                     txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                 }else if(data == 'C'){
                     txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -4013,12 +4167,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -4114,12 +4274,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -4215,12 +4381,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -4316,12 +4488,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -4416,12 +4594,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -4517,12 +4701,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -4617,12 +4807,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                 }else if(data == '2'){
                     txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                 }else if(data == '3'){
-                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                 }else if(data == '4'){
-                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                 }else if(data == '5'){
-                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                 }else if(data == '6'){
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                }else if(data == '7'){
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                }else if(data == '8'){
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                }else if(data == '9'){
                     txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                 }else if(data == 'C'){
                     txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -4706,12 +4902,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                 }else if(data == '2'){
                     txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                 }else if(data == '3'){
-                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                 }else if(data == '4'){
-                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                 }else if(data == '5'){
-                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                 }else if(data == '6'){
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                }else if(data == '7'){
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                }else if(data == '8'){
+                    txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                }else if(data == '9'){
                     txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                 }else if(data == 'C'){
                     txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -4794,12 +4996,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -4894,12 +5102,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -4995,12 +5209,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -5095,12 +5315,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -5196,12 +5422,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -5296,12 +5528,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -5397,12 +5635,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -5498,12 +5742,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -5599,12 +5849,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -5700,12 +5956,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -5801,12 +6063,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -5902,12 +6170,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -6003,12 +6277,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -6104,12 +6384,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -6205,12 +6491,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -6306,12 +6598,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -6407,12 +6705,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -6508,12 +6812,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -6609,12 +6919,18 @@ if(window.location.pathname == '/documents_admission_all/all'){
                     }else if(data == '2'){
                         txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
                     }else if(data == '3'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '4'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
                     }else if(data == '5'){
-                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
                     }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
                         txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
                     }else if(data == 'C'){
                         txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -6647,4 +6963,755 @@ if(window.location.pathname == '/documents_admission_all/all'){
     setInterval( function () {
         table.ajax.reload(null, false);
     }, 3000 );
+
+}else if(window.location.pathname == '/documents_admission_secretary_retrun/all/0'){
+    $.fn.dataTable.ext.errMode = 'none';
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // },
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'doc_id' 
+            },
+            { 
+                data: 'sub3d_government' 
+            },
+            { 
+                data: 'sub3d_draft' 
+            },
+            {   
+                data: 'sub3d_date'
+            },
+            {
+                data: 'sub3d_topic' 
+            },
+            {
+                data: 'sub3d_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3d_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_sub3d_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_sub3d_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_sub3d_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_sub3d_speed)
+                }
+            },
+            {
+                data: 'sub3_status' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+                    }else if(data == '1'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+                    }else if(data == '3'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
+                    }else if(data == '4'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
+                    }else if(data == '5'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
+                        txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
+                    }else{
+                        txt_sub3_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_sub3_status)
+                }
+            },
+            {
+                data: 'doc_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_admission_secretary_retrun/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
+
+
+}else if(window.location.pathname == '/documents_admission_secretary_retrun/all/1'){
+    $.fn.dataTable.ext.errMode = 'none';
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // },
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'doc_id' 
+            },
+            { 
+                data: 'sub3d_government' 
+            },
+            { 
+                data: 'sub3d_draft' 
+            },
+            {   
+                data: 'sub3d_date'
+            },
+            {
+                data: 'sub3d_topic' 
+            },
+            {
+                data: 'sub3d_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3d_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_sub3d_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_sub3d_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_sub3d_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_sub3d_speed)
+                }
+            },
+            {
+                data: 'sub3_status' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+                    }else if(data == '1'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+                    }else if(data == '3'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
+                    }else if(data == '4'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
+                    }else if(data == '5'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
+                        txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
+                    }else{
+                        txt_sub3_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_sub3_status)
+                }
+            },
+            {
+                data: 'doc_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_admission_secretary_retrun/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
+
+
+}else if(window.location.pathname == '/documents_admission_inside_secretary_retrun/all/0'){
+    $.fn.dataTable.ext.errMode = 'none';
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // },
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'doc_id' 
+            },
+            { 
+                data: 'sub3d_government' 
+            },
+            { 
+                data: 'sub3d_draft' 
+            },
+            {   
+                data: 'sub3d_date'
+            },
+            {
+                data: 'sub3d_topic' 
+            },
+            {
+                data: 'sub3d_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3d_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_sub3d_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_sub3d_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_sub3d_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_sub3d_speed)
+                }
+            },
+            {
+                data: 'sub3_status' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+                    }else if(data == '1'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+                    }else if(data == '3'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
+                    }else if(data == '4'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
+                    }else if(data == '5'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
+                        txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
+                    }else{
+                        txt_sub3_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_sub3_status)
+                }
+            },
+            {
+                data: 'doc_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_admission_inside_secretary_retrun/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
+
+
+}else if(window.location.pathname == '/documents_admission_inside_secretary_retrun/all/1'){
+    $.fn.dataTable.ext.errMode = 'none';
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // },
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'doc_id' 
+            },
+            { 
+                data: 'sub3d_government' 
+            },
+            { 
+                data: 'sub3d_draft' 
+            },
+            {   
+                data: 'sub3d_date'
+            },
+            {
+                data: 'sub3d_topic' 
+            },
+            {
+                data: 'sub3d_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3d_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_sub3d_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_sub3d_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_sub3d_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_sub3d_speed)
+                }
+            },
+            {
+                data: 'sub3_status' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+                    }else if(data == '1'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+                    }else if(data == '3'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
+                    }else if(data == '4'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
+                    }else if(data == '5'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '6'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_sub3_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
+                        txt_sub3_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_sub3_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
+                    }else{
+                        txt_sub3_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_sub3_status)
+                }
+            },
+            {
+                data: 'doc_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_admission_inside_secretary_retrun/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
+
+}else if(window.location.pathname == '/documents_retrun_inside_secretary/all/0'){
+    $.fn.dataTable.ext.errMode = 'none';
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // },
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'docrt_id' 
+            },
+            { 
+                data: 'docrtdt_government' 
+            },
+            { 
+                data: 'docrtdt_draft' 
+            },
+            {   
+                data: 'docrtdt_date'
+            },
+            {
+                data: 'docrtdt_topic' 
+            },
+            {
+                data: 'docrtdt_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_docrtdt_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_docrtdt_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_docrtdt_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_docrtdt_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_docrtdt_speed)
+                }
+            },
+            {
+                data: 'docrt_status' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+                    }else if(data == '1'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+                    }else if(data == '3'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
+                    }else if(data == '4'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
+                    }else if(data == '5'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
+                        txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
+                    }else{
+                        txt_docrt_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_docrt_status)
+                }
+            },
+            {
+                data: 'docrt_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_retrun_inside_secretary/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
+
+}else if(window.location.pathname == '/documents_retrun_inside_secretary/all/1'){
+    $.fn.dataTable.ext.errMode = 'none';
+    var table = $('.table').DataTable({
+        // processing: true,
+        // language: {
+        //     processing: '<i class="spinner-border"></i><span class="sr-only">Loading...</span><br><p class="text-muted">โหลดแปป</p>'
+        // },
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'docrt_id' 
+            },
+            { 
+                data: 'docrtdt_government' 
+            },
+            { 
+                data: 'docrtdt_draft' 
+            },
+            {   
+                data: 'docrtdt_date'
+            },
+            {
+                data: 'docrtdt_topic' 
+            },
+            {
+                data: 'docrtdt_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_docrtdt_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_docrtdt_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_docrtdt_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_docrtdt_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_docrtdt_speed)
+                }
+            },
+            {
+                data: 'docrt_status' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
+                    }else if(data == '1'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+                    }else if(data == '2'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
+                    }else if(data == '3'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
+                    }else if(data == '4'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
+                    }else if(data == '5'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '6'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+                    }else if(data == '7'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '8'){
+                        txt_docrt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+                    }else if(data == '9'){
+                        txt_docrt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
+                    }else if(data == 'C'){
+                        txt_docrt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
+                    }else{
+                        txt_docrt_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_docrt_status)
+                }
+            },
+            {
+                data: 'docrt_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_retrun_inside_secretary/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+        
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
+
+}else if(window.location.pathname == '/documents_transmission_all/all'){
+    $.fn.dataTable.ext.errMode = 'none';
+    var table = $('.table').DataTable({  
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0,
+            }
+        ],
+        order: [
+            [0, "DESC"]
+        ],
+        ajax: {
+            url: window.location.pathname +'/query',
+            dataSrc: ''
+        },
+        columns: [
+            { 
+                data: 'doc_id' 
+            },
+            { 
+                data: 'doc_origin' 
+            },
+            { 
+                data: 'doc_recnum' 
+            },
+            {   
+                data: 'doc_docnum' 
+            },
+            {   
+                data: 'doc_date' ,
+                render: function ( data) {
+                    var year = data.toString().substring(0, 4);
+                    var month = data.toString().substring(5, 7);
+                    var day = data.toString().substring(8, 10);
+                    var date = [day, month, year].join('-');
+                    return (`<span class="badge bg-secondary">`+ date +`</span>`)
+                }
+            },
+            { 
+                data: 'doc_date_2' ,
+                render: function ( data) {
+                    var year = data.toString().substring(0, 4);
+                    var month = data.toString().substring(5, 7);
+                    var day = data.toString().substring(8, 10);
+                    var date = [day, month, year].join('-');
+                    return (`<span class="badge bg-secondary">`+ date +`</span>`)
+                }
+            },
+            {
+                data: 'doc_title' 
+            },
+            {
+                data: 'doc_speed' ,
+                render: function ( data) {
+                    if(data == '0'){
+                        txt_doc_speed = '<span class="badge bg-primary">ปกติ</span>';
+                    }else if(data == '1'){
+                        txt_doc_speed = '<span class="badge bg-success">ด่วน</span>';
+                    }else if(data == '2'){
+                        txt_doc_speed = '<span class="badge bg-warning">ด่วนมาก</span>';
+                    }else if(data == '3'){
+                        txt_doc_speed = '<span class="badge bg-danger">ด่วนที่สุด!</span>';
+                    }
+                    return (txt_doc_speed)
+                }
+            },
+            {
+                data: 'doc_status' ,
+                render: function ( data) {
+                    if(data == 'waiting'){
+                        txt_status = '<span class="badge bg-warning">รอพิจารณา</span>';
+                    }else if(data == 'success'){
+                        txt_status = '<span class="badge bg-success">พิจารณาแล้ว</span>';
+                    }else{
+                        txt_status = "ไม่ถูกนิยาม";
+                    }
+                    return (txt_status)
+                 }
+            },
+            {
+                data: 'doc_id' ,
+                render: function ( data) {
+                    return (` <a href="/documents_transmission_all/detail/`+ data +`"><i class="far fa-file-alt"></i></a>`)
+                }
+            }
+        ]
+                
+    }).on( 'processing.dt', function ( e, settings, processing ) {
+        $('#processingIndicator').css( 'display', processing ? 'block' : 'none' );
+    });
+    
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+     
+        table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+            this.data(i++);
+        });
+    }).draw();
+     
+    setInterval( function () {
+        table.ajax.reload(null, false);
+    }, 3000 );
+
 }

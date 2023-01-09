@@ -43,60 +43,184 @@ class documents_admission_minister_signController extends Controller
             ->where('doc_site_id',Auth::user()->site_id)
             ->first();
 
-            return view('member.documents_admission_minister_sign.detail',compact('document_detail'));
+            if($document_detail->sub3_sealid_4 != null){
+                $sub3_sealid_4 = $document_detail->sub3_sealid_4;
+            }else{
+                $sub3_sealid_4 = null;
+            }
+            if($document_detail->sub3_sealid_5 != null){
+                $sub3_sealid_5 = $document_detail->sub3_sealid_5;
+            }else{
+                $sub3_sealid_5 = null;
+            }
+
+            $userS = User::where('level', '1')
+            ->when($sub3_sealid_4 != null, function ($builder_4) use ($sub3_sealid_4){
+                $builder_4->where('id','!=',$sub3_sealid_4);
+            })
+            ->when($sub3_sealid_5 != null, function ($builder_5) use ($sub3_sealid_5){
+                $builder_5->where('id','!=',$sub3_sealid_5);
+            })
+            ->where('site_id',Auth::user()->site_id)
+            ->get();
+
+            return view('member.documents_admission_minister_sign.detail',compact('document_detail','userS'));
         }else{
             return redirect('member_dashboard')->with('error','คุณไม่มีสิทธิ์เข้าเมนูนี้ในระบบ !');
         }
     } 
 
     public function understand(Request $request){
-
         //ตรวจสอบข้อมูลที่กรอกเข้ามาก่อน
         $request->validate(
             [
+                'sub3_sealid'=>'required|max:255',
                 'sub3_sealpos'=>'required|max:255'
             ],
             [
-                'sub3_sealpos.required'=>"กรุณากรอกตำแหน่งด้วยครับ",
+                'sub3_sealid.required'=>"กรุณาเลือกผู้ลงนามด้วยครับ",
+                'sub3_sealid.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+                'sub3_sealpos.required' => "กรุณากรอกตำแหน่งด้วยครับ",
                 'sub3_sealpos.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
             ]
         );
+       
+        
+        if($request->sub3_sealid == 'ไม่มีผู้ลงนามต่อ'){
+            if(Auth::user()->id == $request->sub3_sealid_4){
+                $sub3_sealdate = 'sub3_sealdate_4';
+                $sub3_sealpos = 'sub3_sealpos_4';
 
-        $full_path = functionController::funtion_generate_PDF_VI(
-            $request->sub3d_file,
-            $request->sub3_sealid_0,
-            $request->sub3_sealid_1,
-            $request->sub3_sealid_2,
-            $request->sub3_sealpos_0,
-            $request->sub3_sealpos_1,
-            $request->sub3_sealpos,
-            $request->doc_id
-        );
-        if($full_path){
-            $update_sub3_details = sub3_detail::where('sub3d_sub_3id', $request->sub3_id)->update([
-                'sub3d_file'=>$full_path
-            ]);
+                $full_path = functionController::funtion_generate_PDF_deputy_AND_minister(
+                    $request->sub3d_file,
+                    $request->sub3_id,
+                    '',
+                    '',
+                    $request->sub3_sealid_4,
+                    '',
+                    '',
+                    '',
+                    $request->sub3_sealpos,
+                    ''
+                );
+            }else if(Auth::user()->id == $request->sub3_sealid_5){
+                $sub3_sealdate = 'sub3_sealdate_5';
+                $sub3_sealpos = 'sub3_sealpos_5';
+
+                $full_path = functionController::funtion_generate_PDF_deputy_AND_minister(
+                    $request->sub3d_file,
+                    $request->sub3_id,
+                    '',
+                    '',
+                    '',
+                    $request->sub3_sealid_5,
+                    '',
+                    '',
+                    '',
+                    $request->sub3_sealpos
+                );
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [Auth_id!=sub3_sealid] !');
+            }
+
             $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
-                'sub3_sealpos_2'=>$request->sub3_sealpos,
-                'sub3_sealdate_2'=>date('Y-m-d H:i:s'),
-                'sub3_status'=>'6',
+                $sub3_sealdate=>date('Y-m-d H:i:s'),
+                $sub3_sealpos=>$request->sub3_sealpos,
+                'sub3_status'=>'9',
                 'sub3_updated_at'=>date('Y-m-d H:i:s')
             ]);
-            if($update_sub3_docs && $update_sub3_details){
+
+            $update_sub3_detail = sub3_detail::where('sub3d_sub_3id', $request->sub3_id)->update([
+                'sub3d_file'=>$full_path
+            ]);
+            
+            if($update_sub3_docs){
                 //linetoken
                 $tokens_Check = Groupmem::where('group_site_id', Auth::user()->site_id)
                 ->where('group_id', $request->sub_recid)
                 ->first();
+
                 if($tokens_Check){
-                    $message = "\n⚠️ นายกลงนามเอกสารรับเข้าตอบกลับภายนอก ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                    $message = "\n⚠️ รองปลัด|ปลัด ลงนามเอกสารรับเข้าตอบกลับภายนอก ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
                     functionController::line_notify($message,$tokens_Check->group_token);
                 }
                 return redirect()->route('documents_admission_minister_sign_all_0')->with('success',"ลงนามเรียบร้อย");
             }else{
-                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs && update_sub3_details] !');
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [update_sub3_docs]!');
             }
+            
         }else{
-            return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [funtion_generate_PDF_VI] !');
+            if(Auth::user()->id == $request->sub3_sealid_4){
+                $sub3_sealdate = 'sub3_sealdate_4';
+                $sub3_sealpos = 'sub3_sealpos_4';
+    
+                $sub3_sealid = 'sub3_sealid_5';
+                $sub3_status = '8';
+
+                $full_path = functionController::funtion_generate_PDF_deputy_AND_minister(
+                    $request->sub3d_file,
+                    $request->sub3_id,
+                    '',
+                    '',
+                    $request->sub3_sealid_4,
+                    '',
+                    '',
+                    '',
+                    $request->sub3_sealpos,
+                    ''
+                );
+            }else if(Auth::user()->id == $request->sub3_sealid_5){
+                $sub3_sealdate = 'sub3_sealdate_5';
+                $sub3_sealpos = 'sub3_sealpos_5';
+    
+                $sub3_sealid = 'sub3_sealid_4';
+                $sub3_status = '7';
+
+                $full_path = functionController::funtion_generate_PDF_deputy_AND_minister(
+                    $request->sub3d_file,
+                    $request->sub3_id,
+                    '',
+                    '',
+                    '',
+                    $request->sub3_sealid_5,
+                    '',
+                    '',
+                    '',
+                    $request->sub3_sealpos
+                );
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [Auth_id!=sub3_sealid] !');
+            }
+
+            $user_check = User::where('id', $request->sub3_sealid)
+            ->first();
+            if($user_check->level == '1'){
+                $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
+                    $sub3_sealdate=>date('Y-m-d H:i:s'),
+                    $sub3_sealpos=>$request->sub3_sealpos,
+                    $sub3_sealid=>$request->sub3_sealid,
+                    'sub3_status'=>$sub3_status,
+                    'sub3_updated_at'=>date('Y-m-d H:i:s')
+                ]);
+
+                $update_sub3_detail = sub3_detail::where('sub3d_sub_3id', $request->sub3_id)->update([
+                    'sub3d_file'=>$full_path
+                ]);
+
+                //linetoken
+                $tokens_Check = DB::table('tokens')
+                ->where('token_site_id', Auth::user()->site_id)
+                ->where('token_level', $user_check->level)
+                ->first();
+                if($tokens_Check){
+                    $message = "\n⚠️ รองนายก|นายก ลงนามเอกสารรับเข้าตอบกลับภายนอก ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                    functionController::line_notify($message,$tokens_Check->token_token);
+                }
+                return redirect()->route('documents_admission_minister_sign_all_0')->with('success',"ลงนามเรียบร้อย");
+            }else{
+                return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [user_check]!');
+            }
+
         }
         
     }

@@ -65,7 +65,7 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                             <hr>
-                            @if($document_retrun_inside_detail->docrt_sealid_0 == Auth::user()->id && $document_retrun_inside_detail->docrt_sealdate_0 == null || $document_retrun_inside_detail->docrt_sealid_1 == Auth::user()->id && $document_retrun_inside_detail->docrt_sealdate_1 == null)
+                            @if($document_retrun_inside_detail->docrt_sealid_2 == Auth::user()->id && $document_retrun_inside_detail->docrt_sealdate_2 == null || $document_retrun_inside_detail->docrt_sealid_3 == Auth::user()->id && $document_retrun_inside_detail->docrt_sealdate_3 == null)
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="{{route('documents_retrun_inside_deputy_sign_understand')}}" method="post" enctype="multipart/form-data">
@@ -76,9 +76,9 @@ use App\Http\Controllers\functionController;
                                                     <div class="form-group">
                                                         <x-jet-label for="docrt_sealid" value="{{ __('เลือกผู้ลงนามต่อไป') }}" />
                                                         <select class="form-control select2bs4 @error('docrt_sealid') is-invalid @enderror"
-                                                            required name="docrt_sealid">
+                                                            required name="docrt_sealid" id="documents_retrun_inside_deputy_signController_docrt_sealid">
                                                             <option value="">เลือกผู้ลงนามต่อไป</option>
-                                                            <option value="not">ไม่เลือก</option>
+                                                            <option value="ตีกลับ">ตีกลับ</option>
                                                             @foreach($userS as $row_user)
                                                             <option value="{{$row_user->id}}">{{$row_user->name}} [{{$row_user->pos}}]</option>
                                                             @endforeach
@@ -89,6 +89,14 @@ use App\Http\Controllers\functionController;
                                                                 {{$message}}</p>
                                                         </div>
                                                         @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group hide" id="documents_retrun_inside_deputy_signController_form-group_docrt_note">
+                                                        <x-jet-label class="text-md" for="docrt_note"
+                                                            value="{{ __('ข้อความ') }}" />
+                                                        <input class="form-control"
+                                                            name="docrt_note" type="text" value="">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
@@ -120,7 +128,12 @@ use App\Http\Controllers\functionController;
                                                                     value="{{$document_retrun_inside_detail->docrt_sealpos_0}}">
                                                 <input type="hidden" name="docrt_sealpos_1"
                                                                     value="{{$document_retrun_inside_detail->docrt_sealpos_1}}">
-
+                                                <input type="hidden" name="docrt_sealid_2"
+                                                                    value="{{$document_retrun_inside_detail->docrt_sealid_2}}">
+                                                <input type="hidden" name="docrt_sealid_3"
+                                                                    value="{{$document_retrun_inside_detail->docrt_sealid_3}}">
+                                                <input type="hidden" name="docrt_groupmems_id"
+                                                                value="{{$document_retrun_inside_detail->docrt_groupmems_id}}">
                                                 <input type="hidden" name="docrt_id" value="{{$document_retrun_inside_detail->docrt_id}}">
                                                 <input type="hidden" name="docrtdt_topic" value="{{$document_retrun_inside_detail->docrtdt_topic}}">
                                                 <input type="hidden" name="docrtdt_draft"

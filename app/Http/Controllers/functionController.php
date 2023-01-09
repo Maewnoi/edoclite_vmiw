@@ -113,6 +113,8 @@ class functionController extends Controller
             $txt_docrt_speed = '<span class="badge bg-primary">บันทึกข้อความ</span>';
         }elseif($speed == '1'){
             $txt_docrt_speed = '<span class="badge bg-primary">ตราครุฑ</span>';
+        }elseif($speed == '2'){
+            $txt_docrt_speed = '<span class="badge bg-primary">แนบไฟล์</span>';
         }
         return $txt_docrt_speed;
     }
@@ -281,9 +283,101 @@ class functionController extends Controller
                 ->where('sub2_recid', Auth::user()->id);
             })
             //++++++++++=+++++=+++++=+++++=++++++++++
+            ->when($level == '8', function ($builder) use ($level){
+                $builder->where('sub_status', '10');
+            })
+            //++++++++++=+++++=+++++=+++++=++++++++++
             ->get();
         }
         return $document;
+    }
+
+    public static function funtion_generate_PDF_deputy_AND_minister(
+        $sub3d_file,
+        $sub3_id,
+        $sub3_sealid_2,
+        $sub3_sealid_3,
+        $sub3_sealid_4,
+        $sub3_sealid_5,
+        $sub3_sealpos_2,
+        $sub3_sealpos_3,
+        $sub3_sealpos_4,
+        $sub3_sealpos_5,
+    ){
+        $pdf = new Fpdi();
+        //นับจำนวนหน้า
+        $sourceFilePages = $pdf->setSourceFile($sub3d_file);
+        for($pageNo = 1; $pageNo <= $sourceFilePages; $pageNo++){
+            $pdf->AddPage();
+            $tplIdx = $pdf->importPage($pageNo);
+            $pdf->useTemplate($tplIdx, null, null, null);
+
+            if($pageNo == 1){
+                        //Font
+                $pdf->AddFont('THSarabunNew','','THSarabunNew.php');
+                $pdf->SetFont('THSarabunNew','',16);
+            
+                if($sub3_sealid_2 == Auth::user()->id){ //ถ้ารองปลัดเข้า
+                    $user_3 = User::where('id',$sub3_sealid_2)->first(); //รองปลัด
+                    //ลายเซ็นรองปลัด 
+                    if($user_3->sign == ''){
+                        $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,200,10,10);
+                    }else{
+                        $pdf->Image($user_0->sign,95,200,10,10);
+                    }
+                    $pdf->SetTextColor(0, 0, 0);
+                    $pdf->SetXY(95, 216);
+                    $pdf->Write(0, iconv('UTF-8', 'cp874', 'รองปลัด'));
+
+                }else if($sub3_sealid_3 == Auth::user()->id){ //ถ้าปลัดเข้า
+                    $user_2 = User::where('id',$sub3_sealid_3)->first(); //ปลัด
+                    //ลายเซ็นปลัด 
+                    if($user_2->sign == ''){
+                        $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,220,10,10);
+                    }else{
+                        $pdf->Image($user_0->sign,95,220,10,10);
+                    }
+                    $pdf->SetTextColor(0, 0, 0);
+                    $pdf->SetXY(95, 236);
+                    $pdf->Write(0, iconv('UTF-8', 'cp874', 'ปลัด'));
+
+                }else if($sub3_sealid_4 == Auth::user()->id){ //ถ้ารองนายกเข้า
+                    $user_1 = User::where('id',$sub3_sealid_4)->first(); //รองนายก
+                    //ลายเซ็นรองนายก
+                    if($user_1->sign == ''){
+                        $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,240,10,10);
+                    }else{
+                        $pdf->Image($user_1->sign,95,240,10,10);
+                    }
+                    $pdf->SetTextColor(0, 0, 0);
+                    $pdf->SetXY(95, 256);
+                    $pdf->Write(0, iconv('UTF-8', 'cp874', 'รองนายก'));
+
+                }else if($sub3_sealid_5 == Auth::user()->id){ //ถ้านายกเข้า
+                    $user_0 = User::where('id',$sub3_sealid_5)->first(); //นายก
+                    //ลายเซ็นนายก
+                    if($user_0->sign == ''){
+                        $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,260,10,10);
+                    }else{
+                        $pdf->Image(Auth::user()->sign,95,260,10,10);
+                    }
+                    $pdf->SetTextColor(0, 0, 0);
+                    $pdf->SetXY(95, 276);
+                    $pdf->Write(0, iconv('UTF-8', 'cp874', 'นายก'));
+                    
+                }
+            }
+        }
+        // return response($pdf->Output())->header('Content-Type', 'application/pdf');
+        $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+        $date_new = date('Y-m-d');
+        $year_new = date('Y');
+        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond/';
+        $name_gen_new = $sub3_id."_".$date_new;
+        $full_path = $upload_location.$name_gen_new.'.pdf';
+        $pdf->Output('F', $full_path);
+        return $full_path;
+
     }
 
     public static function funtion_generate_PDF_VI(
@@ -1218,8 +1312,8 @@ class functionController extends Controller
             select(reserve_number::raw("reserve_id"),reserve_number::raw("reserve_number"),reserve_number::raw("DATE_FORMAT(reserve_date, '%Y-%m-%d') as date_format"))
             ->where('reserve_owner',$id)
             ->where('reserve_group',Auth::user()->group)
-            ->where('reserve_type','1')
-            ->where('reserve_template','A')
+            ->where('reserve_type','0')
+            ->where('reserve_template','B')
             ->where('reserve_status','0')
             ->where('reserve_site',Auth::user()->site_id)
             ->orderByDesc('reserve_date')
@@ -2015,12 +2109,18 @@ class functionController extends Controller
         }else if($status == '2'){
             $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
         }else if($status == '3'){
-            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
         }else if($status == '4'){
-            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาปลัดและรองปลัด</span>';
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหน้าห้องปลัดและหน้าห้องนายก</span>';
         }else if($status == '5'){
-            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานายกและรองนายก</span>';
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
         }else if($status == '6'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองปลัดและปลัด</span>';
+        }else if($status == '7'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+        }else if($status == '8'){
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณารองนายกและนายก</span>';
+        }else if($status == '9'){
             $txt_status = '<span class="badge bg-success">ลงนามเรียบร้อย</span>';
         }else if($status == 'C'){
             $txt_status = '<span class="badge bg-success">ไม่ได้รับการอนุมัติจากนิติกร</span>';
@@ -2581,6 +2681,8 @@ class functionController extends Controller
             $txt_user_level = 'สารบรรณกอง';
         }elseif($level == '7'){
             $txt_user_level = 'งาน';
+        }elseif($level == '8'){
+            $txt_user_level = 'หน้าห้องปลัด|หน้าห้องนายก';
         }else{
             return "ไม่ถูกนิยาม";
         }

@@ -11,22 +11,22 @@
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
          <?php $__env->slot('logo', null, []); ?> 
-            <img src="<?php if($routes_sites_name_check->site_img != null): ?> <?php echo e(asset($routes_sites_name_check->site_img)); ?>  <?php else: ?>  <?php echo e(asset('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png')); ?> <?php endif; ?> " class="brand-image img-circle elevation-3" width="100"
+            <img src="<?php if(isset($routes_sites_name_check->site_img) && $routes_sites_name_check->site_img != null): ?> <?php echo e(asset($routes_sites_name_check->site_img)); ?>  <?php else: ?>  <?php echo e(asset('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png')); ?> <?php endif; ?> " class="brand-image img-circle elevation-3" width="100"
                 height="100">
          <?php $__env->endSlot(); ?>
         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-lg text-center','id' => 'txt-login','value' => ''.e(__('ระบบสารบรรณอิเล็กทรอนิกส์')).' '.e($routes_sites_name_check->site_name).'']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-lg text-center','id' => 'txt-login','value' => ''.e(__('ระบบสารบรรณอิเล็กทรอนิกส์')).'']]); ?>
 <?php $component->withName('jet-label'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'text-lg text-center','id' => 'txt-login','value' => ''.e(__('ระบบสารบรรณอิเล็กทรอนิกส์')).' '.e($routes_sites_name_check->site_name).'']); ?>
+<?php $component->withAttributes(['class' => 'text-lg text-center','id' => 'txt-login','value' => ''.e(__('ระบบสารบรรณอิเล็กทรอนิกส์')).'']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-        <!-- <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.validation-errors','data' => ['class' => 'mb-4']]); ?>
 <?php $component->withName('jet-validation-errors'); ?>
 <?php if ($component->shouldRender()): ?>
@@ -37,17 +37,17 @@
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?> -->
+<?php endif; ?>
         <form method="POST" action="<?php echo e(route('login')); ?>">
             <?php echo csrf_field(); ?>
 
             <div>
                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'email','value' => ''.e(__('Username')).'']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'email','value' => ''.e(__('Email or username')).'']]); ?>
 <?php $component->withName('jet-label'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['for' => 'email','value' => ''.e(__('Username')).'']); ?>
+<?php $component->withAttributes(['for' => 'email','value' => ''.e(__('Email or username')).'']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
@@ -114,12 +114,12 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <!-- <?php if(Route::has('password.request')): ?>
+                <?php if(Route::has('password.request')): ?>
                     <a class="text-sm text-gray-600 underline hover:text-gray-900" href="<?php echo e(route('password.request')); ?>">
-                        <?php echo e(__('Forgot your password?')); ?>
+                        <?php echo e(__('คุณลืมรหัสผ่านใช่ไหม?')); ?>
 
                     </a>
-                <?php endif; ?> -->
+                <?php endif; ?>
 
                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['class' => 'ml-4','onclick' => 'submitForm(this);']]); ?>
@@ -220,6 +220,20 @@
                                 <i class="fas fa-ellipsis-v"></i>
                             </span>
                             <span class="text">งาน(7) Username : lei07 Password : 1234</span>
+                        </li>
+                        <li>
+                            <span class="handle ui-sortable-handle">
+                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </span>
+                            <span class="text">หน้าห้องนายก(8) Username : lei18 Password : 1234</span>
+                        </li>
+                        <li>
+                            <span class="handle ui-sortable-handle">
+                                <i class="fas fa-ellipsis-v"></i>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </span>
+                            <span class="text">หน้าห้องปลัด(8) Username : lei08 Password : 1234</span>
                         </li>
                     </ul>
                 </div>

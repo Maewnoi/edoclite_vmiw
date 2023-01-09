@@ -93,9 +93,9 @@ foreach($sub_docsS as $row_check_sub_docs){
                                     </div>
                                 </div>
                                 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['type' => 'button','dataToggle' => 'modal','dataTarget' => '#modal-update-general'.e($document_detail->doc_id).'']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
@@ -106,8 +106,8 @@ foreach($sub_docsS as $row_check_sub_docs){
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                            
-                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+                                         
+                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['type' => 'button','dataToggle' => 'modal','dataTarget' => '#modal-update-file'.e($document_detail->doc_id).'']]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
@@ -118,34 +118,30 @@ foreach($sub_docsS as $row_check_sub_docs){
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            
-                                            <?php $__errorArgs = ['doc_filedirec'];
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <?php $__errorArgs = ['doc_filedirec'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                            <div class="my-2">
-                                                <p class="mt-2 text-sm text-red-600">
-                                                    <?php echo e($message); ?></p>
-                                            </div>
-                                            <?php unset($message);
+                                        <div class="my-2">
+                                            <p class="mt-2 text-sm text-red-600">
+                                                <?php echo e($message); ?></p>
+                                        </div>
+                                        <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                        </div>
                                     </div>
                                 </div>
-
                             </div>
-                            <div class="card card-body">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+                                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['class' => 'text-md','for' => 'doc_filedirec','value' => ''.e(__('ไฟล์เอกสาร')).'']]); ?>
 <?php $component->withName('jet-label'); ?>
 <?php if ($component->shouldRender()): ?>
@@ -164,18 +160,18 @@ unset($__errorArgs, $__bag); ?>
                                             <?php echo functionController::display_pdf($document_detail->doc_filedirec_1); ?>
 
                                         <?php endif; ?>
-                                        
+                                            
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class="form-group">
-                                        ไฟล์เอกสารแนบ : 
-                                        <?php if($document_detail->doc_attached_file != ''): ?>
-                                        <button type="button" id="open_doc_attached_file"
-                                            value="<?php echo e(asset($document_detail->doc_attached_file)); ?>"
-                                            class="btn btn-outline-primary col start">
-                                            <i class="fas fa-upload"></i>
-                                            <span>open & download</span>
+                                      <div class="form-group">
+                                         ไฟล์เอกสารแนบ : 
+                                         <?php if($document_detail->doc_attached_file != ''): ?>
+                                         <button type="button" id="open_doc_attached_file"
+                                             value="<?php echo e(asset($document_detail->doc_attached_file)); ?>"
+                                             class="btn btn-outline-primary col start">
+                                             <i class="fas fa-upload"></i>
+                                             <span>open & download</span>
                                         </button>
                                         <?php else: ?>
                                         <label class="text-danger"><?php echo e(__('--ไม่พบไฟล์เอกสารแนบ--')); ?></label>
@@ -584,6 +580,9 @@ unset($__errorArgs, $__bag); ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
                             <div class="form-group">
+                                <button id='documents_admission_group_allController_selected_multiple_sub2_recid_cottons-select-all-select-all' class="h-10 px-5 m-2 text-sm text-purple-100 transition-colors duration-150 bg-purple-600 rounded-lg focus:shadow-outline hover:bg-purple-700">
+                                    เลือกทั้งหมด
+                                </button>
                                 <select name="sub_recid[]" id="documents_admission_allController_update-groupmems_selected_multiple" multiple="multiple"
                                     required class=" <?php $__errorArgs = ['sub_recid'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
