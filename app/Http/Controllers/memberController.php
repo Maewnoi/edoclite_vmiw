@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\functionController;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class memberController extends Controller
 {
@@ -174,7 +176,7 @@ class memberController extends Controller
             $full_path = '';
         }
 
-        $insert = User::insert([
+        $insert = User::insertGetId([
             'site_id'=>$sites,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
@@ -189,6 +191,16 @@ class memberController extends Controller
         ]);
 
         if($insert){
+            $sites = sites::where('site_id', Auth::user()->site_id)
+            ->first();
+
+            $process = new Process(array('/usr/bin/bash', '/var/www/html/signkey/genpripub.sh', $sites->site_path_folder, $insert));
+            $process->run();
+            if (!$process->isSuccessful()) {
+                throw new ProcessFailedException($process);
+                return redirect()->back()->with('error','พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา [Process isSuccessful]!');
+            }
+
             return redirect()->back()->with('success',"บันทึกข้อมูลเรียบร้อย");
         }else{
             return redirect()->back()->with('error','พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา !');
