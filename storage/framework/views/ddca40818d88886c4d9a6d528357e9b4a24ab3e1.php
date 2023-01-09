@@ -1,3 +1,6 @@
+<?php
+use App\Http\Controllers\functionController;
+?>
 <!DOCTYPE html>
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 
@@ -6,12 +9,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
-    <meta name="theme-color" content="#0066CC" />
+    <meta name="theme-color" content="<?php echo e(functionController::get_site_color()); ?>" />
 
     <title>edoclite</title>
     <!-- icon -->
-    <link rel="apple-touch-icon" href="<?php echo e(asset('/image/logo_lei.png')); ?>" />
-    <link rel="icon" href="<?php echo asset('/image/logo_lei.png'); ?>" />
+    <link rel="apple-touch-icon" href="<?php echo e(asset(functionController::get_site_img())); ?>" />
+    <link rel="icon" href="<?php echo asset(functionController::get_site_img()); ?>" />
     <!-- load -->
     <link rel="stylesheet" href="<?php echo e(asset('/css/load.css')); ?>">
     <div class="loader">
@@ -96,19 +99,19 @@
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
 
-    <div class="min-h-screen bg-gradient-to-b from-blue-200 to-blue-400">
+    <div class="min-h-screen bg-gradient-to-b from-<?php echo e(functionController::get_site_color()); ?>-200 to-<?php echo e(functionController::get_site_color()); ?>-400">
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-menu')->html();
-} elseif ($_instance->childHasBeenRendered('7EWVqqY')) {
-    $componentId = $_instance->getRenderedChildComponentId('7EWVqqY');
-    $componentTag = $_instance->getRenderedChildComponentTagName('7EWVqqY');
+} elseif ($_instance->childHasBeenRendered('mGq6M68')) {
+    $componentId = $_instance->getRenderedChildComponentId('mGq6M68');
+    $componentTag = $_instance->getRenderedChildComponentTagName('mGq6M68');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('7EWVqqY');
+    $_instance->preserveRenderedChild('mGq6M68');
 } else {
     $response = \Livewire\Livewire::mount('navigation-menu');
     $html = $response->html();
-    $_instance->logRenderedChild('7EWVqqY', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('mGq6M68', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -315,4 +318,14 @@ $.widget.bridge('uibutton', $.ui.button)
             icon: "success",
         });
     });
-</script><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/layouts/app.blade.php ENDPATH**/ ?>
+</script>
+
+<!-- ปิดระบบ -->
+<!-- <script>
+setInterval( function () {
+    swal({
+            title: "ปิดปรับปรุงระบบสักครู่ (offline)",
+            icon: "error",
+    });
+}, 1000 );
+</script> --><?php /**PATH C:\xampp\htdocs\edoclite\resources\views/layouts/app.blade.php ENDPATH**/ ?>
