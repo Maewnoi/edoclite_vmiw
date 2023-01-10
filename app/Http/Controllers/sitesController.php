@@ -72,9 +72,7 @@ class sitesController extends Controller
                 //++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++
                 $path_details_respond = $path_year.'/respond';
                 $make_details_respond = File::makeDirectory($path_details_respond, $mode = 0777, true, true);
-                //++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++
-                $path_details_respond_retrun = $path_year.'/respond_retrun';
-                $make_details_respond_retrun = File::makeDirectory($path_details_respond_retrun, $mode = 0777, true, true);
+         
             }else{
                 return redirect()->back()->with('error','พบปัญหาการเพิ่มข้อมูลกรุณาแจ้งผู้พัฒนา [make_year]!');
             }

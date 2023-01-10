@@ -84,6 +84,7 @@ class documents_retrun_inside_minister_signController extends Controller
             if(Auth::user()->id == $request->docrt_sealid_4){
                 $docrt_sealdate = 'docrt_sealdate_4';
                 $docrt_sealpos = 'docrt_sealpos_4';
+                $docrt_ca = 'docrt_ca_4';
 
                 $full_path = functionController::funtion_generate_PDF_deputy_AND_minister(
                     $request->docrtdt_file,
@@ -97,9 +98,23 @@ class documents_retrun_inside_minister_signController extends Controller
                     $request->docrt_sealpos,
                     ''
                 );
+                if(!$full_path){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                }
+                //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->docrtdt_file);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
             }else if(Auth::user()->id == $request->docrt_sealid_5){
                 $docrt_sealdate = 'docrt_sealdate_5';
                 $docrt_sealpos = 'docrt_sealpos_5';
+                $docrt_ca = 'docrt_ca_5';
 
                 $full_path = functionController::funtion_generate_PDF_deputy_AND_minister(
                     $request->docrtdt_file,
@@ -113,12 +128,26 @@ class documents_retrun_inside_minister_signController extends Controller
                     '',
                     $request->docrt_sealpos
                 );
+                if(!$full_path){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                }
+                //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->docrtdt_file);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
             }else{
                 return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [Auth_id!=docrt_sealid] !');
             }
 
             $update_documents_retrun = documents_retrun::where('docrt_id', $request->docrt_id)->update([
                 $docrt_sealdate=>date('Y-m-d H:i:s'),
+                $docrt_ca=>$code_ca_64,
                 $docrt_sealpos=>$request->docrt_sealpos,
                 'docrt_status'=>'9',
                 'docrt_updated_at'=>date('Y-m-d H:i:s')
@@ -146,6 +175,7 @@ class documents_retrun_inside_minister_signController extends Controller
             if(Auth::user()->id == $request->docrt_sealid_4){
                 $docrt_sealdate = 'docrt_sealdate_4';
                 $docrt_sealpos = 'docrt_sealpos_4';
+                $docrt_ca = 'docrt_ca_4';
     
                 $docrt_sealid = 'docrt_sealid_5';
                 $docrt_status = '8';
@@ -162,9 +192,23 @@ class documents_retrun_inside_minister_signController extends Controller
                     $request->docrt_sealpos,
                     ''
                 );
+                if(!$full_path){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                }
+                //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->docrtdt_file);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
             }else if(Auth::user()->id == $request->docrt_sealid_5){
                 $docrt_sealdate = 'docrt_sealdate_5';
                 $docrt_sealpos = 'docrt_sealpos_5';
+                $docrt_ca = 'docrt_ca_5';
     
                 $docrt_sealid = 'docrt_sealid_4';
                 $docrt_status = '7';
@@ -181,6 +225,19 @@ class documents_retrun_inside_minister_signController extends Controller
                     '',
                     $request->docrt_sealpos
                 );
+                if(!$full_path){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                }
+                //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->docrtdt_file);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
             }else{
                 return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [Auth_id!=docrt_sealid] !');
             }
@@ -190,6 +247,7 @@ class documents_retrun_inside_minister_signController extends Controller
             if($user_check->level == '1'){
                 $update_documents_retrun = documents_retrun::where('docrt_id', $request->docrt_id)->update([
                     $docrt_sealdate=>date('Y-m-d H:i:s'),
+                    $docrt_ca=>$code_ca_64,
                     $docrt_sealpos=>$request->docrt_sealpos,
                     $docrt_sealid=>$request->docrt_sealid,
                     'docrt_status'=>$docrt_status,

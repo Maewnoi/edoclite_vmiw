@@ -82,9 +82,11 @@ class documents_retrun_inside_secretaryController extends Controller
                 'docrt_check_0'=>'0',
                 'docrt_inspector_0'=>null,
                 'docrt_datetime_0'=>null,
+
                 'docrt_check_1'=>'0',
                 'docrt_inspector_1'=>null,
                 'docrt_datetime_1'=>null,
+
                 'docrt_check_2'=>'0',
                 'docrt_inspector_2'=>null,
                 'docrt_datetime_2'=>null,
@@ -94,12 +96,14 @@ class documents_retrun_inside_secretaryController extends Controller
                 'docrt_sealpos_0'=>null,
                 'docrt_sealdate_0'=>null,
                 'docrt_sealid_0'=>null,
+                'docrt_ca_0'=>null,
 
                 'docrt_sealdetail_1'=>null,
                 'docrt_sealnote_1'=>null,
                 'docrt_sealpos_1'=>null,
                 'docrt_sealdate_1'=>null,
                 'docrt_sealid_1'=>null,
+                'docrt_ca_1'=>null,
 
                 'docrt_note'=>$request->docrt_note,
                 'docrt_status'=>'C',

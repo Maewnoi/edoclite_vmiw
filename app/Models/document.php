@@ -23,6 +23,7 @@ class document extends Model
         'doc_title',
         'doc_filedirec',
         'doc_filedirec_1',
+        'doc_filedirec_1_ca',
         'doc_attached_file',
         'doc_type',
         'doc_template',

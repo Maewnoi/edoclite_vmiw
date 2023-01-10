@@ -204,7 +204,14 @@ class documents_admission_group_allController extends Controller
         }
         //ประทับตรา
         $full_path = functionController::funtion_generate_PDF_II($request->doc_filedirec_1,$request->seal_point,$request->sub_recnum,$request->sub_date,$request->sub_time,$request->sub_id,$request->sign_goup_0);
-
+        if(!$full_path){
+            return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+        }
+        //ca
+        $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+        if(!$code_ca_64){
+            return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+        }
             
         if($request->sign_goup_0 == ''){
               //ตรวจสอบข้อมูลที่กรอกเข้ามาก่อน
@@ -238,7 +245,8 @@ class documents_admission_group_allController extends Controller
                 'sub_date'=>$request->sub_date,
                 'sub_time'=>$request->sub_time,
                 'sub_status'=>'8',
-                'seal_file'=>$full_path,            
+                'seal_file'=>$full_path,   
+                'seal_file_group_ca'=>$code_ca_64,           
                 'sub_updated_at'=>date('Y-m-d H:i:s')
             ]);
 
@@ -278,6 +286,7 @@ class documents_admission_group_allController extends Controller
                             'sub_status'=>'1',
                             'seal_id_0'=>$user_check_level_5[$t]->id,
                             'seal_file'=>$full_path,
+                            'seal_file_group_ca'=>$code_ca_64,
                             'sub_updated_at'=>date('Y-m-d H:i:s')
                         ]);
                     }else{
@@ -308,7 +317,8 @@ class documents_admission_group_allController extends Controller
                         'sub_time'=>$request->sub_time,
                         'sub_status'=>'2',
                         'seal_id_1'=>$user_check_level_4->id,
-                        'seal_file'=>$full_path,   
+                        'seal_file'=>$full_path,
+                        'seal_file_group_ca'=>$code_ca_64, 
                         'sub_updated_at'=>date('Y-m-d H:i:s')
                     ]);
                     // dd($request->sub2_recid_groupmems);

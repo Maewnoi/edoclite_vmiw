@@ -146,7 +146,19 @@ class documents_admission_division_inside_allController extends Controller
             }
             //เซ็น
             $full_path_inside = functionController::funtion_generate_PDF_division_to_work($request->seal_file_inside ,$request->seal_detail_1_inside ,$request->seal_id_1_inside ,$request->seal_pos_1_inside ,$request->sub_id_inside);
-            // $full_path_inside = functionController::funtion_generate_PDF_III($request->doc_filedirec_1_inside, $request->seal_point_inside, $request->sub_recnum_inside, $request->sub_date_inside, $request->sub_time_inside, $request->sub_id_inside, $request->seal_pos_0_inside, $request->seal_date_1_inside, $request->seal_pos_1_inside, $request->seal_date_0_inside, $request->seal_id_1_inside, $request->seal_id_0_inside, $request->seal_detail_1_inside, $request->seal_detail_0_inside);
+            if(!$full_path_inside){
+                return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path_inside]');
+            }
+            //ca
+            $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path_inside);
+            if(!$code_ca_64){
+                return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+            }
+            //ลบไฟล์เดิม
+            $del_old = unlink($request->seal_file_inside);
+            if(!$del_old){
+                return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+            }
 
             $update_sub_docs = sub_doc::where('sub_id', $request->sub_id_inside)->update([
                 'seal_detail_1'=>$request->seal_detail_1_inside,
@@ -154,6 +166,7 @@ class documents_admission_division_inside_allController extends Controller
                 'seal_date_1'=>date('Y-m-d H:i:s'),
                 'sub_status'=>'8',
                 'seal_file'=>$full_path_inside,
+                'seal_file_division_ca'=>$code_ca_64,
                 'sub_updated_at'=>date('Y-m-d H:i:s')
             ]);
         }else{
@@ -175,6 +188,19 @@ class documents_admission_division_inside_allController extends Controller
                 ->first();
                 if($document_check){
                     $full_path_inside = functionController::funtion_generate_PDF_division_to_department($request->seal_file_inside ,$request->seal_detail_1_inside ,$request->seal_id_1_inside ,$request->seal_pos_1_inside ,$request->sub_id_inside);
+                    if(!$full_path_inside){
+                        return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path_inside]');
+                    }
+                    //ca
+                    $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path_inside);
+                    if(!$code_ca_64){
+                        return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                    }
+                    //ลบไฟล์เดิม
+                    $del_old = unlink($request->seal_file_inside);
+                    if(!$del_old){
+                        return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                    }
 
                     for ($t = 0; $t < count($request->sub2_recid_inside_cottons); $t++) {
                         $sub2_recid_inside_cottons[$t] = $request->sub2_recid_inside_cottons[$t];
@@ -205,6 +231,9 @@ class documents_admission_division_inside_allController extends Controller
                                 'seal_detail_1'=>$request->seal_detail_1_inside,
                                 'seal_pos_1'=>$request->seal_pos_1_inside,
                                 'seal_file'=>$full_path_inside,
+                                'seal_file_group_ca'=>$document_check->seal_file_group_ca,
+                                'seal_file_division_ca'=>$code_ca_64,
+                                'seal_file_department_ca'=>$document_check->seal_file_department_ca,
                                 'seal_date_1'=>date('Y-m-d H:i:s'),
                             ]);
 

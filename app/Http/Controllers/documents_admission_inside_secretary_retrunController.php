@@ -90,9 +90,11 @@ class documents_admission_inside_secretary_retrunController extends Controller
                 'sub3_check_0'=>'0',
                 'sub3_inspector_0'=>null,
                 'sub3_datetime_0'=>null,
+
                 'sub3_check_1'=>'0',
                 'sub3_inspector_1'=>null,
                 'sub3_datetime_1'=>null,
+
                 'sub3_check_2'=>'0',
                 'sub3_inspector_2'=>null,
                 'sub3_datetime_2'=>null,
@@ -102,12 +104,14 @@ class documents_admission_inside_secretary_retrunController extends Controller
                 'sub3_sealpos_0'=>null,
                 'sub3_sealdate_0'=>null,
                 'sub3_sealid_0'=>null,
+                'sub3_ca_0'=>null,
 
                 'sub3_sealdetail_1'=>null,
                 'sub3_sealnote_1'=>null,
                 'sub3_sealpos_1'=>null,
                 'sub3_sealdate_1'=>null,
                 'sub3_sealid_1'=>null,
+                'sub3_ca_1'=>null,
 
                 'sub3_note'=>$request->sub3_note,
                 'sub3_status'=>'C',

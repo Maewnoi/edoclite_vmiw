@@ -65,6 +65,9 @@ class sub_doc extends Model
         'seal_id_5',
 
         'seal_file',
+        'seal_file_group_ca',
+        'seal_file_division_ca',
+        'seal_file_department_ca',
         'seal_point',
         'seal_file2',
         'seal_recid',

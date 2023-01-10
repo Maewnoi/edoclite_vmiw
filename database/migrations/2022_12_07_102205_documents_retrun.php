@@ -40,36 +40,42 @@ class DocumentsRetrun extends Migration
             $table->string('docrt_sealpos_0')->nullable();
             $table->dateTime('docrt_sealdate_0')->nullable();
             $table->integer('docrt_sealid_0')->nullable();
+            $table->integer('docrt_ca_0')->nullable();
 
             $table->string('docrt_sealdetail_1')->nullable();//หน้าห้องปลัด || หน้าห้องนายก 4
             $table->string('docrt_sealnote_1')->nullable();
             $table->string('docrt_sealpos_1')->nullable();
             $table->dateTime('docrt_sealdate_1')->nullable();
             $table->integer('docrt_sealid_1')->nullable();
+            $table->integer('docrt_ca_1')->nullable();
 
             $table->string('docrt_sealdetail_2')->nullable(); //รองปลัด | ปลัด 5
             $table->string('docrt_sealnote_2')->nullable();
             $table->string('docrt_sealpos_2')->nullable();
             $table->dateTime('docrt_sealdate_2')->nullable();
             $table->integer('docrt_sealid_2')->nullable();
+            $table->integer('docrt_ca_2')->nullable();
 
             $table->string('docrt_sealdetail_3')->nullable(); //รองปลัด | ปลัด 6
             $table->string('docrt_sealnote_3')->nullable();
             $table->string('docrt_sealpos_3')->nullable();
             $table->dateTime('docrt_sealdate_3')->nullable();
             $table->integer('docrt_sealid_3')->nullable();
+            $table->integer('docrt_ca_3')->nullable();
 
             $table->string('docrt_sealdetail_4')->nullable(); //รองนายก 7
             $table->string('docrt_sealnote_4')->nullable();
             $table->string('docrt_sealpos_4')->nullable();
             $table->dateTime('docrt_sealdate_4')->nullable();
             $table->integer('docrt_sealid_4')->nullable();
+            $table->integer('docrt_ca_4')->nullable();
 
             $table->string('docrt_sealdetail_5')->nullable(); //นายก 8
             $table->string('docrt_sealnote_5')->nullable();
             $table->string('docrt_sealpos_5')->nullable();
             $table->dateTime('docrt_sealdate_5')->nullable();
             $table->integer('docrt_sealid_5')->nullable();
+            $table->integer('docrt_ca_5')->nullable();
 
             $table->timestamp('docrt_created_at')->nullable();
             $table->timestamp('docrt_updated_at')->nullable();

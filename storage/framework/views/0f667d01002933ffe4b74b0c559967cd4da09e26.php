@@ -30,6 +30,7 @@ use App\Http\Controllers\functionController;
                                         <th scope="col">ขนาดการใช้งาน</th>
                                         <th scope="col">วันที่สร้าง</th>
                                         <th scope="col">วันที่อัพเดต</th>
+                                        <th scope="col">ระบบเข้ารหัสเอกสารด้วย CA</th>
                                         <th scope="col">จัดการ</th>
                                     </tr>
                                 </thead>
@@ -61,6 +62,15 @@ use App\Http\Controllers\functionController;
 
                                             </p>
                                             <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input check_site_ca" type="checkbox" <?php echo e($row->site_ca == '1' ? 'checked="checked"' : ''); ?>
+
+                                                 name="site_ca" id="check_site_ca" data-id="<?php echo e($row->site_id); ?>" data-token="<?php echo e(csrf_token()); ?>">
+                                                <label class="form-check-label" for=check_site_ca">
+                                                </label>
+                                            </div>
                                         </td>
                                         <td>
                                             <button type="button" data-toggle="modal"

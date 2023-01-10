@@ -98,24 +98,28 @@ class documents_retrun_inside_deputy_signController extends Controller
                 'docrt_sealpos_0'=>null,
                 'docrt_sealdate_0'=>null,
                 'docrt_sealid_0'=>null,
+                'docrt_ca_0'=>null,
 
                 'docrt_sealdetail_1'=>null,
                 'docrt_sealnote_1'=>null,
                 'docrt_sealpos_1'=>null,
                 'docrt_sealdate_1'=>null,
                 'docrt_sealid_1'=>null,
+                'docrt_ca_1'=>null,
 
                 'docrt_sealdetail_2'=>null,
                 'docrt_sealnote_2'=>null,
                 'docrt_sealpos_2'=>null,
                 'docrt_sealdate_2'=>null,
                 'docrt_sealid_2'=>null,
+                'docrt_ca_2'=>null,
 
                 'docrt_sealdetail_3'=>null,
                 'docrt_sealnote_3'=>null,
                 'docrt_sealpos_3'=>null,
                 'docrt_sealdate_3'=>null,
                 'docrt_sealid_3'=>null,
+                'docrt_ca_3'=>null,
 
                 'docrt_note'=>$request->docrt_note,
                 'docrt_status'=>'C',
@@ -140,6 +144,7 @@ class documents_retrun_inside_deputy_signController extends Controller
             if(Auth::user()->id == $request->docrt_sealid_2){
                 $docrt_sealdate = 'docrt_sealdate_2';
                 $docrt_sealpos = 'docrt_sealpos_2';
+                $docrt_ca = 'docrt_ca_2';
 
                 $docrt_sealid = 'docrt_sealid_3';
                 $docrt_status = '6';
@@ -156,9 +161,23 @@ class documents_retrun_inside_deputy_signController extends Controller
                     '',
                     ''
                 );
+                if(!$full_path){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                }
+                //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->docrtdt_file);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
             }else if(Auth::user()->id == $request->docrt_sealid_3){
                 $docrt_sealdate = 'docrt_sealdate_3';
                 $docrt_sealpos = 'docrt_sealpos_3';
+                $docrt_ca = 'docrt_ca_3';
 
                 $docrt_sealid = 'docrt_sealid_2';
                 $docrt_status = '5';
@@ -175,6 +194,19 @@ class documents_retrun_inside_deputy_signController extends Controller
                     '',
                     ''
                 );
+                if(!$full_path){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                }
+                 //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->docrtdt_file);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
             }else{
                 return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [Auth_id!=docrt_sealid] !');
             }
@@ -184,6 +216,7 @@ class documents_retrun_inside_deputy_signController extends Controller
             if($user_check->level == '2'){
                 $update_documents_retrun = documents_retrun::where('docrt_id', $request->docrt_id)->update([
                     $docrt_sealdate=>date('Y-m-d H:i:s'),
+                    $docrt_ca=>$code_ca_64,
                     $docrt_sealpos=>$request->docrt_sealpos,
                     $docrt_sealid=>$request->docrt_sealid,
                     'docrt_status'=>$docrt_status,
@@ -207,6 +240,7 @@ class documents_retrun_inside_deputy_signController extends Controller
             }else if($user_check->level == '1'){
                 $update_documents_retrun = documents_retrun::where('docrt_id', $request->docrt_id)->update([
                     $docrt_sealdate=>date('Y-m-d H:i:s'),
+                    $docrt_ca=>$code_ca_64,
                     $docrt_sealpos=>$request->docrt_sealpos,
                     'docrt_sealid_4'=>$request->docrt_sealid,
                     'docrt_status'=>'7',

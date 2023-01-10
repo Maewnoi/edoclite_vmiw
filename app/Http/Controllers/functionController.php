@@ -19,10 +19,53 @@ use App\Models\token;
 use App\Models\auto_reserve_numbers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Cookie;
 
 class functionController extends Controller
 { 
+    public static function funtion_check_site_ca($site_id){
+        $check_site_ca = sites::where('site_id', $site_id)
+        ->first();
+        if($check_site_ca){
+            if($check_site_ca->site_ca == '0'){
+                $text = 'ปิด';
+            }else if($check_site_ca->site_ca == '1'){
+                $text = 'เปิดใช้งาน';
+            }else{
+                $text = 'ไม่ถูกนิยาม';
+            }
+        }else{
+            $text = 'ERROR';
+        }
+        
+        return $text;
+    }
+
+    public static function funtion_generate_CA_for_PDF($full_path){
+        //เช็คสิทธิ์
+        $check_site_ca = sites::where('site_id', Auth::user()->site_id)
+        ->first();
+        if($check_site_ca){
+            if($check_site_ca->site_ca == '1'){
+                $process = new Process(array('/usr/bin/bash', '/var/www/html/signkey/signfile.sh', $check_site_ca->site_path_folder, Auth::user()->id, $full_path));
+                $process->run();
+                if (!$process->isSuccessful()) {
+                    throw new ProcessFailedException($process);
+                }
+                return $process->getOutput();
+            }else if($check_site_ca->site_ca == '0'){
+                return 'null';
+            }else{
+                dd('ERROR:funtion_generate_CA_for_PDF_check_site_ca');
+            }
+        }else{
+            dd('ERROR:funtion_generate_CA_for_PDF_sites_not');
+        }
+    }
+
     public static function get_arn_template($value){
         //ตรวจสอบประเภทเลข
         if($value == 'receive'){
@@ -457,10 +500,11 @@ class functionController extends Controller
         }
         // return response($pdf->Output())->header('Content-Type', 'application/pdf');
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+        $random = Str::random(5);
         $date_new = date('Y-m-d');
         $year_new = date('Y');
         $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond/';
-        $name_gen_new = $sub3_id."_".$date_new;
+        $name_gen_new = $sub3_id."_".$date_new."_".$random;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
         return $full_path;
@@ -641,6 +685,22 @@ class functionController extends Controller
         // return response($pdf->Output())->header('Content-Type', 'application/pdf');
 
     }
+    
+    public static function funtion_site_ca_update(Request $request) {
+        if($request->var_status == '0'){
+            $sites_update = sites::where('site_id', $request->var_id)->update([
+                'site_ca'=>'0'
+            ]);
+            return array('status' => '200', 'text' => 'ปิดระบบเรียบร้อย');
+        }else if($request->var_status == '1'){
+            $sites_update = sites::where('site_id', $request->var_id)->update([
+                'site_ca'=>'1'
+            ]);
+            return array('status' => '200', 'text' => 'เปิดระบบเรียบร้อย');
+        }else{
+            return array('status' => '404', 'text' => 'พบปัญหา [แจ้งผู้พัฒนาระบบ]');
+        }
+    }
 
     public static function funtion_user_center_update(Request $request) {
         if($request->var_status == '0'){
@@ -699,7 +759,7 @@ class functionController extends Controller
         return $full_path;
 
     }
-    public static function funtion_generate_PDF_IV($seal_point, $sub_recnum, $sub_date, $sub_time, $doc_docnum, $doc_title, $doc_filedirec, $doc_id, $sign_goup_0){
+    public static function funtion_generate_PDF_IV($seal_point, $sub_recnum, $sub_date, $sub_time, $doc_docnum, $doc_title, $doc_filedirec, $sub_id, $sign_goup_0){
         $groupmems = Groupmem::where('group_id', Auth::user()->group)
         ->where('group_site_id',Auth::user()->site_id)
         ->first();
@@ -814,10 +874,11 @@ class functionController extends Controller
         }
 
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+        $random = Str::random(5);
         $date_new = date('Y-m-d');
         $year_new = date('Y');
         $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/'.$path_.'/';
-        $name_gen_new = $doc_id."_".$date_new;
+        $name_gen_new = $sub_id."_".$date_new."_".$random;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
         return $full_path;
@@ -995,10 +1056,11 @@ class functionController extends Controller
             return response($pdf->Output())->header('Content-Type', 'application/pdf');
         }else if($request->action_garuda == 'respond'){
             $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+            $random = Str::random(5);
             $date_new = date('Y-m-d');
             $year_new = date('Y');
             $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond/';
-            $name_gen_new = $request->sub3_id_garuda."_".$date_new;
+            $name_gen_new = $request->sub3_id_garuda."_".$date_new."_".$random;
             // $name_gen_new = 'test_by_domji';
             $full_path = $upload_location.$name_gen_new.'.pdf';
             $pdf->Output('F', $full_path);
@@ -1089,10 +1151,11 @@ class functionController extends Controller
             return response($pdf->Output())->header('Content-Type', 'application/pdf');
         }else if($request->action_garuda == 'respond'){
             $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+            $random = Str::random(5);
             $date_new = date('Y-m-d');
             $year_new = date('Y');
-            $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond_retrun/';
-            $name_gen_new = $request->docrt_id_garuda."_".$date_new;
+            $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond/';
+            $name_gen_new = $request->docrt_id_garuda."_".$date_new."_".$random;
             // $name_gen_new = 'test_by_domji';
             $full_path = $upload_location.$name_gen_new.'.pdf';
             $pdf->Output('F', $full_path);
@@ -1223,10 +1286,11 @@ class functionController extends Controller
             return response($pdf->Output())->header('Content-Type', 'application/pdf');
         }else if($request->action == 'respond'){
             $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+            $random = Str::random(5);
             $date_new = date('Y-m-d');
             $year_new = date('Y');
             $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond/';
-            $name_gen_new = $request->sub3_id."_".$date_new;
+            $name_gen_new = $request->sub3_id."_".$date_new."_".$random;
             // $name_gen_new = 'test_by_domji';
             $full_path = $upload_location.$name_gen_new.'.pdf';
             $pdf->Output('F', $full_path);
@@ -1359,10 +1423,11 @@ class functionController extends Controller
             return response($pdf->Output())->header('Content-Type', 'application/pdf');
         }else if($request->action == 'respond'){
             $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+            $random = Str::random(5);
             $date_new = date('Y-m-d');
             $year_new = date('Y');
-            $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond_retrun/';
-            $name_gen_new = $request->docrt_id."_".$date_new;
+            $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond/';
+            $name_gen_new = $request->docrt_id."_".$date_new."_".$random;
             // $name_gen_new = 'test_by_domji';
             $full_path = $upload_location.$name_gen_new.'.pdf';
             $pdf->Output('F', $full_path);
@@ -1745,10 +1810,11 @@ class functionController extends Controller
             }
         }
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+        $random = Str::random(5);
         $date_new = date('Y-m-d');
         $year_new = date('Y');
         $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/division/';
-        $name_gen_new = $sub_id."_".$date_new;
+        $name_gen_new = $sub_id."_".$date_new."_".$random;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
         return $full_path;
@@ -1802,10 +1868,11 @@ class functionController extends Controller
             }
         }
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+        $random = Str::random(5);
         $date_new = date('Y-m-d');
         $year_new = date('Y');
         $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/work/';
-        $name_gen_new = $sub_id."_".$date_new;
+        $name_gen_new = $sub_id."_".$date_new."_".$random;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
         return $full_path;
@@ -1860,10 +1927,11 @@ class functionController extends Controller
              }
          }
          $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+         $random = Str::random(5);
          $date_new = date('Y-m-d');
          $year_new = date('Y');
          $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/department/';
-         $name_gen_new = $sub_id."_".$date_new;
+         $name_gen_new = $sub_id."_".$date_new."_".$random;
          $full_path = $upload_location.$name_gen_new.'.pdf';
          $pdf->Output('F', $full_path);
          return $full_path;
@@ -1918,10 +1986,11 @@ class functionController extends Controller
             }
         }
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+        $random = Str::random(5);
         $date_new = date('Y-m-d');
         $year_new = date('Y');
         $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/work/';
-        $name_gen_new = $sub_id."_".$date_new;
+        $name_gen_new = $sub_id."_".$date_new."_".$random;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
         return $full_path;
@@ -2199,10 +2268,11 @@ class functionController extends Controller
             $path_ = 'division';
         }
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+        $random = Str::random(5);
         $date_new = date('Y-m-d');
         $year_new = date('Y');
         $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/'.$path_.'/';
-        $name_gen_new = $sub_id."_".$date_new;
+        $name_gen_new = $sub_id."_".$date_new."_".$random;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
         return $full_path;
@@ -2446,10 +2516,11 @@ class functionController extends Controller
             $pdf->useTemplate($tplIdx, null, null, null);
         }
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+        $random = Str::random(5);
         $date_new = date('Y-m-d');
         $year_new = date('Y');
         $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/center/';
-        $name_gen_new = $doc_id."_".$date_new;
+        $name_gen_new = $doc_id."_".$date_new."_".$random;
         $full_path = $upload_location.$name_gen_new.'.pdf';
         $pdf->Output('F', $full_path);
         return $full_path;

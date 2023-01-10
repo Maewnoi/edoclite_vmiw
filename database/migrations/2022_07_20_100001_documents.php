@@ -27,6 +27,7 @@ class Documents extends Migration
             $table->string('doc_title')->nullable();
             $table->string('doc_filedirec')->nullable();
             $table->string('doc_filedirec_1')->nullable();
+            $table->text('doc_filedirec_1_ca')->nullable();
             $table->string('doc_attached_file')->nullable();
             $table->string('doc_type')->nullable();
             $table->enum('doc_template', array('A', 'B', 'C', 'D', 'E'));

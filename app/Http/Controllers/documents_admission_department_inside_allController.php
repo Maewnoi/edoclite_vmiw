@@ -133,8 +133,20 @@ class documents_admission_department_inside_allController extends Controller
                     'sub2_created_at'=>date('Y-m-d H:i:s')
                 ]);
             }
-            // $full_path_inside = functionController::funtion_generate_PDF_III($request->doc_filedirec_1_inside, $request->seal_point_inside, $request->sub_recnum_inside, $request->sub_date_inside, $request->sub_time_inside, $request->sub_id_inside, $request->seal_pos_0_inside, $request->seal_date_1_inside, $request->seal_pos_1_inside, $request->seal_date_0_inside, $request->seal_id_1_inside, $request->seal_id_0_inside, $request->seal_detail_1_inside, $request->seal_detail_0_inside);
             $full_path_inside = functionController::funtion_generate_PDF_department_to_work($request->seal_file_inside ,$request->seal_detail_0_inside ,$request->seal_id_0_inside ,$request->seal_pos_0_inside ,$request->sub_id_inside);
+            if(!$full_path_inside){
+                return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path_inside]');
+            }
+            //ca
+            $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path_inside);
+            if(!$code_ca_64){
+                return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+            }
+            //ลบไฟล์เดิม
+            $del_old = unlink($request->seal_file_inside);
+            if(!$del_old){
+                return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+            }
 
             $sub_status_inside = '8';
         }else{
@@ -144,6 +156,19 @@ class documents_admission_department_inside_allController extends Controller
             if($user_check_level->level == '4'){
                 //หัวหน้ากอง
                 $full_path_inside = functionController::funtion_generate_PDF_department_to_division($request->seal_file_inside ,$request->seal_detail_0_inside ,$request->seal_id_0_inside ,$request->seal_pos_0_inside ,$request->sub_id_inside);
+                if(!$full_path_inside){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path_inside]');
+                }
+                //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path_inside);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->seal_file_inside);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
 
                 $update_sub_docs_0 = sub_doc::where('sub_id', $request->sub_id_inside)->update([
                     'seal_id_1'=>$request->sign_goup_1_inside
@@ -160,6 +185,7 @@ class documents_admission_department_inside_allController extends Controller
             'seal_date_0'=>date('Y-m-d H:i:s'),
             'sub_status'=>$sub_status_inside,
             'seal_file'=>$full_path_inside,
+            'seal_file_department_ca'=>$code_ca_64,
             'sub_updated_at'=>date('Y-m-d H:i:s')
         ]);
 

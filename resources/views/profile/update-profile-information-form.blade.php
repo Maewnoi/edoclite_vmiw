@@ -91,6 +91,12 @@ use App\Http\Controllers\functionController;
                 value='{!! functionController::format_Size(functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id)))!!} ({!!substr(functionController::funtion_sites_site_path_folder(Auth::user()->site_id), 0, -25)!!})' />
         </div>
         <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="level" value="{{ __('ระบบเข้ารหัสเอกสารด้วย CA') }}" />
+            <x-jet-label for="level" class="text-primary"
+                value='{{ functionController::funtion_check_site_ca(Auth::user()->site_id) }}' />
+       
+        </div>
+        <div class="col-span-6 sm:col-span-4">
             @csrf
             <x-jet-label for="sign" value="{{ __('รูปลายเซ็น') }}" />
             @if(Auth::user()->sign != '')

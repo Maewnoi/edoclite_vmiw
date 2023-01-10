@@ -125,8 +125,22 @@ class documents_admission_department_allController extends Controller
                     'sub2_created_at'=>date('Y-m-d H:i:s')
                 ]);
             }
-            //ประทับตราและเซ็น
+            //เซ็น
             $full_path = functionController::funtion_generate_PDF_department_to_work($request->seal_file ,$request->seal_detail_0 ,$request->seal_id_0 ,$request->seal_pos_0 ,$request->sub_id);
+            if(!$full_path){
+                return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+            }
+            //ca
+            $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+            if(!$code_ca_64){
+                return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+            }
+            //ลบไฟล์เดิม
+            $del_old = unlink($request->seal_file);
+            if(!$del_old){
+                return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+            }
+
             $sub_status = '8';
         }else{
             //ถ้าเลือกคนพิจารณา
@@ -135,6 +149,20 @@ class documents_admission_department_allController extends Controller
             ->first();
             if($user_check_level->level == '4'){
                 $full_path = functionController::funtion_generate_PDF_department_to_division($request->seal_file ,$request->seal_detail_0 ,$request->seal_id_0 ,$request->seal_pos_0 ,$request->sub_id);
+                if(!$full_path){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                }
+                //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->seal_file);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
+
                 //หัวหน้ากอง
                 $update_sub_docs_0 = sub_doc::where('sub_id', $request->sub_id)->update([
                     'seal_id_1'=>$request->sign_goup_1
@@ -151,6 +179,7 @@ class documents_admission_department_allController extends Controller
             'seal_date_0'=>date('Y-m-d H:i:s'),
             'sub_status'=>$sub_status,
             'seal_file'=>$full_path,
+            'seal_file_department_ca'=>$code_ca_64,
             'sub_updated_at'=>date('Y-m-d H:i:s')
         ]);
 

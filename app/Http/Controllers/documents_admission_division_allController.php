@@ -140,7 +140,19 @@ class documents_admission_division_allController extends Controller
             }
             //เซ็น
             $full_path = functionController::funtion_generate_PDF_division_to_work($request->seal_file ,$request->seal_detail_1 ,$request->seal_id_1 ,$request->seal_pos_1 ,$request->sub_id);
-            // $full_path = functionController::funtion_generate_PDF_III($request->doc_filedirec_1,$request->seal_point,$request->sub_recnum,$request->sub_date,$request->sub_time,$request->sub_id,$request->seal_pos_0,$request->seal_date_1,$request->seal_pos_1,$request->seal_date_0,$request->seal_id_1,$request->seal_id_0,$request->seal_detail_1,$request->seal_detail_0);
+            if(!$full_path){
+                return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+            }
+            //ca
+            $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+            if(!$code_ca_64){
+                return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+            }
+            //ลบไฟล์เดิม
+            $del_old = unlink($request->seal_file);
+            if(!$del_old){
+                return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+            }
 
             $update_sub_docs = sub_doc::where('sub_id', $request->sub_id)
             ->update([
@@ -149,6 +161,7 @@ class documents_admission_division_allController extends Controller
                  'seal_date_1'=>date('Y-m-d H:i:s'),
                  'sub_status'=>'8',
                  'seal_file'=>$full_path,
+                 'seal_file_division_ca'=>$code_ca_64,
                  'sub_updated_at'=>date('Y-m-d H:i:s')
             ]);
         }else{
@@ -170,6 +183,19 @@ class documents_admission_division_allController extends Controller
                 ->first();
                 if($document_check){
                     $full_path = functionController::funtion_generate_PDF_division_to_department($request->seal_file ,$request->seal_detail_1 ,$request->seal_id_1 ,$request->seal_pos_1 ,$request->sub_id);
+                    if(!$full_path){
+                        return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                    }
+                    //ca
+                    $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                    if(!$code_ca_64){
+                        return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                    }
+                    //ลบไฟล์เดิม
+                    $del_old = unlink($request->seal_file);
+                    if(!$del_old){
+                        return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                    }
 
                     for ($t = 0; $t < count($request->sub2_recid_cottons); $t++) {
                         $sub2_recid_cottons[$t] = $request->sub2_recid_cottons[$t];
@@ -200,6 +226,9 @@ class documents_admission_division_allController extends Controller
                                 'seal_detail_1'=>$request->seal_detail_1,
                                 'seal_pos_1'=>$request->seal_pos_1,
                                 'seal_file'=>$full_path,
+                                'seal_file_group_ca'=>$document_check->seal_file_group_ca,
+                                'seal_file_division_ca'=>$code_ca_64,
+                                'seal_file_department_ca'=>$document_check->seal_file_department_ca,
                                 'seal_date_1'=>date('Y-m-d H:i:s'),
                             ]);
 

@@ -90,6 +90,7 @@ class documents_admission_inside_minister_signController extends Controller
             if(Auth::user()->id == $request->sub3_sealid_4){
                 $sub3_sealdate = 'sub3_sealdate_4';
                 $sub3_sealpos = 'sub3_sealpos_4';
+                $sub3_ca = 'sub3_ca_4';
 
                 $full_path = functionController::funtion_generate_PDF_deputy_AND_minister(
                     $request->sub3d_file,
@@ -103,9 +104,23 @@ class documents_admission_inside_minister_signController extends Controller
                     $request->sub3_sealpos,
                     ''
                 );
+                if(!$full_path){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                }
+                //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->sub3d_file);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
             }else if(Auth::user()->id == $request->sub3_sealid_5){
                 $sub3_sealdate = 'sub3_sealdate_5';
                 $sub3_sealpos = 'sub3_sealpos_5';
+                $sub3_ca = 'sub3_ca_5';
 
                 $full_path = functionController::funtion_generate_PDF_deputy_AND_minister(
                     $request->sub3d_file,
@@ -119,12 +134,26 @@ class documents_admission_inside_minister_signController extends Controller
                     '',
                     $request->sub3_sealpos
                 );
+                if(!$full_path){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                }
+                //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->sub3d_file);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
             }else{
                 return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [Auth_id!=sub3_sealid] !');
             }
 
             $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
                 $sub3_sealdate=>date('Y-m-d H:i:s'),
+                $sub3_ca=>$code_ca_64,
                 $sub3_sealpos=>$request->sub3_sealpos,
                 'sub3_status'=>'9',
                 'sub3_updated_at'=>date('Y-m-d H:i:s')
@@ -153,6 +182,7 @@ class documents_admission_inside_minister_signController extends Controller
             if(Auth::user()->id == $request->sub3_sealid_4){
                 $sub3_sealdate = 'sub3_sealdate_4';
                 $sub3_sealpos = 'sub3_sealpos_4';
+                $sub3_ca = 'sub3_ca_4';
     
                 $sub3_sealid = 'sub3_sealid_5';
                 $sub3_status = '8';
@@ -169,9 +199,23 @@ class documents_admission_inside_minister_signController extends Controller
                     $request->sub3_sealpos,
                     ''
                 );
+                if(!$full_path){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                }
+                //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->sub3d_file);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
             }else if(Auth::user()->id == $request->sub3_sealid_5){
                 $sub3_sealdate = 'sub3_sealdate_5';
                 $sub3_sealpos = 'sub3_sealpos_5';
+                $sub3_ca = 'sub3_ca_5';
     
                 $sub3_sealid = 'sub3_sealid_4';
                 $sub3_status = '7';
@@ -188,6 +232,19 @@ class documents_admission_inside_minister_signController extends Controller
                     '',
                     $request->sub3_sealpos
                 );
+                if(!$full_path){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                }
+                //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->sub3d_file);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
             }else{
                 return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [Auth_id!=sub3_sealid] !');
             }
@@ -197,6 +254,7 @@ class documents_admission_inside_minister_signController extends Controller
             if($user_check->level == '1'){
                 $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
                     $sub3_sealdate=>date('Y-m-d H:i:s'),
+                    $sub3_ca=>$code_ca_64,
                     $sub3_sealpos=>$request->sub3_sealpos,
                     $sub3_sealid=>$request->sub3_sealid,
                     'sub3_status'=>$sub3_status,

@@ -21,6 +21,7 @@ class Site extends Migration
             $table->string('site_path_folder');
             $table->string('site_img');
             $table->string('site_color');
+            $table->enum('site_ca', array('0', '1'))->default('0');
             $table->timestamp('site_created_at')->nullable();
             $table->timestamp('site_updated_at')->nullable();
         });

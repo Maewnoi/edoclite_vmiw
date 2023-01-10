@@ -10,6 +10,7 @@ use App\Models\Groupmem;
 use App\Models\User;
 use App\Models\documents_retrun;
 use App\Models\documents_retrun_detail;
+use Illuminate\Support\Str;
 
 class documents_retrun_inside_division_retrunController extends Controller
 {
@@ -50,17 +51,18 @@ class documents_retrun_inside_division_retrunController extends Controller
                 ]);
 
                 $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+                $random = Str::random(5);
                 $date_new = date('Y-m-d');
                 $year_new = date('Y');
                 //การเข้ารหัสไฟล์_doc_filedirec
                 $docrtdt_file = $request->file('docrtdt_file');
                 //Generate ชื่อไฟล์
-                $name_gen_new = $request->sub3_id_normal."_".$date_new;
+                $name_gen_new = $request->sub3_id_normal."_".$date_new."_".$random;
                 // ดึงนามสกุลไฟล์
                 $docrtdt_file_img_ext = strtolower($docrtdt_file->getClientOriginalExtension());
                 $docrtdt_file_img_name = $name_gen_new.'.'.$docrtdt_file_img_ext;
                 //อัพโหลดและบันทึกข้อมูล
-                $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond_retrun/';
+                $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond/';
                 $full_path = $upload_location.$docrtdt_file_img_name;
                 $docrtdt_file->move($upload_location,$docrtdt_file_img_name);
 

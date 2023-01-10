@@ -40,36 +40,42 @@ class Sub3Docs extends Migration
             $table->string('sub3_sealpos_0')->nullable();
             $table->dateTime('sub3_sealdate_0')->nullable();
             $table->integer('sub3_sealid_0')->nullable();
+            $table->text('sub3_ca_0')->nullable();
 
             $table->string('sub3_sealdetail_1')->nullable(); //หน้าห้องปลัด || หน้าห้องนายก 4
             $table->string('sub3_sealnote_1')->nullable();
             $table->string('sub3_sealpos_1')->nullable();
             $table->dateTime('sub3_sealdate_1')->nullable();
             $table->integer('sub3_sealid_1')->nullable();
+            $table->text('sub3_ca_1')->nullable();
 
             $table->string('sub3_sealdetail_2')->nullable(); //รองปลัด | ปลัด 5
             $table->string('sub3_sealnote_2')->nullable();
             $table->string('sub3_sealpos_2')->nullable();
             $table->dateTime('sub3_sealdate_2')->nullable();
             $table->integer('sub3_sealid_2')->nullable();
+            $table->text('sub3_ca_2')->nullable();
 
             $table->string('sub3_sealdetail_3')->nullable(); //รองปลัด | ปลัด 6
             $table->string('sub3_sealnote_3')->nullable();
             $table->string('sub3_sealpos_3')->nullable();
             $table->dateTime('sub3_sealdate_3')->nullable();
             $table->integer('sub3_sealid_3')->nullable();
+            $table->text('sub3_ca_3')->nullable();
 
             $table->string('sub3_sealdetail_4')->nullable(); //รองนายก 7
             $table->string('sub3_sealnote_4')->nullable();
             $table->string('sub3_sealpos_4')->nullable();
             $table->dateTime('sub3_sealdate_4')->nullable();
             $table->integer('sub3_sealid_4')->nullable();
+            $table->text('sub3_ca_4')->nullable();
 
             $table->string('sub3_sealdetail_5')->nullable(); //นายก 8
             $table->string('sub3_sealnote_5')->nullable();
             $table->string('sub3_sealpos_5')->nullable();
             $table->dateTime('sub3_sealdate_5')->nullable();
             $table->integer('sub3_sealid_5')->nullable();
+            $table->text('sub3_ca_5')->nullable();
 
             $table->timestamp('sub3_created_at')->nullable();
             $table->timestamp('sub3_updated_at')->nullable();

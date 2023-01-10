@@ -136,6 +136,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     Route::post('/jurisprudence/update',[functionController::class , 'funtion_jurisprudence_update' ]);
     Route::post('/user_center/update',[functionController::class , 'funtion_user_center_update' ]);
+    Route::post('/site_ca/update',[functionController::class , 'funtion_site_ca_update' ]);
+
 
     Route::post('/navigation/search',[functionController::class , 'funtion_navigation_search' ]);
 

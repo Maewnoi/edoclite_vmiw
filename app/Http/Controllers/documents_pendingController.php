@@ -80,9 +80,14 @@ class documents_pendingController extends Controller
         //ประทับตาและเซ็น
         $full_path = functionController::funtion_generate_PDF_I($request->sub_recid ,$request->seal_point ,$request->doc_recnum ,$request->doc_date ,$request->doc_time ,$request->pos ,$request->doc_filedirec ,$request->doc_id ,$request->seal_deteil ,$request->doc_docnum ,$request->doc_title);
         if(!$full_path){
-           return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา !');
+           return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
         }
-        
+        //ca
+        $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+        if(!$code_ca_64){
+            return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+        }
+
         //นับจำนวนกองงาน
         for ($t = 0; $t < count($request->sub_recid); $t++) {
             $sub_recid[$t] = $request->sub_recid[$t];
@@ -109,6 +114,7 @@ class documents_pendingController extends Controller
         $update_documents = document::where('doc_id', $request->doc_id)->update([
             'doc_status'=>'success',
             'doc_filedirec_1'=>$full_path,
+            'doc_filedirec_1_ca'=>$code_ca_64,
             'doc_updated_at'=>date('Y-m-d H:i:s')
         ]);
 

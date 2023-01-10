@@ -106,24 +106,28 @@ class documents_admission_inside_deputy_signController extends Controller
                 'sub3_sealpos_0'=>null,
                 'sub3_sealdate_0'=>null,
                 'sub3_sealid_0'=>null,
+                'sub3_ca_0'=>null,
 
                 'sub3_sealdetail_1'=>null,
                 'sub3_sealnote_1'=>null,
                 'sub3_sealpos_1'=>null,
                 'sub3_sealdate_1'=>null,
                 'sub3_sealid_1'=>null,
+                'sub3_ca_1'=>null,
 
                 'sub3_sealdetail_2'=>null,
                 'sub3_sealnote_2'=>null,
                 'sub3_sealpos_2'=>null,
                 'sub3_sealdate_2'=>null,
                 'sub3_sealid_2'=>null,
+                'sub3_ca_2'=>null,
 
                 'sub3_sealdetail_3'=>null,
                 'sub3_sealnote_3'=>null,
                 'sub3_sealpos_3'=>null,
                 'sub3_sealdate_3'=>null,
                 'sub3_sealid_3'=>null,
+                'sub3_ca_3'=>null,
 
                 'sub3_note'=>$request->sub3_note,
                 'sub3_status'=>'C',
@@ -150,6 +154,7 @@ class documents_admission_inside_deputy_signController extends Controller
             if(Auth::user()->id == $request->sub3_sealid_2){
                 $sub3_sealdate = 'sub3_sealdate_2';
                 $sub3_sealpos = 'sub3_sealpos_2';
+                $sub3_ca = 'sub3_ca_2';
 
                 $sub3_sealid = 'sub3_sealid_3';
                 $sub3_status = '6';
@@ -166,9 +171,24 @@ class documents_admission_inside_deputy_signController extends Controller
                     '',
                     ''
                 );
+                if(!$full_path){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                }
+                //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->sub3d_file);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
+
             }else if(Auth::user()->id == $request->sub3_sealid_3){
                 $sub3_sealdate = 'sub3_sealdate_3';
                 $sub3_sealpos = 'sub3_sealpos_3';
+                $sub3_ca = 'sub3_ca_3';
 
                 $sub3_sealid = 'sub3_sealid_2';
                 $sub3_status = '5';
@@ -185,6 +205,19 @@ class documents_admission_inside_deputy_signController extends Controller
                     '',
                     ''
                 );
+                if(!$full_path){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path]');
+                }
+                 //ca
+                $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path);
+                if(!$code_ca_64){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+                }
+                //ลบไฟล์เดิม
+                $del_old = unlink($request->sub3d_file);
+                if(!$del_old){
+                    return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![del_old]');
+                }
             }else{
                 return redirect('member_dashboard')->with('error','เกิดข้อผิดพลาด [Auth_id!=sub3_sealid] !');
             }
@@ -194,6 +227,7 @@ class documents_admission_inside_deputy_signController extends Controller
             if($user_check->level == '2'){
                 $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
                     $sub3_sealdate=>date('Y-m-d H:i:s'),
+                    $sub3_ca=>$code_ca_64,
                     $sub3_sealpos=>$request->sub3_sealpos,
                     $sub3_sealid=>$request->sub3_sealid,
                     'sub3_status'=>$sub3_status,
@@ -217,6 +251,7 @@ class documents_admission_inside_deputy_signController extends Controller
             }else if($user_check->level == '1'){
                 $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([
                     $sub3_sealdate=>date('Y-m-d H:i:s'),
+                    $sub3_ca=>$code_ca_64,
                     $sub3_sealpos=>$request->sub3_sealpos,
                     'sub3_sealid_4'=>$request->sub3_sealid,
                     'sub3_status'=>'7',

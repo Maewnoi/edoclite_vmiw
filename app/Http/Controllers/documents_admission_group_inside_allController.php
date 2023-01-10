@@ -219,7 +219,16 @@ class documents_admission_group_inside_allController extends Controller
              }
          }
 
-        $full_path_inside = functionController::funtion_generate_PDF_IV($request->seal_point_inside, $request->sub_recnum_inside, $request->sub_date_inside, $request->sub_time_inside, $request->doc_docnum_inside, $request->doc_title_inside, $request->doc_filedirec_inside, $request->doc_id_inside, $request->sign_goup_0_inside);
+        $full_path_inside = functionController::funtion_generate_PDF_IV($request->seal_point_inside, $request->sub_recnum_inside, $request->sub_date_inside, $request->sub_time_inside, $request->doc_docnum_inside, $request->doc_title_inside, $request->doc_filedirec_inside, $request->sub_id_inside, $request->sign_goup_0_inside);
+        if(!$full_path_inside){
+            return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![full_path_inside]');
+        }
+        //ca
+        $code_ca_64 = functionController::funtion_generate_CA_for_PDF($full_path_inside);
+        if(!$code_ca_64){
+            return redirect()->back()->with('error','พบปัญหาการประทับตากรุณาแจ้งผู้พัฒนา ![code_ca_64]');
+        }
+
         //เช็คผู้พิจารณา
         if($request->sign_goup_0_inside == ''){
             //ตรวจสอบข้อมูลที่กรอกเข้ามาก่อน
@@ -252,7 +261,8 @@ class documents_admission_group_inside_allController extends Controller
                 'sub_date'=>$request->sub_date_inside,
                 'sub_time'=>$request->sub_time_inside,
                 'sub_status'=>'8',
-                'seal_file'=>$full_path_inside,        
+                'seal_file'=>$full_path_inside,
+                'seal_file_group_ca'=>$code_ca_64,       
                 'sub_updated_at'=>date('Y-m-d H:i:s')
             ]);
             
@@ -298,6 +308,7 @@ class documents_admission_group_inside_allController extends Controller
                             'sub_status'=>'1',
                             'seal_id_0'=>$user_check_level_5[$t]->id,
                             'seal_file'=>$full_path_inside,
+                            'seal_file_group_ca'=>$code_ca_64, 
                             'sub_updated_at'=>date('Y-m-d H:i:s')
                         ]);
                     }else{
@@ -325,7 +336,8 @@ class documents_admission_group_inside_allController extends Controller
                           'sub_time'=>$request->sub_time_inside,
                           'sub_status'=>'2',
                           'seal_id_1'=>$user_check_level_4->id,
-                          'seal_file'=>$full_path_inside,  
+                          'seal_file'=>$full_path_inside,
+                          'seal_file_group_ca'=>$code_ca_64,  
                           'sub_updated_at'=>date('Y-m-d H:i:s')
                       ]);
                       // dd($request->sub2_recid_groupmems);
@@ -367,7 +379,7 @@ class documents_admission_group_inside_allController extends Controller
         ->where('group_id', Auth::user()->group)
         ->first();
         if($tokens_Check){
-            $message = "\n⚠️ ลงรับเอกสารรับเข้าภายใน ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+            $message = "\n⚠️ ลงรับเอกสารรับเข้าภายใน ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum_inside."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin_inside."\n>เรื่อง : ".$request->doc_title_inside."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
             functionController::line_notify($message,$tokens_Check->group_token);
         }
 

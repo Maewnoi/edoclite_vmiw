@@ -14,6 +14,7 @@ use App\Models\sites;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\functionController;
+use Illuminate\Support\Str;
 
 class documents_admission_inside_work_retrunController extends Controller
 {
@@ -59,12 +60,13 @@ class documents_admission_inside_work_retrunController extends Controller
                 ]);
 
                 $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+                $random = Str::random(5);
                 $date_new = date('Y-m-d');
                 $year_new = date('Y');
                 //การเข้ารหัสไฟล์_doc_filedirec
                 $sub3d_file = $request->file('sub3d_file');
                 //Generate ชื่อไฟล์
-                $name_gen_new = $request->sub3_id_normal."_".$date_new;
+                $name_gen_new = $request->sub3_id_normal."_".$date_new."_".$random;
                 // ดึงนามสกุลไฟล์
                 $sub3d_file_img_ext = strtolower($sub3d_file->getClientOriginalExtension());
                 $sub3d_file_img_name = $name_gen_new.'.'.$sub3d_file_img_ext;

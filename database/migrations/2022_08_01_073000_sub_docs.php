@@ -70,6 +70,9 @@ class SubDocs extends Migration
             $table->integer('seal_id_5')->nullable();
 
             $table->string('seal_file')->nullable();
+            $table->text('seal_file_group_ca')->nullable();
+            $table->text('seal_file_division_ca')->nullable();
+            $table->text('seal_file_department_ca')->nullable();
             $table->integer('seal_point')->nullable();
             $table->string('seal_file2')->nullable();
             $table->string('seal_recid')->nullable();

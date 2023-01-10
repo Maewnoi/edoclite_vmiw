@@ -15,6 +15,7 @@ use App\Models\sub_doc;
 use App\Models\sub2_doc;
 use App\Models\documents_retrun;
 use App\Models\documents_retrun_detail;
+use Illuminate\Support\Str;
 
 class member_dashboardController extends Controller
 {
@@ -56,17 +57,18 @@ class member_dashboardController extends Controller
                         ]);
 
                         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+                        $random = Str::random(5);
                         $date_new = date('Y-m-d');
                         $year_new = date('Y');
                         //การเข้ารหัสไฟล์_doc_filedirec
                         $docrt_file = $request->file('docrtdt_file');
                         //Generate ชื่อไฟล์
-                        $name_gen_new = $insert_documents_retrun."_".$date_new;
+                        $name_gen_new = $insert_documents_retrun."_".$date_new."_".$random;
                         // ดึงนามสกุลไฟล์
                         $docrt_file_img_ext = strtolower($docrt_file->getClientOriginalExtension());
                         $docrt_file_img_name = $name_gen_new.'.'.$docrt_file_img_ext;
                         //อัพโหลดและบันทึกข้อมูล
-                        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond_retrun/';
+                        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond/';
                         $full_path = $upload_location.$docrt_file_img_name;
                         $docrt_file->move($upload_location,$docrt_file_img_name);
 
@@ -91,17 +93,18 @@ class member_dashboardController extends Controller
                         ]);
 
                         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+                        $random = Str::random(5);
                         $date_new = date('Y-m-d');
                         $year_new = date('Y');
                         //การเข้ารหัสไฟล์_doc_filedirec
                         $docrt_file = $request->file('docrtdt_file');
                         //Generate ชื่อไฟล์
-                        $name_gen_new = $insert_documents_retrun."_".$date_new;
+                        $name_gen_new = $insert_documents_retrun."_".$date_new."_".$random;
                         // ดึงนามสกุลไฟล์
                         $docrt_file_img_ext = strtolower($docrt_file->getClientOriginalExtension());
                         $docrt_file_img_name = $name_gen_new.'.'.$docrt_file_img_ext;
                         //อัพโหลดและบันทึกข้อมูล
-                        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond_retrun/';
+                        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond/';
                         $full_path = $upload_location.$docrt_file_img_name;
                         $docrt_file->move($upload_location,$docrt_file_img_name);
 
@@ -126,17 +129,18 @@ class member_dashboardController extends Controller
                         ]);
 
                         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
+                        $random = Str::random(5);
                         $date_new = date('Y-m-d');
                         $year_new = date('Y');
                         //การเข้ารหัสไฟล์_doc_filedirec
                         $docrt_file = $request->file('docrtdt_file');
                         //Generate ชื่อไฟล์
-                        $name_gen_new = $insert_documents_retrun."_".$date_new;
+                        $name_gen_new = $insert_documents_retrun."_".$date_new."_".$random;
                         // ดึงนามสกุลไฟล์
                         $docrt_file_img_ext = strtolower($docrt_file->getClientOriginalExtension());
                         $docrt_file_img_name = $name_gen_new.'.'.$docrt_file_img_ext;
                         //อัพโหลดและบันทึกข้อมูล
-                        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond_retrun/';
+                        $upload_location = 'image/'.$sites->site_path_folder.'/'.$year_new.'/respond/';
                         $full_path = $upload_location.$docrt_file_img_name;
                         $docrt_file->move($upload_location,$docrt_file_img_name);
 
@@ -735,7 +739,7 @@ class member_dashboardController extends Controller
         }
 
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
-
+        $random = Str::random(5);
         //หา ID documentล่าสุด
         $document_Check_doc_id = document::max('doc_id');
         $doc_id_new = $document_Check_doc_id + 1;
@@ -744,7 +748,7 @@ class member_dashboardController extends Controller
         //การเข้ารหัสไฟล์_doc_filedirec
         $doc_filedirec = $request->file('doc_filedirec');
         //Generate ชื่อไฟล์
-        $name_gen_new = $doc_id_new."_".$date_new;
+        $name_gen_new = $doc_id_new."_".$date_new."_".$random;
         // ดึงนามสกุลไฟล์
         $doc_filedirec_img_ext = strtolower($doc_filedirec->getClientOriginalExtension());
         $doc_filedirec_img_name = $name_gen_new.'.'.$doc_filedirec_img_ext;
@@ -908,7 +912,7 @@ class member_dashboardController extends Controller
         }
         
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
-
+        $random = Str::random(5);
         //หา ID documentล่าสุด
         $document_Check_doc_id = document::max('doc_id');
         $doc_id_new = $document_Check_doc_id + 1;
@@ -917,7 +921,7 @@ class member_dashboardController extends Controller
         //การเข้ารหัสไฟล์_doc_filedirec
         $doc_filedirec = $request->file('doc_filedirec');
         //Generate ชื่อไฟล์
-        $name_gen_new = $doc_id_new."_".$date_new;
+        $name_gen_new = $doc_id_new."_".$date_new."_".$random;
         // ดึงนามสกุลไฟล์
         $doc_filedirec_img_ext = strtolower($doc_filedirec->getClientOriginalExtension());
         $doc_filedirec_img_name = $name_gen_new.'.'.$doc_filedirec_img_ext;
@@ -1093,7 +1097,7 @@ class member_dashboardController extends Controller
          }
 
         $sites= sites::where('sites.site_id', Auth::user()->site_id)->first();
-
+        $random = Str::random(5);
         //หา ID documentล่าสุด
         $document_Check_doc_id = document::max('doc_id');
         $doc_id_new = $document_Check_doc_id + 1;
@@ -1102,7 +1106,7 @@ class member_dashboardController extends Controller
         //การเข้ารหัสไฟล์_doc_filedirec
         $doc_filedirec = $request->file('doc_filedirec_inside');
         //Generate ชื่อไฟล์
-        $name_gen_new = $doc_id_new."_".$date_new;
+        $name_gen_new = $doc_id_new."_".$date_new."_".$random;
         // ดึงนามสกุลไฟล์
         $doc_filedirec_img_ext = strtolower($doc_filedirec->getClientOriginalExtension());
         $doc_filedirec_img_name = $name_gen_new.'.'.$doc_filedirec_img_ext;
@@ -1194,7 +1198,7 @@ class member_dashboardController extends Controller
             ->where('token_level', Auth::user()->level)
             ->first();
             if($tokens_Check){
-                $message = "\n⚠️ สร้างเอกสารส่งภายใน ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin."\n>เรื่อง : ".$request->doc_title."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
+                $message = "\n⚠️ สร้างเอกสารส่งภายใน ⚠️\n>เลขที่หนังสือ :  ".$request->doc_docnum_inside."\n>หน่วยงานต้นเรื่อง :  ".$request->doc_origin_inside."\n>เรื่อง : ".$request->doc_title_inside."\n>เวลาแจ้งเตือน : ".date('Y-m-d H:i')." ";
                 functionController::line_notify($message,$tokens_Check->group_token);
             }
 
