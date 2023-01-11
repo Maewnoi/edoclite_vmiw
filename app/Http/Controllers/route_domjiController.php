@@ -17,21 +17,33 @@ class route_domjiController extends Controller
     public function index(){
         if(Auth::user()->level=='0'){
 
-            // $memberS=User::join('sites', 'sites.site_id', '=', 'users.site_id')
-            // ->get();
+            //กำหนดไว้
+            $fd = '222 MB';
+            $fd_explode = explode(" ", $fd);
+            $int = (int)$fd_explode[0];
 
-            // $i = 0;
-            // foreach($memberS as $row){
+            if ($fd_explode[1] == 'KB') {
+                $value = ($int * 1024);
+            } elseif ($fd_explode[1] == 'MB') {
+                $value = ($int * 1048576);
+            } elseif ($fd_explode[1] == 'GB') {
+                $value = ($int * 1073741824);
+            } elseif ($fd_explode[1] == 'TB') {
+                $value = ($int * 1099511627776);
+            } else {
+                $value = $int;
+            }
 
-            //     $process = new Process(array('/usr/bin/bash', '/var/www/html/signkey/genpripub.sh', $row->site_path_folder, $row->id));
-            //     $process->run();
-            //     if (!$process->isSuccessful()) {
-            //         throw new ProcessFailedException($process);
-            //     }
-              
-            //     $i++;
-            // }
-            // dd($i);
+            //ใช้งานแล้ว
+            $ss = functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id));
+
+            if($value <= $ss){
+                dd('คุณใช้พื้นที่เต็มแล้ว กำหนดไว้ :'.functionController::format_Size($value).' ใช้งานแล้ว :'.functionController::format_Size($ss));
+            }else{
+                dd('ยังไม่เต็ม กำหนดไว้ :'.functionController::format_Size($value).' ใช้งานแล้ว :'.functionController::format_Size($ss));
+            }
+            // dd($value);
+    
        
            
 

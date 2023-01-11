@@ -18,6 +18,7 @@ class sites extends Model
         'site_img',
         'site_color',
         'site_ca',
+        'site_size_ltd',
         'site_created_at',
         'site_updated_at'
     ];

@@ -262,6 +262,7 @@ unset($__errorArgs, $__bag); ?>
                                                             name="arn_quantity" id="auto_reserve_number_arn_quantity" required>
                                                             <?php if($check_auto_reserve_number): ?>
                                                             <option selected value="<?php echo e($check_auto_reserve_number->arn_quantity); ?>"><?php echo e($check_auto_reserve_number->arn_quantity); ?></option>
+                                                            <option value="1">1</option>
                                                             <?php else: ?>
                                                             <option selected value="1">1</option>
                                                             <?php endif; ?>

@@ -103,15 +103,15 @@ use App\Http\Controllers\functionController;
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-menu')->html();
-} elseif ($_instance->childHasBeenRendered('mJAhhL3')) {
-    $componentId = $_instance->getRenderedChildComponentId('mJAhhL3');
-    $componentTag = $_instance->getRenderedChildComponentTagName('mJAhhL3');
+} elseif ($_instance->childHasBeenRendered('zpsbvUV')) {
+    $componentId = $_instance->getRenderedChildComponentId('zpsbvUV');
+    $componentTag = $_instance->getRenderedChildComponentTagName('zpsbvUV');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('mJAhhL3');
+    $_instance->preserveRenderedChild('zpsbvUV');
 } else {
     $response = \Livewire\Livewire::mount('navigation-menu');
     $html = $response->html();
-    $_instance->logRenderedChild('mJAhhL3', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('zpsbvUV', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -265,6 +265,18 @@ $.widget.bridge('uibutton', $.ui.button)
         });
     </script>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php endif; ?>
+
+<?php if(functionController::get_bytes(Auth::user()->site_id) != 0 && functionController::get_bytes(Auth::user()->site_id) <= functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id))): ?>
+    <script>
+        setInterval( function () {
+            swal({
+                    title: "พื้นที่เต็ม",
+                    icon: "error",
+            });
+        }, 60000 );
+    </script>
+    <!-- 60000 -->
 <?php endif; ?>
 <!-- Toastr -->
 <script src="<?php echo e(asset('/plugins/toastr/toastr.min.js')); ?>"></script>

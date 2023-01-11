@@ -30,11 +30,12 @@ use App\Http\Controllers\functionController;
                                 </thead>
                                 <tbody>
                                     @foreach($sitesrS as $row)
+                                    @php $site_size_ltd_explode = explode(" ", $row->site_size_ltd); @endphp
                                     <tr>
                                         <th>{{$loop->index+1}}</th>
                                         <td>{{$row->site_name}}</td>
-                                        <td>{{substr($row->site_path_folder, 0, -25)}}</td>
-                                        <td>{!! functionController::format_Size(functionController::folder_Size("image/".$row->site_path_folder))!!}</td>
+                                        <td><p class="text-sm text-muted">{{substr($row->site_path_folder, 0, -25)}}</p></td>
+                                        <td><span class="badge bg-secondary">{!! functionController::format_Size(functionController::folder_Size("image/".$row->site_path_folder))!!} / @if($row->site_size_ltd == '-') {{'ไม่จำกัด'}} @else {{$row->site_size_ltd}} @endif </span></td>
                                         <td>
                                             @if($row->site_created_at != NULL)
                                             <span
@@ -124,7 +125,7 @@ use App\Http\Controllers\functionController;
                                                             <div class="col-sm-12">
                                                                 <div class="form-group">
                                                                     <x-jet-label for="site_img" value="{{ __('โลโก้') }}" />
-                                                                    <input type="file" name="site_img" value="{{$row->site_img}}"
+                                                                    <input type="file" name="site_img"
                                                                         class="form-control @error('site_img') is-invalid @enderror"
                                                                     required accept="image/*">
                                                                 @error('site_img')
@@ -150,6 +151,48 @@ use App\Http\Controllers\functionController;
                                                                         </option>   
                                                                     </select>
                                                                     @error('site_color')
+                                                                    <div class="my-2">
+                                                                        <p class="mt-2 text-sm text-red-600">
+                                                                        {{$message}}</p>
+                                                                    </div>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <x-jet-label for="site_size_ltd" value="{{ __('ขนาดพื้นที่') }}" />
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6">
+                                                                            <select class="form-control select2bs4 @error('site_size_ltd_0') is-invalid @enderror"
+                                                                                name="site_size_ltd_0" required>
+                                                                                <option value="@if($row->site_size_ltd == '-') {{'-'}} @else {{ $site_size_ltd_explode[0];}} @endif">@if($row->site_size_ltd == '-') {{'-'}} @else {{ $site_size_ltd_explode[0];}} @endif
+                                                                                </option>
+                                                                                <option value="-">เลือก ไม่จำกัด
+                                                                                </option>
+                                                                                @for($i = 1; $i <= 1024; $i++)
+                                                                                <option value="{{ $i }}">{{ $i }}
+                                                                                </option>
+                                                                                @endfor
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <select class="form-control select2bs4 @error('site_size_ltd_1') is-invalid @enderror"
+                                                                                name="site_size_ltd_1" required>
+                                                                                
+                                                                                <option value="@if($row->site_size_ltd == '-') {{'KB'}} @else {{ $site_size_ltd_explode[1];}} @endif">@if($row->site_size_ltd == '-') {{'KB'}} @else {{ $site_size_ltd_explode[1];}} @endif
+                                                                                </option>
+                                                                                <option value="KB">KB
+                                                                                </option>
+                                                                                <option value="MB">MB
+                                                                                </option>
+                                                                                <option value="GB">GB
+                                                                                </option>
+                                                                                <option value="TB">TB
+                                                                                </option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    @error('site_size_ltd_0')
                                                                     <div class="my-2">
                                                                         <p class="mt-2 text-sm text-red-600">
                                                                         {{$message}}</p>
@@ -224,6 +267,43 @@ use App\Http\Controllers\functionController;
                                                 </option>     
                                             </select>
                                             @error('site_color')
+                                            <div class="my-2">
+                                                <p class="mt-2 text-sm text-red-600">
+                                                {{$message}}</p>
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <x-jet-label for="site_size_ltd" value="{{ __('ขนาดพื้นที่') }}" />
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <select class="form-control select2bs4 @error('site_size_ltd_0') is-invalid @enderror"
+                                                        name="site_size_ltd_0" required>
+                                                        <option value="-">เลือก ไม่จำกัด
+                                                        </option>
+                                                        @for($i = 1; $i <= 1024; $i++)
+                                                        <option value="{{ $i }}">{{ $i }}
+                                                        </option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <select class="form-control select2bs4 @error('site_size_ltd_1') is-invalid @enderror"
+                                                        name="site_size_ltd_1" required>
+                                                        <option value="KB">KB
+                                                        </option>
+                                                        <option value="MB">MB
+                                                        </option>
+                                                        <option value="GB">GB
+                                                        </option>
+                                                        <option value="TB">TB
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            @error('site_size_ltd_0')
                                             <div class="my-2">
                                                 <p class="mt-2 text-sm text-red-600">
                                                 {{$message}}</p>

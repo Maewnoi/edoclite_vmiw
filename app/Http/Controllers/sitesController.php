@@ -48,7 +48,10 @@ class sitesController extends Controller
             $year_new = date('Y');
             $path_year = $path_site_path_folder.'/'.$year_new;
             $make_year = File::makeDirectory($path_year, $mode = 0777, true, true);
-            if($make_year){
+            //++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++
+            $path_pripubkey = $path_site_path_folder.'/pripubkey';
+            $make_pripubkey = File::makeDirectory($path_pripubkey, $mode = 0777, true, true);
+            if($make_year && $make_pripubkey){
                 $path_details_attached = $path_year.'/attached';
                 $make_details_attached = File::makeDirectory($path_details_attached, $mode = 0777, true, true);
                 //++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++//++++++++++++++
@@ -82,7 +85,7 @@ class sitesController extends Controller
 
         if($make_details_attached && $make_details_original && $make_details_center &&
         $make_details_group && $make_details_division && $make_details_department &&
-        $make_details_work && $make_details_respond && $make_details_respond_retrun){
+        $make_details_work && $make_details_respond){
 
             //การเข้ารหัสรูปภาพ
             $sign_image = $request->file('site_img');
@@ -105,6 +108,11 @@ class sitesController extends Controller
             $data["site_path_folder"] = $site_path_folder_md5;
             $data["site_img"] = $full_path;
             $data["site_color"] = $request->site_color;
+            if($request->site_size_ltd_0 == '-'){
+                $data["site_size_ltd"] = $request->site_size_ltd_0;
+            }else{
+                $data["site_size_ltd"] = $request->site_size_ltd_0." ".$request->site_size_ltd_1;
+            }
             $data["site_created_at"] = date('Y-m-d H:i:s');
 
             //query builder
@@ -137,14 +145,11 @@ class sitesController extends Controller
         $request->validate(
             [
                 'site_name'=>'required|max:255',
-                'site_img'=>'required',
                 'site_color'=>'required|max:255'
             ],
             [
                 'site_name.required'=>"กรุณาป้อนชื่อกองงานด้วยครับ",
                 'site_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
-
-                'site_img.required'=>"กรุณาเลือกรูปโลโก้ด้วยครับ",
 
                 'site_color.required'=>"กรุณาเลือกธีมด้วยครับ",
                 'site_color.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
@@ -152,27 +157,41 @@ class sitesController extends Controller
         );
 
         $site_image = $request->file('site_img');
-        //Generate ชื่อภาพ
-        $name_gen=hexdec(uniqid());
-        // ดึงนามสกุลไฟล์ภาพ
-        $site_img_ext = strtolower($site_image->getClientOriginalExtension());
-        $site_img_name = $name_gen.'.'.$site_img_ext;
-             
-        //อัพโหลดและบันทึกข้อมูล
-        $upload_location = 'image/';
-        $full_path = $upload_location.$site_img_name;
 
-        //ลบภาพเก่าและอัพภาพใหม่แทนที่
-        $old_site = $request->old_site_img;
-        unlink($old_site);
-             
-        $site_image->move($upload_location,$site_img_name);
+        if($site_image){
+            //Generate ชื่อภาพ
+            $name_gen=hexdec(uniqid());
+            // ดึงนามสกุลไฟล์ภาพ
+            $site_img_ext = strtolower($site_image->getClientOriginalExtension());
+            $site_img_name = $name_gen.'.'.$site_img_ext;
+                 
+            //อัพโหลดและบันทึกข้อมูล
+            $upload_location = 'image/';
+            $full_path = $upload_location.$site_img_name;
+    
+            //ลบภาพเก่าและอัพภาพใหม่แทนที่
+            $old_site = $request->old_site_img;
+            unlink($old_site);
+                 
+            $site_image->move($upload_location,$site_img_name);
 
+            $update_img = DB::table('sites')->where('site_id', $request->site_id)->update([
+                'site_img'=>$full_path,
+                'site_updated_at'=>date('Y-m-d H:i:s')
+            ]);
+        }
+      
         //query
+        if($request->site_size_ltd_0 == '-'){
+            $site_size_ltd = $request->site_size_ltd_0;
+        }else{
+            $site_size_ltd = $request->site_size_ltd_0." ".$request->site_size_ltd_1;
+        }
+
         $update = DB::table('sites')->where('site_id', $request->site_id)->update([
             'site_name'=>$request->site_name,
-            'site_img'=>$full_path,
             'site_color'=>$request->site_color,
+            'site_size_ltd'=>$site_size_ltd,
             'site_updated_at'=>date('Y-m-d H:i:s')
         ]);
         

@@ -3835,20 +3835,38 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
                         </div>
-                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
+                        <?php if(functionController::get_bytes(Auth::user()->site_id) != 0 && functionController::get_bytes(Auth::user()->site_id) <= functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id))): ?>
+                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['disabled' => true]]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
-                            <?php echo e(__('save')); ?>
+<?php $component->withAttributes(['disabled' => true]); ?>
+                                <?php echo e(__('พื้นที่เต็ม')); ?>
 
-                         <?php echo $__env->renderComponent(); ?>
+                             <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
+                            <?php else: ?>
+                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
+<?php $component->withName('jet-button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
+                                <?php echo e(__('save')); ?>
+
+                             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                        <?php endif; ?>
+                        <p class="text-sm text-muted">(<?php echo functionController::format_Size(functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id))); ?> / <?php echo functionController::get_site_size_ltd(Auth::user()->site_id); ?>)</p>
                     </form>
                 </div>
             </div>
@@ -4495,20 +4513,38 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
                         </div>
-                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
+                        <?php if(functionController::get_bytes(Auth::user()->site_id) != 0 && functionController::get_bytes(Auth::user()->site_id) <= functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id))): ?>
+                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['disabled' => true]]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
-                            <?php echo e(__('save')); ?>
+<?php $component->withAttributes(['disabled' => true]); ?>
+                                <?php echo e(__('พื้นที่เต็ม')); ?>
 
-                         <?php echo $__env->renderComponent(); ?>
+                             <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
+                            <?php else: ?>
+                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
+<?php $component->withName('jet-button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
+                                <?php echo e(__('save')); ?>
+
+                             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                        <?php endif; ?>
+                        <p class="text-sm text-muted">(<?php echo functionController::format_Size(functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id))); ?> / <?php echo functionController::get_site_size_ltd(Auth::user()->site_id); ?>)</p>
                     </form>
                 </div>
             </div>
@@ -5201,20 +5237,38 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
                         </div>
-                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
+                        <?php if(functionController::get_bytes(Auth::user()->site_id) != 0 && functionController::get_bytes(Auth::user()->site_id) <= functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id))): ?>
+                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['disabled' => true]]); ?>
 <?php $component->withName('jet-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
-                            <?php echo e(__('save')); ?>
+<?php $component->withAttributes(['disabled' => true]); ?>
+                                <?php echo e(__('พื้นที่เต็ม')); ?>
 
-                         <?php echo $__env->renderComponent(); ?>
+                             <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
+                            <?php else: ?>
+                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['onclick' => 'submitForm(this);']]); ?>
+<?php $component->withName('jet-button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['onclick' => 'submitForm(this);']); ?>
+                                <?php echo e(__('save')); ?>
+
+                             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                        <?php endif; ?>
+                        <p class="text-sm text-muted">(<?php echo functionController::format_Size(functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id))); ?> / <?php echo functionController::get_site_size_ltd(Auth::user()->site_id); ?>)</p>
                     </form>
                 </div>
             </div>

@@ -237,6 +237,18 @@ $.widget.bridge('uibutton', $.ui.button)
     </script>
 @endforeach
 @endif
+
+@if(functionController::get_bytes(Auth::user()->site_id) != 0 && functionController::get_bytes(Auth::user()->site_id) <= functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id)))
+    <script>
+        setInterval( function () {
+            swal({
+                    title: "พื้นที่เต็ม",
+                    icon: "error",
+            });
+        }, 60000 );
+    </script>
+    <!-- 60000 -->
+@endif
 <!-- Toastr -->
 <script src="{{ asset('/plugins/toastr/toastr.min.js') }}"></script>
 <!-- search -->

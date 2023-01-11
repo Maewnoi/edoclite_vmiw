@@ -88,7 +88,7 @@ use App\Http\Controllers\functionController;
             <x-jet-label for="level" value="{{ __('ขนาดการใช้งาน') }}" />
             
             <x-jet-label for="level" class="text-primary"
-                value='{!! functionController::format_Size(functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id)))!!} ({!!substr(functionController::funtion_sites_site_path_folder(Auth::user()->site_id), 0, -25)!!})' />
+                value='{!! functionController::format_Size(functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id)))!!} / {!! functionController::get_site_size_ltd(Auth::user()->site_id) !!} ({!!substr(functionController::funtion_sites_site_path_folder(Auth::user()->site_id), 0, -25)!!})' />
         </div>
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="level" value="{{ __('ระบบเข้ารหัสเอกสารด้วย CA') }}" />

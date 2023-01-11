@@ -199,6 +199,44 @@ class functionController extends Controller
         return $response;
     }
 
+    public static function get_site_size_ltd($site_id){
+        $sites_Check = sites::where('site_id', $site_id)->first();
+        if($sites_Check){
+            if($sites_Check->site_size_ltd == '-'){
+                $txt = 'ไม่จำกัด';
+            }else{
+                $txt = $sites_Check->site_size_ltd;
+            }
+        }else{
+            $txt = 'ไม่ถูกนิยาม';
+        }
+        return $txt;
+    }
+
+    public static function get_bytes($site_id){
+        //กำหนดไว้ $format_Size = '222 MB';
+        $sites_Check = sites::where('site_id', $site_id)->first();
+        if($sites_Check->site_size_ltd == '-'){
+            return 0;
+        }else{
+            $fd_explode = explode(" ",$sites_Check->site_size_ltd);
+            $int = (int)$fd_explode[0];
+
+            if ($fd_explode[1] == 'KB') {
+                $value = ($int * 1024);
+            } elseif ($fd_explode[1] == 'MB') {
+                $value = ($int * 1048576);
+            } elseif ($fd_explode[1] == 'GB') {
+                $value = ($int * 1073741824);
+            } elseif ($fd_explode[1] == 'TB') {
+                $value = ($int * 1099511627776);
+            } else {
+                $value = $int;
+            }
+            return $value;
+        }
+    }
+
     public static function format_Size($set_bytes){
         $set_kb = 1024;
         $set_mb = $set_kb * 1024;

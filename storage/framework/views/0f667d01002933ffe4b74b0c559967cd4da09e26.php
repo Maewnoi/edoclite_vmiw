@@ -36,11 +36,12 @@ use App\Http\Controllers\functionController;
                                 </thead>
                                 <tbody>
                                     <?php $__currentLoopData = $sitesrS; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $site_size_ltd_explode = explode(" ", $row->site_size_ltd); ?>
                                     <tr>
                                         <th><?php echo e($loop->index+1); ?></th>
                                         <td><?php echo e($row->site_name); ?></td>
-                                        <td><?php echo e(substr($row->site_path_folder, 0, -25)); ?></td>
-                                        <td><?php echo functionController::format_Size(functionController::folder_Size("image/".$row->site_path_folder)); ?></td>
+                                        <td><p class="text-sm text-muted"><?php echo e(substr($row->site_path_folder, 0, -25)); ?></p></td>
+                                        <td><span class="badge bg-secondary"><?php echo functionController::format_Size(functionController::folder_Size("image/".$row->site_path_folder)); ?> / <?php if($row->site_size_ltd == '-'): ?> <?php echo e('ไม่จำกัด'); ?> <?php else: ?> <?php echo e($row->site_size_ltd); ?> <?php endif; ?> </span></td>
                                         <td>
                                             <?php if($row->site_created_at != NULL): ?>
                                             <span
@@ -179,7 +180,7 @@ unset($__errorArgs, $__bag); ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
 <?php endif; ?>
-                                                                    <input type="file" name="site_img" value="<?php echo e($row->site_img); ?>"
+                                                                    <input type="file" name="site_img"
                                                                         class="form-control <?php $__errorArgs = ['site_img'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -238,6 +239,81 @@ unset($__errorArgs, $__bag); ?>"
                                                                         </option>   
                                                                     </select>
                                                                     <?php $__errorArgs = ['site_color'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                                    <div class="my-2">
+                                                                        <p class="mt-2 text-sm text-red-600">
+                                                                        <?php echo e($message); ?></p>
+                                                                    </div>
+                                                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'site_size_ltd','value' => ''.e(__('ขนาดพื้นที่')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['for' => 'site_size_ltd','value' => ''.e(__('ขนาดพื้นที่')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6">
+                                                                            <select class="form-control select2bs4 <?php $__errorArgs = ['site_size_ltd_0'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                                                name="site_size_ltd_0" required>
+                                                                                <option value="<?php if($row->site_size_ltd == '-'): ?> <?php echo e('-'); ?> <?php else: ?> <?php echo e($site_size_ltd_explode[0]); ?> <?php endif; ?>"><?php if($row->site_size_ltd == '-'): ?> <?php echo e('-'); ?> <?php else: ?> <?php echo e($site_size_ltd_explode[0]); ?> <?php endif; ?>
+                                                                                </option>
+                                                                                <option value="-">เลือก ไม่จำกัด
+                                                                                </option>
+                                                                                <?php for($i = 1; $i <= 1024; $i++): ?>
+                                                                                <option value="<?php echo e($i); ?>"><?php echo e($i); ?>
+
+                                                                                </option>
+                                                                                <?php endfor; ?>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <select class="form-control select2bs4 <?php $__errorArgs = ['site_size_ltd_1'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                                                name="site_size_ltd_1" required>
+                                                                                
+                                                                                <option value="<?php if($row->site_size_ltd == '-'): ?> <?php echo e('KB'); ?> <?php else: ?> <?php echo e($site_size_ltd_explode[1]); ?> <?php endif; ?>"><?php if($row->site_size_ltd == '-'): ?> <?php echo e('KB'); ?> <?php else: ?> <?php echo e($site_size_ltd_explode[1]); ?> <?php endif; ?>
+                                                                                </option>
+                                                                                <option value="KB">KB
+                                                                                </option>
+                                                                                <option value="MB">MB
+                                                                                </option>
+                                                                                <option value="GB">GB
+                                                                                </option>
+                                                                                <option value="TB">TB
+                                                                                </option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php $__errorArgs = ['site_size_ltd_0'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -398,6 +474,76 @@ unset($__errorArgs, $__bag); ?>"
                                                 </option>     
                                             </select>
                                             <?php $__errorArgs = ['site_color'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                            <div class="my-2">
+                                                <p class="mt-2 text-sm text-red-600">
+                                                <?php echo e($message); ?></p>
+                                            </div>
+                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'site_size_ltd','value' => ''.e(__('ขนาดพื้นที่')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['for' => 'site_size_ltd','value' => ''.e(__('ขนาดพื้นที่')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <select class="form-control select2bs4 <?php $__errorArgs = ['site_size_ltd_0'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                        name="site_size_ltd_0" required>
+                                                        <option value="-">เลือก ไม่จำกัด
+                                                        </option>
+                                                        <?php for($i = 1; $i <= 1024; $i++): ?>
+                                                        <option value="<?php echo e($i); ?>"><?php echo e($i); ?>
+
+                                                        </option>
+                                                        <?php endfor; ?>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <select class="form-control select2bs4 <?php $__errorArgs = ['site_size_ltd_1'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                        name="site_size_ltd_1" required>
+                                                        <option value="KB">KB
+                                                        </option>
+                                                        <option value="MB">MB
+                                                        </option>
+                                                        <option value="GB">GB
+                                                        </option>
+                                                        <option value="TB">TB
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <?php $__errorArgs = ['site_size_ltd_0'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

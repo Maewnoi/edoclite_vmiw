@@ -1713,9 +1713,16 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                         </div>
-                        <x-jet-button onclick="submitForm(this);">
-                            {{ __('save') }}
-                        </x-jet-button>
+                        @if(functionController::get_bytes(Auth::user()->site_id) != 0 && functionController::get_bytes(Auth::user()->site_id) <= functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id)))
+                            <x-jet-button disabled>
+                                {{ __('พื้นที่เต็ม') }}
+                            </x-jet-button>
+                            @else
+                            <x-jet-button onclick="submitForm(this);">
+                                {{ __('save') }}
+                            </x-jet-button>
+                        @endif
+                        <p class="text-sm text-muted">({!! functionController::format_Size(functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id)))!!} / {!! functionController::get_site_size_ltd(Auth::user()->site_id) !!})</p>
                     </form>
                 </div>
             </div>
@@ -2033,9 +2040,16 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                         </div>
-                        <x-jet-button onclick="submitForm(this);">
-                            {{ __('save') }}
-                        </x-jet-button>
+                        @if(functionController::get_bytes(Auth::user()->site_id) != 0 && functionController::get_bytes(Auth::user()->site_id) <= functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id)))
+                            <x-jet-button disabled>
+                                {{ __('พื้นที่เต็ม') }}
+                            </x-jet-button>
+                            @else
+                            <x-jet-button onclick="submitForm(this);">
+                                {{ __('save') }}
+                            </x-jet-button>
+                        @endif
+                        <p class="text-sm text-muted">({!! functionController::format_Size(functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id)))!!} / {!! functionController::get_site_size_ltd(Auth::user()->site_id) !!})</p>
                     </form>
                 </div>
             </div>
@@ -2345,9 +2359,16 @@ use App\Http\Controllers\functionController;
                                 </div>
                             </div>
                         </div>
-                        <x-jet-button onclick="submitForm(this);">
-                            {{ __('save') }}
-                        </x-jet-button>
+                        @if(functionController::get_bytes(Auth::user()->site_id) != 0 && functionController::get_bytes(Auth::user()->site_id) <= functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id)))
+                            <x-jet-button disabled>
+                                {{ __('พื้นที่เต็ม') }}
+                            </x-jet-button>
+                            @else
+                            <x-jet-button onclick="submitForm(this);">
+                                {{ __('save') }}
+                            </x-jet-button>
+                        @endif
+                        <p class="text-sm text-muted">({!! functionController::format_Size(functionController::folder_Size("image/".functionController::funtion_sites_site_path_folder(Auth::user()->site_id)))!!} / {!! functionController::get_site_size_ltd(Auth::user()->site_id) !!})</p>
                     </form>
                 </div>
             </div>
