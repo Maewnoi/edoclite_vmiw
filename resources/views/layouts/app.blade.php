@@ -245,7 +245,7 @@ $.widget.bridge('uibutton', $.ui.button)
                     title: "พื้นที่เต็ม",
                     icon: "error",
             });
-        }, 60000 );
+        }, 30000 );
     </script>
     <!-- 60000 -->
 @endif
