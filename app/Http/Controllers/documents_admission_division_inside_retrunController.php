@@ -88,7 +88,6 @@ class documents_admission_division_inside_retrunController extends Controller
             //หา นิติการ
             $userS_0 = User::where('jurisprudence', '1')
             ->where('site_id',Auth::user()->site_id)
-            ->where('group', Auth::user()->group)
             ->first();
             if($userS_0){
                 $update_sub3_docs = sub3_doc::where('sub3_id', $request->sub3_id)->update([

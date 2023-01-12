@@ -26,9 +26,15 @@ foreach($sub_docsS as $row_check_sub_docs){
                                 <i class="fa fa-arrow-left"></i>
                             </x-jet-nav-link>
                             เอกสารรับเข้าภายนอก : {{$document_detail->doc_origin}}
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" onClick="PrintDivDetailDoc();">
+                                    <i class="fa fa-print"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="card-body table-responsive">
-                            <div class="row">
+                            <div class="row" id="div_print_detail">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         เลขที่รับส่วนงาน : 
@@ -125,7 +131,7 @@ foreach($sub_docsS as $row_check_sub_docs){
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" id="div_print_status">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="callout callout-danger"> 
@@ -138,6 +144,7 @@ foreach($sub_docsS as $row_check_sub_docs){
                                                 @foreach($sub_docsS as $row_sub_docs)
                                                 <tr>
                                                     <td>{{ functionController::funtion_groupmem_name($row_sub_docs->sub_recid) }}</td>
+                                                    <td>{{ functionController::funtion_cottons($row_sub_docs->sub_cotton) }}</td>
                                                     <td>{!! functionController::funtion_sub_status_detail($row_sub_docs->sub_status) !!}</td>
                                                 </tr>
                                                 @endforeach
@@ -148,14 +155,7 @@ foreach($sub_docsS as $row_check_sub_docs){
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <x-jet-button type="button"  data-toggle="modal" onclick="window.print();" class="btn btn-primary" > print</x-jet-button>
-                                    
-                                </div>
-                            </div>
                             <hr>
-                          
                             <div class="flex items-center justify-center mt-20">
                                 @if($document_detail->doc_status == 'success' && $check_s == '0')
                                 <x-jet-button type="button"  data-toggle="modal" data-target="#modal-update-groupmems{{$document_detail->doc_id}}"><i class="fa fa-edit"></i> แก้ไขกองงานที่เกี่ยวข้อง</x-jet-button>

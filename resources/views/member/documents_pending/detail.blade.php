@@ -79,7 +79,11 @@ foreach($sub_docsS as $row_check_sub_docs){
                                     <div class="form-group">
                                         <x-jet-label class="text-md" for="doc_filedirec"
                                             value="{{ __('ไฟล์เอกสาร') }}" />
-                                        {!!functionController::display_pdf($document_detail->doc_filedirec)!!}
+                                            @if($document_detail->doc_status == 'waiting')
+                                                {!!functionController::display_pdf($document_detail->doc_filedirec)!!}
+                                            @elseif($document_detail->doc_status == 'success')
+                                                {!!functionController::display_pdf($document_detail->doc_filedirec_1)!!}
+                                            @endif
                                     </div>
                                 </div>
                                 <div class="col-md-3">

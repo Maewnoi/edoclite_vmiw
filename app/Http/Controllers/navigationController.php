@@ -765,7 +765,7 @@ class navigationController extends Controller
                       ->orWhere('doc_template', 'E');
             })
             ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '8')
             ->where('sub2_status', '1')
             ->where('sub3_status', '2')
@@ -1038,7 +1038,7 @@ class navigationController extends Controller
             ->where('doc_type', '0')
             ->where('doc_template', 'A')
             ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '8')
             ->where('sub2_status', '1')
             ->where('sub3_status', '2')
@@ -1417,7 +1417,7 @@ class navigationController extends Controller
     }
 
     public static function funtion_document_waiting_count_level_4($id) {
-        if($id == '4'){
+        if($id == '1'){
             //นับจำนวนงานรอพิจารณาภายนอก
             $document_waiting_count = document::where('doc_site_id',Auth::user()->site_id)
             ->where('doc_type', '0')

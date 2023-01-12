@@ -61,7 +61,6 @@ class documents_retrun_inside_division_signController extends Controller
             //หา นิติการ
             $userS_0 = User::where('jurisprudence', '1')
             ->where('site_id',Auth::user()->site_id)
-            ->where('group', Auth::user()->group)
             ->first();
             if($userS_0){
                 $update_documents_retrun = documents_retrun::where('docrt_id', $request->docrt_id)->update([

@@ -306,7 +306,7 @@ class functionController extends Controller
         if($status == '0'){
             $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
         }else if($status == '1'){
-            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณา ผอ.กอง</span>';
         }else if($status == '2'){
             $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
         }else if($status == '3'){
@@ -491,7 +491,7 @@ class functionController extends Controller
                     if($user_3->sign == ''){
                         $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,200,10,10);
                     }else{
-                        $pdf->Image($user_0->sign,95,200,10,10);
+                        $pdf->Image($user_3->sign,95,200,10,10);
                     }
                     $pdf->SetTextColor(0, 0, 0);
                     $pdf->SetXY(95, 216);
@@ -503,7 +503,7 @@ class functionController extends Controller
                     if($user_2->sign == ''){
                         $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,220,10,10);
                     }else{
-                        $pdf->Image($user_0->sign,95,220,10,10);
+                        $pdf->Image($user_2->sign,95,220,10,10);
                     }
                     $pdf->SetTextColor(0, 0, 0);
                     $pdf->SetXY(95, 236);
@@ -527,7 +527,7 @@ class functionController extends Controller
                     if($user_0->sign == ''){
                         $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',95,260,10,10);
                     }else{
-                        $pdf->Image(Auth::user()->sign,95,260,10,10);
+                        $pdf->Image($user_0->sign,95,260,10,10);
                     }
                     $pdf->SetTextColor(0, 0, 0);
                     $pdf->SetXY(95, 276);
@@ -2315,7 +2315,7 @@ class functionController extends Controller
         if($status == '0'){
             $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้าฝ่าย</span>';
         }else if($status == '1'){
-            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณาหัวหน้ากอง</span>';
+            $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณา ผอ.กอง</span>';
         }else if($status == '2'){
             $txt_status = '<span class="badge bg-warning">อยู่ระหว่างพิจารณานิติการ</span>';
         }else if($status == '3'){
@@ -2376,7 +2376,7 @@ class functionController extends Controller
         }elseif($status == '1'){
             $txt_status = '<span class="badge bg-warning">รอหัวหน้าฝ่ายพิจารณา</span>';
         }elseif($status == '2'){
-            $txt_status = '<span class="badge bg-warning">รอหัวหน้ากองงานพิจารณา</span>';
+            $txt_status = '<span class="badge bg-warning">รอ ผอ.กองงานพิจารณา</span>';
         }elseif($status == '3'){
             $txt_status = '<span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '4'){
@@ -2403,7 +2403,7 @@ class functionController extends Controller
         }elseif($status == '1'){
             $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">รอหัวหน้าฝ่ายพิจารณา</span>';
         }elseif($status == '2'){
-            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">รอหัวหน้ากองงานพิจารณา</span>';
+            $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">รอ ผอ.กองพิจารณา</span>';
         }elseif($status == '3'){
             $txt_status = '<span class="badge bg-success">ลงทะเบียนรับแล้ว</span> <span class="badge bg-warning">กำลังดำเนินการ</span>';
         }elseif($status == '4'){
@@ -2476,7 +2476,7 @@ class functionController extends Controller
             if($seal_point == '4'){ $sealpoint = 125; $x1 = 140; $x2 = 134; $x3 = 138; }
             if($seal_point == '5'){ $sealpoint = 165;  $x1 = 180; $x2 = 174; $x3 = 178; }
 
-            if($tokens->token_seal != ''){
+            if($tokens && $tokens->token_seal != ''){
                 $pdf->Image($tokens->token_seal,$sealpoint,10,40,23);
             }else{
                 $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',$sealpoint,10,40,23);
@@ -2873,7 +2873,7 @@ class functionController extends Controller
         if($cottons){
             return $cottons->cottons_name;
         }else{
-            return "ไม่ถูกนิยาม";
+            return "";
         }
     }
 
@@ -2918,7 +2918,7 @@ class functionController extends Controller
         }elseif($level == '3'){
             $txt_user_level = 'สารบรรณกลาง';
         }elseif($level == '4'){
-            $txt_user_level = 'หัวหน้ากอง';
+            $txt_user_level = 'ผอ.กอง';
         }elseif($level == '5'){
             $txt_user_level = 'หัวหน้าฝ่าย';
         }elseif($level == '6'){

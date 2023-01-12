@@ -43,9 +43,15 @@ foreach($sub_docsS as $row_check_sub_docs){
 <?php endif; ?>
                             เอกสารรับเข้าภายนอก : <?php echo e($document_detail->doc_origin); ?>
 
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" onClick="PrintDivDetailDoc();">
+                                    <i class="fa fa-print"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="card-body table-responsive">
-                            <div class="row">
+                            <div class="row" id="div_print_detail">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         เลขที่รับส่วนงาน : 
@@ -179,7 +185,7 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" id="div_print_status">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="callout callout-danger"> 
@@ -223,24 +229,7 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.button','data' => ['type' => 'button','dataToggle' => 'modal','onclick' => 'window.print();','class' => 'btn btn-primary']]); ?>
-<?php $component->withName('jet-button'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['type' => 'button','data-toggle' => 'modal','onclick' => 'window.print();','class' => 'btn btn-primary']); ?> print <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-                                    
-                                </div>
-                            </div>
                             <hr>
-                          
                             <div class="flex items-center justify-center mt-20">
                                 <?php if($document_detail->doc_status == 'success' && $check_s == '0'): ?>
                                 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>

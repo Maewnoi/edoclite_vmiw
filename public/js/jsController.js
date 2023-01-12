@@ -26,7 +26,20 @@ function logout(btn) {
         }
     });
 }
-// alert(var_memberController_add_level);
+
+function PrintDivDetailDoc(){
+    var div_print_detail = document.getElementById("div_print_detail").innerHTML;
+    var div_print_status = document.getElementById("div_print_status").innerHTML;
+    var a = window.open('', '', 'height=800, width=1400');
+    a.document.write('<html>');
+    a.document.write('<body>');
+    a.document.write(div_print_detail);
+    a.document.write(div_print_status);
+    a.document.write('</body>');
+    a.document.write('</html>');
+    a.document.close();
+    a.print();
+}
 //------------------------------------------------------------------------------------------
 //controltokens
 $("#controltokensController_token_level").change(function(event) {

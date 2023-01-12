@@ -103,15 +103,15 @@ use App\Http\Controllers\functionController;
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-menu')->html();
-} elseif ($_instance->childHasBeenRendered('zpsbvUV')) {
-    $componentId = $_instance->getRenderedChildComponentId('zpsbvUV');
-    $componentTag = $_instance->getRenderedChildComponentTagName('zpsbvUV');
+} elseif ($_instance->childHasBeenRendered('y1wdz0b')) {
+    $componentId = $_instance->getRenderedChildComponentId('y1wdz0b');
+    $componentTag = $_instance->getRenderedChildComponentTagName('y1wdz0b');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('zpsbvUV');
+    $_instance->preserveRenderedChild('y1wdz0b');
 } else {
     $response = \Livewire\Livewire::mount('navigation-menu');
     $html = $response->html();
-    $_instance->logRenderedChild('zpsbvUV', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('y1wdz0b', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -274,7 +274,7 @@ $.widget.bridge('uibutton', $.ui.button)
                     title: "พื้นที่เต็ม",
                     icon: "error",
             });
-        }, 60000 );
+        }, 30000 );
     </script>
     <!-- 60000 -->
 <?php endif; ?>

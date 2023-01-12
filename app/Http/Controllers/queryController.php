@@ -1476,7 +1476,7 @@ class queryController extends Controller
                       ->orWhere('doc_template', 'E');
             })
             ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '8')
             ->where('sub2_status', '1')
             ->where('sub3_status', '2')
@@ -2014,7 +2014,7 @@ class queryController extends Controller
             ->where('doc_type', '0')
             ->where('doc_template', 'A')
             ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '8')
             ->where('sub2_status', '1')
             ->where('sub3_status', '2')
@@ -2033,7 +2033,7 @@ class queryController extends Controller
                       ->orWhere('doc_template', 'E');
             })
             ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '8')
             ->where('sub2_status', '1')
             ->where('sub3_status', '2')
@@ -2060,7 +2060,7 @@ class queryController extends Controller
             ->where('doc_type', '0')
             ->where('doc_template', 'A')
             ->where('doc_status', 'success')
-            ->where('sub_recid', Auth::user()->group)
+            // ->where('sub_recid', Auth::user()->group)
             ->where('sub_status', '8')
             ->where('sub2_status', '1')
             ->where('sub3_status', '2')
@@ -2637,7 +2637,7 @@ class queryController extends Controller
     }
     
     public static function funtion_query_documents_pendingController_1_level_4(){
-        if(Auth::user()->level=='4'){
+        if(Auth::user()->center=='1'){
             $documents = document::where('doc_site_id',Auth::user()->site_id)
             ->where('doc_type', '0')
             ->where('doc_template', 'A')
@@ -2653,7 +2653,7 @@ class queryController extends Controller
     }
 
     public static function funtion_query_documents_pendingController_level_4(){
-        if(Auth::user()->level=='4'){
+        if(Auth::user()->center=='1'){
             $documents = document::where('doc_site_id',Auth::user()->site_id)
             ->where('doc_type', '0')
             ->where('doc_template', 'A')

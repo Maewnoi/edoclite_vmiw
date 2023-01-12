@@ -211,7 +211,7 @@ use App\Http\Controllers\functionController;
 <?php $component->withAttributes(['href' => ''.e(route('documents_pending_all')).'','class' => 'text-decoration-none']); ?>
                                         <?php echo e(__('เอกสารรอพิจารณาจากสารบรรณกลาง ( ')); ?>
 
-                                        <?php echo e(navigationController::funtion_document_waiting_count_level_4(Auth::user()->level)); ?>
+                                        <?php echo e(navigationController::funtion_document_waiting_count_level_4(Auth::user()->center)); ?>
 
                                         <?php echo e(__(' ) เรื่อง')); ?>
 

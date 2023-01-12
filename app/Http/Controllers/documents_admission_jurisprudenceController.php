@@ -34,7 +34,6 @@ class documents_admission_jurisprudenceController extends Controller
             ->join('sub3_details','sub3_details.sub3d_sub_3id','sub3_docs.sub3_id')
             ->where('doc_id', $id)
             ->where('doc_site_id',Auth::user()->site_id)
-            ->where('sub_recid', Auth::user()->group)
             ->where('sub3_status', '2')
             ->first();
 

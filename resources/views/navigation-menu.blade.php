@@ -116,7 +116,7 @@ use App\Http\Controllers\functionController;
                                     <x-jet-dropdown-link href="{{ route('documents_pending_all') }}"
                                         class="text-decoration-none">
                                         {{ __('เอกสารรอพิจารณาจากสารบรรณกลาง ( ') }}
-                                        {{navigationController::funtion_document_waiting_count_level_4(Auth::user()->level)}}
+                                        {{navigationController::funtion_document_waiting_count_level_4(Auth::user()->center)}}
                                         {{ __(' ) เรื่อง') }}
                                     </x-jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
@@ -427,7 +427,7 @@ use App\Http\Controllers\functionController;
                                     <div class="border-t border-gray-100"></div>
                                     <x-jet-dropdown-link type="button" data-toggle="modal" class="text-decoration-none" data-target="#modal-Create-new-document-inside-retrun"
                                         class="text-decoration-none">
-                                        {{ __('สร้างเอกสารตอบกลับ') }}
+                                        {{ __('สร้างเอกสาร') }}
                                     </x-jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
                                     <x-jet-dropdown-link href="{{ route('documents_retrun_inside_division_all') }}"
@@ -479,7 +479,7 @@ use App\Http\Controllers\functionController;
                                     <div class="border-t border-gray-100"></div>
                                     <x-jet-dropdown-link type="button" data-toggle="modal" class="text-decoration-none" data-target="#modal-Create-new-document-inside-retrun"
                                         class="text-decoration-none">
-                                        {{ __('สร้างเอกสารตอบกลับ') }}
+                                        {{ __('สร้างเอกสาร') }}
                                     </x-jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
                                     <x-jet-dropdown-link href="{{ route('documents_retrun_inside_department_all') }}"
@@ -533,7 +533,7 @@ use App\Http\Controllers\functionController;
                                     <div class="border-t border-gray-100"></div>
                                     <x-jet-dropdown-link type="button" data-toggle="modal" class="text-decoration-none" data-target="#modal-Create-new-document-inside-retrun"
                                         class="text-decoration-none">
-                                        {{ __('สร้างเอกสารตอบกลับ') }}
+                                        {{ __('สร้างเอกสาร') }}
                                     </x-jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
                                     <x-jet-dropdown-link href="{{ route('documents_retrun_inside_work_all') }}"
@@ -1168,7 +1168,7 @@ use App\Http\Controllers\functionController;
             <div class="border-t border-gray-100"></div>
             <x-jet-responsive-nav-link type="button" data-toggle="modal" class="text-decoration-none" data-target="#modal-Create-new-document-inside-retrun"
                 class="text-decoration-none">
-                {{ __('สร้างเอกสารตอบกลับ') }}
+                {{ __('สร้างเอกสาร') }}
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('documents_retrun_inside_division_all') }}"
                 class="text-decoration-none">
@@ -1228,7 +1228,7 @@ use App\Http\Controllers\functionController;
             <div class="border-t border-gray-100"></div>
             <x-jet-responsive-nav-link type="button" data-toggle="modal" class="text-decoration-none" data-target="#modal-Create-new-document-inside-retrun"
                 class="text-decoration-none">
-                {{ __('สร้างเอกสารตอบกลับ') }}
+                {{ __('สร้างเอกสาร') }}
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('documents_retrun_inside_department_all') }}"
                 class="text-decoration-none">
@@ -1353,7 +1353,7 @@ use App\Http\Controllers\functionController;
             <div class="border-t border-gray-100"></div>
             <x-jet-responsive-nav-link type="button" data-toggle="modal" class="text-decoration-none" data-target="#modal-Create-new-document-inside-retrun"
                 class="text-decoration-none">
-                {{ __('สร้างเอกสารตอบกลับ') }}
+                {{ __('สร้างเอกสาร') }}
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('documents_retrun_inside_work_all') }}"
                 class="text-decoration-none">
