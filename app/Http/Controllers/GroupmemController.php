@@ -39,14 +39,18 @@ class GroupmemController extends Controller
         $request->validate(
             [
                 'group_name'=>'required|max:255',
-                'group_site_id'=>'required|max:255'
+                'group_site_id'=>'required|max:255',
+                'group_seal'=>'required|max:255'
             ],
             [
                 'group_name.required'=>"กรุณาป้อนชื่อกองงานด้วยครับ",
                 'group_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
 
                 'group_site_id.required'=>"กรุณาเลือก Sites ด้วยครับ",
-                'group_site_id.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
+                'group_site_id.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+
+                'group_seal.required'=>"กรุณาเลือกรูปประทับตรา ด้วยครับ",
+                'group_seal.max' => "ห้ามป้อนเกิน 255 ตัวอักษร"
             ]
         );
 
@@ -57,11 +61,33 @@ class GroupmemController extends Controller
             return redirect()->back()->with('error','ตรวจพบชื่อกองงาน '.$Groupmem_check->group_name.' มีในระบบแล้ว');
         }
 
+         //เช็คว่ามีการแนบไฟล์รูปไหม
+         if($request->group_seal != ''){
+            //การเข้ารหัสรูปภาพ
+            $group_seal = $request->file('group_seal');
+
+            //Generate ชื่อภาพ
+            $name_gen=hexdec(uniqid());
+            // ดึงนามสกุลไฟล์ภาพ
+            $group_seal_ext = strtolower($group_seal->getClientOriginalExtension());
+            $group_seal_name = $name_gen.'.'.$group_seal_ext;
+            
+            
+            //อัพโหลดและบันทึกข้อมูล
+            $upload_location = 'image/seal/';
+            $full_path = $upload_location.$group_seal_name;
+
+            $group_seal->move($upload_location,$group_seal_name);
+        }else{
+            $full_path = '';
+        }
+
         //บันทึกข้อมูล
         $data = array();
         $data["group_site_id"] = $request->group_site_id;
         $data["group_name"] = $request->group_name;
         $data["group_token"] = $request->group_token;
+        $data["group_seal"] = $full_path;
         $data["group_created_at"] = date('Y-m-d H:i:s');
 
         //query builder
@@ -75,6 +101,11 @@ class GroupmemController extends Controller
     }
     //delete_กองงาน
     public function delete(Request $request){
+        $del_old = unlink($request->group_seal);
+        if(!$del_old){
+            return redirect()->back()->with('error','พบปัญหากรุณาแจ้งผู้พัฒนา ![del_old]');
+        }
+
         $delete = DB::table('groupmems')->where('group_id', $request->group_id)->delete();
         if($delete){
             return redirect()->back()->with('success',"ลบข้อมูลเรียบร้อย");
@@ -107,6 +138,33 @@ class GroupmemController extends Controller
         ->first();
         if($Groupmem_check){
             return redirect()->back()->with('error','ตรวจพบชื่อกองงาน '.$Groupmem_check->group_name.' มีในระบบแล้ว');
+        }
+
+        //เช็คว่ามีการแนบไฟล์รูปไหม
+        if($request->group_seal != ''){
+            //การเข้ารหัสรูปภาพ
+            $group_seal = $request->file('group_seal');
+
+            //Generate ชื่อภาพ
+            $name_gen=hexdec(uniqid());
+            // ดึงนามสกุลไฟล์ภาพ
+            $group_seal_ext = strtolower($group_seal->getClientOriginalExtension());
+            $group_seal_name = $name_gen.'.'.$group_seal_ext;
+            
+            
+            //อัพโหลดและบันทึกข้อมูล
+            $upload_location = 'image/seal/';
+            $full_path = $upload_location.$group_seal_name;
+
+            $group_seal->move($upload_location,$group_seal_name);
+
+            $update_img = DB::table('groupmems')->where('group_id', $request->group_id)->update([
+                'group_seal'=>$full_path
+            ]);
+
+            $del_old = unlink($request->group_seal_old);
+        }else{
+            $full_path = '';
         }
 
         //query

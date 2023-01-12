@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-                    <div class="border border shadow card border-info border-info">
+                    <div class="border shadow card border-info">
                         <div class="card-header">ตารางข้อมูลฝ่าย</div>
                         <div class="card-body table-responsive">
                             <table id="example1" class="table table-striped">
@@ -48,7 +48,7 @@
                                         </td>
                                         <td>
                                             <?php if($row->cottons_updated_at != NULL): ?>
-                                            <span class="badge bg-secondary">$row->cottons_updated_at</span>
+                                            <span class="badge bg-secondary"><?php echo e($row->cottons_updated_at); ?></span>
                                             <p class="text-sm text-muted">
                                                 <i class="mr-1 far fa-clock"></i>
                                                 <?php echo e(Carbon\Carbon::parse($row->cottons_updated_at)->diffForHumans()); ?>
@@ -179,7 +179,7 @@ unset($__errorArgs, $__bag); ?>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="border border shadow card border-info border-info">
+                    <div class="border shadow card border-info">
                         <div class="card-header">เพิ่มฝ่าย</div>
                         <div class="card-body">
                             <form action="<?php echo e(route('addcottons')); ?>" method="post">

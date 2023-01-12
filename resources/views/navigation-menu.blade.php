@@ -40,7 +40,10 @@ use App\Http\Controllers\functionController;
                         class="text-decoration-none">
                         ชื่อผู้ใช้
                     </x-jet-nav-link>
-
+                    <x-jet-nav-link href="{{ route('controltokens') }}" :active="request()->routeIs('controltokens')"
+                        class="text-decoration-none">
+                        จัดการ tokens
+                    </x-jet-nav-link>
             
                     <!-- <x-jet-nav-link href="{{ route('department') }} " :active="request()->routeIs('department')">
                         Department
@@ -1080,6 +1083,10 @@ use App\Http\Controllers\functionController;
             <x-jet-responsive-nav-link href="{{ route('member') }}" :active="request()->routeIs('member')"
                 class="text-decoration-none">
                 {{ __('ชื่อผู้ใช้') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('controltokens') }}" :active="request()->routeIs('controltokens')"
+                class="text-decoration-none">
+                {{ __('จัดการ tokens') }}
             </x-jet-responsive-nav-link>
 
             @elseif(Auth::user()->level !='0')

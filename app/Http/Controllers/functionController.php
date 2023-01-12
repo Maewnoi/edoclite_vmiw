@@ -810,10 +810,7 @@ class functionController extends Controller
         $pdf->SetFont('THSarabunNew','',16);
 
         if($groupmems->group_seal == ''){
-            $tokens = token::where('tokens'.'token_site_id', Auth::user()->site_id)
-            ->first();
-
-            $pdf->Image($tokens->token_seal,$seal_point,10,40,23);
+            $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',$seal_point,10,40,23);
         }else{
             $pdf->Image($groupmems->group_seal,$seal_point,10,40,23);
         }
@@ -2067,7 +2064,6 @@ class functionController extends Controller
                 if($groupmems->group_seal == ''){
                     $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',$sealpoint,10,40,23);
                 }else{
-                    //$pdf->Image($tokens->token_seal,$sealpoint,10,40,23);
                     $pdf->Image($groupmems->group_seal,$sealpoint,10,40,23);
                 }
                 
@@ -2245,11 +2241,7 @@ class functionController extends Controller
                 $pdf->SetFont('THSarabunNew','',16);
                 
                 if($groupmems->group_seal == ''){
-                    //$pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',$seal_point,10,40,23);
-                    $tokens = token::where('tokens'.'token_site_id', Auth::user()->site_id)
-                    ->first();
-
-                     $pdf->Image($tokens->token_seal,$seal_point,10,40,23);
+                    $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/Xiv4Nn.png',$seal_point,10,40,23);
                 }else{
                     $pdf->Image($groupmems->group_seal,$seal_point,10,40,23);
                 }
@@ -2483,7 +2475,13 @@ class functionController extends Controller
             if($seal_point == '3'){ $sealpoint = 85; $x1 = 100; $x2 = 93; $x3 = 97; }
             if($seal_point == '4'){ $sealpoint = 125; $x1 = 140; $x2 = 134; $x3 = 138; }
             if($seal_point == '5'){ $sealpoint = 165;  $x1 = 180; $x2 = 174; $x3 = 178; }
-            $pdf->Image($tokens->token_seal,$sealpoint,10,40,23);
+
+            if($tokens->token_seal != ''){
+                $pdf->Image($tokens->token_seal,$sealpoint,10,40,23);
+            }else{
+                $pdf->Image('https://sv1.picz.in.th/images/2022/08/02/XR72zv.png',$sealpoint,10,40,23);
+            }
+            
 
             //dd($tokens);
 

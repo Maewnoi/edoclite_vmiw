@@ -28,6 +28,18 @@ function logout(btn) {
 }
 // alert(var_memberController_add_level);
 //------------------------------------------------------------------------------------------
+//controltokens
+$("#controltokensController_token_level").change(function(event) {
+    var token_level = $('#controltokensController_token_level').val();
+    if(token_level == '3'){
+        document.getElementById('controltokensController_token_seal_form-group').style.display = 'block';
+        document.getElementById("controltokensController_token_seal").required = true;
+    }else{
+        document.getElementById('controltokensController_token_seal_form-group').style.display = 'none';
+        document.getElementById("controltokensController_token_seal").required = false;
+    }
+});
+//------------------------------------------------------------------------------------------
 //auto_reserve_number
 $("input[name='auto_reserve_number_options-radio']").click(function(event) {
     if($(this).val() == '0'){

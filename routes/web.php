@@ -62,6 +62,7 @@ use App\Http\Controllers\documents_admission_secretary_retrunController;
 use App\Http\Controllers\documents_admission_inside_secretary_retrunController;
 use App\Http\Controllers\documents_retrun_inside_secretaryController;
 use App\Http\Controllers\documents_transmission_allController;
+use App\Http\Controllers\controltokensController;
 
 /*
 |--------------------------------------------------------------------------
@@ -300,6 +301,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     Route::get('/domji',[route_domjiController::class,'index']);
     Route::post('/domji/submit',[route_domjiController::class,'submit'])->name('domji_submit');
+
+    Route::get('/controltokens/all',[controltokensController::class,'index'])->name('controltokens');
+    Route::post('/controltokens/add',[controltokensController::class,'add'])->name('addControltokens');
+    Route::post('/controltokens/delete',[controltokensController::class,'delete'])->name('deleteControltokens');
+    Route::post('/controltokens/update',[controltokensController::class,'update'])->name('updateControltokens');
+
     //---------------------------------------------------------------------------------------------------
     //replace รักษาการแทน
     Route::get('/replace/all',[replaceController::class,'index'])->name('replace');

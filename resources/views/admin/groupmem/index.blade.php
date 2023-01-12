@@ -23,6 +23,7 @@ use App\Http\Controllers\functionController;
                                         <th scope="col">ชื่อกอง</th>
                                         <th scope="col">LineToken</th>
                                         <th scope="col">ชื่อ Sites</th>
+                                        <th scope="col">รูปประทับตรา</th>
                                         <th scope="col">วันที่สร้าง</th>
                                         <th scope="col">วันที่อัพเดต</th>
                                         <th scope="col">จัดการ</th>
@@ -43,6 +44,11 @@ use App\Http\Controllers\functionController;
                                             </p>
                                         </td>
                                         <td>{{ functionController::funtion_sites($row->group_site_id) }}</td>
+                                        <td>
+                                            @if($row->group_seal != '')
+                                                <img src="{{ asset($row->group_seal) }}" class="img-thumbnail visible-xs" alt="">
+                                            @endif
+                                        </td>
                                         <td>
                                             @if($row->group_created_at != NULL)
                                             <span class="badge bg-secondary">{{$row->group_created_at}}</span>
@@ -85,6 +91,8 @@ use App\Http\Controllers\functionController;
                                                         @csrf
                                                         <input type="hidden" required name="group_id"
                                                             class="form-control" value="{{$row->group_id}}">
+                                                        <input type="hidden" required name="group_seal"
+                                                            class="form-control" value="{{$row->group_seal}}">
                                                         <x-jet-button onclick="submitForm(this);">
                                                             {{ __('delete') }}
                                                         </x-jet-button>
@@ -101,7 +109,7 @@ use App\Http\Controllers\functionController;
                                                     </h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{route('updateGroupmem')}}" method="post">
+                                                    <form action="{{route('updateGroupmem')}}" method="post" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="row">
                                                             <div class="col-sm-12">
@@ -190,8 +198,24 @@ use App\Http\Controllers\functionController;
                                                                         class="form-control">
                                                                 </div>
                                                             </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <x-jet-label for="group_seal" value="{{ __('รูปประทับตรา ') }}" />
+                                                                    <input type="file" name="group_seal"
+                                                                        class="form-control @error('group_seal') is-invalid @enderror"
+                                                                        accept="image/*">
+                                                                    @error('group_seal')
+                                                                    <div class="my-2">
+                                                                        <p class="mt-2 text-sm text-red-600">
+                                                                            {{$message}}</p>
+                                                                    </div>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <hr>
+                                                        <input type="hidden" name="group_seal_old" class="form-control"
+                                                            value="{{$row->group_seal}}">
                                                         <input type="hidden" required name="group_id"
                                                             value="{{$row->group_id}}" class="form-control">
                                                         <x-jet-button onclick="submitForm(this);">
@@ -212,7 +236,7 @@ use App\Http\Controllers\functionController;
                     <div class="border shadow card border-info">
                         <div class="card-header">เพิ่มกองงาน</div>
                         <div class="card-body">
-                            <form action="{{route('addGroupmem')}}" method="post">
+                            <form action="{{route('addGroupmem')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -289,6 +313,20 @@ use App\Http\Controllers\functionController;
                                             <x-jet-label for="group_token" value="{{ __('LineToken') }}" />
                                             <input type="text" name="group_token" value="{{ old('group_token') }}"
                                                 class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <x-jet-label for="group_seal" value="{{ __('รูปประทับตรา (บังคับ)') }}" />
+                                            <input type="file" name="group_seal" required
+                                                class="form-control @error('group_seal') is-invalid @enderror"
+                                                accept="image/*">
+                                            @error('group_seal')
+                                            <div class="my-2">
+                                                <p class="mt-2 text-sm text-red-600">
+                                                    {{$message}}</p>
+                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
